@@ -1,0 +1,53 @@
+@use '@/styles/common.scss';
+
+.header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-content: center;
+  background-color: var(--bg-white);
+  border-bottom: var(--border-primary);
+  padding: 0 2rem;
+
+  @include common.mediaquery('sm') {
+    padding: 0 calc(2rem + 10vw);
+  }
+
+  @include common.mediaquery('xl') {
+    padding: 0 calc(5rem + 20vw);
+  }
+}
+
+.heading {
+  margin: 1.5rem 0;
+  font-size: 3rem;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  width: 100%;
+}
+
+.input {
+  border: none;
+  background-color: var(--bg-gray);
+  border-radius: var(--radius-medium);
+  width: 100%;
+  font-size: 2rem;
+  padding: 0.75rem 2rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+}

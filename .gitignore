@@ -12,6 +12,8 @@
 /.next/
 /out/
 
+.idea/
+
 # production
 /build
 
@@ -27,6 +29,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,3 +37,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+public/sw.js
+public/workbox-*.js

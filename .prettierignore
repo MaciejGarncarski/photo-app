@@ -1,0 +1,14 @@
+README.md
+.eslintrc
+.prettierrc
+.commitlintrc
+.lintstagedrc
+pnpm-lock.yaml
+.github/
+.husky/
+.next/
+.swc/
+.vscode/
+node_modules/
+public/
+public/favicon/site.webmanifest
