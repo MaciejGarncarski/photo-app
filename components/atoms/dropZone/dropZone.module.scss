@@ -1,0 +1,30 @@
+@use '/styles/common.scss';
+
+.dropZone {
+  width: 100%;
+  border: 4px dashed var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: var(--radius-medium);
+  padding: 2rem 1rem;
+  grid-row: 2 / 4;
+  text-align: center;
+  cursor: pointer;
+
+  @include common.mediaquery('xl') {
+    height: 100%;
+    padding: 3rem;
+  }
+}
+
+.dropZoneActive {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-color: var(--bg-gray);
+}
+
+.dropIcon {
+  font-size: 7rem;
+}

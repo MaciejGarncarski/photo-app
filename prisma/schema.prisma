@@ -42,6 +42,13 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  posts          Post[]
+  posts_likes    PostLike[]
+  posts_comments PostComments[]
+
+    fromUser Follower[] @relation("Follower")
+  toUser   Follower[] @relation("Following")
 }
 
 model VerificationToken {
@@ -50,4 +57,49 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id             Int              @id @default(autoincrement()) @db.Integer
+  author         User         @relation(fields: [author_id], references: [id])
+  author_id      String           
+  description    String
+  created_at     DateTime         @default(now()) @db.Timestamptz()
+  img            String
+  file_id String?
+  location       String?
+  posts_likes    PostLike[]
+  posts_comments PostComments[]
+}
+
+model PostLike {
+  id      Int      @id @default(autoincrement()) @db.Integer
+  post    Post    @relation(fields: [post_id], references: [id])
+  post_id Int      @default(autoincrement()) @db.Integer
+  user    User @relation(fields: [user_id], references: [id])
+  user_id String  
+}
+
+model PostComments {
+  id           Int      @id @default(autoincrement()) @db.Integer
+  user         User @relation(fields: [user_id], references: [id])
+  user_id      String
+  post         Post    @relation(fields: [post_id], references: [id])
+  post_id      Int      @db.Integer
+  created_at   DateTime @default(now()) @db.Timestamptz()
+  comment_text String   @db.Text
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Follower {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  from_user  User @relation(fields: [from], references: [id], name: "Follower")
+  from       String   
+  to_user    User @relation(fields: [to], references: [id], name: "Following")
+  to         String   
+  created_at DateTime @default(now()) @db.Timestamptz()
 }

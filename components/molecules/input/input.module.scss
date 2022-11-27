@@ -1,0 +1,41 @@
+@use '/styles/common.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-small);
+  position: relative;
+}
+
+.containerError {
+  border-color: var(--color-error);
+}
+
+.label {
+  position: absolute;
+  left: 0rem;
+  bottom: 1rem;
+  padding: 0 1rem;
+  color: var(--text-placeholder);
+  transition: all 100ms ease-out;
+  cursor: text;
+  transition-property: background-color, transform, font-size;
+}
+
+.labelActive,
+.input:focus+.label {
+  transform: translateY(-2.5rem);
+  background-color: var(--bg-primary);
+
+  @include common.mediaquery('xl') {
+    font-size: 2rem;
+    transform: translateX(0.5rem) translateY(-3rem);
+  }
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  padding: 1rem;
+}

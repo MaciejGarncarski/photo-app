@@ -1,16 +1,19 @@
 import { signOut, useSession } from 'next-auth/react';
+import ReactTooltip from 'react-tooltip';
+
+export const APP_NAME = 'PhotoApp';
 
 export default function Home() {
-  const { data } = useSession();
+  const { data: session } = useSession();
 
-  if (!data?.user) {
+  if (!session?.user) {
     return <div>Not signed up</div>;
   }
 
   return (
     <div>
-      <img src={data.user.image ?? ''} />
-      <h1>Hi {data.user.name}</h1>
+      <img src={session.user.image ?? ''} />
+      <h1>Hi {session.user.name}</h1>
       <button type='button' onClick={() => signOut()}>
         Sign out
       </button>

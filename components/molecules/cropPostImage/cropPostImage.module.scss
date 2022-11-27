@@ -1,0 +1,55 @@
+@use '/styles/common.scss';
+
+.cropPost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 3rem;
+
+
+  @include common.mediaquery('xl') {
+    gap: 5rem;
+  }
+}
+
+.reactCrop {
+  border-radius: var(--radius-medium);
+  grid-row: 2 / 5;
+
+  @include common.mediaquery('xl') {
+    height: 100%;
+
+    &img {
+      height: 100%;
+    }
+  }
+
+}
+
+.heading {
+  text-align: center;
+}
+
+.aspectRatioButtons {
+  display: flex;
+  grid-column: 2 / 2;
+  gap: 3rem;
+  justify-content: center;
+
+  @include common.mediaquery('xl') {
+    justify-content: space-around;
+    gap: 0;
+  }
+}
+
+.buttonCenter {
+  display: flex;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  justify-content: center;
+  align-items: center;
+}

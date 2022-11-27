@@ -9,7 +9,6 @@
 html {
   display: grid;
   min-height: 100%;
-
   font-size: 62.5%;
 
   @include common.mediaquery('lg') {
@@ -55,17 +54,37 @@ a {
 // }
 
 :root {
-  --color-primary: #fff;
+  --color-primary: #1070b4;
+  --color-primary-light: #3694e0;
+  --color-secondary: #d1ecfd;
+  --color-gray: #fefefe;
+  --color-error: #d64242;
+  --color-white: #fff;
+  --color-disabled: rgb(77, 86, 107);
+
   --text-primary: #262626;
+  --text-placeholder: rgb(75, 74, 74);
 
   --bg-primary: #fafafa;
   --bg-white: #ffffff;
   --bg-gray: #efefef;
-
-  --border-primary: 1px solid rgb(219, 219, 219);
+  --bg-overlay: rgb(0, 0, 0, 0.6);
+  --border-primary: 1px solid rgb(160, 160, 160);
+  --border-secondary: 1px solid rgb(219, 219, 219);
 
   --radius-small: 0.5rem;
   --radius-medium: 0.75rem;
+
+
+  --shadow-primary: 0 4px 10px 2px rgb(0, 0, 0, 0.15);
+
+
+  --itemSize: 2.75rem;
+
+  @include common.mediaquery('lg') {
+    --itemSize: 3.5rem;
+  }
+
 
   // @media (prefers-color-scheme: dark) {
   //   --text-primary: #ffffff;
