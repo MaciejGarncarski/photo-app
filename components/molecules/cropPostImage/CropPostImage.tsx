@@ -7,6 +7,7 @@ import { centerAspectCrop } from '@/utils/centerAspectCrop';
 import styles from './cropPostImage.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
+import { CropError } from '@/components/atoms/cropError/CropError';
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { useCreateImg } from '@/components/pages/createPost/useCreateImg';
 
@@ -15,15 +16,17 @@ type ButtonData = {
   aspectRatio: number;
 };
 
-const buttonData: Array<ButtonData> = [
-  { text: '1:1', aspectRatio: 1 },
-  { text: '4:9', aspectRatio: 4 / 9 },
-  { text: '16:9', aspectRatio: 16 / 9 },
-];
-
 type CropPostImageProps = {
   setFinalImg: (img: Blob | null) => void;
 };
+
+export type ImageErrors = null | 'DIMENSIONS' | 'FILE_SIZE';
+
+const buttonData: Array<ButtonData> = [
+  { text: 'Normal', aspectRatio: 1 },
+  { text: 'Portrait', aspectRatio: 4 / 5 },
+  { text: 'Landscape', aspectRatio: 1.91 / 1 },
+];
 
 export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   const [imgSrc, setImgSrc] = useState('');
@@ -32,6 +35,7 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+  const [error, setError] = useState<ImageErrors>(null);
 
   useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg });
 
@@ -59,7 +63,7 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   return (
     <>
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
-      {!imgSrc && <DropZone handleImage={handleImage} setImgSrc={setImgSrc} />}
+      {!imgSrc && <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />}
       {Boolean(imgSrc) && (
         <>
           <ReactCrop
@@ -72,22 +76,25 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
           >
             <img ref={imgRef} alt='Crop me' src={imgSrc} onLoad={onImageLoad} />
           </ReactCrop>
+
           <div className={styles.buttonCenter}>
             <Button variant='secondary' onClick={chooseDiffrentImage}>
               Choose diffrent image
             </Button>
           </div>
+          <div className={styles.aspectRatioButtons}>
+            {buttonData.map(({ text, aspectRatio }) => {
+              return (
+                <Button onClick={() => setAspect(aspectRatio)} key={aspectRatio}>
+                  {text}
+                </Button>
+              );
+            })}
+          </div>
         </>
       )}
-      <div className={styles.aspectRatioButtons}>
-        {buttonData.map(({ text, aspectRatio }) => {
-          return (
-            <Button onClick={() => setAspect(aspectRatio)} key={aspectRatio}>
-              {text}
-            </Button>
-          );
-        })}
-      </div>
+
+      <CropError errorType={error} />
     </>
   );
 };

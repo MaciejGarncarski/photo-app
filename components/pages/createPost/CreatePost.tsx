@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,6 +16,7 @@ type FormValues = {
 };
 
 export const CreatePost = () => {
+  const { push } = useRouter();
   const [finalImg, setFinalImg] = useState<Blob | null>(null);
 
   const {
@@ -26,6 +28,10 @@ export const CreatePost = () => {
       location: '',
     },
   });
+
+  const handleCancel = () => {
+    push('/');
+  };
 
   return (
     <section aria-labelledby='Create new post' className={styles.createPost}>
@@ -47,7 +53,9 @@ export const CreatePost = () => {
         />
       </div>
       <div className={styles.buttons}>
-        <Button variant='secondary'>Cancel</Button>
+        <Button variant='secondary' onClick={handleCancel}>
+          Cancel
+        </Button>
         <Button disabled={!dirtyFields.description || !finalImg}>Complete</Button>
       </div>
     </section>
