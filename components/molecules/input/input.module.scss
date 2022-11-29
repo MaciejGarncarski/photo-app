@@ -25,12 +25,22 @@
 
 .labelActive,
 .input:focus+.label {
-  transform: translateY(-2.5rem);
+  transform: translateX(0.5rem) translateY(-2.4rem);
+
   background-color: var(--bg-primary);
   color: var(--text-primary);
 
+
+  @include common.mediaquery('lg') {
+    font-size: 2.5rem;
+    transform: translateX(0.5rem) translateY(-3.75rem);
+  }
+
   @include common.mediaquery('xl') {
-    font-size: 2rem;
+    transform: translateX(0.5rem) translateY(-3.7rem);
+  }
+
+  @include common.mediaquery('xl') {
     transform: translateX(0.5rem) translateY(-3rem);
   }
 }
@@ -39,4 +49,8 @@
   background-color: transparent;
   border: none;
   padding: 1rem;
+
+  &:-webkit-autofill {
+    background-color: red;
+  }
 }

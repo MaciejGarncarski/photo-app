@@ -3,6 +3,7 @@ import { ChangeEvent, SyntheticEvent, useRef, useState } from 'react';
 import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
 
 import { centerAspectCrop } from '@/utils/centerAspectCrop';
+import { handleDropImage } from '@/utils/handleDropImage';
 
 import styles from './cropPostImage.module.scss';
 
@@ -42,9 +43,8 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   const handleImage = (changeEv: ChangeEvent<HTMLInputElement>) => {
     if (changeEv.target.files && changeEv.target.files.length > 0) {
       setCrop(undefined);
-      const reader = new FileReader();
-      reader.addEventListener('load', () => setImgSrc(reader.result?.toString() || ''));
-      reader.readAsDataURL(changeEv.target.files[0]);
+      const file = changeEv.target.files[0];
+      handleDropImage({ file, setError, setImgSrc });
     }
   };
 
@@ -64,7 +64,7 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
     <>
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
       {!imgSrc && <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />}
-      {Boolean(imgSrc) && (
+      {Boolean(imgSrc) && !error && (
         <>
           <ReactCrop
             className={styles.reactCrop}

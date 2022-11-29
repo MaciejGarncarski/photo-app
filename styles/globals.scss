@@ -8,10 +8,11 @@
 
 html {
   display: grid;
-  min-height: 100%;
+  min-height: 110%;
   font-size: 62.5%;
 
   @include common.mediaquery('lg') {
+    min-height: 100%;
     font-size: 50%;
   }
 

@@ -45,16 +45,12 @@ const listData: Array<ListData> = [
 export const Header = () => {
   const { data: session, status } = useSession();
 
-  if (status === 'loading') {
-    return null;
-  }
-
   return (
     <header className={styles.header}>
       <h1 className={styles.heading}>{APP_NAME}</h1>
       <LayoutSearch />
       <nav className={styles.nav}>
-        {session ? (
+        {status !== 'loading' && session ? (
           <ul className={styles.list}>
             {listData.map(({ icon, alt, onClick, href, title }) => {
               if (href) {

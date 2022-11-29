@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
-import { AiOutlineDownload } from 'react-icons/ai';
+import { AiOutlineDownload, AiOutlineFolderOpen } from 'react-icons/ai';
+
+import { handleDropImage } from '@/utils/handleDropImage';
 
 import styles from './dropZone.module.scss';
 
@@ -11,9 +13,6 @@ type DropZoneProps = {
   setImgSrc: (src: string) => void;
   setError: (error: ImageErrors | null) => void;
 };
-
-const IMAGE_MIN_SIZE = 500;
-const IMAGE_MAX_FILE_SIZE = 36_700_160;
 
 export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -38,27 +37,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
         return;
       }
       const file = dt.files[0];
-      const reader = new FileReader();
-      console.log(file.size);
-      if (file.size > IMAGE_MAX_FILE_SIZE) {
-        setError('FILE_SIZE');
-        return;
-      }
-
-      reader.addEventListener('load', () => {
-        const image = new Image();
-        image.onload = () => {
-          if (image.width < IMAGE_MIN_SIZE || image.height < IMAGE_MIN_SIZE) {
-            setError('DIMENSIONS');
-            return;
-          }
-          setImgSrc(reader.result?.toString() || '');
-          setFileName(file.name);
-        };
-        image.src = URL.createObjectURL(file);
-      });
-      reader.readAsDataURL(file);
-      setError(null);
+      handleDropImage({ file, setError, setFileName, setImgSrc });
     },
     [setError, setImgSrc]
   );
@@ -83,8 +62,17 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
       ref={dropZoneRef}
       className={clsx(isActive && styles.dropZoneActive, styles.dropZone)}
     >
-      <AiOutlineDownload className={styles.dropIcon} />
-      <p>Drop or click to add image.</p>
+      {isActive ? (
+        <>
+          <AiOutlineFolderOpen className={styles.dropIcon} />
+          <p>Drop here 👌</p>
+        </>
+      ) : (
+        <>
+          <AiOutlineDownload className={styles.dropIcon} />
+          <p>Drop or click to add image.</p>
+        </>
+      )}
       {fileName && <p>{fileName}</p>}
       <input
         type='file'
