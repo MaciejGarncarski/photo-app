@@ -70,6 +70,13 @@ model Post {
   location       String?
   posts_likes    PostLike[]
   posts_comments PostComments[]
+  post_saved     SavedPost[]
+}
+
+model SavedPost {
+    id             Int              @id @default(autoincrement()) @db.Integer
+    post    Post    @relation(fields: [post_id], references: [id])
+    post_id Int      @default(autoincrement()) @db.Integer
 }
 
 model PostLike {

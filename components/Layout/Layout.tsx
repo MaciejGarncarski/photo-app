@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import styles from './layout.module.scss';
 
-import { Header } from '@/components/organisms/Header/Header';
+import { Header } from '@/components/organisms/header/Header';
 
 export type Children = {
   children: ReactNode;
