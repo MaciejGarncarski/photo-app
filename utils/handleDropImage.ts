@@ -17,8 +17,15 @@ export const handleDropImage = ({ file, setError, setFileName, setImgSrc }: Hand
     return;
   }
 
+  const fileType = file.type.split('/');
+  if (!fileType.includes('image')) {
+    setError('INVALID_TYPE');
+    return;
+  }
+
   reader.addEventListener('load', () => {
     const image = new Image();
+
     image.onload = () => {
       if (image.width < IMAGE_MIN_SIZE || image.height < IMAGE_MIN_SIZE) {
         setError('DIMENSIONS');

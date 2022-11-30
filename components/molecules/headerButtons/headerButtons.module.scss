@@ -1,0 +1,56 @@
+@use '/styles/common.scss';
+
+.list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 3rem;
+  width: 100%;
+
+  @include common.mediaquery('lg') {
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+  }
+
+  gap: 3rem;
+}
+
+.listItem {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.listItemTitle {
+  font-size: 1.5rem;
+
+  @include common.mediaquery('lg') {
+    display: none;
+  }
+}
+
+.listItemChild {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  flex-direction: column;
+  font-size: var(--itemSize);
+}
+
+.listItemButton {
+  background-color: transparent;
+  border: none;
+}
+
+.listItemImage {
+  width: var(--itemSize);
+  height: var(--itemSize);
+  border-radius: 100%;
+}

@@ -13,8 +13,9 @@ export const CropError = ({ errorType }: CropErrorProps) => {
 
   return (
     <p className={styles.error}>
-      {errorType === 'DIMENSIONS' && 'Image dimmnsions are too small 🥺'}
+      {errorType === 'DIMENSIONS' && 'Image dimensions are too small 🥺'}
       {errorType === 'FILE_SIZE' && 'Image is too big 😲'}
+      {errorType === 'INVALID_TYPE' && 'Invalid file type 🤔'}
     </p>
   );
 };

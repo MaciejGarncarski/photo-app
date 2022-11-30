@@ -8,26 +8,17 @@ import { handleDropImage } from '@/utils/handleDropImage';
 import styles from './cropPostImage.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
+import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { CropError } from '@/components/atoms/cropError/CropError';
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
+import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { useCreateImg } from '@/components/pages/createPost/useCreateImg';
-
-type ButtonData = {
-  text: string;
-  aspectRatio: number;
-};
 
 type CropPostImageProps = {
   setFinalImg: (img: Blob | null) => void;
 };
 
-export type ImageErrors = null | 'DIMENSIONS' | 'FILE_SIZE';
-
-const buttonData: Array<ButtonData> = [
-  { text: 'Normal', aspectRatio: 1 },
-  { text: 'Portrait', aspectRatio: 4 / 5 },
-  { text: 'Landscape', aspectRatio: 1.91 / 1 },
-];
+export type ImageErrors = null | 'DIMENSIONS' | 'FILE_SIZE' | 'INVALID_TYPE';
 
 export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   const [imgSrc, setImgSrc] = useState('');
@@ -35,7 +26,7 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
-  const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+  const [aspect, setAspect] = useState<number | undefined>(1);
   const [error, setError] = useState<ImageErrors>(null);
 
   useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg });
@@ -60,40 +51,32 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
     setFinalImg(null);
   };
 
+  if (!imgSrc || error) {
+    return <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />;
+  }
+
   return (
     <>
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
-      {!imgSrc && <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />}
-      {Boolean(imgSrc) && !error && (
-        <>
-          <ReactCrop
-            className={styles.reactCrop}
-            key={aspect}
-            crop={crop}
-            onChange={(_, percentCrop) => setCrop(percentCrop)}
-            onComplete={(c) => setCompletedCrop(c)}
-            aspect={aspect}
-          >
-            <img ref={imgRef} alt='Crop me' src={imgSrc} onLoad={onImageLoad} />
-          </ReactCrop>
-
-          <div className={styles.buttonCenter}>
-            <Button variant='secondary' onClick={chooseDiffrentImage}>
-              Choose diffrent image
-            </Button>
-          </div>
-          <div className={styles.aspectRatioButtons}>
-            {buttonData.map(({ text, aspectRatio }) => {
-              return (
-                <Button onClick={() => setAspect(aspectRatio)} key={aspectRatio}>
-                  {text}
-                </Button>
-              );
-            })}
-          </div>
-        </>
-      )}
-
+      <CreatePostItemContainer>
+        <h3 className='heading'>Crop your image</h3>
+        <ReactCrop
+          className={styles.reactCrop}
+          key={aspect}
+          crop={crop}
+          onChange={(_, percentCrop) => setCrop(percentCrop)}
+          onComplete={(c) => setCompletedCrop(c)}
+          aspect={aspect}
+        >
+          <img ref={imgRef} alt='Crop me' src={imgSrc} onLoad={onImageLoad} />
+        </ReactCrop>
+        <div className={styles.buttonCenter}>
+          <Button variant='secondary' onClick={chooseDiffrentImage}>
+            Choose diffrent image
+          </Button>
+        </div>
+      </CreatePostItemContainer>
+      <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
       <CropError errorType={error} />
     </>
   );

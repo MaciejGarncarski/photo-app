@@ -11,7 +11,7 @@
   padding: 2rem 1rem;
   text-align: center;
   cursor: pointer;
-  max-width: 50rem;
+  width: 100%;
 
   &>* {
     pointer-events: none;
@@ -22,8 +22,9 @@
   }
 
   @include common.mediaquery('xl') {
-    height: 100%;
-    padding: 3rem;
+    margin-inline: auto;
+    width: 80%;
+    padding: 6rem 3rem;
   }
 }
 
@@ -34,4 +35,8 @@
 
 .dropIcon {
   font-size: 7rem;
+}
+
+.input:focus+.dropZone {
+  @extend .dropZoneActive;
 }

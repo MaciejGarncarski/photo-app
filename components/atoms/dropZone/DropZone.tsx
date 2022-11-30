@@ -50,37 +50,40 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
   };
 
   return (
-    <div
-      onClick={openInput}
-      onDragOver={active}
-      onDragEnter={active}
-      onDrop={(dragEv) => {
-        inactive(dragEv);
-        handleDrop(dragEv);
-      }}
-      onDragLeave={inactive}
-      ref={dropZoneRef}
-      className={clsx(isActive && styles.dropZoneActive, styles.dropZone)}
-    >
-      {isActive ? (
-        <>
-          <AiOutlineFolderOpen className={styles.dropIcon} />
-          <p>Drop here 👌</p>
-        </>
-      ) : (
-        <>
-          <AiOutlineDownload className={styles.dropIcon} />
-          <p>Drop or click to add image.</p>
-        </>
-      )}
-      {fileName && <p>{fileName}</p>}
+    <>
       <input
         type='file'
         accept='image/*'
-        className='visually-hidden'
+        className={clsx('visually-hidden', styles.input)}
         ref={inputRef}
         onChange={handleImage}
       />
-    </div>
+
+      <div
+        onClick={openInput}
+        onDragOver={active}
+        onDragEnter={active}
+        onDrop={(dragEv) => {
+          inactive(dragEv);
+          handleDrop(dragEv);
+        }}
+        onDragLeave={inactive}
+        ref={dropZoneRef}
+        className={clsx(isActive && styles.dropZoneActive, styles.dropZone)}
+      >
+        {isActive ? (
+          <>
+            <AiOutlineFolderOpen className={styles.dropIcon} />
+            <p>Drop here 👌</p>
+          </>
+        ) : (
+          <>
+            <AiOutlineDownload className={styles.dropIcon} />
+            <p>Drop or click to add image.</p>
+          </>
+        )}
+        {fileName && <p>{fileName}</p>}
+      </div>
+    </>
   );
 };

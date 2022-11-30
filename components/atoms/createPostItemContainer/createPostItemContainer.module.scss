@@ -1,0 +1,11 @@
+@use '/styles/common.scss';
+
+.container {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+
+  @include common.mediaquery('lg') {
+    gap: 2rem;
+  }
+}
