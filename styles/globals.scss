@@ -1,6 +1,8 @@
 @use 'common.scss';
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -8,10 +10,11 @@
 
 html {
   display: grid;
-  min-height: 100%;
+  min-height: 110%;
   font-size: 62.5%;
 
   @include common.mediaquery('lg') {
+    min-height: 100%;
     font-size: 50%;
   }
 
@@ -54,9 +57,8 @@ a {
 // }
 
 :root {
-  --color-primary: #1070b4;
-  --color-primary-light: #3694e0;
-  --color-secondary: #d1ecfd;
+  --color-primary: #3178c6;
+  --color-secondary: #7db5f5;
   --color-gray: #fefefe;
   --color-error: #d64242;
   --color-white: #fff;
@@ -72,12 +74,11 @@ a {
   --border-primary: 1px solid rgb(160, 160, 160);
   --border-secondary: 1px solid rgb(219, 219, 219);
 
-  --radius-small: 0.5rem;
-  --radius-medium: 0.75rem;
+  --radius-small: 0.6rem;
+  --radius-medium: 0.9rem;
 
 
   --shadow-primary: 0 4px 10px 2px rgb(0, 0, 0, 0.15);
-
 
   --itemSize: 2.75rem;
 
@@ -86,6 +87,7 @@ a {
   }
 
 
+  --create-post-width: min(80rem, 70%);
   // @media (prefers-color-scheme: dark) {
   //   --text-primary: #ffffff;
   //   --bg-primary: #2e2e2e;
@@ -100,4 +102,27 @@ a {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+
+#__next {
+  isolation: isolate;
+
+}
+
+.heading {
+  text-align: left;
+  position: relative;
+  line-height: 1.5;
+
+  &::before {
+    content: '';
+    z-index: -1;
+    width: 2.5em;
+    height: 90%;
+    position: absolute;
+    left: -0.75em;
+    top: 5%;
+    background-color: var(--color-secondary);
+  }
 }

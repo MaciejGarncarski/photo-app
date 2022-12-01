@@ -1,16 +1,16 @@
 import clsx from 'clsx';
+import { ButtonHTMLAttributes } from 'react';
 
 import styles from './button.module.scss';
 
 import { Children } from '@/components/Layout/Layout';
 
 type ButtonProps = {
-  type?: 'reset' | 'submit' | 'button';
   className?: string;
   disabled?: boolean;
   variant?: 'secondary';
-  onClick?: () => void;
-} & Children;
+} & Children &
+  ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
   type = 'button',
@@ -19,9 +19,11 @@ export const Button = ({
   variant,
   onClick,
   className,
+  onKeyDown,
 }: ButtonProps) => {
   return (
     <button
+      onKeyDown={onKeyDown}
       onClick={onClick}
       type={type}
       disabled={disabled}

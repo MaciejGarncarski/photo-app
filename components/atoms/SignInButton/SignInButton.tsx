@@ -3,6 +3,8 @@ import { KeyboardEvent, MouseEvent, useRef, useState } from 'react';
 
 import styles from './signInButton.module.scss';
 
+import { Button } from '@/components/atoms/button/Button';
+
 export const SignInButton = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -21,14 +23,9 @@ export const SignInButton = () => {
 
   return (
     <>
-      <button
-        type='button'
-        onKeyDown={handleEscapeKey}
-        className={styles.button}
-        onClick={() => setIsModalOpen(true)}
-      >
+      <Button onKeyDown={handleEscapeKey} onClick={() => setIsModalOpen(true)}>
         Sign in
-      </button>
+      </Button>
       {isModalOpen && (
         <div ref={overlayRef} onClick={handleOverlayClick} className={styles.overlay}>
           <div role='dialog' className={styles.dialog}>

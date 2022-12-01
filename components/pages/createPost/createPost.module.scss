@@ -1,33 +1,26 @@
 @use '/styles/common.scss';
 
 .createPost {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: auto;
-  width: min(80%, 100rem);
-  gap: 3rem;
-  padding-bottom: 5rem;
-
+  display: grid;
+  row-gap: 4rem;
+  margin-inline: calc(2rem + 4vw);
 
   @include common.mediaquery('lg') {
-    gap: 5rem;
+    width: var(--create-post-width);
+    margin-inline: auto;
+    row-gap: 6rem;
   }
 }
 
-.heading {
-  text-align: center;
-}
-
-
-.buttons {
+.actionButtons {
   display: flex;
-  justify-content: center;
-  gap: 7rem;
+  justify-content: space-between;
 }
 
-.inputs {
-  display: grid;
-  gap: 3rem;
+.input,
+.actionButtons {
+  @include common.mediaquery('lg') {
+    margin-inline: auto;
+    width: 80%;
+  }
 }

@@ -11,20 +11,32 @@
   padding: 2rem 1rem;
   text-align: center;
   cursor: pointer;
+  width: 100%;
 
-  @include common.mediaquery('xl') {
-    height: 100%;
-    max-width: 50rem;
-    padding: 3rem;
+  &>* {
+    pointer-events: none;
+  }
+
+  &:hover {
+    @extend .dropZoneActive;
+  }
+
+  @include common.mediaquery('lg') {
+    margin-inline: auto;
+    width: 80%;
+    padding: 6rem 3rem;
   }
 }
 
 .dropZoneActive {
   color: var(--color-primary);
   border-color: var(--color-primary);
-  background-color: var(--bg-gray);
 }
 
 .dropIcon {
   font-size: 7rem;
+}
+
+.input:focus+.dropZone {
+  @extend .dropZoneActive;
 }
