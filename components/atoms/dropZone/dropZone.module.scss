@@ -21,7 +21,7 @@
     @extend .dropZoneActive;
   }
 
-  @include common.mediaquery('xl') {
+  @include common.mediaquery('lg') {
     margin-inline: auto;
     width: 80%;
     padding: 6rem 3rem;

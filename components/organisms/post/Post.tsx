@@ -13,8 +13,6 @@ export const Post = ({ author, images }: PostProps) => {
     return responseData;
   });
 
-  console.log(data);
-
   return (
     <article>
       <Image src={images} alt='Post' width={300} height={500} />

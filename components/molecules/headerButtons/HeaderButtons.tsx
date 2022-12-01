@@ -67,7 +67,7 @@ export const HeaderButtons = () => {
           );
         })}
         <li>
-          <Link href='/user' className={clsx(styles.listItemChild)}>
+          <Link href='/user' data-tip='Account' className={clsx(styles.listItemChild)}>
             <span className='visually-hidden'>{session.user?.name}</span>
             <Image
               className={styles.listItemImage}

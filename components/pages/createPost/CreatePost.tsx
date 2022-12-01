@@ -44,7 +44,6 @@ export const CreatePost = () => {
       return;
     }
     mutate({ description, location, image: finalImg });
-    console.log(isSuccess);
   };
 
   return (
@@ -55,15 +54,18 @@ export const CreatePost = () => {
         <CreatePostItemContainer>
           <h3 className='heading'>Info about post</h3>
           <Input
+            data-testid='descriptionInput'
             labelText='Description'
-            isDirty={dirtyFields.description}
             error={errors.description}
+            className={styles.input}
+            isDirty={dirtyFields.description}
             {...register('description')}
           />
           <Input
             labelText='Location'
             optional
             error={errors.location}
+            className={styles.input}
             isDirty={dirtyFields.location}
             {...register('location')}
           />
@@ -71,7 +73,7 @@ export const CreatePost = () => {
             <Button variant='secondary' onClick={handleCancel}>
               Cancel
             </Button>
-            <Button type='submit' disabled={!dirtyFields.description || !finalImg}>
+            <Button type='submit' disabled={Boolean(!dirtyFields.description || !finalImg)}>
               Complete
             </Button>
           </div>

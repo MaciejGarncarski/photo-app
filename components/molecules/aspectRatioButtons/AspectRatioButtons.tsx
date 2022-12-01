@@ -10,9 +10,9 @@ type ButtonData = {
   aspectRatio: number;
 };
 const buttonData: Array<ButtonData> = [
-  { text: 'Normal', aspectRatio: 1 },
-  { text: 'Portrait', aspectRatio: 4 / 5 },
-  { text: 'Landscape', aspectRatio: 1.91 / 1 },
+  { text: 'square', aspectRatio: 1 },
+  { text: 'portrait', aspectRatio: 4 / 5 },
+  { text: 'landscape', aspectRatio: 1.91 / 1 },
 ];
 
 type AspectRatioButtonsProps = {
@@ -23,11 +23,12 @@ type AspectRatioButtonsProps = {
 export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProps) => {
   return (
     <CreatePostItemContainer>
-      <h3 className={clsx('heading', styles.aspectRatioHeading)}>Image aspect ratio</h3>
+      <h3 className={clsx('heading', styles.aspectRatioHeading)}>Cropping orientation</h3>
       <div className={styles.aspectRatioButtons}>
         {buttonData.map(({ text, aspectRatio }) => {
           return (
             <Button
+              className={styles.button}
               variant={aspectRatio === aspect ? undefined : 'secondary'}
               onClick={() => setAspect(aspectRatio)}
               key={aspectRatio}

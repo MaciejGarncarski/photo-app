@@ -1,4 +1,16 @@
+@use '/styles/common.scss';
+
 .aspectRatioButtons {
   display: flex;
   justify-content: space-around;
+
+  @include common.mediaquery('lg') {
+    justify-content: space-between;
+    margin-inline: auto;
+    width: 80%;
+  }
+}
+
+.button {
+  text-transform: capitalize;
 }

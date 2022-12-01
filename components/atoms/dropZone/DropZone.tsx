@@ -31,9 +31,14 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
   };
 
   const handleDrop = useCallback(
-    (dragEv: DragEvent<HTMLDivElement>) => {
-      const dt = dragEv.dataTransfer;
-      if (!dt?.files) {
+    (dropEv: DragEvent<HTMLDivElement>) => {
+      const dt = dropEv.dataTransfer;
+      if (!dt.files || !dt.files[0]) {
+        setError('NO_IMAGE_DETECTED');
+        return;
+      }
+      if (dt.files.length > 1) {
+        setError('TOO_MANY_IMAGES');
         return;
       }
       const file = dt.files[0];
@@ -52,6 +57,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
   return (
     <>
       <input
+        data-testid='fileInput'
         type='file'
         accept='image/*'
         className={clsx('visually-hidden', styles.input)}

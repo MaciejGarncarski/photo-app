@@ -14,8 +14,6 @@ export const Home = () => {
     rootMargin: '0px 0px 400px 0px',
   });
 
-  console.log(data);
-
   if (!data) {
     return <p>no data</p>;
   }

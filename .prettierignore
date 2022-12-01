@@ -3,7 +3,7 @@ README.md
 .prettierrc
 .commitlintrc
 .lintstagedrc
-pnpm-lock.yaml
+yarn-lock.yaml
 .github/
 .husky/
 .next/

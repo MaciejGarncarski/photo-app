@@ -18,7 +18,13 @@ type CropPostImageProps = {
   setFinalImg: (img: Blob | null) => void;
 };
 
-export type ImageErrors = null | 'DIMENSIONS' | 'FILE_SIZE' | 'INVALID_TYPE';
+export type ImageErrors =
+  | null
+  | 'DIMENSIONS'
+  | 'FILE_SIZE'
+  | 'INVALID_TYPE'
+  | 'NO_IMAGE_DETECTED'
+  | 'TOO_MANY_IMAGES';
 
 export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
   const [imgSrc, setImgSrc] = useState('');
@@ -46,20 +52,38 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
     }
   };
 
+  const onImageError = () => {
+    setError('NO_IMAGE_DETECTED');
+    setFinalImg(null);
+    setImgSrc('');
+  };
+
   const chooseDiffrentImage = () => {
     setImgSrc('');
+    setError(null);
     setFinalImg(null);
   };
 
   if (!imgSrc || error) {
-    return <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />;
+    return (
+      <>
+        <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />
+        <CropError errorType={error} />
+      </>
+    );
   }
 
   return (
     <>
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
+      <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
       <CreatePostItemContainer>
-        <h3 className='heading'>Crop your image</h3>
+        <div className={styles.heading}>
+          <h3 className='heading'>Crop your image</h3>
+          <Button variant='secondary' onClick={chooseDiffrentImage}>
+            Choose diffrent image
+          </Button>
+        </div>
         <ReactCrop
           className={styles.reactCrop}
           key={aspect}
@@ -68,16 +92,15 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
           onComplete={(c) => setCompletedCrop(c)}
           aspect={aspect}
         >
-          <img ref={imgRef} alt='Crop me' src={imgSrc} onLoad={onImageLoad} />
+          <img
+            ref={imgRef}
+            alt='Crop me'
+            src={imgSrc}
+            onLoad={onImageLoad}
+            onError={onImageError}
+          />
         </ReactCrop>
-        <div className={styles.buttonCenter}>
-          <Button variant='secondary' onClick={chooseDiffrentImage}>
-            Choose diffrent image
-          </Button>
-        </div>
       </CreatePostItemContainer>
-      <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
-      <CropError errorType={error} />
     </>
   );
 };

@@ -12,7 +12,8 @@
        "simple-import-sort",
        "unused-imports",
        "prettier",
-       "jsx-a11y"
+       "jsx-a11y",
+       "jest"
      ],
      "extends": [
        "eslint:recommended",
