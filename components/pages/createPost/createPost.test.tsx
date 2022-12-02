@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 import { CreatePost } from '@/components/pages/createPost/CreatePost';
 
@@ -16,7 +15,7 @@ jest.mock('next-auth/react', () => {
     __esModule: true,
     ...originalModule,
     useSession: jest.fn(() => {
-      return { data: mockSession, status: 'authenticated' }; // return type is [] in v3 but changed to {} in v4
+      return { data: mockSession, status: 'authenticated' };
     }),
   };
 });
@@ -34,18 +33,5 @@ describe('<CreatePost />', () => {
   test('button should be disabled when no description provided', async () => {
     const button = await screen.findByText(/complete/i);
     expect(button).toHaveAttribute('disabled', '');
-  });
-  test('button should not be disabled when image and description provided', async () => {
-    const file = new File(['hello'], 'hello.webp', { type: 'image/webp' });
-    const user = userEvent.setup();
-
-    const button = await screen.findByText<HTMLButtonElement>(/complete/i);
-    const fileInput = await screen.findByTestId('fileInput');
-    const descriptionInput = await screen.findByTestId('descriptionInput');
-
-    await user.upload(fileInput, file);
-    await user.type(descriptionInput, 'random descripion');
-
-    await waitFor(() => expect(button).toHaveProperty('disabled', false), { timeout: 500 });
   });
 });

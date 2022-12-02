@@ -36,18 +36,19 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
   email         String?   @unique
   emailVerified DateTime?
+  name          String?
+  username      String?
+  bio           String?
   image         String?
+  customImage   String?
   accounts      Account[]
   sessions      Session[]
-
   posts          Post[]
   posts_likes    PostLike[]
   posts_comments PostComments[]
-
-    fromUser Follower[] @relation("Follower")
+  fromUser Follower[] @relation("Follower")
   toUser   Follower[] @relation("Following")
 }
 

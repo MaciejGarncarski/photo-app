@@ -9,7 +9,7 @@ import styles from './createPost.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
-import { CropPostImage } from '@/components/molecules/cropPostImage/CropPostImage';
+import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { Input } from '@/components/molecules/input/Input';
 import { useCreatePost } from '@/components/pages/createPost/useCreatePost';
 
@@ -49,7 +49,7 @@ export const CreatePost = () => {
   return (
     <section aria-labelledby='Create new post' className={styles.createPost}>
       <h2 className={clsx('heading', styles.heading)}>Create new post</h2>
-      <CropPostImage setFinalImg={setFinalImg} />
+      <CropImage setFinalImg={setFinalImg} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
           <h3 className='heading'>Info about post</h3>

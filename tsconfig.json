@@ -18,8 +18,8 @@
     "paths": {
       "@/*": ["./*"],
       "~/*": ["./public/*"]
-    }
+    },
   },
   "include": ["next-env.d.ts", "jest.setup.js", "jest.config.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

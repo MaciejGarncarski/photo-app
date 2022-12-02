@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import Image from 'next/image';
+
+import { useAccount } from '@/components/pages/account/useAccount';
 
 type PostProps = {
   author: string;
@@ -8,11 +8,7 @@ type PostProps = {
 };
 
 export const Post = ({ author, images }: PostProps) => {
-  const { data } = useQuery([author], async () => {
-    const { data: responseData } = await axios.get(`/api/user/${author}`);
-    return responseData;
-  });
-
+  const { data } = useAccount({ id: author });
   return (
     <article>
       <Image src={images} alt='Post' width={300} height={500} />
