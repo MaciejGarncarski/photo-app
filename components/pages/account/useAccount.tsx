@@ -20,6 +20,11 @@ type UseAccount = {
 type UseAccountResponse = {
   status: number;
   user: User;
+  count: {
+    posts: number | null;
+    followers: number | null;
+    following: number | null;
+  };
 };
 
 export const useAccount = ({ id, username }: UseAccount) => {

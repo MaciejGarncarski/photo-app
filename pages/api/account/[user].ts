@@ -1,9 +1,52 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
 
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+
+const countUser = async (userID: string) => {
+  const countedPosts = await prisma.post.aggregate({
+    _count: {
+      id: true,
+    },
+    where: {
+      author_id: userID,
+    },
+  });
+
+  const countedFollowers = await prisma.follower.aggregate({
+    _count: {
+      id: true,
+    },
+    where: {
+      to: userID,
+    },
+  });
+
+  const countedFollowing = await prisma.follower.aggregate({
+    _count: {
+      id: true,
+    },
+    where: {
+      from: userID,
+    },
+  });
+
+  const count = {
+    posts: countedPosts._count.id,
+    followers: countedFollowers._count.id,
+    following: countedFollowing._count.id,
+  };
+
+  return count;
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { user, type } = req.query;
+
+  const session = await unstable_getServerSession(req, res, authOptions);
+  console.log(session);
 
   if (typeof user !== 'string') {
     return;
@@ -15,6 +58,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         id: user,
       },
     });
+    if (!user) {
+      res.status(404).send({ status: 404 });
+      return;
+    }
 
     if (type === 'username') {
       const userData = await prisma.user.findFirst({
@@ -22,11 +69,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           username: user,
         },
       });
-      res.status(200).send({ status: 200, user: userData });
+
+      if (!user) {
+        res.status(404).send({ status: 404 });
+        return;
+      }
+      const count = await countUser(userData?.id ?? '');
+      res.status(200).send({ status: 200, user: userData, count });
       return;
     }
 
-    res.status(200).send({ status: 200, user: userData });
+    const count = await countUser(user);
+    res.status(200).send({ status: 200, user: userData, count });
   } catch (error) {
     res.status(400).send({ status: 400, error });
   }

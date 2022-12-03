@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
@@ -6,6 +7,7 @@ import styles from './account.module.scss';
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/button/Button';
 import { ModalOvelay } from '@/components/atoms/modalOverlay/ModalOverlay';
+import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 export type AccountID = {
@@ -20,6 +22,7 @@ const listData = ['posts', 'followers', 'following'] as const;
 
 export const Account = ({ username }: AccountProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { data: session } = useSession();
   const { data, isLoading } = useAccount({ username });
 
   const openMenu = () => {
@@ -30,13 +33,13 @@ export const Account = ({ username }: AccountProps) => {
     return <p>loading</p>;
   }
 
-  const isUsernameSet = Boolean(data.user.username);
-
-  if (!isUsernameSet) {
-    return <p>no username set!! :(</p>;
+  if (!data.user) {
+    return <p>user error</p>;
   }
 
-  const { customImage, image, name } = data.user;
+  const { name } = data.user;
+
+  const isIamOwner = session?.user?.id === data.user.id;
 
   return (
     <>
@@ -47,7 +50,7 @@ export const Account = ({ username }: AccountProps) => {
           {listData.map((item) => {
             return (
               <li className={styles.listItem} key={item}>
-                <p className={styles.listItemNumber}>0</p>
+                <p className={styles.listItemNumber}>{data.count[item]}</p>
                 <p>{item}</p>
               </li>
             );
@@ -59,7 +62,7 @@ export const Account = ({ username }: AccountProps) => {
           similique. Doloremque, veritatis totam magnam magni qui ab consectetur vero, iusto
           dignissimos, nam nostrum explicabo nesciunt tenetur optio.
         </p>
-        <Button className={styles.followButton}>follow 💪</Button>
+        {!isIamOwner && <Button className={styles.followButton}>follow 💪</Button>}
         <button type='button' onClick={openMenu} className={styles.menuButton}>
           <span className='visually-hidden'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
           <AiOutlineMenu />
@@ -76,6 +79,7 @@ export const Account = ({ username }: AccountProps) => {
           </div>
         </ModalOvelay>
       )}
+      <AccountPosts id={data.user.id} />
     </>
   );
 };
