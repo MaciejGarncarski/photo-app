@@ -22,12 +22,12 @@ export const CreatePost = () => {
   const { push } = useRouter();
   const [finalImg, setFinalImg] = useState<Blob | null>(null);
 
-  const { mutate, isSuccess } = useCreatePost();
+  const { mutate } = useCreatePost();
 
   const {
     register,
     handleSubmit,
-    formState: { isDirty, dirtyFields, errors },
+    formState: { dirtyFields, errors },
   } = useForm<FormValues>({
     defaultValues: {
       description: '',
