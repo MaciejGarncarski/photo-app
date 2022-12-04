@@ -12,3 +12,4 @@ yarn-lock.yaml
 node_modules/
 public/
 public/favicon/site.webmanifest
+**/*.scss
