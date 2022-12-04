@@ -9,7 +9,7 @@
     "lint": "next lint",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
-    "lint-strict-fix": "eslint --fix components pages && pnpm format",
+    "lint-strict-fix": "eslint --fix components pages && yarn format",
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
