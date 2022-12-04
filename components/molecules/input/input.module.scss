@@ -49,8 +49,15 @@
   background-color: transparent;
   border: none;
   padding: 1rem;
+}
 
-  &:-webkit-autofill {
-    background-color: red;
+.error {
+  color: var(--color-error);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+
+  @include common.mediaquery('lg') {
+    font-size: 2rem;
   }
 }

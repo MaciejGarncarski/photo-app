@@ -1,0 +1,20 @@
+.list {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 1rem 1rem;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button {
+  background-color: transparent;
+  border: 0;
+  font: inherit;
+  display: flex;
+}

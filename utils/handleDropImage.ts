@@ -1,4 +1,4 @@
-import { ImageErrors } from '@/components/molecules/cropPostImage/CropPostImage';
+import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
 
 type HandleDropImage = {
   file: File;
@@ -47,7 +47,6 @@ export const handleDropImage = ({ file, setError, setFileName, setImgSrc }: Hand
         setFileName(file.name);
       }
     } catch (error) {
-      console.log(error);
       setImgSrc('');
       setError('INVALID_TYPE');
     }

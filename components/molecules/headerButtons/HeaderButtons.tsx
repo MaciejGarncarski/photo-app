@@ -10,6 +10,7 @@ import styles from './headerButtons.module.scss';
 
 import { HeaderButton } from '@/components/atoms/headerButton/HeaderButton';
 import { SignInButton } from '@/components/atoms/SignInButton/SignInButton';
+import { useAccount } from '@/components/pages/account/useAccount';
 
 export type ListData = {
   icon: ReactNode;
@@ -42,6 +43,7 @@ const listData: Array<ListData> = [
 
 export const HeaderButtons = () => {
   const { data: session, status } = useSession();
+  const { data } = useAccount({ id: session?.user?.id });
 
   if (status === 'loading') {
     return null;
@@ -66,20 +68,27 @@ export const HeaderButtons = () => {
             />
           );
         })}
-        <li>
-          <Link href='/user' data-tip='Account' className={clsx(styles.listItemChild)}>
-            <span className='visually-hidden'>{session.user?.name}</span>
-            <Image
-              className={styles.listItemImage}
-              src={session.user?.image ?? ''}
-              width={30}
-              height={30}
-              priority
-              alt={session.user?.name ?? 'User avatar'}
-            />
-            <span className={styles.listItemTitle}>Account</span>
-          </Link>
-        </li>
+
+        {data?.user.username && (
+          <li>
+            <Link
+              href={`/${data?.user.username}`}
+              data-tip='Account'
+              className={clsx(styles.listItemChild)}
+            >
+              <span className='visually-hidden'>{session.user?.name}</span>
+              <Image
+                className={styles.listItemImage}
+                src={session.user?.image ?? ''}
+                width={30}
+                height={30}
+                priority
+                alt={session.user?.name ?? 'User avatar'}
+              />
+              <span className={styles.listItemTitle}>Account</span>
+            </Link>
+          </li>
+        )}
       </ul>
       <ReactTooltip effect='solid' />
     </>

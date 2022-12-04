@@ -5,7 +5,7 @@ import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
 import { centerAspectCrop } from '@/utils/centerAspectCrop';
 import { handleDropImage } from '@/utils/handleDropImage';
 
-import styles from './cropPostImage.module.scss';
+import styles from './cropImage.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
@@ -14,7 +14,7 @@ import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { useCreateImg } from '@/components/pages/createPost/useCreateImg';
 
-type CropPostImageProps = {
+type CropImageProps = {
   setFinalImg: (img: Blob | null) => void;
 };
 
@@ -26,7 +26,7 @@ export type ImageErrors =
   | 'NO_IMAGE_DETECTED'
   | 'TOO_MANY_IMAGES';
 
-export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
+export const CropImage = ({ setFinalImg }: CropImageProps) => {
   const [imgSrc, setImgSrc] = useState('');
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -78,19 +78,19 @@ export const CropPostImage = ({ setFinalImg }: CropPostImageProps) => {
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
       <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
       <CreatePostItemContainer>
-        <div className={styles.heading}>
+        <div className={styles.cropContainer}>
           <h3 className='heading'>Crop your image</h3>
           <Button variant='secondary' onClick={chooseDiffrentImage}>
             Choose diffrent image
           </Button>
         </div>
         <ReactCrop
-          className={styles.reactCrop}
           key={aspect}
           crop={crop}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
           aspect={aspect}
+          className={styles.reactCrop}
         >
           <img
             ref={imgRef}

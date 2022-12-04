@@ -1,6 +1,6 @@
 import styles from './cropError.module.scss';
 
-import { ImageErrors } from '@/components/molecules/cropPostImage/CropPostImage';
+import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
 
 type CropErrorProps = {
   errorType: ImageErrors;

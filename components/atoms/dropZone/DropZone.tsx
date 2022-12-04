@@ -6,7 +6,7 @@ import { handleDropImage } from '@/utils/handleDropImage';
 
 import styles from './dropZone.module.scss';
 
-import { ImageErrors } from '@/components/molecules/cropPostImage/CropPostImage';
+import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
 
 type DropZoneProps = {
   handleImage: (changeEv: ChangeEvent<HTMLInputElement>) => void;

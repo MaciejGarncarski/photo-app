@@ -1,14 +1,18 @@
 import { Post, User } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
+
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 export const POSTS_PER_SCROLL = 4;
 
 export type InfinitePost = {
   posts: Array<
     Post & {
+      isLiked?: boolean;
       author: User;
       _count: {
         posts_likes: number;
@@ -26,6 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
   const { skip } = req.query;
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   const skipNumber = parseInt(string(skip));
   const takeNumber = POSTS_PER_SCROLL;
@@ -60,6 +65,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const canLoadMore = postsCount > (skipNumber + 1) * POSTS_PER_SCROLL;
 
     const nextCursor = canLoadMore ? skipNumber + 1 : null;
+
+    if (session) {
+      const postsWithLikesData = await Promise.all(
+        posts.map(async (post) => {
+          const like = await prisma.postLike.findFirst({
+            where: {
+              post_id: post.id,
+              user_id: session.user?.id,
+            },
+          });
+
+          return { ...post, isLiked: Boolean(like) };
+        })
+      );
+
+      res.status(200).send({ posts: postsWithLikesData, postsCount, cursor: nextCursor });
+      return;
+    }
 
     res.status(200).send({ posts, postsCount, cursor: nextCursor });
   } catch (e) {

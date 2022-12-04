@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps, AppType } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { useState } from 'react';
@@ -12,6 +13,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={client}>
+        <ReactQueryDevtools />
         <Layout>
           <Component {...pageProps} />
         </Layout>
