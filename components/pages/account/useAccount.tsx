@@ -37,7 +37,7 @@ export const useAccount = ({ id, username }: UseAccount) => {
       return fetchAccount({ id });
     },
     {
-      enabled: Boolean(id || username),
+      enabled: Boolean(id) || Boolean(username),
     }
   );
 };

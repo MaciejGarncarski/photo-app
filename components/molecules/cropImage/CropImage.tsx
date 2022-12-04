@@ -5,6 +5,8 @@ import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
 import { centerAspectCrop } from '@/utils/centerAspectCrop';
 import { handleDropImage } from '@/utils/handleDropImage';
 
+import styles from './cropImage.module.scss';
+
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { CropError } from '@/components/atoms/cropError/CropError';
@@ -76,7 +78,7 @@ export const CropImage = ({ setFinalImg }: CropImageProps) => {
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
       <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
       <CreatePostItemContainer>
-        <div>
+        <div className={styles.cropContainer}>
           <h3 className='heading'>Crop your image</h3>
           <Button variant='secondary' onClick={chooseDiffrentImage}>
             Choose diffrent image
@@ -88,6 +90,7 @@ export const CropImage = ({ setFinalImg }: CropImageProps) => {
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={(c) => setCompletedCrop(c)}
           aspect={aspect}
+          className={styles.reactCrop}
         >
           <img
             ref={imgRef}

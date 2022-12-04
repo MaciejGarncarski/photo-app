@@ -1,0 +1,12 @@
+@use '/styles/common.scss';
+
+.posts {
+  display: grid;
+  grid-auto-columns: minmax(10rem, 40rem);
+  place-content: center;
+  gap: 4rem;
+
+  @include common.mediaquery('lg') {
+    gap: 6rem;
+  }
+}

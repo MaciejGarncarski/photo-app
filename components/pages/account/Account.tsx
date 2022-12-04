@@ -44,7 +44,7 @@ export const Account = ({ username }: AccountProps) => {
   return (
     <>
       <main className={styles.account}>
-        <Avatar className={styles.avatar} src={data.user.customImage ?? data.user.image} alt='' />
+        <Avatar className={styles.avatar} userID={data.user.id} alt='' />
         <h2 className={styles.username}>{username}</h2>
         <ul className={styles.list}>
           {listData.map((item) => {

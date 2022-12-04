@@ -9,4 +9,5 @@
   align-items: center;
   background-color: var(--bg-overlay);
   backdrop-filter: blur(1px);
+  z-index: 1;
 }

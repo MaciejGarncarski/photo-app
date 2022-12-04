@@ -1,8 +1,10 @@
-// import syles from './accountPosts.module.scss';
-
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
+
+import styles from './accountPosts.module.scss';
+
+import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
 
 import { InfinitePost } from '@/pages/api/post/infinitePosts';
 
@@ -34,10 +36,18 @@ export const AccountPosts = ({ id }: AccountPostsProps) => {
   }
 
   return (
-    <div>
+    <div className={styles.posts}>
       {data.pages.map((page) => {
-        return page.posts.map(({ images, id, author_id }) => {
-          return <p key={id}>im a post</p>;
+        return page.posts.map(({ images, id, author_id, _count }) => {
+          return (
+            <AccountPost
+              key={id}
+              authorID={author_id}
+              src={images}
+              likesCount={_count.posts_likes}
+              commentsCount={_count.posts_comments}
+            />
+          );
         });
       })}
       {(isLoading || hasNextPage) && (

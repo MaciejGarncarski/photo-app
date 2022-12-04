@@ -1,6 +1,8 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { Post } from '@/components/organisms/post/Post';
+import styles from './home.module.scss';
+
+import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
 export const Home = () => {
@@ -19,10 +21,20 @@ export const Home = () => {
   }
 
   return (
-    <main>
+    <main className={styles.posts}>
       {data.pages.map((page) => {
-        return page.posts.map(({ images, id, author_id }) => {
-          return <Post author={author_id} key={id} images={images} />;
+        return page.posts.map(({ images, id, author_id, _count, description, isLiked }) => {
+          return (
+            <HomepagePost
+              key={id}
+              postID={id}
+              authorID={author_id}
+              description={description}
+              isLiked={Boolean(isLiked)}
+              images={images}
+              likesCount={_count.posts_likes}
+            />
+          );
         });
       })}
       {(isLoading || hasNextPage) && (

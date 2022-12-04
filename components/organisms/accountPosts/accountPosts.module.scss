@@ -1,0 +1,21 @@
+@use '/styles/common.scss';
+
+.posts {
+  display: grid;
+  place-content: center;
+  margin: 0 1rem;
+  margin-top: 5rem;
+  gap: 3rem;
+
+  @include common.mediaquery('lg') {
+    margin: 0 20rem;
+    margin-top: 6rem;
+    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include common.mediaquery('xl') {
+    gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

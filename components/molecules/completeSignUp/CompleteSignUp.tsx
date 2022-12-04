@@ -49,8 +49,6 @@ export const CompleteSignUp = () => {
     },
   });
 
-  console.log(errors);
-
   const onSubmit: SubmitHandler<SignUpSchema> = async ({ username, fullName }) => {
     const { status } = await axios.put('/api/account/completeSignUp', {
       data: {

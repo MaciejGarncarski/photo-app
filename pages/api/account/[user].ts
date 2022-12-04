@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
-
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const countUser = async (userID: string) => {
   const countedPosts = await prisma.post.aggregate({
@@ -44,9 +41,6 @@ const countUser = async (userID: string) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { user, type } = req.query;
-
-  const session = await unstable_getServerSession(req, res, authOptions);
-  console.log(session);
 
   if (typeof user !== 'string') {
     return;

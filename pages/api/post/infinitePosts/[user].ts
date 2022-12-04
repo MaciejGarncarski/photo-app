@@ -50,9 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const postsCount = _count.id;
-
     const canLoadMore = postsCount > (skipNumber + 1) * POSTS_PER_SCROLL;
-
     const nextCursor = canLoadMore ? skipNumber + 1 : null;
 
     res.status(200).send({ posts, postsCount, cursor: nextCursor });

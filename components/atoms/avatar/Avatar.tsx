@@ -3,8 +3,10 @@ import Image, { ImageProps } from 'next/image';
 
 import styles from './avatar.module.scss';
 
+import { useAccount } from '@/components/pages/account/useAccount';
+
 type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
-  src: string | null;
+  userID: string;
   alt: string;
   className?: string;
 };
@@ -12,19 +14,25 @@ type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
 const DEFAULT_AVATAR_SIZE = 140;
 
 export const Avatar = ({
-  src,
+  userID,
   alt,
   className,
   width = DEFAULT_AVATAR_SIZE,
   height = DEFAULT_AVATAR_SIZE,
 }: AvatarProps) => {
-  if (!src) {
-    return <p>invalid image</p>;
+  const { data } = useAccount({ id: userID });
+
+  if (!data?.user) {
+    return null;
+  }
+
+  if (!data.user.image) {
+    return <p>no image</p>;
   }
 
   return (
     <Image
-      src={src}
+      src={data.user.customImage ?? data.user.image}
       alt={alt}
       width={width}
       height={height}

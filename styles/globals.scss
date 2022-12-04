@@ -4,13 +4,15 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+* {
   padding: 0;
   margin: 0;
 }
 
 html {
   display: grid;
-  min-height: 110%;
   font-size: 62.5%;
 
   @include common.mediaquery('lg') {
@@ -24,6 +26,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   font-size: clamp(100%, calc(1rem + 2vw), 24px);
 }
 
@@ -37,12 +40,18 @@ body {
   color: var(--text-primary);
 }
 
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
 
 button,
 input {
-  font-family: inherit;
-  font-size: inherit;
-  color: var(--text-primary);
+  font: inherit;
+  color: inherit;
 }
 
 a {
@@ -107,13 +116,13 @@ a {
 
 #__next {
   isolation: isolate;
-
 }
 
 .heading {
   text-align: left;
   position: relative;
   line-height: 1.5;
+  font-weight: 600;
 
   &::before {
     content: '';
