@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
@@ -8,6 +7,7 @@ import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/button/Button';
 import { ModalOvelay } from '@/components/atoms/modalOverlay/ModalOverlay';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 export type AccountID = {
@@ -22,7 +22,7 @@ const listData = ['posts', 'followers', 'following'] as const;
 
 export const Account = ({ username }: AccountProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const { data: session } = useSession();
+  const { session } = useAuth();
   const { data, isLoading } = useAccount({ username });
 
   const openMenu = () => {

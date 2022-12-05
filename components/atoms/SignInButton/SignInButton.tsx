@@ -1,25 +1,9 @@
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
-
-import styles from './signInButton.module.scss';
+import { useRouter } from 'next/router';
 
 import { Button } from '@/components/atoms/button/Button';
-import { ModalOvelay } from '@/components/atoms/modalOverlay/ModalOverlay';
 
 export const SignInButton = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { push } = useRouter();
 
-  return (
-    <>
-      <Button onClick={() => setIsModalOpen(true)}>Sign in</Button>
-      {isModalOpen && (
-        <ModalOvelay setOpen={setIsModalOpen}>
-          <div role='dialog' className={styles.dialog}>
-            <h2>Sign in</h2>
-            <button onClick={() => signIn('google')}>google</button>
-          </div>
-        </ModalOvelay>
-      )}
-    </>
-  );
+  return <Button onClick={() => push('/auth/signin')}>Sign in</Button>;
 };

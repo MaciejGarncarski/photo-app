@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import styles from './homepagePost.module.scss';
@@ -8,6 +7,7 @@ import styles from './homepagePost.module.scss';
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 type HomePagePostProps = {
@@ -29,7 +29,8 @@ export const HomepagePost = ({
   postID,
   isLiked,
 }: HomePagePostProps) => {
-  const { data: session } = useSession();
+  const { session, status } = useAuth();
+
   const { data } = useAccount({ id: authorID });
 
   if (!data) {
@@ -44,12 +45,10 @@ export const HomepagePost = ({
           <Avatar userID={data.user.id} width={AVATAR_SIZE} height={AVATAR_SIZE} alt='' />
           <h2>{data.user.username}</h2>
         </Link>
-        {isAbleToOpenOptions && (
-          <div className={styles.options}>
-            <FollowButton className={styles.followBtn} isFollowing={false} />
-            <AiOutlineMenu />
-          </div>
-        )}
+        <div className={styles.options}>
+          <FollowButton className={styles.followBtn} isFollowing={false} />
+          {isAbleToOpenOptions && <AiOutlineMenu />}
+        </div>
       </header>
       <Image className={styles.image} src={images} width={300} height={300} alt='' />
       <PostButtons likesCount={likesCount} postID={postID} isLiked={isLiked} />

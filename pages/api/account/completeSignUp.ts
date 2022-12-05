@@ -14,16 +14,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const { id, fullName, username } = req.body.data;
+  const { userID, fullName, username } = req.body.data;
 
   if (method !== 'PUT') {
     res.status(405).send({ status: 405, message: 'Only PUT request allowed' });
   }
 
   try {
-    await prisma.user.updateMany({
+    await prisma.user.update({
       where: {
-        id: id,
+        id: userID,
       },
       data: {
         name: fullName,

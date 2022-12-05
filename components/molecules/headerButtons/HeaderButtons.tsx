@@ -1,7 +1,3 @@
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import { ReactNode } from 'react';
 import { AiOutlineHome, AiOutlinePlusSquare, AiOutlineSave } from 'react-icons/ai';
 import ReactTooltip from 'react-tooltip';
@@ -10,6 +6,8 @@ import styles from './headerButtons.module.scss';
 
 import { HeaderButton } from '@/components/atoms/headerButton/HeaderButton';
 import { SignInButton } from '@/components/atoms/SignInButton/SignInButton';
+import { AccountIcon } from '@/components/molecules/accountIcon/AccountIcon';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 export type ListData = {
@@ -42,7 +40,7 @@ const listData: Array<ListData> = [
 ];
 
 export const HeaderButtons = () => {
-  const { data: session, status } = useSession();
+  const { session, status } = useAuth();
   const { data } = useAccount({ id: session?.user?.id });
 
   if (status === 'loading') {
@@ -69,26 +67,7 @@ export const HeaderButtons = () => {
           );
         })}
 
-        {data?.user.username && (
-          <li>
-            <Link
-              href={`/${data?.user.username}`}
-              data-tip='Account'
-              className={clsx(styles.listItemChild)}
-            >
-              <span className='visually-hidden'>{session.user?.name}</span>
-              <Image
-                className={styles.listItemImage}
-                src={session.user?.image ?? ''}
-                width={30}
-                height={30}
-                priority
-                alt={session.user?.name ?? 'User avatar'}
-              />
-              <span className={styles.listItemTitle}>Account</span>
-            </Link>
-          </li>
-        )}
+        {data?.user.username && <AccountIcon id={session.user?.id ?? ''} />}
       </ul>
       <ReactTooltip effect='solid' />
     </>

@@ -3,7 +3,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { signOut, useSession } from 'next-auth/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -11,6 +10,7 @@ import styles from './completeSignUp.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Input } from '@/components/molecules/input/Input';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
@@ -32,7 +32,7 @@ type SignUpSchema = z.infer<typeof signUpSchema>;
 
 export const CompleteSignUp = () => {
   const { push } = useRouter();
-  const { data: session } = useSession();
+  const { session, signOut } = useAuth();
   const { data } = useAccount({ id: session?.user?.id });
   const queryCache = useQueryClient();
 

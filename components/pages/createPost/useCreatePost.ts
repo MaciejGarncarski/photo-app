@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
+
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 
 type MutationValues = {
   description: string;
@@ -24,7 +25,8 @@ const uplaodPost = async ({ description, location, image, author }: UploadPostAr
 
 export const useCreatePost = () => {
   const { push } = useRouter();
-  const { data: session } = useSession();
+  const { session } = useAuth();
+
   return useMutation(
     async ({ description, location, image }: MutationValues) => {
       if (!session?.user?.id) {

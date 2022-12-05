@@ -72,6 +72,7 @@ a {
   --color-error: #d64242;
   --color-white: #fff;
   --color-disabled: rgb(77, 86, 107);
+  --color-separator: rgb(145, 143, 143);
 
   --text-primary: #262626;
   --text-placeholder: rgb(75, 74, 74);
@@ -80,7 +81,7 @@ a {
   --bg-white: #ffffff;
   --bg-gray: #efefef;
   --bg-overlay: rgb(0, 0, 0, 0.6);
-  --border-primary: 1px solid rgb(160, 160, 160);
+  --border-primary: 1px solid rgb(202, 202, 202);
   --border-secondary: 1px solid rgb(219, 219, 219);
 
   --radius-small: 0.6rem;
@@ -88,6 +89,7 @@ a {
 
 
   --shadow-primary: 0 4px 10px 2px rgb(0, 0, 0, 0.15);
+  --shadow-secondary: 0 4px 10px 1px rgb(0, 0, 0, 0.05);
 
   --itemSize: 2.75rem;
 
@@ -127,11 +129,12 @@ a {
   &::before {
     content: '';
     z-index: -1;
-    width: 2.5em;
+    width: 2.7em;
     height: 90%;
     position: absolute;
-    left: -0.75em;
+    left: -0.55em;
     top: 5%;
+    border-radius: 3px;
     background-color: var(--color-secondary);
   }
 }
