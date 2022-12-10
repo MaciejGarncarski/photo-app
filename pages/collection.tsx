@@ -1,5 +1,7 @@
+import { Collection } from '@/components/pages/collection/Collection';
+
 const CollectionPage = () => {
-  return <p>hejka</p>;
+  return <Collection />;
 };
 
 export default CollectionPage;
