@@ -38,7 +38,6 @@ export const PostOptions = ({ setIsOpen, postID }: PostOptionsProps) => {
   const onModalClose = () => setIsOpen(false);
 
   const { data } = useCollection({ userID: session?.user?.id ?? '' });
-
   console.log(data);
 
   const { mutate } = useMutation(async ({ type }: CollectionMutation) => {

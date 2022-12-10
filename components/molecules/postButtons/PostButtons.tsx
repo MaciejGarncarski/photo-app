@@ -11,6 +11,7 @@ import { useAuth } from '@/components/organisms/signIn/useAuth';
 
 type PostButtonsProps = {
   isLiked: boolean;
+  isInCollection: boolean;
   likesCount: number;
   postID: number;
 };
@@ -23,7 +24,7 @@ const Item = ({ children, isLast }: ItemProps) => {
   return <li className={clsx(isLast && styles.itemLast, styles.item)}>{children}</li>;
 };
 
-export const PostButtons = ({ isLiked, likesCount, postID }: PostButtonsProps) => {
+export const PostButtons = ({ isLiked, likesCount, postID, isInCollection }: PostButtonsProps) => {
   const { session } = useAuth();
   const { push } = useRouter();
   const { mutate } = usePostLike();
@@ -56,9 +57,7 @@ export const PostButtons = ({ isLiked, likesCount, postID }: PostButtonsProps) =
       <Item>
         <Icon.Share />
       </Item>
-      <Item isLast>
-        <Icon.Bookmark />
-      </Item>
+      <Item isLast>{isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}</Item>
     </ul>
   );
 };

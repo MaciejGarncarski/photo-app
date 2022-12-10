@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {
-    res.status(401).send({ status: 401, message: 'Unauthorized request' });
+    res.status(401).send({ status: 'unauthorized' });
     return;
   }
 
@@ -25,10 +25,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      res.status(200).send({ status: 200, message: 'Success' });
+      res.status(200).send({ status: 'ok' });
     } catch (error) {
       console.log(error);
-      res.status(400).send({ status: 400, message: 'Cannot add post to your collection' });
+      res.status(400).send({ status: 'error', message: 'Cannot add post to your collection' });
     }
   }
 
@@ -41,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
       res.status(200).send({ status: 200, data });
     } catch (error) {
-      res.status(400).send({ status: 400, message: 'Cannot download your collection' });
+      res.status(400).send({ status: 'error', message: 'Cannot download your collection' });
     }
   }
 };

@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const commentText = string(comment);
 
   if (!session) {
-    res.status(401).send({ status: 401, message: 'Unauthorized request' });
+    res.status(401).send({ status: 'unauthorized', message: 'Unauthorized request' });
     return;
   }
 
@@ -32,9 +32,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
         },
       });
-      res.status(200).send({ status: 200, message: 'Success' });
+      res.status(200).send({ status: 'ok' });
     } catch (error) {
-      res.status(400).send({ status: 400, message: 'Error while adding comment' });
+      res.status(400).send({ status: 'error', message: 'Error while adding comment' });
     }
   }
 };

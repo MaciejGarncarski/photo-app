@@ -24,10 +24,11 @@ export const Home = () => {
     <main className={styles.posts}>
       {data.pages.map((page) => {
         return page.posts.map(
-          ({ images, id, author_id, _count, description, isLiked, created_at }) => {
+          ({ images, id, author_id, _count, description, isLiked, created_at, isInCollection }) => {
             return (
               <HomepagePost
                 key={id}
+                isInCollection={isInCollection ?? false}
                 postID={id}
                 authorID={author_id}
                 description={description}
