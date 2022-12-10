@@ -53,7 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
     if (!user) {
-      res.status(404).send({ status: 404 });
+      res.status(404).send({ status: 'not found' });
       return;
     }
 
@@ -65,7 +65,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       if (!user) {
-        res.status(404).send({ status: 404 });
+        res.status(404).send({ status: 'not found' });
         return;
       }
       const count = await countUser(userData?.id ?? '');
@@ -76,7 +76,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const count = await countUser(user);
     res.status(200).send({ status: 200, user: userData, count });
   } catch (error) {
-    res.status(400).send({ status: 400, error });
+    res.status(400).send({ status: 'error', error });
   }
 };
 

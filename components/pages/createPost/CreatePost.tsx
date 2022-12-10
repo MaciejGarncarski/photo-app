@@ -10,12 +10,10 @@ import styles from './createPost.module.scss';
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
-import { Input } from '@/components/molecules/input/Input';
 import { useCreatePost } from '@/components/pages/createPost/useCreatePost';
 
 type FormValues = {
   description: string;
-  location: string;
 };
 
 export const CreatePost = () => {
@@ -27,11 +25,10 @@ export const CreatePost = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, errors },
+    formState: { dirtyFields },
   } = useForm<FormValues>({
     defaultValues: {
       description: '',
-      location: '',
     },
   });
 
@@ -39,11 +36,11 @@ export const CreatePost = () => {
     push('/');
   };
 
-  const onSubmit: SubmitHandler<FormValues> = ({ description, location }) => {
+  const onSubmit: SubmitHandler<FormValues> = ({ description }) => {
     if (!finalImg) {
       return;
     }
-    mutate({ description, location, image: finalImg });
+    mutate({ description, image: finalImg });
   };
 
   return (
@@ -53,22 +50,18 @@ export const CreatePost = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
           <h3 className='heading'>Info about post</h3>
-          <Input
-            data-testid='descriptionInput'
-            labelText='Description'
-            error={errors.description}
-            className={styles.input}
-            isDirty={dirtyFields.description}
-            {...register('description')}
-          />
-          <Input
-            labelText='Location'
-            optional
-            error={errors.location}
-            className={styles.input}
-            isDirty={dirtyFields.location}
-            {...register('location')}
-          />
+          <div className={styles.textAreaContainer}>
+            <textarea
+              id='description'
+              className={styles.textArea}
+              cols={30}
+              rows={10}
+              {...register('description')}
+            ></textarea>
+            <label htmlFor='description' className={styles.label}>
+              Description
+            </label>
+          </div>
           <div className={styles.actionButtons}>
             <Button variant='secondary' onClick={handleCancel}>
               Cancel

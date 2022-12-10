@@ -23,19 +23,23 @@ export const Home = () => {
   return (
     <main className={styles.posts}>
       {data.pages.map((page) => {
-        return page.posts.map(({ images, id, author_id, _count, description, isLiked }) => {
-          return (
-            <HomepagePost
-              key={id}
-              postID={id}
-              authorID={author_id}
-              description={description}
-              isLiked={Boolean(isLiked)}
-              images={images}
-              likesCount={_count.posts_likes}
-            />
-          );
-        });
+        return page.posts.map(
+          ({ images, id, author_id, _count, description, isLiked, created_at, isInCollection }) => {
+            return (
+              <HomepagePost
+                key={id}
+                isInCollection={isInCollection ?? false}
+                postID={id}
+                authorID={author_id}
+                description={description}
+                isLiked={Boolean(isLiked)}
+                images={images}
+                createdAt={created_at}
+                likesCount={_count.posts_likes}
+              />
+            );
+          }
+        );
       })}
       {(isLoading || hasNextPage) && (
         <div ref={sentryRef}>

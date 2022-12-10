@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { skip, user } = req.query;
   if (typeof user !== 'string') {
-    res.status(404).send({ status: 404 });
+    res.status(404).send({ status: 'not found' });
     return;
   }
 

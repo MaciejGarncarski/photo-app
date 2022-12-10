@@ -3,6 +3,7 @@
   align-items: flex-start;
   gap: 2rem;
   margin: 1rem 1rem;
+  margin-bottom: 0;
 }
 
 .item {
@@ -10,11 +11,26 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-size: 3rem;
+}
+
+.itemLast {
+  margin-left: auto;
+}
+
+.count {
+  font-size: 2rem;
+  font-weight: 600;
+  position: relative;
+  top: -5px;
 }
 
 .button {
   background-color: transparent;
   border: 0;
-  font: inherit;
   display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -1,0 +1,42 @@
+@use '/styles/common.scss';
+
+.header {
+  margin: 1rem;
+  display: flex;
+
+  @include common.mediaquery('lg') {
+    margin: 1rem 2rem;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  @include common.mediaquery('lg') {
+    font-size: 1.5rem;
+  }
+}
+
+.options {
+  margin-left: auto;
+  display: flex;
+  background-color: transparent;
+  border: 0;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.followBtn {
+  font-size: 1.5rem;
+}
+
+.optionsButton {
+  border: none;
+  background-color: transparent;
+  padding: 0.75rem;
+  cursor: pointer;
+}

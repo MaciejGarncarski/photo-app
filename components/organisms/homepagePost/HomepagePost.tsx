@@ -1,61 +1,94 @@
+import parse from 'html-react-parser';
+import moment from 'moment';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useSession } from 'next-auth/react';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { useState } from 'react';
 
 import styles from './homepagePost.module.scss';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
+import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
+import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 type HomePagePostProps = {
   images: string;
   description: string;
+  isInCollection: boolean;
   isLiked: boolean;
   postID: number;
   authorID: string;
   likesCount: number;
+  createdAt: Date;
 };
-
-const AVATAR_SIZE = 40;
 
 export const HomepagePost = ({
   images,
   authorID,
   description,
+  isInCollection,
   likesCount,
   postID,
   isLiked,
+  createdAt,
 }: HomePagePostProps) => {
-  const { data: session } = useSession();
   const { data } = useAccount({ id: authorID });
+
+  const [showMore, setShowMore] = useState<boolean>(false);
+
+  const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
+    descriptionData(description);
+
+  const fromNow = moment(createdAt).fromNow();
+
+  const Description = () => {
+    if (isDescriptionLong || hasMultipleBreaks) {
+      return (
+        <>
+          {parse(showMore ? descriptionWithNewLine : shortDescription)}
+          &nbsp;
+          <button
+            className={styles.showMore}
+            type='button'
+            onClick={() => setShowMore((prev) => !prev)}
+          >
+            {showMore ? 'less' : 'more'}
+          </button>
+        </>
+      );
+    }
+
+    return <>{parse(descriptionWithNewLine)}</>;
+  };
 
   if (!data) {
     return null;
   }
-  const isAbleToOpenOptions = data.user.id === session?.user?.id;
 
   return (
     <article className={styles.post}>
-      <header className={styles.header}>
-        <Link href={`/${data.user.username}`} className={styles.link}>
-          <Avatar userID={data.user.id} width={AVATAR_SIZE} height={AVATAR_SIZE} alt='' />
-          <h2>{data.user.username}</h2>
-        </Link>
-        {isAbleToOpenOptions && (
-          <div className={styles.options}>
-            <FollowButton className={styles.followBtn} isFollowing={false} />
-            <AiOutlineMenu />
-          </div>
-        )}
-      </header>
-      <Image className={styles.image} src={images} width={300} height={300} alt='' />
-      <PostButtons likesCount={likesCount} postID={postID} isLiked={isLiked} />
-      <div>{description}</div>
-      <div>info</div>
-      <div>addcommentdesktop</div>
+      <PostHeader user={data.user} postID={postID} />
+      <Image
+        className={styles.image}
+        src={images}
+        width={300}
+        height={300}
+        alt={`${data.user.username} - ${shortDescription}`}
+      />
+      <PostButtons
+        isInCollection={isInCollection}
+        likesCount={likesCount}
+        postID={postID}
+        isLiked={isLiked}
+      />
+      <footer className={styles.bottom}>
+        <p className={styles.description}>
+          <span className={styles.author}>{data.user.username}</span>
+          <Description />
+        </p>
+        <p>{fromNow}</p>
+        <CommentForm postID={postID} />
+      </footer>
     </article>
   );
 };

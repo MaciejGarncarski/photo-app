@@ -20,9 +20,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
         },
       });
-      res.status(200).send({ status: 200, message: 'Success' });
+      res.status(200).send({ status: 'ok' });
     } catch (error) {
-      res.status(400).send({ status: 400, message: 'Error while adding like' });
+      res.status(400).send({ status: 'error', message: 'Error while adding like' });
     }
   }
 
@@ -34,9 +34,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           user_id: userID,
         },
       });
-      res.status(200).send({ status: 200, message: 'Success' });
+      res.status(200).send({ status: 'ok' });
     } catch (error) {
-      res.status(400).send({ status: 400, message: 'Error while adding like' });
+      res.status(400).send({ status: 'error', message: 'Error while adding like' });
     }
   }
 };

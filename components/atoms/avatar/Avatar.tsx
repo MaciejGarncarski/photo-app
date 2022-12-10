@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image, { ImageProps } from 'next/image';
+import { AiOutlineUser } from 'react-icons/ai';
 
 import styles from './avatar.module.scss';
 
@@ -26,13 +27,13 @@ export const Avatar = ({
     return null;
   }
 
-  if (!data.user.image) {
-    return <p>no image</p>;
+  if (!data.user.customImage && !data.user.image) {
+    return <AiOutlineUser className={clsx(className, styles.avatar)} />;
   }
 
   return (
     <Image
-      src={data.user.customImage ?? data.user.image}
+      src={data.user.customImage ?? data.user.image ?? ''}
       alt={alt}
       width={width}
       height={height}

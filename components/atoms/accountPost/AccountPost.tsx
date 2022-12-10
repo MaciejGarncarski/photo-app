@@ -1,9 +1,11 @@
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AiFillMessage, AiOutlineHeart } from 'react-icons/ai';
 
 import styles from './accountPost.module.scss';
+
+import { Icon } from '@/components/atoms/icons/Icons';
+
 type AccountPostProps = {
   src: string;
   authorID: string;
@@ -30,10 +32,10 @@ export const AccountPost = ({ src, likesCount, commentsCount }: AccountPostProps
       <Image className={styles.image} src={src} alt='' width={300} height={300} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>
-          <AiOutlineHeart /> {likesCount}
+          <Icon.Heart /> {likesCount}
         </p>
         <p className={styles.count}>
-          <AiFillMessage /> {commentsCount}
+          <Icon.Comment /> {commentsCount}
         </p>
       </motion.div>
     </MotionLink>

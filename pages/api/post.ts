@@ -7,10 +7,8 @@ import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
-// import { promises as fs } from 'fs';
 export type CreatePost = {
   description: string;
-  location: string;
   image: Blob;
   author: string;
 };
@@ -45,7 +43,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const uuid = v4();
       const fileContents = await fs.readFile(files.image.filepath);
-      const { author, description, location } = fields;
+      const { author, description } = fields;
       const { url } = await imageKit.upload({
         file: fileContents,
         fileName: `/1.webp`,
@@ -55,7 +53,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await prisma.post.create({
         data: {
           description: string(description),
-          location: string(location),
           author_id: string(author),
           images: url,
         },
@@ -65,9 +62,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      res.status(200).send({ status: 200, data: 'success' });
+      res.status(200).send({ status: 'ok' });
     } catch (error) {
-      res.status(400).send({ status: 400, error });
+      res.status(400).send({ status: 'error', error });
     }
   }
 };

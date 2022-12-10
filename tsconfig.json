@@ -20,6 +20,6 @@
       "~/*": ["./public/*"]
     },
   },
-  "include": ["next-env.d.ts", "jest.setup.js", "jest.config.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["types.d.ts", "next-env.d.ts", "jest.setup.js", "jest.config.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
 }

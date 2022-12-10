@@ -28,7 +28,7 @@ type UseAccountResponse = {
 };
 
 export const useAccount = ({ id, username }: UseAccount) => {
-  return useQuery<UseAccountResponse>(
+  const query = useQuery<UseAccountResponse>(
     ['account', id],
     () => {
       if (username) {
@@ -40,4 +40,11 @@ export const useAccount = ({ id, username }: UseAccount) => {
       enabled: Boolean(id) || Boolean(username),
     }
   );
+
+  return {
+    ...query,
+    account: query.data?.user,
+    count: query.data?.count,
+    status: query.data?.status,
+  };
 };

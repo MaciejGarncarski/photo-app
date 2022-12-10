@@ -4,11 +4,11 @@ import styles from './modalOverlay.module.scss';
 
 import { Children } from '@/components/Layout/Layout';
 
-type ModalOvelayProps = {
+type ModalOverlayProps = {
   setOpen: (isOpen: boolean) => void;
 } & Children;
 
-export const ModalOvelay = ({ children, setOpen }: ModalOvelayProps) => {
+export const ModalOverlay = ({ children, setOpen }: ModalOverlayProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

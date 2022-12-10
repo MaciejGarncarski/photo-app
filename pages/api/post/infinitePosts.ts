@@ -13,6 +13,7 @@ export type InfinitePost = {
   posts: Array<
     Post & {
       isLiked?: boolean;
+      isInCollection?: boolean;
       author: User;
       _count: {
         posts_likes: number;
@@ -61,14 +62,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const postsCount = _count.id;
-
     const canLoadMore = postsCount > (skipNumber + 1) * POSTS_PER_SCROLL;
-
     const nextCursor = canLoadMore ? skipNumber + 1 : null;
+
+    const postsWithCollectionData = await Promise.all(
+      posts.map(async (post) => {
+        const isInCollection = await prisma.collection.findFirst({
+          where: {
+            post_id: post.id,
+            user_id: session?.user?.id,
+          },
+        });
+
+        return {
+          ...post,
+          isInCollection: Boolean(isInCollection),
+        };
+      })
+    );
 
     if (session) {
       const postsWithLikesData = await Promise.all(
-        posts.map(async (post) => {
+        postsWithCollectionData.map(async (post) => {
           const like = await prisma.postLike.findFirst({
             where: {
               post_id: post.id,
@@ -84,7 +99,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    res.status(200).send({ posts, postsCount, cursor: nextCursor });
+    res.status(200).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
   } catch (e) {
     res.status(400).send('400');
   }

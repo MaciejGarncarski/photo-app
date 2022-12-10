@@ -1,0 +1,72 @@
+@use '/styles/common.scss';
+
+.container {
+  width: var(--create-post-width);
+  margin: 0 auto;
+}
+
+.form {
+  display: grid;
+  gap: 3rem;
+  margin-top: 5rem;
+
+  @include common.mediaquery('lg') {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 7rem;
+  }
+}
+
+.separator {
+  height: 2px;
+  background-color: var(--color-separator);
+  margin-top: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+
+  @include common.mediaquery('lg') {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 7rem;
+  }
+
+}
+
+.orWith {
+  background-color: var(--bg-primary);
+  text-transform: uppercase;
+  padding: 0 1rem;
+  position: relative;
+  top: -0.25rem;
+  display: inline-block;
+}
+
+.other {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
+
+  @include common.mediaquery('lg') {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 7rem;
+  }
+
+
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.google {
+  color: var(--color-white);
+  font-weight: 600;
+  margin-left: 1rem;
+}

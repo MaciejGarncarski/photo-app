@@ -1,0 +1,7 @@
+.dialog {
+  background-color: var(--bg-white);
+  border-radius: var(--radius-medium);
+  width: min(45rem, 80%);
+  margin-inline: auto;
+  position: relative;
+}
