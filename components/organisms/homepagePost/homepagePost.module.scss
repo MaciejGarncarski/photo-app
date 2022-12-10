@@ -1,3 +1,5 @@
+@use '/styles/common.scss';
+
 .post {
   border: var(--border-primary);
   border-radius: var(--radius-medium);
@@ -7,14 +9,22 @@
 .header {
   margin: 1rem;
   display: flex;
+
+  @include common.mediaquery('lg') {
+    margin: 1rem 2rem;
+  }
 }
 
 .link {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
+
+  @include common.mediaquery('lg') {
+    font-size: 1.5rem;
+  }
 }
 
 .image {
@@ -22,6 +32,11 @@
   max-height: 100%;
   object-fit: contain;
   border-block: var(--border-secondary);
+  background-color: var(--bg-primary);
+
+  @include common.mediaquery('lg') {
+    min-height: 40rem;
+  }
 }
 
 .options {
@@ -33,5 +48,31 @@
 
 .followBtn {
   padding: 0.5em 1em;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+}
+
+.bottom {
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.description {
+  display: flex;
+  font-size: 2rem;
+  word-break: break-all;
+}
+
+.author {
+  font-weight: 600;
+
+  &::after {
+    content: ' ';
+  }
+}
+
+.showMore {
+  background-color: transparent;
+  border: none;
+  color: var(--color-disabled);
+  cursor: pointer;
 }

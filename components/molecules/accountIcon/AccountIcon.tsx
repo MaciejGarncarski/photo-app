@@ -50,10 +50,13 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
       }
     };
 
-    document.addEventListener('keydown', handleEscKey);
-    document.addEventListener('click', handleClose);
+    const timeout = setTimeout(() => {
+      document.addEventListener('keydown', handleEscKey);
+      document.addEventListener('click', handleClose);
+    }, 200);
 
     return () => {
+      clearTimeout(timeout);
       document.removeEventListener('click', handleClose);
       document.removeEventListener('keydown', handleEscKey);
     };
@@ -89,7 +92,11 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
           >
             <div className={styles.square}></div>
             <p className={styles.welcome}>Hi, {account?.username}</p>
-            <Link href={`/${account?.username}`} className={styles.link}>
+            <Link
+              href={`/${account?.username}`}
+              className={styles.link}
+              onClick={() => setIsOptionsOpen(false)}
+            >
               <AiOutlineUser /> your account
             </Link>
             <button type='button' className={styles.signOut} onClick={() => signOut()}>

@@ -1,3 +1,17 @@
+@use '/styles/common.scss';
+
 .avatar {
+
+  --size: 3rem;
   border-radius: 100%;
+  min-width: 3rem;
+  box-shadow: 0 0 0 2px var(--color-secondary);
+  min-width: var(--size);
+  min-height: var(--size);
+  font-size: var(--size);
+
+
+  @include common.mediaquery('lg') {
+    --size: 3.5rem;
+  }
 }

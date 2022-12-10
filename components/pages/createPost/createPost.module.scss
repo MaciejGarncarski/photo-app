@@ -24,3 +24,32 @@
     width: 80%;
   }
 }
+
+.textAreaContainer {
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-small);
+  position: relative;
+
+  @include common.mediaquery('lg') {
+    margin-inline: auto;
+    width: 80%;
+    display: flex;
+  }
+}
+
+.textArea {
+  border: none;
+  background-color: transparent;
+  padding: 2rem 1rem;
+  font: inherit;
+  resize: vertical;
+  max-width: 100%;
+}
+
+.label {
+  position: absolute;
+  left: 1rem;
+  top: -1.5rem;
+  background-color: var(--bg-primary);
+  padding: 0 1rem;
+}

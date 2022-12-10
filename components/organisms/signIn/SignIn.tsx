@@ -24,7 +24,6 @@ export const SignIn = () => {
 
   const onSubmit: SubmitHandler<FormValues> = ({ email }) => {
     signIn('email', { email });
-    console.log(email);
   };
 
   return (

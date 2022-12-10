@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import { AiOutlineHome, AiOutlinePlusSquare, AiOutlineSave } from 'react-icons/ai';
 import ReactTooltip from 'react-tooltip';
 
 import styles from './headerButtons.module.scss';
 
 import { HeaderButton } from '@/components/atoms/headerButton/HeaderButton';
+import { Icon } from '@/components/atoms/icons/Icons';
 import { SignInButton } from '@/components/atoms/SignInButton/SignInButton';
 import { AccountIcon } from '@/components/molecules/accountIcon/AccountIcon';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -20,19 +20,19 @@ export type ListData = {
 
 const listData: Array<ListData> = [
   {
-    icon: <AiOutlineHome />,
+    icon: <Icon.Home />,
     alt: 'Home',
     title: 'Home',
     href: '/',
   },
   {
-    icon: <AiOutlinePlusSquare />,
+    icon: <Icon.Create />,
     alt: 'Create post',
     title: 'Create',
     href: '/create-post',
   },
   {
-    icon: <AiOutlineSave />,
+    icon: <Icon.Bookmark />,
     alt: 'Saved posts',
     title: 'Saved',
     href: '/posts/saved',

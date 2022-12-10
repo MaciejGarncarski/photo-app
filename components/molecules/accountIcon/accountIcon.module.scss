@@ -1,9 +1,12 @@
+@use '/styles/common.scss';
+
 .options {
   background-color: var(--bg-white);
   position: absolute;
   box-shadow: var(--shadow-secondary);
-  top: 6rem;
-  left: -8.2rem;
+  top: -16rem;
+  left: -11.5rem;
+  border: var(--border-primary);
   border-radius: var(--radius-small);
   min-width: 20rem;
 
@@ -12,18 +15,29 @@
   align-items: center;
   flex-direction: column;
   font-size: 2rem;
+
+  @include common.mediaquery('lg') {
+    top: 6rem;
+    left: -8.2rem;
+  }
 }
 
 .square {
   position: absolute;
-  top: -10px;
-  left: 0;
-  right: 0;
+  bottom: -10px;
+  right: 47px;
   margin: 0 auto;
   transform: rotate(45deg);
   width: 20px;
   height: 20px;
   background-color: var(--bg-white);
+
+  @include common.mediaquery('lg') {
+    top: -10px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 .link {

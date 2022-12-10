@@ -15,7 +15,7 @@
 .label {
   position: absolute;
   left: 0rem;
-  bottom: 1rem;
+  top: 0;
   padding: 0 1rem;
   color: var(--text-placeholder);
   transition: all 100ms ease-out;
@@ -25,7 +25,6 @@
 
 .labelActive,
 .input:focus+.label {
-  transform: translateX(0.5rem) translateY(-2.4rem);
 
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -33,15 +32,11 @@
 
   @include common.mediaquery('lg') {
     font-size: 2.5rem;
-    transform: translateX(0.5rem) translateY(-3.75rem);
   }
 
   @include common.mediaquery('xl') {
-    transform: translateX(0.5rem) translateY(-3.7rem);
-  }
-
-  @include common.mediaquery('xl') {
-    transform: translateX(0.5rem) translateY(-3rem);
+    top: -2rem;
+    left: 1rem;
   }
 }
 
@@ -60,4 +55,14 @@
   @include common.mediaquery('lg') {
     font-size: 2rem;
   }
+}
+
+.textarea {
+  border: none;
+  padding: 1.5rem;
+  max-width: calc(100% - 1px);
+  font-size: 2rem;
+  font: inherit;
+
+  resize: vertical;
 }

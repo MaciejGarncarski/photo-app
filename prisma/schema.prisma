@@ -69,15 +69,13 @@ model Post {
   id             Int            @id @default(autoincrement()) @db.Int
   author         User           @relation(fields: [author_id], references: [id])
   author_id      String
-  description    String
+  description    String  @db.MediumText
   created_at   DateTime @default(now()) @db.Timestamp(0)
   images         String
   file_id        String?
-  location       String?
   posts_likes    PostLike[]
   posts_comments PostComments[]
   post_saved     SavedPost[]
-
   @@index([author_id])
 }
 

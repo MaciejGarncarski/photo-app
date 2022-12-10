@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt, AiTwotoneMessage } from 'react-icons/ai';
 
 import styles from './postButtons.module.scss';
 
+import { Icon } from '@/components/atoms/icons/Icons';
 import { Children } from '@/components/Layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -37,15 +37,15 @@ export const PostButtons = ({ isLiked, likesCount, postID }: PostButtonsProps) =
     <ul className={styles.list}>
       <Item>
         <button type='button' onClick={handleLike} className={styles.button}>
-          {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+          {isLiked ? <Icon.HeartActive /> : <Icon.Heart />}
         </button>
-        <p>{likesCount}</p>
+        <p className={styles.count}>{likesCount}</p>
       </Item>
       <Item>
-        <AiTwotoneMessage />
+        <Icon.Comment />
       </Item>
       <Item>
-        <AiOutlineShareAlt />
+        <Icon.Share />
       </Item>
     </ul>
   );

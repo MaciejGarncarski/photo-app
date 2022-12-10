@@ -5,7 +5,7 @@ import { FieldError } from 'react-hook-form';
 import styles from './input.module.scss';
 
 type InputProps = {
-  type?: JSX.IntrinsicElements['input']['type'];
+  type?: JSX.IntrinsicElements['input']['type'] | 'textarea';
   labelText: string;
   isDirty?: boolean;
   isEmpty?: boolean;

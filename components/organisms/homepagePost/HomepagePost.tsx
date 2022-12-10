@@ -1,5 +1,7 @@
+import parse from 'html-react-parser';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import styles from './homepagePost.module.scss';
@@ -20,6 +22,7 @@ type HomePagePostProps = {
 };
 
 const AVATAR_SIZE = 40;
+const LONG_DESCRIPTION = 50;
 
 export const HomepagePost = ({
   images,
@@ -29,13 +32,39 @@ export const HomepagePost = ({
   postID,
   isLiked,
 }: HomePagePostProps) => {
-  const { session, status } = useAuth();
-
+  const { session } = useAuth();
   const { data } = useAccount({ id: authorID });
+
+  const [showMore, setShowMore] = useState<boolean>(false);
+
+  const descriptionWithNewLine = description.replace(/\r?\n/g, '<br />');
+  const isDescriptionLong = description.length >= LONG_DESCRIPTION;
+  const shortDescription = description.slice(0, LONG_DESCRIPTION) + '...';
+
+  const Description = () => {
+    if (isDescriptionLong) {
+      return (
+        <>
+          {parse(showMore ? descriptionWithNewLine : shortDescription)}
+          &nbsp;
+          <button
+            className={styles.showMore}
+            type='button'
+            onClick={() => setShowMore((prev) => !prev)}
+          >
+            {showMore ? 'less' : 'more'}
+          </button>
+        </>
+      );
+    }
+
+    return <>{parse(descriptionWithNewLine)}</>;
+  };
 
   if (!data) {
     return null;
   }
+
   const isAbleToOpenOptions = data.user.id === session?.user?.id;
 
   return (
@@ -50,11 +79,32 @@ export const HomepagePost = ({
           {isAbleToOpenOptions && <AiOutlineMenu />}
         </div>
       </header>
-      <Image className={styles.image} src={images} width={300} height={300} alt='' />
+      <Image
+        className={styles.image}
+        src={images}
+        width={300}
+        height={300}
+        alt={`${data.user.username} - ${shortDescription}`}
+      />
+      {/* <img
+        src='s'
+        className={styles.image}
+        alt={`${data.user.username} - ${shortDescription}`}
+        width={300}
+        height={300}
+      /> */}
       <PostButtons likesCount={likesCount} postID={postID} isLiked={isLiked} />
-      <div>{description}</div>
-      <div>info</div>
-      <div>addcommentdesktop</div>
+
+      <div className={styles.bottom}>
+        <div className={styles.description}>
+          <p>
+            <span className={styles.author}>{data.user.username}</span>
+            <Description />
+          </p>
+        </div>
+        <div>info</div>
+        <div>addcommentdesktop</div>
+      </div>
     </article>
   );
 };
