@@ -1,0 +1,16 @@
+.addComment {
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.commentInput {
+  min-width: 100%;
+  height: 5rem;
+  min-height: 5rem;
+  resize: vertical;
+  border-radius: var(--radius-small);
+  padding: 0.5rem;
+  border: var(--border-secondary);
+}

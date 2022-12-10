@@ -33,9 +33,9 @@ const listData: Array<ListData> = [
   },
   {
     icon: <Icon.Bookmark />,
-    alt: 'Saved posts',
-    title: 'Saved',
-    href: '/posts/saved',
+    alt: 'Collection',
+    title: 'Collection',
+    href: '/collection',
   },
 ];
 

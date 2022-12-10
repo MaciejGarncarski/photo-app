@@ -1,15 +1,14 @@
 import parse from 'html-react-parser';
+import moment from 'moment';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import styles from './homepagePost.module.scss';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
+import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
+import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 type HomePagePostProps = {
@@ -19,10 +18,8 @@ type HomePagePostProps = {
   postID: number;
   authorID: string;
   likesCount: number;
+  createdAt: Date;
 };
-
-const AVATAR_SIZE = 40;
-const LONG_DESCRIPTION = 50;
 
 export const HomepagePost = ({
   images,
@@ -31,18 +28,19 @@ export const HomepagePost = ({
   likesCount,
   postID,
   isLiked,
+  createdAt,
 }: HomePagePostProps) => {
-  const { session } = useAuth();
   const { data } = useAccount({ id: authorID });
 
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  const descriptionWithNewLine = description.replace(/\r?\n/g, '<br />');
-  const isDescriptionLong = description.length >= LONG_DESCRIPTION;
-  const shortDescription = description.slice(0, LONG_DESCRIPTION) + '...';
+  const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
+    descriptionData(description);
+
+  const fromNow = moment(createdAt).fromNow();
 
   const Description = () => {
-    if (isDescriptionLong) {
+    if (isDescriptionLong || hasMultipleBreaks) {
       return (
         <>
           {parse(showMore ? descriptionWithNewLine : shortDescription)}
@@ -65,20 +63,9 @@ export const HomepagePost = ({
     return null;
   }
 
-  const isAbleToOpenOptions = data.user.id === session?.user?.id;
-
   return (
     <article className={styles.post}>
-      <header className={styles.header}>
-        <Link href={`/${data.user.username}`} className={styles.link}>
-          <Avatar userID={data.user.id} width={AVATAR_SIZE} height={AVATAR_SIZE} alt='' />
-          <h2>{data.user.username}</h2>
-        </Link>
-        <div className={styles.options}>
-          <FollowButton className={styles.followBtn} isFollowing={false} />
-          {isAbleToOpenOptions && <AiOutlineMenu />}
-        </div>
-      </header>
+      <PostHeader user={data.user} postID={postID} />
       <Image
         className={styles.image}
         src={images}
@@ -86,25 +73,15 @@ export const HomepagePost = ({
         height={300}
         alt={`${data.user.username} - ${shortDescription}`}
       />
-      {/* <img
-        src='s'
-        className={styles.image}
-        alt={`${data.user.username} - ${shortDescription}`}
-        width={300}
-        height={300}
-      /> */}
       <PostButtons likesCount={likesCount} postID={postID} isLiked={isLiked} />
-
-      <div className={styles.bottom}>
-        <div className={styles.description}>
-          <p>
-            <span className={styles.author}>{data.user.username}</span>
-            <Description />
-          </p>
-        </div>
-        <div>info</div>
-        <div>addcommentdesktop</div>
-      </div>
+      <footer className={styles.bottom}>
+        <p className={styles.description}>
+          <span className={styles.author}>{data.user.username}</span>
+          <Description />
+        </p>
+        <p>{fromNow}</p>
+        <CommentForm postID={postID} />
+      </footer>
     </article>
   );
 };

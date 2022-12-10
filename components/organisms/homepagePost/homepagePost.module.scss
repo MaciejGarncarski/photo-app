@@ -6,26 +6,6 @@
   background-color: var(--bg-white);
 }
 
-.header {
-  margin: 1rem;
-  display: flex;
-
-  @include common.mediaquery('lg') {
-    margin: 1rem 2rem;
-  }
-}
-
-.link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-
-  @include common.mediaquery('lg') {
-    font-size: 1.5rem;
-  }
-}
 
 .image {
   width: 100%;
@@ -39,26 +19,16 @@
   }
 }
 
-.options {
-  margin-left: auto;
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.followBtn {
-  padding: 0.5em 1em;
-  font-size: 1.5rem;
-}
-
 .bottom {
+  font-size: 2rem;
+  display: grid;
+  gap: 1rem;
   padding: 0 1.5rem;
   padding-bottom: 1.5rem;
 }
 
+
 .description {
-  display: flex;
-  font-size: 2rem;
   word-break: break-all;
 }
 

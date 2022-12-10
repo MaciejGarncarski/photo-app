@@ -1,0 +1,67 @@
+@use '/styles/common.scss';
+
+
+.list {
+  list-style: none;
+  display: grid;
+  justify-content: stretch;
+  width: 100%;
+  align-items: center;
+}
+
+.item {
+  width: 100%;
+  font-weight: 600;
+  padding: 1.5rem 0;
+  padding-left: 2rem;
+  border-top: var(--border-primary);
+  font-size: 2.25rem;
+  text-transform: capitalize;
+
+  @include common.mediaquery('lg') {
+    padding: 2rem 0;
+    padding-left: 4rem;
+    font-size: 2.5rem;
+  }
+}
+
+.itemButton {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  text-align: center;
+
+  @include common.mediaquery('lg') {
+    gap: 2rem;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.item-red {
+  color: var(--color-error);
+}
+
+.item-first {
+  border-top: none;
+}
+
+.closeButton {
+  position: absolute;
+  right: -3rem;
+  top: -6rem;
+  font-size: 4rem;
+  background-color: transparent;
+  background-color: var(--bg-white);
+  border: none;
+  border-radius: var(--radius-small);
+  cursor: pointer;
+
+  &:focus {
+    background-color: var(--color-secondary);
+  }
+}
