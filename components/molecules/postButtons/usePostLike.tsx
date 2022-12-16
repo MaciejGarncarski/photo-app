@@ -22,6 +22,7 @@ export const usePostLike = () => {
     {
       onSettled: () => {
         queryClient.invalidateQueries(['homepage infinite posts']);
+        queryClient.invalidateQueries(['collection']);
       },
     }
   );

@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -9,6 +8,7 @@ import { z } from 'zod';
 import styles from './completeSignUp.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
+import { Heading } from '@/components/atoms/heading/Heading';
 import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
@@ -23,9 +23,12 @@ export const username = z
   .min(4, { message: 'Username must contain at least 4 characters' })
   .regex(usernameRegex, { message: 'Invalid username' });
 
+const bio = z.string();
+
 const signUpSchema = z.object({
   username,
   fullName,
+  bio,
 });
 
 type SignUpSchema = z.infer<typeof signUpSchema>;
@@ -46,14 +49,16 @@ export const CompleteSignUp = () => {
     defaultValues: {
       username: data?.user.username ?? '',
       fullName: data?.user.name ?? '',
+      bio: '',
     },
   });
 
-  const onSubmit: SubmitHandler<SignUpSchema> = async ({ username, fullName }) => {
+  const onSubmit: SubmitHandler<SignUpSchema> = async ({ username, fullName, bio }) => {
     const { status } = await axios.put('/api/account/completeSignUp', {
       data: {
         username,
         fullName,
+        bio,
         userID: session?.user?.id,
       },
     });
@@ -66,7 +71,9 @@ export const CompleteSignUp = () => {
 
   return (
     <div className={styles.dialog} role='dialog'>
-      <h2 className={clsx('heading', styles.heading)}>Complete your sign up</h2>
+      <Heading tag='h2' className={styles.heading}>
+        Complete your sign up
+      </Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
           labelText='Username'
@@ -79,6 +86,14 @@ export const CompleteSignUp = () => {
           error={errors.fullName}
           isEmpty={defaultValues?.fullName?.trim() === ''}
           isDirty={dirtyFields.fullName}
+          {...register('fullName')}
+        />
+        <Input
+          labelText='Bio'
+          error={errors.bio}
+          isEmpty={defaultValues?.bio?.trim() === ''}
+          isDirty={dirtyFields.bio}
+          optional
           {...register('fullName')}
         />
         <div className={styles.buttons}>

@@ -1,12 +1,13 @@
 import {
   AiFillHeart,
+  AiOutlineCheckCircle,
   AiOutlineClose,
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlineHeart,
   AiOutlineHome,
   AiOutlineMessage,
-  AiOutlinePlusSquare,
+  AiOutlinePlusCircle,
   AiOutlineShareAlt,
   AiOutlineUser,
 } from 'react-icons/ai';
@@ -33,11 +34,12 @@ Icon.BookmarkActive = BookmarkActive;
 Icon.Share = Share;
 
 const Home = () => <AiOutlineHome />;
-const Create = () => <AiOutlinePlusSquare />;
+const Create = () => <AiOutlinePlusCircle />;
 const Account = () => <AiOutlineUser />;
 const Close = () => <AiOutlineClose />;
 const Edit = () => <AiOutlineEdit />;
 const Trash = () => <AiOutlineDelete />;
+const Success = () => <AiOutlineCheckCircle />;
 
 Icon.Home = Home;
 Icon.Create = Create;
@@ -45,3 +47,4 @@ Icon.Account = Account;
 Icon.Close = Close;
 Icon.Edit = Edit;
 Icon.Trash = Trash;
+Icon.Success = Success;

@@ -1,3 +1,5 @@
+@use '/styles/common.scss';
+
 .container {
   position: relative;
   border-radius: var(--radius-small);
@@ -11,11 +13,15 @@
 
 .image {
   width: 100%;
-  min-height: 20rem;
   background-color: var(--bg-white);
   border-radius: var(--radius-small);
   object-fit: contain;
   box-shadow: 0 6px 10px 1px rgb(0, 0, 0, 0.1);
+  height: 18rem;
+
+  @include common.mediaquery('lg') {
+    min-height: 20rem;
+  }
 }
 
 .link {

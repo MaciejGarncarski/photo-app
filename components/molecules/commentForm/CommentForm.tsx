@@ -6,6 +6,8 @@ import styles from './commentForm.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 
+import { InfinitePost } from '@/pages/api/post/infinitePosts';
+
 type CommentFormValues = {
   comment: string;
 };
@@ -15,11 +17,11 @@ type Mutation = {
   id: number;
 };
 
-export type postID = {
-  postID: number;
+export type CommentFormProps = {
+  post: InfinitePost;
 };
 
-export const CommentForm = ({ postID }: postID) => {
+export const CommentForm = ({ post }: CommentFormProps) => {
   const {
     register,
     handleSubmit,
@@ -30,6 +32,8 @@ export const CommentForm = ({ postID }: postID) => {
       comment: '',
     },
   });
+
+  const { id } = post;
 
   const { mutate } = useMutation(
     async ({ comment, id }: Mutation) => {
@@ -42,7 +46,7 @@ export const CommentForm = ({ postID }: postID) => {
   );
 
   const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
-    mutate({ comment, id: postID });
+    mutate({ comment, id });
   };
 
   return (

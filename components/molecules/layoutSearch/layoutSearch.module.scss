@@ -1,9 +1,15 @@
+@use '/styles/common.scss';
+
 .form {
   display: flex;
   align-items: center;
   background-color: var(--bg-gray);
   border-radius: var(--radius-medium);
-  margin: 1.25rem 0;
+  margin: 0.75rem 0;
+
+  @include common.mediaquery('lg') {
+    margin: 1.25rem 0;
+  }
 }
 
 .label {

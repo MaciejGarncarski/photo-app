@@ -1,13 +1,12 @@
-import Image from 'next/image';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { AiOutlineGoogle } from 'react-icons/ai';
 
 import styles from './signIn.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
+import { Heading } from '@/components/atoms/heading/Heading';
 import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-
-import google from '~/icons/google.svg';
 
 type FormValues = {
   email: string;
@@ -28,7 +27,7 @@ export const SignIn = () => {
 
   return (
     <main className={styles.container}>
-      <h2 className='heading'>Sign in</h2>
+      <Heading tag='h2'>Sign in</Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input labelText='E-mail' type='email' {...register('email')} />
         <Button type='submit'>Sign in with email</Button>
@@ -42,7 +41,7 @@ export const SignIn = () => {
           type='button'
           onClick={() => signIn('google', { redirect: true })}
         >
-          <Image src={google} priority alt='' />
+          <AiOutlineGoogle />
           <p className={styles.google}>Google</p>
         </Button>
       </div>

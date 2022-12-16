@@ -37,6 +37,10 @@ type ModalCloseProps = {
   onClose: () => void;
 };
 
+const ModalHeading = ({ text }: { text: string }) => {
+  return <h3 className={styles.heading}>{text}</h3>;
+};
+
 const ModalClose = ({ onClose }: ModalCloseProps) => {
   return (
     <button className={styles.closeButton} type='button' onClick={onClose}>
@@ -50,3 +54,4 @@ Modal.List = ModalList;
 Modal.Overlay = ModalOverlay;
 Modal.Item = ModalItem;
 Modal.Close = ModalClose;
+Modal.Heading = ModalHeading;

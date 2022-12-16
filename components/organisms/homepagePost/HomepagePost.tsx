@@ -9,37 +9,24 @@ import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+import { PostData } from '@/components/pages/collection/useCollection';
 
 type HomePagePostProps = {
-  images: string;
-  description: string;
-  isInCollection: boolean;
-  isLiked: boolean;
-  postID: number;
-  authorID: string;
-  likesCount: number;
-  createdAt: Date;
+  post: PostData;
 };
 
-export const HomepagePost = ({
-  images,
-  authorID,
-  description,
-  isInCollection,
-  likesCount,
-  postID,
-  isLiked,
-  createdAt,
-}: HomePagePostProps) => {
-  const { data } = useAccount({ id: authorID });
-
+export const HomepagePost = ({ post }: HomePagePostProps) => {
+  const { session } = useAuth();
+  const { author_id, description, created_at, images } = post;
+  const { data } = useAccount({ id: author_id });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
     descriptionData(description);
 
-  const fromNow = moment(createdAt).fromNow();
+  const fromNow = moment(created_at).fromNow();
 
   const Description = () => {
     if (isDescriptionLong || hasMultipleBreaks) {
@@ -52,7 +39,7 @@ export const HomepagePost = ({
             type='button'
             onClick={() => setShowMore((prev) => !prev)}
           >
-            {showMore ? 'less' : 'more'}
+            show {showMore ? 'less' : 'more'}
           </button>
         </>
       );
@@ -67,27 +54,23 @@ export const HomepagePost = ({
 
   return (
     <article className={styles.post}>
-      <PostHeader user={data.user} postID={postID} />
+      <PostHeader user={data.user} post={post} />
       <Image
         className={styles.image}
         src={images}
         width={300}
         height={300}
+        priority
         alt={`${data.user.username} - ${shortDescription}`}
       />
-      <PostButtons
-        isInCollection={isInCollection}
-        likesCount={likesCount}
-        postID={postID}
-        isLiked={isLiked}
-      />
+      <PostButtons post={post} />
       <footer className={styles.bottom}>
         <p className={styles.description}>
           <span className={styles.author}>{data.user.username}</span>
           <Description />
         </p>
         <p>{fromNow}</p>
-        <CommentForm postID={postID} />
+        {session?.user && <CommentForm post={post} />}
       </footer>
     </article>
   );

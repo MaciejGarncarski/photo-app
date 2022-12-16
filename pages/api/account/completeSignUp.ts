@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const { userID, fullName, username } = req.body.data;
+  const { userID, fullName, username, bio } = req.body.data;
 
   if (method !== 'PUT') {
     res.status(405).send({ status: 'wrong request', message: 'Only PUT request allowed' });
@@ -28,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         name: fullName,
         username,
+        bio,
       },
     });
     res.status(200).send({ status: 'ok' });

@@ -1,0 +1,29 @@
+@use '/styles/common.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: flex-start;
+  gap: 3rem;
+
+  @include common.mediaquery('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include common.mediaquery('lg') {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+  }
+}
+
+.heading {
+  margin-bottom: 2rem;
+
+  @include common.mediaquery('sm') {
+    grid-column: 1 / 3;
+  }
+
+  @include common.mediaquery('lg') {
+    grid-column: 1 / 4;
+  }
+}

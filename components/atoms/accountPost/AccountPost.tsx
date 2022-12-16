@@ -5,12 +5,10 @@ import Link from 'next/link';
 import styles from './accountPost.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
+import { PostData } from '@/components/pages/collection/useCollection';
 
 type AccountPostProps = {
-  src: string;
-  authorID: string;
-  likesCount: number | null;
-  commentsCount: number | null;
+  post: PostData;
 };
 
 const overlay: Variants = {
@@ -20,16 +18,20 @@ const overlay: Variants = {
 
 export const MotionLink = motion(Link);
 
-export const AccountPost = ({ src, likesCount, commentsCount }: AccountPostProps) => {
+export const AccountPost = ({ post }: AccountPostProps) => {
+  const { images, likesCount, commentsCount } = post;
+  console.log(post);
+
   return (
     <MotionLink
       shallow
       href='/post'
       initial='hidden'
       whileHover='visible'
+      transition={{ type: 'tween', duration: 0.25 }}
       className={styles.container}
     >
-      <Image className={styles.image} src={src} alt='' width={300} height={300} priority />
+      <Image className={styles.image} src={images} alt='' width={300} height={300} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>
           <Icon.Heart /> {likesCount}
