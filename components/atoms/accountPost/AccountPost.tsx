@@ -20,7 +20,6 @@ export const MotionLink = motion(Link);
 
 export const AccountPost = ({ post }: AccountPostProps) => {
   const { images, likesCount, commentsCount } = post;
-  console.log(post);
 
   return (
     <MotionLink

@@ -15,7 +15,6 @@ export const Header = () => {
   const { isGoingUp } = useScrollPosition();
   const { isMobile } = useScreenWidth();
 
-  //TODO nav animation
   return (
     <header className={styles.header}>
       <Link href='/' className={styles.anchor}>
@@ -24,7 +23,7 @@ export const Header = () => {
       <LayoutSearch />
       <motion.nav
         animate={isMobile && isGoingUp ? { y: 0 } : {}}
-        initial={isMobile ? { y: 70 } : {}}
+        initial={isMobile ? { y: 70 } : { y: 0 }}
         transition={{ type: 'tween', duration: 0.2 }}
         className={clsx(styles.nav)}
       >

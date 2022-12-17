@@ -2,10 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
+import { infinitePostsCount } from '@/utils/infinitePostsCount';
 import { string } from '@/utils/string';
 import { transformCollectionPost } from '@/utils/transformCollectionPost';
 
+import { PostData } from '@/components/pages/collection/useCollection';
+
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 const COLLECTION_POSTS_PER_SCROLL = 9;
 
@@ -95,13 +99,16 @@ const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         posts.map((collectionPost) => transformCollectionPost({ collectionPost, session }))
       );
 
-      const postsCount = _count.id;
-      const canLoadMore = postsCount > (skipNumber + 1) * COLLECTION_POSTS_PER_SCROLL;
-      const nextCursor = canLoadMore ? skipNumber + 1 : null;
+      const { postsCount, nextCursor } = infinitePostsCount({ count: _count.id, skipNumber });
 
-      res.status(200).send({ posts: postsWithCount, postsCount, cursor: nextCursor });
+      const response: InfinitePosts<PostData> = {
+        posts: postsWithCount,
+        postsCount,
+        cursor: nextCursor,
+      };
+
+      res.status(200).send(response);
     } catch (error) {
-      console.log(error);
       res.status(400).send({ status: 'error', message: 'Cannot download your collection' });
     }
   }

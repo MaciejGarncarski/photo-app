@@ -32,8 +32,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   });
 
-  console.log(req.query);
-
   if (req.method === 'PUT') {
     createPost(req, res, formData);
   }
