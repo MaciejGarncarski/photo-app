@@ -11,6 +11,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (method === 'PUT') {
     try {
+      const likeAlreadyExists = await prisma.postLike.findFirst({
+        where: {
+          post_id: Number(postID),
+          user_id: userID,
+        },
+      });
+
+      if (likeAlreadyExists) {
+        res.status(409).send({ status: 'error', message: 'Error while adding like' });
+        return;
+      }
+
       await prisma.postLike.create({
         data: {
           post_id: Number(postID),

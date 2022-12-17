@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import ReactTooltip from 'react-tooltip';
 
 import styles from './headerButtons.module.scss';
 
@@ -52,24 +51,21 @@ export const HeaderButtons = () => {
   }
 
   return (
-    <>
-      <ul className={styles.list}>
-        {listData.map(({ icon, alt, onClick, href, title }) => {
-          return (
-            <HeaderButton
-              icon={icon}
-              alt={alt}
-              onClick={onClick}
-              href={href}
-              title={title}
-              key={title}
-            />
-          );
-        })}
+    <ul className={styles.list}>
+      {listData.map(({ icon, alt, onClick, href, title }) => {
+        return (
+          <HeaderButton
+            icon={icon}
+            alt={alt}
+            onClick={onClick}
+            href={href}
+            title={title}
+            key={title}
+          />
+        );
+      })}
 
-        {data?.user.username && <AccountIcon id={session.user?.id ?? ''} />}
-      </ul>
-      <ReactTooltip effect='solid' />
-    </>
+      {data?.user.username && <AccountIcon id={session.user?.id ?? ''} />}
+    </ul>
   );
 };

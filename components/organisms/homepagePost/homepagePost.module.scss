@@ -30,6 +30,11 @@
 
 .description {
   word-break: break-all;
+  font-size: 1.75rem;
+
+  @include common.mediaquery('lg') {
+    font-size: 2rem;
+  }
 }
 
 .author {
@@ -43,6 +48,6 @@
 .showMore {
   background-color: transparent;
   border: none;
-  color: var(--color-disabled);
+  color: var(--color-primary);
   cursor: pointer;
 }

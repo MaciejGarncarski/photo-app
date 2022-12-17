@@ -1,4 +1,3 @@
-import { Post, User } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
 
@@ -9,18 +8,8 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 export const POSTS_PER_SCROLL = 4;
 
-export type InfinitePost = {
-  posts: Array<
-    Post & {
-      isLiked?: boolean;
-      isInCollection?: boolean;
-      author: User;
-      _count: {
-        posts_likes: number;
-        posts_comments: number;
-      };
-    }
-  >;
+export type InfinitePosts<T> = {
+  posts: Array<T>;
   postsCount: number;
   cursor: number | null;
 };
@@ -67,6 +56,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const postsWithCollectionData = await Promise.all(
       posts.map(async (post) => {
+        if (!session?.user?.id) {
+          return {
+            ...post,
+            likesCount: post._count.posts_likes,
+            commentsCount: post._count.posts_comments,
+            isInCollection: false,
+          };
+        }
+
         const isInCollection = await prisma.collection.findFirst({
           where: {
             post_id: post.id,
@@ -76,6 +74,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         return {
           ...post,
+          likesCount: post._count.posts_likes,
+          commentsCount: post._count.posts_comments,
           isInCollection: Boolean(isInCollection),
         };
       })
@@ -101,7 +101,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
   } catch (e) {
-    console.log(e);
     res.status(400).send('400');
   }
 };

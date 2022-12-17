@@ -1,8 +1,15 @@
+@use '/styles/common.scss';
+
 .container {
   position: relative;
   border-radius: var(--radius-small);
   border: var(--border-secondary);
   cursor: pointer;
+
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover>.overlay {
     opacity: 1;
@@ -11,11 +18,15 @@
 
 .image {
   width: 100%;
-  min-height: 20rem;
+  height: 100%;
   background-color: var(--bg-white);
   border-radius: var(--radius-small);
   object-fit: contain;
   box-shadow: 0 6px 10px 1px rgb(0, 0, 0, 0.1);
+
+  @include common.mediaquery('lg') {
+    min-height: 20rem;
+  }
 }
 
 .link {
@@ -42,15 +53,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5rem;
+  gap: 1.5rem;
   background-color: rgb(35, 35, 35, 0.55);
   color: var(--color-white);
+
+  @include common.mediaquery('lg') {
+    gap: 4rem;
+  }
 }
 
 .count {
   display: flex;
   justify-content: center;
-  font-size: 4rem;
+  font-size: 3.25rem;
   align-items: center;
   gap: 0.5rem;
+
+  @include common.mediaquery('lg') {
+    font-size: 4rem;
+  }
 }

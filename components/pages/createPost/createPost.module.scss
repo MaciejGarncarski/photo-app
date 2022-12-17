@@ -3,9 +3,9 @@
 .createPost {
   display: grid;
   row-gap: 4rem;
-  margin-inline: calc(2rem + 4vw);
 
   @include common.mediaquery('lg') {
+    margin-inline: calc(2rem + 4vw);
     width: var(--create-post-width);
     margin-inline: auto;
     row-gap: 6rem;
@@ -43,6 +43,9 @@
   padding: 2rem 1rem;
   resize: vertical;
   max-width: 100%;
+  width: 100%;
+  min-height: 8rem;
+  height: 8rem;
 }
 
 .label {

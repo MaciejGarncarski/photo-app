@@ -1,9 +1,29 @@
-import Link from 'next/link';
+import styles from './collection.module.scss';
+
+import { Heading } from '@/components/atoms/heading/Heading';
+import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
+import { useCollection } from '@/components/pages/collection/useCollection';
 
 export const Collection = () => {
+  const { session } = useAuth();
+
+  const { data } = useCollection({ userID: session?.user?.id ?? '' });
+
+  if (!data) {
+    return null;
+  }
+
   return (
-    <p>
-      noting to find there <Link href='/'>go to home page</Link>
-    </p>
+    <main className={styles.container}>
+      <Heading tag='h2' className={styles.heading}>
+        Your post collection
+      </Heading>
+      {data.pages.map((page) => {
+        return page.posts.map((post) => {
+          return <HomepagePost key={post.id} post={post} />;
+        });
+      })}
+    </main>
   );
 };

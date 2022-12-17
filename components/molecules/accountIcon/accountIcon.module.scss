@@ -31,6 +31,8 @@
   width: 20px;
   height: 20px;
   background-color: var(--bg-white);
+  border-left: var(--border-primary);
+  border-top: var(--border-primary);
 
   @include common.mediaquery('lg') {
     top: -10px;

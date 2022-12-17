@@ -8,23 +8,26 @@ import styles from './postHeader.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { PostOptions } from '@/components/molecules/postOptions/PostOptions';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+import { PostData } from '@/components/pages/collection/useCollection';
 
 type PostHeaderProps = {
   user: User;
-  postID: number;
+  post: PostData;
 };
 
 const AVATAR_SIZE = 40;
 
-export const PostHeader = ({ user, postID }: PostHeaderProps) => {
+export const PostHeader = ({ user, post }: PostHeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { session } = useAuth();
   const { data } = useAccount({ id: session?.user?.id });
 
-  const isAbleToModify = user.id === data?.user.id || data?.user.role === 'ADMIN';
+  const isAuthor = data?.user.id === post.author_id;
+
   const onModalOpen = () => setIsOpen(true);
 
   return (
@@ -35,16 +38,16 @@ export const PostHeader = ({ user, postID }: PostHeaderProps) => {
           <h2>{user.username}</h2>
         </Link>
         <div className={styles.options}>
-          <FollowButton className={styles.followBtn} isFollowing={false} />
-          {isAbleToModify && (
+          {!isAuthor && <FollowButton className={styles.followBtn} isFollowing={false} />}
+          <Tooltip variant='right' content='Post menu'>
             <button type='button' className={styles.optionsButton} onClick={onModalOpen}>
               <AiOutlineMenu />
             </button>
-          )}
+          </Tooltip>
         </div>
       </header>
       <AnimatePresence>
-        {isOpen && <PostOptions postID={postID} setIsOpen={setIsOpen} />}
+        {isOpen && <PostOptions post={post} setIsOpen={setIsOpen} />}
       </AnimatePresence>
     </>
   );

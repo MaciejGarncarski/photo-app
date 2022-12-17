@@ -3,28 +3,28 @@ import Link from 'next/link';
 
 import styles from '@/components/molecules/headerButtons/headerButtons.module.scss';
 
-import { Children } from '@/components/Layout/Layout';
+import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { ListData } from '@/components/molecules/headerButtons/HeaderButtons';
-
-const ListItem = ({ children }: Children) => {
-  return <li className={styles.listItem}>{children}</li>;
-};
 
 export const HeaderButton = ({ href, onClick, alt, title, icon }: ListData) => {
   if (href) {
     return (
-      <ListItem>
-        <Link href={href} data-tip={alt} className={clsx(styles.listItemChild)}>
-          {icon}
-        </Link>
-        <span className={styles.listItemTitle}>{title}</span>
-      </ListItem>
+      <li className={styles.listItemChild}>
+        <Tooltip variant='bottom' content={alt}>
+          <div className={styles.listItem}>
+            <Link href={href} className={clsx(styles.listItemChild)}>
+              {icon}
+            </Link>
+            <span className={styles.listItemTitle}>{title}</span>
+          </div>
+        </Tooltip>
+      </li>
     );
   }
 
   if (onClick) {
     return (
-      <ListItem>
+      <li>
         <button
           className={clsx(styles.listItemChild, styles.listItemButton)}
           type='button'
@@ -35,7 +35,7 @@ export const HeaderButton = ({ href, onClick, alt, title, icon }: ListData) => {
           <span className='visually-hidden'>{alt}</span>
           <span className={styles.listItemTitle}>{title}</span>
         </button>
-      </ListItem>
+      </li>
     );
   }
   return null;

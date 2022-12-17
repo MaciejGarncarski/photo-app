@@ -1,11 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
+import { infinitePostsCount } from '@/utils/infinitePostsCount';
 import { string } from '@/utils/string';
+
+import { PostData } from '@/components/pages/collection/useCollection';
+
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 const POSTS_PER_SCROLL = 9;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
   if (req.method !== 'GET') {
     res.status(405).send({ status: 405, error: 'Invalid metod' });
     return;
@@ -49,11 +58,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const postsCount = _count.id;
-    const canLoadMore = postsCount > (skipNumber + 1) * POSTS_PER_SCROLL;
-    const nextCursor = canLoadMore ? skipNumber + 1 : null;
+    const { postsCount, nextCursor } = infinitePostsCount({ count: _count.id, skipNumber });
 
-    res.status(200).send({ posts, postsCount, cursor: nextCursor });
+    const transformedPosts = posts.map((post) => {
+      return {
+        ...post,
+        likesCount: post._count.posts_likes,
+        commentsCount: post._count.posts_comments,
+      };
+    });
+
+    const response: InfinitePosts<PostData> = {
+      posts: transformedPosts,
+      postsCount,
+      cursor: nextCursor,
+    };
+
+    res.status(200).send(response);
   } catch (e) {
     res.status(400).send('400');
   }

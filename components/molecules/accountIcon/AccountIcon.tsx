@@ -15,16 +15,18 @@ type AccountIconProps = {
   id: string;
 };
 
-const variants: Variants = {
+export const tooltipVariant: Variants = {
   initial: {
-    opacity: 0.5,
-    y: 30,
+    opacity: 0.7,
   },
   animate: {
     opacity: 1,
-    y: 0,
   },
   exit: {
+    transition: {
+      type: 'tween',
+      duration: 0.25,
+    },
     opacity: 0,
   },
 };
@@ -35,6 +37,8 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
 
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
+
+  const onBtnClick = () => setIsOptionsOpen((prev) => !prev);
 
   useEffect(() => {
     const handleClose = (mouseEv: MouseEvent) => {
@@ -70,13 +74,11 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     <li
       className={commonStyles.accountIconContainer}
       ref={containerRef}
+      onClick={onBtnClick}
       onMouseEnter={() => setIsOptionsOpen(true)}
       onMouseLeave={() => setIsOptionsOpen(false)}
     >
-      <button
-        className={clsx(commonStyles.listItemChild, styles.button)}
-        onClick={() => setIsOptionsOpen((prev: boolean) => !prev)}
-      >
+      <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
         <span className='visually-hidden'>{session.user?.name}</span>
         <Avatar userID={session.user?.id ?? ''} alt='' />
         <span className={commonStyles.listItemTitle}>Account</span>
@@ -85,7 +87,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
         {isOptionsOpen && (
           <motion.div
             className={styles.options}
-            variants={variants}
+            variants={tooltipVariant}
             animate='animate'
             initial='initial'
             exit='exit'

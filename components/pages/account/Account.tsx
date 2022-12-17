@@ -37,9 +37,8 @@ export const Account = ({ username }: AccountProps) => {
     return <p>user error</p>;
   }
 
-  const { name } = data.user;
-
-  const isIamOwner = session?.user?.id === data.user.id;
+  const { name, bio } = data.user;
+  const isOwner = session?.user?.id === data.user.id;
 
   return (
     <>
@@ -57,12 +56,8 @@ export const Account = ({ username }: AccountProps) => {
           })}
         </ul>
         <p className={styles.name}>{name}</p>
-        <p className={styles.bio}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab provident iusto blanditiis
-          similique. Doloremque, veritatis totam magnam magni qui ab consectetur vero, iusto
-          dignissimos, nam nostrum explicabo nesciunt tenetur optio.
-        </p>
-        {!isIamOwner && <Button className={styles.followButton}>follow 💪</Button>}
+        <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
+        {!isOwner && <Button className={styles.followButton}>follow 💪</Button>}
         <button type='button' onClick={openMenu} className={styles.menuButton}>
           <span className='visually-hidden'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
           <AiOutlineMenu />
