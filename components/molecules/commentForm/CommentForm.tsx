@@ -5,8 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './commentForm.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
-
-import { InfinitePost } from '@/pages/api/post/infinitePosts';
+import { PostData } from '@/components/pages/collection/useCollection';
 
 type CommentFormValues = {
   comment: string;
@@ -18,7 +17,7 @@ type Mutation = {
 };
 
 export type CommentFormProps = {
-  post: InfinitePost;
+  post: PostData;
 };
 
 export const CommentForm = ({ post }: CommentFormProps) => {
