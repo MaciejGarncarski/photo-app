@@ -8,6 +8,7 @@ import styles from './postHeader.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { PostOptions } from '@/components/molecules/postOptions/PostOptions';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -15,7 +16,7 @@ import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type PostHeaderProps = {
-  user: User;
+  user?: User;
   post: PostData;
 };
 
@@ -29,6 +30,14 @@ export const PostHeader = ({ user, post }: PostHeaderProps) => {
   const isAuthor = data?.user.id === post.author_id;
 
   const onModalOpen = () => setIsOpen(true);
+
+  if (!data || !user) {
+    return (
+      <header className={styles.header}>
+        <Loading variants={['very-small', 'left']} />;
+      </header>
+    );
+  }
 
   return (
     <>

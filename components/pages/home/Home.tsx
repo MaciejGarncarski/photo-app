@@ -2,6 +2,7 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import styles from './home.module.scss';
 
+import { Loading } from '@/components/atoms/loading/Loading';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
@@ -16,12 +17,8 @@ export const Home = () => {
     rootMargin: '0px 0px 100px 0px',
   });
 
-  if (!data) {
-    return <p>no data</p>;
-  }
-
-  if (isLoading) {
-    return <p>Loading posts...</p>;
+  if (isLoading || !data) {
+    return <Loading />;
   }
 
   return (
@@ -33,7 +30,7 @@ export const Home = () => {
       })}
       {(isLoading || hasNextPage) && (
         <div ref={sentryRef}>
-          <p>loading...</p>
+          <Loading />
         </div>
       )}
     </main>

@@ -39,6 +39,7 @@
   background-color: transparent;
   cursor: pointer;
   font-size: 2.5rem;
+  display: block;
 
   @include common.mediaquery('lg') {
     font-size: 3rem;

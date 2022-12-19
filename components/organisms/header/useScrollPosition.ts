@@ -1,40 +1,40 @@
-import { useCallback, useEffect, useState } from 'react';
-
-import { useThrottle } from '@/components/organisms/header/useThrottle';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { throttle } from 'throttle-debounce';
 
 export const useScrollPosition = () => {
   const [scrollPos, setScrollPos] = useState<number>(0);
   const [isGoingUp, setIsGoingUp] = useState<boolean>(false);
 
-  const handleScroll = useCallback(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
+  const handleScroll = useCallback(
+    (scrollEv: Event) => {
+      const target = scrollEv.currentTarget as Window;
+      if (target === null || typeof target === 'undefined') {
+        return;
+      }
 
-    if (window.scrollY > scrollPos) {
-      setIsGoingUp(false);
-    }
-    if (window.scrollY < scrollPos) {
-      setIsGoingUp(true);
-    }
-    setScrollPos(window.scrollY);
-  }, [scrollPos]);
+      if (window.scrollY > scrollPos) {
+        setIsGoingUp(false);
+      }
+      if (window.scrollY < scrollPos) {
+        setIsGoingUp(true);
+      }
 
-  const throttledHandleScroll = useThrottle({ cb: handleScroll, limit: 250 });
+      setScrollPos(target.scrollY);
+    },
+    [scrollPos]
+  );
+
+  const throttledScroll = useMemo(() => throttle(600, handleScroll), [handleScroll]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    window.addEventListener('scroll', throttledHandleScroll, {
+    window.addEventListener('scroll', throttledScroll, {
       passive: true,
     });
 
     return () => {
-      window.removeEventListener('scroll', throttledHandleScroll);
+      window.removeEventListener('scroll', throttledScroll);
     };
-  }, [handleScroll, scrollPos, throttledHandleScroll]);
+  }, [scrollPos, throttledScroll]);
 
-  return { isGoingUp, scrollPos };
+  return { isGoingUp };
 };

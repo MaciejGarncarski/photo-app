@@ -31,7 +31,7 @@ const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      res.status(200).send({ status: 'ok, deleted' });
+      res.status(200).send({ status: 'resource updated successfully' });
     } catch (error) {
       res.status(400).send({ status: 'error', message: 'Cannot remove post from your collection' });
     }
@@ -47,7 +47,7 @@ const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      res.status(200).send({ status: 'ok' });
+      res.status(201).send({ status: 'resource updated successfully' });
     } catch (error) {
       res.status(400).send({ status: 'error', message: 'Cannot add post to your collection' });
     }

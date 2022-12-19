@@ -69,12 +69,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
       const count = await countUser(userData?.id ?? '');
-      res.status(200).send({ status: 200, user: userData, count });
+      res.status(200).send({ user: userData, count });
       return;
     }
 
     const count = await countUser(user);
-    res.status(200).send({ status: 200, user: userData, count });
+    res.status(200).send({ user: userData, count });
   } catch (error) {
     res.status(400).send({ status: 'error', error });
   }
