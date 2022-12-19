@@ -5,6 +5,7 @@ import styles from './account.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/button/Button';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { ModalOverlay } from '@/components/atoms/modalOverlay/ModalOverlay';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -30,7 +31,7 @@ export const Account = ({ username }: AccountProps) => {
   };
 
   if (!data || isLoading) {
-    return <p>loading</p>;
+    return <Loading />;
   }
 
   if (!data.user) {

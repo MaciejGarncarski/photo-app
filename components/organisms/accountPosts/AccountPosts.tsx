@@ -5,6 +5,7 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 import styles from './accountPosts.module.scss';
 
 import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
@@ -32,8 +33,8 @@ export const AccountPosts = ({ id }: AccountPostsProps) => {
     rootMargin: '0px 0px 400px 0px',
   });
 
-  if (!data) {
-    return <p>no data</p>;
+  if (!data || isLoading) {
+    return <Loading />;
   }
 
   return (

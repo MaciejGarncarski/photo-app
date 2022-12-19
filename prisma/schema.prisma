@@ -57,6 +57,7 @@ model User {
   fromUser       Follower[]     @relation("Follower")
   toUser         Follower[]     @relation("Following")
   Collection     Collection[]
+  created_at     DateTime       @default(now()) @db.Timestamp(0)
 }
 
 model VerificationToken {

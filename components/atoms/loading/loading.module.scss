@@ -1,0 +1,66 @@
+@use '/styles/common.scss';
+
+.container {
+  --loading-size: 15rem;
+  height: var(--loading-size);
+  width: var(--loading-size);
+  margin: auto;
+  text-align: center;
+
+  border-radius: 100%;
+  border: 2rem solid var(--color-primary);
+  border-left-color: var(--color-secondary);
+  border-right-color: var(--color-secondary);
+
+  animation: rotation 3s infinite forwards linear;
+
+  @include common.mediaquery('lg') {
+    --loading-size: 20rem;
+  }
+}
+
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.small {
+  --small-loading-size: 10rem;
+  border-width: 1.5rem;
+  height: var(--small-loading-size);
+  width: var(--small-loading-size);
+
+  @include common.mediaquery('lg') {
+    --loading-size: 14rem;
+  }
+
+  @include common.mediaquery('lg') {
+    --loading-size: 18rem;
+  }
+}
+
+.very-small {
+  --small-loading-size: 4rem;
+  border-width: 1rem;
+  height: var(--small-loading-size);
+  width: var(--small-loading-size);
+
+  @include common.mediaquery('lg') {
+    --loading-size: 6rem;
+  }
+
+  @include common.mediaquery('lg') {
+    --loading-size: 7rem;
+  }
+}
+
+.left {
+  margin: auto;
+  margin-left: 0;
+}

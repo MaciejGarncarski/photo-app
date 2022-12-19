@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
         },
       });
-      res.status(200).send({ status: 'ok' });
+      res.status(201).send({ status: 'resource updated successfully' });
     } catch (error) {
       res.status(400).send({ status: 'error', message: 'Error while adding like' });
     }
@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           user_id: userID,
         },
       });
-      res.status(200).send({ status: 'ok' });
+      res.status(200).send({ status: 'resource updated successfully' });
     } catch (error) {
       res.status(400).send({ status: 'error', message: 'Error while adding like' });
     }

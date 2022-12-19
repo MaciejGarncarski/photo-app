@@ -3,7 +3,6 @@
   align-items: flex-start;
   gap: 2rem;
   margin: 1rem 1rem;
-  margin-bottom: 0;
 }
 
 .item {
@@ -16,13 +15,6 @@
 
 .itemLast {
   margin-left: auto;
-}
-
-.count {
-  font-size: 2rem;
-  font-weight: 600;
-  position: relative;
-  top: -5px;
 }
 
 .button {

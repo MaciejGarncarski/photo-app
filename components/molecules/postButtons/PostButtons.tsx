@@ -41,7 +41,7 @@ const Button = ({ children, onClick }: ButtonProps) => {
 };
 
 export const PostButtons = ({ post }: PostButtonsProps) => {
-  const { isLiked, id, isInCollection, likesCount } = post;
+  const { isLiked, id, isInCollection } = post;
   const { session } = useAuth();
   const { push } = useRouter();
   const { mutate } = usePostLike();
@@ -69,7 +69,6 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
     <ul className={styles.list}>
       <Item>
         <Button onClick={handleLike}>{isLiked ? <Icon.HeartActive /> : <Icon.Heart />}</Button>
-        <p className={styles.count}>{likesCount}</p>
       </Item>
       <Item>
         <Icon.Comment />

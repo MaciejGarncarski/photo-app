@@ -19,7 +19,7 @@ type HomePagePostProps = {
 
 export const HomepagePost = ({ post }: HomePagePostProps) => {
   const { session } = useAuth();
-  const { author_id, description, created_at, images } = post;
+  const { author_id, description, created_at, images, likesCount } = post;
   const { data } = useAccount({ id: author_id });
   const [showMore, setShowMore] = useState<boolean>(false);
 
@@ -48,25 +48,29 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
     return <>{parse(descriptionWithNewLine)}</>;
   };
 
-  if (!data) {
-    return null;
-  }
-
   return (
     <article className={styles.post}>
-      <PostHeader user={data.user} post={post} />
+      <PostHeader user={data?.user} post={post} />
       <Image
         className={styles.image}
         src={images}
         width={300}
         height={300}
         priority
-        alt={`${data.user.username} - ${shortDescription}`}
+        alt={`${data?.user.username} - ${shortDescription}`}
       />
       <PostButtons post={post} />
       <footer className={styles.bottom}>
+        {likesCount !== 0 && (
+          <p className={styles.count}>
+            {likesCount}
+            &nbsp;
+            {likesCount === 1 && 'like'}
+            {likesCount > 1 && 'likes'}
+          </p>
+        )}
         <p className={styles.description}>
-          <span className={styles.author}>{data.user.username}</span>
+          <span className={styles.author}>{data?.user.username}</span>
           <Description />
         </p>
         <p>{fromNow}</p>
