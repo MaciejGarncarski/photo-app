@@ -19,15 +19,15 @@ const overlay: Variants = {
 export const MotionLink = motion(Link);
 
 export const AccountPost = ({ post }: AccountPostProps) => {
-  const { images, likesCount, commentsCount } = post;
+  const { images, likesCount, commentsCount, id } = post;
 
   return (
     <MotionLink
       shallow
-      href='/post'
+      href={`/post/${id}`}
       initial='hidden'
       whileHover='visible'
-      transition={{ type: 'tween', duration: 0.25 }}
+      transition={{ type: 'tween', duration: 0.15 }}
       className={styles.container}
     >
       <Image className={styles.image} src={images} alt='' width={300} height={300} priority />

@@ -4,6 +4,8 @@ import styles from './layout.module.scss';
 
 import { CompleteSignUp } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { Header } from '@/components/organisms/header/Header';
+import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
+import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
@@ -12,6 +14,9 @@ export type Children = {
 };
 
 export const Layout = ({ children }: Children) => {
+  useScrollPosition();
+  useScreenWidth();
+
   const { session, status } = useAuth();
   const { data, isLoading } = useAccount({ id: session?.user?.id });
 
