@@ -10,6 +10,7 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   const { postID } = req.query;
   const postIDToNum = Number(string(postID));
+
   try {
     const post = await prisma.post.findFirst({
       where: {
@@ -17,7 +18,9 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    if (post?.author_id !== session?.user?.id) {
+    const isAbleToDelete = post?.author_id === session?.user?.id;
+
+    if (!isAbleToDelete) {
       res.status(401).send({ status: 'unauthorized' });
       return;
     }

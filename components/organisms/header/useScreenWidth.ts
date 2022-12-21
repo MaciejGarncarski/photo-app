@@ -1,13 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
-import { debounce } from 'throttle-debounce';
+import { useEffect, useMemo } from 'react';
+import { throttle } from 'throttle-debounce';
+
+import { useGlobalOptions } from '@/lib/useGlobalOptions';
+
+const THROTTLE_DELAY = 400;
 
 export const useScreenWidth = () => {
-  const [screenWidth, setScreenWidth] = useState<number>(0);
+  const screenWidth = useGlobalOptions((state) => state.screenWidth);
+  const setScreenWidth = useGlobalOptions((state) => state.setScreenWidth);
+  const setIsMobile = useGlobalOptions((state) => state.setIsMobile);
 
-  const handleResize = () => {
-    setScreenWidth(window.innerWidth);
-  };
-  const throttledHandleResize = useMemo(() => debounce(500, handleResize), []);
+  const throttledHandleResize = useMemo(() => {
+    return throttle(THROTTLE_DELAY, () => {
+      const isMobile = screenWidth === 0 ? false : screenWidth < 768;
+      setIsMobile(isMobile);
+      setScreenWidth(window.innerWidth);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     throttledHandleResize();
     window.addEventListener('resize', throttledHandleResize, { passive: true });
@@ -15,8 +26,5 @@ export const useScreenWidth = () => {
     return () => {
       window.removeEventListener('resize', throttledHandleResize);
     };
-  }, [screenWidth, throttledHandleResize]);
-
-  const isMobile = screenWidth === 0 ? false : screenWidth < 768;
-  return { screenWidth, isMobile };
+  }, [throttledHandleResize]);
 };

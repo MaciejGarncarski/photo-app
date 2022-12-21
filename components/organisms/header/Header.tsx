@@ -2,18 +2,18 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+import { useGlobalOptions } from '@/lib/useGlobalOptions';
+
 import styles from './header.module.scss';
 
 import { HeaderButtons } from '@/components/molecules/headerButtons/HeaderButtons';
 import { LayoutSearch } from '@/components/molecules/layoutSearch/LayoutSearch';
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
-import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 
 import { APP_NAME } from '@/pages';
 
 export const Header = () => {
-  const { isGoingUp } = useScrollPosition();
-  const { isMobile } = useScreenWidth();
+  const isMobile = useGlobalOptions((state) => state.isMobile);
+  const isGoingUp = useGlobalOptions((state) => state.isGoingUp);
 
   return (
     <header className={styles.header}>

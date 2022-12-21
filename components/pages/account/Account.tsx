@@ -59,10 +59,12 @@ export const Account = ({ username }: AccountProps) => {
         <p className={styles.name}>{name}</p>
         <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
         {!isOwner && <Button className={styles.followButton}>follow 💪</Button>}
-        <button type='button' onClick={openMenu} className={styles.menuButton}>
-          <span className='visually-hidden'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
-          <AiOutlineMenu />
-        </button>
+        {isOwner && (
+          <button type='button' onClick={openMenu} className={styles.menuButton}>
+            <span className='visually-hidden'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
+            <AiOutlineMenu />
+          </button>
+        )}
       </main>
       {isMenuOpen && (
         <ModalOverlay setOpen={setIsMenuOpen}>
