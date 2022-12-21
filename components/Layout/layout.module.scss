@@ -9,3 +9,24 @@
     padding: 5rem 2rem;
   }
 }
+
+.cookies {
+  position: fixed;
+  left: 5rem;
+  bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--bg-white);
+  padding: 1rem 2rem;
+  gap: 1rem;
+  z-index: 2;
+  border-radius: var(--radius-small);
+  border: var(--border-secondary);
+}
+
+.cookiesButtons {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
