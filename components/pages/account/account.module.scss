@@ -114,7 +114,7 @@
 
 .followButton {
   grid-row: 2 / 3;
-  grid-column: 2 / 3;
+  grid-column: 3 / 4;
   justify-self: flex-start;
   margin-top: 2rem;
 
@@ -125,8 +125,7 @@
     font-size: 2rem;
     margin-top: 0;
     position: relative;
-    left: -17rem;
-    top: -0.5rem;
+    left: -5rem;
   }
 }
 
