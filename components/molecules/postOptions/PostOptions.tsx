@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './postOptions.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { Modal } from '@/components/molecules/modal/Modal';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
@@ -34,7 +35,7 @@ export const dialogVariant: Variants = {
 export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const { id, isInCollection, author } = post;
-  const { mutate } = useCollectionMutation();
+  const collectionMutation = useCollectionMutation();
   const deletePostMutation = useDeletePost();
   const { session } = useAuth();
   const { data } = useAccount({ id: session?.user?.id ?? '' });
@@ -44,7 +45,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   const onModalClose = () => setIsOpen(false);
 
   const handleCollection = () => {
-    mutate({ type: isInCollection ? 'remove' : undefined, postID: id });
+    collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postID: id });
   };
 
   const handleDeletePost = () => {
@@ -101,15 +102,24 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
         <Modal.Close onClose={onModalClose} />
         <Modal.List>
           <Modal.Item isFirst onClick={handleCollection}>
-            {isInCollection ? (
+            {collectionMutation.isLoading ? (
               <>
-                <Icon.BookmarkActive />
-                Remove from collection
+                <Loading variants={['very-small']} />
+                Loading...
               </>
             ) : (
               <>
-                <Icon.Bookmark />
-                Save to collection
+                {isInCollection ? (
+                  <>
+                    <Icon.BookmarkActive />
+                    Remove from collection
+                  </>
+                ) : (
+                  <>
+                    <Icon.Bookmark />
+                    Save to collection
+                  </>
+                )}
               </>
             )}
           </Modal.Item>

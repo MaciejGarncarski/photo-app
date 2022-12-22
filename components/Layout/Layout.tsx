@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import styles from './layout.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { CompleteSignUp } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { Header } from '@/components/organisms/header/Header';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
@@ -44,6 +45,15 @@ export const Layout = ({ children }: LayoutProps) => {
     window.localStorage.setItem(COOKIES_ACCEPTED, 'true');
     handleClose();
   };
+
+  if (!data) {
+    return (
+      <div className={styles.full}>
+        <Loading variants={['center']} />
+        <h2>Loading PhotoApp</h2>
+      </div>
+    );
+  }
 
   return (
     <div>

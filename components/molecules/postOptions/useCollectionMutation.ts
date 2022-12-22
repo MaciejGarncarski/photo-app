@@ -24,8 +24,8 @@ export const useCollectionMutation = () => {
       });
     },
     {
-      onSettled: () => {
-        queryClient.invalidateQueries(['homepage infinite posts']);
+      onSettled: async () => {
+        await queryClient.invalidateQueries(['homepage infinite posts']);
       },
     }
   );
