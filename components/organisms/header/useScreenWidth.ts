@@ -1,20 +1,19 @@
 import { useEffect, useMemo } from 'react';
 import { throttle } from 'throttle-debounce';
 
-import { useGlobalOptions } from '@/lib/useGlobalOptions';
+import { useStore } from '@/lib/useStore';
 
 const THROTTLE_DELAY = 400;
 
 export const useScreenWidth = () => {
-  const screenWidth = useGlobalOptions((state) => state.screenWidth);
-  const setScreenWidth = useGlobalOptions((state) => state.setScreenWidth);
-  const setIsMobile = useGlobalOptions((state) => state.setIsMobile);
+  const setScreenWidth = useStore((state) => state.setScreenWidth);
+  const setIsMobile = useStore((state) => state.setIsMobile);
 
   const throttledHandleResize = useMemo(() => {
     return throttle(THROTTLE_DELAY, () => {
-      const isMobile = screenWidth === 0 ? false : screenWidth < 768;
-      setIsMobile(isMobile);
+      const isMobile = window.innerWidth < 800 || false;
       setScreenWidth(window.innerWidth);
+      setIsMobile(isMobile);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

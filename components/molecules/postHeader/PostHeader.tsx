@@ -31,10 +31,10 @@ export const PostHeader = ({ user, post }: PostHeaderProps) => {
 
   const onModalOpen = () => setIsOpen(true);
 
-  if (!data || !user) {
+  if (!user) {
     return (
       <header className={styles.header}>
-        <Loading variants={['very-small', 'left']} />;
+        <Loading variants={['very-small', 'left']} />
       </header>
     );
   }

@@ -1,36 +1,30 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { throttle } from 'throttle-debounce';
-import shallow from 'zustand/shallow';
 
-import { useGlobalOptions } from '@/lib/useGlobalOptions';
+import { useStore } from '@/lib/useStore';
 
 export const useScrollPosition = () => {
-  const scrollPos = useGlobalOptions((state) => state.scrollPos, shallow);
-  const setIsGoingUp = useGlobalOptions((state) => state.setIsGoingUp, shallow);
-  const setScrollPos = useGlobalOptions((state) => state.setScrollPos, shallow);
+  const scrollPos = useStore((state) => state.scrollPos);
+  const setIsGoingUp = useStore((state) => state.setIsGoingUp);
+  const setScrollPos = useStore((state) => state.setScrollPos);
+
+  const lastScroll = useRef<number>(0);
 
   const throttledScroll = useMemo(
     () =>
-      throttle(400, (scrollEv: Event) => {
-        const target = scrollEv.currentTarget as Window;
-        if (target === null || typeof target === 'undefined') {
-          return;
-        }
-
-        if (window.scrollY > scrollPos) {
-          setIsGoingUp(false);
-        }
-        if (window.scrollY < scrollPos) {
-          setIsGoingUp(true);
-        }
-
-        setScrollPos(target.scrollY);
+      throttle(400, () => {
+        const isGoingUp = window.scrollY < lastScroll.current;
+        setScrollPos(window.scrollY);
+        setIsGoingUp(isGoingUp);
+        lastScroll.current = scrollY > 0 ? scrollY : 0;
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
   useEffect(() => {
+    lastScroll.current = window.scrollY;
+
     window.addEventListener('scroll', throttledScroll, {
       passive: true,
     });

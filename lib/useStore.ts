@@ -1,6 +1,6 @@
 import create from 'zustand';
 
-type GlobalOptions = {
+type Store = {
   scrollPos: number;
   setScrollPos: (state: number) => void;
   isGoingUp: boolean;
@@ -11,7 +11,7 @@ type GlobalOptions = {
   setIsMobile: (isMobile: boolean) => void;
 };
 
-export const useGlobalOptions = create<GlobalOptions>((set) => ({
+export const useStore = create<Store>((set) => ({
   scrollPos: 0,
   setScrollPos: (newScrollPos) => set(() => ({ scrollPos: newScrollPos })),
   isGoingUp: false,
