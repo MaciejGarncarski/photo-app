@@ -1,4 +1,3 @@
-import { hasCookie, setCookie } from 'cookies-next';
 import { ReactNode, useState } from 'react';
 
 import styles from './layout.module.scss';
@@ -19,8 +18,14 @@ type LayoutProps = Children;
 
 const COOKIES_ACCEPTED = 'cookiesAccepted' as const;
 
+const cookieConstenst =
+  'By using this app, you accept saving and reading necessary cookies by your browser.';
+
 export const Layout = ({ children }: LayoutProps) => {
-  const isCookieAccepted = hasCookie(COOKIES_ACCEPTED);
+  const localStorageData =
+    typeof window !== 'undefined' ? localStorage.getItem(COOKIES_ACCEPTED) : false;
+
+  const isCookieAccepted = localStorageData === 'true';
   const [isCookiesOpen, setIsCookiesOpen] = useState<boolean>(!isCookieAccepted);
 
   useScrollPosition();
@@ -36,7 +41,7 @@ export const Layout = ({ children }: LayoutProps) => {
   };
 
   const handleCookies = () => {
-    setCookie(COOKIES_ACCEPTED, true);
+    window.localStorage.setItem(COOKIES_ACCEPTED, 'true');
     handleClose();
   };
 
@@ -46,13 +51,13 @@ export const Layout = ({ children }: LayoutProps) => {
       <div className={styles.children}>
         {isCookiesOpen && (
           <div role='dialog' className={styles.cookies}>
-            <p>By using this app, you accept necessary cookies.</p>
+            <p>{cookieConstenst}</p>
             <div className={styles.cookiesButtons}>
-              <Button type='button' variant='secondary' onClick={handleClose}>
-                Close
-              </Button>
-              <Button type='button' onClick={handleCookies}>
+              <Button type='button' variant='secondary' onClick={handleCookies}>
                 Don&apos;t show again
+              </Button>
+              <Button type='button' onClick={handleClose}>
+                Close
               </Button>
             </div>
           </div>

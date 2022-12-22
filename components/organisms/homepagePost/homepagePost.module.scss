@@ -57,3 +57,11 @@
   font-weight: 600;
   position: relative;
 }
+
+.date {
+  font-size: 1.75rem;
+
+  @include common.mediaquery('lg') {
+    font-size: 2rem;
+  }
+}

@@ -1,7 +1,7 @@
 @use '/styles/common.scss';
 
 .children {
-  padding: 2rem 2.5rem;
+  padding: 2rem 2rem;
   max-width: 140rem;
   margin: 0 auto;
 
@@ -12,8 +12,12 @@
 
 .cookies {
   position: fixed;
-  left: 5rem;
-  bottom: 5rem;
+  --offset: 2rem;
+  right: var(--offset);
+  left: var(--offset);
+  margin: auto;
+  bottom: 6rem;
+  max-width: 40ch;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -23,10 +27,18 @@
   z-index: 2;
   border-radius: var(--radius-small);
   border: var(--border-secondary);
+  box-shadow: var(--shadow-primary);
+
+
+  @include common.mediaquery('lg') {
+    right: unset;
+    left: 5rem;
+  }
 }
 
 .cookiesButtons {
   display: flex;
   gap: 2rem;
   width: 100%;
+  justify-content: flex-start;
 }

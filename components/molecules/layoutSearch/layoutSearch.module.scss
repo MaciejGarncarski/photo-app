@@ -5,6 +5,7 @@
   align-items: center;
   background-color: var(--bg-gray);
   border-radius: var(--radius-medium);
+  border: var(--border-secondary);
   margin: 0.75rem 0;
 
   @include common.mediaquery('lg') {

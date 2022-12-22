@@ -73,7 +73,9 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
           <span className={styles.author}>{data?.user.username}</span>
           <Description />
         </p>
-        <p>{fromNow}</p>
+        <p className={styles.date}>
+          <time dateTime={created_at.toString()}>{fromNow}</time>
+        </p>
         {session?.user && <CommentForm post={post} />}
       </footer>
     </article>

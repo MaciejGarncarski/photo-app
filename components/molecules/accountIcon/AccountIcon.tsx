@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 
+import { useStore } from '@/lib/useStore';
+
 import styles from './accountIcon.module.scss';
 import commonStyles from '@/components/molecules/headerButtons/headerButtons.module.scss';
 
@@ -34,6 +36,7 @@ export const tooltipVariant: Variants = {
 export const AccountIcon = ({ id }: AccountIconProps) => {
   const { session, signOut } = useAuth();
   const { account } = useAccount({ id });
+  const isGoingUp = useStore((state) => state.isGoingUp);
 
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
@@ -84,7 +87,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
         <span className={commonStyles.listItemTitle}>Account</span>
       </button>
       <AnimatePresence>
-        {isOptionsOpen && (
+        {isOptionsOpen && isGoingUp && (
           <motion.div
             className={styles.options}
             variants={tooltipVariant}
