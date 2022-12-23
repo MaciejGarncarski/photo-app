@@ -9,6 +9,7 @@ import styles from './createPost.module.scss';
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { useCreatePost } from '@/components/pages/createPost/useCreatePost';
 
@@ -20,7 +21,7 @@ export const CreatePost = () => {
   const { push } = useRouter();
   const [finalImg, setFinalImg] = useState<Blob | null>(null);
 
-  const { mutate } = useCreatePost();
+  const { mutate, isLoading } = useCreatePost();
 
   const {
     register,
@@ -42,6 +43,17 @@ export const CreatePost = () => {
     }
     mutate({ description, image: finalImg });
   };
+
+  if (isLoading) {
+    return (
+      <section className={styles.loadingContainer} aria-labelledby='Upload loading'>
+        <Heading tag='h2' variant='center'>
+          Uploading your post
+        </Heading>
+        <Loading />
+      </section>
+    );
+  }
 
   return (
     <section aria-labelledby='Create new post' className={styles.createPost}>

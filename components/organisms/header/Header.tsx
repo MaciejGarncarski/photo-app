@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { memo } from 'react';
 
 import { useStore } from '@/lib/useStore';
 
@@ -10,6 +11,8 @@ import { HeaderButtons } from '@/components/molecules/headerButtons/HeaderButton
 import { LayoutSearch } from '@/components/molecules/layoutSearch/LayoutSearch';
 
 import { APP_NAME } from '@/pages';
+
+const MemoHeaderButtons = memo(() => <HeaderButtons />);
 
 export const Header = () => {
   const isMobile = useStore((state) => state.isMobile);
@@ -27,7 +30,7 @@ export const Header = () => {
         transition={{ type: 'tween', duration: 0.2 }}
         className={clsx(styles.nav)}
       >
-        <HeaderButtons />
+        <MemoHeaderButtons />
       </motion.nav>
     </header>
   );

@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import styles from './layout.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
+import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { CompleteSignUp } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { Header } from '@/components/organisms/header/Header';
@@ -33,7 +34,7 @@ export const Layout = ({ children }: LayoutProps) => {
   useScreenWidth();
 
   const { session, status } = useAuth();
-  const { data } = useAccount({ id: session?.user?.id });
+  const { data, isLoading } = useAccount({ id: session?.user?.id });
 
   const isNotCompleted = !data?.user.username && status === 'authenticated';
 
@@ -47,10 +48,14 @@ export const Layout = ({ children }: LayoutProps) => {
   };
 
   if (!data) {
+    return null;
+  }
+
+  if (isLoading) {
     return (
       <div className={styles.full}>
+        <Heading tag='h1'>Loading PhotoApp</Heading>
         <Loading variants={['center']} />
-        <h2>Loading PhotoApp</h2>
       </div>
     );
   }

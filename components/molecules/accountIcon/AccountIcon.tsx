@@ -77,7 +77,6 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     <li
       className={commonStyles.accountIconContainer}
       ref={containerRef}
-      onClick={onBtnClick}
       onMouseEnter={() => setIsOptionsOpen(true)}
       onMouseLeave={() => setIsOptionsOpen(false)}
     >

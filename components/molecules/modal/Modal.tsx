@@ -1,12 +1,27 @@
 import clsx from 'clsx';
+import { motion, Variants } from 'framer-motion';
 
 import styles from './modal.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
 import { ModalOverlay } from '@/components/atoms/modalOverlay/ModalOverlay';
 import { Children } from '@/components/Layout/Layout';
-
 export const Modal = () => null;
+
+export const dialogVariant: Variants = {
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+  hidden: {
+    y: 50,
+    opacity: 0.3,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+  },
+};
 
 type ModalItemProps = {
   variant?: 'red';
@@ -50,8 +65,24 @@ const ModalClose = ({ onClose }: ModalCloseProps) => {
   );
 };
 
+const ModalContainer = ({ children }: Children) => {
+  return (
+    <motion.div
+      variants={dialogVariant}
+      initial='hidden'
+      exit='exit'
+      animate='visible'
+      className={styles.dialog}
+      role='dialog'
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 Modal.List = ModalList;
 Modal.Overlay = ModalOverlay;
 Modal.Item = ModalItem;
 Modal.Close = ModalClose;
 Modal.Heading = ModalHeading;
+Modal.Container = ModalContainer;

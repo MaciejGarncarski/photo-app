@@ -1,7 +1,4 @@
-import { motion, Variants } from 'framer-motion';
 import { useState } from 'react';
-
-import styles from './postOptions.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
@@ -15,21 +12,6 @@ import { PostData } from '@/components/pages/collection/useCollection';
 type PostOptionsProps = {
   setIsOpen: (isOpen: boolean) => void;
   post: PostData;
-};
-
-export const dialogVariant: Variants = {
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-  hidden: {
-    y: 50,
-    opacity: 0.3,
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.9,
-  },
 };
 
 export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
@@ -55,9 +37,14 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   if (deletePostMutation.isLoading) {
     return (
       <Modal.Overlay setOpen={setIsOpen}>
-        <Modal.List>
-          <Modal.Item>Deleting</Modal.Item>
-        </Modal.List>
+        <Modal.Container>
+          <Modal.List>
+            <Modal.Item isFirst>
+              <Loading variants={['very-small']} />
+              Deleting...
+            </Modal.Item>
+          </Modal.List>
+        </Modal.Container>
       </Modal.Overlay>
     );
   }
@@ -65,14 +52,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   if (isDeleting) {
     return (
       <Modal.Overlay setOpen={setIsOpen}>
-        <motion.div
-          variants={dialogVariant}
-          initial='hidden'
-          exit='exit'
-          animate='visible'
-          className={styles.dialog}
-          role='dialog'
-        >
+        <Modal.Container>
           <Modal.Heading text='Are you sure?' />
           <Modal.List>
             <Modal.Item isFirst variant='red' onClick={handleDeletePost}>
@@ -84,21 +64,14 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
               No, go back
             </Modal.Item>
           </Modal.List>
-        </motion.div>
+        </Modal.Container>
       </Modal.Overlay>
     );
   }
 
   return (
     <Modal.Overlay setOpen={setIsOpen}>
-      <motion.div
-        variants={dialogVariant}
-        initial='hidden'
-        exit='exit'
-        animate='visible'
-        className={styles.dialog}
-        role='dialog'
-      >
+      <Modal.Container>
         <Modal.Close onClose={onModalClose} />
         <Modal.List>
           <Modal.Item isFirst onClick={handleCollection}>
@@ -140,7 +113,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
             Close
           </Modal.Item>
         </Modal.List>
-      </motion.div>
+      </Modal.Container>
     </Modal.Overlay>
   );
 };
