@@ -10,6 +10,16 @@
   }
 }
 
+
+.full {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
 .cookies {
   position: fixed;
   --offset: 2rem;
@@ -32,7 +42,9 @@
 
   @include common.mediaquery('lg') {
     right: unset;
-    left: 5rem;
+    bottom: 4rem;
+    left: 4rem;
+    gap: 2.5rem;
   }
 }
 

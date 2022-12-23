@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import styles from './postButtons.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { Children } from '@/components/Layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
@@ -78,9 +79,13 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       </Item>
       {session?.user && (
         <Item isLast>
-          <Button onClick={handleCollection}>
-            {isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}
-          </Button>
+          {collectionMutation.isLoading ? (
+            <Loading variants={['very-small']} />
+          ) : (
+            <Button onClick={handleCollection}>
+              {isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}
+            </Button>
+          )}
         </Item>
       )}
     </ul>

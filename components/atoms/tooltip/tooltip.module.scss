@@ -20,7 +20,7 @@
   line-height: 1;
   padding: 1rem 1.5rem;
 
-  --tooltip-triangle: 15px;
+  --tooltip-triangle: 2rem;
 
 
   @include common.mediaquery('lg') {
@@ -35,7 +35,7 @@
     transform: rotate(45deg);
     left: 0;
     right: 0;
-    top: -0.8rem;
+    top: -1rem;
     margin-inline: auto;
     border-left: var(--border-primary);
     border-top: var(--border-primary);

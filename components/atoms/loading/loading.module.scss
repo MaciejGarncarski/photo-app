@@ -46,8 +46,8 @@
 }
 
 .very-small {
-  --small-loading-size: 4rem;
-  border-width: 1rem;
+  --small-loading-size: 3rem;
+  border-width: 0.6rem;
   height: var(--small-loading-size);
   width: var(--small-loading-size);
 
@@ -63,4 +63,8 @@
 .left {
   margin: auto;
   margin-left: 0;
+}
+
+.center {
+  margin: 0;
 }

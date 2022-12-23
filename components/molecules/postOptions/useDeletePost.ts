@@ -13,8 +13,8 @@ export const useDeletePost = () => {
       await axios.delete(`/api/post?postID=${postID}`);
     },
     {
-      onSettled: () => {
-        queryClient.invalidateQueries(['homepage infinite posts']);
+      onSettled: async () => {
+        await queryClient.invalidateQueries(['homepage infinite posts']);
       },
     }
   );

@@ -1,9 +1,7 @@
-import { motion, Variants } from 'framer-motion';
 import { useState } from 'react';
 
-import styles from './postOptions.module.scss';
-
 import { Icon } from '@/components/atoms/icons/Icons';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { Modal } from '@/components/molecules/modal/Modal';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
@@ -16,25 +14,10 @@ type PostOptionsProps = {
   post: PostData;
 };
 
-export const dialogVariant: Variants = {
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-  hidden: {
-    y: 50,
-    opacity: 0.3,
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.9,
-  },
-};
-
 export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const { id, isInCollection, author } = post;
-  const { mutate } = useCollectionMutation();
+  const collectionMutation = useCollectionMutation();
   const deletePostMutation = useDeletePost();
   const { session } = useAuth();
   const { data } = useAccount({ id: session?.user?.id ?? '' });
@@ -44,7 +27,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   const onModalClose = () => setIsOpen(false);
 
   const handleCollection = () => {
-    mutate({ type: isInCollection ? 'remove' : undefined, postID: id });
+    collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postID: id });
   };
 
   const handleDeletePost = () => {
@@ -54,9 +37,14 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   if (deletePostMutation.isLoading) {
     return (
       <Modal.Overlay setOpen={setIsOpen}>
-        <Modal.List>
-          <Modal.Item>Deleting</Modal.Item>
-        </Modal.List>
+        <Modal.Container>
+          <Modal.List>
+            <Modal.Item isFirst>
+              <Loading variants={['very-small']} />
+              Deleting...
+            </Modal.Item>
+          </Modal.List>
+        </Modal.Container>
       </Modal.Overlay>
     );
   }
@@ -64,14 +52,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   if (isDeleting) {
     return (
       <Modal.Overlay setOpen={setIsOpen}>
-        <motion.div
-          variants={dialogVariant}
-          initial='hidden'
-          exit='exit'
-          animate='visible'
-          className={styles.dialog}
-          role='dialog'
-        >
+        <Modal.Container>
           <Modal.Heading text='Are you sure?' />
           <Modal.List>
             <Modal.Item isFirst variant='red' onClick={handleDeletePost}>
@@ -83,33 +64,35 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
               No, go back
             </Modal.Item>
           </Modal.List>
-        </motion.div>
+        </Modal.Container>
       </Modal.Overlay>
     );
   }
 
   return (
     <Modal.Overlay setOpen={setIsOpen}>
-      <motion.div
-        variants={dialogVariant}
-        initial='hidden'
-        exit='exit'
-        animate='visible'
-        className={styles.dialog}
-        role='dialog'
-      >
+      <Modal.Container>
         <Modal.Close onClose={onModalClose} />
         <Modal.List>
           <Modal.Item isFirst onClick={handleCollection}>
-            {isInCollection ? (
+            {collectionMutation.isLoading ? (
               <>
-                <Icon.BookmarkActive />
-                Remove from collection
+                <Loading variants={['very-small']} />
+                Loading...
               </>
             ) : (
               <>
-                <Icon.Bookmark />
-                Save to collection
+                {isInCollection ? (
+                  <>
+                    <Icon.BookmarkActive />
+                    Remove from collection
+                  </>
+                ) : (
+                  <>
+                    <Icon.Bookmark />
+                    Save to collection
+                  </>
+                )}
               </>
             )}
           </Modal.Item>
@@ -130,7 +113,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
             Close
           </Modal.Item>
         </Modal.List>
-      </motion.div>
+      </Modal.Container>
     </Modal.Overlay>
   );
 };
