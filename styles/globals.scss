@@ -81,13 +81,12 @@ a {
   --border-primary: 1px solid hsl(0, 0%, 79%);
   --border-secondary: 1px solid hsl(0, 0%, 86%);
 
-  --radius-small: 0.6rem;
-  --radius-medium: 0.9rem;
+  --radius-small: 0.45rem;
+  --radius-medium: 0.8rem;
 
 
   --shadow-primary: 0 4px 10px 2px hsla(0, 0%, 0%, 0.15);
-  --shadow-secondary: 0 4px 10px 1px hsla(0, 0%, 0%, 0.05);
-
+  --shadow-secondary: 0 0 0 1px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 5%), 0 12px 24px rgb(0 0 0 / 5%);
   --itemSize: 2.75rem;
 
   @include common.mediaquery('lg') {

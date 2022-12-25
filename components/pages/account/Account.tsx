@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
@@ -44,9 +45,11 @@ export const Account = ({ username }: AccountProps) => {
   return (
     <>
       <main className={styles.account}>
-        <Avatar className={styles.avatar} userID={data.user.id} alt='' />
-        <h2 className={styles.username}>{username}</h2>
-        <ul className={styles.list}>
+        <Avatar className={styles.avatar} userID={data.user.id} />
+        <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
+          {username}
+        </motion.h2>
+        <motion.ul initial={{ x: -10 }} animate={{ x: 0 }} className={styles.list}>
           {listData.map((item) => {
             return (
               <li className={styles.listItem} key={item}>
@@ -55,7 +58,7 @@ export const Account = ({ username }: AccountProps) => {
               </li>
             );
           })}
-        </ul>
+        </motion.ul>
         <p className={styles.name}>{name}</p>
         <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
         {!isOwner && <Button className={styles.followButton}>follow 💪</Button>}

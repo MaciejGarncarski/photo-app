@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 
-import { useStore } from '@/lib/useStore';
+import { isGoingUpAtom } from '@/lib/state/scrollPos';
 
 import styles from './accountIcon.module.scss';
 import commonStyles from '@/components/molecules/headerButtons/headerButtons.module.scss';
@@ -33,13 +34,15 @@ export const tooltipVariant: Variants = {
   },
 };
 
-export const AccountIcon = ({ id }: AccountIconProps) => {
-  const { session, signOut } = useAuth();
-  const { account } = useAccount({ id });
-  const isGoingUp = useStore((state) => state.isGoingUp);
+const TIMEOUT = 300;
 
+export const AccountIcon = ({ id }: AccountIconProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
+  const { session, signOut } = useAuth();
+  const { account } = useAccount({ id });
+
+  const [isGoingUp] = useAtom(isGoingUpAtom);
 
   const onBtnClick = () => setIsOptionsOpen((prev) => !prev);
 
@@ -60,7 +63,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     const timeout = setTimeout(() => {
       document.addEventListener('keydown', handleEscKey);
       document.addEventListener('click', handleClose);
-    }, 200);
+    }, TIMEOUT);
 
     return () => {
       clearTimeout(timeout);
@@ -75,14 +78,14 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
 
   return (
     <li
-      className={commonStyles.accountIconContainer}
-      ref={containerRef}
       onMouseEnter={() => setIsOptionsOpen(true)}
       onMouseLeave={() => setIsOptionsOpen(false)}
+      className={commonStyles.accountIconContainer}
+      ref={containerRef}
     >
       <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
         <span className='visually-hidden'>{session.user?.name}</span>
-        <Avatar userID={session.user?.id ?? ''} alt='' />
+        <Avatar userID={session.user?.id ?? ''} />
         <span className={commonStyles.listItemTitle}>Account</span>
       </button>
       <AnimatePresence>

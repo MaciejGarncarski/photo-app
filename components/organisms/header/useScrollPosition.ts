@@ -1,12 +1,12 @@
+import { useAtom } from 'jotai';
 import { useEffect, useMemo, useRef } from 'react';
 import { throttle } from 'throttle-debounce';
 
-import { useStore } from '@/lib/useStore';
+import { isGoingUpAtom, scrollPosAtom } from '@/lib/state/scrollPos';
 
 export const useScrollPosition = () => {
-  const scrollPos = useStore((state) => state.scrollPos);
-  const setIsGoingUp = useStore((state) => state.setIsGoingUp);
-  const setScrollPos = useStore((state) => state.setScrollPos);
+  const [, setIsGoingUp] = useAtom(isGoingUpAtom);
+  const [scrollPos, setScrollPos] = useAtom(scrollPosAtom);
 
   const lastScroll = useRef<number>(0);
 

@@ -16,7 +16,7 @@ type AccountPostsProps = {
 
 export const AccountPosts = ({ id }: AccountPostsProps) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
-    ['account posts', id],
+    [{ accountPosts: id }],
     async ({ pageParam = 0 }) => {
       const { data: axiosData } = await axios.get<InfinitePosts<PostData>>(
         `/api/post/infinitePosts/${id}?skip=${pageParam}`

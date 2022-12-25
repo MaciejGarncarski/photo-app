@@ -53,6 +53,7 @@
   @include common.mediaquery('lg') {
     display: flex;
     margin: 0;
+    padding: 0;
     margin-bottom: 1.5rem;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
@@ -114,9 +115,8 @@
 
 .followButton {
   grid-row: 2 / 3;
-  grid-column: 3 / 4;
+  grid-column: 2 / 3;
   justify-self: flex-start;
-  margin-top: 2rem;
 
   @include common.mediaquery('lg') {
     place-self: center;
@@ -125,7 +125,7 @@
     font-size: 2rem;
     margin-top: 0;
     position: relative;
-    left: -5rem;
+    left: -2rem;
   }
 }
 

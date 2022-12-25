@@ -1,0 +1,41 @@
+@use '/styles/common.scss';
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(70rem, 85%);
+  max-height: 70%;
+  background-color: var(--bg-white);
+  border: var(--border-primary);
+  box-shadow: var(--shadow-secondary);
+  border-radius: var(--radius-medium);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+
+  overflow: hidden;
+
+  @include common.mediaquery('lg') {
+    padding: 3rem;
+  }
+}
+
+.imgLoading {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.postImg {
+  margin: auto;
+  margin-bottom: 2rem;
+  object-fit: contain;
+}
+
+.comments {
+  margin-top: 3rem;
+  height: 15rem;
+  overflow-y: scroll;
+}

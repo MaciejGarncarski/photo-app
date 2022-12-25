@@ -52,8 +52,13 @@ type ModalCloseProps = {
   onClose: () => void;
 };
 
-const ModalHeading = ({ text }: { text: string }) => {
-  return <h3 className={styles.heading}>{text}</h3>;
+type ModalHeadingProps = {
+  variant?: 'red';
+  text: string;
+};
+
+const ModalHeading = ({ text, variant }: ModalHeadingProps) => {
+  return <h3 className={clsx(variant && styles[`heading-${variant}`], styles.heading)}>{text}</h3>;
 };
 
 const ModalClose = ({ onClose }: ModalCloseProps) => {

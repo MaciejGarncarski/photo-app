@@ -1,13 +1,14 @@
+import { useAtom } from 'jotai';
 import { useEffect, useMemo } from 'react';
 import { throttle } from 'throttle-debounce';
 
-import { useStore } from '@/lib/useStore';
+import { isMobileAtom, screenWidthAtom } from '@/lib/state/scrollPos';
 
 const THROTTLE_DELAY = 400;
 
 export const useScreenWidth = () => {
-  const setScreenWidth = useStore((state) => state.setScreenWidth);
-  const setIsMobile = useStore((state) => state.setIsMobile);
+  const [, setIsMobile] = useAtom(isMobileAtom);
+  const [, setScreenWidth] = useAtom(screenWidthAtom);
 
   const throttledHandleResize = useMemo(() => {
     return throttle(THROTTLE_DELAY, () => {

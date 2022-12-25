@@ -1,9 +1,9 @@
 @use '/styles/common.scss';
 
 .post {
-  border: var(--border-primary);
   border-radius: var(--radius-medium);
   background-color: var(--bg-white);
+  box-shadow: var(--shadow-secondary);
 }
 
 

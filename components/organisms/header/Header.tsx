@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { memo } from 'react';
 
-import { useStore } from '@/lib/useStore';
+import { isGoingUpAtom, isMobileAtom } from '@/lib/state/scrollPos';
 
 import styles from './header.module.scss';
 
@@ -15,8 +16,8 @@ import { APP_NAME } from '@/pages';
 const MemoHeaderButtons = memo(() => <HeaderButtons />);
 
 export const Header = () => {
-  const isMobile = useStore((state) => state.isMobile);
-  const isGoingUp = useStore((state) => state.isGoingUp);
+  const [isMobile] = useAtom(isMobileAtom);
+  const [isGoingUp] = useAtom(isGoingUpAtom);
 
   return (
     <header className={styles.header}>
