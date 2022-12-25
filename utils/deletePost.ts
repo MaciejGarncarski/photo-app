@@ -19,6 +19,7 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const isAbleToDelete = post?.author_id === session?.user?.id;
+    console.log(post?.author_id, session?.user?.id);
 
     if (!isAbleToDelete) {
       res.status(401).send({ status: 'unauthorized' });

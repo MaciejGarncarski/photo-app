@@ -53,7 +53,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
     return (
       <Modal.Overlay setOpen={setIsOpen}>
         <Modal.Container>
-          <Modal.Heading text='Are you sure?' />
+          <Modal.Heading variant='red' text='Are you sure?' />
           <Modal.List>
             <Modal.Item isFirst variant='red' onClick={handleDeletePost}>
               <Icon.Trash />
@@ -75,12 +75,13 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
         <Modal.Close onClose={onModalClose} />
         <Modal.List>
           <Modal.Item isFirst onClick={handleCollection}>
-            {collectionMutation.isLoading ? (
+            {collectionMutation.isLoading && (
               <>
                 <Loading variants={['very-small']} />
-                Loading...
+                {isInCollection ? 'Removing...' : 'Adding...'}
               </>
-            ) : (
+            )}
+            {!collectionMutation.isLoading && (
               <>
                 {isInCollection ? (
                   <>

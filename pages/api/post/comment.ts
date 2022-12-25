@@ -8,9 +8,9 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const { id, comment, commentID } = req.body;
+  const { id, comment } = req.body;
   const session = await unstable_getServerSession(req, res, authOptions);
-  const postID = +string(id);
+  const postID = parseInt(req.body.id);
   const userID = string(session?.user?.id);
   const commentText = string(comment);
 

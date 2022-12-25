@@ -55,7 +55,7 @@
 
 .closeButton {
   position: absolute;
-  right: -3rem;
+  right: -1rem;
   top: -6rem;
   font-size: 4rem;
   background-color: transparent;
@@ -80,6 +80,10 @@
     padding-left: 4rem;
     font-size: 2.5rem;
   }
+}
+
+.heading-red {
+  color: var(--color-error);
 }
 
 .dialog {

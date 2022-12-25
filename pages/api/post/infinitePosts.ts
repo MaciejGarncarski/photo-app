@@ -21,6 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   const { skip } = req.query;
   const session = await unstable_getServerSession(req, res, authOptions);
+  const isSignedUp = Boolean(session?.user?.id);
 
   const skipNumber = parseInt(string(skip));
   const takeNumber = POSTS_PER_SCROLL;
@@ -56,15 +57,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const postsWithCollectionData = await Promise.all(
       posts.map(async (post) => {
-        if (!session?.user?.id) {
-          return {
-            ...post,
-            likesCount: post._count.posts_likes,
-            commentsCount: post._count.posts_comments,
-            isInCollection: false,
-          };
-        }
-
         const isInCollection = await prisma.collection.findFirst({
           where: {
             post_id: post.id,
@@ -76,7 +68,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           ...post,
           likesCount: post._count.posts_likes,
           commentsCount: post._count.posts_comments,
-          isInCollection: Boolean(isInCollection),
+          isInCollection: isSignedUp ? Boolean(isInCollection) : false,
         };
       })
     );

@@ -1,10 +1,8 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import styles from './layout.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
-import { Heading } from '@/components/atoms/heading/Heading';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { CompleteSignUp } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { Header } from '@/components/organisms/header/Header';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
@@ -21,11 +19,14 @@ type LayoutProps = Children;
 const COOKIES_ACCEPTED = 'cookiesAccepted' as const;
 
 const cookieConstenst =
-  'By using this app, you accept saving and reading necessary cookies by your browser.';
+  'By using this app, you accept saving and reading necessary cookies to run this app by your browser.';
 
 export const Layout = ({ children }: LayoutProps) => {
-  const localStorageData =
-    typeof window !== 'undefined' ? localStorage.getItem(COOKIES_ACCEPTED) : false;
+  const [localStorageData, setLocalStorageData] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLocalStorageData(localStorage.getItem(COOKIES_ACCEPTED));
+  }, []);
 
   const isCookieAccepted = localStorageData === 'true';
   const [isCookiesOpen, setIsCookiesOpen] = useState<boolean>(!isCookieAccepted);
@@ -34,8 +35,7 @@ export const Layout = ({ children }: LayoutProps) => {
   useScreenWidth();
 
   const { session, status } = useAuth();
-  const { data, isLoading } = useAccount({ id: session?.user?.id });
-
+  const { data } = useAccount({ id: session?.user?.id });
   const isNotCompleted = !data?.user.username && status === 'authenticated';
 
   const handleClose = () => {
@@ -47,18 +47,14 @@ export const Layout = ({ children }: LayoutProps) => {
     handleClose();
   };
 
-  if (!data) {
-    return null;
-  }
-
-  if (isLoading) {
-    return (
-      <div className={styles.full}>
-        <Heading tag='h1'>Loading PhotoApp</Heading>
-        <Loading variants={['center']} />
-      </div>
-    );
-  }
+  // if (isFetching) {
+  //   return (
+  //     <div className={styles.full}>
+  //       <Heading tag='h1'>Loading PhotoApp</Heading>
+  //       <Loading variants={['center']} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>

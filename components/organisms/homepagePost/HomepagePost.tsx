@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import styles from './homepagePost.module.scss';
 
+import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
@@ -27,6 +28,7 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
     descriptionData(description);
 
   const fromNow = moment(created_at).fromNow();
+  const formattedDate = moment(created_at).format('MMMM Do YYYY');
 
   const Description = () => {
     if (isDescriptionLong || hasMultipleBreaks) {
@@ -50,7 +52,7 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
 
   return (
     <article className={styles.post}>
-      <PostHeader user={data?.user} post={post} />
+      <PostHeader post={post} />
       <Image
         className={styles.image}
         src={images}
@@ -74,7 +76,9 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
           <Description />
         </p>
         <p className={styles.date}>
-          <time dateTime={created_at.toString()}>{fromNow}</time>
+          <Tooltip variant='top' content={formattedDate}>
+            <time dateTime={created_at.toString()}>{fromNow}</time>
+          </Tooltip>
         </p>
         {session?.user && <CommentForm post={post} />}
       </footer>

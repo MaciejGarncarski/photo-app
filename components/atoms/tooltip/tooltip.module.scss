@@ -11,8 +11,7 @@
   position: absolute;
   background-color: var(--bg-white);
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-primary);
-  border: var(--border-primary);
+  box-shadow: var(--shadow-secondary);
   left: 50%;
   transform: translateX(-50%);
   font-size: 2rem;
@@ -35,10 +34,10 @@
     transform: rotate(45deg);
     left: 0;
     right: 0;
-    top: -1rem;
+    top: -2rem;
     margin-inline: auto;
-    border-left: var(--border-primary);
-    border-top: var(--border-primary);
+    border-left: var(--border-secondary);
+    border-top: var(--border-secondary);
     background-color: var(--bg-white);
   }
 }
@@ -49,15 +48,23 @@
 
   &::before {
     top: unset;
-    bottom: -0.8rem;
+    bottom: -1rem;
     border: none;
-    border-right: var(--border-primary);
-    border-bottom: var(--border-primary);
+    border-right: var(--border-secondary);
+    border-bottom: var(--border-secondary);
   }
 }
 
 .bottom {
   bottom: -5.5rem;
+
+  &::before {
+    top: -1.1rem;
+    bottom: unset;
+    border: none;
+    border-left: var(--border-secondary);
+    border-top: var(--border-secondary);
+  }
 }
 
 .right {
@@ -65,12 +72,14 @@
   left: 5rem;
   transform: translateX(0) translateY(-50%);
 
+  --tooltip-triangle: 1.5rem;
+
   &::before {
     border: none;
-    left: -0.8rem;
+    left: -0.90rem;
     right: unset;
-    border-left: var(--border-primary);
-    border-bottom: var(--border-primary);
+    border-left: var(--border-secondary);
+    border-bottom: var(--border-secondary);
     bottom: 0;
     top: 0;
     margin: auto 0;

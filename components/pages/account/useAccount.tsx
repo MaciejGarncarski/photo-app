@@ -7,9 +7,10 @@ const fetchAccount = async ({ id, username }: UseAccount) => {
     const { data } = await axios.get(`/api/account/${username}?type=username`);
     return data;
   }
-
-  const { data } = await axios.get(`/api/account/${id}`);
-  return data;
+  if (id) {
+    const { data } = await axios.get(`/api/account/${id}`);
+    return data;
+  }
 };
 
 type UseAccount = {
@@ -27,19 +28,21 @@ type UseAccountResponse = {
   };
 };
 
+export type UsernameToIdResponse = {
+  message: string;
+  data?: {
+    id: string;
+  };
+};
+
 export const useAccount = ({ id, username }: UseAccount) => {
-  const query = useQuery<UseAccountResponse>(
-    ['account', id],
-    () => {
-      if (username) {
-        return fetchAccount({ username });
-      }
-      return fetchAccount({ id });
+  const query = useQuery<UseAccountResponse>({
+    queryKey: [{ account: id ?? username }],
+    queryFn: async () => {
+      return fetchAccount({ id, username });
     },
-    {
-      enabled: Boolean(id) || Boolean(username),
-    }
-  );
+    enabled: Boolean(id) || Boolean(username),
+  });
 
   return {
     ...query,

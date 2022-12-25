@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -16,22 +16,24 @@ import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type PostHeaderProps = {
-  user?: User;
   post: PostData;
 };
 
 const AVATAR_SIZE = 40;
 
-export const PostHeader = ({ user, post }: PostHeaderProps) => {
+export const PostHeader = ({ post }: PostHeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { session } = useAuth();
   const { data } = useAccount({ id: session?.user?.id });
+  const { data: authorData } = useAccount({ id: post.author_id });
+
+  const queryClient = useQueryClient();
 
   const isAuthor = data?.user.id === post.author_id;
 
   const onModalOpen = () => setIsOpen(true);
 
-  if (!user) {
+  if (!authorData) {
     return (
       <header className={styles.header}>
         <Loading variants={['very-small', 'left']} />
@@ -39,21 +41,29 @@ export const PostHeader = ({ user, post }: PostHeaderProps) => {
     );
   }
 
+  const prefetchUser = async () => {
+    await queryClient.prefetchQuery({
+      queryKey: [{ account: authorData.user.username }],
+    });
+  };
+
   return (
     <>
       <header className={styles.header}>
-        <Link href={`/${user.username}`} className={styles.link}>
-          <Avatar userID={user.id} width={AVATAR_SIZE} height={AVATAR_SIZE} alt='' />
-          <h2>{user.username}</h2>
+        <Link href={`/${authorData.user.username}`} className={styles.link} onClick={prefetchUser}>
+          <Avatar userID={authorData.user.id} width={AVATAR_SIZE} height={AVATAR_SIZE} />
+          <h2>{authorData.user.username}</h2>
         </Link>
-        <div className={styles.options}>
-          {!isAuthor && <FollowButton className={styles.followBtn} isFollowing={false} />}
-          <Tooltip variant='right' content='Post menu'>
-            <button type='button' className={styles.optionsButton} onClick={onModalOpen}>
-              <AiOutlineMenu />
-            </button>
-          </Tooltip>
-        </div>
+        {data && (
+          <div className={styles.options}>
+            {!isAuthor && <FollowButton className={styles.followBtn} isFollowing={false} />}
+            <Tooltip variant='right' content='Post menu'>
+              <button type='button' className={styles.optionsButton} onClick={onModalOpen}>
+                <AiOutlineMenu />
+              </button>
+            </Tooltip>
+          </div>
+        )}
       </header>
       <AnimatePresence>
         {isOpen && <PostOptions post={post} setIsOpen={setIsOpen} />}
