@@ -60,7 +60,10 @@ export const CreatePost = () => {
       <Heading tag='h2' className={styles.heading}>
         Create new post
       </Heading>
-      <CropImage setFinalImg={setFinalImg} />
+      <div className={styles.addPhoto}>
+        <Heading tag='h3'>Add photo</Heading>
+        <CropImage setFinalImg={setFinalImg} />
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
           <Heading tag='h3'>Info about post</Heading>
