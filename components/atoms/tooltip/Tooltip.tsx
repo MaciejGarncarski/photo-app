@@ -32,7 +32,7 @@ export const Tooltip = ({ children, content, variant }: TooltipProps) => {
             exit='exit'
             className={clsx(styles[variant], styles.tip)}
           >
-            <p>{content}</p>
+            {content}
           </motion.span>
         )}
       </AnimatePresence>

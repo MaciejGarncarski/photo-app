@@ -41,6 +41,8 @@ export const PostModal = ({ post }: PostModalProps) => {
     return <Loading />;
   }
 
+  const commentsCount = data.pages[0].commentsCount;
+
   return (
     <Modal.Overlay setOpen={setIsModalOpen}>
       <motion.div
@@ -62,14 +64,21 @@ export const PostModal = ({ post }: PostModalProps) => {
           width={200}
           height={200}
         />
-        <Heading tag='h2'>Comments</Heading>
-        <div className={styles.comments} ref={sentryRef}>
-          {data.pages.map((page) => {
-            return page.comments.map((comment) => {
-              return <Comment key={comment.id} commentData={comment} />;
-            });
-          })}
-        </div>
+        <section className={styles.commentsContainer}>
+          <Heading tag='h2'>Comments</Heading>
+          <div className={styles.comments} ref={sentryRef}>
+            {commentsCount > 0 && (
+              <>
+                {data.pages.map((page) => {
+                  return page.comments.map((comment) => {
+                    return <Comment key={comment.id} commentData={comment} />;
+                  });
+                })}
+              </>
+            )}
+            {commentsCount === 0 && <p>No comments.</p>}
+          </div>
+        </section>
       </motion.div>
     </Modal.Overlay>
   );

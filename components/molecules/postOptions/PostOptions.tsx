@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
 import { Modal } from '@/components/molecules/modal/Modal';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
@@ -51,21 +52,11 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
 
   if (isDeleting) {
     return (
-      <Modal.Overlay setOpen={setIsOpen}>
-        <Modal.Container>
-          <Modal.Heading variant='red' text='Are you sure?' />
-          <Modal.List>
-            <Modal.Item isFirst variant='red' onClick={handleDeletePost}>
-              <Icon.Trash />
-              Yes, delete
-            </Modal.Item>
-            <Modal.Item onClick={() => setIsDeleting(false)}>
-              <Icon.Close />
-              No, go back
-            </Modal.Item>
-          </Modal.List>
-        </Modal.Container>
-      </Modal.Overlay>
+      <ConfirmationModal
+        onCancel={() => setIsDeleting(false)}
+        onConfirm={handleDeletePost}
+        setIsOpen={setIsDeleting}
+      />
     );
   }
 
