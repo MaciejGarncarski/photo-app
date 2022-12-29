@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<AspectRatioButtons /> should render heading 1`] = `
-<h3
-  class="heading aspectRatioHeading"
->
-  Cropping orientation
-</h3>
-`;
