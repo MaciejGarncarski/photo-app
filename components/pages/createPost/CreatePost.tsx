@@ -56,7 +56,11 @@ export const CreatePost = () => {
   }
 
   return (
-    <section aria-labelledby='Create new post' className={styles.createPost}>
+    <section
+      aria-labelledby='Create new post'
+      className={styles.createPost}
+      data-testid='createPost-container'
+    >
       <Heading tag='h2' className={styles.heading}>
         Create new post
       </Heading>

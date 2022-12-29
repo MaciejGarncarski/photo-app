@@ -12,7 +12,7 @@ export const Loading = ({ variants }: LoadingProps) => {
   const variantClassName = variants?.map((variant) => styles[variant]);
 
   return (
-    <div className={clsx(variantClassName, styles.container)}>
+    <div className={clsx(variantClassName, styles.container)} data-testid='loading'>
       <span className='visually-hidden'>loading</span>
     </div>
   );

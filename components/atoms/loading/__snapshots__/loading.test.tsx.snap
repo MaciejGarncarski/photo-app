@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loading /> should render center variant 1`] = `
+<div
+  class="center container"
+  data-testid="loading"
+>
+  <span
+    class="visually-hidden"
+  >
+    loading
+  </span>
+</div>
+`;
+
+exports[`<Loading /> should render default variant 1`] = `
+<div
+  class="container"
+  data-testid="loading"
+>
+  <span
+    class="visually-hidden"
+  >
+    loading
+  </span>
+</div>
+`;
+
+exports[`<Loading /> should render multiple variants 1`] = `
+<div
+  class="center very-small container"
+  data-testid="loading"
+>
+  <span
+    class="visually-hidden"
+  >
+    loading
+  </span>
+</div>
+`;
+
+exports[`<Loading /> should render small variant 1`] = `
+<div
+  class="small container"
+  data-testid="loading"
+>
+  <span
+    class="visually-hidden"
+  >
+    loading
+  </span>
+</div>
+`;

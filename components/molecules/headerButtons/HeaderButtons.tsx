@@ -4,7 +4,7 @@ import styles from './headerButtons.module.scss';
 
 import { HeaderButton } from '@/components/atoms/headerButton/HeaderButton';
 import { Icon } from '@/components/atoms/icons/Icons';
-import { SignInButton } from '@/components/atoms/SignInButton/SignInButton';
+import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
 import { AccountIcon } from '@/components/molecules/accountIcon/AccountIcon';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';

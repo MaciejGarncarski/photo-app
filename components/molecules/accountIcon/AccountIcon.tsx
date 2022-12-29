@@ -44,7 +44,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
 
   const [isGoingUp] = useAtom(isGoingUpAtom);
 
-  const onBtnClick = () => setIsOptionsOpen((prev) => !prev);
+  const onBtnClick = () => setIsOptionsOpen(true);
 
   useEffect(() => {
     const handleClose = (mouseEv: MouseEvent) => {

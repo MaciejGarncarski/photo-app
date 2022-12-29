@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreatePost /> button should be disabled when no description provided 1`] = `
+<button
+  class="button"
+  disabled=""
+  type="submit"
+>
+  Complete
+</button>
+`;

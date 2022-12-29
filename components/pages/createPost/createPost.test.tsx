@@ -1,7 +1,6 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
-
 import { CreatePost } from '@/components/pages/createPost/CreatePost';
+
+import { render, screen } from '@/tests';
 
 jest.mock('next/router', () => require('next-router-mock'));
 
@@ -21,17 +20,18 @@ jest.mock('next-auth/react', () => {
 });
 
 describe('<CreatePost />', () => {
-  const queryClient = new QueryClient();
   beforeEach(() => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <CreatePost />
-      </QueryClientProvider>
-    );
+    render(<CreatePost />);
   });
 
-  test('button should be disabled when no description provided', async () => {
+  it('CreatePost component should render', async () => {
+    const container = await screen.findByTestId(/createPost-container/i);
+    expect(container).toBeInTheDocument();
+  });
+
+  it('button should be disabled when no description provided', async () => {
     const button = await screen.findByText(/complete/i);
     expect(button).toHaveAttribute('disabled', '');
+    expect(button).toMatchSnapshot();
   });
 });

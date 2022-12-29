@@ -7,17 +7,15 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig: Config = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-
+  setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
-
   testEnvironment: 'jest-environment-jsdom',
-
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/public/$1',
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
+  collectCoverage: true,
 };
 
 module.exports = createJestConfig(customJestConfig);
