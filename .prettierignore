@@ -14,4 +14,4 @@ public/
 public/favicon/site.webmanifest
 **/*.scss
 tsconfig.json
-jest.setup.js
+jest.setup.ts

@@ -4,6 +4,7 @@
 .tooltip {
   position: relative;
   display: inline-block;
+  z-index: 1;
 }
 
 .tip {
@@ -18,8 +19,7 @@
   white-space: nowrap;
   line-height: 1;
   padding: 1rem 1.5rem;
-
-  --tooltip-triangle: 2rem;
+  --tooltip-arrow-size: 1rem;
 
 
   @include common.mediaquery('lg') {
@@ -28,17 +28,14 @@
 
   &::before {
     content: " ";
-    width: var(--tooltip-triangle);
-    height: var(--tooltip-triangle);
+    left: 50%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
     position: absolute;
-    transform: rotate(45deg);
-    left: 0;
-    right: 0;
-    top: -2rem;
-    margin-inline: auto;
-    border-left: var(--border-secondary);
-    border-top: var(--border-secondary);
-    background-color: var(--bg-white);
+    pointer-events: none;
+    border-width: var(--tooltip-arrow-size);
+    margin-left: calc(var(--tooltip-arrow-size) * -1);
   }
 }
 
@@ -47,11 +44,9 @@
   bottom: unset;
 
   &::before {
-    top: unset;
-    bottom: -1rem;
-    border: none;
-    border-right: var(--border-secondary);
-    border-bottom: var(--border-secondary);
+    transform: translateY(3rem);
+    filter: drop-shadow(0px 1px 0px var(--border-primary-color));
+    border-top-color: var(--bg-white);
   }
 }
 
@@ -59,11 +54,9 @@
   bottom: -5.5rem;
 
   &::before {
-    top: -1.1rem;
-    bottom: unset;
-    border: none;
-    border-left: var(--border-secondary);
-    border-top: var(--border-secondary);
+    transform: translateY(-3rem);
+    filter: drop-shadow(0px -1px 0px var(--border-primary-color));
+    border-bottom-color: var(--bg-white);
   }
 }
 
@@ -72,16 +65,10 @@
   left: 5rem;
   transform: translateX(0) translateY(-50%);
 
-  --tooltip-triangle: 1.5rem;
-
   &::before {
-    border: none;
-    left: -0.90rem;
-    right: unset;
-    border-left: var(--border-secondary);
-    border-bottom: var(--border-secondary);
-    bottom: 0;
-    top: 0;
-    margin: auto 0;
+    transform: translateX(-50%);
+    left: 0;
+    filter: drop-shadow(-1px 0px 0px var(--border-primary-color));
+    border-right-color: var(--bg-white);
   }
 }

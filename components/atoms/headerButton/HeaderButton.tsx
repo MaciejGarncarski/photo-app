@@ -11,12 +11,12 @@ export const HeaderButton = ({ href, onClick, alt, title, icon }: ListData) => {
     return (
       <li className={styles.listItemChild}>
         <Tooltip variant='bottom' content={alt}>
-          <div className={styles.listItem}>
+          <span className={styles.listItem}>
             <Link href={href} className={clsx(styles.listItemChild)}>
               {icon}
             </Link>
             <span className={styles.listItemTitle}>{title}</span>
-          </div>
+          </span>
         </Tooltip>
       </li>
     );

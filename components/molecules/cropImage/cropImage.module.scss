@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin: 1.5rem 0;
 
   @include common.mediaquery('lg') {
     gap: 0;
@@ -29,4 +30,8 @@
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+.canvas {
+  display: none;
 }

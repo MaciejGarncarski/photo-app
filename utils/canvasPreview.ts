@@ -2,13 +2,13 @@ import { PixelCrop } from 'react-image-crop';
 
 const TO_RADIANS = Math.PI / 180;
 
-export async function canvasPreview(
+export const canvasPreview = async (
   image: HTMLImageElement,
   canvas: HTMLCanvasElement,
   crop: PixelCrop,
   scale = 1,
   rotate = 0
-) {
+) => {
   const ctx = canvas.getContext('2d');
 
   if (!ctx) {
@@ -58,9 +58,10 @@ export async function canvasPreview(
       async (file) => {
         if (file) {
           const blobUrl = URL.createObjectURL(file);
-          const imgFile = await fetch(blobUrl).then((r) => r.blob());
+          const imgFile = await fetch(blobUrl);
+          const imgBlob = await imgFile.blob();
 
-          resolve(imgFile);
+          resolve(imgBlob);
         }
       },
       'image/webp',
@@ -68,5 +69,7 @@ export async function canvasPreview(
     );
   });
 
-  return { toBlob };
-}
+  const blob = await toBlob;
+
+  return { toBlob: blob };
+};

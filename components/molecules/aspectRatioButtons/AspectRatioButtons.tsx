@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { memo } from 'react';
 
 import styles from './aspectRatioButtons.module.scss';
 
@@ -9,6 +10,7 @@ type ButtonData = {
   text: string;
   aspectRatio: number;
 };
+
 const buttonData: Array<ButtonData> = [
   { text: 'square', aspectRatio: 1 },
   { text: 'portrait', aspectRatio: 4 / 5 },
@@ -20,7 +22,7 @@ type AspectRatioButtonsProps = {
   aspect?: number;
 };
 
-export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProps) => {
+export const AspectRatioButtons = memo(({ setAspect, aspect }: AspectRatioButtonsProps) => {
   return (
     <CreatePostItemContainer>
       <h3 className={clsx('heading', styles.aspectRatioHeading)}>Cropping orientation</h3>
@@ -29,9 +31,12 @@ export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProp
           return (
             <Button
               className={styles.button}
-              variant={aspectRatio === aspect ? undefined : 'secondary'}
-              onClick={() => setAspect(aspectRatio)}
-              key={aspectRatio}
+              variant={aspectRatio !== aspect && 'secondary'}
+              onClick={() => {
+                setAspect(aspectRatio);
+              }}
+              key={text}
+              data-testid='aspectRatioButton'
             >
               {text}
             </Button>
@@ -40,4 +45,4 @@ export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProp
       </div>
     </CreatePostItemContainer>
   );
-};
+});

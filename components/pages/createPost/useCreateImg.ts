@@ -32,7 +32,7 @@ export const useCreateImg = ({
         completedCrop
       );
 
-      setFinalImg(await toBlob);
+      setFinalImg(toBlob);
     };
     createImg();
   }, [completedCrop, imgRef, previewCanvasRef, setFinalImg]);
