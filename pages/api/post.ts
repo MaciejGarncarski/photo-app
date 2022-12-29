@@ -33,13 +33,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (req.method === 'PUT') {
-    await createPost(req, res, formData);
-    return;
+    createPost(req, res, formData);
   }
 
   if (req.method === 'DELETE') {
-    await deletePost(req, res);
-    return;
+    deletePost(req, res);
   }
 };
 

@@ -10,7 +10,6 @@ import styles from './postButtons.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
-import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { Children } from '@/components/Layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
@@ -24,17 +23,10 @@ type PostButtonsProps = {
 
 type ItemProps = {
   isLast?: boolean;
-  content: string;
 } & Children;
 
-const Item = ({ content, children, isLast }: ItemProps) => {
-  return (
-    <li className={clsx(isLast && styles.itemLast, styles.item)}>
-      <Tooltip variant='top' content={content}>
-        {children}
-      </Tooltip>
-    </li>
-  );
+const Item = ({ children, isLast }: ItemProps) => {
+  return <li className={clsx(isLast && styles.itemLast, styles.item)}>{children}</li>;
 };
 
 type ButtonProps = {
@@ -84,28 +76,24 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       return;
     }
 
-    collectionMutation.mutate({ postID: id });
+    collectionMutation.mutate({ type: undefined, postID: id });
   };
 
   return (
     <ul className={styles.list}>
-      <Item content='Like'>
-        <Button onClick={handleLike}>
-          <span className='visually-hidden'>{isLiked ? 'Remove like' : 'Like'}</span>
-          {isLiked ? <Icon.HeartActive /> : <Icon.Heart />}
-        </Button>
+      <Item>
+        <Button onClick={handleLike}>{isLiked ? <Icon.HeartActive /> : <Icon.Heart />}</Button>
       </Item>
-      <Item content='Comment'>
+      <Item>
         <Button onClick={openModal}>
-          <span className='visually-hidden'>Comment</span>
           <Icon.Comment />
         </Button>
       </Item>
-      <Item content='Share'>
+      <Item>
         <Icon.Share />
       </Item>
       {session?.user && (
-        <Item content='Collection' isLast>
+        <Item isLast>
           {collectionMutation.isLoading ? (
             <Loading variants={['very-small']} />
           ) : (

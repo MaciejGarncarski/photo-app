@@ -44,7 +44,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
 
   const [isGoingUp] = useAtom(isGoingUpAtom);
 
-  const onBtnClick = () => setIsOptionsOpen(true);
+  const onBtnClick = () => setIsOptionsOpen((prev) => !prev);
 
   useEffect(() => {
     const handleClose = (mouseEv: MouseEvent) => {
@@ -85,7 +85,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     >
       <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
         <span className='visually-hidden'>{session.user?.name}</span>
-        {session.user?.id && <Avatar userID={session.user?.id} />}
+        <Avatar userID={session.user?.id ?? ''} />
         <span className={commonStyles.listItemTitle}>Account</span>
       </button>
       <AnimatePresence>

@@ -27,16 +27,17 @@ export type ImageErrors =
   | 'TOO_MANY_IMAGES';
 
 export const CropImage = ({ setFinalImg }: CropImageProps) => {
-  const [imgSrc, setImgSrc] = useState<string>('');
+  const [imgSrc, setImgSrc] = useState('');
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [aspect, setAspect] = useState<number | undefined>(1);
   const [error, setError] = useState<ImageErrors>(null);
-  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
+
   useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg });
 
-  const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
+  const handleImage = (changeEv: ChangeEvent<HTMLInputElement>) => {
     if (changeEv.target.files && changeEv.target.files.length > 0) {
       setCrop(undefined);
       const file = changeEv.target.files[0];
@@ -44,32 +45,29 @@ export const CropImage = ({ setFinalImg }: CropImageProps) => {
     }
   };
 
-  const onImageLoad = (loadEv: SyntheticEvent<HTMLImageElement>) => {
+  const onImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
     if (aspect) {
-      const { width, height } = loadEv.currentTarget;
+      const { width, height } = e.currentTarget;
       setCrop(centerAspectCrop(width, height, aspect));
     }
   };
 
-  const resetImgState = () => {
+  const onImageError = () => {
+    setError('NO_IMAGE_DETECTED');
     setFinalImg(null);
     setImgSrc('');
   };
 
-  const onImageError = () => {
-    setError('NO_IMAGE_DETECTED');
-    resetImgState();
-  };
-
   const chooseDiffrentImage = () => {
     setImgSrc('');
-    resetImgState();
+    setError(null);
+    setFinalImg(null);
   };
 
   if (!imgSrc || error) {
     return (
       <>
-        <DropZone onChange={onChange} setImgSrc={setImgSrc} setError={setError} />
+        <DropZone handleImage={handleImage} setImgSrc={setImgSrc} setError={setError} />
         <CropError errorType={error} />
       </>
     );
@@ -77,10 +75,10 @@ export const CropImage = ({ setFinalImg }: CropImageProps) => {
 
   return (
     <>
-      <canvas className={styles.canvas} ref={previewCanvasRef}></canvas>
+      <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
       <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
       <CreatePostItemContainer>
-        <div data-testid='crop-container' className={styles.cropContainer}>
+        <div className={styles.cropContainer}>
           <h3 className='heading'>Crop your image</h3>
           <Button variant='secondary' onClick={chooseDiffrentImage}>
             Choose diffrent image

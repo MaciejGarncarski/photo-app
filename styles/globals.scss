@@ -78,10 +78,8 @@ a {
   --bg-primary: hsl(0, 0%, 98%);
   --bg-gray: hsl(0, 0%, 94%);
   --bg-overlay: hsla(0, 0%, 0%, 0.67);
-  --border-primary-color: hsl(0, 0%, 79%);
-  --border-secondary-color: hsl(0, 0%, 86%);
-  --border-primary: 1px solid var(--border-primary-color);
-  --border-secondary: 1px solid var(--border-secondary-color);
+  --border-primary: 1px solid hsl(0, 0%, 79%);
+  --border-secondary: 1px solid hsl(0, 0%, 86%);
 
   --radius-small: 0.45rem;
   --radius-medium: 0.8rem;

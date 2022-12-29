@@ -1,32 +1,24 @@
 import clsx from 'clsx';
-import { ChangeEvent, DragEvent, useRef, useState } from 'react';
+import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
 import { AiOutlineDownload, AiOutlineFolderOpen } from 'react-icons/ai';
 
-import { handleDrop } from '@/utils/handleDrop';
+import { handleDropImage } from '@/utils/handleDropImage';
 
 import styles from './dropZone.module.scss';
 
-import { DropZoneContainer } from '@/components/atoms/dropZoneContainer/DropZoneContainer';
 import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
 
 type DropZoneProps = {
-  onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
+  handleImage: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string) => void;
   setError: (error: ImageErrors | null) => void;
 };
 
-export const DropZone = ({ onChange, setImgSrc, setError }: DropZoneProps) => {
+export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const dropZoneRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleInputClick = () => {
-    if (!inputRef.current || fileName) {
-      return;
-    }
-    inputRef.current.click();
-  };
 
   const active = (dragEv: DragEvent<HTMLDivElement>) => {
     dragEv.preventDefault();
@@ -38,34 +30,51 @@ export const DropZone = ({ onChange, setImgSrc, setError }: DropZoneProps) => {
     setIsActive(false);
   };
 
-  const onDrop = (dropEvent: DragEvent<HTMLDivElement>) => {
-    if (!dropEvent) {
+  const handleDrop = useCallback(
+    (dropEv: DragEvent<HTMLDivElement>) => {
+      const dt = dropEv.dataTransfer;
+      if (!dt.files || !dt.files[0]) {
+        setError('NO_IMAGE_DETECTED');
+        return;
+      }
+      if (dt.files.length > 1) {
+        setError('TOO_MANY_IMAGES');
+        return;
+      }
+      const file = dt.files[0];
+      handleDropImage({ file, setError, setFileName, setImgSrc });
+    },
+    [setError, setImgSrc]
+  );
+
+  const openInput = () => {
+    if (!inputRef.current || fileName) {
       return;
     }
-    inactive(dropEvent);
-    const { dataTransfer } = dropEvent;
-    const files = [...dataTransfer.files];
-    handleDrop({ setError, files, setFileName, setImgSrc });
+    inputRef.current.click();
   };
 
   return (
     <>
       <input
+        data-testid='fileInput'
         type='file'
         accept='image/*'
         className={clsx('visually-hidden', styles.input)}
         ref={inputRef}
-        onChange={onChange}
-        data-testid='fileInput'
+        onChange={handleImage}
       />
 
-      <DropZoneContainer
-        ref={dropZoneRef}
-        onClick={handleInputClick}
+      <div
+        onClick={openInput}
         onDragOver={active}
         onDragEnter={active}
-        onDrop={onDrop}
+        onDrop={(dragEv) => {
+          inactive(dragEv);
+          handleDrop(dragEv);
+        }}
         onDragLeave={inactive}
+        ref={dropZoneRef}
         className={clsx(isActive && styles.dropZoneActive, styles.dropZone)}
       >
         {isActive ? (
@@ -80,7 +89,7 @@ export const DropZone = ({ onChange, setImgSrc, setError }: DropZoneProps) => {
           </>
         )}
         {fileName && <p>{fileName}</p>}
-      </DropZoneContainer>
+      </div>
     </>
   );
 };

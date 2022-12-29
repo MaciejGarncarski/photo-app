@@ -8,7 +8,7 @@ import { Children } from '@/components/Layout/Layout';
 type ButtonProps = {
   className?: string;
   disabled?: boolean;
-  variant?: 'secondary' | false;
+  variant?: 'secondary';
 } & Children &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -20,7 +20,6 @@ export const Button = ({
   onClick,
   className,
   onKeyDown,
-  ...rest
 }: ButtonProps) => {
   return (
     <button
@@ -29,7 +28,6 @@ export const Button = ({
       type={type}
       disabled={disabled}
       className={clsx(variant && styles[`button-${variant}`], className, styles.button)}
-      {...rest}
     >
       {children}
     </button>

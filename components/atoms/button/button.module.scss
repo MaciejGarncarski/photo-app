@@ -4,9 +4,10 @@
   padding: 0.75rem 1.5rem;
   color: var(--color-white);
   font-weight: 600;
+  transition: all 100ms ease-in-out;
+  transition-property: transform;
   border: none;
   text-transform: capitalize;
-  transition: all 150ms ease-in-out;
 
   &:hover {
     cursor: pointer;
@@ -14,10 +15,7 @@
 
   &:hover {
     &:not(:disabled) {
-      --shadow-color: var(--color-primary);
-      box-shadow: inset 0 0 0 2px var(--shadow-color);
-      background-color: transparent;
-      color: var(--color-primary);
+      background-color: var(--color-secondary);
     }
   }
 
@@ -43,11 +41,7 @@
 
   &:hover {
     &:not(:disabled) {
-      --shadow-color: var(--color-secondary);
-      background-color: var(--color-secondary);
-      color: var(--color-white);
-      transition: all 100ms ease-in-out;
-      border: none;
+      background-color: var(--bg-gray);
     }
   }
 
