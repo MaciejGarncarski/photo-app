@@ -1,3 +1,5 @@
+import { AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -55,19 +57,27 @@ export const Layout = ({ children }: LayoutProps) => {
     <div>
       <Header />
       <div className={styles.children}>
-        {isCookiesOpen && (
-          <div role='dialog' className={styles.cookies}>
-            <p>{COOKIE_CONSTENST}</p>
-            <div className={styles.cookiesButtons}>
-              <Button type='button' variant='secondary' onClick={handleCookies}>
-                Don&apos;t show again
-              </Button>
-              <Button type='button' onClick={handleClose}>
-                Close
-              </Button>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isCookiesOpen && !localStorageData && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ y: 250, transition: { type: 'tween' } }}
+              role='dialog'
+              className={styles.cookies}
+            >
+              <p>{COOKIE_CONSTENST}</p>
+              <div className={styles.cookiesButtons}>
+                <Button type='button' variant='secondary' onClick={handleCookies}>
+                  Don&apos;t show again
+                </Button>
+                <Button type='button' onClick={handleClose}>
+                  Close
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {isNotCompleted && !isLoading ? <CompleteSignUp /> : <>{children}</>}
       </div>
     </div>
