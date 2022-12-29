@@ -16,7 +16,7 @@
   font-size: 2rem;
 
   @include common.mediaquery('lg') {
-    top: 6rem;
+    top: 5rem;
     left: -8.2rem;
   }
 }
@@ -24,23 +24,20 @@
 .square {
   position: absolute;
   bottom: -10px;
-  right: 47px;
+  right: 0;
   margin: 0 auto;
-  transform: rotate(45deg);
-  width: 20px;
-  height: 20px;
-  background-color: var(--bg-white);
-  border-right: var(--border-primary);
-  border-bottom: var(--border-primary);
+  width: 0;
+  height: 0;
+  border: 1rem solid transparent;
+  border-bottom: 1rem solid var(--bg-white);
+  filter: drop-shadow(0 -1px 0 var(--border-primary-color));
+
 
   @include common.mediaquery('lg') {
-    top: -10px;
+    top: -2rem;
     left: 0;
     right: 0;
     bottom: 0;
-    border: 0;
-    border-left: var(--border-primary);
-    border-top: var(--border-primary);
   }
 }
 

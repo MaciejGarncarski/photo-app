@@ -85,7 +85,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     >
       <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
         <span className='visually-hidden'>{session.user?.name}</span>
-        <Avatar userID={session.user?.id ?? ''} />
+        {session.user?.id && <Avatar userID={session.user?.id} />}
         <span className={commonStyles.listItemTitle}>Account</span>
       </button>
       <AnimatePresence>

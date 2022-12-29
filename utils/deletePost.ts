@@ -18,7 +18,13 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const isAbleToDelete = post?.author_id === session?.user?.id;
+    const user = await prisma.user.findFirst({
+      where: {
+        id: session?.user?.id,
+      },
+    });
+
+    const isAbleToDelete = post?.author_id === session?.user?.id || user?.role === 'ADMIN';
 
     if (!isAbleToDelete) {
       res.status(401).send({ status: 'unauthorized' });

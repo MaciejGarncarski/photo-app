@@ -17,16 +17,15 @@ export const Tooltip = ({ children, content, variant }: TooltipProps) => {
   const [active, setActive] = useState<boolean>(false);
 
   return (
-    <div
+    <span
       className={styles.tooltip}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     >
       {children}
-
       <AnimatePresence>
         {active && (
-          <motion.div
+          <motion.span
             variants={tooltipVariant}
             animate='animate'
             initial='initial'
@@ -34,9 +33,9 @@ export const Tooltip = ({ children, content, variant }: TooltipProps) => {
             className={clsx(styles[variant], styles.tip)}
           >
             <p>{content}</p>
-          </motion.div>
+          </motion.span>
         )}
       </AnimatePresence>
-    </div>
+    </span>
   );
 };
