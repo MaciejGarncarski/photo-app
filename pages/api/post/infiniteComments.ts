@@ -1,16 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-
 const COMMENTS_PER_SCROLL = 10;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
-
   if (req.method !== 'GET') {
     res.status(405).send({ status: 405, error: 'Invalid metod' });
     return;
