@@ -16,6 +16,7 @@ const customJestConfig: Config = {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   collectCoverage: true,
+  testEnvironmentOptions: { resources: 'usable' },
 };
 
 module.exports = createJestConfig(customJestConfig);
