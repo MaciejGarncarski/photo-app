@@ -56,18 +56,11 @@ export const CreatePost = () => {
   }
 
   return (
-    <section
-      aria-labelledby='Create new post'
-      className={styles.createPost}
-      data-testid='createPost-container'
-    >
+    <section aria-labelledby='Create new post' className={styles.createPost}>
       <Heading tag='h2' className={styles.heading}>
         Create new post
       </Heading>
-      <div className={styles.addPhoto}>
-        <Heading tag='h3'>Add photo</Heading>
-        <CropImage setFinalImg={setFinalImg} />
-      </div>
+      <CropImage setFinalImg={setFinalImg} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
           <Heading tag='h3'>Info about post</Heading>

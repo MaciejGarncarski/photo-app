@@ -1,6 +1,6 @@
 import { PostComments } from '@prisma/client';
-import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
+import moment from 'moment';
 
 import styles from './comment.module.scss';
 
@@ -14,7 +14,7 @@ type CommentProps = {
 export const Comment = ({ commentData }: CommentProps) => {
   const { data } = useAccount({ id: commentData.user_id });
 
-  const timeSinceCreated = dayjs().to(dayjs(commentData.created_at));
+  const timeSinceCreated = moment(commentData.created_at).fromNow();
 
   return (
     <motion.div className={styles.comment}>

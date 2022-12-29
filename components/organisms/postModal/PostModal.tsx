@@ -62,9 +62,7 @@ export const PostModal = ({ post }: PostModalProps) => {
           width={200}
           height={200}
         />
-        <Heading className={styles.heading} tag='h2'>
-          Comments
-        </Heading>
+        <Heading tag='h2'>Comments</Heading>
         <div className={styles.comments} ref={sentryRef}>
           {data.pages.map((page) => {
             return page.comments.map((comment) => {

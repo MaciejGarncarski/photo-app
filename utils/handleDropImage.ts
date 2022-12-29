@@ -11,10 +11,11 @@ export const IMAGE_MIN_SIZE = 150;
 export const IMAGE_MAX_FILE_SIZE = 36_700_160;
 
 export const handleDropImage = ({ file, setError, setFileName, setImgSrc }: HandleDropImage) => {
-  const fileType = file.type.split('/');
   const reader = new FileReader();
 
+  const fileType = file.type.split('/');
   setError(null);
+
   if (file.size > IMAGE_MAX_FILE_SIZE) {
     setError('FILE_SIZE');
     return;
@@ -39,12 +40,9 @@ export const handleDropImage = ({ file, setError, setFileName, setImgSrc }: Hand
         };
         resolve();
       });
-
       image.src = URL.createObjectURL(file);
-
-      setImgSrc(reader.result?.toString() || '');
       setError(null);
-
+      setImgSrc(reader.result?.toString() || '');
       if (setFileName) {
         setFileName(file.name);
       }

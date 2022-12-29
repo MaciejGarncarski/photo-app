@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
 import parse from 'html-react-parser';
+import moment from 'moment';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -27,8 +27,8 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
   const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
     descriptionData(description);
 
-  const fromNow = dayjs().to(dayjs(created_at));
-  const formattedDate = dayjs(created_at).format('MMMM DD YYYY');
+  const fromNow = moment(created_at).fromNow();
+  const formattedDate = moment(created_at).format('MMMM Do YYYY');
 
   const Description = () => {
     if (isDescriptionLong || hasMultipleBreaks) {
