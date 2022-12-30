@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
+import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -16,12 +17,15 @@ import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type PostHeaderProps = {
+  tag?: 'header' | 'div';
   post: PostData;
+  className?: string;
+  variant?: 'no-margin-left';
 };
 
-const AVATAR_SIZE = 40;
+export const POST_AVATAR_SIZE = 40;
 
-export const PostHeader = ({ post }: PostHeaderProps) => {
+export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PostHeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { session } = useAuth();
   const { data } = useAccount({ id: session?.user?.id });
@@ -33,11 +37,13 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
 
   const onModalOpen = () => setIsOpen(true);
 
+  const headerClassName = clsx(className, variant && styles[variant], styles.header);
+
   if (!authorData) {
     return (
-      <header className={styles.header}>
+      <Tag className={headerClassName}>
         <Loading variants={['very-small', 'left']} />
-      </header>
+      </Tag>
     );
   }
 
@@ -49,9 +55,9 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
 
   return (
     <>
-      <header className={styles.header}>
+      <Tag className={headerClassName}>
         <Link href={`/${authorData.user.username}`} className={styles.link} onClick={prefetchUser}>
-          <Avatar userID={authorData.user.id} width={AVATAR_SIZE} height={AVATAR_SIZE} />
+          <Avatar userId={authorData.user.id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
           <h2>{authorData.user.username}</h2>
         </Link>
         {data && (
@@ -64,7 +70,7 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
             </Tooltip>
           </div>
         )}
-      </header>
+      </Tag>
       <AnimatePresence>
         {isOpen && <PostOptions post={post} setIsOpen={setIsOpen} />}
       </AnimatePresence>

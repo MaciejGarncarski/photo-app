@@ -6,6 +6,7 @@ import { useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { postModalAtom } from '@/lib/state/modal';
+import { isMobileAtom } from '@/lib/state/scrollPos';
 
 import styles from './postModal.module.scss';
 
@@ -24,6 +25,7 @@ type PostModalProps = {
 export const PostModal = ({ post }: PostModalProps) => {
   const [, setIsModalOpen] = useAtom(postModalAtom);
   const [isImgLoading, setIsImgLoading] = useState<boolean>(true);
+  const [isMobile] = useAtom(isMobileAtom);
 
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
     postId: post.id,
@@ -54,7 +56,12 @@ export const PostModal = ({ post }: PostModalProps) => {
         className={styles.container}
       >
         <Modal.Close onClose={() => setIsModalOpen(false)} />
-        <PostHeader post={post} />
+        <PostHeader
+          tag='div'
+          variant={isMobile ? undefined : 'no-margin-left'}
+          className={styles.postHeader}
+          post={post}
+        />
         {isImgLoading && <Loading />}
         <Image
           className={clsx(isImgLoading && styles.imgLoading, styles.postImg)}

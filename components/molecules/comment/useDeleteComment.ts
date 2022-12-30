@@ -1,16 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-type DeleteCommentMutation = {
-  id: number;
-};
+import { CommentId } from '@/components/molecules/comment/useCommentLike';
 
 export const useDeleteComment = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ id }: DeleteCommentMutation) => {
-      await axios.delete(`/api/post/comment?commentId=${id}`);
+    async ({ commentId }: CommentId) => {
+      await axios.delete(`/api/post/comment?commentId=${commentId}`);
     },
     {
       onSettled: async () => {

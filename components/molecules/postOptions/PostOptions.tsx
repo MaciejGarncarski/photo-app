@@ -69,7 +69,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
             {collectionMutation.isLoading && (
               <>
                 <Loading variants={['very-small']} />
-                {isInCollection ? 'Removing...' : 'Adding...'}
+                {isInCollection ? 'Removing...' : 'Saving...'}
               </>
             )}
             {!collectionMutation.isLoading && (

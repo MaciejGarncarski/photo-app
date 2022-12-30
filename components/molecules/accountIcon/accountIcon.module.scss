@@ -1,7 +1,7 @@
 @use '/styles/common.scss';
 
 .options {
-  background-color: var(--bg-white);
+  background-color: var(--bg-primary);
   position: absolute;
   box-shadow: var(--shadow-secondary);
   top: -16rem;
@@ -29,7 +29,7 @@
   width: 0;
   height: 0;
   border: 1rem solid transparent;
-  border-bottom: 1rem solid var(--bg-white);
+  border-bottom: 1rem solid var(--bg-primary);
   filter: drop-shadow(0 -1px 0 var(--border-primary-color));
 
 
