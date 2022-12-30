@@ -1,18 +1,24 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
+import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
+export const CommentPutRequestSchema = z.object({
+  commentText: z.string(),
+  postId: z.number(),
+});
+
+export const CommentPostRequestSchema = z.object({
+  commentId: z.number(),
+});
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const { id, comment } = req.body;
   const session = await unstable_getServerSession(req, res, authOptions);
-  const postID = parseInt(req.body.id);
-  const userID = string(session?.user?.id);
-  const commentText = string(comment);
 
   if (!session || !session.user?.id) {
     res.status(401).send({ status: 'unauthorized', message: 'Unauthorized request' });
@@ -20,11 +26,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (method === 'PUT') {
+    const response = CommentPutRequestSchema.safeParse(req.body);
+
+    if (!response.success) {
+      return res.status(400).send({
+        message: `Yo, bad payload!`,
+      });
+    }
+
+    const {
+      data: { commentText, postId },
+    } = response;
+
+    const userId = string(session?.user?.id);
+
     try {
       await prisma.postComments.create({
         data: {
-          post_id: postID,
-          user_id: userID,
+          post_id: postId,
+          user_id: userId,
           comment_text: commentText,
         },
         select: {
@@ -82,9 +102,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (method === 'POST') {
+    const response = CommentPostRequestSchema.safeParse(req.body);
+
+    if (!response.success) {
+      return res.status(400).send({
+        message: `Yo, bad payload!`,
+      });
+    }
+
+    const {
+      data: { commentId },
+    } = response;
+
     const isLikedData = await prisma.commentLike.findFirst({
       where: {
-        comment_id: id,
+        comment_id: commentId,
       },
     });
 
@@ -94,7 +126,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await prisma.commentLike.deleteMany({
           where: {
-            comment_id: id,
+            comment_id: commentId,
           },
         });
         res.status(200).send({ status: 'ok', message: 'deleted' });
@@ -107,7 +139,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         await prisma.commentLike.create({
           data: {
             user_id: session.user?.id,
-            comment_id: id,
+            comment_id: commentId,
           },
           select: {
             id: true,

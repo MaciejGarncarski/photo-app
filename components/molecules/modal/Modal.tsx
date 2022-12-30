@@ -63,10 +63,17 @@ const ModalHeading = ({ text, variant }: ModalHeadingProps) => {
 
 const ModalClose = ({ onClose }: ModalCloseProps) => {
   return (
-    <button className={styles.closeButton} type='button' onClick={onClose}>
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileFocus={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className={styles.closeButton}
+      type='button'
+      onClick={onClose}
+    >
       <Icon.Close />
       <span className='visually-hidden'>Close dialog</span>
-    </button>
+    </motion.button>
   );
 };
 

@@ -45,7 +45,7 @@ export const Account = ({ username }: AccountProps) => {
   return (
     <>
       <main className={styles.account}>
-        <Avatar className={styles.avatar} userID={data.user.id} />
+        <Avatar className={styles.avatar} userId={data.user.id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
           {username}
         </motion.h2>

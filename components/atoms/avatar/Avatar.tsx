@@ -8,7 +8,7 @@ import styles from './avatar.module.scss';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
-  userID: string;
+  userId: string;
   className?: string;
 };
 
@@ -17,12 +17,12 @@ const DEFAULT_AVATAR_SIZE = 140;
 export const MotionImage = motion(Image);
 
 export const Avatar = ({
-  userID,
+  userId,
   className,
   width = DEFAULT_AVATAR_SIZE,
   height = DEFAULT_AVATAR_SIZE,
 }: AvatarProps) => {
-  const { data } = useAccount({ id: userID });
+  const { data } = useAccount({ id: userId });
 
   if (!data?.user) {
     return null;

@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { z } from 'zod';
 
-type CommentLike = {
-  id: number;
-};
+import { CommentPostRequestSchema } from '@/pages/api/post/comment';
 
-export const useCommentLike = ({ id }: CommentLike) => {
+type Mutation = z.infer<typeof CommentPostRequestSchema>;
+
+export const useCommentLike = ({ commentId }: Mutation) => {
   const queryClient = useQueryClient();
 
   return useMutation(
     async () => {
-      const { status } = await axios.post(`/api/post/comment`, {
-        id,
+      await axios.post<null, null, Mutation>(`/api/post/comment`, {
+        commentId,
       });
-      return status;
     },
     {
       onSettled: async () => {

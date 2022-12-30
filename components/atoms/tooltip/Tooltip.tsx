@@ -10,7 +10,7 @@ import { tooltipVariant } from '@/components/molecules/accountIcon/AccountIcon';
 
 type TooltipProps = {
   content: string;
-  variant: 'top' | 'bottom' | 'right';
+  variant: 'top' | 'bottom' | 'right' | 'left';
 } & Children;
 
 export const Tooltip = ({ children, content, variant }: TooltipProps) => {

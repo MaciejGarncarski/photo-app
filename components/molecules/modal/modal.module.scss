@@ -59,13 +59,13 @@
   top: -6rem;
   font-size: 4rem;
   background-color: transparent;
-  background-color: var(--bg-white);
+  background-color: var(--bg-primary);
   border: none;
   border-radius: var(--radius-small);
   cursor: pointer;
 
-  &:focus {
-    background-color: var(--color-secondary);
+  &:hover {
+    color: var(--color-primary);
   }
 }
 
@@ -87,7 +87,7 @@
 }
 
 .dialog {
-  background-color: var(--bg-white);
+  background-color: var(--bg-primary);
   border-radius: var(--radius-medium);
   width: min(45rem, 80%);
   margin-inline: auto;

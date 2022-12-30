@@ -1,24 +1,24 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import styles from './commentForm.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { PostData } from '@/components/pages/collection/useCollection';
 
+import { CommentPutRequestSchema } from '@/pages/api/post/comment';
+
 type CommentFormValues = {
   comment: string;
-};
-
-type Mutation = {
-  comment: string;
-  id: number;
 };
 
 export type CommentFormProps = {
   post: PostData;
 };
+
+type Mutation = z.infer<typeof CommentPutRequestSchema>;
 
 export const CommentForm = ({ post }: CommentFormProps) => {
   const {
@@ -32,20 +32,18 @@ export const CommentForm = ({ post }: CommentFormProps) => {
     },
   });
 
-  const { id } = post;
-
   const { mutate } = useMutation(
-    async ({ comment, id }: Mutation) => {
-      await axios.put('/api/post/comment', {
-        comment,
-        id,
+    async ({ commentText, postId }: Mutation) => {
+      await axios.put<null, null, Mutation>('/api/post/comment', {
+        commentText,
+        postId,
       });
     },
     { onSuccess: () => reset() }
   );
 
   const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
-    mutate({ comment, id });
+    mutate({ commentText: comment, postId: post.id });
   };
 
   return (
@@ -56,7 +54,7 @@ export const CommentForm = ({ post }: CommentFormProps) => {
         rows={3}
         cols={25}
       ></textarea>
-      <Button type='submit' disabled={!isDirty}>
+      <Button type='submit' className={styles.postButton} disabled={!isDirty}>
         post
       </Button>
     </form>

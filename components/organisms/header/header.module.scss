@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   place-content: center;
-  background-color: var(--bg-white);
+  background-color: var(--bg-primary);
   border-bottom: var(--border-secondary);
   padding: 0 2rem;
   position: sticky;
@@ -46,7 +46,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-white);
+  background-color: var(--bg-primary);
   bottom: 0;
   left: 0;
   padding-top: 0.5rem;

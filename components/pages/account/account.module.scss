@@ -103,7 +103,7 @@
 }
 
 .bio {
-  color: var(--color-disabled);
+  color: var(--text-secondary);
   grid-column: 1 / 3;
 
   @include common.mediaquery('lg') {
