@@ -9,7 +9,6 @@ import styles from './comment.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Icon } from '@/components/atoms/icons/Icons';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
@@ -38,17 +37,13 @@ export const Comment = ({ commentData }: CommentProps) => {
   const handleDelete = () => commentDelete.mutate({ commentId: id });
   const onDeleteBtnClick = () => setIsDeleting(true);
 
-  if (!sessionUserData?.user) {
-    return <Loading variants={['small']} />;
-  }
-
-  const { user } = sessionUserData;
-  const isAbleToDelete = user.id === user_id || user.role === 'ADMIN';
+  const isAbleToDelete =
+    sessionUserData?.user.id === user_id || sessionUserData?.user.role === 'ADMIN';
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
   return (
     <motion.article className={styles.comment}>
-      <Link href={`/${user.username}`}>
+      <Link href={`/${sessionUserData?.user.username}`}>
         <Avatar
           userId={user_id}
           className={styles.avatar}
@@ -57,7 +52,7 @@ export const Comment = ({ commentData }: CommentProps) => {
         />
       </Link>
       <div className={styles.commentText}>
-        <Link href={`/${user.username}`}>
+        <Link href={`/${sessionUserData?.user.username}`}>
           <h3 className={styles.author}>{data?.user.username}</h3>
         </Link>
         <p className={styles.content}>{parse(commentWithNewLine)}</p>
