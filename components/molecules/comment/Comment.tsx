@@ -46,7 +46,6 @@ export const Comment = ({ commentData }: CommentProps) => {
   const isAbleToDelete = user.id === user_id || user.role === 'ADMIN';
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
-
   return (
     <motion.article className={styles.comment}>
       <Link href={`/${user.username}`}>
