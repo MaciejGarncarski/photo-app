@@ -44,7 +44,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
   const isOwner = session?.user?.id === data.user.id;
 
   if (!username || !name || !image) {
-    return;
+    return null;
   }
 
   return (
