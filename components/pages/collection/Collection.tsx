@@ -1,3 +1,5 @@
+import { NextSeo } from 'next-seo';
+
 import styles from './collection.module.scss';
 
 import { Heading } from '@/components/atoms/heading/Heading';
@@ -16,6 +18,7 @@ export const Collection = () => {
 
   return (
     <main className={styles.container}>
+      <NextSeo title='Post collection' />
       <Heading tag='h2' className={styles.heading}>
         Your post collection
       </Heading>

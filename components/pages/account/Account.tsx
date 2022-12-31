@@ -13,8 +13,6 @@ import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
-import { APP_NAME } from '@/pages';
-
 export type AccountID = {
   id: string;
 };
@@ -25,10 +23,10 @@ type AccountProps = {
 
 const listData = ['posts', 'followers', 'following'] as const;
 
-export const Account = ({ username }: AccountProps) => {
+export const Account = ({ username: propsUsername }: AccountProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { session } = useAuth();
-  const { data, isLoading } = useAccount({ username });
+  const { data, isLoading } = useAccount({ username: propsUsername });
 
   const openMenu = () => {
     setIsMenuOpen(true);
@@ -42,12 +40,35 @@ export const Account = ({ username }: AccountProps) => {
     return <p>user error</p>;
   }
 
-  const { name, bio } = data.user;
+  const { name, bio, username, customImage, image } = data.user;
   const isOwner = session?.user?.id === data.user.id;
+
+  if (!username || !name || !image) {
+    return;
+  }
 
   return (
     <>
-      <NextSeo title={`${username} - ${APP_NAME}`} />
+      <NextSeo
+        title={`${name} (@${username})`}
+        openGraph={{
+          title: username,
+          url: `https://www.photo-app-orpin.vercel.app/${username}`,
+          type: 'profile',
+          profile: {
+            firstName: name,
+            username: username,
+          },
+          images: [
+            {
+              url: image ?? customImage,
+              alt: 'Profile Photo',
+              width: 200,
+              height: 200,
+            },
+          ],
+        }}
+      />
       <main className={styles.account}>
         <Avatar className={styles.avatar} userId={data.user.id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
