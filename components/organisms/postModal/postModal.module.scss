@@ -61,7 +61,6 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 
   @include common.mediaquery('lg') {
     height: 100%;

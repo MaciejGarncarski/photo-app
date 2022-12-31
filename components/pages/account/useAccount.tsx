@@ -19,6 +19,7 @@ type UseAccount = {
 };
 
 type UseAccountResponse = {
+  isFollowing: boolean;
   status: number;
   user: User;
   count: {
@@ -37,7 +38,7 @@ export type UsernameToIdResponse = {
 
 export const useAccount = ({ id, username }: UseAccount) => {
   const query = useQuery<UseAccountResponse>({
-    queryKey: [{ account: id ?? username }],
+    queryKey: ['account', id, username],
     queryFn: async () => {
       return fetchAccount({ id, username });
     },

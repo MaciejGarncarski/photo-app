@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -57,6 +58,7 @@ export const CreatePost = () => {
 
   return (
     <section aria-labelledby='Create new post' className={styles.createPost}>
+      <NextSeo title='Create new post' />
       <Heading tag='h2' className={styles.heading}>
         Create new post
       </Heading>

@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
+
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const countUser = async (userID: string) => {
   const countedPosts = await prisma.post.aggregate({
@@ -41,21 +45,29 @@ const countUser = async (userID: string) => {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { user, type } = req.query;
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   if (typeof user !== 'string') {
     return;
   }
 
   try {
+    if (!user) {
+      return res.status(httpCodes.Bad_request).send({ status: responseMessages.Bad_request });
+    }
+
     const userData = await prisma.user.findFirst({
       where: {
         id: user,
       },
     });
-    if (!user) {
-      res.status(404).send({ status: 'not found' });
-      return;
-    }
+
+    const isFollowing = await prisma.follower.findFirst({
+      where: {
+        from: session?.user?.id,
+        to: user,
+      },
+    });
 
     if (type === 'username') {
       const userData = await prisma.user.findFirst({
@@ -65,18 +77,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       if (!user) {
-        res.status(404).send({ status: 'not found' });
-        return;
+        return res.status(httpCodes.Unauthorized).send({ status: responseMessages.Unauthorized });
       }
       const count = await countUser(userData?.id ?? '');
-      res.status(200).send({ user: userData, count });
-      return;
+      return res
+        .status(httpCodes.Success)
+        .send({ user: userData, count, isFollowing: Boolean(isFollowing) });
     }
 
     const count = await countUser(user);
-    res.status(200).send({ user: userData, count });
+    res
+      .status(httpCodes.Success)
+      .send({ user: userData, count, isFollowing: Boolean(isFollowing) });
   } catch (error) {
-    res.status(400).send({ status: 'error', error });
+    res.status(httpCodes.Forbidden).send({ status: responseMessages.Forbidden, error });
   }
 };
 

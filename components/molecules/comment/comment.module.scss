@@ -8,12 +8,6 @@
   row-gap: 1rem;
   column-gap: 0.25rem;
   place-content: center;
-  border-bottom: var(--border-secondary);
-
-  &:last-child {
-    border: none;
-  }
-
 
   @include common.mediaquery('lg') {
     padding: 1rem 0;

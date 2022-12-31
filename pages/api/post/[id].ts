@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const postComments = await prisma.postComments.aggregate({
+    const postComments = await prisma.postComment.aggregate({
       where: {
         post_id: parseInt(id),
       },
