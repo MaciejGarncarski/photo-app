@@ -45,7 +45,7 @@ export const Comment = ({ commentData }: CommentProps) => {
   const { user } = sessionUserData;
   const isAbleToDelete = user.id === user_id || user.role === 'ADMIN';
 
-  const commentWithNewLine = commentData.comment_text.replace(/\r?\n/g, '<br />');
+  const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
 
   return (
     <motion.article className={styles.comment}>
@@ -61,7 +61,7 @@ export const Comment = ({ commentData }: CommentProps) => {
         <Link href={`/${user.username}`}>
           <h3 className={styles.author}>{data?.user.username}</h3>
         </Link>
-        <p className={styles.content}>{parse(commentData.comment_text)}</p>
+        <p className={styles.content}>{parse(commentWithNewLine)}</p>
       </div>
 
       <div className={styles.info}>
