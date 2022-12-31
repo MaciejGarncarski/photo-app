@@ -53,7 +53,7 @@ model User {
   sessions       Session[]
   posts          Post[]
   posts_likes    PostLike[]
-  posts_comments PostComments[]
+  posts_comments PostComment[]
   fromUser       Follower[]     @relation("Follower")
   toUser         Follower[]     @relation("Following")
   Collection     Collection[]
@@ -78,7 +78,7 @@ model Post {
   images         String
   file_id        String?
   posts_likes    PostLike[]
-  posts_comments PostComments[]
+  posts_comments PostComment[]
   post_saved     SavedPost[]
   Collection     Collection[]
 
@@ -104,7 +104,7 @@ model PostLike {
   @@index([user_id])
 }
 
-model PostComments {
+model PostComment {
   id           Int           @id @default(autoincrement()) @db.Int
   user         User          @relation(fields: [user_id], references: [id])
   user_id      String
@@ -120,7 +120,7 @@ model PostComments {
 
 model CommentLike {
   id         Int          @id @default(autoincrement()) @db.Int
-  comment    PostComments @relation(fields: [comment_id], references: [id])
+  comment    PostComment @relation(fields: [comment_id], references: [id])
   comment_id Int          @db.Int
   user       User         @relation(fields: [user_id], references: [id])
   user_id    String

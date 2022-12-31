@@ -1,16 +1,19 @@
 import { motion } from 'framer-motion';
+import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import styles from './account.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { Button } from '@/components/atoms/button/Button';
+import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { ModalOverlay } from '@/components/atoms/modalOverlay/ModalOverlay';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import { APP_NAME } from '@/pages';
 
 export type AccountID = {
   id: string;
@@ -44,6 +47,7 @@ export const Account = ({ username }: AccountProps) => {
 
   return (
     <>
+      <NextSeo title={`${username} - ${APP_NAME}`} />
       <main className={styles.account}>
         <Avatar className={styles.avatar} userId={data.user.id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
@@ -61,7 +65,7 @@ export const Account = ({ username }: AccountProps) => {
         </motion.ul>
         <p className={styles.name}>{name}</p>
         <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
-        {!isOwner && <Button className={styles.followButton}>follow 💪</Button>}
+        {!isOwner && <FollowButton className={styles.followButton} userId={data.user.id} />}
         {isOwner && (
           <button type='button' onClick={openMenu} className={styles.menuButton}>
             <span className='visually-hidden'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>

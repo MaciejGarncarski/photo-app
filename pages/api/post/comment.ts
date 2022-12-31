@@ -41,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const userId = string(session?.user?.id);
 
     try {
-      await prisma.postComments.create({
+      await prisma.postComment.create({
         data: {
           post_id: postId,
           user_id: userId,
@@ -72,7 +72,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const comment = await prisma.postComments.findFirst({
+    const comment = await prisma.postComment.findFirst({
       where: {
         id: commentId,
       },
@@ -90,7 +90,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           comment_id: commentId,
         },
       });
-      await prisma.postComments.deleteMany({
+      await prisma.postComment.deleteMany({
         where: {
           id: commentId,
         },

@@ -60,13 +60,10 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
       }
     };
 
-    const timeout = setTimeout(() => {
-      document.addEventListener('keydown', handleEscKey);
-      document.addEventListener('click', handleClose);
-    }, TIMEOUT);
+    document.addEventListener('keydown', handleEscKey);
+    document.addEventListener('click', handleClose);
 
     return () => {
-      clearTimeout(timeout);
       document.removeEventListener('click', handleClose);
       document.removeEventListener('keydown', handleEscKey);
     };
@@ -76,12 +73,15 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     return null;
   }
 
+  const handleOpen = () => setIsOptionsOpen(true);
+  const handleClose = () => setIsOptionsOpen(false);
+
   return (
     <li
-      onMouseEnter={() => setIsOptionsOpen(true)}
-      onMouseLeave={() => setIsOptionsOpen(false)}
-      className={commonStyles.accountIconContainer}
       ref={containerRef}
+      onMouseEnter={handleOpen}
+      onMouseLeave={handleClose}
+      className={commonStyles.accountIconContainer}
     >
       <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
         <span className='visually-hidden'>{session.user?.name}</span>

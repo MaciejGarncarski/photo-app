@@ -31,7 +31,7 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    await prisma.postComments.deleteMany({
+    await prisma.postComment.deleteMany({
       where: {
         post_id: postIDToNum,
       },

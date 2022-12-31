@@ -1,8 +1,8 @@
-import { PostComments } from '@prisma/client';
+import { PostComment } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export type PostCommentsWithIsLiked = PostComments & {
+export type PostCommentsWithIsLiked = PostComment & {
   isLiked: boolean;
   likesCount: number;
 };

@@ -49,7 +49,7 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
 
   const prefetchUser = async () => {
     await queryClient.prefetchQuery({
-      queryKey: [{ account: authorData.user.username }],
+      queryKey: ['account', authorData.user.username],
     });
   };
 
@@ -62,7 +62,7 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
         </Link>
         {data && (
           <div className={styles.options}>
-            {!isAuthor && <FollowButton className={styles.followBtn} isFollowing={false} />}
+            {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
             <Tooltip variant='right' content='Post menu'>
               <button type='button' className={styles.optionsButton} onClick={onModalOpen}>
                 <AiOutlineMenu />
