@@ -1,4 +1,3 @@
-import { NextSeo } from 'next-seo';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import styles from './home.module.scss';
@@ -6,8 +5,6 @@ import styles from './home.module.scss';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
-
-import { APP_NAME } from '@/pages';
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
@@ -26,8 +23,6 @@ export const Home = () => {
 
   return (
     <main className={styles.posts}>
-      <NextSeo title={APP_NAME} description='Social app, created to post pictures.' />
-
       {data.pages.map((page) => {
         return page.posts.map((post) => {
           return <HomepagePost key={post.id} post={post} />;
