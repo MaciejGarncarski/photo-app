@@ -25,12 +25,12 @@ export const AccountPost = ({ post }: AccountPostProps) => {
     <MotionLink
       shallow
       href={`/post/${id}`}
-      initial='hidden'
-      whileHover='visible'
+      initial="hidden"
+      whileHover="visible"
       transition={{ type: 'tween', duration: 0.15 }}
       className={styles.container}
     >
-      <Image className={styles.image} src={images} alt='' width={300} height={300} priority />
+      <Image className={styles.image} src={images} alt="" width={300} height={300} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>
           <Icon.Heart /> {likesCount}

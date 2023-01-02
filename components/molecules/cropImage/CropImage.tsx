@@ -18,13 +18,7 @@ type CropImageProps = {
   setFinalImg: (img: Blob | null) => void;
 };
 
-export type ImageErrors =
-  | null
-  | 'DIMENSIONS'
-  | 'FILE_SIZE'
-  | 'INVALID_TYPE'
-  | 'NO_IMAGE_DETECTED'
-  | 'TOO_MANY_IMAGES';
+export type ImageErrors = null | 'DIMENSIONS' | 'FILE_SIZE' | 'INVALID_TYPE' | 'NO_IMAGE_DETECTED' | 'TOO_MANY_IMAGES';
 
 export const CropImage = ({ setFinalImg }: CropImageProps) => {
   const [imgSrc, setImgSrc] = useState('');
@@ -79,8 +73,8 @@ export const CropImage = ({ setFinalImg }: CropImageProps) => {
       <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
       <CreatePostItemContainer>
         <div className={styles.cropContainer}>
-          <h3 className='heading'>Crop your image</h3>
-          <Button variant='secondary' onClick={chooseDiffrentImage}>
+          <h3 className="heading">Crop your image</h3>
+          <Button variant="secondary" onClick={chooseDiffrentImage}>
             Choose diffrent image
           </Button>
         </div>
@@ -92,13 +86,7 @@ export const CropImage = ({ setFinalImg }: CropImageProps) => {
           aspect={aspect}
           className={styles.reactCrop}
         >
-          <img
-            ref={imgRef}
-            alt='Crop me'
-            src={imgSrc}
-            onLoad={onImageLoad}
-            onError={onImageError}
-          />
+          <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} onError={onImageError} />
         </ReactCrop>
       </CreatePostItemContainer>
     </>

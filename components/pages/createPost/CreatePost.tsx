@@ -47,8 +47,8 @@ export const CreatePost = () => {
 
   if (isLoading) {
     return (
-      <section className={styles.loadingContainer} aria-labelledby='Upload loading'>
-        <Heading tag='h2' variant='center'>
+      <section className={styles.loadingContainer} aria-labelledby="Upload loading">
+        <Heading tag="h2" variant="center">
           Uploading your post
         </Heading>
         <Loading />
@@ -57,35 +57,35 @@ export const CreatePost = () => {
   }
 
   return (
-    <section aria-labelledby='Create new post' className={styles.createPost}>
-      <NextSeo title='Create new post' />
-      <Heading tag='h2' className={styles.heading}>
+    <section aria-labelledby="Create new post" className={styles.createPost}>
+      <NextSeo title="Create new post" />
+      <Heading tag="h2" className={styles.heading}>
         Create new post
       </Heading>
       <div className={styles.addPhoto}>
-        <Heading tag='h3'>Add photo</Heading>
+        <Heading tag="h3">Add photo</Heading>
         <CropImage setFinalImg={setFinalImg} />
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
-          <Heading tag='h3'>Info about post</Heading>
+          <Heading tag="h3">Info about post</Heading>
           <div className={styles.textAreaContainer}>
             <textarea
-              id='description'
+              id="description"
               className={styles.textArea}
               cols={30}
               rows={10}
               {...register('description')}
             ></textarea>
-            <label htmlFor='description' className={styles.label}>
+            <label htmlFor="description" className={styles.label}>
               Description
             </label>
           </div>
           <div className={styles.actionButtons}>
-            <Button variant='secondary' onClick={handleCancel}>
+            <Button variant="secondary" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button type='submit' disabled={Boolean(!dirtyFields.description || !finalImg)}>
+            <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImg)}>
               Complete
             </Button>
           </div>

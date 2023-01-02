@@ -80,15 +80,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(httpCodes.Unauthorized).send({ status: responseMessages.Unauthorized });
       }
       const count = await countUser(userData?.id ?? '');
-      return res
-        .status(httpCodes.Success)
-        .send({ user: userData, count, isFollowing: Boolean(isFollowing) });
+      return res.status(httpCodes.Success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
     }
 
     const count = await countUser(user);
-    res
-      .status(httpCodes.Success)
-      .send({ user: userData, count, isFollowing: Boolean(isFollowing) });
+    res.status(httpCodes.Success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
   } catch (error) {
     res.status(httpCodes.Forbidden).send({ status: responseMessages.Forbidden, error });
   }

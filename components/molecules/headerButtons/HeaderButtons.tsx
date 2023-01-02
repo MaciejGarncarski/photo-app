@@ -53,16 +53,7 @@ export const HeaderButtons = () => {
   return (
     <ul className={styles.list}>
       {listData.map(({ icon, alt, onClick, href, title }) => {
-        return (
-          <HeaderButton
-            icon={icon}
-            alt={alt}
-            onClick={onClick}
-            href={href}
-            title={title}
-            key={title}
-          />
-        );
+        return <HeaderButton icon={icon} alt={alt} onClick={onClick} href={href} title={title} key={title} />;
       })}
 
       {data?.user.username && <AccountIcon id={session.user?.id ?? ''} />}

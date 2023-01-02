@@ -18,6 +18,6 @@ export const useAuth = () => {
         signOut,
         sessionUserData: sessionUserData.data,
       } as const),
-    [session, sessionUserData, status]
+    [session, sessionUserData, status],
   );
 };

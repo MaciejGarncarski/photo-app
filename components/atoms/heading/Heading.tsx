@@ -15,7 +15,5 @@ type HeadingProps = Children & {
 };
 
 export const Heading = ({ children, variant, tag: Tag = 'h2', className }: HeadingProps) => {
-  return (
-    <Tag className={clsx(variant && styles[variant], className, styles.heading)}>{children}</Tag>
-  );
+  return <Tag className={clsx(variant && styles[variant], className, styles.heading)}>{children}</Tag>;
 };

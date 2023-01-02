@@ -35,12 +35,7 @@ type ButtonProps = {
 
 const Button = ({ children, onClick }: ButtonProps) => {
   return (
-    <motion.button
-      whileTap={{ scale: 0.8 }}
-      type='button'
-      onClick={onClick}
-      className={styles.button}
-    >
+    <motion.button whileTap={{ scale: 0.8 }} type="button" onClick={onClick} className={styles.button}>
       {children}
     </motion.button>
   );
@@ -97,9 +92,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
           {collectionMutation.isLoading ? (
             <Loading variants={['very-small']} />
           ) : (
-            <Button onClick={handleCollection}>
-              {isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}
-            </Button>
+            <Button onClick={handleCollection}>{isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}</Button>
           )}
         </Item>
       )}
@@ -109,7 +102,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
           <AnimatePresence>
             <PostModal post={post} />
           </AnimatePresence>,
-          document.body
+          document.body,
         )}
     </ul>
   );

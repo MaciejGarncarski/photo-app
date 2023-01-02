@@ -7,7 +7,7 @@ export async function canvasPreview(
   canvas: HTMLCanvasElement,
   crop: PixelCrop,
   scale = 1,
-  rotate = 0
+  rotate = 0,
 ) {
   const ctx = canvas.getContext('2d');
 
@@ -39,17 +39,7 @@ export async function canvasPreview(
   ctx.rotate(rotateRads);
   ctx.scale(scale, scale);
   ctx.translate(-centerX, -centerY);
-  ctx.drawImage(
-    image,
-    0,
-    0,
-    image.naturalWidth,
-    image.naturalHeight,
-    0,
-    0,
-    image.naturalWidth,
-    image.naturalHeight
-  );
+  ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, 0, 0, image.naturalWidth, image.naturalHeight);
 
   ctx.restore();
 
@@ -64,7 +54,7 @@ export async function canvasPreview(
         }
       },
       'image/webp',
-      0.65
+      0.65,
     );
   });
 

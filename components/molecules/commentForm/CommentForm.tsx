@@ -39,7 +39,7 @@ export const CommentForm = ({ post }: CommentFormProps) => {
         postId,
       });
     },
-    { onSuccess: () => reset() }
+    { onSuccess: () => reset() },
   );
 
   const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
@@ -48,13 +48,8 @@ export const CommentForm = ({ post }: CommentFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>
-      <textarea
-        className={styles.commentInput}
-        {...register('comment')}
-        rows={3}
-        cols={25}
-      ></textarea>
-      <Button type='submit' className={styles.postButton} disabled={!isDirty}>
+      <textarea className={styles.commentInput} {...register('comment')} rows={3} cols={25}></textarea>
+      <Button type="submit" className={styles.postButton} disabled={!isDirty}>
         post
       </Button>
     </form>

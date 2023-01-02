@@ -22,7 +22,7 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
     ['infinite comments', postId],
     async ({ pageParam = 0 }) => {
       const { data } = await axios.get<InfiniteComments>(
-        `/api/post/infiniteComments?skip=${pageParam}&postId=${postId}`
+        `/api/post/infiniteComments?skip=${pageParam}&postId=${postId}`,
       );
       return data;
     },
@@ -32,6 +32,6 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
       getNextPageParam: (prevPosts) => {
         return prevPosts.cursor ?? undefined;
       },
-    }
+    },
   );
 };

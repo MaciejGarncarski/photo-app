@@ -31,7 +31,7 @@ export const FollowButton = ({ userId, className }: FollowButtonProps) => {
       onSettled: async () => {
         await queryClient.invalidateQueries(['account', userId]);
       },
-    }
+    },
   );
 
   if (isLoading) {

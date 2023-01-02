@@ -36,11 +36,7 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
         <>
           {parse(showMore ? descriptionWithNewLine : shortDescription)}
           &nbsp;
-          <button
-            className={styles.showMore}
-            type='button'
-            onClick={() => setShowMore((prev) => !prev)}
-          >
+          <button className={styles.showMore} type="button" onClick={() => setShowMore((prev) => !prev)}>
             show {showMore ? 'less' : 'more'}
           </button>
         </>
@@ -76,7 +72,7 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
           <Description />
         </p>
         <p className={styles.date}>
-          <Tooltip variant='top' content={formattedDate}>
+          <Tooltip variant="top" content={formattedDate}>
             <time dateTime={created_at.toString()}>{fromNow}</time>
           </Tooltip>
         </p>

@@ -33,9 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
     res.status(200).send({ status: 'ok' });
   } catch (error) {
-    res
-      .status(400)
-      .send({ status: 'error', message: 'Something went wrong, error while updating' });
+    res.status(400).send({ status: 'error', message: 'Something went wrong, error while updating' });
   }
 };
 

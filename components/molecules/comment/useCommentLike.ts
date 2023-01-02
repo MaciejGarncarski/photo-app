@@ -19,6 +19,6 @@ export const useCommentLike = ({ commentId }: Mutation) => {
       onSettled: async () => {
         await queryClient.invalidateQueries(['infinite comments']);
       },
-    }
+    },
   );
 };

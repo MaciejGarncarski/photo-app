@@ -96,7 +96,7 @@ const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       const postsWithCount = await Promise.all(
-        posts.map((collectionPost) => transformCollectionPost({ collectionPost, session }))
+        posts.map((collectionPost) => transformCollectionPost({ collectionPost, session })),
       );
 
       const { postsCount, nextCursor } = infinitePostsCount({ count: _count.id, skipNumber });

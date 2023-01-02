@@ -70,7 +70,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           commentsCount: post._count.posts_comments,
           isInCollection: isSignedUp ? Boolean(isInCollection) : false,
         };
-      })
+      }),
     );
 
     if (session) {
@@ -84,7 +84,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           });
 
           return { ...post, isLiked: Boolean(like) };
-        })
+        }),
       );
 
       res.status(200).send({ posts: postsWithLikesData, postsCount, cursor: nextCursor });

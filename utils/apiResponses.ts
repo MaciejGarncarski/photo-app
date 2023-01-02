@@ -1,10 +1,4 @@
-type ResponseNames =
-  | 'Bad_request'
-  | 'Unauthorized'
-  | 'Forbidden'
-  | 'Not_found'
-  | 'Wrong_method'
-  | 'Success';
+type ResponseNames = 'Bad_request' | 'Unauthorized' | 'Forbidden' | 'Not_found' | 'Wrong_method' | 'Success';
 
 export const httpCodes: Record<ResponseNames, number> = {
   Bad_request: 400,

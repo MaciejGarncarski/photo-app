@@ -39,7 +39,7 @@ const Nav = ({ children }: Children) => {
 export const Header = () => {
   return (
     <header className={styles.header}>
-      <Link href='/' className={styles.anchor}>
+      <Link href="/" className={styles.anchor}>
         <h1 className={styles.heading}>{APP_NAME}</h1>
       </Link>
       <LayoutSearch />

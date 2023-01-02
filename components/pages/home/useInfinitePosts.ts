@@ -9,9 +9,7 @@ export const useInfinitePosts = () => {
   return useInfiniteQuery(
     ['homepage infinite posts'],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<InfinitePosts<PostData>>(
-        `/api/post/infinitePosts?skip=${pageParam}`
-      );
+      const { data } = await axios.get<InfinitePosts<PostData>>(`/api/post/infinitePosts?skip=${pageParam}`);
       return data;
     },
 
@@ -20,6 +18,6 @@ export const useInfinitePosts = () => {
       getNextPageParam: (prevPosts) => {
         return prevPosts.cursor ?? undefined;
       },
-    }
+    },
   );
 };

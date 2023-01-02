@@ -24,9 +24,7 @@ export const useCollection = ({ userID }: UseCollection) => {
   return useInfiniteQuery(
     ['collection', userID],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<InfinitePosts<PostData>>(
-        `/api/collection?skip=${pageParam}&user=${userID}`
-      );
+      const { data } = await axios.get<InfinitePosts<PostData>>(`/api/collection?skip=${pageParam}&user=${userID}`);
       return data;
     },
 
@@ -35,6 +33,6 @@ export const useCollection = ({ userID }: UseCollection) => {
       getNextPageParam: (prevPosts) => {
         return prevPosts.cursor ?? undefined;
       },
-    }
+    },
   );
 };

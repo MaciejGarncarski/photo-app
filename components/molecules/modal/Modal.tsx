@@ -36,12 +36,7 @@ const ModalList = ({ children }: Children) => {
 const ModalItem = ({ children, variant, isFirst, onClick }: ModalItemProps) => {
   return (
     <li className={clsx(isFirst && styles['item-first'], styles[`item-${variant}`], styles.item)}>
-      <button
-        type='button'
-        className={styles.itemButton}
-        onClick={onClick}
-        disabled={Boolean(!onClick)}
-      >
+      <button type="button" className={styles.itemButton} onClick={onClick} disabled={Boolean(!onClick)}>
         {children}
       </button>
     </li>
@@ -68,11 +63,11 @@ const ModalClose = ({ onClose }: ModalCloseProps) => {
       whileFocus={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       className={styles.closeButton}
-      type='button'
+      type="button"
       onClick={onClose}
     >
       <Icon.Close />
-      <span className='visually-hidden'>Close dialog</span>
+      <span className="visually-hidden">Close dialog</span>
     </motion.button>
   );
 };
@@ -81,11 +76,11 @@ const ModalContainer = ({ children }: Children) => {
   return (
     <motion.div
       variants={dialogVariant}
-      initial='hidden'
-      exit='exit'
-      animate='visible'
+      initial="hidden"
+      exit="exit"
+      animate="visible"
       className={styles.dialog}
-      role='dialog'
+      role="dialog"
     >
       {children}
     </motion.div>

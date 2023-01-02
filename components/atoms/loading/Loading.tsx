@@ -13,7 +13,7 @@ export const Loading = ({ variants }: LoadingProps) => {
 
   return (
     <div className={clsx(variantClassName, styles.container)}>
-      <span className='visually-hidden'>loading</span>
+      <span className="visually-hidden">loading</span>
     </div>
   );
 };

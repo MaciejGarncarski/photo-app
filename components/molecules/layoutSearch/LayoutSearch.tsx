@@ -49,18 +49,12 @@ export const LayoutSearch = () => {
             <SearchIcon />
           </div>
         )}
-        <span className='visually-hidden'>Search</span>
-        <input
-          className={styles.input}
-          type='text'
-          placeholder='Search'
-          onClick={handleClick}
-          {...register('input')}
-        />
+        <span className="visually-hidden">Search</span>
+        <input className={styles.input} type="text" placeholder="Search" onClick={handleClick} {...register('input')} />
       </label>
       {isEnabled && (
-        <button type='reset' onClick={handleReset} className={styles.resetIcon}>
-          <span className='visually-hidden'>reset input</span>
+        <button type="reset" onClick={handleReset} className={styles.resetIcon}>
+          <span className="visually-hidden">reset input</span>
           <ResetIcon />
         </button>
       )}

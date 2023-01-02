@@ -16,6 +16,6 @@ export const useDeleteComment = () => {
       onSettled: async () => {
         await queryClient.invalidateQueries(['infinite comments']);
       },
-    }
+    },
   );
 };

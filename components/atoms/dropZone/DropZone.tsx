@@ -44,7 +44,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
       const file = dt.files[0];
       handleDropImage({ file, setError, setFileName, setImgSrc });
     },
-    [setError, setImgSrc]
+    [setError, setImgSrc],
   );
 
   const openInput = () => {
@@ -57,9 +57,9 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
   return (
     <>
       <input
-        data-testid='fileInput'
-        type='file'
-        accept='image/*'
+        data-testid="fileInput"
+        type="file"
+        accept="image/*"
         className={clsx('visually-hidden', styles.input)}
         ref={inputRef}
         onChange={handleImage}
