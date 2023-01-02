@@ -63,17 +63,15 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
         {data && (
           <div className={styles.options}>
             {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
-            <Tooltip variant='right' content='Post menu'>
-              <button type='button' className={styles.optionsButton} onClick={onModalOpen}>
+            <Tooltip variant="right" content="Post menu">
+              <button type="button" className={styles.optionsButton} onClick={onModalOpen}>
                 <AiOutlineMenu />
               </button>
             </Tooltip>
           </div>
         )}
       </Tag>
-      <AnimatePresence>
-        {isOpen && <PostOptions post={post} setIsOpen={setIsOpen} />}
-      </AnimatePresence>
+      <AnimatePresence>{isOpen && <PostOptions post={post} setIsOpen={setIsOpen} />}</AnimatePresence>
     </>
   );
 };

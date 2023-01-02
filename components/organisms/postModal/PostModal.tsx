@@ -49,15 +49,15 @@ export const PostModal = ({ post }: PostModalProps) => {
     <Modal.Overlay setOpen={setIsModalOpen}>
       <motion.div
         variants={dialogVariant}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-        role='dialog'
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        role="dialog"
         className={styles.container}
       >
         <Modal.Close onClose={() => setIsModalOpen(false)} />
         <PostHeader
-          tag='div'
+          tag="div"
           variant={isMobile ? undefined : 'no-margin-left'}
           className={styles.postHeader}
           post={post}
@@ -66,13 +66,13 @@ export const PostModal = ({ post }: PostModalProps) => {
         <Image
           className={clsx(isImgLoading && styles.imgLoading, styles.postImg)}
           src={post.images}
-          alt='post'
+          alt="post"
           onLoad={() => setIsImgLoading(false)}
           width={200}
           height={200}
         />
         <section className={styles.commentsContainer}>
-          <Heading tag='h2'>Comments</Heading>
+          <Heading tag="h2">Comments</Heading>
           <div className={styles.comments} ref={sentryRef}>
             {commentsCount > 0 && (
               <>

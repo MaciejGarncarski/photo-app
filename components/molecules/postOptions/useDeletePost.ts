@@ -16,6 +16,6 @@ export const useDeletePost = () => {
       onSettled: async () => {
         await queryClient.invalidateQueries(['homepage infinite posts']);
       },
-    }
+    },
   );
 };

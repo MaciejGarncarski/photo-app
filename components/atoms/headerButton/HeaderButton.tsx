@@ -10,7 +10,7 @@ export const HeaderButton = ({ href, onClick, alt, title, icon }: ListData) => {
   if (href) {
     return (
       <li className={styles.listItemChild}>
-        <Tooltip variant='bottom' content={alt}>
+        <Tooltip variant="bottom" content={alt}>
           <span className={styles.listItem}>
             <Link href={href} className={clsx(styles.listItemChild)}>
               {icon}
@@ -27,12 +27,12 @@ export const HeaderButton = ({ href, onClick, alt, title, icon }: ListData) => {
       <li>
         <button
           className={clsx(styles.listItemChild, styles.listItemButton)}
-          type='button'
+          type="button"
           onClick={onClick}
           data-tip={alt}
         >
           {icon}
-          <span className='visually-hidden'>{alt}</span>
+          <span className="visually-hidden">{alt}</span>
           <span className={styles.listItemTitle}>{title}</span>
         </button>
       </li>

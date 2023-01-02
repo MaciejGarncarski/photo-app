@@ -25,7 +25,7 @@ const COOKIE_CONSTENST =
   'By using this app, you accept saving and reading necessary cookies to run this app by your browser.';
 
 const CompleteSignUp = dynamic(() =>
-  namedComponent(import('@/components/molecules/completeSignUp/CompleteSignUp'), 'CompleteSignUp')
+  namedComponent(import('@/components/molecules/completeSignUp/CompleteSignUp'), 'CompleteSignUp'),
 );
 
 export const Layout = ({ children }: LayoutProps) => {
@@ -63,15 +63,15 @@ export const Layout = ({ children }: LayoutProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ y: 250, transition: { type: 'tween' } }}
-              role='dialog'
+              role="dialog"
               className={styles.cookies}
             >
               <p>{COOKIE_CONSTENST}</p>
               <div className={styles.cookiesButtons}>
-                <Button type='button' variant='secondary' onClick={handleCookies}>
+                <Button type="button" variant="secondary" onClick={handleCookies}>
                   Don&apos;t show again
                 </Button>
-                <Button type='button' onClick={handleClose}>
+                <Button type="button" onClick={handleClose}>
                   Close
                 </Button>
               </div>

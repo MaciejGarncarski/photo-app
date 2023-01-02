@@ -54,7 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           },
         });
         return { ...comment, isLiked: Boolean(isLiked), likesCount: likesCount._count.comment_id };
-      })
+      }),
     );
 
     const commentsCount = _count.id;

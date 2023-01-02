@@ -9,9 +9,9 @@ export const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect
       },
       aspect,
       mediaWidth,
-      mediaHeight
+      mediaHeight,
     ),
     mediaWidth,
-    mediaHeight
+    mediaHeight,
   );
 };

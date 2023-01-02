@@ -5,7 +5,7 @@ const FourOFour = () => {
     <main>
       <h2>404</h2>
       <p>not found</p>
-      <Link href='/'>go back to homepage</Link>
+      <Link href="/">go back to homepage</Link>
     </main>
   );
 };

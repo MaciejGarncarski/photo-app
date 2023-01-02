@@ -34,8 +34,6 @@ export const tooltipVariant: Variants = {
   },
 };
 
-const TIMEOUT = 300;
-
 export const AccountIcon = ({ id }: AccountIconProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
@@ -84,7 +82,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
       className={commonStyles.accountIconContainer}
     >
       <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
-        <span className='visually-hidden'>{session.user?.name}</span>
+        <span className="visually-hidden">{session.user?.name}</span>
         {session.user?.id && <Avatar userId={session.user?.id} />}
         <span className={commonStyles.listItemTitle}>Account</span>
       </button>
@@ -93,20 +91,16 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
           <motion.div
             className={styles.options}
             variants={tooltipVariant}
-            animate='animate'
-            initial='initial'
-            exit='exit'
+            animate="animate"
+            initial="initial"
+            exit="exit"
           >
             <div className={styles.square}></div>
             <p className={styles.welcome}>Hi, {account?.username}</p>
-            <Link
-              href={`/${account?.username}`}
-              className={styles.link}
-              onClick={() => setIsOptionsOpen(false)}
-            >
+            <Link href={`/${account?.username}`} className={styles.link} onClick={() => setIsOptionsOpen(false)}>
               <AiOutlineUser /> your account
             </Link>
-            <button type='button' className={styles.signOut} onClick={() => signOut()}>
+            <button type="button" className={styles.signOut} onClick={() => signOut()}>
               Sign out
             </button>
           </motion.div>

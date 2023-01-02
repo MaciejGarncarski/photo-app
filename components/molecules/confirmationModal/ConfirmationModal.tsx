@@ -11,9 +11,9 @@ export const ConfirmationModal = ({ setIsOpen, onConfirm, onCancel }: Confirmati
   return (
     <Modal.Overlay setOpen={setIsOpen}>
       <Modal.Container>
-        <Modal.Heading variant='red' text='Are you sure?' />
+        <Modal.Heading variant="red" text="Are you sure?" />
         <Modal.List>
-          <Modal.Item isFirst variant='red' onClick={() => onConfirm()}>
+          <Modal.Item isFirst variant="red" onClick={() => onConfirm()}>
             <Icon.Trash />
             Yes, delete
           </Modal.Item>

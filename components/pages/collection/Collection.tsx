@@ -18,8 +18,8 @@ export const Collection = () => {
 
   return (
     <main className={styles.container}>
-      <NextSeo title='Post collection' />
-      <Heading tag='h2' className={styles.heading}>
+      <NextSeo title="Post collection" />
+      <Heading tag="h2" className={styles.heading}>
         Your post collection
       </Heading>
       {data.pages.map((page) => {

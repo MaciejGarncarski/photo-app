@@ -26,7 +26,7 @@ describe('<CreatePost />', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <CreatePost />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
   });
 

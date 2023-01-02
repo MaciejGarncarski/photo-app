@@ -10,27 +10,13 @@ type UseCreateImg = {
   setFinalImg: (image: Blob) => void;
 };
 
-export const useCreateImg = ({
-  completedCrop,
-  imgRef,
-  previewCanvasRef,
-  setFinalImg,
-}: UseCreateImg) => {
+export const useCreateImg = ({ completedCrop, imgRef, previewCanvasRef, setFinalImg }: UseCreateImg) => {
   useEffect(() => {
     const createImg = async () => {
-      if (
-        !imgRef.current ||
-        !previewCanvasRef.current ||
-        !completedCrop?.height ||
-        !completedCrop.width
-      ) {
+      if (!imgRef.current || !previewCanvasRef.current || !completedCrop?.height || !completedCrop.width) {
         return;
       }
-      const { toBlob } = await canvasPreview(
-        imgRef.current,
-        previewCanvasRef.current,
-        completedCrop
-      );
+      const { toBlob } = await canvasPreview(imgRef.current, previewCanvasRef.current, completedCrop);
 
       setFinalImg(await toBlob);
     };

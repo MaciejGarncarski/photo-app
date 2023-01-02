@@ -24,6 +24,6 @@ export const usePostLike = () => {
         queryClient.invalidateQueries(['homepage infinite posts']);
         queryClient.invalidateQueries(['collection']);
       },
-    }
+    },
   );
 };

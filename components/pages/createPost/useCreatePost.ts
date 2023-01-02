@@ -36,6 +36,6 @@ export const useCreatePost = () => {
       onSuccess: () => {
         push('/');
       },
-    }
+    },
   );
 };

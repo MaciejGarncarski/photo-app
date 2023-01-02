@@ -15,9 +15,7 @@ import { useAccount } from '@/components/pages/account/useAccount';
 
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
-export const fullName = z
-  .string()
-  .min(4, { message: 'Full name must contain at least 2 characters' });
+export const fullName = z.string().min(4, { message: 'Full name must contain at least 2 characters' });
 export const username = z
   .string()
   .min(4, { message: 'Username must contain at least 4 characters' })
@@ -70,26 +68,21 @@ export const CompleteSignUp = () => {
   };
 
   return (
-    <div className={styles.dialog} role='dialog'>
-      <Heading tag='h2' className={styles.heading}>
+    <div className={styles.dialog} role="dialog">
+      <Heading tag="h2" className={styles.heading}>
         Complete your sign up
       </Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <Input labelText="Username" error={errors.username} isDirty={dirtyFields.username} {...register('username')} />
         <Input
-          labelText='Username'
-          error={errors.username}
-          isDirty={dirtyFields.username}
-          {...register('username')}
-        />
-        <Input
-          labelText='Full name'
+          labelText="Full name"
           error={errors.fullName}
           isEmpty={defaultValues?.fullName?.trim() === ''}
           isDirty={dirtyFields.fullName}
           {...register('fullName')}
         />
         <Input
-          labelText='Bio'
+          labelText="Bio"
           error={errors.bio}
           isEmpty={defaultValues?.bio?.trim() === ''}
           isDirty={dirtyFields.bio}
@@ -97,10 +90,10 @@ export const CompleteSignUp = () => {
           {...register('fullName')}
         />
         <div className={styles.buttons}>
-          <Button type='button' variant='secondary' onClick={() => signOut()}>
+          <Button type="button" variant="secondary" onClick={() => signOut()}>
             sign out
           </Button>
-          <Button type='submit'>looks good</Button>
+          <Button type="submit">looks good</Button>
         </div>
       </form>
     </div>

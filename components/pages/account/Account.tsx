@@ -88,15 +88,15 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
         {!isOwner && <FollowButton className={styles.followButton} userId={data.user.id} />}
         {isOwner && (
-          <button type='button' onClick={openMenu} className={styles.menuButton}>
-            <span className='visually-hidden'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
+          <button type="button" onClick={openMenu} className={styles.menuButton}>
+            <span className="visually-hidden">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
             <AiOutlineMenu />
           </button>
         )}
       </main>
       {isMenuOpen && (
         <ModalOverlay setOpen={setIsMenuOpen}>
-          <div role='dialog' className={styles.menu}>
+          <div role="dialog" className={styles.menu}>
             <ul className={styles.menuList}>
               <li>hej</li>
               <li>hej</li>

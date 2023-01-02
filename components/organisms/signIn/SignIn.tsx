@@ -27,20 +27,16 @@ export const SignIn = () => {
 
   return (
     <main className={styles.container}>
-      <Heading tag='h2'>Sign in</Heading>
+      <Heading tag="h2">Sign in</Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input labelText='E-mail' type='email' {...register('email')} />
-        <Button type='submit'>Sign in with email</Button>
+        <Input labelText="E-mail" type="email" {...register('email')} />
+        <Button type="submit">Sign in with email</Button>
       </form>
       <div className={styles.separator}>
         <p className={styles.orWith}>or</p>
       </div>
       <div className={styles.other}>
-        <Button
-          className={styles.button}
-          type='button'
-          onClick={() => signIn('google', { redirect: true })}
-        >
+        <Button className={styles.button} type="button" onClick={() => signIn('google', { redirect: true })}>
           <AiOutlineGoogle />
           <p className={styles.google}>Google</p>
         </Button>

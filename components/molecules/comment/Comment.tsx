@@ -37,19 +37,13 @@ export const Comment = ({ commentData }: CommentProps) => {
   const handleDelete = () => commentDelete.mutate({ commentId: id });
   const onDeleteBtnClick = () => setIsDeleting(true);
 
-  const isAbleToDelete =
-    sessionUserData?.user.id === user_id || sessionUserData?.user.role === 'ADMIN';
+  const isAbleToDelete = sessionUserData?.user.id === user_id || sessionUserData?.user.role === 'ADMIN';
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
   return (
     <motion.article className={styles.comment}>
       <Link href={`/${sessionUserData?.user.username}`}>
-        <Avatar
-          userId={user_id}
-          className={styles.avatar}
-          width={POST_AVATAR_SIZE}
-          height={POST_AVATAR_SIZE}
-        />
+        <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
       <div className={styles.commentText}>
         <Link href={`/${sessionUserData?.user.username}`}>
@@ -59,28 +53,24 @@ export const Comment = ({ commentData }: CommentProps) => {
       </div>
 
       <div className={styles.info}>
-        <Tooltip variant='right' content={formattedDate}>
+        <Tooltip variant="right" content={formattedDate}>
           <p className={styles.createdAt}>
             <time dateTime={created_at.toString()}>{timeSinceCreated}</time>
           </p>
         </Tooltip>
-        <button type='button' onClick={handleLike} className={styles.likeBtn}>
+        <button type="button" onClick={handleLike} className={styles.likeBtn}>
           {isLiked ? <Icon.HeartActive /> : <Icon.Heart />}
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
         {isAbleToDelete && (
-          <button type='button' onClick={onDeleteBtnClick} className={styles.likeBtn}>
+          <button type="button" onClick={onDeleteBtnClick} className={styles.likeBtn}>
             delete
           </button>
         )}
       </div>
 
       {isDeleting && (
-        <ConfirmationModal
-          onCancel={() => setIsDeleting(false)}
-          onConfirm={handleDelete}
-          setIsOpen={setIsDeleting}
-        />
+        <ConfirmationModal onCancel={() => setIsDeleting(false)} onConfirm={handleDelete} setIsOpen={setIsDeleting} />
       )}
     </motion.article>
   );

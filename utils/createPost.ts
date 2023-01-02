@@ -8,11 +8,7 @@ import { string } from '@/utils/string';
 
 import { FormidableResult } from '@/pages/api/post';
 
-export const createPost = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  formData: FormidableResult
-) => {
+export const createPost = async (req: NextApiRequest, res: NextApiResponse, formData: FormidableResult) => {
   const { fields, files } = formData;
 
   try {

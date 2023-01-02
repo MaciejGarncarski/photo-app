@@ -52,11 +52,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
 
   if (isDeleting) {
     return (
-      <ConfirmationModal
-        onCancel={() => setIsDeleting(false)}
-        onConfirm={handleDeletePost}
-        setIsOpen={setIsDeleting}
-      />
+      <ConfirmationModal onCancel={() => setIsDeleting(false)} onConfirm={handleDeletePost} setIsOpen={setIsDeleting} />
     );
   }
 
@@ -94,7 +90,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
                 <Icon.Edit />
                 edit (not working)
               </Modal.Item>
-              <Modal.Item variant='red' onClick={() => setIsDeleting(true)}>
+              <Modal.Item variant="red" onClick={() => setIsDeleting(true)}>
                 <Icon.Trash />
                 Delete post
               </Modal.Item>

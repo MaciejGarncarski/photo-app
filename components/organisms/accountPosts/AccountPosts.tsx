@@ -19,10 +19,10 @@ export const AccountPosts = ({ id }: AccountPostsProps) => {
     [{ accountPosts: id }],
     async ({ pageParam = 0 }) => {
       const { data: axiosData } = await axios.get<InfinitePosts<PostData>>(
-        `/api/post/infinitePosts/${id}?skip=${pageParam}`
+        `/api/post/infinitePosts/${id}?skip=${pageParam}`,
       );
       return axiosData;
-    }
+    },
   );
 
   const [sentryRef] = useInfiniteScroll({

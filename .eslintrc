@@ -16,11 +16,10 @@
        "jest"
      ],
      "extends": [
-       "eslint:recommended",
+       "prettier",
        "next",
        "next/core-web-vitals",
-       "plugin:@typescript-eslint/recommended",
-       "prettier"
+       "plugin:@typescript-eslint/recommended"
      ],
      "rules": {
        "prettier/prettier": "error",

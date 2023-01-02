@@ -14,7 +14,7 @@ export const useUser = ({ id }: UseUser) => {
     },
     {
       enabled: Boolean(id),
-    }
+    },
   );
 
   return { ...user };
