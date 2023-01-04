@@ -26,6 +26,7 @@ export const useCollectionMutation = () => {
     {
       onSettled: async () => {
         await queryClient.invalidateQueries(['homepage infinite posts']);
+        await queryClient.invalidateQueries(['collection']);
       },
     },
   );

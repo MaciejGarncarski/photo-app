@@ -22,6 +22,7 @@ export const Collection = () => {
       <Heading tag="h2" className={styles.heading}>
         Your post collection
       </Heading>
+      {data.pages[0].posts.length < 1 && <p>No saved posts.</p>}
       {data.pages.map((page) => {
         return page.posts.map((post) => {
           return <HomepagePost key={post.id} post={post} />;

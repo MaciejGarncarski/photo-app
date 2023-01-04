@@ -8,7 +8,7 @@ import styles from './avatar.module.scss';
 import { useAccount } from '@/components/pages/account/useAccount';
 
 type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
-  userId: string;
+  userId?: string;
   className?: string;
 };
 
@@ -28,7 +28,7 @@ export const Avatar = ({
     return null;
   }
 
-  if (!data.user.customImage && !data.user.image) {
+  if ((!data.user.customImage && !data.user.image) || !userId) {
     return <AiOutlineUser className={clsx(className, styles.avatar)} />;
   }
 

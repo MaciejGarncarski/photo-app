@@ -1,20 +1,17 @@
-import { useAtom } from 'jotai';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { throttle } from 'throttle-debounce';
-
-import { isMobileAtom, screenWidthAtom } from '@/lib/state/scrollPos';
 
 const THROTTLE_DELAY = 400;
 
 export const useScreenWidth = () => {
-  const [, setIsMobile] = useAtom(isMobileAtom);
-  const [, setScreenWidth] = useAtom(screenWidthAtom);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [screenWidth, setScreenWidth] = useState<number>(1000);
 
   const throttledHandleResize = useMemo(() => {
     return throttle(THROTTLE_DELAY, () => {
-      const isMobile = window.innerWidth < 800 || false;
+      const isMobileDevice = window.innerWidth < 800 || false;
       setScreenWidth(window.innerWidth);
-      setIsMobile(isMobile);
+      setIsMobile(isMobileDevice);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -27,4 +24,6 @@ export const useScreenWidth = () => {
       window.removeEventListener('resize', throttledHandleResize);
     };
   }, [throttledHandleResize]);
+
+  return { screenWidth, isMobile };
 };

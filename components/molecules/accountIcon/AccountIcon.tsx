@@ -1,16 +1,14 @@
 import clsx from 'clsx';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
-
-import { isGoingUpAtom } from '@/lib/state/scrollPos';
 
 import styles from './accountIcon.module.scss';
 import commonStyles from '@/components/molecules/headerButtons/headerButtons.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
@@ -39,8 +37,7 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
   const containerRef = useRef<HTMLLIElement>(null);
   const { session, signOut } = useAuth();
   const { account } = useAccount({ id });
-
-  const [isGoingUp] = useAtom(isGoingUpAtom);
+  const { isGoingUp } = useScrollPosition();
 
   const onBtnClick = () => setIsOptionsOpen((prev) => !prev);
 
@@ -67,10 +64,6 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
     };
   }, []);
 
-  if (!session) {
-    return null;
-  }
-
   const handleOpen = () => setIsOptionsOpen(true);
   const handleClose = () => setIsOptionsOpen(false);
 
@@ -82,8 +75,8 @@ export const AccountIcon = ({ id }: AccountIconProps) => {
       className={commonStyles.accountIconContainer}
     >
       <button className={clsx(commonStyles.listItemChild, styles.button)} onClick={onBtnClick}>
-        <span className="visually-hidden">{session.user?.name}</span>
-        {session.user?.id && <Avatar userId={session.user?.id} />}
+        <span className="visually-hidden">{session?.user?.name}</span>
+        <Avatar userId={session?.user?.id} />
         <span className={commonStyles.listItemTitle}>Account</span>
       </button>
       <AnimatePresence>
