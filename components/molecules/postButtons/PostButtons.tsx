@@ -89,14 +89,20 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
   return (
     <ul className={styles.list}>
       <Item>
-        <Button onClick={handleLike}>{isLiked ? <Icon.HeartActive /> : <Icon.Heart />}</Button>
+        <Button onClick={handleLike}>
+          <span className="visually-hidden">like</span>
+          {isLiked ? <Icon.HeartActive /> : <Icon.Heart />}
+        </Button>
       </Item>
       <Item>
         <Button onClick={openModal}>
+          <span className="visually-hidden">comment</span>
+
           <Icon.Comment />
         </Button>
       </Item>
       <Item>
+        <span className="visually-hidden">share</span>
         <Icon.Share />
       </Item>
       {session?.user && (
