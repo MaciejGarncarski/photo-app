@@ -1,24 +1,23 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { memo } from 'react';
-
-import { isGoingUpAtom, isMobileAtom } from '@/lib/state/scrollPos';
 
 import styles from './header.module.scss';
 
 import { Children } from '@/components/Layout/Layout';
 import { HeaderButtons } from '@/components/molecules/headerButtons/HeaderButtons';
 import { LayoutSearch } from '@/components/molecules/layoutSearch/LayoutSearch';
+import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
+import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 
 import { APP_NAME } from '@/pages';
 
 const MemoHeaderButtons = memo(() => <HeaderButtons />);
 
 const Nav = ({ children }: Children) => {
-  const [isMobile] = useAtom(isMobileAtom);
-  const [isGoingUp] = useAtom(isGoingUpAtom);
+  const { isMobile } = useScreenWidth();
+  const { isGoingUp } = useScrollPosition();
 
   if (isMobile) {
     return (

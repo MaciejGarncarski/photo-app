@@ -1,19 +1,20 @@
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { postIdOfModalAtom, postModalAtom } from '@/lib/state/modal';
+import { namedComponent } from '@/utils/namedComponent';
 
 import styles from './postButtons.module.scss';
 
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { Children } from '@/components/Layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
-import { PostModal } from '@/components/organisms/postModal/PostModal';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { PostData } from '@/components/pages/collection/useCollection';
 
@@ -25,13 +26,17 @@ type ItemProps = {
   isLast?: boolean;
 } & Children;
 
-const Item = ({ children, isLast }: ItemProps) => {
-  return <li className={clsx(isLast && styles.itemLast, styles.item)}>{children}</li>;
-};
-
 type ButtonProps = {
   onClick: () => void;
 } & Children;
+
+const PostModal = dynamic(() => {
+  return namedComponent(import('@/components/organisms/postModal/PostModal'), 'PostModal');
+});
+
+const Item = ({ children, isLast }: ItemProps) => {
+  return <li className={clsx(isLast && styles.itemLast, styles.item)}>{children}</li>;
+};
 
 const Button = ({ children, onClick }: ButtonProps) => {
   return (
@@ -41,10 +46,14 @@ const Button = ({ children, onClick }: ButtonProps) => {
   );
 };
 
+type ModalState = {
+  isOpen: boolean;
+  postId: number;
+};
+
 export const PostButtons = ({ post }: PostButtonsProps) => {
   const { isLiked, id, isInCollection } = post;
-  const [isModalOpen, setModalOpen] = useAtom(postModalAtom);
-  const [postId, setPostId] = useAtom(postIdOfModalAtom);
+  const [modalState, setModalState] = useState<ModalState>({ isOpen: false, postId: 0 });
 
   const { session } = useAuth();
   const { push } = useRouter();
@@ -61,8 +70,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
   };
 
   const openModal = () => {
-    setModalOpen((prev) => !prev);
-    setPostId(post.id);
+    setModalState({ isOpen: true, postId: id });
   };
 
   const handleCollection = () => {
@@ -72,6 +80,10 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
     }
 
     collectionMutation.mutate({ type: undefined, postID: id });
+  };
+
+  const setIsOpen = (isOpen: boolean) => {
+    setModalState({ isOpen, postId: id });
   };
 
   return (
@@ -92,15 +104,17 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
           {collectionMutation.isLoading ? (
             <Loading variants={['very-small']} />
           ) : (
-            <Button onClick={handleCollection}>{isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}</Button>
+            <Tooltip variant="right" content={`${isInCollection ? 'Remove from' : 'Save to'} collection`}>
+              <Button onClick={handleCollection}>{isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}</Button>
+            </Tooltip>
           )}
         </Item>
       )}
-      {isModalOpen &&
-        postId === post.id &&
+      {modalState.isOpen &&
+        modalState.postId === id &&
         createPortal(
           <AnimatePresence>
-            <PostModal post={post} />
+            <PostModal post={post} setIsOpen={setIsOpen} />
           </AnimatePresence>,
           document.body,
         )}
