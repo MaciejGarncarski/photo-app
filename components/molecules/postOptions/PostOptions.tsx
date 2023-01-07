@@ -21,18 +21,18 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   const collectionMutation = useCollectionMutation();
   const deletePostMutation = useDeletePost();
   const { session } = useAuth();
-  const { data } = useAccount({ id: session?.user?.id ?? '' });
+  const { data } = useAccount({ userId: session?.user?.id ?? '' });
 
   const isAbleToModify = author.id === data?.user?.id || data?.user?.role === 'ADMIN';
 
   const onModalClose = () => setIsOpen(false);
 
   const handleCollection = () => {
-    collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postID: id });
+    collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postId: id });
   };
 
   const handleDeletePost = () => {
-    deletePostMutation.mutate({ postID: id });
+    deletePostMutation.mutate({ postId: id });
   };
 
   if (deletePostMutation.isLoading) {

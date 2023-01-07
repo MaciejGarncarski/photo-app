@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import styles from '@/components/molecules/headerButtons/headerButtons.module.scss';
+import styles from '@/components/molecules/navButtons/navButtons.module.scss';
 
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
-import { ListData } from '@/components/molecules/headerButtons/HeaderButtons';
+import { ListData } from '@/components/molecules/navButtons/NavButtons';
 
-export const HeaderButton = ({ href, onClick, alt, title, icon }: ListData) => {
+export const NavListButton = ({ href, onClick, alt, title, icon }: ListData) => {
   if (href) {
     return (
       <li className={styles.listItemChild}>

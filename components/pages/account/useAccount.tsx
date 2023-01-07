@@ -2,20 +2,19 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-const fetchAccount = async ({ id, username }: UseAccount) => {
+type UseAccount = {
+  username?: string;
+  userId?: string;
+};
+
+const fetchAccount = async ({ userId, username }: UseAccount) => {
   if (username) {
     const { data } = await axios.get(`/api/account/${username}?type=username`);
     return data;
   }
-  if (id) {
-    const { data } = await axios.get(`/api/account/${id}`);
-    return data;
-  }
-};
 
-type UseAccount = {
-  username?: string;
-  id?: string;
+  const { data } = await axios.get(`/api/account/${userId}`);
+  return data;
 };
 
 type UseAccountResponse = {
@@ -36,13 +35,13 @@ export type UsernameToIdResponse = {
   };
 };
 
-export const useAccount = ({ id, username }: UseAccount) => {
+export const useAccount = ({ userId, username }: UseAccount) => {
   const query = useQuery<UseAccountResponse>({
-    queryKey: ['account', id, username],
+    queryKey: ['account', userId, username],
     queryFn: async () => {
-      return fetchAccount({ id, username });
+      return fetchAccount({ userId, username });
     },
-    enabled: Boolean(id) || Boolean(username),
+    enabled: Boolean(userId) || Boolean(username),
   });
 
   return {

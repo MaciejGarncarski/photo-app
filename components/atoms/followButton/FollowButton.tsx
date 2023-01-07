@@ -13,7 +13,7 @@ type FollowButtonProps = {
 };
 
 export const FollowButton = ({ userId, className }: FollowButtonProps) => {
-  const { data } = useAccount({ id: userId });
+  const { data } = useAccount({ userId });
   const queryClient = useQueryClient();
 
   const { isLoading, mutate } = useMutation(

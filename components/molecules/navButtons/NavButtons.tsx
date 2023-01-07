@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
-import styles from './headerButtons.module.scss';
+import styles from './navButtons.module.scss';
 
-import { HeaderButton } from '@/components/atoms/headerButton/HeaderButton';
 import { Icon } from '@/components/atoms/icons/Icons';
+import { NavAccountIcon } from '@/components/atoms/navAccountIcon/NavAccountIcon';
+import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
 import { SignInButton } from '@/components/atoms/SignInButton/SignInButton';
-import { AccountIcon } from '@/components/molecules/accountIcon/AccountIcon';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
@@ -38,9 +38,9 @@ const listData: Array<ListData> = [
   },
 ];
 
-export const HeaderButtons = () => {
+export const NavButtons = () => {
   const { session, status } = useAuth();
-  const { data } = useAccount({ id: session?.user?.id });
+  const { data } = useAccount({ userId: session?.user?.id });
 
   if (status === 'loading') {
     return null;
@@ -53,10 +53,10 @@ export const HeaderButtons = () => {
   return (
     <ul className={styles.list}>
       {listData.map(({ icon, alt, onClick, href, title }) => {
-        return <HeaderButton icon={icon} alt={alt} onClick={onClick} href={href} title={title} key={title} />;
+        return <NavListButton icon={icon} alt={alt} onClick={onClick} href={href} title={title} key={title} />;
       })}
 
-      {data?.user.username && <AccountIcon id={session.user?.id ?? ''} />}
+      {data?.user.username && <NavAccountIcon userId={session.user?.id ?? ''} />}
     </ul>
   );
 };

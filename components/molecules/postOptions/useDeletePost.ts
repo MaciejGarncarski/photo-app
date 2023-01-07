@@ -2,15 +2,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 type DeletePostMutation = {
-  postID: number;
+  postId: number;
 };
 
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ postID }: DeletePostMutation) => {
-      await axios.delete(`/api/post?postID=${postID}`);
+    async ({ postId }: DeletePostMutation) => {
+      await axios.delete(`/api/post?postId=${postId}`);
     },
     {
       onSettled: async () => {

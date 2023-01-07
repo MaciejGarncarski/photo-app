@@ -6,7 +6,7 @@ import { useAccount } from '@/components/pages/account/useAccount';
 export const useAuth = () => {
   const { data: session, status } = useSession();
 
-  const sessionUserData = useAccount({ id: session?.user?.id });
+  const sessionUserData = useAccount({ userId: session?.user?.id });
 
   return useMemo(
     () =>

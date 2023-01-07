@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
+import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
@@ -14,17 +16,30 @@ export type InfinitePosts<T> = {
   cursor: number | null;
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'GET') {
-    res.status(405).send({ status: 405, error: 'Invalid metod' });
-    return;
-  }
-  const { skip } = req.query;
-  const session = await unstable_getServerSession(req, res, authOptions);
-  const isSignedUp = Boolean(session?.user?.id);
+const InfinitePostsSchema = z.object({
+  skip: z.string(),
+});
 
+const takeNumber = POSTS_PER_SCROLL;
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  const response = InfinitePostsSchema.safeParse(req.query);
+
+  if (!response.success) {
+    return res.status(httpCodes.badRequest).send({
+      message: responseMessages.badRequest,
+    });
+  }
+
+  if (req.method !== 'GET') {
+    return res.status(httpCodes.invalidMethod).send(responseMessages.invalidMethod);
+  }
+
+  const { skip } = response.data;
+
+  const isSignedUp = Boolean(session?.user?.id);
   const skipNumber = parseInt(string(skip));
-  const takeNumber = POSTS_PER_SCROLL;
 
   try {
     const posts = await prisma.post.findMany({
@@ -64,32 +79,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           },
         });
 
+        const isLiked = await prisma.postLike.findFirst({
+          where: {
+            post_id: post.id,
+            user_id: session?.user?.id,
+          },
+        });
+
         return {
           ...post,
           likesCount: post._count.posts_likes,
           commentsCount: post._count.posts_comments,
+          isLiked: session ? Boolean(isLiked) : false,
           isInCollection: isSignedUp ? Boolean(isInCollection) : false,
         };
       }),
     );
-
-    if (session) {
-      const postsWithLikesData = await Promise.all(
-        postsWithCollectionData.map(async (post) => {
-          const like = await prisma.postLike.findFirst({
-            where: {
-              post_id: post.id,
-              user_id: session.user?.id,
-            },
-          });
-
-          return { ...post, isLiked: Boolean(like) };
-        }),
-      );
-
-      res.status(200).send({ posts: postsWithLikesData, postsCount, cursor: nextCursor });
-      return;
-    }
 
     res.status(200).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
   } catch (e) {

@@ -36,7 +36,7 @@ export const Layout = ({ children }: LayoutProps) => {
   }, [localStorageData]);
 
   const { session, status } = useAuth();
-  const { data, isLoading } = useAccount({ id: session?.user?.id });
+  const { data, isLoading } = useAccount({ userId: session?.user?.id });
   const isNotCompleted = !data?.user.username && status === 'authenticated';
 
   const handleClose = () => {

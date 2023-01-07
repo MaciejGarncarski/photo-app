@@ -24,7 +24,7 @@ export const useCollection = ({ userID }: UseCollection) => {
   return useInfiniteQuery(
     ['collection', userID],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<InfinitePosts<PostData>>(`/api/collection?skip=${pageParam}&user=${userID}`);
+      const { data } = await axios.get<InfinitePosts<PostData>>(`/api/collection?skip=${pageParam}&userId=${userID}`);
       return data;
     },
 

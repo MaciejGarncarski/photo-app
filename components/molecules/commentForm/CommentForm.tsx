@@ -18,7 +18,7 @@ export type CommentFormProps = {
   post: PostData;
 };
 
-type Mutation = z.infer<typeof CommentPutRequestSchema>;
+type PutCommentRequest = z.infer<typeof CommentPutRequestSchema>;
 
 export const CommentForm = ({ post }: CommentFormProps) => {
   const {
@@ -33,8 +33,8 @@ export const CommentForm = ({ post }: CommentFormProps) => {
   });
 
   const { mutate } = useMutation(
-    async ({ commentText, postId }: Mutation) => {
-      await axios.put<null, null, Mutation>('/api/post/comment', {
+    async ({ commentText, postId }: PutCommentRequest) => {
+      await axios.put<null, null, PutCommentRequest>('/api/post/comment', {
         commentText,
         postId,
       });

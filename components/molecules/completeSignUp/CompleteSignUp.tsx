@@ -34,7 +34,7 @@ type SignUpSchema = z.infer<typeof signUpSchema>;
 export const CompleteSignUp = () => {
   const { push } = useRouter();
   const { session, signOut } = useAuth();
-  const { data } = useAccount({ id: session?.user?.id });
+  const { data } = useAccount({ userId: session?.user?.id });
   const queryCache = useQueryClient();
 
   const {

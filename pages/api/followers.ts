@@ -20,14 +20,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (method === 'PUT') {
     if (!session?.user?.id) {
-      return res.status(httpCodes.Unauthorized).send({ message: responseMessages.Unauthorized });
+      return res.status(httpCodes.unauthorized).send({ message: responseMessages.unauthorized });
     }
 
     const response = FollowersPutRequestSchema.safeParse(req.body);
 
     if (!response.success) {
-      return res.status(httpCodes.Bad_request).send({
-        message: responseMessages.Bad_request,
+      return res.status(httpCodes.badRequest).send({
+        message: responseMessages.badRequest,
       });
     }
 
@@ -46,17 +46,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
         },
       });
-      res.status(httpCodes.Success).send({ messsage: responseMessages.Success });
+      res.status(httpCodes.success).send({ messsage: responseMessages.success });
     } catch (error) {
-      return res.status(httpCodes.Forbidden).send({
-        message: responseMessages.Forbidden,
+      return res.status(httpCodes.badRequest).send({
+        message: responseMessages.badRequest,
       });
     }
   }
 
   if (method === 'DELETE') {
     if (!session?.user?.id) {
-      return res.status(httpCodes.Unauthorized).send({ message: responseMessages.Unauthorized });
+      return res.status(httpCodes.unauthorized).send({ message: responseMessages.unauthorized });
     }
 
     const followingUserId = string(req.query.followingUserId);
@@ -69,10 +69,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      res.status(httpCodes.Success).send({ messsage: responseMessages.Success });
+      res.status(httpCodes.success).send({ messsage: responseMessages.success });
     } catch (error) {
-      return res.status(httpCodes.Forbidden).send({
-        message: responseMessages.Forbidden,
+      return res.status(httpCodes.forbidden).send({
+        message: responseMessages.forbidden,
       });
     }
   }
