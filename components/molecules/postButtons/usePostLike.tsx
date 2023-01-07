@@ -23,7 +23,7 @@ export const usePostLike = () => {
       }
       await axios.put<null, null, PostLike>(`/api/post/like`, {
         userId,
-        postId,
+        postId: postId.toString(),
       });
     },
     {
