@@ -47,4 +47,4 @@ Icon.Account = Account;
 Icon.Close = Close;
 Icon.Edit = Edit;
 Icon.Trash = Trash;
-Icon.Success = Success;
+Icon.success = Success;

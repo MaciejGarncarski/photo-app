@@ -1,31 +1,37 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { infinitePostsCount } from '@/utils/infinitePostsCount';
 import { string } from '@/utils/string';
 
 import { PostData } from '@/components/pages/collection/useCollection';
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 const POSTS_PER_SCROLL = 9;
 
+const InfinitePostsSchema = z.object({
+  skip: z.string(),
+  userId: z.string(),
+});
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const response = InfinitePostsSchema.safeParse(req.query);
+
+  if (!response.success) {
+    return res.status(httpCodes.badRequest).send({
+      message: responseMessages.badRequest,
+    });
+  }
 
   if (req.method !== 'GET') {
-    res.status(405).send({ status: 405, error: 'Invalid metod' });
+    res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
     return;
   }
 
-  const { skip, user } = req.query;
-  if (typeof user !== 'string') {
-    res.status(404).send({ status: 'not found' });
-    return;
-  }
-
+  const { skip, userId } = response.data;
   const skipNumber = parseInt(string(skip));
   const takeNumber = POSTS_PER_SCROLL;
 
@@ -35,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       take: takeNumber,
 
       where: {
-        author_id: user,
+        author_id: userId,
       },
 
       include: {

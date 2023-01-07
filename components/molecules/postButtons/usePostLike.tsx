@@ -1,23 +1,30 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { z } from 'zod';
+
+import { PostLikeSchema } from '@/pages/api/post/like';
 
 type LikePost = {
-  userID: string;
+  userId: string;
   isLiked: boolean;
-  postID: number;
+  postId: number;
 };
+
+type PostLike = z.infer<typeof PostLikeSchema>;
 
 export const usePostLike = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ userID, postID, isLiked }: LikePost) => {
+    async ({ userId, postId, isLiked }: LikePost) => {
       if (isLiked) {
-        const { status } = await axios.delete(`/api/post/like?user=${userID}&post=${postID}`);
+        const { status } = await axios.delete(`/api/post/like?userId=${userId}&postId=${postId}`);
         return status;
       }
-      const { status } = await axios.put(`/api/post/like?user=${userID}&post=${postID}`);
-      return status;
+      await axios.put<null, null, PostLike>(`/api/post/like`, {
+        userId,
+        postId,
+      });
     },
     {
       onSettled: () => {

@@ -1,26 +1,31 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { z } from 'zod';
 
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 
+import { PutCollectionSchema } from '@/pages/api/collection';
+
 type CollectionMutation = {
   type?: 'remove';
-  postID: number;
+  postId: number;
 };
+
+type PutCollection = z.infer<typeof PutCollectionSchema>;
 
 export const useCollectionMutation = () => {
   const { session } = useAuth();
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ type, postID }: CollectionMutation) => {
+    async ({ type, postId }: CollectionMutation) => {
       if (type === 'remove') {
-        await axios.delete(`/api/collection?postID=${postID}`);
+        await axios.delete(`/api/collection?postID=${postId}`);
         return;
       }
-      await axios.put('/api/collection', {
-        userID: session?.user?.id,
-        postID,
+      await axios.put<null, null, PutCollection>('/api/collection', {
+        userId: session?.user?.id ?? '',
+        postId: postId.toString(),
       });
     },
     {

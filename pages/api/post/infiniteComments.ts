@@ -1,17 +1,32 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { string } from '@/utils/string';
 
 const COMMENTS_PER_SCROLL = 10;
 
+const InfiniteCommentsSchema = z.object({
+  skip: z.string(),
+  postId: z.string(),
+});
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'GET') {
-    res.status(405).send({ status: 405, error: 'Invalid metod' });
-    return;
+  const response = InfiniteCommentsSchema.safeParse(req.query);
+
+  if (!response.success) {
+    return res.status(httpCodes.badRequest).send({
+      message: responseMessages.badRequest,
+    });
   }
 
-  const { skip, postId } = req.query;
+  if (req.method !== 'GET') {
+    return res.status(httpCodes.invalidMethod).send(responseMessages.invalidMethod);
+  }
+
+  const { skip, postId } = response.data;
+
   const skipNumber = parseInt(string(skip));
   const takeNumber = COMMENTS_PER_SCROLL;
 

@@ -22,7 +22,7 @@ export const Avatar = ({
   width = DEFAULT_AVATAR_SIZE,
   height = DEFAULT_AVATAR_SIZE,
 }: AvatarProps) => {
-  const { data } = useAccount({ id: userId });
+  const { data } = useAccount({ userId });
 
   if (!data?.user) {
     return null;

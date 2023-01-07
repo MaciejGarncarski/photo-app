@@ -1,39 +1,11 @@
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { memo } from 'react';
 
 import styles from './header.module.scss';
 
-import { Children } from '@/components/Layout/Layout';
-import { HeaderButtons } from '@/components/molecules/headerButtons/HeaderButtons';
 import { LayoutSearch } from '@/components/molecules/layoutSearch/LayoutSearch';
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
-import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
+import { Navbar } from '@/components/molecules/navbar/Navbar';
 
 import { APP_NAME } from '@/pages';
-
-const MemoHeaderButtons = memo(() => <HeaderButtons />);
-
-const Nav = ({ children }: Children) => {
-  const { isMobile } = useScreenWidth();
-  const { isGoingUp } = useScrollPosition();
-
-  if (isMobile) {
-    return (
-      <motion.nav
-        animate={isGoingUp ? { y: 0 } : {}}
-        initial={{ y: 70 }}
-        transition={{ type: 'tween', duration: 0.2 }}
-        className={clsx(styles.nav)}
-      >
-        {children}
-      </motion.nav>
-    );
-  }
-
-  return <motion.nav className={clsx(styles.nav)}>{children}</motion.nav>;
-};
 
 export const Header = () => {
   return (
@@ -42,9 +14,7 @@ export const Header = () => {
         <h1 className={styles.heading}>{APP_NAME}</h1>
       </Link>
       <LayoutSearch />
-      <Nav>
-        <MemoHeaderButtons />
-      </Nav>
+      <Navbar />
     </header>
   );
 };

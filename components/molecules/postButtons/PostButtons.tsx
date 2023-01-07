@@ -66,7 +66,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       return;
     }
 
-    mutate({ isLiked: isLiked ?? false, userID: session?.user?.id, postID: id });
+    mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId: id });
   };
 
   const openModal = () => {
@@ -75,11 +75,11 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
 
   const handleCollection = () => {
     if (isInCollection) {
-      collectionMutation.mutate({ type: 'remove', postID: id });
+      collectionMutation.mutate({ type: 'remove', postId: id });
       return;
     }
 
-    collectionMutation.mutate({ type: undefined, postID: id });
+    collectionMutation.mutate({ type: undefined, postId: id });
   };
 
   const setIsOpen = (isOpen: boolean) => {

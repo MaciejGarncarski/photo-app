@@ -25,7 +25,7 @@ type CommentProps = {
 export const Comment = ({ commentData }: CommentProps) => {
   const { sessionUserData } = useAuth();
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const { data } = useAccount({ id: commentData.user_id });
+  const { data } = useAccount({ userId: commentData.user_id });
   const { isLiked, id, created_at, comment_text, user_id, likesCount } = commentData;
   const timeSinceCreated = dayjs(created_at).fromNow();
   const formattedDate = dayjs(created_at).format('MMMM DD YYYY');

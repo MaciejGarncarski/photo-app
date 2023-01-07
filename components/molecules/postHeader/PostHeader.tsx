@@ -28,8 +28,8 @@ export const POST_AVATAR_SIZE = 40;
 export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PostHeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { session } = useAuth();
-  const { data } = useAccount({ id: session?.user?.id });
-  const { data: authorData } = useAccount({ id: post.author_id });
+  const { data } = useAccount({ userId: session?.user?.id });
+  const { data: authorData } = useAccount({ userId: post.author_id });
 
   const queryClient = useQueryClient();
 

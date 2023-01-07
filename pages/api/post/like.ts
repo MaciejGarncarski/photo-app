@@ -1,20 +1,33 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
-import { string } from '@/utils/string';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
+
+export const PostLikeSchema = z.object({
+  postId: z.string(),
+  userId: z.string(),
+});
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const { post, user } = req.query;
-  const postID = string(post);
-  const userID = string(user);
 
   if (method === 'PUT') {
+    const response = PostLikeSchema.safeParse(req.body);
+
+    if (!response.success) {
+      return res.status(httpCodes.badRequest).send({
+        message: responseMessages.badRequest,
+      });
+    }
+
+    const { postId, userId } = response.data;
+
     try {
       const likeAlreadyExists = await prisma.postLike.findFirst({
         where: {
-          post_id: Number(postID),
-          user_id: userID,
+          post_id: Number(postId),
+          user_id: userId,
         },
       });
 
@@ -25,25 +38,35 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.postLike.create({
         data: {
-          post_id: Number(postID),
-          user_id: userID,
+          post_id: Number(postId),
+          user_id: userId,
         },
         select: {
           id: true,
         },
       });
-      res.status(201).send({ status: 'resource updated successfully' });
+      res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
     } catch (error) {
-      res.status(400).send({ status: 'error', message: 'Error while adding like' });
+      res.status(httpCodes.badRequest).send(responseMessages.badRequest);
     }
   }
 
   if (method === 'DELETE') {
+    const response = PostLikeSchema.safeParse(req.query);
+
+    if (!response.success) {
+      return res.status(httpCodes.badRequest).send({
+        message: responseMessages.badRequest,
+      });
+    }
+
+    const { postId, userId } = response.data;
+
     try {
       await prisma.postLike.deleteMany({
         where: {
-          post_id: Number(postID),
-          user_id: userID,
+          user_id: userId,
+          post_id: Number(postId),
         },
       });
       res.status(200).send({ status: 'resource updated successfully' });

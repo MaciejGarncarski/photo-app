@@ -21,7 +21,7 @@ type HomePagePostProps = {
 export const HomepagePost = ({ post }: HomePagePostProps) => {
   const { session } = useAuth();
   const { author_id, description, created_at, images, likesCount } = post;
-  const { data } = useAccount({ id: author_id });
+  const { data } = useAccount({ userId: author_id });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
