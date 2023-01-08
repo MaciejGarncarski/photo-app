@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
+import ReactFocusLock from 'react-focus-lock';
 
 import styles from './modal.module.scss';
 
@@ -82,7 +83,7 @@ const ModalContainer = ({ children }: Children) => {
       className={styles.dialog}
       role="dialog"
     >
-      {children}
+      <ReactFocusLock>{children}</ReactFocusLock>
     </motion.div>
   );
 };
