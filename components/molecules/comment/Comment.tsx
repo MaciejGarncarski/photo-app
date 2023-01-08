@@ -9,7 +9,6 @@ import styles from './comment.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Icon } from '@/components/atoms/icons/Icons';
-import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
@@ -40,24 +39,25 @@ export const Comment = ({ commentData }: CommentProps) => {
   const isAbleToDelete = sessionUserData?.user.id === user_id || sessionUserData?.user.role === 'ADMIN';
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
+
+  const userAccountHref = `/${sessionUserData?.user.username}`;
+
   return (
     <motion.article className={styles.comment}>
-      <Link href={`/${sessionUserData?.user.username}`}>
+      <Link href={userAccountHref}>
         <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
       <div className={styles.commentText}>
-        <Link href={`/${sessionUserData?.user.username}`}>
+        <Link href={userAccountHref}>
           <h3 className={styles.author}>{data?.user.username}</h3>
         </Link>
         <p className={styles.content}>{parse(commentWithNewLine)}</p>
       </div>
 
       <div className={styles.info}>
-        <Tooltip variant="right" content={formattedDate}>
-          <p className={styles.createdAt}>
-            <time dateTime={created_at.toString()}>{timeSinceCreated}</time>
-          </p>
-        </Tooltip>
+        <p className={styles.createdAt}>
+          <time dateTime={created_at.toString()}>{timeSinceCreated}</time>
+        </p>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>
           {isLiked ? <Icon.HeartActive /> : <Icon.Heart />}
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>

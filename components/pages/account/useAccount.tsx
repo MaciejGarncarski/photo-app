@@ -7,17 +7,7 @@ type UseAccount = {
   userId?: string;
 };
 
-const fetchAccount = async ({ userId, username }: UseAccount) => {
-  if (username) {
-    const { data } = await axios.get(`/api/account/${username}?type=username`);
-    return data;
-  }
-
-  const { data } = await axios.get(`/api/account/${userId}`);
-  return data;
-};
-
-type UseAccountResponse = {
+type Account = {
   isFollowing: boolean;
   status: number;
   user: User;
@@ -28,6 +18,16 @@ type UseAccountResponse = {
   };
 };
 
+const fetchAccount = async ({ userId, username }: UseAccount) => {
+  if (username) {
+    const { data } = await axios.get<Account>(`/api/account/${username}?type=username`);
+    return data;
+  }
+
+  const { data } = await axios.get<Account>(`/api/account/${userId}`);
+  return data;
+};
+
 export type UsernameToIdResponse = {
   message: string;
   data?: {
@@ -36,7 +36,7 @@ export type UsernameToIdResponse = {
 };
 
 export const useAccount = ({ userId, username }: UseAccount) => {
-  const query = useQuery<UseAccountResponse>({
+  const query = useQuery({
     queryKey: ['account', userId, username],
     queryFn: async () => {
       return fetchAccount({ userId, username });
