@@ -1,0 +1,28 @@
+name: Tests
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request: {}
+
+jobs:
+  test:
+    name: 🃏 Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false      
+
+      - name: ⎔ Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+
+      - name: 📥 Download deps
+        run: yarn install
