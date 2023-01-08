@@ -13,10 +13,6 @@
   object-fit: contain;
   border-block: var(--border-secondary);
   background-color: var(--bg-primary);
-
-  @include common.mediaquery('lg') {
-    min-height: 40rem;
-  }
 }
 
 .bottom {
