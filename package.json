@@ -78,6 +78,7 @@
     "jest-environment-jsdom": "^29.3.1",
     "lint-staged": "^13.1.0",
     "next-router-mock": "^0.8.0",
+    "nextjs-bundle-analysis": "^0.4.0",
     "prettier": "^2.8.0",
     "prisma": "^4.6.1"
   }
