@@ -1,5 +1,4 @@
 ## Overview 🎉
-About
 Fullstack Next,js social app. In photo-app you can sign up via google and upload your favourite photos.
 
 ## Live 📍
