@@ -11,7 +11,6 @@ import { useAccount } from '@/components/pages/account/useAccount';
 
 export type ListData = {
   icon: ReactNode;
-  alt: string;
   title: string;
   href?: string;
   onClick?: () => void;
@@ -20,19 +19,16 @@ export type ListData = {
 const listData: Array<ListData> = [
   {
     icon: <Icon.Home />,
-    alt: 'Home',
     title: 'Home',
     href: '/',
   },
   {
     icon: <Icon.Create />,
-    alt: 'Create post',
-    title: 'Create',
+    title: 'Create post',
     href: '/create-post',
   },
   {
     icon: <Icon.Bookmark />,
-    alt: 'Collection',
     title: 'Collection',
     href: '/collection',
   },
@@ -46,17 +42,16 @@ export const NavButtons = () => {
     return null;
   }
 
-  if (!session) {
+  if (!session?.user?.id) {
     return <SignInButton />;
   }
 
   return (
     <ul className={styles.list}>
-      {listData.map(({ icon, alt, onClick, href, title }) => {
-        return <NavListButton icon={icon} alt={alt} onClick={onClick} href={href} title={title} key={title} />;
+      {listData.map(({ icon, onClick, href, title }) => {
+        return <NavListButton icon={icon} onClick={onClick} href={href} title={title} key={title} />;
       })}
-
-      {data?.user.username && <NavAccountIcon userId={session.user?.id ?? ''} />}
+      {data?.user.username && <NavAccountIcon userId={session.user.id ?? ''} />}
     </ul>
   );
 };

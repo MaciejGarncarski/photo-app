@@ -22,8 +22,8 @@ export const Icon = ({ children }: Children) => <>{children}</>;
 const HeartActive = () => <AiFillHeart className={styles.heartActive} />;
 const Heart = () => <AiOutlineHeart />;
 const Comment = () => <AiOutlineMessage />;
-const Bookmark = () => <BsBookmark style={{ transform: 'scale(0.85)' }} />;
-const BookmarkActive = () => <BsBookmarkFill style={{ transform: 'scale(0.85)' }} />;
+const Bookmark = () => <BsBookmark style={{ transform: 'scale(0.9)' }} />;
+const BookmarkActive = () => <BsBookmarkFill style={{ transform: 'scale(0.9)' }} />;
 const Share = () => <AiOutlineShareAlt />;
 
 Icon.HeartActive = HeartActive;
