@@ -24,6 +24,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
           <DefaultSeo {...seoConfig} />
           <Component {...pageProps} />
         </Layout>
+        <div id="modal"></div>
       </QueryClientProvider>
     </SessionProvider>
   );

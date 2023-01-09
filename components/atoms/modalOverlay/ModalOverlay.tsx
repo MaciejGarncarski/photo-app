@@ -1,4 +1,5 @@
 import { MouseEvent, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 import styles from './modalOverlay.module.scss';
 
@@ -30,9 +31,10 @@ export const ModalOverlay = ({ children, setOpen }: ModalOverlayProps) => {
     }
   };
 
-  return (
+  return createPortal(
     <div ref={overlayRef} onClick={handleOverlayClick} className={styles.overlay}>
       {children}
-    </div>
+    </div>,
+    document.querySelector('#modal') as HTMLElement,
   );
 };
