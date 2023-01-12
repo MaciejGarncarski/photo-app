@@ -23,7 +23,7 @@ export const useCollectionMutation = () => {
         await axios.delete(`/api/collection?postID=${postId}`);
         return;
       }
-      await axios.put<null, null, PutCollection>('/api/collection', {
+      await axios.put<unknown, null, PutCollection>('/api/collection', {
         userId: session?.user?.id ?? '',
         postId: postId.toString(),
       });

@@ -15,8 +15,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 
-  if (type !== 'username') {
-    try {
+  try {
+    if (type !== 'username') {
       const userData = await prisma.user.findFirst({
         where: {
           id: user,
@@ -24,14 +24,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       const { count, isFollowing } = await getMoreUserData(user, session?.user?.id);
-      res.status(httpCodes.success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
-    } catch (error) {
-      res.status(httpCodes.forbidden).send({ status: responseMessages.forbidden, error });
+      return res.status(httpCodes.success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
     }
-  }
 
-  if (type === 'username') {
-    try {
+    if (type === 'username') {
       const userData = await prisma.user.findFirst({
         where: {
           username: user,
@@ -40,9 +36,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const { count, isFollowing } = await getMoreUserData(userData?.id ?? '', session?.user?.id);
       return res.status(httpCodes.success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
-    } catch (error) {
-      res.status(httpCodes.forbidden).send({ status: responseMessages.forbidden, error });
     }
+  } catch (error) {
+    res.status(httpCodes.forbidden).send(responseMessages.forbidden);
   }
 };
 export default handler;

@@ -80,9 +80,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       cursor: nextCursor,
     };
 
-    res.status(200).send(response);
+    res.status(httpCodes.success).send(response);
   } catch (e) {
-    res.status(400).send('400');
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
 

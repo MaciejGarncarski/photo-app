@@ -22,7 +22,7 @@ export const FollowButton = ({ userId, className }: FollowButtonProps) => {
         await axios.delete(`/api/followers?followingUserId=${userId}`);
       }
       if (!data?.isFollowing) {
-        await axios.put<null, null, FollowersPutRequest>('/api/followers', {
+        await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
           followingUserId: userId,
         });
       }

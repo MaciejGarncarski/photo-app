@@ -7,7 +7,7 @@ type ResponseNames =
   | 'success'
   | 'resourceSuccess';
 
-export const httpCodes: Record<ResponseNames, number> = {
+export const httpCodes = {
   badRequest: 400,
   unauthorized: 401,
   forbidden: 403,
@@ -15,9 +15,9 @@ export const httpCodes: Record<ResponseNames, number> = {
   invalidMethod: 405,
   success: 200,
   resourceSuccess: 201,
-};
+} satisfies Record<ResponseNames, number>;
 
-export const responseMessages: Record<ResponseNames, string> = {
+export const responseMessages = {
   badRequest: 'Bad request',
   forbidden: 'Forbidden',
   notFound: 'Not found',
@@ -25,4 +25,5 @@ export const responseMessages: Record<ResponseNames, string> = {
   invalidMethod: 'Wrong method',
   success: 'Success',
   resourceSuccess: 'Resource updated successfully',
-};
+  badPayload: 'Bad payload',
+} satisfies Record<ResponseNames | 'badPayload', string>;

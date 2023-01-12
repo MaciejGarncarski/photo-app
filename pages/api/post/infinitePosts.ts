@@ -94,9 +94,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }),
     );
 
-    res.status(200).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
+    res.status(httpCodes.success).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
   } catch (e) {
-    res.status(400).send('400');
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
 

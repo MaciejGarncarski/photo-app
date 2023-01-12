@@ -3,6 +3,7 @@ import { unstable_getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
@@ -16,22 +17,23 @@ export const CommentPostRequestSchema = z.object({
   commentId: z.number(),
 });
 
+const CommentDeletePostSchema = z.object({
+  commentId: z.number(),
+});
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session || !session.user?.id) {
-    res.status(401).send({ status: 'unauthorized', message: 'Unauthorized request' });
-    return;
+    return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
   }
 
   if (method === 'PUT') {
     const response = CommentPutRequestSchema.safeParse(req.body);
 
     if (!response.success) {
-      return res.status(400).send({
-        message: `Yo, bad payload!`,
-      });
+      return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
 
     const {
@@ -52,19 +54,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
         },
       });
-      res.status(200).send({ status: 'ok' });
+      res.status(httpCodes.success).send(responseMessages.success);
     } catch (error) {
-      res.status(400).send({ status: 'error', message: 'Error while adding comment' });
+      return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
     }
   }
 
   if (method === 'DELETE') {
-    const commentId = parseInt(string(req.query.commentId));
+    const response = CommentDeletePostSchema.safeParse(req.query.commentId);
 
-    if (!commentId) {
-      res.status(400).send({ status: 'error', message: 'commentId is mandatory' });
-      return;
+    if (!response.success) {
+      return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
+
+    const commentId = response.data.commentId;
 
     const user = await prisma.user.findFirst({
       where: {
@@ -81,7 +84,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const isAbleToDelete = comment?.user_id === session?.user?.id || user?.role === 'ADMIN';
 
     if (!isAbleToDelete) {
-      res.status(405).send({ status: 'unauthorized' });
+      return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
     }
 
     try {
@@ -95,9 +98,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: commentId,
         },
       });
-      res.status(200).send({ status: 'ok' });
+      res.status(httpCodes.success).send(responseMessages.success);
     } catch (error) {
-      res.status(400).send({ status: 'error', message: 'Error while deleting comment' });
+      return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
     }
   }
 
@@ -105,9 +108,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const response = CommentPostRequestSchema.safeParse(req.body);
 
     if (!response.success) {
-      return res.status(400).send({
-        message: `Yo, bad payload!`,
-      });
+      return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
 
     const {
@@ -129,9 +130,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             comment_id: commentId,
           },
         });
-        res.status(200).send({ status: 'ok', message: 'deleted' });
+        res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
       } catch (error) {
-        res.status(400).send({ status: 'error' });
+        return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
       }
     }
     if (!isLiked) {
@@ -145,9 +146,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             id: true,
           },
         });
-        res.status(200).send({ status: 'ok', message: 'created' });
+        res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
       } catch (error) {
-        res.status(400).send({ status: 'error' });
+        return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
       }
     }
   }

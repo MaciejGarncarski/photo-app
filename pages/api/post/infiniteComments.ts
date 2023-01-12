@@ -76,9 +76,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const canLoadMore = commentsCount > (skipNumber + 1) * COMMENTS_PER_SCROLL;
     const nextCursor = canLoadMore ? skipNumber + 1 : null;
 
-    res.status(200).send({ comments: commentsWithLikes, commentsCount, cursor: nextCursor });
+    res.status(httpCodes.success).send({ comments: commentsWithLikes, commentsCount, cursor: nextCursor });
   } catch (e) {
-    res.status(400).send('400');
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
 

@@ -1,6 +1,7 @@
 import { PixelCrop } from 'react-image-crop';
 
 const TO_RADIANS = Math.PI / 180;
+const IMG_QUALITY = 0.95;
 
 export async function canvasPreview(
   image: HTMLImageElement,
@@ -54,7 +55,7 @@ export async function canvasPreview(
         }
       },
       'image/webp',
-      0.65,
+      IMG_QUALITY,
     );
   });
 

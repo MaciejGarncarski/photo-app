@@ -7,7 +7,7 @@ import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-const CompleteSignUpSchema = z.object({
+export const CompleteSignUpSchema = z.object({
   userId: z.string(),
   bio: z.string().optional(),
   username: z.string(),
