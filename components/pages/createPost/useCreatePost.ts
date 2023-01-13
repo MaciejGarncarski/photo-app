@@ -14,7 +14,7 @@ type UploadPostArguments = {
 } & MutationValues;
 
 const uplaodPost = async ({ description, image, author }: UploadPostArguments) => {
-  return await axios.putForm<null, null, UploadPostArguments>('/api/post', {
+  return await axios.putForm<unknown, null, UploadPostArguments>('/api/post', {
     description,
     image,
     author,

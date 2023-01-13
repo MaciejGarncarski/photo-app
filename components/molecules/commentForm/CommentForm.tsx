@@ -34,7 +34,7 @@ export const CommentForm = ({ post }: CommentFormProps) => {
 
   const { mutate } = useMutation(
     async ({ commentText, postId }: PutCommentRequest) => {
-      await axios.put<null, null, PutCommentRequest>('/api/post/comment', {
+      await axios.put<unknown, null, PutCommentRequest>('/api/post/comment', {
         commentText,
         postId,
       });

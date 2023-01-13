@@ -20,8 +20,6 @@ const InfinitePostsSchema = z.object({
   skip: z.string(),
 });
 
-const takeNumber = POSTS_PER_SCROLL;
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   const response = InfinitePostsSchema.safeParse(req.query);
@@ -43,8 +41,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const posts = await prisma.post.findMany({
-      skip: skipNumber * takeNumber,
-      take: takeNumber,
+      skip: skipNumber * POSTS_PER_SCROLL,
+      take: POSTS_PER_SCROLL,
 
       include: {
         author: true,
@@ -96,9 +94,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }),
     );
 
-    res.status(200).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
+    res.status(httpCodes.success).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
   } catch (e) {
-    res.status(400).send('400');
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
 

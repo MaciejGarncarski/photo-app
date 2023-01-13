@@ -25,7 +25,9 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
 
   const isAbleToModify = author.id === data?.user?.id || data?.user?.role === 'ADMIN';
 
-  const onModalClose = () => setIsOpen(false);
+  const onModalClose = () => {
+    setIsOpen(false);
+  };
 
   const handleCollection = () => {
     collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postId: id });

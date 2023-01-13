@@ -27,14 +27,6 @@
   flex-direction: column;
 }
 
-.listItemTitle {
-  font-size: 1.5rem;
-
-  @include common.mediaquery('lg') {
-    display: none;
-  }
-}
-
 .listItemChild {
   display: flex;
   justify-content: center;

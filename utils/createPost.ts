@@ -1,6 +1,5 @@
 import { promises as fs } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
-import sanitize from 'sanitize-filename';
 import { v4 } from 'uuid';
 
 import { imageKit } from '@/lib/imagekit';
@@ -18,8 +17,8 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
     }
 
     const uuid = v4();
-    const sanitizedFilePath = sanitize(files.image.filepath);
-    const fileContents = await fs.readFile(sanitizedFilePath);
+    const fileContents = await fs.readFile(files.image.filepath);
+
     const { author, description } = fields;
     const { url } = await imageKit.upload({
       file: fileContents,

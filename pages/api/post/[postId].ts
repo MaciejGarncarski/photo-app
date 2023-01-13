@@ -50,9 +50,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       postLikesCount: postLikes._count.id,
     };
 
-    res.status(200).send({ status: 200, data });
+    res.status(httpCodes.success).send({ data });
   } catch (error) {
-    res.status(400).send({ status: 'error', error });
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
 

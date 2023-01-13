@@ -71,3 +71,8 @@
   border: none;
   background-color: transparent;
 }
+
+.avatar {
+  height: var(--itemSize);
+  width: var(--itemSize);
+}

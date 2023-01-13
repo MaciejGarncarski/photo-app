@@ -66,8 +66,7 @@ export const NavAccountIcon = ({ userId }: NavAccountIconProps) => {
         <span className="visually-hidden">
           @{account?.username} {account?.name}
         </span>
-        <Avatar userId={account.id} />
-        <span className={commonStyles.listItemTitle}>Account</span>
+        <Avatar className={styles.avatar} userId={account.id} />
       </Link>
       <AnimatePresence>
         {isOptionsOpen && isGoingUp && (

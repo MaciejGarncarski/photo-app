@@ -13,6 +13,8 @@ import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
+import { CompleteSignUpSchema } from '@/pages/api/account/completeSignUp';
+
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
 export const fullName = z.string().min(4, { message: 'Full name must contain at least 2 characters' });
@@ -30,6 +32,8 @@ const signUpSchema = z.object({
 });
 
 type SignUpSchema = z.infer<typeof signUpSchema>;
+
+type CompleteSignUpData = z.infer<typeof CompleteSignUpSchema>;
 
 export const CompleteSignUp = () => {
   const { push } = useRouter();
@@ -52,19 +56,18 @@ export const CompleteSignUp = () => {
   });
 
   const onSubmit: SubmitHandler<SignUpSchema> = async ({ username, fullName, bio }) => {
-    const { status } = await axios.put('/api/account/completeSignUp', {
-      data: {
-        username,
-        fullName,
-        bio,
-        userID: session?.user?.id,
-      },
+    if (!session?.user?.id) {
+      return;
+    }
+    await axios.put<unknown, null, CompleteSignUpData>('/api/account/completeSignUp', {
+      username,
+      fullName,
+      bio,
+      userId: session?.user?.id,
     });
 
-    if (status === 200) {
-      queryCache.invalidateQueries();
-      push('/');
-    }
+    queryCache.invalidateQueries();
+    push('/');
   };
 
   return (

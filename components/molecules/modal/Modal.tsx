@@ -7,7 +7,6 @@ import styles from './modal.module.scss';
 import { Icon } from '@/components/atoms/icons/Icons';
 import { ModalOverlay } from '@/components/atoms/modalOverlay/ModalOverlay';
 import { Children } from '@/components/Layout/Layout';
-export const Modal = () => null;
 
 export const dialogVariant: Variants = {
   visible: {
@@ -20,7 +19,11 @@ export const dialogVariant: Variants = {
   },
   exit: {
     opacity: 0,
-    scale: 0.9,
+    scale: 0.5,
+    transition: {
+      type: 'ease',
+      duration: 0.2,
+    },
   },
 };
 
@@ -88,6 +91,7 @@ const ModalContainer = ({ children }: Children) => {
   );
 };
 
+export const Modal = () => null;
 Modal.List = ModalList;
 Modal.Overlay = ModalOverlay;
 Modal.Item = ModalItem;
