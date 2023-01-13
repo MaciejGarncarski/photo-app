@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -51,7 +52,7 @@ export const CompleteSignUp = () => {
     defaultValues: {
       username: data?.user.username ?? '',
       fullName: data?.user.name ?? '',
-      bio: '',
+      bio: data?.user.bio ?? '',
     },
   });
 
@@ -72,6 +73,7 @@ export const CompleteSignUp = () => {
 
   return (
     <div className={styles.dialog} role="dialog">
+      <NextSeo title="Complete sign up" />
       <Heading tag="h2" className={styles.heading}>
         Complete your sign up
       </Heading>
@@ -90,7 +92,7 @@ export const CompleteSignUp = () => {
           isEmpty={defaultValues?.bio?.trim() === ''}
           isDirty={dirtyFields.bio}
           optional
-          {...register('fullName')}
+          {...register('bio')}
         />
         <div className={styles.buttons}>
           <Button type="button" variant="secondary" onClick={() => signOut()}>

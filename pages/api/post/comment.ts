@@ -18,7 +18,7 @@ export const CommentPostRequestSchema = z.object({
 });
 
 const CommentDeletePostSchema = z.object({
-  commentId: z.number(),
+  commentId: z.string(),
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -61,13 +61,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (method === 'DELETE') {
-    const response = CommentDeletePostSchema.safeParse(req.query.commentId);
+    const response = CommentDeletePostSchema.safeParse(req.query);
 
     if (!response.success) {
       return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
 
-    const commentId = response.data.commentId;
+    const commentId = parseInt(response.data.commentId);
 
     const user = await prisma.user.findFirst({
       where: {

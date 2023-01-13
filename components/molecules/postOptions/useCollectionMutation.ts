@@ -20,7 +20,7 @@ export const useCollectionMutation = () => {
   return useMutation(
     async ({ type, postId }: CollectionMutation) => {
       if (type === 'remove') {
-        await axios.delete(`/api/collection?postID=${postId}`);
+        await axios.delete(`/api/collection?postId=${postId}`);
         return;
       }
       await axios.put<unknown, null, PutCollection>('/api/collection', {

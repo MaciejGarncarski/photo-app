@@ -65,9 +65,10 @@
   @include common.mediaquery('lg') {
     height: 100%;
     margin-top: 1rem;
-    max-height: 60rem;
+    max-height: 45rem;
     overflow-y: auto;
   }
+
 }
 
 .commentsContainer {

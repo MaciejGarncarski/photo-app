@@ -31,8 +31,11 @@ export const tooltipVariant: Variants = {
 export const Tooltip = ({ children, content, variant }: TooltipProps) => {
   const [active, setActive] = useState<boolean>(false);
 
+  const show = () => setActive(true);
+  const close = () => setActive(false);
+
   return (
-    <span className={styles.tooltip} onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}>
+    <span className={styles.tooltip} onBlur={close} onFocus={show} onMouseEnter={show} onMouseLeave={close}>
       {children}
       <AnimatePresence>
         {active && (

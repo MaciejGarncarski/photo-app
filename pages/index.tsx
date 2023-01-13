@@ -70,11 +70,10 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 120,
     };
   } catch (error) {
-    console.error(error);
+    return {
+      props: {},
+    };
   }
-  return {
-    props: {},
-  };
 };
 
 export default HomePage;
