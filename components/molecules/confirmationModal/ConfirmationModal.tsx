@@ -1,5 +1,5 @@
 import { Icon } from '@/components/atoms/icons/Icons';
-import { Modal } from '@/components/molecules/modal/Modal';
+import { Modal } from '@/components/atoms/modal/Modal';
 
 type ConfirmationModalProps = {
   setIsOpen: (isOpen: boolean) => void;
@@ -13,14 +13,14 @@ export const ConfirmationModal = ({ setIsOpen, onConfirm, onCancel }: Confirmati
       <Modal.Container>
         <Modal.Heading variant="red" text="Are you sure?" />
         <Modal.List>
-          <Modal.Item isFirst variant="red" onClick={() => onConfirm()}>
+          <Modal.ListItem withButton isFirst variant="red" onClick={() => onConfirm()}>
             <Icon.Trash />
             Yes, delete
-          </Modal.Item>
-          <Modal.Item onClick={onCancel}>
+          </Modal.ListItem>
+          <Modal.ListItem withButton onClick={onCancel}>
             <Icon.Close />
             No, go back
-          </Modal.Item>
+          </Modal.ListItem>
         </Modal.List>
       </Modal.Container>
     </Modal.Overlay>

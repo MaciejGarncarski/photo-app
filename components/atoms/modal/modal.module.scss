@@ -1,0 +1,116 @@
+@use '/styles/common.scss';
+
+
+.list {
+  list-style: none;
+  display: grid;
+  justify-content: stretch;
+  width: 100%;
+  align-items: center;
+}
+
+.item {
+  width: 100%;
+  font-weight: 600;
+  padding: 1.5rem 0;
+  padding-left: 2rem;
+  border-top: var(--border-primary);
+  font-size: 2.25rem;
+  text-align: left;
+
+  @include common.mediaquery('lg') {
+    padding: 2rem 0;
+    padding-left: 4rem;
+    font-size: 2.5rem;
+  }
+}
+
+%itemFlex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link {
+  @extend %itemFlex;
+}
+
+.itemButton {
+  @extend %itemFlex;
+  background-color: transparent;
+  text-align: left;
+  border: none;
+  text-transform: capitalize;
+  font-size: 2rem;
+
+  @include common.mediaquery('lg') {
+    gap: 2rem;
+    font-size: 2.5rem;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.item-red {
+  color: var(--color-error);
+}
+
+.item-first {
+  border-top: none;
+}
+
+.closeButton {
+  position: absolute;
+  right: -1rem;
+  top: -6rem;
+  font-size: 4rem;
+  background-color: transparent;
+  background-color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-small);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.heading {
+  border-bottom: var(--border-primary);
+  padding: 1.5rem 0;
+  padding-left: 2rem;
+  font-size: 2.25rem;
+
+  @include common.mediaquery('lg') {
+    padding: 2rem 0;
+    padding-left: 4rem;
+    font-size: 2.5rem;
+  }
+}
+
+.heading-red {
+  color: var(--color-error);
+}
+
+.dialog {
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-medium);
+  width: min(45rem, 80%);
+  margin-inline: auto;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-overlay);
+  z-index: 1;
+}
