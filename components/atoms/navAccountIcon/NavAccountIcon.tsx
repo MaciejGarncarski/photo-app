@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
 
 import styles from './navAccountIcon.module.scss';
 import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { Icon } from '@/components/atoms/icons/Icons';
 import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip';
 import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -80,7 +80,7 @@ export const NavAccountIcon = ({ userId }: NavAccountIconProps) => {
             <div className={styles.square}></div>
             <p className={styles.welcome}>Hi, {account?.username}</p>
             <Link href={accountHref} className={styles.link} onClick={() => setIsOptionsOpen(false)}>
-              <AiOutlineUser /> your account
+              <Icon.Account /> your account
             </Link>
             <button type="button" className={styles.signOut} onClick={() => signOut()}>
               Sign out

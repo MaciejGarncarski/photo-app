@@ -16,8 +16,8 @@ export const useCreateImg = ({ completedCrop, imgRef, previewCanvasRef, setFinal
       if (!imgRef.current || !previewCanvasRef.current || !completedCrop?.height || !completedCrop.width) {
         return;
       }
-      const { toBlob } = await canvasPreview(imgRef.current, previewCanvasRef.current, completedCrop);
 
+      const { toBlob } = await canvasPreview(imgRef.current, previewCanvasRef.current, completedCrop);
       setFinalImg(await toBlob);
     };
     createImg();

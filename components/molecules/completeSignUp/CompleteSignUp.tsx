@@ -14,8 +14,6 @@ import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
-import { CompleteSignUpSchema } from '@/pages/api/account/completeSignUp';
-
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
 export const fullName = z.string().min(4, { message: 'Full name must contain at least 2 characters' });
@@ -24,31 +22,35 @@ export const username = z
   .min(4, { message: 'Username must contain at least 4 characters' })
   .regex(usernameRegex, { message: 'Invalid username' });
 
-const bio = z.string();
+export const bio = z.string();
 
-const signUpSchema = z.object({
+export const AccountPersonalInfoSchema = z.object({
   username,
   fullName,
   bio,
 });
 
-type SignUpSchema = z.infer<typeof signUpSchema>;
+export type AccountPersonalInfo = z.infer<typeof AccountPersonalInfoSchema>;
 
-type CompleteSignUpData = z.infer<typeof CompleteSignUpSchema>;
+export const SignUpSchema = AccountPersonalInfoSchema.extend({
+  userId: z.string(),
+});
+
+export type SignUpSchemaData = z.infer<typeof SignUpSchema>;
 
 export const CompleteSignUp = () => {
   const { push } = useRouter();
   const { session, signOut } = useAuth();
   const { data } = useAccount({ userId: session?.user?.id });
-  const queryCache = useQueryClient();
+  const queryClient = useQueryClient();
 
   const {
     register,
     handleSubmit,
     formState: { dirtyFields, errors, defaultValues },
-  } = useForm<SignUpSchema>({
+  } = useForm<AccountPersonalInfo>({
     mode: 'onBlur',
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(AccountPersonalInfoSchema),
     defaultValues: {
       username: data?.user.username ?? '',
       fullName: data?.user.name ?? '',
@@ -56,18 +58,18 @@ export const CompleteSignUp = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<SignUpSchema> = async ({ username, fullName, bio }) => {
+  const onSubmit: SubmitHandler<AccountPersonalInfo> = async ({ username, fullName, bio }) => {
     if (!session?.user?.id) {
       return;
     }
-    await axios.put<unknown, null, CompleteSignUpData>('/api/account/completeSignUp', {
+    await axios.put<unknown, null, SignUpSchemaData>('/api/account/completeSignUp', {
       username,
       fullName,
       bio,
       userId: session?.user?.id,
     });
 
-    queryCache.invalidateQueries();
+    queryClient.invalidateQueries();
     push('/');
   };
 

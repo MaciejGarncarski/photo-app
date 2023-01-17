@@ -12,7 +12,7 @@ export type CreatePost = {
 
 export type FormidableResult = {
   fields: Fields;
-  files: Files;
+  files: Partial<Files>;
 };
 
 export const config = {

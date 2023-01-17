@@ -16,14 +16,14 @@ type InputProps = {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ type = 'text', labelText, isDirty, error, optional, isEmpty, className, ...props }, ref) => {
+    const containerClassName = clsx(className, error && styles.containerError, styles.container);
+    const labelClassName = clsx(isDirty && styles.labelActive, !isEmpty && styles.labelActive, styles.label);
+
     return (
       <div>
-        <div className={clsx(className && className, error && styles.containerError, styles.container)}>
-          <input className={styles.input} ref={ref} type={type} {...props} id={labelText} />
-          <label
-            className={clsx(isDirty && styles.labelActive, !isEmpty && styles.labelActive, styles.label)}
-            htmlFor={labelText}
-          >
+        <div className={containerClassName}>
+          <input ref={ref} type={type} id={labelText} className={styles.input} {...props} />
+          <label className={labelClassName} htmlFor={labelText}>
             {labelText} {optional && '(optional)'}
           </label>
         </div>

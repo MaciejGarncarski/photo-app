@@ -1,9 +1,9 @@
 import styles from './cropError.module.scss';
 
-import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
+import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 
 type CropErrorProps = {
-  errorType: ImageErrors;
+  errorType: ImageCropErrors;
 };
 
 export const DimensionError = 'Image dimensions are too small 🥺';
@@ -25,5 +25,9 @@ export const CropError = ({ errorType }: CropErrorProps) => {
     return null;
   }
 
-  return <p className={styles.error}>{messagesData[errorType]}</p>;
+  return (
+    <p className={styles.error}>
+      {messagesData[errorType]} <br /> Try again
+    </p>
+  );
 };

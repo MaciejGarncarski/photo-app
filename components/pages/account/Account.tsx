@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import styles from './account.module.scss';
 
@@ -91,7 +90,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         {isOwner && (
           <button type="button" onClick={openMenu} className={styles.menuButton}>
             <span className="visually-hidden">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
-            <AiOutlineMenu />
+            <Icon.Settings />
           </button>
         )}
       </main>

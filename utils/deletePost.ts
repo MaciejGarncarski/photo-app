@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
 
+import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
@@ -29,6 +30,10 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!isAbleToDelete) {
       res.status(401).send({ status: 'unauthorized' });
       return;
+    }
+
+    if (post?.file_id) {
+      await imageKit.deleteFile(post?.file_id);
     }
 
     await prisma.postComment.deleteMany({
