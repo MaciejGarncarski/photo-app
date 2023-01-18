@@ -54,7 +54,12 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
 
   if (isDeleting) {
     return (
-      <ConfirmationModal onCancel={() => setIsDeleting(false)} onConfirm={handleDeletePost} setIsOpen={setIsDeleting} />
+      <ConfirmationModal
+        confirmText="Delete"
+        onCancel={() => setIsDeleting(false)}
+        onConfirm={handleDeletePost}
+        setIsOpen={setIsDeleting}
+      />
     );
   }
 

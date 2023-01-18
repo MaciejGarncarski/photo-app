@@ -70,7 +70,12 @@ export const Comment = ({ commentData }: CommentProps) => {
       </div>
 
       {isDeleting && (
-        <ConfirmationModal onCancel={() => setIsDeleting(false)} onConfirm={handleDelete} setIsOpen={setIsDeleting} />
+        <ConfirmationModal
+          confirmText="Delete"
+          onCancel={() => setIsDeleting(false)}
+          onConfirm={handleDelete}
+          setIsOpen={setIsDeleting}
+        />
       )}
     </motion.article>
   );
