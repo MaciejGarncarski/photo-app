@@ -1,22 +1,24 @@
 import clsx from 'clsx';
 import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
-import { AiOutlineDownload, AiOutlineFolderOpen } from 'react-icons/ai';
+import { AiOutlineDownload, AiOutlineFolderOpen, AiOutlineStop } from 'react-icons/ai';
 
 import { handleDropImage } from '@/utils/handleDropImage';
 
 import styles from './dropZone.module.scss';
 
-import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
+import { CropError } from '@/components/atoms/cropError/CropError';
+import { Heading } from '@/components/atoms/heading/Heading';
+import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 
 type DropZoneProps = {
   handleImage: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string) => void;
-  setError: (error: ImageErrors | null) => void;
+  error: ImageCropErrors;
+  setError: (error: ImageCropErrors | null) => void;
 };
 
-export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) => {
+export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZoneProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [fileName, setFileName] = useState<string | null>(null);
   const dropZoneRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,13 +44,13 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
         return;
       }
       const file = dt.files[0];
-      handleDropImage({ file, setError, setFileName, setImgSrc });
+      handleDropImage({ file, setError, setImgSrc });
     },
     [setError, setImgSrc],
   );
 
   const openInput = () => {
-    if (!inputRef.current || fileName) {
+    if (!inputRef.current) {
       return;
     }
     inputRef.current.click();
@@ -56,6 +58,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
 
   return (
     <>
+      <Heading tag="h2">Upload image</Heading>
       <input
         data-testid="fileInput"
         type="file"
@@ -75,20 +78,28 @@ export const DropZone = ({ handleImage, setImgSrc, setError }: DropZoneProps) =>
         }}
         onDragLeave={inactive}
         ref={dropZoneRef}
-        className={clsx(isActive && styles.dropZoneActive, styles.dropZone)}
+        className={clsx(isActive && styles.dropZoneActive, error && styles.dropZoneError, styles.dropZone)}
       >
-        {isActive ? (
+        {isActive && (
           <>
             <AiOutlineFolderOpen className={styles.dropIcon} />
             <p>Drop here 👌</p>
           </>
-        ) : (
+        )}
+
+        {!error && !isActive && (
           <>
             <AiOutlineDownload className={styles.dropIcon} />
             <p>Drop or click to add image.</p>
           </>
         )}
-        {fileName && <p>{fileName}</p>}
+
+        {error && !isActive && (
+          <>
+            <AiOutlineStop className={styles.dropIconError} />
+            <CropError errorType={error} />
+          </>
+        )}
       </div>
     </>
   );

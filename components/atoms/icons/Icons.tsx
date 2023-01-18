@@ -10,6 +10,7 @@ import {
   AiOutlinePlusCircle,
   AiOutlineShareAlt,
   AiOutlineUser,
+  AiTwotoneSetting,
 } from 'react-icons/ai';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 
@@ -40,6 +41,7 @@ const Close = () => <AiOutlineClose />;
 const Edit = () => <AiOutlineEdit />;
 const Trash = () => <AiOutlineDelete />;
 const Success = () => <AiOutlineCheckCircle />;
+const Settings = () => <AiTwotoneSetting />;
 
 Icon.Home = Home;
 Icon.Create = Create;
@@ -47,4 +49,5 @@ Icon.Account = Account;
 Icon.Close = Close;
 Icon.Edit = Edit;
 Icon.Trash = Trash;
-Icon.success = Success;
+Icon.Success = Success;
+Icon.Settings = Settings;

@@ -1,40 +1,61 @@
 @use '/styles/common.scss';
 
 .dropZone {
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-medium);
   width: 100%;
-  border: 4px dashed var(--text-primary);
+  background-color: var(--bg-gray);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-radius: var(--radius-medium);
+  gap: 2rem;
   padding: 2rem 1rem;
   text-align: center;
   cursor: pointer;
-  width: 100%;
+  transition: 0.2s ease;
+  max-height: 30rem;
+
+
 
   &>* {
     pointer-events: none;
   }
 
   &:hover {
-    @extend .dropZoneActive;
+    @extend %commonActiveState;
   }
 
   @include common.mediaquery('lg') {
-    margin-inline: auto;
-    width: 80%;
-    padding: 6rem 3rem;
+    aspect-ratio: 1 / 1;
+    gap: 3rem;
+    padding: 5rem 3rem;
   }
 }
 
-.dropZoneActive {
+%commonActiveState {
+  box-shadow: var(--shadow-focus);
   color: var(--color-primary);
-  border-color: var(--color-primary);
 }
+
+.dropZoneError {
+  background-color: rgba(224, 1, 1, 0.1);
+}
+
+
+.dropZoneActive {
+  @extend %commonActiveState;
+  background-color: var(--bg-gray);
+}
+
 
 .dropIcon {
   font-size: 7rem;
+}
+
+.dropIconError {
+  @extend .dropIcon;
+  color: var(--color-error);
 }
 
 .input:focus+.dropZone {

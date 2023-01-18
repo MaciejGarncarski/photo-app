@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import styles from './account.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
-import { ModalOverlay } from '@/components/atoms/modalOverlay/ModalOverlay';
+import { Modal } from '@/components/atoms/modal/Modal';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
@@ -90,21 +90,23 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         {isOwner && (
           <button type="button" onClick={openMenu} className={styles.menuButton}>
             <span className="visually-hidden">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
-            <AiOutlineMenu />
+            <Icon.Settings />
           </button>
         )}
       </main>
       {isMenuOpen && (
-        <ModalOverlay setOpen={setIsMenuOpen}>
-          <div role="dialog" className={styles.menu}>
-            <ul className={styles.menuList}>
-              <li>hej</li>
-              <li>hej</li>
-              <li>hej</li>
-            </ul>
-          </div>
-        </ModalOverlay>
+        <Modal.Overlay setOpen={setIsMenuOpen}>
+          <Modal.Container>
+            <Modal.Close onClose={() => setIsMenuOpen(false)} />
+            <Modal.List>
+              <Modal.ListItem withLink href="/edit-account" isFirst>
+                <Icon.Edit /> Edit account
+              </Modal.ListItem>
+            </Modal.List>
+          </Modal.Container>
+        </Modal.Overlay>
       )}
+
       <AccountPosts id={data.user.id} />
     </>
   );

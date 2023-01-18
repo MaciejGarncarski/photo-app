@@ -1,16 +1,15 @@
-import { ImageErrors } from '@/components/molecules/cropImage/CropImage';
+import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 
 type HandleDropImage = {
   file: File;
-  setError: (err: ImageErrors) => void;
+  setError: (err: ImageCropErrors) => void;
   setImgSrc: (err: string) => void;
-  setFileName?: (err: string | null) => void;
 };
 
 export const IMAGE_MIN_SIZE = 150;
 export const IMAGE_MAX_FILE_SIZE = 36_700_160;
 
-export const handleDropImage = ({ file, setError, setFileName, setImgSrc }: HandleDropImage) => {
+export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
   const reader = new FileReader();
 
   const fileType = file.type.split('/');
@@ -43,9 +42,6 @@ export const handleDropImage = ({ file, setError, setFileName, setImgSrc }: Hand
       image.src = URL.createObjectURL(file);
       setError(null);
       setImgSrc(reader.result?.toString() || '');
-      if (setFileName) {
-        setFileName(file.name);
-      }
     } catch (error) {
       setImgSrc('');
       setError('INVALID_TYPE');

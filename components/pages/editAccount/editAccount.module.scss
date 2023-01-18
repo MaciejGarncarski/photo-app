@@ -1,0 +1,38 @@
+@use '/styles/common.scss';
+
+.container {
+  width: min(80rem, 80vw);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.form {
+  display: grid;
+  gap: 2rem;
+
+  @include common.mediaquery('lg') {
+    gap: 3rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include common.mediaquery('lg') {
+    gap: 3rem;
+  }
+}
+
+.buttonsLastStage {
+  display: flex;
+  gap: 3rem;
+}

@@ -8,8 +8,8 @@ import styles from './postModal.module.scss';
 
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { dialogVariant, Modal } from '@/components/atoms/modal/Modal';
 import { Comment } from '@/components/molecules/comment/Comment';
-import { dialogVariant, Modal } from '@/components/molecules/modal/Modal';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useInfiniteComments } from '@/components/organisms/postModal/useInfiniteComments';

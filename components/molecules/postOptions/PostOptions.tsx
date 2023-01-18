@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { Modal } from '@/components/atoms/modal/Modal';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
-import { Modal } from '@/components/molecules/modal/Modal';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -42,10 +42,10 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
       <Modal.Overlay setOpen={setIsOpen}>
         <Modal.Container>
           <Modal.List>
-            <Modal.Item isFirst>
+            <Modal.ListItem isFirst>
               <Loading variants={['very-small']} />
               Deleting...
-            </Modal.Item>
+            </Modal.ListItem>
           </Modal.List>
         </Modal.Container>
       </Modal.Overlay>
@@ -54,7 +54,12 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
 
   if (isDeleting) {
     return (
-      <ConfirmationModal onCancel={() => setIsDeleting(false)} onConfirm={handleDeletePost} setIsOpen={setIsDeleting} />
+      <ConfirmationModal
+        confirmText="Delete"
+        onCancel={() => setIsDeleting(false)}
+        onConfirm={handleDeletePost}
+        setIsOpen={setIsDeleting}
+      />
     );
   }
 
@@ -63,45 +68,43 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
       <Modal.Container>
         <Modal.Close onClose={onModalClose} />
         <Modal.List>
-          <Modal.Item isFirst onClick={handleCollection}>
-            {collectionMutation.isLoading && (
-              <>
-                <Loading variants={['very-small']} />
-                {isInCollection ? 'Removing...' : 'Saving...'}
-              </>
-            )}
-            {!collectionMutation.isLoading && (
-              <>
-                {isInCollection ? (
-                  <>
-                    <Icon.BookmarkActive />
-                    Remove from collection
-                  </>
-                ) : (
-                  <>
-                    <Icon.Bookmark />
-                    Save to collection
-                  </>
-                )}
-              </>
-            )}
-          </Modal.Item>
+          {collectionMutation.isLoading ? (
+            <Modal.ListItem isFirst>
+              <Loading variants={['very-small']} />
+              {isInCollection ? 'Removing...' : 'Saving...'}
+            </Modal.ListItem>
+          ) : (
+            <Modal.ListItem withButton onClick={handleCollection} isFirst>
+              {isInCollection ? (
+                <>
+                  <Icon.BookmarkActive />
+                  Remove from collection
+                </>
+              ) : (
+                <>
+                  <Icon.Bookmark />
+                  Save to collection
+                </>
+              )}
+            </Modal.ListItem>
+          )}
+
           {isAbleToModify && (
             <>
-              <Modal.Item>
+              <Modal.ListItem>
                 <Icon.Edit />
                 edit (not working)
-              </Modal.Item>
-              <Modal.Item variant="red" onClick={() => setIsDeleting(true)}>
+              </Modal.ListItem>
+              <Modal.ListItem withButton variant="red" onClick={() => setIsDeleting(true)}>
                 <Icon.Trash />
                 Delete post
-              </Modal.Item>
+              </Modal.ListItem>
             </>
           )}
-          <Modal.Item onClick={onModalClose}>
+          <Modal.ListItem withButton onClick={onModalClose}>
             <Icon.Close />
             Close
-          </Modal.Item>
+          </Modal.ListItem>
         </Modal.List>
       </Modal.Container>
     </Modal.Overlay>

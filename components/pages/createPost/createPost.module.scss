@@ -17,22 +17,13 @@
   justify-content: space-between;
 }
 
-.input,
-.actionButtons {
-  @include common.mediaquery('lg') {
-    margin-inline: auto;
-    width: 80%;
-  }
-}
 
 .textAreaContainer {
-  border: 2px solid var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: var(--radius-small);
   position: relative;
 
   @include common.mediaquery('lg') {
-    margin-inline: auto;
-    width: 80%;
     display: flex;
   }
 }
@@ -46,6 +37,11 @@
   width: 100%;
   min-height: 6rem;
   height: 6rem;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus-secondary);
+  }
 }
 
 .label {

@@ -1,9 +1,8 @@
-import clsx from 'clsx';
-
 import styles from './aspectRatioButtons.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
+import { Heading } from '@/components/atoms/heading/Heading';
 
 type ButtonData = {
   text: string;
@@ -16,14 +15,14 @@ const buttonData: Array<ButtonData> = [
 ];
 
 type AspectRatioButtonsProps = {
-  setAspect: (aspect?: number) => void;
-  aspect?: number;
+  setAspect: (aspect: number) => void;
+  aspect: number;
 };
 
 export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProps) => {
   return (
     <CreatePostItemContainer>
-      <h3 className={clsx('heading', styles.aspectRatioHeading)}>Cropping orientation</h3>
+      <Heading tag="h2">Type of crop</Heading>
       <div className={styles.aspectRatioButtons}>
         {buttonData.map(({ text, aspectRatio }) => {
           return (

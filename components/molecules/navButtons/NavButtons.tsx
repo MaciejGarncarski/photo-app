@@ -5,7 +5,7 @@ import styles from './navButtons.module.scss';
 import { Icon } from '@/components/atoms/icons/Icons';
 import { NavAccountIcon } from '@/components/atoms/navAccountIcon/NavAccountIcon';
 import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
-import { SignInButton } from '@/components/atoms/SignInButton/SignInButton';
+import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 

@@ -1,0 +1,18 @@
+.button {
+  border-radius: var(--radius-small);
+  padding: 0.7rem 2.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  border: none;
+  transition: all 0.2s ease;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.35rem var(--bg-secondary), 0 0 0 0.65rem var(--color-primary);
+  }
+}

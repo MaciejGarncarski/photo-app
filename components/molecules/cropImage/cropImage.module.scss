@@ -7,15 +7,6 @@
   justify-content: center;
   align-items: center;
   justify-self: center;
-  grid-row: 2 / 5;
-
-
-  @include common.mediaquery('lg') {
-    img {
-      max-height: 70rem;
-      min-width: 50rem;
-    }
-  }
 }
 
 .cropContainer {

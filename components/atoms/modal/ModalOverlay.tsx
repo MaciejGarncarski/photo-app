@@ -1,7 +1,7 @@
 import { MouseEvent, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import styles from './modalOverlay.module.scss';
+import styles from './modal.module.scss';
 
 import { Children } from '@/components/Layout/Layout';
 

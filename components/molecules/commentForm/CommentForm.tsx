@@ -32,7 +32,7 @@ export const CommentForm = ({ post }: CommentFormProps) => {
     },
   });
 
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     async ({ commentText, postId }: PutCommentRequest) => {
       await axios.put<unknown, null, PutCommentRequest>('/api/post/comment', {
         commentText,
@@ -45,6 +45,10 @@ export const CommentForm = ({ post }: CommentFormProps) => {
   const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
     mutate({ commentText: comment, postId: post.id });
   };
+
+  if (isLoading) {
+    return <p>Uploading...</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>

@@ -1,18 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
-import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { SignUpSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 
-export const CompleteSignUpSchema = z.object({
-  userId: z.string(),
-  bio: z.string().optional(),
-  username: z.string(),
-  fullName: z.string(),
-});
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -22,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
   }
 
-  const response = CompleteSignUpSchema.safeParse(req.body);
+  const response = SignUpSchema.safeParse(req.body);
   if (!response.success) {
     return res.status(httpCodes.badRequest).send({
       message: responseMessages.badRequest,

@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import 'react-image-crop/src/ReactCrop.scss';
 import styles from './createPost.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { useCreatePost } from '@/components/pages/createPost/useCreatePost';
 
@@ -21,7 +21,7 @@ type FormValues = {
 export const CreatePost = () => {
   const { push } = useRouter();
   const [finalImg, setFinalImg] = useState<Blob | null>(null);
-
+  const [aspectRatio, setAspectRatio] = useState<number>(1);
   const { mutate, isLoading } = useCreatePost();
 
   const {
@@ -45,6 +45,13 @@ export const CreatePost = () => {
     mutate({ description, image: finalImg });
   };
 
+  useEffect(() => {
+    window.onbeforeunload = (e) => {
+      e.preventDefault();
+      return 'Are you sure you want to leave?';
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <section className={styles.loadingContainer} aria-labelledby="Upload loading">
@@ -59,38 +66,33 @@ export const CreatePost = () => {
   return (
     <section aria-labelledby="Create new post" className={styles.createPost}>
       <NextSeo title="Create new post" />
-      <Heading tag="h2" className={styles.heading}>
-        Create new post
-      </Heading>
+      {finalImg && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       <div className={styles.addPhoto}>
-        <Heading tag="h3">Add photo</Heading>
-        <CropImage setFinalImg={setFinalImg} />
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
-          <Heading tag="h3">Info about post</Heading>
-          <div className={styles.textAreaContainer}>
-            <textarea
-              id="description"
-              className={styles.textArea}
-              cols={30}
-              rows={10}
-              {...register('description')}
-            ></textarea>
-            <label htmlFor="description" className={styles.label}>
-              Description
-            </label>
-          </div>
-          <div className={styles.actionButtons}>
-            <Button variant="secondary" onClick={handleCancel}>
-              Cancel
-            </Button>
-            <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImg)}>
-              Complete
-            </Button>
-          </div>
+          <CropImage setFinalImg={setFinalImg} aspectRatio={aspectRatio} />
         </CreatePostItemContainer>
-      </form>
+      </div>
+      {finalImg && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <CreatePostItemContainer>
+            <Heading tag="h2">Info about post</Heading>
+            <div className={styles.textAreaContainer}>
+              <textarea id="description" className={styles.textArea} cols={30} rows={10} {...register('description')} />
+              <label htmlFor="description" className={styles.label}>
+                Description
+              </label>
+            </div>
+            <div className={styles.actionButtons}>
+              <Button variant="secondary" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImg)}>
+                Complete
+              </Button>
+            </div>
+          </CreatePostItemContainer>
+        </form>
+      )}
     </section>
   );
 };

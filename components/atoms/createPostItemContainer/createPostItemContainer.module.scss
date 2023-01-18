@@ -4,4 +4,8 @@
   display: grid;
   gap: 2rem;
   width: 100%;
+
+  @include common.mediaquery('lg') {
+    gap: 3rem;
+  }
 }

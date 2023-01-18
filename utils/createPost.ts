@@ -4,6 +4,7 @@ import { v4 } from 'uuid';
 
 import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { string } from '@/utils/string';
 
 import { FormidableResult } from '@/pages/api/post';
@@ -17,9 +18,13 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
     }
 
     const uuid = v4();
-    const fileContents = await fs.readFile(files.image.filepath);
+    const fileContents = files.image?.filepath ? await fs.readFile(files.image.filepath) : null;
 
     const { author, description } = fields;
+
+    if (!fileContents) {
+      return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
+    }
     const { url } = await imageKit.upload({
       file: fileContents,
       fileName: `/1.webp`,
@@ -38,8 +43,8 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
       },
     });
 
-    res.status(200).send({ status: 'ok' });
+    res.status(httpCodes.success).send(responseMessages.success);
   } catch (error) {
-    res.status(400).send({ status: 'error', error });
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
