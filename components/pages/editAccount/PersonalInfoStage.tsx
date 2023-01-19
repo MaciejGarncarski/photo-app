@@ -36,9 +36,9 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
     mode: 'onBlur',
     resolver: zodResolver(AccountPersonalInfoSchema),
     defaultValues: {
-      username: data?.user.username ?? '',
-      fullName: data?.user.name ?? '',
-      bio: data?.user.bio ?? '',
+      username: data?.user?.username ?? '',
+      fullName: data?.user?.name ?? '',
+      bio: data?.user?.bio ?? '',
     },
   });
 

@@ -1,7 +1,7 @@
 @use '/styles/common.scss';
 
 .container {
-  width: min(80rem, 80vw);
+  width: min(85rem, 80vw);
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,24 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.avatarButtons {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3rem;
+  width: 80%;
+  margin-inline: auto;
+
+  @include common.mediaquery('lg') {
+    grid-template-rows: 1fr;
+    width: 100%;
+    grid-template-columns: repeat(3, auto);
+  }
+
+  @include common.mediaquery('xl') {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .stageContainer {

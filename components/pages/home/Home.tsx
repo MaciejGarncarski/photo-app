@@ -1,16 +1,17 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { PrefetchedPostData } from '@/utils/prefetchPosts';
+
 import styles from './home.module.scss';
 
 import { Loading } from '@/components/atoms/loading/Loading';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
-import { PostData } from '@/components/pages/collection/useCollection';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 type HomeProps = {
-  initialData?: InfinitePosts<PostData>;
+  initialData?: InfinitePosts<PrefetchedPostData>;
 };
 
 export const Home = ({ initialData }: HomeProps) => {
@@ -31,8 +32,8 @@ export const Home = ({ initialData }: HomeProps) => {
   return (
     <main className={styles.posts}>
       {data.pages.map((page) => {
-        return page?.posts.map((post) => {
-          return <HomepagePost key={post.id} post={post} />;
+        return page?.posts.map((post, idx) => {
+          return <HomepagePost isPriority={idx < 2} key={post.id} post={post} />;
         });
       })}
       {(isLoading || hasNextPage) && (

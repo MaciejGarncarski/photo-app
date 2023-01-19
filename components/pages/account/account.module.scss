@@ -12,7 +12,7 @@
 
 }
 
-.avatar {
+img.avatar {
   --account-avatar-size: 8rem;
   width: var(--account-avatar-size);
   height: var(--account-avatar-size);
@@ -20,13 +20,12 @@
 
   @include common.mediaquery('lg') {
     --account-avatar-size: 14rem;
-    min-width: var(--account-avatar-size);
-    min-height: var(--account-avatar-size);
-
+    width: var(--account-avatar-size);
+    height: var(--account-avatar-size);
 
     justify-self: center;
     grid-row: 1 / 4;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }
 

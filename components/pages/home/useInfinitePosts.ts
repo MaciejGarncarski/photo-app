@@ -1,21 +1,21 @@
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { PostData } from '@/components/pages/collection/useCollection';
+import { PrefetchedPostData } from '@/utils/prefetchPosts';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 type UseInfinitePosts = {
-  initialData?: InfinitePosts<PostData>;
+  initialData?: InfinitePosts<PrefetchedPostData>;
 };
 
 export const fetchInfinitePosts = async ({ pageParam = 0 }) => {
-  const { data } = await axios.get<InfinitePosts<PostData>>(`/api/post/infinitePosts?skip=${pageParam}`);
+  const { data } = await axios.get<InfinitePosts<PrefetchedPostData>>(`/api/post/infinitePosts?skip=${pageParam}`);
   return data;
 };
 
 export const useInfinitePosts = ({ initialData }: UseInfinitePosts) => {
-  const transformedInitialData: InfiniteData<InfinitePosts<PostData> | undefined> = {
+  const transformedInitialData: InfiniteData<InfinitePosts<PrefetchedPostData> | undefined> = {
     pages: [initialData],
     pageParams: [],
   };

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { motion } from 'framer-motion';
 import parse from 'html-react-parser';
 import Link from 'next/link';
@@ -21,13 +22,14 @@ type CommentProps = {
   commentData: PostCommentsWithIsLiked;
 };
 
+dayjs.extend(relativeTime);
+
 export const Comment = ({ commentData }: CommentProps) => {
   const { sessionUserData } = useAuth();
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const { data } = useAccount({ userId: commentData.user_id });
   const { isLiked, id, created_at, comment_text, user_id, likesCount } = commentData;
   const timeSinceCreated = dayjs(created_at).fromNow();
-  const formattedDate = dayjs(created_at).format('MMMM DD YYYY');
 
   const commentLike = useCommentLike({ commentId: id });
   const commentDelete = useDeleteComment();
@@ -36,11 +38,11 @@ export const Comment = ({ commentData }: CommentProps) => {
   const handleDelete = () => commentDelete.mutate({ commentId: id });
   const onDeleteBtnClick = () => setIsDeleting(true);
 
-  const isAbleToDelete = sessionUserData?.user.id === user_id || sessionUserData?.user.role === 'ADMIN';
+  const isAbleToDelete = sessionUserData?.user?.id === user_id || sessionUserData?.user?.role === 'ADMIN';
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
 
-  const userAccountHref = `/${sessionUserData?.user.username}`;
+  const userAccountHref = `/${sessionUserData?.user?.username}`;
 
   return (
     <motion.article className={styles.comment}>
@@ -49,7 +51,7 @@ export const Comment = ({ commentData }: CommentProps) => {
       </Link>
       <div className={styles.commentText}>
         <Link href={userAccountHref}>
-          <h3 className={styles.author}>{data?.user.username}</h3>
+          <h3 className={styles.author}>{data?.user?.username}</h3>
         </Link>
         <p className={styles.content}>{parse(commentWithNewLine)}</p>
       </div>

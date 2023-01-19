@@ -44,6 +44,8 @@ export const CompleteSignUp = () => {
   const { data } = useAccount({ userId: session?.user?.id });
   const queryClient = useQueryClient();
 
+  const userData = data?.user;
+
   const {
     register,
     handleSubmit,
@@ -52,9 +54,9 @@ export const CompleteSignUp = () => {
     mode: 'onBlur',
     resolver: zodResolver(AccountPersonalInfoSchema),
     defaultValues: {
-      username: data?.user.username ?? '',
-      fullName: data?.user.name ?? '',
-      bio: data?.user.bio ?? '',
+      username: userData?.username ?? '',
+      fullName: userData?.name ?? '',
+      bio: userData?.bio ?? '',
     },
   });
 

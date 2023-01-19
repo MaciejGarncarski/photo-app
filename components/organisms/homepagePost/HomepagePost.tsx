@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import parse from 'html-react-parser';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -11,17 +12,21 @@ import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { Account, useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type HomePagePostProps = {
   post: PostData;
+  authorData?: Account;
+  isPriority: boolean;
 };
 
-export const HomepagePost = ({ post }: HomePagePostProps) => {
+dayjs.extend(relativeTime);
+
+export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps) => {
   const { session } = useAuth();
   const { author_id, description, created_at, images, likesCount } = post;
-  const { data } = useAccount({ userId: author_id });
+  const { data } = useAccount({ userId: author_id, authorData });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
@@ -54,8 +59,8 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
         src={images}
         width={300}
         height={300}
-        priority
-        alt={`${data?.user.username} - ${shortDescription}`}
+        priority={isPriority}
+        alt={`${data?.user?.username} - ${shortDescription}`}
       />
       <PostButtons post={post} />
       <footer className={styles.bottom}>
@@ -68,7 +73,7 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
           </p>
         )}
         <p className={styles.description}>
-          <span className={styles.author}>{data?.user.username}</span>
+          <span className={styles.author}>{data?.user?.username}</span>
           <Description />
         </p>
         <p className={styles.date}>

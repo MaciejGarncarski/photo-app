@@ -6,7 +6,6 @@ import { namedComponent } from '@/utils/namedComponent';
 
 import styles from './layout.module.scss';
 
-import { Header } from '@/components/organisms/header/Header';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
@@ -18,12 +17,25 @@ type LayoutProps = Children;
 
 const COOKIES_ACCEPTED = 'cookiesAccepted' as const;
 
-const CompleteSignUp = dynamic(() =>
-  namedComponent(import('@/components/molecules/completeSignUp/CompleteSignUp'), 'CompleteSignUp'),
+const Header = dynamic(
+  () => {
+    return namedComponent(import('@/components/organisms/header/Header'), 'Header');
+  },
+  { ssr: false },
 );
 
-const CookieAlert = dynamic(() =>
-  namedComponent(import('@/components/molecules/cookieAlert/CookieAlert'), 'CookieAlert'),
+const CompleteSignUp = dynamic(
+  () => {
+    return namedComponent(import('@/components/molecules/completeSignUp/CompleteSignUp'), 'CompleteSignUp');
+  },
+  { ssr: false },
+);
+
+const CookieAlert = dynamic(
+  () => {
+    return namedComponent(import('@/components/molecules/cookieAlert/CookieAlert'), 'CookieAlert');
+  },
+  { ssr: false },
 );
 
 export const Layout = ({ children }: LayoutProps) => {
@@ -37,7 +49,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   const { session, status } = useAuth();
   const { data, isLoading } = useAccount({ userId: session?.user?.id });
-  const isNotCompleted = !data?.user.username && status === 'authenticated';
+  const isNotCompleted = !data?.user?.username && status === 'authenticated';
 
   const handleClose = () => {
     setIsCookiesOpen(false);

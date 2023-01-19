@@ -51,7 +51,7 @@ export const NavButtons = () => {
       {listData.map(({ icon, onClick, href, title }) => {
         return <NavListButton icon={icon} onClick={onClick} href={href} title={title} key={title} />;
       })}
-      {data?.user.username && <NavAccountIcon userId={session.user.id ?? ''} />}
+      {data?.user?.username && <NavAccountIcon userId={session.user.id ?? ''} />}
     </ul>
   );
 };

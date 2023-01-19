@@ -12,7 +12,7 @@ import styles from './postButtons.module.scss';
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
-import { Children } from '@/components/Layout/Layout';
+import { Children } from '@/components/layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { useAuth } from '@/components/organisms/signIn/useAuth';

@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from 'react';
 
 import styles from './button.module.scss';
 
-import { Children } from '@/components/Layout/Layout';
+import { Children } from '@/components/layout/Layout';
 
 type ButtonProps = {
   className?: string;
