@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import styles from './createPost.module.scss';
@@ -44,13 +44,6 @@ export const CreatePost = () => {
     }
     mutate({ description, image: finalImg });
   };
-
-  useEffect(() => {
-    window.onbeforeunload = (e) => {
-      e.preventDefault();
-      return 'Are you sure you want to leave?';
-    };
-  }, []);
 
   if (isLoading) {
     return (

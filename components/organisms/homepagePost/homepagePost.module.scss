@@ -3,9 +3,14 @@
 .post {
   border-radius: var(--radius-medium);
   background-color: var(--bg-primary);
+  position: relative;
   box-shadow: var(--shadow-secondary);
 }
 
+img.imageLoading {
+  width: 0;
+  height: 0;
+}
 
 .image {
   width: 100%;

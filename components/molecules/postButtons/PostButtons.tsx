@@ -1,3 +1,4 @@
+import { IconHeart, IconMessage, IconShare, IconStar } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -9,7 +10,6 @@ import { namedComponent } from '@/utils/namedComponent';
 
 import styles from './postButtons.module.scss';
 
-import { Icon } from '@/components/atoms/icons/Icons';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { Children } from '@/components/layout/Layout';
@@ -91,19 +91,18 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       <Item>
         <Button onClick={handleLike}>
           <span className="visually-hidden">like</span>
-          {isLiked ? <Icon.HeartActive /> : <Icon.Heart />}
+          {isLiked ? <IconHeart color="#dd2020" fill="#dd2020" /> : <IconHeart />}
         </Button>
       </Item>
       <Item>
         <Button onClick={openModal}>
           <span className="visually-hidden">comment</span>
-
-          <Icon.Comment />
+          <IconMessage />
         </Button>
       </Item>
       <Item>
         <span className="visually-hidden">share</span>
-        <Icon.Share />
+        <IconShare />
       </Item>
       {session?.user && (
         <Item isLast>
@@ -111,7 +110,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
             <Loading variants={['very-small']} />
           ) : (
             <Tooltip variant="right" content={`${isInCollection ? 'Remove from' : 'Save to'} collection`}>
-              <Button onClick={handleCollection}>{isInCollection ? <Icon.BookmarkActive /> : <Icon.Bookmark />}</Button>
+              <Button onClick={handleCollection}>{isInCollection ? <IconStar fill="black" /> : <IconStar />}</Button>
             </Tooltip>
           )}
         </Item>

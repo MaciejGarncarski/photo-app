@@ -1,5 +1,5 @@
+import { IconBrandGoogle } from '@tabler/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { AiOutlineGoogle } from 'react-icons/ai';
 
 import styles from './signIn.module.scss';
 
@@ -37,7 +37,7 @@ export const SignIn = () => {
       </div>
       <div className={styles.other}>
         <Button className={styles.button} type="button" onClick={() => signIn('google', { redirect: true })}>
-          <AiOutlineGoogle />
+          <IconBrandGoogle />
           <p className={styles.google}>Google</p>
         </Button>
       </div>

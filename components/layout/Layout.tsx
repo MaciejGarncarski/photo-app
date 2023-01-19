@@ -2,8 +2,6 @@ import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useState } from 'react';
 
-import { namedComponent } from '@/utils/namedComponent';
-
 import styles from './layout.module.scss';
 
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -13,32 +11,27 @@ export type Children = {
   children: ReactNode;
 };
 
-type LayoutProps = Children;
+type LayoutProps = Children & {
+  className: string;
+};
 
 const COOKIES_ACCEPTED = 'cookiesAccepted' as const;
 
-const Header = dynamic(
-  () => {
-    return namedComponent(import('@/components/organisms/header/Header'), 'Header');
-  },
-  { ssr: false },
-);
+const Header = dynamic(() => import('@/components/organisms/header/Header').then(({ Header }) => Header), {
+  ssr: false,
+});
 
 const CompleteSignUp = dynamic(
-  () => {
-    return namedComponent(import('@/components/molecules/completeSignUp/CompleteSignUp'), 'CompleteSignUp');
-  },
+  () => import('@/components/molecules/completeSignUp/CompleteSignUp').then(({ CompleteSignUp }) => CompleteSignUp),
   { ssr: false },
 );
 
 const CookieAlert = dynamic(
-  () => {
-    return namedComponent(import('@/components/molecules/cookieAlert/CookieAlert'), 'CookieAlert');
-  },
+  () => import('@/components/molecules/cookieAlert/CookieAlert').then(({ CookieAlert }) => CookieAlert),
   { ssr: false },
 );
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ className, children }: LayoutProps) => {
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
   const [isCookiesOpen, setIsCookiesOpen] = useState<boolean>(false);
 
@@ -61,7 +54,7 @@ export const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
-    <div>
+    <div className={className}>
       <Header />
       <div className={styles.children}>
         <AnimatePresence>
