@@ -49,7 +49,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   const { session, status } = useAuth();
   const { data, isLoading } = useAccount({ userId: session?.user?.id });
-  const isNotCompleted = !data?.user.username && status === 'authenticated';
+  const isNotCompleted = !data?.user?.username && status === 'authenticated';
 
   const handleClose = () => {
     setIsCookiesOpen(false);
