@@ -67,6 +67,5 @@ export const prefetchPosts = async () => {
     cursor: nextCursor,
   };
 
-  console.log(data);
   return data;
 };
