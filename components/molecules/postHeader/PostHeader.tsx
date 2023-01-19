@@ -36,7 +36,7 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
   const { data } = useAccount({ userId: session?.user?.id });
   const { data: authorData } = useAccount({ userId: post.author_id });
 
-  const isAuthor = data?.user.id === post.author_id;
+  const isAuthor = data?.user?.id === post.author_id;
 
   const onModalOpen = () => {
     setIsOpen(true);
@@ -54,9 +54,9 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
 
   return (
     <Tag className={headerClassName}>
-      <Link href={`/${authorData.user.username}`} className={styles.link}>
-        <Avatar userId={authorData.user.id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
-        <h2>{authorData.user.username}</h2>
+      <Link href={`/${authorData.user?.username}`} className={styles.link}>
+        <Avatar userId={authorData.user?.id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <h2>{authorData.user?.username}</h2>
       </Link>
       {data && (
         <div className={styles.options}>

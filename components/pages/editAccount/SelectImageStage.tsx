@@ -50,7 +50,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
         <Button type="button" onClick={stageCropImage}>
           Update avatar
         </Button>
-        {data?.user.customImage && (
+        {data?.user?.customImage && (
           <Button type="button" variant="secondary" onClick={() => setIsRemoving(true)}>
             remove avatar
           </Button>

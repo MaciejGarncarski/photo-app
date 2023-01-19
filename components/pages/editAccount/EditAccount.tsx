@@ -49,7 +49,7 @@ export const EditAccount = ({ userId }: PropsTypes) => {
 
   return (
     <main id="main" className={styles.container}>
-      <NextSeo title={`@${data?.user.username} - Edit account`} />
+      <NextSeo title={`@${data?.user?.username} - Edit account`} />
 
       <AnimatePresence mode="wait">
         <Suspense fallback={<Loading variants={['center']} />}>
