@@ -22,7 +22,7 @@ export const username = z
   .min(4, { message: 'Username must contain at least 4 characters' })
   .regex(usernameRegex, { message: 'Invalid username' });
 
-export const bio = z.string();
+export const bio = z.string().max(200, { message: 'Bio contains too many characters!' });
 
 export const AccountPersonalInfoSchema = z.object({
   username,

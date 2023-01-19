@@ -1,8 +1,9 @@
-import { IconHome, IconSquareRoundedPlus, IconStar } from '@tabler/icons';
+import { IconHome, IconSquareRoundedPlus } from '@tabler/icons';
 import { ReactNode } from 'react';
 
 import styles from './navButtons.module.scss';
 
+import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
 import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
 import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
@@ -18,17 +19,17 @@ export type ListData = {
 
 const listData: Array<ListData> = [
   {
-    icon: <IconHome size={32} />,
+    icon: <IconHome />,
     title: 'Home',
     href: '/',
   },
   {
-    icon: <IconSquareRoundedPlus size={32} />,
+    icon: <IconSquareRoundedPlus />,
     title: 'Create post',
     href: '/create-post',
   },
   {
-    icon: <IconStar size={32} />,
+    icon: <IconStarWrapper />,
     title: 'Collection',
     href: '/collection',
   },

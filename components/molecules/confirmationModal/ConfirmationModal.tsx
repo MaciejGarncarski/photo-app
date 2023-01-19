@@ -1,6 +1,7 @@
-import { IconCheck, IconTrash, IconX } from '@tabler/icons';
+import { IconCheck, IconTrash } from '@tabler/icons';
 import { ReactNode } from 'react';
 
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { Modal } from '@/components/atoms/modal/Modal';
 import { ModalClose } from '@/components/atoms/modal/ModalClose';
 
@@ -40,7 +41,7 @@ export const ConfirmationModal = ({
             {confirmText}
           </Modal.ListItem>
           <Modal.ListItem withButton onClick={handleCancel}>
-            <IconX />
+            <IconXWrapper />
             Cancel
           </Modal.ListItem>
         </Modal.List>

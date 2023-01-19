@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import parse from 'html-react-parser';
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import styles from './homepagePost.module.scss';
@@ -10,6 +9,7 @@ import styles from './homepagePost.module.scss';
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
+import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
@@ -24,11 +24,6 @@ type HomePagePostProps = {
 };
 
 dayjs.extend(relativeTime);
-
-const LazyCommentForm = dynamic(
-  () => import('@/components/molecules/commentForm/CommentForm').then(({ CommentForm }) => CommentForm),
-  { ssr: false },
-);
 
 export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps) => {
   const { session } = useAuth();
@@ -95,7 +90,7 @@ export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps
             <time dateTime={created_at.toString()}>{fromNow}</time>
           </Tooltip>
         </p>
-        {session?.user && <LazyCommentForm post={post} />}
+        {session?.user && <CommentForm post={post} />}
       </footer>
     </article>
   );

@@ -35,7 +35,7 @@ export const CropImage = ({ setFinalImg, aspectRatio }: CropImageProps) => {
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [error, setError] = useState<ImageCropErrors>(null);
 
-  useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg });
+  useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg, isError: Boolean(error) });
 
   const handleImage = (changeEv: ChangeEvent<HTMLInputElement>) => {
     if (changeEv.target.files && changeEv.target.files.length > 0) {

@@ -30,10 +30,22 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
   const { data } = useAccount({ userId });
 
   const [isRemoving, setIsRemoving] = useState<boolean>(false);
-  const { mutate } = useDeleteAvatar();
+  const { mutate, isLoading } = useDeleteAvatar();
 
   if (!userId) {
     return <Loading />;
+  }
+  const removeAvatar = () => {
+    mutate({ userId }, { onSettled: () => setIsRemoving(false) });
+  };
+
+  if (isLoading) {
+    return (
+      <section>
+        <Heading tag="h2">Removing avatar...</Heading>
+        <Loading />
+      </section>
+    );
   }
 
   return (
@@ -63,7 +75,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
         <ConfirmationModal
           confirmText="Delete"
           onCancel={() => setIsRemoving(false)}
-          onConfirm={() => mutate({ userId })}
+          onConfirm={removeAvatar}
           setIsOpen={setIsRemoving}
         />
       )}

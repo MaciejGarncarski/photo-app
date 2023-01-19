@@ -1,4 +1,4 @@
-import { IconHeart, IconMessage, IconShare, IconStar } from '@tabler/icons';
+import { IconHeart, IconMessage, IconShare } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -10,6 +10,7 @@ import { namedComponent } from '@/utils/namedComponent';
 
 import styles from './postButtons.module.scss';
 
+import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { Children } from '@/components/layout/Layout';
@@ -110,7 +111,9 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
             <Loading variants={['very-small']} />
           ) : (
             <Tooltip variant="right" content={`${isInCollection ? 'Remove from' : 'Save to'} collection`}>
-              <Button onClick={handleCollection}>{isInCollection ? <IconStar fill="black" /> : <IconStar />}</Button>
+              <Button onClick={handleCollection}>
+                {isInCollection ? <IconStarWrapper isActive /> : <IconStarWrapper />}
+              </Button>
             </Tooltip>
           )}
         </Item>

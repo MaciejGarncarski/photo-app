@@ -1,4 +1,5 @@
 @use 'common.scss';
+@use 'variables';
 
 *,
 *::before,
@@ -63,43 +64,8 @@ a {
 
 
 :root {
+  @extend %variables;
 
-  --color-primary: rgb(63, 114, 175);
-  --color-secondary: rgb(137, 170, 231);
-  --color-error: rgb(207, 60, 30);
-  --color-white: rgb(248, 246, 246);
-  --color-disabled: rgb(63, 114, 175, 0.9);
-  --color-separator: rgb(133, 153, 173);
-
-  --text-primary: rgb(17, 45, 78);
-  --text-secondary: rgb(64, 64, 64);
-  --text-placeholder: rgb(75, 73, 73);
-
-  --bg-primary: rgb(255, 255, 255);
-  --bg-secondary: rgb(249, 247, 247);
-  --bg-gray: rgb(236, 236, 243);
-  --bg-black: rgb(0, 0, 0);
-  --bg-overlay: rgba(0, 0, 0, 0.67);
-  --border-primary-color: rgb(201, 201, 201);
-  --border-secondary-color: rgb(219, 219, 219);
-  --border-primary: 1px solid var(--border-primary-color);
-  --border-secondary: 1px solid var(--border-secondary-color);
-
-  --radius-small: 0.45rem;
-  --radius-medium: 0.8rem;
-
-
-  --shadow-primary: 0 4px 10px 2px rgba(0, 0, 0, 0.15);
-  --shadow-secondary: 0 0 0 1px rgb(0, 0, 0, 12%), 0 2px 4px rgb(0, 0, 0, 5%), 0 12px 24px rgb(0, 0, 0, 5%);
-  --shadow-focus: inset 0 0 0 2px var(--color-primary);
-  --shadow-focus-secondary: inset 0 0 0 2px var(--color-secondary);
-  --itemSize: 2.75rem;
-
-  @include common.mediaquery('lg') {
-    --itemSize: 3.5rem;
-  }
-
-  --create-post-width: min(80rem, 80%);
 }
 
 .visually-hidden {
@@ -114,11 +80,37 @@ a {
 
 
 .icon-tabler {
-  width: 30px;
-  height: 30px;
+  width: 3.2rem;
+  height: 3.2rem;
   stroke-width: 1.75;
 }
 
 #__next {
   isolation: isolate;
+}
+
+
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.4em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1em;
 }

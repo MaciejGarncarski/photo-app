@@ -1,4 +1,4 @@
-import { IconEdit, IconSettings } from '@tabler/icons';
+import { IconEdit } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import styles from './account.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Modal } from '@/components/atoms/modal/Modal';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
@@ -48,7 +49,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <NextSeo title={`@${username}`} />
       <main className={styles.account}>
         <Avatar className={styles.avatar} userId={data.user.id} />
@@ -71,7 +72,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         {isOwner && (
           <button type="button" onClick={openMenu} className={styles.menuButton}>
             <span className="visually-hidden">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
-            <IconSettings />
+            <IconSettingsWrapper size="lg" />
           </button>
         )}
       </main>
@@ -89,6 +90,6 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
       )}
 
       <AccountPosts id={data.user.id} />
-    </>
+    </div>
   );
 };

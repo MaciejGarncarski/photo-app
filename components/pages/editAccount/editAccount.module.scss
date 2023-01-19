@@ -1,11 +1,11 @@
 @use '/styles/common.scss';
 
 .container {
-  width: min(85rem, 80vw);
+  width: min(85rem, 90vw);
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .form {
@@ -13,7 +13,7 @@
   gap: 2rem;
 
   @include common.mediaquery('lg') {
-    gap: 3rem;
+    gap: 4rem;
   }
 }
 

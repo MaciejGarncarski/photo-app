@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import styles from './loading.module.scss';
 
-type LoadingVariants = 'small' | 'very-small' | 'left' | 'center';
+type LoadingVariants = 'small' | 'very-small' | 'left' | 'center' | 'no-margin';
 
 type LoadingProps = {
   variants?: Array<LoadingVariants>;

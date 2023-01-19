@@ -9,7 +9,6 @@
   grid-template-columns: repeat(2, 1fr);
 
   @include common.mediaquery('lg') {
-    margin: 0 20rem;
     margin-top: 6rem;
     gap: 4rem;
     grid-template-columns: repeat(2, 1fr);

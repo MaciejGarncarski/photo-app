@@ -1,6 +1,8 @@
-import { IconEdit, IconStar, IconTrash, IconX } from '@tabler/icons';
+import { IconEdit, IconTrash } from '@tabler/icons';
 import { useState } from 'react';
 
+import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Modal } from '@/components/atoms/modal/Modal';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
@@ -70,19 +72,19 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
         <Modal.List>
           {collectionMutation.isLoading ? (
             <Modal.ListItem isFirst>
-              <Loading variants={['very-small']} />
+              <Loading variants={['no-margin', 'very-small']} />
               {isInCollection ? 'Removing...' : 'Saving...'}
             </Modal.ListItem>
           ) : (
             <Modal.ListItem withButton onClick={handleCollection} isFirst>
               {isInCollection ? (
                 <>
-                  <IconStar fill="black" />
+                  <IconStarWrapper isActive />
                   Remove from collection
                 </>
               ) : (
                 <>
-                  <IconStar />
+                  <IconStarWrapper />
                   Save to collection
                 </>
               )}
@@ -102,7 +104,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
             </>
           )}
           <Modal.ListItem withButton onClick={onModalClose}>
-            <IconX />
+            <IconXWrapper />
             Close
           </Modal.ListItem>
         </Modal.List>
