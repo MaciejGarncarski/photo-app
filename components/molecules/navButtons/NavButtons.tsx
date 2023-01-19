@@ -1,9 +1,10 @@
+import { IconHome, IconSquareRoundedPlus } from '@tabler/icons';
 import { ReactNode } from 'react';
 
 import styles from './navButtons.module.scss';
 
-import { Icon } from '@/components/atoms/icons/Icons';
-import { NavAccountIcon } from '@/components/atoms/navAccountIcon/NavAccountIcon';
+import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
+import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
 import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
 import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
@@ -18,17 +19,17 @@ export type ListData = {
 
 const listData: Array<ListData> = [
   {
-    icon: <Icon.Home />,
+    icon: <IconHome />,
     title: 'Home',
     href: '/',
   },
   {
-    icon: <Icon.Create />,
+    icon: <IconSquareRoundedPlus />,
     title: 'Create post',
     href: '/create-post',
   },
   {
-    icon: <Icon.Bookmark />,
+    icon: <IconStarWrapper />,
     title: 'Collection',
     href: '/collection',
   },
@@ -51,7 +52,7 @@ export const NavButtons = () => {
       {listData.map(({ icon, onClick, href, title }) => {
         return <NavListButton icon={icon} onClick={onClick} href={href} title={title} key={title} />;
       })}
-      {data?.user?.username && <NavAccountIcon userId={session.user.id ?? ''} />}
+      {data?.user?.username && <NavAccountButton userId={session.user.id ?? ''} />}
     </ul>
   );
 };

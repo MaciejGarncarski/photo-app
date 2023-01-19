@@ -1,10 +1,10 @@
+import { IconSearch } from '@tabler/icons';
 import { MouseEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import styles from './layoutSearch.module.scss';
 
-import { ResetIcon } from '@/components/atoms/icons/ResetIcon/ResetIcon';
-import { SearchIcon } from '@/components/atoms/icons/SearchIcon/SearchIcon';
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { useClickOutside } from '@/components/molecules/layoutSearch/useClickOutside';
 
 type FormValues = {
@@ -46,7 +46,7 @@ export const LayoutSearch = () => {
       <label className={styles.label}>
         {!isEnabled && (
           <div className={styles.searchIcon}>
-            <SearchIcon />
+            <IconSearch />
           </div>
         )}
         <span className="visually-hidden">Search</span>
@@ -55,7 +55,7 @@ export const LayoutSearch = () => {
       {isEnabled && (
         <button type="reset" onClick={handleReset} className={styles.resetIcon}>
           <span className="visually-hidden">reset input</span>
-          <ResetIcon />
+          <IconXWrapper />
         </button>
       )}
     </form>

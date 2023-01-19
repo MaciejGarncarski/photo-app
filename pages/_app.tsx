@@ -1,3 +1,4 @@
+import { Lato } from '@next/font/google';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MotionConfig } from 'framer-motion';
@@ -9,6 +10,11 @@ import '/styles/globals.scss';
 import { Layout } from '@/components/layout/Layout';
 import { DefaultSeoWrapper } from '@/components/seo/DefaultSeo';
 
+const lato = Lato({
+  weight: ['400', '700', '900'],
+  variable: '--font-lato',
+});
+
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -17,7 +23,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
         <MotionConfig transition={{ duration: 0.2 }}>
-          <Layout>
+          <Layout className={lato.className}>
             <DefaultSeoWrapper />
             <Hydrate state={pageProps.dehydratedState}>
               <Component {...pageProps} />

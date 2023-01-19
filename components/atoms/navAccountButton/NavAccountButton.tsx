@@ -1,14 +1,17 @@
+import { IconUser } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-import styles from './navAccountIcon.module.scss';
+import styles from './navAccountButton.module.scss';
 import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { Icon } from '@/components/atoms/icons/Icons';
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip';
+import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
+import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
@@ -17,12 +20,16 @@ type NavAccountIconProps = {
   userId: string;
 };
 
-export const NavAccountIcon = ({ userId }: NavAccountIconProps) => {
+export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
+
+  const [isSigningOut, setIsSigningOut] = useState<boolean>(false);
+
   const { signOut } = useAuth();
   const { account } = useAccount({ userId });
   const { isGoingUp } = useScrollPosition();
+  const { isMobile } = useScreenWidth();
 
   useEffect(() => {
     const handleTooltipClose = (mouseEv: MouseEvent) => {
@@ -54,22 +61,28 @@ export const NavAccountIcon = ({ userId }: NavAccountIconProps) => {
     return null;
   }
 
+  const canShowOnScroll = (isMobile && isGoingUp) || !isMobile;
+
   const accountHref = `/${account.username}`;
   return (
     <li
       ref={containerRef}
       onMouseEnter={handleOpen}
-      onMouseLeave={handleClose}
+      // onMouseLeave={handleClose}
       className={commonStyles.accountIconContainer}
     >
-      <Link href={accountHref} className={clsx(commonStyles.listItemChild, styles.button)}>
+      <button
+        type="button"
+        onClick={() => setIsOptionsOpen((prev) => !prev)}
+        className={clsx(commonStyles.listItemChild, styles.button)}
+      >
         <span className="visually-hidden">
           @{account?.username} {account?.name}
         </span>
         <Avatar className={styles.avatar} userId={account.id} />
-      </Link>
+      </button>
       <AnimatePresence>
-        {isOptionsOpen && isGoingUp && (
+        {isOptionsOpen && canShowOnScroll && (
           <motion.div
             className={styles.options}
             variants={tooltipVariant}
@@ -77,15 +90,25 @@ export const NavAccountIcon = ({ userId }: NavAccountIconProps) => {
             initial="initial"
             exit="exit"
           >
-            <div className={styles.square}></div>
             <p className={styles.welcome}>Hi, {account?.username}</p>
             <Link href={accountHref} className={styles.link} onClick={() => setIsOptionsOpen(false)}>
-              <Icon.Account /> your account
+              <IconUser /> your account
             </Link>
-            <button type="button" className={styles.signOut} onClick={() => signOut()}>
+            <button type="button" className={styles.signOut} onClick={() => setIsSigningOut(true)}>
+              <IconXWrapper />
               Sign out
             </button>
           </motion.div>
+        )}
+
+        {isSigningOut && (
+          <ConfirmationModal
+            key="sign out modal"
+            confirmText="Sign out"
+            onCancel={() => setIsSigningOut(false)}
+            onConfirm={() => signOut()}
+            setIsOpen={setIsSigningOut}
+          />
         )}
       </AnimatePresence>
     </li>

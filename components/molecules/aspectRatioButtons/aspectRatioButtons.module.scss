@@ -1,11 +1,12 @@
 @use '/styles/common.scss';
 
 .aspectRatioButtons {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  gap: 2rem;
 
   @include common.mediaquery('lg') {
-    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
   }
 }
 

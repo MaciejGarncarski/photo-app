@@ -28,22 +28,6 @@
   }
 }
 
-.textArea {
-  border: none;
-  background-color: transparent;
-  padding: 2rem 1rem;
-  resize: vertical;
-  max-width: 100%;
-  width: 100%;
-  min-height: 6rem;
-  height: 6rem;
-
-  &:focus {
-    outline: none;
-    box-shadow: var(--shadow-focus-secondary);
-  }
-}
-
 .label {
   position: absolute;
   left: 1rem;

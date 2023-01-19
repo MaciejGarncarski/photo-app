@@ -27,6 +27,13 @@
   }
 
   @include common.mediaquery('lg') {
+
+
+    >svg {
+      width: 8rem;
+      height: 8rem;
+    }
+
     aspect-ratio: 1 / 1;
     gap: 3rem;
     padding: 5rem 3rem;
@@ -39,7 +46,7 @@
 }
 
 .dropZoneError {
-  background-color: rgba(224, 1, 1, 0.1);
+  background-color: var(--bg-error);
 }
 
 

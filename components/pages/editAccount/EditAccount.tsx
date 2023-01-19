@@ -9,17 +9,11 @@ import styles from './editAccount.module.scss';
 
 import { Loading } from '@/components/atoms/loading/Loading';
 import { useAccount } from '@/components/pages/account/useAccount';
+import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
 
 type PropsTypes = {
   userId: string;
 };
-
-const LazySelectImageStage = dynamic(
-  async () => {
-    return namedComponent(import('@/components/pages/editAccount/SelectImageStage'), 'SelectImageStage');
-  },
-  { ssr: false },
-);
 
 const LazyCropImageStage = dynamic(
   async () => {
@@ -51,10 +45,10 @@ export const EditAccount = ({ userId }: PropsTypes) => {
     <main id="main" className={styles.container}>
       <NextSeo title={`@${data?.user?.username} - Edit account`} />
 
-      <AnimatePresence mode="wait">
-        <Suspense fallback={<Loading variants={['center']} />}>
+      <Suspense fallback={<Loading variants={['center']} />}>
+        <AnimatePresence mode="wait">
           {stage === 'selectImage' && (
-            <LazySelectImageStage
+            <SelectImageStage
               key="selectImageStage"
               stageCropImage={stageCropImage}
               stagePersonalInfo={stagePersonalInfo}
@@ -79,8 +73,8 @@ export const EditAccount = ({ userId }: PropsTypes) => {
               userId={userId}
             />
           )}
-        </Suspense>
-      </AnimatePresence>
+        </AnimatePresence>
+      </Suspense>
     </main>
   );
 };

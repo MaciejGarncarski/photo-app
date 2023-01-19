@@ -1,6 +1,8 @@
+import { IconEdit, IconTrash } from '@tabler/icons';
 import { useState } from 'react';
 
-import { Icon } from '@/components/atoms/icons/Icons';
+import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Modal } from '@/components/atoms/modal/Modal';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
@@ -70,19 +72,19 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
         <Modal.List>
           {collectionMutation.isLoading ? (
             <Modal.ListItem isFirst>
-              <Loading variants={['very-small']} />
+              <Loading variants={['no-margin', 'very-small']} />
               {isInCollection ? 'Removing...' : 'Saving...'}
             </Modal.ListItem>
           ) : (
             <Modal.ListItem withButton onClick={handleCollection} isFirst>
               {isInCollection ? (
                 <>
-                  <Icon.BookmarkActive />
+                  <IconStarWrapper isActive />
                   Remove from collection
                 </>
               ) : (
                 <>
-                  <Icon.Bookmark />
+                  <IconStarWrapper />
                   Save to collection
                 </>
               )}
@@ -92,17 +94,17 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
           {isAbleToModify && (
             <>
               <Modal.ListItem>
-                <Icon.Edit />
+                <IconEdit />
                 edit (not working)
               </Modal.ListItem>
               <Modal.ListItem withButton variant="red" onClick={() => setIsDeleting(true)}>
-                <Icon.Trash />
+                <IconTrash />
                 Delete post
               </Modal.ListItem>
             </>
           )}
           <Modal.ListItem withButton onClick={onModalClose}>
-            <Icon.Close />
+            <IconXWrapper />
             Close
           </Modal.ListItem>
         </Modal.List>

@@ -1,9 +1,9 @@
+import { IconMenu } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import { namedComponent } from '@/utils/namedComponent';
 
@@ -63,7 +63,7 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
           {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
           <Tooltip variant="right" content="Post menu">
             <button type="button" className={styles.optionsButton} onClick={onModalOpen}>
-              <AiOutlineMenu />
+              <IconMenu />
             </button>
           </Tooltip>
         </div>

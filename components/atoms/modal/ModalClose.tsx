@@ -2,7 +2,7 @@ import { domAnimation, LazyMotion, m } from 'framer-motion';
 
 import styles from './modal.module.scss';
 
-import { Icon } from '@/components/atoms/icons/Icons';
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 
 type ModalCloseProps = {
   onClose: () => void;
@@ -19,7 +19,7 @@ export const ModalClose = ({ onClose }: ModalCloseProps) => {
         type="button"
         onClick={onClose}
       >
-        <Icon.Close />
+        <IconXWrapper size="lg" />
         <span className="visually-hidden">Close dialog</span>
       </m.button>
     </LazyMotion>

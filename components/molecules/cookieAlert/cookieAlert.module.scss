@@ -2,11 +2,11 @@
 
 .cookies {
   position: fixed;
-  --offset: 2rem;
+  --offset: 1rem;
   right: var(--offset);
   left: var(--offset);
   margin: auto;
-  bottom: 6rem;
+  bottom: 5rem;
   max-width: 40ch;
   display: flex;
   flex-direction: column;

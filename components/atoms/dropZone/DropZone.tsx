@@ -1,6 +1,6 @@
+import { IconCircleX, IconDownload, IconFolderPlus } from '@tabler/icons';
 import clsx from 'clsx';
 import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
-import { AiOutlineDownload, AiOutlineFolderOpen, AiOutlineStop } from 'react-icons/ai';
 
 import { handleDropImage } from '@/utils/handleDropImage';
 
@@ -82,21 +82,21 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
       >
         {isActive && (
           <>
-            <AiOutlineFolderOpen className={styles.dropIcon} />
+            <IconFolderPlus className={styles.dropIcon} />
             <p>Drop here 👌</p>
           </>
         )}
 
         {!error && !isActive && (
           <>
-            <AiOutlineDownload className={styles.dropIcon} />
+            <IconDownload className={styles.dropIcon} />
             <p>Drop or click to add image.</p>
           </>
         )}
 
         {error && !isActive && (
           <>
-            <AiOutlineStop className={styles.dropIconError} />
+            <IconCircleX className={styles.dropIconError} />
             <CropError errorType={error} />
           </>
         )}

@@ -1,10 +1,10 @@
+import { IconHeart, IconMessage } from '@tabler/icons';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from './accountPost.module.scss';
 
-import { Icon } from '@/components/atoms/icons/Icons';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type AccountPostProps = {
@@ -33,10 +33,10 @@ export const AccountPost = ({ post }: AccountPostProps) => {
       <Image className={styles.image} src={images} alt="" width={300} height={300} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>
-          <Icon.Heart /> {likesCount}
+          <IconHeart /> {likesCount}
         </p>
         <p className={styles.count}>
-          <Icon.Comment /> {commentsCount}
+          <IconMessage /> {commentsCount}
         </p>
       </motion.div>
     </MotionLink>

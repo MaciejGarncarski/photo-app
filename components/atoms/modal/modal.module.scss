@@ -17,6 +17,7 @@
   border-top: var(--border-primary);
   font-size: 2.25rem;
   text-align: left;
+  text-transform: capitalize;
 
   @include common.mediaquery('lg') {
     padding: 2rem 0;
@@ -35,7 +36,11 @@
 
 .link {
   @extend %itemFlex;
-  display: inline-flex
+  display: inline-flex;
+
+  @include common.mediaquery('lg') {
+    gap: 2rem;
+  }
 }
 
 .itemButton {
@@ -43,16 +48,11 @@
   background-color: transparent;
   text-align: left;
   border: none;
-  text-transform: capitalize;
   font-size: 2rem;
 
   @include common.mediaquery('lg') {
     gap: 2rem;
     font-size: 2.5rem;
-
-    >svg {
-      transform: scale(1.3);
-    }
   }
 
   &:not(:disabled) {

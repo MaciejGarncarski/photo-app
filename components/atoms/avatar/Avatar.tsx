@@ -1,7 +1,7 @@
+import { IconUser } from '@tabler/icons';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
-import { AiOutlineUser } from 'react-icons/ai';
 
 import styles from './avatar.module.scss';
 
@@ -29,7 +29,7 @@ export const Avatar = ({
   }
 
   if ((!data.user.customImage && !data.user.image) || !userId) {
-    return <AiOutlineUser className={clsx(className, styles.avatar)} />;
+    return <IconUser className={clsx(className, styles.avatar)} />;
   }
 
   return (
