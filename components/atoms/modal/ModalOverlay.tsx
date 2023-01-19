@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import styles from './modal.module.scss';
 
-import { Children } from '@/components/Layout/Layout';
+import { Children } from '@/components/layout/Layout';
 
 type ModalOverlayProps = {
   setOpen: (isOpen: boolean) => void;

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 type UseCollection = {
-  userID: string;
+  userId: string;
 };
 
 export type PostData = Post & {
@@ -20,11 +20,11 @@ export type PostData = Post & {
   };
 };
 
-export const useCollection = ({ userID }: UseCollection) => {
+export const useCollection = ({ userId }: UseCollection) => {
   return useInfiniteQuery(
-    ['collection', userID],
+    ['collection', userId],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<InfinitePosts<PostData>>(`/api/collection?skip=${pageParam}&userId=${userID}`);
+      const { data } = await axios.get<InfinitePosts<PostData>>(`/api/collection?skip=${pageParam}&userId=${userId}`);
       return data;
     },
 

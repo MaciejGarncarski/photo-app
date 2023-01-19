@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { motion } from 'framer-motion';
 import parse from 'html-react-parser';
 import Link from 'next/link';
@@ -20,6 +21,8 @@ import { useAccount } from '@/components/pages/account/useAccount';
 type CommentProps = {
   commentData: PostCommentsWithIsLiked;
 };
+
+dayjs.extend(relativeTime);
 
 export const Comment = ({ commentData }: CommentProps) => {
   const { sessionUserData } = useAuth();

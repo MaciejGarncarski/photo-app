@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import styles from './tooltip.module.scss';
 
-import { Children } from '@/components/Layout/Layout';
+import { Children } from '@/components/layout/Layout';
 
 type TooltipProps = {
   content: string;

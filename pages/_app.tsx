@@ -1,33 +1,30 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { MotionConfig } from 'framer-motion';
-import type { AppProps, AppType } from 'next/app';
+import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
-import { DefaultSeo } from 'next-seo';
-
-import { seoConfig } from '@/lib/next-seo.config';
 
 import '/styles/globals.scss';
 
-import { Layout } from '@/components/Layout/Layout';
+import { Layout } from '@/components/layout/Layout';
+import { DefaultSeoWrapper } from '@/components/seo/DefaultSeo';
+
 const queryClient = new QueryClient();
 
-dayjs.extend(relativeTime);
-
-const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
         <MotionConfig transition={{ duration: 0.2 }}>
           <Layout>
-            <DefaultSeo {...seoConfig} />
-            <Component {...pageProps} />
+            <DefaultSeoWrapper />
+            <Hydrate state={pageProps.dehydratedState}>
+              <Component {...pageProps} />
+              <div id="modal"></div>
+            </Hydrate>
           </Layout>
         </MotionConfig>
-        <div id="modal"></div>
       </QueryClientProvider>
     </SessionProvider>
   );

@@ -46,7 +46,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
     >
       <Heading tag="h2">1. Avatar</Heading>
 
-      <div className={styles.buttons}>
+      <div className={styles.avatarButtons}>
         <Button type="button" onClick={stageCropImage}>
           Update avatar
         </Button>

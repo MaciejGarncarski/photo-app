@@ -16,7 +16,7 @@ import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 
 import styles from './icons.module.scss';
 
-import { Children } from '@/components/Layout/Layout';
+import { Children } from '@/components/layout/Layout';
 
 export const Icon = ({ children }: Children) => <>{children}</>;
 
@@ -27,13 +27,6 @@ const Bookmark = () => <BsBookmark style={{ transform: 'scale(0.9)' }} />;
 const BookmarkActive = () => <BsBookmarkFill style={{ transform: 'scale(0.9)' }} />;
 const Share = () => <AiOutlineShareAlt />;
 
-Icon.HeartActive = HeartActive;
-Icon.Heart = Heart;
-Icon.Comment = Comment;
-Icon.Bookmark = Bookmark;
-Icon.BookmarkActive = BookmarkActive;
-Icon.Share = Share;
-
 const Home = () => <AiOutlineHome />;
 const Create = () => <AiOutlinePlusCircle />;
 const Account = () => <AiOutlineUser />;
@@ -43,6 +36,12 @@ const Trash = () => <AiOutlineDelete />;
 const Success = () => <AiOutlineCheckCircle />;
 const Settings = () => <AiTwotoneSetting />;
 
+Icon.HeartActive = HeartActive;
+Icon.Heart = Heart;
+Icon.Comment = Comment;
+Icon.Bookmark = Bookmark;
+Icon.BookmarkActive = BookmarkActive;
+Icon.Share = Share;
 Icon.Home = Home;
 Icon.Create = Create;
 Icon.Account = Account;

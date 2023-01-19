@@ -2,15 +2,9 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-type UseAccount = {
-  username?: string;
-  userId?: string;
-};
-
-type Account = {
+export type Account = {
   isFollowing: boolean;
-  status: number;
-  user: User;
+  user: User | null;
   count: {
     posts: number | null;
     followers: number | null;
@@ -18,7 +12,7 @@ type Account = {
   };
 };
 
-const fetchAccount = async ({ userId, username }: UseAccount) => {
+export const fetchAccount = async ({ userId, username }: UseAccount) => {
   if (username) {
     const { data } = await axios.get<Account>(`/api/account/${username}?type=username`);
     return data;
@@ -35,12 +29,19 @@ export type UsernameToIdResponse = {
   };
 };
 
-export const useAccount = ({ userId, username }: UseAccount) => {
+type UseAccount = {
+  username?: string;
+  userId?: string;
+  authorData?: Account;
+};
+
+export const useAccount = ({ userId, username, authorData }: UseAccount) => {
   const query = useQuery({
     queryKey: ['account', userId, username],
     queryFn: async () => {
-      return fetchAccount({ userId, username });
+      return await fetchAccount({ userId, username });
     },
+    initialData: authorData,
     enabled: Boolean(userId) || Boolean(username),
   });
 
@@ -48,6 +49,5 @@ export const useAccount = ({ userId, username }: UseAccount) => {
     ...query,
     account: query.data?.user,
     count: query.data?.count,
-    status: query.data?.status,
   };
 };

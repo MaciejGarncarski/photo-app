@@ -40,7 +40,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
     return <p>user error</p>;
   }
 
-  const { name, bio, username, customImage, image } = data.user;
+  const { name, bio, username, image } = data.user;
   const isOwner = session?.user?.id === data.user.id;
 
   if (!username || !name || !image) {
@@ -49,26 +49,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
 
   return (
     <>
-      <NextSeo
-        title={`${name} (@${username})`}
-        openGraph={{
-          title: username,
-          url: `https://www.photo-app-orpin.vercel.app/${username}`,
-          type: 'profile',
-          profile: {
-            firstName: name,
-            username: username,
-          },
-          images: [
-            {
-              url: image ?? customImage,
-              alt: 'Profile Photo',
-              width: 200,
-              height: 200,
-            },
-          ],
-        }}
-      />
+      <NextSeo title={`@${username}`} />
       <main className={styles.account}>
         <Avatar className={styles.avatar} userId={data.user.id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
@@ -86,7 +67,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         </motion.ul>
         <p className={styles.name}>{name}</p>
         <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
-        {!isOwner && <FollowButton className={styles.followButton} userId={data.user.id} />}
+        {!isOwner && session && <FollowButton className={styles.followButton} userId={data.user.id} />}
         {isOwner && (
           <button type="button" onClick={openMenu} className={styles.menuButton}>
             <span className="visually-hidden">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>

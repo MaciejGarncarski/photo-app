@@ -15,6 +15,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+
     "paths": {
       "@/*": ["./*"],
       "~/*": ["./public/*"]

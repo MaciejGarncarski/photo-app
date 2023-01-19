@@ -4,7 +4,7 @@
 
   --size: 3rem;
   border-radius: 100%;
-  min-width: 3rem;
+  min-width: var(--size);
   box-shadow: 0 0 0 2px var(--color-primary);
   width: var(--size);
   height: var(--size);

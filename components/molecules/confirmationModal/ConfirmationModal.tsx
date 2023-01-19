@@ -1,5 +1,6 @@
 import { Icon } from '@/components/atoms/icons/Icons';
 import { Modal } from '@/components/atoms/modal/Modal';
+import { ModalClose } from '@/components/atoms/modal/ModalClose';
 
 type ConfirmationModalProps = {
   setIsOpen: (isOpen: boolean) => void;
@@ -14,6 +15,7 @@ export const ConfirmationModal = ({ setIsOpen, onConfirm, onCancel, confirmText,
   return (
     <Modal.Overlay setOpen={setIsOpen}>
       <Modal.Container>
+        <ModalClose onClose={onCancel} />
         <Modal.Heading variant={variant === 'positive' ? undefined : 'red'} text="Are you sure?" />
         <Modal.List>
           <Modal.ListItem
