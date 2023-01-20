@@ -2,7 +2,7 @@ import { IconHeart } from '@tabler/icons';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -45,7 +45,7 @@ export const Comment = ({ commentData }: CommentProps) => {
   const userAccountHref = `/${sessionUserData?.user?.username}`;
 
   return (
-    <motion.article className={styles.comment}>
+    <m.article className={styles.comment}>
       <Link href={userAccountHref}>
         <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
@@ -79,6 +79,6 @@ export const Comment = ({ commentData }: CommentProps) => {
           setIsOpen={setIsDeleting}
         />
       )}
-    </motion.article>
+    </m.article>
   );
 };

@@ -4,25 +4,25 @@ import EmailProvider from 'next-auth/providers/email';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { prisma } from '@/lib/prismadb';
-import { env } from '@/utils/env';
+import { serverEnv } from '@/utils/env.mjs';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId: serverEnv.GOOGLE_CLIENT_ID,
+      clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
     }),
     EmailProvider({
       server: {
-        host: env.EMAIL_SERVER_HOST,
-        port: env.EMAIL_SERVER_PORT,
+        host: serverEnv.EMAIL_SERVER_HOST,
+        port: serverEnv.EMAIL_SERVER_PORT,
         auth: {
-          user: env.EMAIL_SERVER_USER,
-          pass: env.EMAIL_SERVER_PASSWORD,
+          user: serverEnv.EMAIL_SERVER_USER,
+          pass: serverEnv.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: env.EMAIL_FROM,
+      from: serverEnv.EMAIL_FROM,
     }),
   ],
   callbacks: {
@@ -32,6 +32,16 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+
+    async jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
     async redirect({ baseUrl }) {
       return baseUrl;
     },
@@ -39,7 +49,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth/signin',
   },
-  secret: env.NEXTAUTH_SECRET,
+  secret: serverEnv.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

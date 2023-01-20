@@ -2,6 +2,8 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
+import { clientEnv } from '@/utils/env.mjs';
+
 export type Account = {
   isFollowing: boolean;
   user: User | null;
@@ -14,12 +16,14 @@ export type Account = {
 
 export const fetchAccount = async ({ userId, username }: UseAccount) => {
   if (userId) {
-    const { data } = await axios.get<Account>(`/api/account/${userId}`);
+    const { data } = await axios.get<Account>(`${clientEnv.NEXT_PUBLIC_API_ROOT}/api/account/${userId}`);
     return data;
   }
 
   if (username) {
-    const { data } = await axios.get<Account>(`/api/account/${username}?type=username`);
+    const { data } = await axios.get<Account>(
+      `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/account/${username}?type=username`,
+    );
     return data;
   }
 };

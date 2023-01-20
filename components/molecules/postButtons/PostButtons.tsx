@@ -1,6 +1,6 @@
 import { IconHeart, IconMessage, IconShare } from '@tabler/icons';
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -41,9 +41,9 @@ const Item = ({ children, isLast }: ItemProps) => {
 
 const Button = ({ children, onClick }: ButtonProps) => {
   return (
-    <motion.button whileTap={{ scale: 0.8 }} type="button" onClick={onClick} className={styles.button}>
+    <m.button whileTap={{ scale: 0.8 }} type="button" onClick={onClick} className={styles.button}>
       {children}
-    </motion.button>
+    </m.button>
   );
 };
 

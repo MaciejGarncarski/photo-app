@@ -1,28 +1,22 @@
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { PrefetchedPostData } from '@/utils/prefetchPosts';
+import { clientEnv } from '@/utils/env.mjs';
+
+import { PostData } from '@/components/pages/collection/useCollection';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
-type UseInfinitePosts = {
-  initialData?: InfinitePosts<PrefetchedPostData>;
-};
-
 export const fetchInfinitePosts = async ({ pageParam = 0 }) => {
-  const { data } = await axios.get<InfinitePosts<PrefetchedPostData>>(`/api/post/infinitePosts?skip=${pageParam}`);
+  const { data } = await axios.get<InfinitePosts<PostData>>(
+    `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/post/infinitePosts?skip=${pageParam}`,
+  );
   return data;
 };
 
-export const useInfinitePosts = ({ initialData }: UseInfinitePosts) => {
-  const transformedInitialData: InfiniteData<InfinitePosts<PrefetchedPostData> | undefined> = {
-    pages: [initialData],
-    pageParams: [],
-  };
-
+export const useInfinitePosts = () => {
   return useInfiniteQuery(['homepage infinite posts'], fetchInfinitePosts, {
     refetchOnWindowFocus: false,
-    initialData: transformedInitialData,
     getNextPageParam: (prevPosts) => {
       return prevPosts?.cursor ?? undefined;
     },

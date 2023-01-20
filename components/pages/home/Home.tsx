@@ -1,21 +1,13 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { PrefetchedPostData } from '@/utils/prefetchPosts';
-
 import styles from './home.module.scss';
 
 import { Loading } from '@/components/atoms/loading/Loading';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
-import { InfinitePosts } from '@/pages/api/post/infinitePosts';
-
-type HomeProps = {
-  initialData?: InfinitePosts<PrefetchedPostData>;
-};
-
-export const Home = ({ initialData }: HomeProps) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts({ initialData });
+export const Home = () => {
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,

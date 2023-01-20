@@ -4,7 +4,6 @@ import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
-import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
@@ -17,7 +16,7 @@ export type InfinitePosts<T> = {
 };
 
 const InfinitePostsSchema = z.object({
-  skip: z.string(),
+  skip: z.string().optional(),
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -34,10 +33,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(httpCodes.invalidMethod).send(responseMessages.invalidMethod);
   }
 
-  const { skip } = response.data;
-
+  const skip = response.data.skip === 'null' ? 0 : response.data.skip || 0;
   const isSignedUp = Boolean(session?.user?.id);
-  const skipNumber = parseInt(string(skip));
+  const skipNumber = Number(skip);
 
   try {
     const posts = await prisma.post.findMany({
