@@ -47,5 +47,3 @@ export const clientEnv = {
   NEXT_PUBLIC_IMG_KIT_PUBLIC: process.env.NEXT_PUBLIC_IMG_KIT_PUBLIC,
   NEXT_PUBLIC_API_ROOT: process.env.NEXT_PUBLIC_API_ROOT,
 };
-
-export const API_HTTP_PREFIX = serverEnv.NODE_ENV === 'PRODUCTION' ? 'https://' : 'http://';

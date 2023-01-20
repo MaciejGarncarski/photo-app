@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { API_HTTP_PREFIX, clientEnv } from '@/utils/env.mjs';
+import { clientEnv } from '@/utils/env.mjs';
 
 export type Account = {
   isFollowing: boolean;
@@ -14,17 +14,24 @@ export type Account = {
   };
 };
 
-export const fetchAccount = async ({ userId, username }: UseAccount) => {
+type UseAccount = {
+  username?: string;
+  userId?: string;
+  isPrefetching?: boolean;
+  authorData?: Account;
+};
+
+export const fetchAccount = async ({ userId, username, isPrefetching }: UseAccount) => {
   if (userId) {
     const { data } = await axios.get<Account>(
-      `${API_HTTP_PREFIX}${clientEnv.NEXT_PUBLIC_API_ROOT}/api/account/${userId}`,
+      `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${userId}`,
     );
     return data;
   }
 
   if (username) {
     const { data } = await axios.get<Account>(
-      `${API_HTTP_PREFIX}${clientEnv.NEXT_PUBLIC_API_ROOT}/api/account/${username}?type=username`,
+      `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${username}?type=username`,
     );
     return data;
   }
@@ -35,12 +42,6 @@ export type UsernameToIdResponse = {
   data?: {
     id: string;
   };
-};
-
-type UseAccount = {
-  username?: string;
-  userId?: string;
-  authorData?: Account;
 };
 
 export const useAccount = ({ userId, username, authorData }: UseAccount) => {
