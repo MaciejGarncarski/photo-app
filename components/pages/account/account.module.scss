@@ -7,7 +7,7 @@
 
 .account {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr 0.5fr;
   position: relative;
 
   @include common.mediaquery('lg') {
@@ -16,7 +16,7 @@
 
 }
 
-img.avatar {
+.avatar {
   --account-avatar-size: 8rem;
   width: var(--account-avatar-size);
   height: var(--account-avatar-size);
@@ -39,7 +39,7 @@ img.avatar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 2rem;
-  grid-column: 1 / 3;
+  grid-column: 1 / 4;
   grid-row: 5 / 6;
   padding-bottom: 2rem;
   position: relative;
@@ -88,24 +88,26 @@ img.avatar {
 }
 
 .username {
-  font-size: 3.5rem;
   font-weight: 700;
   grid-column: 2 / 3;
+  font-size: 3rem;
 
   &::before {
     content: '@';
   }
+
+  @include common.mediaquery('lg') {
+    font-size: 3.5rem;
+  }
 }
 
 .name {
-  margin-top: 1rem;
+  margin-top: 3rem;
   font-weight: 600;
-  grid-column: 1 / 3;
-  margin-left: 1rem;
+  grid-column: 1 / 4;
 
   @include common.mediaquery('lg') {
     margin-top: 0;
-    margin-left: 0;
     font-size: 2rem;
     line-height: 1.5em;
     grid-column: 2 / 3;
@@ -115,11 +117,9 @@ img.avatar {
 
 .bio {
   color: var(--text-secondary);
-  grid-column: 1 / 3;
-  margin-left: 1rem;
+  grid-column: 1 / 4;
 
   @include common.mediaquery('lg') {
-    margin-left: 0;
     font-size: 2rem;
     grid-column: 2 / 3;
     grid-row: 4 / 5;
@@ -128,7 +128,7 @@ img.avatar {
 
 .followButton {
   grid-row: 2 / 3;
-  grid-column: 2 / 3;
+  grid-column: 2 / 4;
   justify-self: flex-start;
 
   @include common.mediaquery('lg') {
@@ -148,11 +148,8 @@ img.avatar {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  font-size: 2.5rem;
-  right: 1rem;
-  top: 0;
-  cursor: pointer;
+  grid-column: 3 / 5;
+  grid-row: 1 / 1;
 
   @include common.mediaquery('lg') {
     place-self: center;

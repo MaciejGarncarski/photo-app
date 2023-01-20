@@ -32,15 +32,19 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: 2rem;
+
+  @include common.mediaquery('lg') {
+    gap: 2rem;
+    font-size: 2.5rem;
+  }
+
 }
 
 .link {
   @extend %itemFlex;
   display: inline-flex;
 
-  @include common.mediaquery('lg') {
-    gap: 2rem;
-  }
 }
 
 .itemButton {
@@ -48,12 +52,7 @@
   background-color: transparent;
   text-align: left;
   border: none;
-  font-size: 2rem;
 
-  @include common.mediaquery('lg') {
-    gap: 2rem;
-    font-size: 2.5rem;
-  }
 
   &:not(:disabled) {
     cursor: pointer;

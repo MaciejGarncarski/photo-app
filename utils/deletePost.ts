@@ -1,16 +1,30 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
+import { z } from 'zod';
 
 import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
+import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
+const DeletePostSchema = z.object({
+  postId: z.string(),
+});
+
 export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions);
-  const { postID } = req.query;
-  const postIDToNum = Number(string(postID));
+
+  const response = DeletePostSchema.safeParse(req.query);
+
+  if (!response.success) {
+    return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
+  }
+
+  const { postId } = response.data;
+
+  const postIDToNum = Number(string(postId));
 
   try {
     const post = await prisma.post.findFirst({
@@ -28,45 +42,22 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
     const isAbleToDelete = post?.author_id === session?.user?.id || user?.role === 'ADMIN';
 
     if (!isAbleToDelete) {
-      res.status(401).send({ status: 'unauthorized' });
+      res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
       return;
     }
-
-    if (post?.file_id) {
-      await imageKit.deleteFile(post?.file_id);
-    }
-
-    await prisma.postComment.deleteMany({
-      where: {
-        post_id: postIDToNum,
-      },
-    });
-
-    await prisma.postLike.deleteMany({
-      where: {
-        post_id: postIDToNum,
-      },
-    });
-
-    await prisma.savedPost.deleteMany({
-      where: {
-        post_id: postIDToNum,
-      },
-    });
-
-    await prisma.collection.deleteMany({
-      where: {
-        post_id: postIDToNum,
-      },
-    });
 
     await prisma.post.deleteMany({
       where: {
         id: postIDToNum,
       },
     });
-    res.status(200).send({ status: 'ok' });
+
+    if (post?.file_id) {
+      await imageKit.deleteFile(post?.file_id);
+    }
+
+    res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
   } catch (error) {
-    res.status(400).send({ status: 'error' });
+    res.status(httpCodes.forbidden).send(responseMessages.forbidden);
   }
 };

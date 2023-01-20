@@ -41,10 +41,10 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
     return <p>user error</p>;
   }
 
-  const { name, bio, username, image } = data.user;
+  const { name, bio, username } = data.user;
   const isOwner = session?.user?.id === data.user.id;
 
-  if (!username || !name || !image) {
+  if (!username || !name) {
     return null;
   }
 

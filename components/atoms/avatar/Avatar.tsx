@@ -28,17 +28,20 @@ export const Avatar = ({
     return null;
   }
 
-  if ((!data.user.customImage && !data.user.image) || !userId) {
-    return <IconUser className={clsx(className, styles.avatar)} />;
-  }
+  const hasNoImage = (!data.user.customImage && !data.user.image) || !userId;
 
   return (
-    <MotionImage
-      src={data.user.customImage ?? data.user.image ?? ''}
-      alt={`${data.user.username}'s avatar`}
-      width={width}
-      height={height}
-      className={clsx(className, styles.avatar)}
-    />
+    <figure className={clsx(className, styles.avatarContainer)}>
+      {hasNoImage && <IconUser className={styles.icon} />}
+      {!hasNoImage && (
+        <MotionImage
+          src={data.user.customImage ?? data.user.image ?? ''}
+          alt={`${data.user.username}'s avatar`}
+          width={width}
+          height={height}
+          className={styles.avatar}
+        />
+      )}
+    </figure>
   );
 };

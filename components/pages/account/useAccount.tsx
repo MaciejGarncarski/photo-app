@@ -13,13 +13,15 @@ export type Account = {
 };
 
 export const fetchAccount = async ({ userId, username }: UseAccount) => {
+  if (userId) {
+    const { data } = await axios.get<Account>(`/api/account/${userId}`);
+    return data;
+  }
+
   if (username) {
     const { data } = await axios.get<Account>(`/api/account/${username}?type=username`);
     return data;
   }
-
-  const { data } = await axios.get<Account>(`/api/account/${userId}`);
-  return data;
 };
 
 export type UsernameToIdResponse = {
