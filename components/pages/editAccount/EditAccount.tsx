@@ -3,8 +3,6 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { Suspense, useState } from 'react';
 
-import { namedComponent } from '@/utils/namedComponent';
-
 import styles from './editAccount.module.scss';
 
 import { Loading } from '@/components/atoms/loading/Loading';
@@ -17,14 +15,14 @@ type PropsTypes = {
 
 const LazyCropImageStage = dynamic(
   async () => {
-    return namedComponent(import('@/components/pages/editAccount/CropImageStage'), 'CropImageStage');
+    return import('@/components/pages/editAccount/CropImageStage').then(({ CropImageStage }) => CropImageStage);
   },
   { ssr: false },
 );
 
-const LazyPersonalInfoStage = dynamic(
+const LazyDetailsStage = dynamic(
   async () => {
-    return namedComponent(import('@/components/pages/editAccount/PersonalInfoStage'), 'PersonalInfoStage');
+    return import('@/components/pages/editAccount/DetailsStage').then(({ DetailsStage }) => DetailsStage);
   },
   { ssr: false },
 );
@@ -66,8 +64,8 @@ export const EditAccount = ({ userId }: PropsTypes) => {
           )}
 
           {stage === 'personalInfo' && (
-            <LazyPersonalInfoStage
-              key="personalInfoStage"
+            <LazyDetailsStage
+              key="detailsStage"
               finalImg={finalImg}
               stageSelectImage={stageSelectImage}
               userId={userId}

@@ -18,6 +18,7 @@ type WithButton = {
   href?: never;
   withButton: boolean;
   onClick: () => void;
+  disabled?: boolean;
 };
 
 type WithLink = {
@@ -25,6 +26,7 @@ type WithLink = {
   href: string;
   withButton?: never;
   onClick?: never;
+  disabled?: never;
 };
 
 type OnlyListItem = {
@@ -32,6 +34,7 @@ type OnlyListItem = {
   href?: never;
   withButton?: never;
   onClick?: never;
+  disabled?: never;
 };
 
 type ModalListItemConditionalProps = WithButton | WithLink | OnlyListItem;
@@ -45,6 +48,7 @@ export const ModalListItem = ({
   children,
   variant,
   onClick,
+  disabled,
   href,
 }: ModalListItemProps) => {
   const className = clsx(isFirst && styles['item-first'], styles[`item-${variant}`], styles.item);
@@ -53,12 +57,14 @@ export const ModalListItem = ({
 
   if (withButton) {
     const handleClick = () => {
-      unlockScroll();
+      // unlockScroll();
       onClick();
     };
     return (
       <li className={className}>
-        <ModalButton onClick={handleClick}>{children}</ModalButton>
+        <ModalButton onClick={handleClick} disabled={disabled}>
+          {children}
+        </ModalButton>
       </li>
     );
   }

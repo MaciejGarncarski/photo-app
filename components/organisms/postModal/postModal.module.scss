@@ -3,26 +3,29 @@
 .container {
   position: relative;
   z-index: 1;
-  width: min(70rem, 85%);
+  width: min(70rem, 100%);
   background-color: var(--bg-primary);
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
-  margin: auto;
+  margin-top: auto;
 
 
-  @include common.mediaquery('xxl') {
-    height: 60rem;
-  }
 
   @include common.mediaquery('lg') {
+    border-radius: var(--radius-medium);
     width: clamp(70rem, 70%, 105rem);
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr 0.75fr;
     column-gap: 2rem;
+    margin: auto;
+  }
+
+  @include common.mediaquery('xxl') {
+    height: 60rem;
   }
 }
 
@@ -57,7 +60,7 @@
 }
 
 .comments {
-  height: 15rem;
+  height: 20rem;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

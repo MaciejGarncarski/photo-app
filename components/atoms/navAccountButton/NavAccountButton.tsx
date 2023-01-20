@@ -68,7 +68,9 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
     <li
       ref={containerRef}
       onMouseEnter={!isMobile ? handleOpen : undefined}
+      onFocus={!isMobile ? handleOpen : undefined}
       onMouseLeave={handleClose}
+      onBlur={handleClose}
       className={commonStyles.accountIconContainer}
     >
       <button
@@ -89,6 +91,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
             animate="animate"
             initial="initial"
             exit="exit"
+            key="tooltip options"
           >
             <p className={styles.welcome}>Hi, {account?.username}</p>
             <Link href={accountHref} className={styles.link} onClick={() => setIsOptionsOpen(false)}>

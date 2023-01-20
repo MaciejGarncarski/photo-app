@@ -10,7 +10,7 @@ import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
-import { AccountPersonalInfo, AccountPersonalInfoSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
+import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
 import { Input } from '@/components/molecules/input/Input';
 import { useAccount } from '@/components/pages/account/useAccount';
@@ -23,7 +23,7 @@ type PropsTypes = {
   userId: string;
 };
 
-export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsTypes) => {
+export const DetailsStage = ({ finalImg, userId, stageSelectImage }: PropsTypes) => {
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { data, isLoading } = useAccount({ userId });
   const router = useRouter();
@@ -42,9 +42,9 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
     reset,
     getValues,
     formState: { isDirty, errors },
-  } = useForm<AccountPersonalInfo>({
+  } = useForm<AccountDetails>({
     mode: 'all',
-    resolver: zodResolver(AccountPersonalInfoSchema),
+    resolver: zodResolver(AccountDetailsSchema),
     defaultValues,
   });
 
@@ -88,7 +88,7 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
 
   return (
     <>
-      <Heading tag="h2">2. Edit personal information</Heading>
+      <Heading tag="h2">2. Edit account details</Heading>
       <m.form
         variants={stageVariant}
         animate="animate"

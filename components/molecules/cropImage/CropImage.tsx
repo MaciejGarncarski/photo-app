@@ -38,10 +38,14 @@ export const CropImage = ({ setFinalImg, aspectRatio }: CropImageProps) => {
   useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg, isError: Boolean(error) });
 
   const handleImage = (changeEv: ChangeEvent<HTMLInputElement>) => {
-    if (changeEv.target.files && changeEv.target.files.length > 0) {
+    if (!changeEv.target.files) {
+      setError('NO_IMAGE_DETECTED');
+      return;
+    }
+
+    if (changeEv.target.files.length > 0) {
       setCrop(undefined);
       const file = changeEv.target.files[0];
-
       handleDropImage({ file, setError, setImgSrc });
     }
   };
