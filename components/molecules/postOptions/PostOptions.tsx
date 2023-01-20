@@ -36,7 +36,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
   };
 
   const handleDeletePost = () => {
-    deletePostMutation.mutate({ postId: id });
+    deletePostMutation.mutate({ postId: id }, { onSettled: () => setIsDeleting(false) });
   };
 
   if (deletePostMutation.isLoading) {
@@ -45,7 +45,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
         <Modal.Container>
           <Modal.List>
             <Modal.ListItem isFirst>
-              <Loading variants={['very-small']} />
+              <Loading variants={['no-margin', 'very-small']} />
               Deleting...
             </Modal.ListItem>
           </Modal.List>

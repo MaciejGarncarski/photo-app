@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import { SignUpSchemaData } from '@/components/molecules/completeSignUp/CompleteSignUp';
 
-type EditAccountData = {
-  image: Blob | null;
+export type EditAccountData = {
+  image?: Blob | null;
 } & SignUpSchemaData;
 
 export const useEditAccount = () => {

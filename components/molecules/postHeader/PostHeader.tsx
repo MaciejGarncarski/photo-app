@@ -55,7 +55,12 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
   return (
     <Tag className={headerClassName}>
       <Link href={`/${authorData.user?.username}`} className={styles.link}>
-        <Avatar userId={authorData.user?.id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <Avatar
+          className={styles.avatar}
+          userId={authorData.user?.id}
+          width={POST_AVATAR_SIZE}
+          height={POST_AVATAR_SIZE}
+        />
         <h2>{authorData.user?.username}</h2>
       </Link>
       {data && (

@@ -1,6 +1,5 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
@@ -44,7 +43,7 @@ model User {
   email          String?        @unique
   emailVerified  DateTime?
   name           String?
-  username       String?
+  username       String?        @default(cuid())
   bio            String?
   image          String?
   customImage    String?
@@ -71,7 +70,7 @@ model VerificationToken {
 
 model Post {
   id             Int            @id @default(autoincrement()) @db.Int
-  author         User           @relation(fields: [author_id], references: [id])
+  author         User           @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id      String
   description    String         @db.MediumText
   created_at     DateTime       @default(now()) @db.Timestamp(0)
@@ -87,7 +86,7 @@ model Post {
 
 model SavedPost {
   id      Int  @id @default(autoincrement()) @db.Int
-  post    Post @relation(fields: [post_id], references: [id])
+  post    Post @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id Int  @db.Int
 
   @@index([post_id])
@@ -95,9 +94,9 @@ model SavedPost {
 
 model PostLike {
   id      Int    @id @default(autoincrement()) @db.Int
-  post    Post   @relation(fields: [post_id], references: [id])
+  post    Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id Int    @db.Int
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
   @@index([post_id])
@@ -106,9 +105,9 @@ model PostLike {
 
 model PostComment {
   id           Int           @id @default(autoincrement()) @db.Int
-  user         User          @relation(fields: [user_id], references: [id])
+  user         User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id      String
-  post         Post          @relation(fields: [post_id], references: [id])
+  post         Post          @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id      Int           @db.Int
   created_at   DateTime      @default(now()) @db.Timestamp(0)
   comment_text String        @db.Text
@@ -120,9 +119,9 @@ model PostComment {
 
 model CommentLike {
   id         Int          @id @default(autoincrement()) @db.Int
-  comment    PostComment @relation(fields: [comment_id], references: [id])
+  comment    PostComment @relation(fields: [comment_id], references: [id], onDelete: Cascade)
   comment_id Int          @db.Int
-  user       User         @relation(fields: [user_id], references: [id])
+  user       User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
 
   @@index([comment_id])
@@ -136,9 +135,9 @@ enum Role {
 
 model Follower {
   id         Int      @id @default(autoincrement()) @db.Int
-  from_user  User     @relation(fields: [from], references: [id], name: "Follower")
+  from_user  User     @relation(fields: [from], references: [id], name: "Follower", onDelete: Cascade)
   from       String
-  to_user    User     @relation(fields: [to], references: [id], name: "Following")
+  to_user    User     @relation(fields: [to], references: [id], name: "Following", onDelete: Cascade)
   to         String
   created_at DateTime @default(now()) @db.Timestamp(0)
 
@@ -148,9 +147,9 @@ model Follower {
 
 model Collection {
   id      Int    @id @default(autoincrement()) @db.Int
-  post    Post   @relation(fields: [post_id], references: [id])
+  post    Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id Int    @db.Int
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
   @@index([user_id])

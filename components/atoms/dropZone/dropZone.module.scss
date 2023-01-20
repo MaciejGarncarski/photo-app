@@ -16,6 +16,10 @@
   transition: 0.2s ease;
   max-height: 30rem;
 
+  >svg {
+    width: 5rem;
+    height: 5rem;
+  }
 
 
   &>* {
@@ -28,13 +32,11 @@
 
   @include common.mediaquery('lg') {
 
-
     >svg {
       width: 8rem;
       height: 8rem;
     }
 
-    aspect-ratio: 1 / 1;
     gap: 3rem;
     padding: 5rem 3rem;
   }

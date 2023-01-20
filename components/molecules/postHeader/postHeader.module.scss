@@ -9,6 +9,16 @@
   }
 }
 
+.avatar {
+  width: 3rem;
+  height: 3rem;
+
+  @include common.mediaquery('lg') {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+}
+
 .link {
   display: flex;
   align-items: center;

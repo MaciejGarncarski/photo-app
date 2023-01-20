@@ -67,8 +67,8 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   return (
     <li
       ref={containerRef}
-      onMouseEnter={handleOpen}
-      // onMouseLeave={handleClose}
+      onMouseEnter={!isMobile ? handleOpen : undefined}
+      onMouseLeave={handleClose}
       className={commonStyles.accountIconContainer}
     >
       <button
