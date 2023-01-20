@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import styles from './navbar.module.scss';
 
@@ -13,20 +13,20 @@ export const Navbar = () => {
 
   if (isMobile) {
     return (
-      <m.nav
+      <motion.nav
         animate={isGoingUp ? { y: 0 } : {}}
         initial={{ y: 70 }}
         transition={{ type: 'tween', duration: 0.2 }}
         className={clsx(styles.nav)}
       >
         <NavButtons />
-      </m.nav>
+      </motion.nav>
     );
   }
 
   return (
-    <m.nav className={clsx(styles.nav)}>
+    <nav className={clsx(styles.nav)}>
       <NavButtons />
-    </m.nav>
+    </nav>
   );
 };

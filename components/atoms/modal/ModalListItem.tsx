@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import styles from './modal.module.scss';
 
 import { ModalButton } from '@/components/atoms/modal/ModalButton';
+import { useScrollLock } from '@/components/atoms/modal/useScrollLock';
 
 type ModalListItemCommonProps = {
   variant?: 'red';
@@ -48,10 +49,16 @@ export const ModalListItem = ({
 }: ModalListItemProps) => {
   const className = clsx(isFirst && styles['item-first'], styles[`item-${variant}`], styles.item);
 
+  const { unlockScroll } = useScrollLock();
+
   if (withButton) {
+    const handleClick = () => {
+      unlockScroll();
+      onClick();
+    };
     return (
       <li className={className}>
-        <ModalButton onClick={onClick}>{children}</ModalButton>
+        <ModalButton onClick={handleClick}>{children}</ModalButton>
       </li>
     );
   }

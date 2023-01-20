@@ -1,4 +1,4 @@
-import { IconHeart, IconMessage, IconShare } from '@tabler/icons';
+import { IconMessage, IconShare } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -10,6 +10,7 @@ import { namedComponent } from '@/utils/namedComponent';
 
 import styles from './postButtons.module.scss';
 
+import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
@@ -92,7 +93,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       <Item>
         <Button onClick={handleLike}>
           <span className="visually-hidden">like</span>
-          {isLiked ? <IconHeart color="#dd2020" fill="#dd2020" /> : <IconHeart />}
+          {isLiked ? <IconHeartWrapper isActive /> : <IconHeartWrapper />}
         </Button>
       </Item>
       <Item>

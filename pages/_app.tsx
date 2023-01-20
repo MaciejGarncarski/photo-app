@@ -4,9 +4,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
+import { useEffect } from 'react';
 
 import '/styles/globals.scss';
 
+import { useScrollLock } from '@/components/atoms/modal/useScrollLock';
 import { Layout } from '@/components/layout/Layout';
 import { DefaultSeoWrapper } from '@/components/seo/DefaultSeo';
 
@@ -18,6 +20,12 @@ const lato = Lato({
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const { unlockScroll } = useScrollLock();
+
+  useEffect(() => {
+    unlockScroll();
+  }, [unlockScroll]);
+
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>

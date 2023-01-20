@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 
 import styles from './modal.module.scss';
 
+import { useScrollLock } from '@/components/atoms/modal/useScrollLock';
 import { Children } from '@/components/layout/Layout';
 
 type ModalOverlayProps = {
@@ -11,8 +12,10 @@ type ModalOverlayProps = {
 
 export const ModalOverlay = ({ children, setOpen }: ModalOverlayProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const { lockScroll, unlockScroll } = useScrollLock();
 
   useEffect(() => {
+    lockScroll();
     const handleEscapeKey = (keyEv: KeyboardEvent) => {
       if (keyEv.key === 'Escape') {
         setOpen(false);
@@ -23,11 +26,12 @@ export const ModalOverlay = ({ children, setOpen }: ModalOverlayProps) => {
     }
 
     document.addEventListener('keydown', handleEscapeKey);
-  }, [setOpen]);
+  }, [lockScroll, setOpen]);
 
   const handleOverlayClick = (mouseEv: MouseEvent) => {
     if (mouseEv.target === overlayRef.current) {
       setOpen(false);
+      unlockScroll();
     }
   };
 
