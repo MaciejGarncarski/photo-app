@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import styles from './cookieAlert.module.scss';
 
@@ -14,7 +14,7 @@ type CookieAlertProps = {
 
 export const CookieAlert = ({ onClose, onPermanentClose }: CookieAlertProps) => {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ y: 250, transition: { type: 'tween' } }}
@@ -30,6 +30,6 @@ export const CookieAlert = ({ onClose, onPermanentClose }: CookieAlertProps) => 
           Close
         </Button>
       </div>
-    </motion.div>
+    </m.div>
   );
 };

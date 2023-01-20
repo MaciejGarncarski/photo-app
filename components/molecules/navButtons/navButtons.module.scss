@@ -25,15 +25,16 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+
 }
 
 .listItemChild {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   flex-direction: column;
   font-size: var(--itemSize);
+  cursor: pointer;
 }
 
 .listItemButton {

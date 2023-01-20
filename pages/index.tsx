@@ -1,28 +1,47 @@
-import { GetStaticProps } from 'next';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import { PrefetchedPostData, prefetchPosts } from '@/utils/prefetchPosts';
+import { prisma } from '@/lib/prismadb';
 
+import { fetchAccount } from '@/components/pages/account/useAccount';
 import { Home } from '@/components/pages/home/Home';
+import { fetchInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
-import { InfinitePosts } from '@/pages/api/post/infinitePosts';
-
-type HomeProps = {
-  initialData?: InfinitePosts<PrefetchedPostData>;
+const HomePage = () => {
+  return <Home />;
 };
 
-const HomePage = ({ initialData }: HomeProps) => {
-  return <Home initialData={initialData} />;
-};
+export const getServerSideProps = async () => {
+  const queryClient = new QueryClient();
 
-export const getStaticProps: GetStaticProps = async () => {
   try {
-    const data = await prefetchPosts();
+    const postsData = await prisma.post.findMany({
+      skip: 0,
+      take: 9,
+
+      include: {
+        author: true,
+        _count: {
+          select: {
+            posts_likes: true,
+            posts_comments: true,
+          },
+        },
+      },
+      orderBy: {
+        id: 'desc',
+      },
+    });
+
+    postsData.forEach(async (post) => {
+      await queryClient.prefetchQuery(['account', post.author_id], () => fetchAccount({ userId: post.author_id }));
+    });
+
+    await queryClient.prefetchInfiniteQuery(['homepage infinite posts'], fetchInfinitePosts);
 
     return {
       props: {
-        initialData: JSON.parse(JSON.stringify(data)),
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
-      revalidate: 120,
     };
   } catch (error) {
     return {

@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import styles from './layout.module.scss';
 
+import { Header } from '@/components/organisms/header/Header';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 
@@ -16,10 +17,6 @@ type LayoutProps = Children & {
 };
 
 const COOKIES_ACCEPTED = 'cookiesAccepted' as const;
-
-const Header = dynamic(() => import('@/components/organisms/header/Header').then(({ Header }) => Header), {
-  ssr: false,
-});
 
 const CompleteSignUp = dynamic(
   () => import('@/components/molecules/completeSignUp/CompleteSignUp').then(({ CompleteSignUp }) => CompleteSignUp),

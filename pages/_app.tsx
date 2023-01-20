@@ -1,7 +1,7 @@
 import { Lato } from '@next/font/google';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { MotionConfig } from 'framer-motion';
+import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 
@@ -26,8 +26,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <Layout className={lato.className}>
             <DefaultSeoWrapper />
             <Hydrate state={pageProps.dehydratedState}>
-              <Component {...pageProps} />
-              <div id="modal"></div>
+              <LazyMotion features={domAnimation}>
+                <Component {...pageProps} />
+                <div id="modal"></div>
+              </LazyMotion>
             </Hydrate>
           </Layout>
         </MotionConfig>

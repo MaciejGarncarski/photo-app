@@ -9,6 +9,7 @@
     "start": "next start",
     "prepare": "yarn husky install",
     "lint": "next lint",
+    "tsc": "tsc --noEmit",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
     "lint-strict-fix": "eslint --fix && yarn format",
