@@ -14,15 +14,24 @@ export type Account = {
   };
 };
 
-export const fetchAccount = async ({ userId, username }: UseAccount) => {
+type UseAccount = {
+  username?: string;
+  userId?: string;
+  isPrefetching?: boolean;
+  authorData?: Account;
+};
+
+export const fetchAccount = async ({ userId, username, isPrefetching }: UseAccount) => {
   if (userId) {
-    const { data } = await axios.get<Account>(`${clientEnv.NEXT_PUBLIC_API_ROOT}/api/account/${userId}`);
+    const { data } = await axios.get<Account>(
+      `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${userId}`,
+    );
     return data;
   }
 
   if (username) {
     const { data } = await axios.get<Account>(
-      `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/account/${username}?type=username`,
+      `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${username}?type=username`,
     );
     return data;
   }
@@ -33,12 +42,6 @@ export type UsernameToIdResponse = {
   data?: {
     id: string;
   };
-};
-
-type UseAccount = {
-  username?: string;
-  userId?: string;
-  authorData?: Account;
 };
 
 export const useAccount = ({ userId, username, authorData }: UseAccount) => {

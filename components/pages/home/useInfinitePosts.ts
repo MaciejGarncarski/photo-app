@@ -7,9 +7,9 @@ import { PostData } from '@/components/pages/collection/useCollection';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
-export const fetchInfinitePosts = async ({ pageParam = 0 }) => {
+export const fetchInfinitePosts = async ({ pageParam = 0, isPrefetching = false }) => {
   const { data } = await axios.get<InfinitePosts<PostData>>(
-    `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/post/infinitePosts?skip=${pageParam}`,
+    `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/post/infinitePosts?skip=${pageParam}`,
   );
   return data;
 };
