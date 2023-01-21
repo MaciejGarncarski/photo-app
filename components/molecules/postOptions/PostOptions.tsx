@@ -93,7 +93,7 @@ export const PostOptions = ({ setIsOpen, post }: PostOptionsProps) => {
 
           {isAbleToModify && (
             <>
-              <Modal.ListItem>
+              <Modal.ListItem withLink href={`/post/${id}/edit`}>
                 <IconEdit />
                 edit (not working)
               </Modal.ListItem>

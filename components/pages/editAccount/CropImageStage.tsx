@@ -18,10 +18,10 @@ export const CropImageStage = ({ setFinalImg, stagePersonalInfo, stageSelectImag
       <CropImage setFinalImg={setFinalImg} aspectRatio={1} />
       <div className={styles.buttons}>
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
-          back
+          back to beginning
         </Button>
         <Button type="button" onClick={stagePersonalInfo}>
-          Next stage
+          next
         </Button>
       </div>
     </m.div>

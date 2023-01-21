@@ -29,7 +29,7 @@ type WithLink = {
   disabled?: never;
 };
 
-type OnlyListItem = {
+type Default = {
   withLink?: never;
   href?: never;
   withButton?: never;
@@ -37,7 +37,7 @@ type OnlyListItem = {
   disabled?: never;
 };
 
-type ModalListItemConditionalProps = WithButton | WithLink | OnlyListItem;
+type ModalListItemConditionalProps = WithButton | WithLink | Default;
 
 type ModalListItemProps = ModalListItemCommonProps & ModalListItemConditionalProps;
 
@@ -72,12 +72,16 @@ export const ModalListItem = ({
   if (withLink) {
     return (
       <li className={className}>
-        <Link className={styles.link} href={href}>
+        <Link className={styles.itemLink} href={href}>
           {children}
         </Link>
       </li>
     );
   }
 
-  return <li className={clsx(styles.link, className)}>{children}</li>;
+  return (
+    <li className={className}>
+      <p className={styles.itemText}>{children}</p>
+    </li>
+  );
 };

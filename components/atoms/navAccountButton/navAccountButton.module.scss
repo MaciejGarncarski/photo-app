@@ -8,15 +8,12 @@
   left: -13.5rem;
   border-radius: var(--radius-small);
   min-width: 20rem;
-
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   font-size: 2rem;
-  gap: 2rem;
-  padding: 1rem 0;
-  padding-left: 2rem;
+  overflow: hidden;
 
   @include common.mediaquery('lg') {
     top: 4.5rem;
@@ -25,6 +22,14 @@
 }
 
 
+%hover {
+
+  &:hover,
+  &:focus {
+    background-color: var(--bg-gray);
+  }
+}
+
 .link {
   display: flex;
   justify-content: flex-start;
@@ -32,6 +37,11 @@
   gap: 1.5rem;
   margin: 0;
   text-transform: capitalize;
+  padding: 1rem 0;
+  padding-left: 2rem;
+  width: 100%;
+
+  @extend %hover;
 }
 
 .signOut {
@@ -41,10 +51,17 @@
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  padding: 1rem 0;
+  padding-left: 2rem;
+  width: 100%;
+
+  @extend %hover;
 }
 
 .welcome {
   font-weight: 700;
+  padding: 1rem 0;
+  padding-left: 2rem;
 }
 
 .button {

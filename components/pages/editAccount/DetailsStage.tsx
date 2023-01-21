@@ -103,7 +103,7 @@ export const DetailsStage = ({ finalImg, userId, stageSelectImage }: PropsTypes)
         <div className={styles.buttons}>
           <div className={styles.buttonsLastStage}>
             <Button type="button" variant="secondary" onClick={stageSelectImage}>
-              back
+              back to beginning
             </Button>
             <Button type="reset" disabled={!isDirty} onClick={onReset}>
               Reset

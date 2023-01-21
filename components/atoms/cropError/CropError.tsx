@@ -25,9 +25,5 @@ export const CropError = ({ errorType }: CropErrorProps) => {
     return null;
   }
 
-  return (
-    <p className={styles.error}>
-      {messagesData[errorType]} <br /> Try again
-    </p>
-  );
+  return <p className={styles.error}>{messagesData[errorType]}</p>;
 };

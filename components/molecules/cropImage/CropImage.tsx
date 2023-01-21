@@ -50,7 +50,7 @@ export const CropImage = ({ setFinalImg, aspectRatio }: CropImageProps) => {
     }
   };
 
-  const chooseDiffrentImage = () => {
+  const selectDiffrentImage = () => {
     setImgSrc('');
     setError(null);
     setFinalImg(null);
@@ -77,8 +77,8 @@ export const CropImage = ({ setFinalImg, aspectRatio }: CropImageProps) => {
     <>
       <div className={styles.cropContainer}>
         <Heading tag="h2">Crop your image</Heading>
-        <Button variant="secondary" onClick={chooseDiffrentImage}>
-          Choose diffrent image
+        <Button variant="secondary" onClick={selectDiffrentImage}>
+          Select diffrent image
         </Button>
       </div>
       <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>

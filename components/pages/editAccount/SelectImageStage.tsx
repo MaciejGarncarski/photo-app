@@ -68,7 +68,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
           </Button>
         )}
         <Button type="button" variant="secondary" onClick={stagePersonalInfo}>
-          skip to next stage
+          Edit details
         </Button>
       </div>
       {isRemoving && (
