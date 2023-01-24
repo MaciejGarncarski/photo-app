@@ -68,13 +68,18 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+// !TODO: MULTIPLE IMAGES !!! image1, 2 ,3
+
 model Post {
   id             Int            @id @default(autoincrement()) @db.Int
   author         User           @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id      String
   description    String         @db.MediumText
   created_at     DateTime       @default(now()) @db.Timestamp(0)
-  images         String
+  images         String?
+  image1         String?
+  image2         String?
+  image3         String?
   file_id        String?
   posts_likes    PostLike[]
   posts_comments PostComment[]

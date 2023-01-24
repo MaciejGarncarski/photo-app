@@ -1,15 +1,10 @@
 import { PixelCrop } from 'react-image-crop';
 
+const IMG_QUALITY = 1;
 const TO_RADIANS = Math.PI / 180;
-const IMG_QUALITY = 0.95;
 
-export async function canvasPreview(
-  image: HTMLImageElement,
-  canvas: HTMLCanvasElement,
-  crop: PixelCrop,
-  scale = 1,
-  rotate = 0,
-) {
+export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) => {
+  const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
   if (!ctx) {
@@ -29,7 +24,7 @@ export async function canvasPreview(
   const cropX = crop.x * scaleX;
   const cropY = crop.y * scaleY;
 
-  const rotateRads = rotate * TO_RADIANS;
+  const rotateRads = 0 * TO_RADIANS;
   const centerX = image.naturalWidth / 2;
   const centerY = image.naturalHeight / 2;
 
@@ -38,13 +33,13 @@ export async function canvasPreview(
   ctx.translate(-cropX, -cropY);
   ctx.translate(centerX, centerY);
   ctx.rotate(rotateRads);
-  ctx.scale(scale, scale);
+  ctx.scale(1, 1);
   ctx.translate(-centerX, -centerY);
   ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, 0, 0, image.naturalWidth, image.naturalHeight);
 
   ctx.restore();
 
-  const toBlob = new Promise<Blob>((resolve) => {
+  const blob = await new Promise<Blob>((resolve) => {
     canvas.toBlob(
       async (file) => {
         if (file) {
@@ -54,10 +49,10 @@ export async function canvasPreview(
           resolve(imgFile);
         }
       },
-      'image/webp',
+      'image/png',
       IMG_QUALITY,
     );
   });
 
-  return { toBlob };
-}
+  return { blob };
+};

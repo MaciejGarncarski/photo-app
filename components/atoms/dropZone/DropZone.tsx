@@ -12,13 +12,13 @@ import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 
 type DropZoneProps = {
-  handleImage: (changeEv: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string) => void;
   error: ImageCropErrors;
   setError: (error: ImageCropErrors | null) => void;
 };
 
-export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZoneProps) => {
+export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { isMobile } = useScreenWidth();
@@ -33,7 +33,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
     setIsActive(false);
   };
 
-  const handleDrop = useCallback(
+  const onDrop = useCallback(
     (dropEv: DragEvent<HTMLDivElement>) => {
       const dt = dropEv.dataTransfer;
       if (!dt.files || !dt.files[0]) {
@@ -59,7 +59,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
         onDragEnter={active}
         onDrop={(dragEv) => {
           inactive(dragEv);
-          handleDrop(dragEv);
+          onDrop(dragEv);
         }}
         onDragLeave={inactive}
       >
@@ -70,7 +70,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
           accept="image/*"
           className={clsx('visually-hidden', styles.input)}
           ref={inputRef}
-          onChange={handleImage}
+          onChange={onChange}
         />
 
         <div className={styles.dropZoneState}>
@@ -84,7 +84,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
           {!error && !isActive && (
             <>
               <IconPhoto className={styles.dropIcon} />
-              <p>Drag photos here.</p>
+              <p>Drag photo here.</p>
             </>
           )}
           {error && !isActive && (

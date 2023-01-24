@@ -88,7 +88,7 @@ export const DetailsStage = ({ finalImg, userId, stageSelectImage }: PropsTypes)
 
   return (
     <>
-      <Heading tag="h2">2. Edit account details</Heading>
+      <Heading tag="h2">Edit account details</Heading>
       <m.form
         variants={stageVariant}
         animate="animate"

@@ -48,3 +48,43 @@
   gap: 2rem;
   width: 100%;
 }
+
+.previewContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-content: center;
+  gap: 5rem;
+}
+
+.previewButton {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  border-radius: var(--radius-small);
+  overflow: hidden;
+  box-shadow: var(--shadow-secondary);
+  justify-content: center;
+  align-items: center;
+}
+
+.imgPreview {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
+.emptySpace {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-small);
+  border: 0;
+  box-shadow: var(--shadow-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  >svg {
+    width: 6rem;
+    height: 6rem;
+  }
+}

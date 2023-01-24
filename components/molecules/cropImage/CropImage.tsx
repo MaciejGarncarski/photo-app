@@ -4,6 +4,7 @@ import { Crop, PixelCrop } from 'react-image-crop';
 import ReactCrop from 'react-image-crop';
 
 import { centerAspectCrop } from '@/utils/centerAspectCrop';
+import { convertToBlob } from '@/utils/convertToBlob';
 import { handleDropImage } from '@/utils/handleDropImage';
 
 import 'react-image-crop/src/ReactCrop.scss';
@@ -12,11 +13,14 @@ import styles from './cropImage.module.scss';
 import { Button } from '@/components/atoms/button/Button';
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { useCreateImg } from '@/components/pages/createPost/useCreateImg';
+import { FinalImages } from '@/components/pages/createPost/CreatePost';
 
-type CropImageProps = {
+type PropsTypes = {
   aspectRatio: number;
-  setFinalImg: (img: Blob | null) => void;
+  finalImages: FinalImages;
+  isCropping: boolean;
+  setIsCropping: (isAdding: boolean) => void;
+  setFinalImages: (finalImages: FinalImages) => void;
 };
 
 export type ImageCropErrors =
@@ -27,71 +31,81 @@ export type ImageCropErrors =
   | 'NO_IMAGE_DETECTED'
   | 'TOO_MANY_IMAGES';
 
-export const CropImage = ({ setFinalImg, aspectRatio }: CropImageProps) => {
+export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalImages }: PropsTypes) => {
   const [imgSrc, setImgSrc] = useState('');
-  const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
-  const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+  const [cropCompleted, setCropCompleted] = useState<PixelCrop>();
   const [error, setError] = useState<ImageCropErrors>(null);
-
-  useCreateImg({ completedCrop, imgRef, previewCanvasRef, setFinalImg, isError: Boolean(error) });
-
-  const handleImage = (changeEv: ChangeEvent<HTMLInputElement>) => {
-    if (!changeEv.target.files) {
-      setError('NO_IMAGE_DETECTED');
-      return;
-    }
-
-    if (changeEv.target.files.length > 0) {
-      setCrop(undefined);
-      const file = changeEv.target.files[0];
-      handleDropImage({ file, setError, setImgSrc });
-    }
-  };
-
-  const selectDiffrentImage = () => {
-    setImgSrc('');
-    setError(null);
-    setFinalImg(null);
-  };
 
   const onImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
     if (aspectRatio) {
+      setIsCropping(true);
       const { width, height } = e.currentTarget;
       setCrop(centerAspectCrop(width, height, aspectRatio));
     }
   };
 
-  const onImageError = () => {
-    setError('NO_IMAGE_DETECTED');
-    setFinalImg(null);
-    setImgSrc('');
+  const saveCrop = async () => {
+    if (imgRef.current && cropCompleted) {
+      const { blob } = await convertToBlob(imgRef.current, cropCompleted);
+      setFinalImages([
+        ...finalImages,
+        {
+          file: blob,
+          id: finalImages.length,
+        },
+      ]);
+
+      setImgSrc('');
+      setCrop(undefined);
+      setError(null);
+      setIsCropping(false);
+    }
   };
 
   if (!imgSrc || error) {
-    return <DropZone handleImage={handleImage} error={error} setImgSrc={setImgSrc} setError={setError} />;
+    const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
+      setIsCropping(false);
+      setImgSrc('');
+      setCrop(undefined);
+      setError(null);
+
+      if (!changeEv.target.files) {
+        setError('NO_IMAGE_DETECTED');
+        return;
+      }
+
+      if (changeEv.target.files.length > 0) {
+        const file = changeEv.target.files[0];
+        handleDropImage({ file, setError, setImgSrc });
+      }
+    };
+
+    return <DropZone onChange={onChange} error={error} setImgSrc={setImgSrc} setError={setError} />;
   }
 
   return (
     <>
       <div className={styles.cropContainer}>
         <Heading tag="h2">Crop your image</Heading>
-        <Button variant="secondary" onClick={selectDiffrentImage}>
-          Select diffrent image
-        </Button>
+        <Button variant="secondary">Select diffrent image</Button>
       </div>
-      <canvas style={{ display: 'none' }} ref={previewCanvasRef}></canvas>
       <ReactCrop
         key={aspectRatio}
         crop={crop}
-        onChange={(_, percentCrop) => setCrop(percentCrop)}
-        onComplete={(c) => setCompletedCrop(c)}
+        onChange={(_, percentCrop) => {
+          setCrop(percentCrop);
+        }}
         aspect={aspectRatio}
         className={styles.reactCrop}
+        onComplete={(c) => setCropCompleted(c)}
       >
-        <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} onError={onImageError} />
+        <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} />
       </ReactCrop>
+      <Button type="button" className={styles.saveCrop} onClick={saveCrop}>
+        Save crop
+      </Button>
     </>
   );
 };

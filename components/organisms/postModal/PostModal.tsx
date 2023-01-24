@@ -1,16 +1,15 @@
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import styles from './postModal.module.scss';
 
-import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { dialogVariant, Modal } from '@/components/atoms/modal/Modal';
 import { Comment } from '@/components/molecules/comment/Comment';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
+import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useInfiniteComments } from '@/components/organisms/postModal/useInfiniteComments';
 import { PostData } from '@/components/pages/collection/useCollection';
@@ -59,17 +58,7 @@ export const PostModal = ({ post, setIsOpen }: PostModalProps) => {
           className={styles.postHeader}
           post={post}
         />
-        {isImgLoading && <Loading />}
-        <MotionImage
-          className={clsx(isImgLoading && styles.imgLoading, styles.postImg)}
-          src={post.images}
-          alt="post"
-          initial={{ opacity: 0 }}
-          animate={!isImgLoading ? { opacity: 1 } : { opacity: 0 }}
-          onLoad={() => setIsImgLoading(false)}
-          width={200}
-          height={200}
-        />
+        <PostSlider post={post} />
         <section className={styles.commentsContainer}>
           <Heading tag="h2">Comments</Heading>
           <div className={styles.comments} ref={sentryRef}>

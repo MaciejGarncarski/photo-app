@@ -1,3 +1,4 @@
+import formidable from 'formidable';
 import { promises as fs } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v4 } from 'uuid';
@@ -12,30 +13,49 @@ import { FormidableResult } from '@/pages/api/post';
 export const createPost = async (req: NextApiRequest, res: NextApiResponse, formData: FormidableResult) => {
   const { fields, files } = formData;
 
+  const images = files['images[]'];
+
   try {
-    if (Array.isArray(files.image)) {
+    if (!Array.isArray(images)) {
       return;
     }
 
     const uuid = v4();
-    const fileContents = files.image?.filepath ? await fs.readFile(files.image.filepath) : null;
-
     const { author, description } = fields;
 
-    if (!fileContents) {
-      return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
-    }
-    const { url } = await imageKit.upload({
-      file: fileContents,
-      fileName: `/1.webp`,
-      folder: `${author}/posts/${uuid}`,
-    });
+    const uploadData = async (image: formidable.File, index: number) => {
+      const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
+
+      if (!fileContents) {
+        res.status(httpCodes.badRequest).send(responseMessages.badRequest);
+        return undefined;
+      }
+      const { url } = await imageKit.upload({
+        file: fileContents,
+        fileName: `/${index}.webp`,
+        folder: `${author}/posts/${uuid}`,
+      });
+
+      if (url) {
+        return url;
+      }
+
+      // FIXME: CREATE ONE POST, CHANGE IDS ONLY!!!!!!!
+    };
+
+    const imageUrls = await Promise.all(
+      images?.map(async (img, idx) => {
+        return uploadData(img, idx);
+      }),
+    );
 
     await prisma.post.create({
       data: {
         description: string(description),
         author_id: string(author),
-        images: url,
+        image1: imageUrls[0],
+        image2: imageUrls[1],
+        image3: imageUrls[2],
       },
       select: {
         created_at: true,

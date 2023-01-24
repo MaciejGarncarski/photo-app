@@ -34,10 +34,18 @@
 
 
   --itemSize: 2.75rem;
+  --create-post-width: min(80rem, 80%);
+
+
+  --postWidth: 20rem;
 
   @include common.mediaquery('lg') {
+    --postWidth: 40rem;
     --itemSize: 3.5rem;
   }
 
-  --create-post-width: min(80rem, 80%);
+  @include common.mediaquery('xl') {
+    --postWidth: 45rem;
+  }
+
 }
