@@ -68,7 +68,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// !TODO: MULTIPLE IMAGES !!! image1, 2 ,3
 
 model Post {
   id             Int            @id @default(autoincrement()) @db.Int

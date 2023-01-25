@@ -1,6 +1,8 @@
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { AnimatePresence, motion, PanInfo, Variants } from 'framer-motion';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 import styles from './postSlider.module.scss';
 
@@ -9,71 +11,125 @@ import { descriptionData } from '@/components/organisms/homepagePost/description
 import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
 
-type PropsTypes = {
-  post: PostData;
+const imageVariants: Variants = {
+  enter: {
+    opacity: 0,
+  },
+  center: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
 };
 
-export const PostSlider = ({ post }: PropsTypes) => {
-  const [currentImage, setCurrentImage] = useState<number>(0);
+type PropsTypes = {
+  post: PostData;
+  containerClassName?: string;
+  imageClassName?: string;
+};
+
+export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const customImageClassName = clsx(imageClassName, styles.sliderImage);
+  const customContainerClassName = clsx(containerClassName, styles.slider);
 
   const { description, image1, image2, image3, images } = post;
   const { shortDescription } = descriptionData(description);
   const { data } = useAccount({ userId: post.author_id });
-  const postImages = [image1, image2, image3].filter((item) => item !== null);
+  const constraintsRef = useRef<HTMLDivElement>(null);
+
+  const postImages = [image1, image2, image3].flatMap((str) => (str ? [str] : []));
 
   const prevImage = () => {
-    if (currentImage === 0) {
+    if (currentIndex === 0) {
       return;
     }
-    setCurrentImage((prevImage) => prevImage - 1);
+    setCurrentIndex((prevImage) => prevImage - 1);
   };
 
   const nextImage = () => {
-    if (currentImage === postImages.length - 1) {
+    if (currentIndex === postImages.length - 1) {
       return;
     }
-    setCurrentImage((prevImage) => prevImage + 1);
+    setCurrentIndex((prevImage) => prevImage + 1);
+  };
+
+  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
+    const { offset } = info;
+    if (offset.x < -200) {
+      nextImage();
+    }
+    if (offset.x > 200) {
+      prevImage();
+    }
   };
 
   if (postImages.length === 0 && images) {
     return (
-      <MotionImage
-        className={styles.image}
-        src={images}
-        width={300}
-        height={300}
-        alt={`${data?.user?.username} - ${shortDescription}`}
-      />
+      <div className={customContainerClassName}>
+        <MotionImage
+          className={customImageClassName}
+          src={images}
+          width={300}
+          height={300}
+          alt={`${data?.user?.username} - ${shortDescription}`}
+        />
+      </div>
     );
   }
 
   return (
-    <div className={styles.imagesContainer}>
-      {currentImage !== 0 && postImages.length > 0 && (
+    <div className={customContainerClassName}>
+      {currentIndex !== 0 && postImages.length > 0 && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
         </button>
       )}
-      {postImages.map((image, idx) => {
-        if (!image) {
-          return null;
-        }
+      <motion.div ref={constraintsRef} className={styles.imagesContainer}>
+        <AnimatePresence mode="wait">
+          {postImages[currentIndex] !== null && (
+            <motion.figure
+              key={`${post.id} ${currentIndex}`}
+              drag="x"
+              dragConstraints={constraintsRef}
+              whileDrag={{ cursor: 'grab' }}
+              onDragEnd={handleDragEnd}
+              variants={imageVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              <Image
+                className={customImageClassName}
+                src={postImages[currentIndex]}
+                alt={`${data?.user?.username} - ${shortDescription}`}
+                height={400}
+                width={400}
+              />
+            </motion.figure>
+          )}
+        </AnimatePresence>
+      </motion.div>
+      <ul className={styles.statusDots}>
+        {postImages.map((image, idx) => {
+          return (
+            <motion.li
+              key={image}
+              className={styles.dot}
+              initial={{ opacity: 0.5 }}
+              animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.5 }}
+            >
+              <span className="visually-hidden">
+                image {currentIndex} of {postImages.length}
+              </span>
+            </motion.li>
+          );
+        })}
+      </ul>
 
-        return (
-          <MotionImage
-            key={`${post.id} - ${shortDescription} - ${image}`}
-            className={styles.sliderImage}
-            src={image}
-            width={400}
-            height={400}
-            initial={{ opacity: 0 }}
-            animate={currentImage === idx ? { x: 0, opacity: 1 } : { x: -1 * idx * 100, opacity: 0 }}
-            alt={`${data?.user?.username} - ${shortDescription}`}
-          />
-        );
-      })}
-
-      {currentImage !== postImages.length - 1 && postImages.length > 0 && (
+      {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
         <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
           <IconArrowRight />
         </button>

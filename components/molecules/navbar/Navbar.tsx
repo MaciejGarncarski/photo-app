@@ -14,7 +14,7 @@ export const Navbar = () => {
   if (isMobile) {
     return (
       <motion.nav
-        animate={isGoingUp ? { y: 0 } : {}}
+        animate={isGoingUp ? { y: 0 } : { y: 70 }}
         initial={{ y: 70 }}
         transition={{ type: 'tween', duration: 0.2 }}
         className={clsx(styles.nav)}

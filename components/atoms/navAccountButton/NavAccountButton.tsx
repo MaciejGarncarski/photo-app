@@ -1,4 +1,4 @@
-import { IconUser } from '@tabler/icons';
+import { IconDoorExit, IconUser } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
@@ -8,7 +8,6 @@ import styles from './navAccountButton.module.scss';
 import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
@@ -67,7 +66,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   return (
     <li
       ref={containerRef}
-      onMouseEnter={!isMobile ? handleOpen : undefined}
+      onMouseEnter={handleOpen}
       onFocus={!isMobile ? handleOpen : undefined}
       onMouseLeave={handleClose}
       onBlur={handleClose}
@@ -98,7 +97,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
               <IconUser /> your account
             </Link>
             <button type="button" className={styles.signOut} onClick={() => setIsSigningOut(true)}>
-              <IconXWrapper />
+              <IconDoorExit />
               Sign out
             </button>
           </motion.div>

@@ -14,16 +14,17 @@ import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/com
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
 import { Input } from '@/components/molecules/input/Input';
 import { useAccount } from '@/components/pages/account/useAccount';
+import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
 
 type PropsTypes = {
-  finalImg: Blob | null;
+  finalImages: FinalImages;
   stageSelectImage: () => void;
   userId: string;
 };
 
-export const DetailsStage = ({ finalImg, userId, stageSelectImage }: PropsTypes) => {
+export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTypes) => {
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { data, isLoading } = useAccount({ userId });
   const router = useRouter();
@@ -62,7 +63,7 @@ export const DetailsStage = ({ finalImg, userId, stageSelectImage }: PropsTypes)
     const { bio, fullName, username } = getValues();
 
     mutate(
-      { bio, fullName, image: finalImg, userId, username },
+      { bio, fullName, image: finalImages[0]?.file, userId, username },
       {
         onSuccess: () => {
           router.push(`/${username}`);
@@ -109,7 +110,7 @@ export const DetailsStage = ({ finalImg, userId, stageSelectImage }: PropsTypes)
               Reset
             </Button>
           </div>
-          <Button type="submit" onClick={onClick} disabled={!finalImg || isError}>
+          <Button type="submit" onClick={onClick} disabled={isError}>
             Save changes
           </Button>
 

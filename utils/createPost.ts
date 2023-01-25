@@ -15,8 +15,10 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
 
   const images = files['images[]'];
 
+  const imagesArray = Array.isArray(images) ? images : [images];
+
   try {
-    if (!Array.isArray(images)) {
+    if (!Array.isArray(imagesArray)) {
       return;
     }
 
@@ -39,12 +41,14 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
       if (url) {
         return url;
       }
-
-      // FIXME: CREATE ONE POST, CHANGE IDS ONLY!!!!!!!
     };
 
     const imageUrls = await Promise.all(
-      images?.map(async (img, idx) => {
+      imagesArray?.map(async (img, idx) => {
+        if (!img) {
+          return;
+        }
+
         return uploadData(img, idx);
       }),
     );

@@ -3,17 +3,13 @@ import { m } from 'framer-motion';
 import styles from './modal.module.scss';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
-import { useScrollLock } from '@/components/atoms/modal/useScrollLock';
 
 type ModalCloseProps = {
   onClose: () => void;
 };
 
 export const ModalClose = ({ onClose }: ModalCloseProps) => {
-  const { unlockScroll } = useScrollLock();
-
   const handleClose = () => {
-    unlockScroll();
     onClose();
   };
 

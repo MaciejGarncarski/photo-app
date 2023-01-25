@@ -30,7 +30,7 @@
     "eslint": "^8.28.0",
     "eslint-config-next": "13.0.5",
     "formidable": "^2.0.1",
-    "framer-motion": "^8.2.4",
+    "framer-motion": "^8.5.2",
     "html-react-parser": "^3.0.4",
     "imagekit": "^4.1.2",
     "jotai": "^1.12.0",

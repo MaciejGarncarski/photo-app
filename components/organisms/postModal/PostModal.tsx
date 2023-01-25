@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import styles from './postModal.module.scss';
@@ -20,7 +19,6 @@ type PostModalProps = {
 };
 
 export const PostModal = ({ post, setIsOpen }: PostModalProps) => {
-  const [isImgLoading, setIsImgLoading] = useState<boolean>(true);
   const { isMobile } = useScreenWidth();
 
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
@@ -58,7 +56,7 @@ export const PostModal = ({ post, setIsOpen }: PostModalProps) => {
           className={styles.postHeader}
           post={post}
         />
-        <PostSlider post={post} />
+        <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
         <section className={styles.commentsContainer}>
           <Heading tag="h2">Comments</Heading>
           <div className={styles.comments} ref={sentryRef}>

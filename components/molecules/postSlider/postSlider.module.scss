@@ -1,36 +1,38 @@
 @use '/styles/common.scss';
 
 .imagesContainer {
-  position: relative;
-  display: flex;
   overflow: hidden;
-  justify-content: center;
+  position: relative;
+}
+
+.slider {
+  display: flex;
   align-items: center;
-  background-color: var(--bg-gray);
-  aspect-ratio: 4 / 5;
+  justify-content: center;
+  min-height: 30rem;
+  position: relative;
+
+  &:hover {
+    cursor: grab;
+  }
 }
 
 .sliderImage {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  max-width: var(--postWidth);
-  width: 100%;
   height: auto;
-  margin: auto;
-  display: inline-block;
-}
-
-.image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-block: var(--border-secondary);
   background-color: var(--bg-primary);
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  max-width: unset;
+  flex-shrink: 0;
+  pointer-events: none;
+  width: 32rem;
 
+  @include common.mediaquery('lg') {
+    width: 45rem;
+  }
+}
 
 .button {
   --button-width: 5rem;
@@ -63,4 +65,29 @@
 .buttonRight {
   left: unset;
   right: 1rem;
+}
+
+.statusDots {
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  gap: 1rem;
+
+  list-style-type: none;
+}
+
+.dot {
+  --dot-size: 1.5rem;
+
+  border: 0;
+
+  border-radius: 100%;
+  background-color: var(--color-primary);
+  width: var(--dot-size);
+  height: var(--dot-size);
 }

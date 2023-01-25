@@ -32,18 +32,27 @@ export type ImageCropErrors =
   | 'TOO_MANY_IMAGES';
 
 export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalImages }: PropsTypes) => {
-  const [imgSrc, setImgSrc] = useState('');
-  const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [cropCompleted, setCropCompleted] = useState<PixelCrop>();
+  const [imgSrc, setImgSrc] = useState('');
   const [error, setError] = useState<ImageCropErrors>(null);
 
+  const imgRef = useRef<HTMLImageElement>(null);
+
   const onImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
-    if (aspectRatio) {
-      setIsCropping(true);
-      const { width, height } = e.currentTarget;
-      setCrop(centerAspectCrop(width, height, aspectRatio));
+    if (!aspectRatio) {
+      return;
     }
+    const { width, height } = e.currentTarget;
+    setIsCropping(true);
+    setCrop(centerAspectCrop(width, height, aspectRatio));
+  };
+
+  const resetState = () => {
+    setImgSrc('');
+    setCrop(undefined);
+    setError(null);
+    setIsCropping(false);
   };
 
   const saveCrop = async () => {
@@ -57,19 +66,13 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
         },
       ]);
 
-      setImgSrc('');
-      setCrop(undefined);
-      setError(null);
-      setIsCropping(false);
+      resetState();
     }
   };
 
   if (!imgSrc || error) {
     const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
-      setIsCropping(false);
-      setImgSrc('');
-      setCrop(undefined);
-      setError(null);
+      resetState();
 
       if (!changeEv.target.files) {
         setError('NO_IMAGE_DETECTED');
@@ -77,8 +80,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
       }
 
       if (changeEv.target.files.length > 0) {
-        const file = changeEv.target.files[0];
-        handleDropImage({ file, setError, setImgSrc });
+        handleDropImage({ file: changeEv.target.files[0], setError, setImgSrc });
       }
     };
 
@@ -87,10 +89,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
 
   return (
     <>
-      <div className={styles.cropContainer}>
-        <Heading tag="h2">Crop your image</Heading>
-        <Button variant="secondary">Select diffrent image</Button>
-      </div>
+      <Heading tag="h2">Crop your image</Heading>
       <ReactCrop
         key={aspectRatio}
         crop={crop}
@@ -103,9 +102,14 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
       >
         <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} />
       </ReactCrop>
-      <Button type="button" className={styles.saveCrop} onClick={saveCrop}>
-        Save crop
-      </Button>
+      <div className={styles.buttons}>
+        <Button type="button" className={styles.saveCrop} onClick={saveCrop}>
+          Save crop
+        </Button>
+        <Button type="button" onClick={resetState} variant="secondary">
+          Select diffrent image
+        </Button>
+      </div>
     </>
   );
 };

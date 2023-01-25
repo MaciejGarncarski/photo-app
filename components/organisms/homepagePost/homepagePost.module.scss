@@ -4,21 +4,19 @@
   border-radius: var(--radius-medium);
   background-color: var(--bg-primary);
   position: relative;
+  width: auto;
   box-shadow: var(--shadow-secondary);
-  width: var(--postWidth);
+  width: 32rem;
+  margin: 0 auto;
+
+  @include common.mediaquery('lg') {
+    width: 45rem;
+  }
 }
 
 img.imageLoading {
   width: 0;
   height: 0;
-}
-
-.image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-block: var(--border-secondary);
-  background-color: var(--bg-primary);
 }
 
 .bottom {
@@ -28,7 +26,6 @@ img.imageLoading {
   padding: 0 1.5rem;
   padding-bottom: 1.5rem;
 }
-
 
 .description {
   word-break: break-all;

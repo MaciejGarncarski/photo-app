@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
-import { IconPhotoPlus } from '@tabler/icons';
 import { AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -18,6 +17,8 @@ import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
+import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
 import { useSendNewPost } from '@/components/pages/createPost/useSendNewPost';
 
 const PostDetailsSchema = z.object({
@@ -30,10 +31,9 @@ type FinalImage = {
   id: number;
   file: Blob | null;
 };
-
 export type FinalImages = Array<FinalImage | undefined>;
 
-type ImgSrcs = Array<
+export type ImagesBase64 = Array<
   | {
       id: number;
       src: string;
@@ -42,30 +42,18 @@ type ImgSrcs = Array<
 >;
 
 export const CreatePost = () => {
+  const router = useRouter();
+
   const [isCanceling, setIsCanceling] = useState<boolean>(false);
   const [isCropping, setIsCropping] = useState<boolean>(false);
 
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
+  const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>();
 
-  const [finalImagesBase64, setFinalImagesBase64] = useState<ImgSrcs>();
+  useConvertToBase64(finalImages, setFinalImagesBase64);
 
-  useEffect(() => {
-    const convertedFiles = finalImages.map((finalImg) => {
-      if (finalImg?.file) {
-        const img = URL.createObjectURL(finalImg?.file);
-        return {
-          id: finalImg?.id,
-          src: img,
-        };
-      }
-    });
-    setFinalImagesBase64(convertedFiles);
-  }, [finalImages]);
-
-  const defaultValues: PostDetails = {
-    description: '',
-  };
+  const { mutate, isLoading } = useSendNewPost();
 
   const {
     register,
@@ -73,24 +61,21 @@ export const CreatePost = () => {
     formState: { dirtyFields },
   } = useForm<PostDetails>({
     resolver: zodResolver(PostDetailsSchema),
-    defaultValues,
+    defaultValues: {
+      description: '',
+    },
   });
 
-  const { mutate, isLoading } = useSendNewPost();
-
   const onSubmit: SubmitHandler<PostDetails> = ({ description }) => {
-    if (!finalImages) {
-      return;
+    if (finalImages) {
+      mutate({ description, images: finalImages });
     }
-
-    mutate({ description, images: finalImages });
   };
 
   const handleRemoveImage = (id: number) => {
     const filteredState = finalImages.filter((finalImg) => {
       return finalImg?.id !== id;
     });
-
     setFinalImages(filteredState);
   };
 
@@ -107,7 +92,6 @@ export const CreatePost = () => {
 
   const isEmpty = finalImages.length < 1;
   const isFull = finalImages.length === 3;
-  const emptyImagesLength = 3 - finalImages.length;
 
   return (
     <section aria-labelledby="Create new post" className={styles.createPost}>
@@ -126,47 +110,7 @@ export const CreatePost = () => {
           </CreatePostItemContainer>
         </div>
       )}
-      {!isEmpty && finalImagesBase64 && (
-        <>
-          <Heading tag="h2">Images in post</Heading>
-          <div className={styles.previewContainer}>
-            {finalImagesBase64.map((finalImage) => {
-              if (finalImage?.src) {
-                return (
-                  <button
-                    onClick={() => handleRemoveImage(finalImage.id)}
-                    key={finalImage.id}
-                    className={styles.previewButton}
-                    type="button"
-                  >
-                    {finalImagesBase64 && (
-                      <Image
-                        className={styles.imgPreview}
-                        src={finalImage.src}
-                        alt="image preview"
-                        width={200}
-                        height={200}
-                      />
-                    )}
-                    <span className="visually-hidden">remove image</span>
-                  </button>
-                );
-              }
-
-              return null;
-            })}
-
-            {Array.from({ length: emptyImagesLength }, (_, el) => el).map((id) => {
-              return (
-                <button key={id} disabled type="button" className={styles.emptySpace}>
-                  <IconPhotoPlus />
-                  <span className="visually-hidden">empty space for image</span>
-                </button>
-              );
-            })}
-          </div>
-        </>
-      )}
+      {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
       {!isEmpty && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <CreatePostItemContainer>
@@ -186,7 +130,11 @@ export const CreatePost = () => {
 
       <AnimatePresence>
         {isCanceling && (
-          <ConfirmationModal confirmText="Go back to home?" setIsOpen={setIsCanceling} onConfirm={() => null} />
+          <ConfirmationModal
+            confirmText="Go back to home?"
+            setIsOpen={setIsCanceling}
+            onConfirm={() => router.push('/')}
+          />
         )}
       </AnimatePresence>
     </section>

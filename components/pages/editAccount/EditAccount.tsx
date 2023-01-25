@@ -7,6 +7,7 @@ import styles from './editAccount.module.scss';
 
 import { Loading } from '@/components/atoms/loading/Loading';
 import { useAccount } from '@/components/pages/account/useAccount';
+import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
 
 type PropsTypes = {
@@ -31,7 +32,7 @@ export type Stages = 'selectImage' | 'cropImage' | 'personalInfo';
 
 export const EditAccount = ({ userId }: PropsTypes) => {
   const [stage, setStage] = useState<Stages>('selectImage');
-  const [finalImg, setFinalImg] = useState<Blob | null>(null);
+  const [finalImages, setFinalImages] = useState<FinalImages>([]);
 
   const { data } = useAccount({ userId });
 
@@ -57,7 +58,8 @@ export const EditAccount = ({ userId }: PropsTypes) => {
           {stage === 'cropImage' && (
             <LazyCropImageStage
               key="cropImageStage"
-              setFinalImg={setFinalImg}
+              finalImages={finalImages}
+              setFinalImages={setFinalImages}
               stagePersonalInfo={stagePersonalInfo}
               stageSelectImage={stageSelectImage}
             />
@@ -66,7 +68,7 @@ export const EditAccount = ({ userId }: PropsTypes) => {
           {stage === 'personalInfo' && (
             <LazyDetailsStage
               key="detailsStage"
-              finalImg={finalImg}
+              finalImages={finalImages}
               stageSelectImage={stageSelectImage}
               userId={userId}
             />

@@ -130,7 +130,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       {modalState.isOpen &&
         modalState.postId === id &&
         createPortal(
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             <PostModal post={post} setIsOpen={setIsOpen} />
           </AnimatePresence>,
           document.body,
