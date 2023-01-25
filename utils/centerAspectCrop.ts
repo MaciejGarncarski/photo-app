@@ -5,7 +5,7 @@ export const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect
     makeAspectCrop(
       {
         unit: '%',
-        width: 90,
+        width: 50,
       },
       aspect,
       mediaWidth,

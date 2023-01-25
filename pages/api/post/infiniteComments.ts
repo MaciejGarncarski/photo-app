@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { skip, postId } = response.data;
 
-  const skipNumber = parseInt(string(skip));
+  const skipNumber = Number(string(skip));
   const takeNumber = COMMENTS_PER_SCROLL;
 
   try {
@@ -36,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       take: takeNumber,
 
       where: {
-        post_id: parseInt(string(postId)),
+        post_id: Number(string(postId)),
       },
 
       orderBy: {
@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { _count } = await prisma.postComment.aggregate({
       where: {
-        post_id: parseInt(string(postId)),
+        post_id: Number(string(postId)),
       },
       _count: {
         id: true,

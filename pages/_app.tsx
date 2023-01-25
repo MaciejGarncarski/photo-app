@@ -27,8 +27,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <DefaultSeoWrapper />
             <Hydrate state={pageProps.dehydratedState}>
               <LazyMotion features={domAnimation}>
-                <Component {...pageProps} />
                 <div id="modal"></div>
+                <Component {...pageProps} />
               </LazyMotion>
             </Hydrate>
           </Layout>

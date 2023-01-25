@@ -1,0 +1,75 @@
+@use '/styles/common.scss';
+
+.previewContainer {
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @include common.mediaquery('lg') {
+    gap: 10rem;
+  }
+}
+
+.previewButton {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  border-radius: var(--radius-small);
+  overflow: hidden;
+  box-shadow: var(--shadow-secondary);
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &:hover>.deleteIconOverlay {
+    opacity: 1;
+  }
+}
+
+.imgPreview {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
+.emptySpace {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-small);
+  border: 0;
+  box-shadow: var(--shadow-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: opacity(0.5);
+  min-height: 12rem;
+
+
+  >svg {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+.deleteIconOverlay {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--color-primary);
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  transition: all 0.2s ease;
+
+
+  >svg {
+    width: 6rem;
+    height: 6rem;
+  }
+}

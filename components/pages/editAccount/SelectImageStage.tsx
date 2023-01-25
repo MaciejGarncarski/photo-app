@@ -56,8 +56,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
       initial="initial"
       className={styles.stageContainer}
     >
-      <Heading tag="h2">1. Avatar</Heading>
-
+      <Heading tag="h2">What to do with avatar</Heading>
       <div className={styles.avatarButtons}>
         <Button type="button" onClick={stageCropImage}>
           Update avatar
@@ -68,7 +67,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
           </Button>
         )}
         <Button type="button" variant="secondary" onClick={stagePersonalInfo}>
-          skip to next stage
+          Edit details
         </Button>
       </div>
       {isRemoving && (

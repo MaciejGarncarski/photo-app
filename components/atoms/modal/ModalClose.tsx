@@ -9,6 +9,10 @@ type ModalCloseProps = {
 };
 
 export const ModalClose = ({ onClose }: ModalCloseProps) => {
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <m.button
       whileHover={{ scale: 1.1 }}
@@ -16,7 +20,7 @@ export const ModalClose = ({ onClose }: ModalCloseProps) => {
       whileTap={{ scale: 0.9 }}
       className={styles.closeButton}
       type="button"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <IconXWrapper size="lg" />
       <span className="visually-hidden">Close dialog</span>

@@ -74,7 +74,7 @@ const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.collection.create({
         data: {
-          post_id: parseInt(postId),
+          post_id: Number(postId),
           user_id: userId,
         },
       });
@@ -95,7 +95,7 @@ const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const { skip, userId } = response.data;
-    const skipNumber = parseInt(string(skip));
+    const skipNumber = Number(string(skip));
 
     try {
       const posts = await prisma.collection.findMany({

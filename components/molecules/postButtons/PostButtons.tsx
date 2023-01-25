@@ -1,4 +1,4 @@
-import { IconHeart, IconMessage, IconShare } from '@tabler/icons';
+import { IconMessage, IconShare } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -10,12 +10,14 @@ import { namedComponent } from '@/utils/namedComponent';
 
 import styles from './postButtons.module.scss';
 
+import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { Children } from '@/components/layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
+import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { PostData } from '@/components/pages/collection/useCollection';
 
@@ -56,6 +58,8 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
   const { isLiked, id, isInCollection } = post;
   const [modalState, setModalState] = useState<ModalState>({ isOpen: false, postId: 0 });
 
+  const [isSharing, setIsSharing] = useState<boolean>(false);
+
   const { session } = useAuth();
   const { push } = useRouter();
   const { mutate } = usePostLike();
@@ -92,7 +96,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       <Item>
         <Button onClick={handleLike}>
           <span className="visually-hidden">like</span>
-          {isLiked ? <IconHeart color="#dd2020" fill="#dd2020" /> : <IconHeart />}
+          {isLiked ? <IconHeartWrapper isActive /> : <IconHeartWrapper />}
         </Button>
       </Item>
       <Item>
@@ -102,8 +106,10 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
         </Button>
       </Item>
       <Item>
-        <span className="visually-hidden">share</span>
-        <IconShare />
+        <Button onClick={() => setIsSharing(true)}>
+          <span className="visually-hidden">share</span>
+          <IconShare />
+        </Button>
       </Item>
       {session?.user && (
         <Item isLast>
@@ -118,10 +124,13 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
           )}
         </Item>
       )}
+      {isSharing && (
+        <ShareModal setIsOpen={setIsSharing} textToCopy={`https://photo-app-orpin.vercel.app/post/${id}`} />
+      )}
       {modalState.isOpen &&
         modalState.postId === id &&
         createPortal(
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             <PostModal post={post} setIsOpen={setIsOpen} />
           </AnimatePresence>,
           document.body,

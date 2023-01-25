@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { skip, userId } = response.data;
-  const skipNumber = parseInt(string(skip));
+  const skipNumber = Number(string(skip));
   const takeNumber = POSTS_PER_SCROLL;
 
   try {

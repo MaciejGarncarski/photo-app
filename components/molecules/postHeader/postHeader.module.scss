@@ -4,6 +4,7 @@
   margin: 1rem;
   display: flex;
 
+
   @include common.mediaquery('lg') {
     margin: 1rem 2rem;
   }

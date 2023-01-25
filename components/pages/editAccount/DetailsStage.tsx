@@ -10,20 +10,21 @@ import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
-import { AccountPersonalInfo, AccountPersonalInfoSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
+import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
 import { Input } from '@/components/molecules/input/Input';
 import { useAccount } from '@/components/pages/account/useAccount';
+import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
 
 type PropsTypes = {
-  finalImg: Blob | null;
+  finalImages: FinalImages;
   stageSelectImage: () => void;
   userId: string;
 };
 
-export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsTypes) => {
+export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTypes) => {
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { data, isLoading } = useAccount({ userId });
   const router = useRouter();
@@ -42,9 +43,9 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
     reset,
     getValues,
     formState: { isDirty, errors },
-  } = useForm<AccountPersonalInfo>({
+  } = useForm<AccountDetails>({
     mode: 'all',
-    resolver: zodResolver(AccountPersonalInfoSchema),
+    resolver: zodResolver(AccountDetailsSchema),
     defaultValues,
   });
 
@@ -62,7 +63,7 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
     const { bio, fullName, username } = getValues();
 
     mutate(
-      { bio, fullName, image: finalImg, userId, username },
+      { bio, fullName, image: finalImages[0]?.file, userId, username },
       {
         onSuccess: () => {
           router.push(`/${username}`);
@@ -88,7 +89,7 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
 
   return (
     <>
-      <Heading tag="h2">2. Edit personal information</Heading>
+      <Heading tag="h2">Edit account details</Heading>
       <m.form
         variants={stageVariant}
         animate="animate"
@@ -103,13 +104,13 @@ export const PersonalInfoStage = ({ finalImg, userId, stageSelectImage }: PropsT
         <div className={styles.buttons}>
           <div className={styles.buttonsLastStage}>
             <Button type="button" variant="secondary" onClick={stageSelectImage}>
-              back
+              back to beginning
             </Button>
             <Button type="reset" disabled={!isDirty} onClick={onReset}>
               Reset
             </Button>
           </div>
-          <Button type="submit" onClick={onClick} disabled={!finalImg || isError}>
+          <Button type="submit" onClick={onClick} disabled={isError}>
             Save changes
           </Button>
 

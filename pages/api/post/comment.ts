@@ -67,7 +67,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
 
-    const commentId = parseInt(response.data.commentId);
+    const commentId = Number(response.data.commentId);
 
     const user = await prisma.user.findFirst({
       where: {

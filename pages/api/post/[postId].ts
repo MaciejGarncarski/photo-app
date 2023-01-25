@@ -22,13 +22,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const post = await prisma.post.findFirst({
       where: {
-        id: parseInt(postId),
+        id: Number(postId),
       },
     });
 
     const postComments = await prisma.postComment.aggregate({
       where: {
-        post_id: parseInt(postId),
+        post_id: Number(postId),
       },
       _count: {
         id: true,
@@ -37,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const postLikes = await prisma.postLike.aggregate({
       where: {
-        post_id: parseInt(postId),
+        post_id: Number(postId),
       },
       _count: {
         id: true,

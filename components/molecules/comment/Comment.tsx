@@ -1,4 +1,3 @@
-import { IconHeart } from '@tabler/icons';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -10,6 +9,7 @@ import { useState } from 'react';
 import styles from './comment.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
 import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
@@ -42,11 +42,11 @@ export const Comment = ({ commentData }: CommentProps) => {
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
 
-  const userAccountHref = `/${sessionUserData?.user?.username}`;
+  const userAccountHref = `/${data?.user?.username}`;
 
   return (
     <m.article className={styles.comment}>
-      <Link href={userAccountHref}>
+      <Link href={userAccountHref} className={styles.avatarContainer}>
         <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
       <div className={styles.commentText}>
@@ -61,7 +61,7 @@ export const Comment = ({ commentData }: CommentProps) => {
           <time dateTime={created_at.toString()}>{timeSinceCreated}</time>
         </p>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>
-          {isLiked ? <IconHeart stroke="red" fill="red" /> : <IconHeart />}
+          {isLiked ? <IconHeartWrapper isActive /> : <IconHeartWrapper />}
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
         {isAbleToDelete && (

@@ -1,4 +1,4 @@
-import { IconCircleX, IconDownload, IconFolderPlus } from '@tabler/icons';
+import { IconCircleX, IconPhoto } from '@tabler/icons';
 import clsx from 'clsx';
 import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
 
@@ -9,18 +9,19 @@ import styles from './dropZone.module.scss';
 import { CropError } from '@/components/atoms/cropError/CropError';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
+import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 
 type DropZoneProps = {
-  handleImage: (changeEv: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string) => void;
   error: ImageCropErrors;
   setError: (error: ImageCropErrors | null) => void;
 };
 
-export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZoneProps) => {
+export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const dropZoneRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { isMobile } = useScreenWidth();
 
   const active = (dragEv: DragEvent<HTMLDivElement>) => {
     dragEv.preventDefault();
@@ -32,7 +33,7 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
     setIsActive(false);
   };
 
-  const handleDrop = useCallback(
+  const onDrop = useCallback(
     (dropEv: DragEvent<HTMLDivElement>) => {
       const dt = dropEv.dataTransfer;
       if (!dt.files || !dt.files[0]) {
@@ -49,57 +50,53 @@ export const DropZone = ({ handleImage, setImgSrc, setError, error }: DropZonePr
     [setError, setImgSrc],
   );
 
-  const openInput = () => {
-    if (!inputRef.current) {
-      return;
-    }
-    inputRef.current.click();
-  };
-
   return (
     <>
       <Heading tag="h2">Upload image</Heading>
-      <input
-        data-testid="fileInput"
-        type="file"
-        accept="image/*"
-        className={clsx('visually-hidden', styles.input)}
-        ref={inputRef}
-        onChange={handleImage}
-      />
-
       <div
-        onClick={openInput}
+        className={clsx(isActive && styles.dropZoneActive, error && styles.dropZoneError, styles.dropZone)}
         onDragOver={active}
         onDragEnter={active}
         onDrop={(dragEv) => {
           inactive(dragEv);
-          handleDrop(dragEv);
+          onDrop(dragEv);
         }}
         onDragLeave={inactive}
-        ref={dropZoneRef}
-        className={clsx(isActive && styles.dropZoneActive, error && styles.dropZoneError, styles.dropZone)}
       >
-        {isActive && (
-          <>
-            <IconFolderPlus className={styles.dropIcon} />
-            <p>Drop here 👌</p>
-          </>
-        )}
+        <input
+          data-testid="fileInput"
+          type="file"
+          id="dropZoneInput"
+          accept="image/*"
+          className={clsx('visually-hidden', styles.input)}
+          ref={inputRef}
+          onChange={onChange}
+        />
 
-        {!error && !isActive && (
-          <>
-            <IconDownload className={styles.dropIcon} />
-            <p>Drop or click to add image.</p>
-          </>
-        )}
+        <div className={styles.dropZoneState}>
+          {isActive && (
+            <>
+              <IconPhoto className={styles.dropIcon} />
+              <p>Drop here.</p>
+            </>
+          )}
 
-        {error && !isActive && (
-          <>
-            <IconCircleX className={styles.dropIconError} />
-            <CropError errorType={error} />
-          </>
-        )}
+          {!error && !isActive && (
+            <>
+              <IconPhoto className={styles.dropIcon} />
+              <p>Drag photo here.</p>
+            </>
+          )}
+          {error && !isActive && (
+            <>
+              <IconCircleX className={styles.dropIconError} />
+              <CropError errorType={error} />
+            </>
+          )}
+        </div>
+        <label htmlFor="dropZoneInput" className={clsx(isActive && styles.buttonInputDisabled, styles.buttonInput)}>
+          Select from {isMobile ? 'device' : 'computer'}
+        </label>
       </div>
     </>
   );

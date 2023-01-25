@@ -28,15 +28,15 @@ export const username = z
 
 export const bio = z.string().max(200, { message: 'Bio contains too many characters' }).optional();
 
-export const AccountPersonalInfoSchema = z.object({
+export const AccountDetailsSchema = z.object({
   username,
   fullName,
   bio,
 });
 
-export type AccountPersonalInfo = z.infer<typeof AccountPersonalInfoSchema>;
+export type AccountDetails = z.infer<typeof AccountDetailsSchema>;
 
-export const SignUpSchema = AccountPersonalInfoSchema.extend({
+export const SignUpSchema = AccountDetailsSchema.extend({
   userId: z.string(),
 });
 
@@ -54,9 +54,9 @@ export const CompleteSignUp = () => {
     register,
     handleSubmit,
     formState: { dirtyFields, errors, defaultValues },
-  } = useForm<AccountPersonalInfo>({
+  } = useForm<AccountDetails>({
     mode: 'onBlur',
-    resolver: zodResolver(AccountPersonalInfoSchema),
+    resolver: zodResolver(AccountDetailsSchema),
     defaultValues: {
       username: userData?.username ?? '',
       fullName: userData?.name ?? '',
@@ -64,7 +64,7 @@ export const CompleteSignUp = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<AccountPersonalInfo> = async ({ username, fullName, bio }) => {
+  const onSubmit: SubmitHandler<AccountDetails> = async ({ username, fullName, bio }) => {
     if (!session?.user?.id) {
       return;
     }

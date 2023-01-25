@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import parse from 'html-react-parser';
@@ -6,12 +5,11 @@ import { useState } from 'react';
 
 import styles from './homepagePost.module.scss';
 
-import { MotionImage } from '@/components/atoms/avatar/Avatar';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
+import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { Account, useAccount } from '@/components/pages/account/useAccount';
@@ -27,7 +25,7 @@ dayjs.extend(relativeTime);
 
 export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps) => {
   const { session } = useAuth();
-  const { author_id, description, created_at, images, likesCount } = post;
+  const { author_id, description, created_at, images, likesCount, image1, image2, image3 } = post;
   const { data } = useAccount({ userId: author_id, authorData });
   const [showMore, setShowMore] = useState<boolean>(false);
   const [isImgLoading, setIsImgLoading] = useState<boolean>(true);
@@ -57,20 +55,7 @@ export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps
   return (
     <article className={styles.post}>
       <PostHeader post={post} />
-      <figure>
-        {isImgLoading && <Loading />}
-        <MotionImage
-          initial={{ opacity: 0 }}
-          animate={!isImgLoading ? { opacity: 1 } : { opacity: 0 }}
-          className={clsx(isImgLoading && styles.imageLoading, styles.image)}
-          src={images}
-          width={300}
-          height={300}
-          onLoad={() => setIsImgLoading(false)}
-          priority={isPriority}
-          alt={`${data?.user?.username} - ${shortDescription}`}
-        />
-      </figure>
+      <PostSlider post={post} />
       <PostButtons post={post} />
       <footer className={styles.bottom}>
         {likesCount !== 0 && (

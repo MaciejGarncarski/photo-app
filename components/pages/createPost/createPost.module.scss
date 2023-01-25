@@ -3,6 +3,7 @@
 .createPost {
   display: grid;
   row-gap: 4rem;
+  padding-bottom: 6rem;
 
   @include common.mediaquery('lg') {
     margin-inline: calc(2rem + 4vw);

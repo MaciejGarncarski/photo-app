@@ -23,7 +23,7 @@ export const config = {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const formData = await new Promise<FormidableResult>((resolve, reject) => {
-    const form = new IncomingForm({ multiples: false });
+    const form = new IncomingForm({ multiples: true });
     form.parse(req, (err, fields, files) => {
       if (err) {
         reject({ err });
