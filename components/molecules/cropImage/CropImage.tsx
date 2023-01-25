@@ -13,6 +13,7 @@ import styles from './cropImage.module.scss';
 import { Button } from '@/components/atoms/button/Button';
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { Heading } from '@/components/atoms/heading/Heading';
+import { Loading } from '@/components/atoms/loading/Loading';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 
 type PropsTypes = {
@@ -36,6 +37,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   const [cropCompleted, setCropCompleted] = useState<PixelCrop>();
   const [imgSrc, setImgSrc] = useState('');
   const [error, setError] = useState<ImageCropErrors>(null);
+  const [isIdle, setIsIdle] = useState<boolean>(false);
 
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -56,6 +58,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   };
 
   const saveCrop = async () => {
+    setIsIdle(true);
     if (imgRef.current && cropCompleted) {
       const { blob } = await convertToBlob(imgRef.current, cropCompleted);
       setFinalImages([
@@ -65,7 +68,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
           id: finalImages.length,
         },
       ]);
-
+      setIsIdle(false);
       resetState();
     }
   };
@@ -85,6 +88,15 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
     };
 
     return <DropZone onChange={onChange} error={error} setImgSrc={setImgSrc} setError={setError} />;
+  }
+
+  if (isIdle) {
+    return (
+      <>
+        <Heading tag="h2">Be patient, your image is being saved</Heading>
+        <Loading />
+      </>
+    );
   }
 
   return (
