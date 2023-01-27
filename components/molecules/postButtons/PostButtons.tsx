@@ -3,16 +3,14 @@ import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { namedComponent } from '@/utils/namedComponent';
 
-import styles from './postButtons.module.scss';
-
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { useModal } from '@/components/atoms/modal/useModal';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { Children } from '@/components/layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
@@ -20,6 +18,8 @@ import { useCollectionMutation } from '@/components/molecules/postOptions/useCol
 import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { PostData } from '@/components/pages/collection/useCollection';
+
+import styles from './postButtons.module.scss';
 
 type PostButtonsProps = {
   post: PostData;
@@ -49,16 +49,11 @@ const Button = ({ children, onClick }: ButtonProps) => {
   );
 };
 
-type ModalState = {
-  isOpen: boolean;
-  postId: number;
-};
-
 export const PostButtons = ({ post }: PostButtonsProps) => {
   const { isLiked, id, isInCollection } = post;
-  const [modalState, setModalState] = useState<ModalState>({ isOpen: false, postId: 0 });
 
-  const [isSharing, setIsSharing] = useState<boolean>(false);
+  const { modalOpen, open, close } = useModal();
+  const { modalOpen: shareModalOpen, open: openShare, close: closeShare } = useModal();
 
   const { session } = useAuth();
   const { push } = useRouter();
@@ -74,10 +69,6 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
     mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId: id });
   };
 
-  const openModal = () => {
-    setModalState({ isOpen: true, postId: id });
-  };
-
   const handleCollection = () => {
     if (isInCollection) {
       collectionMutation.mutate({ type: 'remove', postId: id });
@@ -85,10 +76,6 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
     }
 
     collectionMutation.mutate({ type: undefined, postId: id });
-  };
-
-  const setIsOpen = (isOpen: boolean) => {
-    setModalState({ isOpen, postId: id });
   };
 
   return (
@@ -100,13 +87,13 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
         </Button>
       </Item>
       <Item>
-        <Button onClick={openModal}>
+        <Button onClick={open}>
           <span className="visually-hidden">comment</span>
           <IconMessage />
         </Button>
       </Item>
       <Item>
-        <Button onClick={() => setIsSharing(true)}>
+        <Button onClick={openShare}>
           <span className="visually-hidden">share</span>
           <IconShare />
         </Button>
@@ -124,14 +111,15 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
           )}
         </Item>
       )}
-      {isSharing && (
-        <ShareModal setIsOpen={setIsSharing} textToCopy={`https://photo-app-orpin.vercel.app/post/${id}`} />
-      )}
-      {modalState.isOpen &&
-        modalState.postId === id &&
+      <AnimatePresence>
+        {shareModalOpen && (
+          <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${id}`} />
+        )}
+      </AnimatePresence>
+      {modalOpen &&
         createPortal(
           <AnimatePresence mode="wait">
-            <PostModal post={post} setIsOpen={setIsOpen} />
+            <PostModal post={post} close={close} />
           </AnimatePresence>,
           document.body,
         )}

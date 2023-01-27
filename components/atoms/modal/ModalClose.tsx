@@ -1,8 +1,8 @@
 import { m } from 'framer-motion';
 
-import styles from './modal.module.scss';
-
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
+
+import styles from './modal.module.scss';
 
 type ModalCloseProps = {
   onClose: () => void;
@@ -22,7 +22,7 @@ export const ModalClose = ({ onClose }: ModalCloseProps) => {
       type="button"
       onClick={handleClose}
     >
-      <IconXWrapper size="lg" />
+      <IconXWrapper size="sm" />
       <span className="visually-hidden">Close dialog</span>
     </m.button>
   );

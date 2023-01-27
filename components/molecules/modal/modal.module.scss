@@ -1,58 +1,5 @@
 @use '/styles/common.scss';
 
-
-.list {
-  list-style: none;
-  display: grid;
-  justify-content: stretch;
-  width: 100%;
-  align-items: center;
-}
-
-.item {
-  width: 100%;
-  font-weight: 600;
-  padding: 1.5rem 0;
-  padding-left: 2rem;
-  border-top: var(--border-primary);
-  font-size: 2.25rem;
-  text-align: left;
-
-  @include common.mediaquery('lg') {
-    padding: 2rem 0;
-    padding-left: 4rem;
-    font-size: 2.5rem;
-  }
-}
-
-.itemButton {
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-align: left;
-  border: none;
-  text-transform: capitalize;
-  font-size: 2rem;
-
-  @include common.mediaquery('lg') {
-    gap: 2rem;
-    font-size: 2.5rem;
-  }
-
-  &:not(:disabled) {
-    cursor: pointer;
-  }
-}
-
-.item-red {
-  color: var(--color-error);
-}
-
-.item-first {
-  border-top: none;
-}
-
 .closeButton {
   position: absolute;
   right: -1rem;
@@ -67,29 +14,4 @@
   &:hover {
     color: var(--color-primary);
   }
-}
-
-.heading {
-  border-bottom: var(--border-primary);
-  padding: 1.5rem 0;
-  padding-left: 2rem;
-  font-size: 2.25rem;
-
-  @include common.mediaquery('lg') {
-    padding: 2rem 0;
-    padding-left: 4rem;
-    font-size: 2.5rem;
-  }
-}
-
-.heading-red {
-  color: var(--color-error);
-}
-
-.dialog {
-  background-color: var(--bg-primary);
-  border-radius: var(--radius-medium);
-  width: min(45rem, 80%);
-  margin-inline: auto;
-  position: relative;
 }

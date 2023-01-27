@@ -4,19 +4,20 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { m } from 'framer-motion';
 import parse from 'html-react-parser';
 import Link from 'next/link';
-import { useState } from 'react';
-
-import styles from './comment.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
-import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { POST_AVATAR_SIZE } from '@/components/molecules/postHeader/PostHeader';
 import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import styles from './comment.module.scss';
 
 type CommentProps = {
   commentData: PostCommentsWithIsLiked;
@@ -26,7 +27,7 @@ dayjs.extend(relativeTime);
 
 export const Comment = ({ commentData }: CommentProps) => {
   const { sessionUserData } = useAuth();
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const { open, close, modalOpen } = useModal();
   const { data } = useAccount({ userId: commentData.user_id });
   const { isLiked, id, created_at, comment_text, user_id, likesCount } = commentData;
   const timeSinceCreated = dayjs(created_at).fromNow();
@@ -36,7 +37,6 @@ export const Comment = ({ commentData }: CommentProps) => {
 
   const handleLike = () => commentLike.mutate();
   const handleDelete = () => commentDelete.mutate({ commentId: id });
-  const onDeleteBtnClick = () => setIsDeleting(true);
 
   const isAbleToDelete = sessionUserData?.user?.id === user_id || sessionUserData?.user?.role === 'ADMIN';
 
@@ -65,20 +65,13 @@ export const Comment = ({ commentData }: CommentProps) => {
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
         {isAbleToDelete && (
-          <button type="button" onClick={onDeleteBtnClick} className={styles.likeBtn}>
+          <button type="button" onClick={open} className={styles.likeBtn}>
             delete
           </button>
         )}
       </div>
 
-      {isDeleting && (
-        <ConfirmationModal
-          confirmText="Delete"
-          onCancel={() => setIsDeleting(false)}
-          onConfirm={handleDelete}
-          setIsOpen={setIsDeleting}
-        />
-      )}
+      <ModalContainer>{modalOpen && <ConfirmationAlert close={close} onConfirm={handleDelete} />}</ModalContainer>
     </m.article>
   );
 };

@@ -1,15 +1,16 @@
 import { motion as m, Variants } from 'framer-motion';
-import { useState } from 'react';
-
-import styles from './editAccount.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
-import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';
+
+import styles from './editAccount.module.scss';
 
 type PropsTypes = {
   stageSelectImage: () => void;
@@ -29,14 +30,15 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
   const userId = session?.user?.id;
   const { data } = useAccount({ userId });
 
-  const [isRemoving, setIsRemoving] = useState<boolean>(false);
+  const { open, close, modalOpen } = useModal();
+
   const { mutate, isLoading } = useDeleteAvatar();
 
   if (!userId) {
     return <Loading />;
   }
   const removeAvatar = () => {
-    mutate({ userId }, { onSettled: () => setIsRemoving(false) });
+    mutate({ userId }, { onSettled: close });
   };
 
   if (isLoading) {
@@ -62,7 +64,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
           Update avatar
         </Button>
         {data?.user?.customImage && (
-          <Button type="button" variant="secondary" onClick={() => setIsRemoving(true)}>
+          <Button type="button" variant="secondary" onClick={open}>
             remove avatar
           </Button>
         )}
@@ -70,14 +72,9 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
           Edit details
         </Button>
       </div>
-      {isRemoving && (
-        <ConfirmationModal
-          confirmText="Delete"
-          onCancel={() => setIsRemoving(false)}
-          onConfirm={removeAvatar}
-          setIsOpen={setIsRemoving}
-        />
-      )}
+      <ModalContainer>
+        {modalOpen && <ConfirmationAlert headingText="Delete Avatar?" close={close} onConfirm={removeAvatar} />}
+      </ModalContainer>
     </m.section>
   );
 };

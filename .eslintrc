@@ -56,8 +56,6 @@
              ["^@?\\w", "^\\u0000"],
              // Lib and hooks
              ["^@/lib", "^@/hooks", "^@/utils"],
-             // {s}css files
-             ["^.+\\.s?css$"],
              // static data
              ["^@/data"],
              // components
@@ -67,6 +65,8 @@
              // Other imports
              ["^@/"],
              // relative paths up until 3 level
+             ["^.+\\.s?css$"],
+             // {s}css files
              [
                "^\\./?$",
                "^\\.(?!/?$)",

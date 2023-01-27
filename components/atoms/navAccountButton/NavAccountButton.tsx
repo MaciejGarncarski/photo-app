@@ -1,19 +1,21 @@
-import { IconDoorExit, IconUser } from '@tabler/icons';
+import { IconLogout, IconUser } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-import styles from './navAccountButton.module.scss';
-import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';
-
 import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
 import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip';
-import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import styles from './navAccountButton.module.scss';
+import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';
 
 type NavAccountIconProps = {
   userId: string;
@@ -22,8 +24,7 @@ type NavAccountIconProps = {
 export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
-
-  const [isSigningOut, setIsSigningOut] = useState<boolean>(false);
+  const { close, modalOpen, open } = useModal();
 
   const { signOut } = useAuth();
   const { account } = useAccount({ userId });
@@ -66,8 +67,8 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   return (
     <li
       ref={containerRef}
-      onMouseEnter={handleOpen}
-      onFocus={!isMobile ? handleOpen : undefined}
+      onMouseOver={isMobile ? undefined : handleOpen}
+      onFocus={isMobile ? undefined : handleOpen}
       onMouseLeave={handleClose}
       onBlur={handleClose}
       className={commonStyles.accountIconContainer}
@@ -96,23 +97,16 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
             <Link href={accountHref} className={styles.link} onClick={() => setIsOptionsOpen(false)}>
               <IconUser /> your account
             </Link>
-            <button type="button" className={styles.signOut} onClick={() => setIsSigningOut(true)}>
-              <IconDoorExit />
-              Sign out
+            <button type="button" className={styles.signOut} onClick={open}>
+              <IconLogout />
+              Log out
             </button>
           </motion.div>
         )}
-
-        {isSigningOut && (
-          <ConfirmationModal
-            key="sign out modal"
-            confirmText="Sign out"
-            onCancel={() => setIsSigningOut(false)}
-            onConfirm={() => signOut()}
-            setIsOpen={setIsSigningOut}
-          />
-        )}
       </AnimatePresence>
+      <ModalContainer>
+        {modalOpen && <ConfirmationAlert headingText="Log out?" close={close} onConfirm={() => signOut()} />}
+      </ModalContainer>
     </li>
   );
 };

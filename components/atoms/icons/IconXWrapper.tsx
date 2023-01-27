@@ -3,7 +3,7 @@ import { IconX } from '@tabler/icons';
 import styles from './icons.module.scss';
 
 type PropsTypes = {
-  size?: 'lg' | 'xl';
+  size?: 'sm' | 'lg' | 'xl';
 };
 
 export const IconXWrapper = ({ size }: PropsTypes) => {

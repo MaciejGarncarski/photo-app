@@ -1,14 +1,15 @@
 import { IconCheck, IconCopy } from '@tabler/icons';
 import { useState } from 'react';
 
-import { Modal } from '@/components/atoms/modal/Modal';
+import { ListModal } from '@/components/molecules/listModal/ListModal';
+import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 
 type PropsTypes = {
-  setIsOpen: (isOpen: boolean) => void;
+  close: () => void;
   textToCopy: string;
 };
 
-export const ShareModal = ({ setIsOpen, textToCopy }: PropsTypes) => {
+export const ShareModal = ({ close, textToCopy }: PropsTypes) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const handleCopy = async () => {
@@ -21,23 +22,16 @@ export const ShareModal = ({ setIsOpen, textToCopy }: PropsTypes) => {
   };
 
   return (
-    <Modal.Overlay setOpen={setIsOpen}>
-      <Modal.Container>
-        <Modal.Close onClose={() => setIsOpen(false)} />
-        <Modal.List>
-          <Modal.ListItem withButton disabled={isCopied} onClick={handleCopy} isFirst>
-            {isCopied ? (
-              <>
-                <IconCheck /> Copied
-              </>
-            ) : (
-              <>
-                <IconCopy /> Copy link
-              </>
-            )}
-          </Modal.ListItem>
-        </Modal.List>
-      </Modal.Container>
-    </Modal.Overlay>
+    <ListModal close={close} headingText="Share post">
+      <ListModalItem
+        type="button"
+        icon={isCopied ? <IconCheck /> : <IconCopy />}
+        disabled={isCopied}
+        isLast
+        onClick={handleCopy}
+      >
+        {isCopied ? 'Copied' : 'Copy link'}
+      </ListModalItem>
+    </ListModal>
   );
 };

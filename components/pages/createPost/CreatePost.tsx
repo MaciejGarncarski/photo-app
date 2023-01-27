@@ -1,25 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import styles from './createPost.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
-import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
 import { useSendNewPost } from '@/components/pages/createPost/useSendNewPost';
+
+import styles from './createPost.module.scss';
 
 const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded' }),
@@ -44,7 +45,6 @@ export type ImagesBase64 = Array<
 export const CreatePost = () => {
   const router = useRouter();
 
-  const [isCanceling, setIsCanceling] = useState<boolean>(false);
   const [isCropping, setIsCropping] = useState<boolean>(false);
 
   const [aspectRatio, setAspectRatio] = useState<number>(1);
@@ -53,6 +53,7 @@ export const CreatePost = () => {
 
   useConvertToBase64(finalImages, setFinalImagesBase64);
 
+  const { open, close, modalOpen } = useModal();
   const { mutate, isLoading } = useSendNewPost();
 
   const {
@@ -117,7 +118,7 @@ export const CreatePost = () => {
             <Heading tag="h2">Info about post</Heading>
             <TextArea label="description" {...register('description')} />
             <div className={styles.actionButtons}>
-              <Button variant="secondary" onClick={() => setIsCanceling(true)}>
+              <Button variant="secondary" onClick={open}>
                 Cancel
               </Button>
               <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImages)}>
@@ -128,15 +129,9 @@ export const CreatePost = () => {
         </form>
       )}
 
-      <AnimatePresence>
-        {isCanceling && (
-          <ConfirmationModal
-            confirmText="Go back to home?"
-            setIsOpen={setIsCanceling}
-            onConfirm={() => router.push('/')}
-          />
-        )}
-      </AnimatePresence>
+      <ModalContainer>
+        {modalOpen && <ConfirmationAlert headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />}
+      </ModalContainer>
     </section>
   );
 };
