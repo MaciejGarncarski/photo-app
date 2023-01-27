@@ -12,11 +12,12 @@
   --text-secondary: rgb(107, 107, 107);
   --text-placeholder: rgb(75, 73, 73);
 
+  --bg-blur: rgb(255, 255, 255, 0.8);
   --bg-primary: rgb(255, 255, 255);
   --bg-secondary: rgb(249, 247, 247);
-  --bg-gray: rgb(236, 236, 243);
+  --bg-gray: rgb(214, 214, 214);
   --bg-black: rgb(0, 0, 0);
-  --bg-overlay: rgba(0, 0, 0, 0.67);
+  --bg-overlay: rgba(0, 0, 0, 0.6);
   --bg-error: rgba(224, 1, 1, 0.1);
 
   --border-primary-color: rgb(201, 201, 201);
@@ -36,6 +37,7 @@
   --itemSize: 2.75rem;
   --create-post-width: min(80rem, 80%);
 
+  --backdrop-blur: blur(15px);
 
   --postWidth: 20rem;
 
@@ -47,5 +49,4 @@
   @include common.mediaquery('xl') {
     --postWidth: 45rem;
   }
-
 }

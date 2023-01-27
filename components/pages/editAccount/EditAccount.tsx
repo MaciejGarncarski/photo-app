@@ -3,12 +3,12 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { Suspense, useState } from 'react';
 
-import styles from './editAccount.module.scss';
-
 import { Loading } from '@/components/atoms/loading/Loading';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
+
+import styles from './editAccount.module.scss';
 
 type PropsTypes = {
   userId: string;
@@ -68,8 +68,8 @@ export const EditAccount = ({ userId }: PropsTypes) => {
           {stage === 'personalInfo' && (
             <LazyDetailsStage
               key="detailsStage"
-              finalImages={finalImages}
               stageSelectImage={stageSelectImage}
+              finalImages={finalImages}
               userId={userId}
             />
           )}

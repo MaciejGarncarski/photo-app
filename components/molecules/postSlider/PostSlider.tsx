@@ -8,6 +8,7 @@ import styles from './postSlider.module.scss';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
+import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
@@ -18,16 +19,17 @@ type PropsTypes = {
   imageClassName?: string;
 };
 
-const CHANGE_IMG_OFFSET = 150;
-
 export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
   const { data } = useAccount({ userId: post.author_id });
+  const { isMobile } = useScreenWidth();
 
   const { description, image1, image2, image3, images } = post;
   const { shortDescription } = descriptionData(description);
+
+  const CHANGE_IMG_OFFSET = isMobile ? 50 : 150;
 
   const customImageClassName = clsx(imageClassName, styles.sliderImage);
   const customContainerClassName = clsx(containerClassName, styles.slider);

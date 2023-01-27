@@ -6,8 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 255, 255, 0.77);
-  backdrop-filter: blur(18px);
+  background-color: var(--bg-blur);
+  backdrop-filter: var(--backdrop-blur);
   bottom: 0;
   left: 0;
   padding: 0.75rem 0;
@@ -22,4 +22,4 @@
     padding: 0;
     background-color: transparent;
   }
-} 
+}

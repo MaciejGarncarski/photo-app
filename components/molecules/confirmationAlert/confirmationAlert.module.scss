@@ -1,0 +1,37 @@
+@use '/styles/common.scss';
+
+.container {
+  width: 80%;
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-medium);
+  position: relative;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include common.mediaquery('lg') {
+    width: auto;
+    gap: 4rem;
+    padding: 4rem 5rem;
+  }
+}
+
+.headingContainer {
+  position: relative;
+}
+
+.heading {
+  text-align: center;
+}
+
+.buttonsRow {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+
+  @include common.mediaquery('lg') {
+    gap: 4rem;
+  }
+}

@@ -22,7 +22,7 @@
   }
 
   @include common.mediaquery('xl') {
-    width: min(100rem, 80%);
+    width: min(120rem, 80%);
     grid-template-columns: 60rem 1fr;
 
   }
