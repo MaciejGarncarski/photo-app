@@ -22,8 +22,8 @@ import styles from './editAccount.module.scss';
 
 type PropsTypes = {
   finalImages: FinalImages;
-  stageSelectImage: () => void;
   userId: string;
+  stageSelectImage: () => void;
 };
 
 export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTypes) => {

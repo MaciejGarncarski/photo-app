@@ -24,7 +24,6 @@ type NavAccountIconProps = {
 export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLLIElement>(null);
-
   const { close, modalOpen, open } = useModal();
 
   const { signOut } = useAuth();
@@ -68,7 +67,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   return (
     <li
       ref={containerRef}
-      onMouseEnter={isMobile ? undefined : handleOpen}
+      onMouseOver={isMobile ? undefined : handleOpen}
       onFocus={isMobile ? undefined : handleOpen}
       onMouseLeave={handleClose}
       onBlur={handleClose}

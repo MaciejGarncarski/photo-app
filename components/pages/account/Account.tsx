@@ -59,7 +59,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
             return (
               <li className={styles.listItem} key={item}>
                 <p className={styles.listItemNumber}>{data.count[item]}</p>
-                <p>{item}</p>
+                <p className={styles.listItemText}>{item}</p>
               </li>
             );
           })}

@@ -1,4 +1,4 @@
-import { IconMenu } from '@tabler/icons';
+import { IconMenu2 } from '@tabler/icons';
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -73,7 +73,7 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
           {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
           <Tooltip variant="right" content="Post menu">
             <button type="button" className={styles.optionsButton} onClick={open}>
-              <IconMenu />
+              <IconMenu2 />
             </button>
           </Tooltip>
         </div>

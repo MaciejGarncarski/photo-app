@@ -74,6 +74,15 @@
 
 .listItemNumber {
   font-weight: 600;
+  font-size: 2rem;
+}
+
+.listItemText {
+  color: var(--text-secondary);
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .username {

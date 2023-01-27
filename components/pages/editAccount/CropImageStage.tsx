@@ -1,12 +1,15 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { motion as m } from 'framer-motion';
 import { useState } from 'react';
 
-import styles from './editAccount.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
+import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
+
+import styles from './editAccount.module.scss';
 
 type PropsTypes = {
   finalImages: FinalImages;
@@ -16,7 +19,24 @@ type PropsTypes = {
 };
 
 export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo, stageSelectImage }: PropsTypes) => {
+  const queryClient = useQueryClient();
   const [isCropping, setIsCropping] = useState<boolean>(false);
+
+  const { mutate, isLoading: isMutationLoading } = useEditAccount();
+
+  const { session } = useAuth();
+
+  const onSaveImage = () => {
+    mutate(
+      { image: finalImages[0]?.file, userId: session?.user?.id ?? '' },
+      {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries(['account']);
+          stagePersonalInfo();
+        },
+      },
+    );
+  };
 
   return (
     <m.div variants={stageVariant} animate="animate" exit="exit" initial="initial" className={styles.stageContainer}>
@@ -31,8 +51,8 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
           back to beginning
         </Button>
-        <Button type="button" onClick={stagePersonalInfo}>
-          next
+        <Button type="button" disabled={isMutationLoading || finalImages.length === 0} onClick={onSaveImage}>
+          Save new image
         </Button>
       </div>
     </m.div>
