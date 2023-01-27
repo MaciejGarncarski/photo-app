@@ -14,42 +14,45 @@
   }
 }
 
-.overlay {
+.overlay,
+.backdrop {
   position: fixed;
   top: 0;
   bottom: 0;
+  height: 100%;
+  width: 100%;
   left: 0;
   right: 0;
+  z-index: 2;
+  background-color: var(--bg-overlay);
+
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  background-color: var(--bg-overlay);
-  z-index: 2;
 
   @include common.mediaquery('lg') {
-    justify-content: center;
     align-items: center;
   }
 }
 
+.backdropMobileCenter {
+  align-items: center;
+}
+
+
 .closeButton {
-  position: absolute;
-  right: 1rem;
-  top: -6rem;
-  font-size: 4rem;
   background-color: transparent;
-  background-color: var(--bg-primary);
   border: none;
-  border-radius: var(--radius-small);
   cursor: pointer;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
 
   &:hover {
     color: var(--color-primary);
   }
 
-  @include common.mediaquery('lg') {
-    right: -1rem;
-  }
+  @include common.mediaquery('lg') {}
 }
 
 .heading {

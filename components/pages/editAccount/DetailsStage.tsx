@@ -1,22 +1,24 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion as m } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { MouseEvent, useRef, useState } from 'react';
+import { MouseEvent, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-
-import styles from './editAccount.module.scss';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
-import { ConfirmationModal } from '@/components/molecules/confirmationModal/ConfirmationModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { Input } from '@/components/molecules/input/Input';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
+
+import styles from './editAccount.module.scss';
 
 type PropsTypes = {
   finalImages: FinalImages;
@@ -25,10 +27,10 @@ type PropsTypes = {
 };
 
 export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTypes) => {
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { data, isLoading } = useAccount({ userId });
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
+  const { close, modalOpen, open } = useModal();
 
   const { mutate, isLoading: isMutationLoading } = useEditAccount();
 
@@ -56,7 +58,7 @@ export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTyp
 
   const onClick = (clickEv: MouseEvent<HTMLButtonElement>) => {
     clickEv.preventDefault();
-    setIsUpdating(true);
+    open();
   };
 
   const onSubmit = () => {
@@ -114,15 +116,9 @@ export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTyp
             Save changes
           </Button>
 
-          {isUpdating && !isError && (
-            <ConfirmationModal
-              confirmText="Save changes"
-              variant="positive"
-              setIsOpen={setIsUpdating}
-              onCancel={() => setIsUpdating(false)}
-              onConfirm={onSubmit}
-            />
-          )}
+          <ModalContainer>
+            {modalOpen && <ConfirmationAlert headingText="Save changes?" close={close} onConfirm={onSubmit} />}
+          </ModalContainer>
         </div>
       </m.form>
     </>

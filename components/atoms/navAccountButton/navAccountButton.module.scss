@@ -1,8 +1,18 @@
 @use '/styles/common.scss';
 
+.button {
+  border: none;
+  background-color: transparent;
+}
+
+.avatar {
+  height: 3rem;
+  width: 3rem;
+}
+
 .options {
-  background-color: var(--bg-primary);
   position: absolute;
+  background-color: var(--bg-primary);
   box-shadow: var(--shadow-secondary);
   top: -15.5rem;
   left: -13.5rem;
@@ -13,11 +23,30 @@
   align-items: flex-start;
   flex-direction: column;
   font-size: 2rem;
-  overflow: hidden;
+
+
+  &::before {
+    @include common.mediaquery('lg') {
+      content: '';
+    }
+
+    position: inherit;
+    --triangle-size: 1.25rem;
+    right: calc(var(--triangle-size) * 2);
+    top: calc(var(--triangle-size) * -1);
+    border-left: var(--triangle-size) solid transparent;
+    border-right: var(--triangle-size) solid transparent;
+    border-bottom: var(--triangle-size) solid var(--bg-primary);
+    filter: drop-shadow(0 -1px 1px var(--border-primary-color));
+  }
+
+
 
   @include common.mediaquery('lg') {
     top: 4.5rem;
-    left: -14rem;
+    left: unset;
+    right: -2.5rem;
+    min-width: 23rem;
   }
 }
 
@@ -54,7 +83,7 @@
   padding: 1rem 0;
   padding-left: 2rem;
   width: 100%;
-
+  border-top: var(--border-primary);
   @extend %hover;
 }
 
@@ -62,14 +91,4 @@
   font-weight: 700;
   padding: 1rem 0;
   padding-left: 2rem;
-}
-
-.button {
-  border: none;
-  background-color: transparent;
-}
-
-.avatar {
-  height: 3rem;
-  width: 3rem;
 }
