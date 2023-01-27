@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useLayoutEffect } from 'react';
+import { RefObject, useCallback, useEffect } from 'react';
 
 export const useUpdateWidth = (imageRef: RefObject<HTMLDivElement>, setState: (newState: number) => void) => {
   const updateWidth = useCallback(() => {
@@ -8,17 +8,15 @@ export const useUpdateWidth = (imageRef: RefObject<HTMLDivElement>, setState: (n
     setState(imageRef.current.offsetWidth);
   }, [imageRef, setState]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!imageRef.current) {
       return;
     }
     setState(imageRef.current.getBoundingClientRect().width);
-  }, [imageRef, setState]);
 
-  useEffect(() => {
     window.addEventListener('resize', updateWidth);
     return () => {
       window.removeEventListener('resize', updateWidth);
     };
-  }, [imageRef, updateWidth]);
+  }, [imageRef, setState, updateWidth]);
 };

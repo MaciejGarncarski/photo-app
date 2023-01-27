@@ -87,6 +87,9 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
         dragElastic={0.3}
+        dragTransition={{
+          bounceStiffness: 350,
+        }}
       >
         <AnimatePresence>
           <motion.div
