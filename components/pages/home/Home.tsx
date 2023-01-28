@@ -1,6 +1,5 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { Loading } from '@/components/atoms/loading/Loading';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
@@ -19,7 +18,7 @@ export const Home = () => {
   });
 
   if (isLoading || !data) {
-    return <Loading />;
+    return <PostPlaceholder />;
   }
 
   return (

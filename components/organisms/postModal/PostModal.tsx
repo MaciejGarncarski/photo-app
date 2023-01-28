@@ -43,7 +43,7 @@ export const PostModal = ({ post, close }: PostModalProps) => {
   return (
     <Backdrop close={close}>
       <motion.div role="dialog" className={styles.container}>
-        <ModalClose onClose={close} />
+        <ModalClose onClose={close} isExternal />
         <PostHeader
           tag="div"
           variant={isMobile ? undefined : 'no-margin-left'}

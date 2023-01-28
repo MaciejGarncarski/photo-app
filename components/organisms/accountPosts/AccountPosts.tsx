@@ -2,13 +2,13 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import styles from './accountPosts.module.scss';
-
 import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
+
+import styles from './accountPosts.module.scss';
 
 type AccountPostsProps = {
   id: string;

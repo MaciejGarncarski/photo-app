@@ -31,8 +31,21 @@
   position: absolute;
   right: 1.25rem;
   top: 1.25rem;
+  cursor: pointer;
 
   &:hover {
     color: var(--color-primary);
+  }
+}
+
+.closeButtonExternal {
+  right: 0rem;
+  top: -6.5rem;
+  border-radius: var(--radius-small);
+  padding: 0.75rem;
+  background-color: var(--bg-primary);
+
+  @include common.mediaquery('lg') {
+    right: -2rem;
   }
 }
