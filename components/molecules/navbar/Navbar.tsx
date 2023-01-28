@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
-import styles from './navbar.module.scss';
-
 import { NavButtons } from '@/components/molecules/navButtons/NavButtons';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
+
+import styles from './navbar.module.scss';
 
 export const Navbar = () => {
   const { isMobile } = useScreenWidth();

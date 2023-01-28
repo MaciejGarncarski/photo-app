@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  >h2 {
+    text-align: center;
+  }
+}

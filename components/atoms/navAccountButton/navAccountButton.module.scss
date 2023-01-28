@@ -3,6 +3,7 @@
 .button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .avatar {
@@ -33,11 +34,11 @@
     position: inherit;
     --triangle-size: 1.25rem;
     right: calc(var(--triangle-size) * 2);
-    top: calc(var(--triangle-size) * -1);
+    top: calc(var(--triangle-size) * -1 + 3px);
     border-left: var(--triangle-size) solid transparent;
     border-right: var(--triangle-size) solid transparent;
     border-bottom: var(--triangle-size) solid var(--bg-primary);
-    filter: drop-shadow(0 -1px 1px var(--border-primary-color));
+    filter: drop-shadow(0 -1px 1px var(--border-secondary-color));
   }
 
 

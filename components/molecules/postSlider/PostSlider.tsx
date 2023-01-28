@@ -1,17 +1,21 @@
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
-import { AnimatePresence, motion, PanInfo } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 
-import styles from './postSlider.module.scss';
-
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
+import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
+import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
+import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
+
+import styles from './postSlider.module.scss';
 
 type PropsTypes = {
   post: PostData;
@@ -24,47 +28,48 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
   const { data } = useAccount({ userId: post.author_id });
-  const { isMobile } = useScreenWidth();
+  const { session } = useAuth();
+  const router = useRouter();
+  useUpdateWidth(imageRef, setWidth);
+  const { mutate } = usePostLike();
 
   const { description, image1, image2, image3, images } = post;
   const { shortDescription } = descriptionData(description);
 
-  const CHANGE_IMG_OFFSET = isMobile ? 50 : 150;
+  const postImages = [image1, image2, image3].flatMap((str) => (str ? [str] : []));
+  const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
 
   const customImageClassName = clsx(imageClassName, styles.sliderImage);
   const customContainerClassName = clsx(containerClassName, styles.slider);
 
-  const postImages = [image1, image2, image3].flatMap((str) => (str ? [str] : []));
-
-  useUpdateWidth(imageRef, setWidth);
-
-  const prevImage = () => {
-    if (currentIndex === 0) {
+  const handleLike = () => {
+    if (!session?.user?.id) {
+      router.push('/auth/signin');
       return;
     }
-    setCurrentIndex((prevImage) => prevImage - 1);
+    mutate({ isLiked: post.isLiked ?? false, userId: session?.user?.id, postId: post.id });
   };
 
-  const nextImage = () => {
-    if (currentIndex === postImages.length - 1) {
-      return;
+  if (postImages.length === 1) {
+    if (!postImages[0]) {
+      return null;
     }
-    setCurrentIndex((prevImage) => prevImage + 1);
-  };
-
-  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
-    const { offset } = info;
-    if (offset.x < CHANGE_IMG_OFFSET * -1) {
-      nextImage();
-    }
-    if (offset.x > CHANGE_IMG_OFFSET) {
-      prevImage();
-    }
-  };
+    return (
+      <div onDoubleClick={handleLike} className={customContainerClassName}>
+        <MotionImage
+          className={customImageClassName}
+          src={postImages[0]}
+          width={300}
+          height={300}
+          alt={`${data?.user?.username} - ${shortDescription}`}
+        />
+      </div>
+    );
+  }
 
   if (postImages.length === 0 && images) {
     return (
-      <div className={customContainerClassName}>
+      <div onDoubleClick={handleLike} className={customContainerClassName}>
         <MotionImage
           className={customImageClassName}
           src={images}
@@ -77,7 +82,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
   }
 
   return (
-    <motion.div className={customContainerClassName}>
+    <motion.div onDoubleClick={handleLike} className={customContainerClassName}>
       {currentIndex !== 0 && postImages.length > 0 && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
@@ -99,15 +104,16 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
             animate={{ x: -1 * currentIndex * (width / postImages.length) }}
             ref={imageRef}
           >
-            {postImages.map((image) => {
+            {postImages.map((image, idx) => {
               return (
-                <motion.figure key={`${post.id} ${image} ${currentIndex}`}>
+                <motion.figure className={styles.figure} key={`${post.id} ${image} ${currentIndex}`}>
                   <Image
                     className={customImageClassName}
                     src={image}
                     alt={`${data?.user?.username} - ${shortDescription}`}
                     height={400}
                     width={400}
+                    priority={idx > 0}
                   />
                 </motion.figure>
               );

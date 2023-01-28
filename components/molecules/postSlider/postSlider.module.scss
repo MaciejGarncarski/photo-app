@@ -4,6 +4,8 @@
   position: relative;
   display: flex;
 
+  height: 100%;
+
   &:hover {
     cursor: grab;
   }
@@ -15,6 +17,12 @@
   min-height: 30rem;
   position: relative;
   overflow: hidden;
+}
+
+.figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sliderImage {

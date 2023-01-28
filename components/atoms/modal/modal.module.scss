@@ -1,20 +1,5 @@
 @use '/styles/common.scss';
 
-.dialog {
-  background-color: var(--bg-primary);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  width: min(45rem, 100%);
-  margin-inline: auto;
-  position: relative;
-
-  @include common.mediaquery('lg') {
-    border-radius: var(--radius-medium);
-
-  }
-}
-
-.overlay,
 .backdrop {
   position: fixed;
   top: 0;
@@ -43,6 +28,9 @@
 .closeButton {
   background-color: transparent;
   border: none;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
   cursor: pointer;
   position: absolute;
   right: 1.25rem;
@@ -51,99 +39,16 @@
   &:hover {
     color: var(--color-primary);
   }
-
-  @include common.mediaquery('lg') {}
 }
 
-.heading {
-  border-bottom: var(--border-primary);
-  padding: 1.5rem 0;
-  padding-left: 2rem;
-  font-size: 2.25rem;
+.closeButtonExternal {
+  right: 0rem;
+  top: -6.5rem;
+  border-radius: var(--radius-small);
+  padding: 0.75rem;
+  background-color: var(--bg-primary);
 
   @include common.mediaquery('lg') {
-    padding: 2rem 0;
-    padding-left: 4rem;
-    font-size: 2.5rem;
+    right: -2rem;
   }
-}
-
-.heading-red {
-  color: var(--color-error);
-}
-
-.list {
-  list-style: none;
-  display: grid;
-  width: 100%;
-  border-radius: var(--radius-medium);
-  align-items: center;
-  overflow: hidden;
-}
-
-%itemFlex {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 2rem;
-  width: 100%;
-  padding: 1.5rem 0;
-  padding-left: 2rem;
-
-
-  @include common.mediaquery('lg') {
-    gap: 2rem;
-    font-size: 2.5rem;
-    padding: 2rem 0;
-    padding-left: 3rem;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: var(--bg-gray);
-  }
-}
-
-.item {
-  width: 100%;
-  font-weight: 600;
-  border-top: var(--border-primary);
-  font-size: 2.25rem;
-  text-align: left;
-  text-transform: capitalize;
-
-
-  @include common.mediaquery('lg') {
-    font-size: 2.5rem;
-  }
-}
-
-.itemLink {
-  @extend %itemFlex;
-  display: inline-flex;
-  cursor: pointer
-}
-
-.itemButton {
-  @extend %itemFlex;
-  background-color: transparent;
-  text-align: left;
-  border: none;
-  width: 100%;
-
-  &:not(:disabled) {
-    cursor: pointer;
-  }
-}
-
-.itemText {
-  @extend %itemFlex;
-}
-
-.item-red {
-  color: var(--color-error);
-}
-
-.item-first {
-  border-top: none;
 }

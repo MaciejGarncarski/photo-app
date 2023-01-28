@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 
-import styles from './avatar.module.scss';
-
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import styles from './avatar.module.scss';
 
 type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
   userId?: string;

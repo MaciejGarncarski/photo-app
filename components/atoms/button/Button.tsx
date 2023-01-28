@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { ButtonHTMLAttributes } from 'react';
 
-import styles from './button.module.scss';
-
 import { Children } from '@/components/layout/Layout';
+
+import styles from './button.module.scss';
 
 type ButtonProps = {
   className?: string;

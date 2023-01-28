@@ -3,12 +3,12 @@ import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import styles from './commentForm.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import { CommentPutRequestSchema } from '@/pages/api/post/comment';
+
+import styles from './commentForm.module.scss';
 
 type CommentFormValues = {
   comment: string;

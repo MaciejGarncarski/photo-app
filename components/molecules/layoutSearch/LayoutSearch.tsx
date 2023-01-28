@@ -2,10 +2,10 @@ import { IconSearch } from '@tabler/icons';
 import { MouseEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import styles from './layoutSearch.module.scss';
-
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { useClickOutside } from '@/components/molecules/layoutSearch/useClickOutside';
+
+import styles from './layoutSearch.module.scss';
 
 type FormValues = {
   input: string;

@@ -69,7 +69,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         {!isOwner && session && <FollowButton className={styles.followButton} userId={data.user.id} />}
         {isOwner && (
           <motion.button
-            whileHover={{ rotate: 50, scale: 1.1 }}
+            whileHover={{ scale: 1.1 }}
             whileFocus={{ scale: 1.1 }}
             type="button"
             onClick={open}

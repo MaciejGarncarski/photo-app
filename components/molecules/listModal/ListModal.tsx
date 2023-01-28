@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
+import ReactFocusLock from 'react-focus-lock';
 
 import { Backdrop } from '@/components/atoms/modal/Backdrop';
 import { ModalClose } from '@/components/atoms/modal/ModalClose';
@@ -14,11 +16,13 @@ type PropsTypes = {
 export const ListModal = ({ close, headingText, children }: PropsTypes) => {
   return (
     <Backdrop close={close}>
-      <div className={styles.container}>
+      <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ scale: 0.8 }} className={styles.container}>
         <h3 className={styles.heading}>{headingText}</h3>
-        <ModalClose onClose={close} />
-        <ul className={styles.list}>{children}</ul>
-      </div>
+        <ReactFocusLock>
+          <ModalClose onClose={close} />
+          <ul className={styles.list}>{children}</ul>
+        </ReactFocusLock>
+      </motion.div>
     </Backdrop>
   );
 };

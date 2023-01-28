@@ -1,4 +1,5 @@
 import { motion, Variants } from 'framer-motion';
+import ReactFocusLock from 'react-focus-lock';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Backdrop } from '@/components/atoms/modal/Backdrop';
@@ -44,15 +45,17 @@ export const ConfirmationAlert = ({ headingText, onConfirm, onCancel, close }: P
         exit="exit"
       >
         <h3 className={styles.heading}>{headingText || 'Are you sure?'}</h3>
-        <ModalClose onClose={handleCancel} />
-        <div className={styles.buttonsRow}>
-          <Button type="button" onClick={handleCancel} variant="secondary" className={styles.button}>
-            cancel
-          </Button>
-          <Button type="button" onClick={onConfirm} className={styles.button}>
-            confirm
-          </Button>
-        </div>
+        <ReactFocusLock>
+          <ModalClose onClose={handleCancel} />
+          <div className={styles.buttonsRow}>
+            <Button type="button" onClick={handleCancel} variant="secondary" className={styles.button}>
+              cancel
+            </Button>
+            <Button type="button" onClick={onConfirm} className={styles.button}>
+              confirm
+            </Button>
+          </div>
+        </ReactFocusLock>
       </motion.div>
     </Backdrop>
   );

@@ -1,11 +1,12 @@
-import { IconPhotoPlus, IconTrash } from '@tabler/icons';
+import { IconPhotoPlus } from '@tabler/icons';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
-import styles from './imagesPreview.module.scss';
-
 import { Heading } from '@/components/atoms/heading/Heading';
+import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { ImagesBase64 } from '@/components/pages/createPost/CreatePost';
+
+import styles from './imagesPreview.module.scss';
 
 type PropsTypes = {
   onRemove: (id: number) => void;
@@ -37,16 +38,17 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
         {imagesBase64.map((finalImage) => {
           if (finalImage?.src) {
             return (
-              <motion.button
-                onClick={() => onRemove(finalImage.id)}
-                key={`${finalImage.id} - preview`}
-                className={styles.previewButton}
-                type="button"
-                variants={item}
-              >
-                <div className={styles.deleteIconOverlay}>
-                  <IconTrash />
-                </div>
+              <motion.div key={`${finalImage.id} - preview`} className={styles.previewButton} variants={item}>
+                <motion.button
+                  whileFocus={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  type="button"
+                  onClick={() => onRemove(finalImage.id)}
+                  className={styles.deleteIcon}
+                >
+                  <IconXWrapper />
+                </motion.button>
 
                 {imagesBase64 && (
                   <Image
@@ -58,7 +60,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
                   />
                 )}
                 <span className="visually-hidden">remove image</span>
-              </motion.button>
+              </motion.div>
             );
           }
 
