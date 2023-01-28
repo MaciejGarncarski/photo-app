@@ -4,14 +4,9 @@
   border-radius: var(--radius-medium);
   background-color: var(--bg-primary);
   position: relative;
-  width: auto;
   box-shadow: var(--shadow-secondary);
-  width: 32rem;
+  width: var(--postWidth);
   margin: 0 auto;
-
-  @include common.mediaquery('lg') {
-    width: 45rem;
-  }
 }
 
 img.imageLoading {

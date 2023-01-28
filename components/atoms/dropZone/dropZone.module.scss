@@ -74,9 +74,9 @@
   font-weight: 500;
   border: none;
   transition: all 0.2s ease;
-  cursor: pointer;
   z-index: 1;
   pointer-events: all;
+  cursor: pointer;
 
   &::first-letter {
     text-transform: uppercase;
@@ -88,7 +88,7 @@
   }
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
 }
 

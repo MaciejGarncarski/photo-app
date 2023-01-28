@@ -2,11 +2,11 @@ import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useState } from 'react';
 
-import styles from './layout.module.scss';
-
 import { Header } from '@/components/organisms/header/Header';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import styles from './layout.module.scss';
 
 export type Children = {
   children: ReactNode;

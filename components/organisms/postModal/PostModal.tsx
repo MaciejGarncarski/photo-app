@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import styles from './postModal.module.scss';
-
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
-import { dialogVariant, Modal } from '@/components/atoms/modal/Modal';
+import { Backdrop } from '@/components/atoms/modal/Backdrop';
+import { ModalClose } from '@/components/atoms/modal/ModalClose';
 import { Comment } from '@/components/molecules/comment/Comment';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
@@ -13,12 +12,14 @@ import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useInfiniteComments } from '@/components/organisms/postModal/useInfiniteComments';
 import { PostData } from '@/components/pages/collection/useCollection';
 
+import styles from './postModal.module.scss';
+
 type PostModalProps = {
   post: PostData;
-  setIsOpen: (isOpen: boolean) => void;
+  close: () => void;
 };
 
-export const PostModal = ({ post, setIsOpen }: PostModalProps) => {
+export const PostModal = ({ post, close }: PostModalProps) => {
   const { isMobile } = useScreenWidth();
 
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
@@ -40,16 +41,9 @@ export const PostModal = ({ post, setIsOpen }: PostModalProps) => {
   const commentsCount = data.pages[0].commentsCount;
 
   return (
-    <Modal.Overlay setOpen={setIsOpen}>
-      <motion.div
-        variants={dialogVariant}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        role="dialog"
-        className={styles.container}
-      >
-        <Modal.Close onClose={() => setIsOpen(false)} />
+    <Backdrop close={close}>
+      <motion.div role="dialog" className={styles.container}>
+        <ModalClose onClose={close} isExternal />
         <PostHeader
           tag="div"
           variant={isMobile ? undefined : 'no-margin-left'}
@@ -73,6 +67,6 @@ export const PostModal = ({ post, setIsOpen }: PostModalProps) => {
           </div>
         </section>
       </motion.div>
-    </Modal.Overlay>
+    </Backdrop>
   );
 };

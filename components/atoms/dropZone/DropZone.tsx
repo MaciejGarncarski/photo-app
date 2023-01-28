@@ -4,12 +4,12 @@ import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
 
 import { handleDropImage } from '@/utils/handleDropImage';
 
-import styles from './dropZone.module.scss';
-
 import { CropError } from '@/components/atoms/cropError/CropError';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
+
+import styles from './dropZone.module.scss';
 
 type DropZoneProps = {
   onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;

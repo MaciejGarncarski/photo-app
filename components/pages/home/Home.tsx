@@ -1,10 +1,10 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import styles from './home.module.scss';
-
-import { Loading } from '@/components/atoms/loading/Loading';
+import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
+
+import styles from './home.module.scss';
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
@@ -18,7 +18,7 @@ export const Home = () => {
   });
 
   if (isLoading || !data) {
-    return <Loading />;
+    return <PostPlaceholder />;
   }
 
   return (
@@ -30,7 +30,7 @@ export const Home = () => {
       })}
       {(isLoading || hasNextPage) && (
         <div ref={sentryRef}>
-          <Loading />
+          <PostPlaceholder />
         </div>
       )}
     </main>

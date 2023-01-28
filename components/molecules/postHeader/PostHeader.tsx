@@ -1,21 +1,23 @@
-import { IconMenu } from '@tabler/icons';
+import { IconMenu2 } from '@tabler/icons';
 import clsx from 'clsx';
-import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import { namedComponent } from '@/utils/namedComponent';
-
-import styles from './postHeader.module.scss';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
+import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
+
+import styles from './postHeader.module.scss';
 
 type PostHeaderProps = {
   tag?: 'header' | 'div';
@@ -31,15 +33,18 @@ const PostOptions = dynamic(() => {
 });
 
 export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PostHeaderProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { open, close, modalOpen } = useModal();
+  const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
+  const deletePostMutation = useDeletePost();
+
   const { session } = useAuth();
   const { data } = useAccount({ userId: session?.user?.id });
   const { data: authorData } = useAccount({ userId: post.author_id });
 
   const isAuthor = data?.user?.id === post.author_id;
 
-  const onModalOpen = () => {
-    setIsOpen(true);
+  const handleDeletePost = () => {
+    deletePostMutation.mutate({ postId: post.id });
   };
 
   const headerClassName = clsx(className, variant && styles[variant], styles.header);
@@ -67,13 +72,25 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
         <div className={styles.options}>
           {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
           <Tooltip variant="right" content="Post menu">
-            <button type="button" className={styles.optionsButton} onClick={onModalOpen}>
-              <IconMenu />
+            <button type="button" className={styles.optionsButton} onClick={open}>
+              <IconMenu2 />
             </button>
           </Tooltip>
         </div>
       )}
-      <AnimatePresence>{isOpen && <PostOptions post={post} setIsOpen={setIsOpen} />}</AnimatePresence>
+      <ModalContainer>
+        {modalOpen && !confirmationOpen && (
+          <PostOptions key="options" post={post} close={close} openCnonfirmation={opeCnonfirmation} />
+        )}
+        {confirmationOpen && (
+          <ConfirmationAlert
+            key="confirmation"
+            onConfirm={handleDeletePost}
+            headingText="Delete post?"
+            close={closeConfirmation}
+          />
+        )}
+      </ModalContainer>
     </Tag>
   );
 };

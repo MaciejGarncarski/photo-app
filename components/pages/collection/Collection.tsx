@@ -1,13 +1,14 @@
 import { NextSeo } from 'next-seo';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import styles from './collection.module.scss';
-
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useCollection } from '@/components/pages/collection/useCollection';
+
+import styles from './collection.module.scss';
 
 export const Collection = () => {
   const { session } = useAuth();
@@ -46,7 +47,7 @@ export const Collection = () => {
       })}
       {(isLoading || hasNextPage) && (
         <div ref={sentryRef}>
-          <Loading />
+          <PostPlaceholder />
         </div>
       )}
     </main>

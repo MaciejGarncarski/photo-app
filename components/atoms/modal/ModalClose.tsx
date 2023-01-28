@@ -1,14 +1,16 @@
+import clsx from 'clsx';
 import { m } from 'framer-motion';
-
-import styles from './modal.module.scss';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 
+import styles from './modal.module.scss';
+
 type ModalCloseProps = {
   onClose: () => void;
+  isExternal?: boolean;
 };
 
-export const ModalClose = ({ onClose }: ModalCloseProps) => {
+export const ModalClose = ({ onClose, isExternal }: ModalCloseProps) => {
   const handleClose = () => {
     onClose();
   };
@@ -18,11 +20,11 @@ export const ModalClose = ({ onClose }: ModalCloseProps) => {
       whileHover={{ scale: 1.1 }}
       whileFocus={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className={styles.closeButton}
+      className={clsx(isExternal && styles.closeButtonExternal, styles.closeButton)}
       type="button"
       onClick={handleClose}
     >
-      <IconXWrapper size="lg" />
+      <IconXWrapper size="sm" />
       <span className="visually-hidden">Close dialog</span>
     </m.button>
   );

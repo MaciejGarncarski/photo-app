@@ -7,14 +7,14 @@ import { centerAspectCrop } from '@/utils/centerAspectCrop';
 import { convertToBlob } from '@/utils/convertToBlob';
 import { handleDropImage } from '@/utils/handleDropImage';
 
-import 'react-image-crop/src/ReactCrop.scss';
-import styles from './cropImage.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Loading } from '@/components/atoms/loading/Loading';
+import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
+
+import 'react-image-crop/src/ReactCrop.scss';
+import styles from './cropImage.module.scss';
 
 type PropsTypes = {
   aspectRatio: number;
@@ -91,12 +91,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   }
 
   if (isIdle) {
-    return (
-      <>
-        <Heading tag="h2">Be patient, your image is being saved</Heading>
-        <Loading />
-      </>
-    );
+    return <LoadingHeading headingText="Your image is being cropped, be patient." />;
   }
 
   return (
