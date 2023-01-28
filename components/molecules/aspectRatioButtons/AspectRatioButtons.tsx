@@ -1,8 +1,8 @@
-import styles from './aspectRatioButtons.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
+
+import styles from './aspectRatioButtons.module.scss';
 
 type ButtonData = {
   text: string;

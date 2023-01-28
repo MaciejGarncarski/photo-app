@@ -1,14 +1,14 @@
 import { IconHome, IconSquareRoundedPlus } from '@tabler/icons';
 import { ReactNode } from 'react';
 
-import styles from './navButtons.module.scss';
-
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
 import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
 import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import styles from './navButtons.module.scss';
 
 export type ListData = {
   icon: ReactNode;

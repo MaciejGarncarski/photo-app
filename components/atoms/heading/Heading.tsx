@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import styles from './heading.module.scss';
-
 import { Children } from '@/components/layout/Layout';
+
+import styles from './heading.module.scss';
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 

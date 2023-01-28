@@ -3,9 +3,9 @@ import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import styles from './accountPost.module.scss';
-
 import { PostData } from '@/components/pages/collection/useCollection';
+
+import styles from './accountPost.module.scss';
 
 type AccountPostProps = {
   post: PostData;

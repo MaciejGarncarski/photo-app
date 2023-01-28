@@ -5,10 +5,10 @@ import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 
-import '/styles/globals.scss';
-
 import { Layout } from '@/components/layout/Layout';
 import { DefaultSeoWrapper } from '@/components/seo/DefaultSeo';
+
+import '/styles/globals.scss';
 
 const lato = Lato({
   weight: ['400', '700', '900'],

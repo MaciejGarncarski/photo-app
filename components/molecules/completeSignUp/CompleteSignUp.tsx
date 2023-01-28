@@ -6,13 +6,13 @@ import { NextSeo } from 'next-seo';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import styles from './completeSignUp.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
+
+import styles from './completeSignUp.module.scss';
 
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 const smallCharactersRegexp = /^[a-z0-9_\-]+$/;

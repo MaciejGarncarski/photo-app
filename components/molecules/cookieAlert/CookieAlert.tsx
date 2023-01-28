@@ -1,8 +1,8 @@
 import { m } from 'framer-motion';
 
-import styles from './cookieAlert.module.scss';
-
 import { Button } from '@/components/atoms/button/Button';
+
+import styles from './cookieAlert.module.scss';
 
 const COOKIE_CONSTENST =
   'By using this app, you accept saving and reading necessary cookies to run this app by your browser.';

@@ -3,9 +3,9 @@ import { AnimatePresence, Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-import styles from './tooltip.module.scss';
-
 import { Children } from '@/components/layout/Layout';
+
+import styles from './tooltip.module.scss';
 
 type TooltipProps = {
   content: string;
