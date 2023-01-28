@@ -3,8 +3,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 
-import styles from './homepagePost.module.scss';
-
+import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
@@ -15,6 +14,8 @@ import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { Account, useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
 
+import styles from './homepagePost.module.scss';
+
 type HomePagePostProps = {
   post: PostData;
   authorData?: Account;
@@ -23,12 +24,11 @@ type HomePagePostProps = {
 
 dayjs.extend(relativeTime);
 
-export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps) => {
+export const HomepagePost = ({ post, authorData }: HomePagePostProps) => {
   const { session } = useAuth();
-  const { author_id, description, created_at, images, likesCount, image1, image2, image3 } = post;
-  const { data } = useAccount({ userId: author_id, authorData });
+  const { author_id, description, created_at, likesCount } = post;
+  const { data, isLoading } = useAccount({ userId: author_id, authorData });
   const [showMore, setShowMore] = useState<boolean>(false);
-  const [isImgLoading, setIsImgLoading] = useState<boolean>(true);
 
   const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
     descriptionData(description);
@@ -51,6 +51,10 @@ export const HomepagePost = ({ post, isPriority, authorData }: HomePagePostProps
 
     return <>{parse(descriptionWithNewLine)}</>;
   };
+
+  if (!data || isLoading) {
+    return <PostPlaceholder />;
+  }
 
   return (
     <article className={styles.post}>

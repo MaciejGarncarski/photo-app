@@ -1,21 +1,31 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { IconBrandGoogle } from '@tabler/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-import styles from './signIn.module.scss';
+import { z } from 'zod';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 
-type FormValues = {
-  email: string;
-};
+import styles from './signIn.module.scss';
+
+const SignInSchema = z.object({
+  email: z.string().email({ message: 'Invalid email' }),
+});
+
+type FormValues = z.infer<typeof SignInSchema>;
 
 export const SignIn = () => {
   const { signIn } = useAuth();
 
-  const { handleSubmit, register } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(SignInSchema),
+    mode: 'all',
     defaultValues: {
       email: '',
     },
@@ -29,7 +39,7 @@ export const SignIn = () => {
     <main className={styles.container}>
       <Heading tag="h2">Sign in</Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input labelText="E-mail" type="email" {...register('email')} />
+        <Input labelText="E-mail" type="email" error={errors.email} {...register('email')} />
         <Button type="submit">Sign in with email</Button>
       </form>
       <div className={styles.separator}>

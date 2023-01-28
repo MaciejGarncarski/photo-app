@@ -4,14 +4,14 @@ import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
-import styles from './postSlider.module.scss';
-
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAccount } from '@/components/pages/account/useAccount';
 import { PostData } from '@/components/pages/collection/useCollection';
+
+import styles from './postSlider.module.scss';
 
 type PropsTypes = {
   post: PostData;
@@ -61,6 +61,23 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       prevImage();
     }
   };
+
+  if (postImages.length === 1) {
+    if (!postImages[0]) {
+      return null;
+    }
+    return (
+      <div className={customContainerClassName}>
+        <MotionImage
+          className={customImageClassName}
+          src={postImages[0]}
+          width={300}
+          height={300}
+          alt={`${data?.user?.username} - ${shortDescription}`}
+        />
+      </div>
+    );
+  }
 
   if (postImages.length === 0 && images) {
     return (

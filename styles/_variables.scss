@@ -39,14 +39,10 @@
 
   --backdrop-blur: blur(15px);
 
-  --postWidth: 20rem;
+  --postWidth: 32rem;
 
   @include common.mediaquery('lg') {
-    --postWidth: 40rem;
-    --itemSize: 3.5rem;
-  }
-
-  @include common.mediaquery('xl') {
     --postWidth: 45rem;
+    --itemSize: 3.5rem;
   }
 }

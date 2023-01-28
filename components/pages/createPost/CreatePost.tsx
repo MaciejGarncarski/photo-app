@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Loading } from '@/components/atoms/loading/Loading';
+import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
@@ -54,7 +54,7 @@ export const CreatePost = () => {
   useConvertToBase64(finalImages, setFinalImagesBase64);
 
   const { open, close, modalOpen } = useModal();
-  const { mutate, isLoading } = useSendNewPost();
+  const { mutate, isLoading, isSuccess } = useSendNewPost();
 
   const {
     register,
@@ -69,7 +69,14 @@ export const CreatePost = () => {
 
   const onSubmit: SubmitHandler<PostDetails> = ({ description }) => {
     if (finalImages) {
-      mutate({ description, images: finalImages });
+      mutate(
+        { description, images: finalImages },
+        {
+          onSuccess: async () => {
+            await router.push('/');
+          },
+        },
+      );
     }
   };
 
@@ -80,15 +87,8 @@ export const CreatePost = () => {
     setFinalImages(filteredState);
   };
 
-  if (isLoading) {
-    return (
-      <section className={styles.loadingContainer} aria-labelledby="Upload loading">
-        <Heading tag="h2" variant="center">
-          Uploading your post
-        </Heading>
-        <Loading />
-      </section>
-    );
+  if (isLoading || isSuccess) {
+    return <LoadingHeading headingText="Uploading your post." />;
   }
 
   const isEmpty = finalImages.length < 1;

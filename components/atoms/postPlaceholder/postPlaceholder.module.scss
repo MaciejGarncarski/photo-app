@@ -1,0 +1,18 @@
+.placeholder {
+  background-color: var(--bg-gray);
+  width: var(--postWidth);
+  height: 50rem;
+  border-radius: var(--radius-medium);
+  opacity: 0.5;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--bg-gray);
+  }
+
+  100% {
+    background-color: rgb(180, 180, 180);
+  }
+}
