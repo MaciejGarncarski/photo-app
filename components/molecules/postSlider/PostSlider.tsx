@@ -9,7 +9,6 @@ import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useAccount } from '@/components/pages/account/useAccount';
@@ -86,6 +85,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       {currentIndex !== 0 && postImages.length > 0 && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
+          <span className="visually-hidden">Previous image</span>
         </button>
       )}
       <motion.div
@@ -140,6 +140,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
         <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
           <IconArrowRight />
+          <span className="visually-hidden">Next image</span>
         </button>
       )}
     </motion.div>
