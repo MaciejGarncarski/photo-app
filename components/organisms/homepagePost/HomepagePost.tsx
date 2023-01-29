@@ -19,12 +19,12 @@ import styles from './homepagePost.module.scss';
 type HomePagePostProps = {
   post: PostData;
   authorData?: Account;
-  isPriority: boolean;
+  priority: boolean;
 };
 
 dayjs.extend(relativeTime);
 
-export const HomepagePost = ({ post, authorData }: HomePagePostProps) => {
+export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) => {
   const { session } = useAuth();
   const { author_id, description, created_at, likesCount } = post;
   const { data, isLoading } = useAccount({ userId: author_id, authorData });
@@ -59,7 +59,7 @@ export const HomepagePost = ({ post, authorData }: HomePagePostProps) => {
   return (
     <article className={styles.post}>
       <PostHeader post={post} />
-      <PostSlider post={post} />
+      <PostSlider post={post} priority={priority} />
       <PostButtons post={post} />
       <footer className={styles.bottom}>
         {likesCount !== 0 && (

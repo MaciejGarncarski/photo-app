@@ -25,7 +25,7 @@ export const Home = () => {
     <main className={styles.posts}>
       {data.pages.map((page) => {
         return page?.posts.map((post, idx) => {
-          return <HomepagePost isPriority={idx < 2} key={post.id} post={post} />;
+          return <HomepagePost priority={idx < 4} key={post.id} post={post} />;
         });
       })}
       {(isLoading || hasNextPage) && (

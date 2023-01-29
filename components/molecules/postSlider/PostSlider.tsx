@@ -1,12 +1,12 @@
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
+import { StatusDots } from '@/components/molecules/postSlider/StatusDots';
 import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
@@ -20,9 +20,10 @@ type PropsTypes = {
   post: PostData;
   containerClassName?: string;
   imageClassName?: string;
+  priority?: boolean;
 };
 
-export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
+export const PostSlider = ({ post, imageClassName, containerClassName, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -37,8 +38,6 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
 
   const postImages = [image1, image2, image3].flatMap((str) => (str ? [str] : []));
   const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
-
-  const customImageClassName = clsx(imageClassName, styles.sliderImage);
   const customContainerClassName = clsx(containerClassName, styles.slider);
 
   const handleLike = () => {
@@ -49,19 +48,26 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
     mutate({ isLiked: post.isLiked ?? false, userId: session?.user?.id, postId: post.id });
   };
 
+  const PostImage = ({ src, imagePriority }: { src: string; imagePriority?: boolean }) => {
+    return (
+      <MotionImage
+        className={clsx(imageClassName, styles.sliderImage)}
+        src={src}
+        priority={imagePriority ?? Boolean(priority)}
+        width={300}
+        height={300}
+        alt={`${data?.user?.username} - ${shortDescription}`}
+      />
+    );
+  };
+
   if (postImages.length === 1) {
     if (!postImages[0]) {
       return null;
     }
     return (
       <div onDoubleClick={handleLike} className={customContainerClassName}>
-        <MotionImage
-          className={customImageClassName}
-          src={postImages[0]}
-          width={300}
-          height={300}
-          alt={`${data?.user?.username} - ${shortDescription}`}
-        />
+        <PostImage src={postImages[0]} />
       </div>
     );
   }
@@ -69,13 +75,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
   if (postImages.length === 0 && images) {
     return (
       <div onDoubleClick={handleLike} className={customContainerClassName}>
-        <MotionImage
-          className={customImageClassName}
-          src={images}
-          width={300}
-          height={300}
-          alt={`${data?.user?.username} - ${shortDescription}`}
-        />
+        <PostImage src={images} />
       </div>
     );
   }
@@ -107,36 +107,14 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
             {postImages.map((image, idx) => {
               return (
                 <motion.figure className={styles.figure} key={`${post.id} ${image} ${currentIndex}`}>
-                  <Image
-                    className={customImageClassName}
-                    src={image}
-                    alt={`${data?.user?.username} - ${shortDescription}`}
-                    height={400}
-                    width={400}
-                    priority={idx > 0}
-                  />
+                  <PostImage src={image} imagePriority={priority && idx === 0} />
                 </motion.figure>
               );
             })}
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      <ul className={styles.statusDots}>
-        {postImages.map((image, idx) => {
-          return (
-            <motion.li
-              key={image}
-              className={styles.dot}
-              initial={{ opacity: 0.5 }}
-              animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.5 }}
-            >
-              <span className="visually-hidden">
-                image {currentIndex} of {postImages.length}
-              </span>
-            </motion.li>
-          );
-        })}
-      </ul>
+      <StatusDots currentIndex={currentIndex} images={postImages} />
       {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
         <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
           <IconArrowRight />
