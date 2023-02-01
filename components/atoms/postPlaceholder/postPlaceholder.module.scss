@@ -5,7 +5,9 @@
   border-radius: var(--radius-medium);
   opacity: 0.5;
   animation: skeleton-loading 1s linear infinite alternate;
-  box-shadow: var(--shadow-secondary);
+  box-shadow: var(--shadow-primary);
+  margin: 0 auto;
+  margin-bottom: 4rem;
 }
 
 @keyframes skeleton-loading {
@@ -14,6 +16,6 @@
   }
 
   100% {
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(190, 190, 190);
   }
 }

@@ -11,6 +11,11 @@
   @include common.mediaquery('lg') {
     margin: 1.25rem 0;
   }
+
+
+  @media screen and (max-width: 900px) and (orientation: landscape) {
+    margin: 0.25rem 0;
+  }
 }
 
 .label {

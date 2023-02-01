@@ -3,6 +3,7 @@ import { motion as m, Variants } from 'framer-motion';
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
+import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
@@ -42,12 +43,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
   };
 
   if (isLoading) {
-    return (
-      <section>
-        <Heading tag="h2">Removing avatar...</Heading>
-        <Loading />
-      </section>
-    );
+    return <LoadingHeading headingText="Removing your avatar.." />;
   }
 
   return (
@@ -58,7 +54,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
       initial="initial"
       className={styles.stageContainer}
     >
-      <Heading tag="h2">What to do with avatar</Heading>
+      <Heading tag="h2">Edit your account</Heading>
       <div className={styles.avatarButtons}>
         <Button type="button" onClick={stageCropImage}>
           Update avatar

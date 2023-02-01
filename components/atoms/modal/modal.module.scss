@@ -18,6 +18,11 @@
   @include common.mediaquery('lg') {
     align-items: center;
   }
+
+  @include common.mobile-landscape {
+    align-items: center;
+
+  }
 }
 
 .backdropMobileCenter {
@@ -38,6 +43,10 @@
 
   &:hover {
     color: var(--color-primary);
+  }
+
+  @include common.mobile-landscape {
+    top: 0.65rem;
   }
 }
 

@@ -24,6 +24,7 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
 
     const uuid = v4();
     const { author, description } = fields;
+    console.log({ length: imagesArray.length });
 
     const uploadData = async (image: formidable.File, index: number) => {
       const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
@@ -69,6 +70,7 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
 
     res.status(httpCodes.success).send(responseMessages.success);
   } catch (error) {
+    console.log(error);
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };

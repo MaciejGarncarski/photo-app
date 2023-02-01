@@ -9,7 +9,7 @@
 
 
   @include common.mediaquery('lg') {
-    gap: 12rem;
+    gap: 10rem;
   }
 }
 
@@ -26,10 +26,12 @@
   &:hover>.deleteIconOverlay {
     opacity: 1;
   }
+
 }
 
 .imgPreview {
   object-fit: contain;
+  border-radius: var(--radius-small);
   width: 100%;
   height: auto;
 }
@@ -69,7 +71,6 @@
   cursor: pointer;
 
   >svg {
-    stroke-width: 3;
     width: 3rem;
     height: 3rem;
   }

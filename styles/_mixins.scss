@@ -17,3 +17,9 @@
     @error "ERROR: No breakpoint specified for query '#{$query}'";
   }
 }
+
+@mixin mobile-landscape {
+  @media screen and (max-width: 1050px) and (orientation: landscape) {
+    @content;
+  }
+}

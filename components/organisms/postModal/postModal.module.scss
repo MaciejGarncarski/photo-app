@@ -12,24 +12,21 @@
   border-radius: var(--radius-small);
 
   @include common.mediaquery('lg') {
-    width: min(85rem, 80%);
+    width: min(90rem, 80%);
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 50rem 1fr;
-    column-gap: 2rem;
     margin: auto;
     border-radius: var(--radius-medium);
+    height: 55rem;
   }
 
   @include common.mediaquery('xl') {
     width: min(120rem, 80%);
     grid-template-columns: 70rem 1fr;
-
-  }
-
-  @include common.mediaquery('xxl') {
     height: 60rem;
   }
+
 }
 
 .postHeader {
@@ -93,23 +90,21 @@
   display: none;
 
   @include common.mediaquery('lg') {
-    display: unset;
+    display: flex;
     height: 100%;
+    gap: 20rem;
   }
 }
 
 .sliderImage {
   z-index: 2;
+  margin-left: 5rem;
 
   @include common.mediaquery('lg') {
-    border-radius: var(--radius-medium);
-    max-width: 70rem;
-    margin: 0 2rem;
-    height: 100%;
+    margin-left: 3rem;
   }
 
   @include common.mediaquery('xl') {
-    margin: 0 10rem;
-    height: auto;
+    margin-left: 12rem;
   }
 }
