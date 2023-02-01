@@ -24,21 +24,21 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
 
     const uuid = v4();
     const { author, description } = fields;
-    console.log({ length: imagesArray.length });
 
     const uploadData = async (image: formidable.File, index: number) => {
       const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
 
       if (!fileContents) {
-        res.status(httpCodes.badRequest).send(responseMessages.badRequest);
-        return undefined;
+        throw new Error('No file contents.');
       }
+
       const { url } = await imageKit.upload({
         file: fileContents,
         fileName: `/${index}.webp`,
         folder: `${author}/posts/${uuid}`,
       });
 
+      console.log(url);
       if (url) {
         return url;
       }

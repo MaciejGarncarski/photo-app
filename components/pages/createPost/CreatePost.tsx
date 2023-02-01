@@ -56,8 +56,6 @@ export const CreatePost = () => {
   const { open, close, modalOpen } = useModal();
   const { mutate, isLoading, isSuccess } = useSendNewPost();
 
-  console.log(finalImages);
-
   const {
     register,
     handleSubmit,
