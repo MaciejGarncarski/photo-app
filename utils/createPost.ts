@@ -29,15 +29,16 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
       const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
 
       if (!fileContents) {
-        res.status(httpCodes.badRequest).send(responseMessages.badRequest);
-        return undefined;
+        throw new Error('No file contents.');
       }
+
       const { url } = await imageKit.upload({
         file: fileContents,
         fileName: `/${index}.webp`,
         folder: `${author}/posts/${uuid}`,
       });
 
+      console.log(url);
       if (url) {
         return url;
       }
@@ -69,6 +70,7 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
 
     res.status(httpCodes.success).send(responseMessages.success);
   } catch (error) {
+    console.log(error);
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };

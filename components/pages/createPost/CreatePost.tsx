@@ -68,7 +68,7 @@ export const CreatePost = () => {
   });
 
   const onSubmit: SubmitHandler<PostDetails> = ({ description }) => {
-    if (finalImages) {
+    if (finalImages[0]?.file) {
       mutate(
         { description, images: finalImages },
         {
@@ -112,22 +112,20 @@ export const CreatePost = () => {
         </div>
       )}
       {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
-      {!isEmpty && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <CreatePostItemContainer>
-            <Heading tag="h2">Info about post</Heading>
-            <TextArea label="description" {...register('description')} />
-            <div className={styles.actionButtons}>
-              <Button variant="secondary" onClick={open}>
-                Cancel
-              </Button>
-              <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImages)}>
-                Complete
-              </Button>
-            </div>
-          </CreatePostItemContainer>
-        </form>
-      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CreatePostItemContainer>
+          <Heading tag="h2">Info about post</Heading>
+          <TextArea label="description" {...register('description')} />
+          <div className={styles.actionButtons}>
+            <Button variant="secondary" onClick={open}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImages)}>
+              Complete
+            </Button>
+          </div>
+        </CreatePostItemContainer>
+      </form>
 
       <ModalContainer>
         {modalOpen && <ConfirmationAlert headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />}

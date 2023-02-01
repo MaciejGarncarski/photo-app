@@ -50,23 +50,26 @@
   margin: auto 0;
 
   border: none;
-  background-color: var(--bg-gray);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
   top: 0;
   bottom: 0;
   left: 1rem;
-
-  z-index: 1;
-
-  opacity: 0.7;
+  z-index: 2;
+  transition: box-shadow 0.2s ease;
 
   &:hover,
   &:focus {
-    opacity: 1;
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  >svg {
+    stroke-width: 3;
   }
 }
 
@@ -85,7 +88,7 @@
   left: 0;
   right: 0;
   gap: 1rem;
-
+  z-index: 2;
   list-style-type: none;
 }
 

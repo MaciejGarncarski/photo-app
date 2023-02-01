@@ -23,16 +23,24 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
   const [isCropping, setIsCropping] = useState<boolean>(false);
 
   const { mutate, isLoading: isMutationLoading } = useEditAccount();
-
   const { session } = useAuth();
 
+  const isFinalImageEmpty = finalImages.filter((image) => !!image).length === 0;
+
   const onSaveImage = () => {
+    if (isFinalImageEmpty) {
+      return;
+    }
+
     mutate(
       { image: finalImages[0]?.file, userId: session?.user?.id ?? '' },
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries(['account']);
           stagePersonalInfo();
+        },
+        onSettled: () => {
+          setFinalImages([undefined]);
         },
       },
     );
@@ -49,9 +57,9 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
       />
       <div className={styles.buttons}>
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
-          back to beginning
+          go back
         </Button>
-        <Button type="button" disabled={isMutationLoading || finalImages.length === 0} onClick={onSaveImage}>
+        <Button type="button" disabled={isMutationLoading || isFinalImageEmpty} onClick={onSaveImage}>
           Save new image
         </Button>
       </div>

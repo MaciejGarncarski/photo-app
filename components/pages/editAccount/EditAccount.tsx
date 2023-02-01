@@ -43,7 +43,6 @@ export const EditAccount = ({ userId }: PropsTypes) => {
   return (
     <main id="main" className={styles.container}>
       <NextSeo title={`@${data?.user?.username} - Edit account`} />
-
       <Suspense fallback={<Loading variants={['center']} />}>
         <AnimatePresence mode="wait">
           {stage === 'selectImage' && (

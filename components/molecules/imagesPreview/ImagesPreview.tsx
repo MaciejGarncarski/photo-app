@@ -1,9 +1,8 @@
-import { IconPhotoPlus } from '@tabler/icons';
+import { IconPhotoPlus, IconTrash } from '@tabler/icons';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
 import { Heading } from '@/components/atoms/heading/Heading';
-import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { ImagesBase64 } from '@/components/pages/createPost/CreatePost';
 
 import styles from './imagesPreview.module.scss';
@@ -47,7 +46,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
                   onClick={() => onRemove(finalImage.id)}
                   className={styles.deleteIcon}
                 >
-                  <IconXWrapper />
+                  <IconTrash />
                 </motion.button>
 
                 {imagesBase64 && (

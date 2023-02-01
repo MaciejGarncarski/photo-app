@@ -90,6 +90,7 @@ const editAccountHandler = async (req: NextApiRequest, res: NextApiResponse) => 
 
       res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
     } catch (error) {
+      console.log(error);
       return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
     }
   }
