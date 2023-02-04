@@ -12,7 +12,7 @@ import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/Conf
 import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './navAccountButton.module.scss';
 import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';
@@ -27,7 +27,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const { close, modalOpen, open } = useModal();
 
   const { signOut } = useAuth();
-  const { account } = useAccount({ userId });
+  const { username, id, name } = useUser({ userId });
   const { isGoingUp } = useScrollPosition();
   const { isMobile } = useScreenWidth();
 
@@ -57,13 +57,9 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const handleOpen = () => setIsOptionsOpen(true);
   const handleClose = () => setIsOptionsOpen(false);
 
-  if (!account) {
-    return null;
-  }
-
   const canShowOnScroll = (isMobile && isGoingUp) || !isMobile;
 
-  const accountHref = `/${account.username}`;
+  const accountHref = `/${username}`;
   return (
     <li
       ref={containerRef}
@@ -79,9 +75,9 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
         className={clsx(commonStyles.listItemChild, styles.button)}
       >
         <span className="visually-hidden">
-          @{account?.username} {account?.name}
+          @{username} {name}
         </span>
-        <Avatar className={styles.avatar} userId={account.id} />
+        <Avatar className={styles.avatar} userId={id} />
       </button>
       <AnimatePresence>
         {isOptionsOpen && canShowOnScroll && (
@@ -93,7 +89,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
             exit="exit"
             key="tooltip options"
           >
-            <p className={styles.welcome}>Hi, {account?.username}</p>
+            <p className={styles.welcome}>Hi, {username}</p>
             <Link href={accountHref} className={styles.link} onClick={() => setIsOptionsOpen(false)}>
               <IconUser /> your account
             </Link>

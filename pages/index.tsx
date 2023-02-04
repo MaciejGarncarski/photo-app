@@ -2,7 +2,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import { prisma } from '@/lib/prismadb';
 
-import { fetchAccount } from '@/components/pages/account/useAccount';
+import { fetchAccount } from '@/components/pages/account/useUser';
 import { Home } from '@/components/pages/home/Home';
 import { fetchInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 

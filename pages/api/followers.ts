@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
@@ -16,7 +16,7 @@ export type FollowersPutRequest = z.infer<typeof FollowersPutRequestSchema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   if (method === 'PUT') {
     if (!session?.user?.id) {

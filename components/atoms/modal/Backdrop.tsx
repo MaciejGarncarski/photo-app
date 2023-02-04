@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
 import { MouseEvent, ReactNode, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 import styles from './modal.module.scss';
 
@@ -42,7 +43,7 @@ export const Backdrop = ({ close, mobileCenter, children }: PropsTypes) => {
     }
   };
 
-  return (
+  return createPortal(
     <motion.div
       ref={backdropRef}
       onClick={handleOverlayClick}
@@ -53,6 +54,7 @@ export const Backdrop = ({ close, mobileCenter, children }: PropsTypes) => {
       exit="exit"
     >
       {children}
-    </motion.div>
+    </motion.div>,
+    document.querySelector('#modal') as HTMLDivElement,
   );
 };

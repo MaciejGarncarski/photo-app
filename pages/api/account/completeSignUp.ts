@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
@@ -10,7 +10,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
     return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);

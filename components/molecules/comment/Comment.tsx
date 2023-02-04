@@ -15,7 +15,7 @@ import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/Conf
 import { POST_AVATAR_SIZE } from '@/components/molecules/postHeader/PostHeader';
 import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './comment.module.scss';
 
@@ -28,7 +28,7 @@ dayjs.extend(relativeTime);
 export const Comment = ({ commentData }: CommentProps) => {
   const { sessionUserData } = useAuth();
   const { open, close, modalOpen } = useModal();
-  const { data } = useAccount({ userId: commentData.user_id });
+  const { username } = useUser({ userId: commentData.user_id });
   const { isLiked, id, created_at, comment_text, user_id, likesCount } = commentData;
   const timeSinceCreated = dayjs(created_at).fromNow();
 
@@ -38,11 +38,11 @@ export const Comment = ({ commentData }: CommentProps) => {
   const handleLike = () => commentLike.mutate();
   const handleDelete = () => commentDelete.mutate({ commentId: id });
 
-  const isAbleToDelete = sessionUserData?.user?.id === user_id || sessionUserData?.user?.role === 'ADMIN';
+  const isAbleToDelete = sessionUserData?.id === user_id || sessionUserData?.role === 'ADMIN';
 
   const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
 
-  const userAccountHref = `/${data?.user?.username}`;
+  const userAccountHref = `/${username}`;
 
   return (
     <m.article className={styles.comment}>
@@ -51,7 +51,7 @@ export const Comment = ({ commentData }: CommentProps) => {
       </Link>
       <div className={styles.commentText}>
         <Link href={userAccountHref}>
-          <h3 className={styles.author}>{data?.user?.username}</h3>
+          <h3 className={styles.author}>{username}</h3>
         </Link>
         <p className={styles.content}>{parse(commentWithNewLine)}</p>
       </div>

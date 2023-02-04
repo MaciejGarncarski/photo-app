@@ -1,12 +1,13 @@
 import { getProviders, signIn, signOut, useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 export const useAuth = () => {
   const { data: session, status } = useSession();
 
-  const sessionUserData = useAccount({ userId: session?.user?.id });
+  const sessionUserData = useUser({ userId: session?.user?.id });
+  const isSignedIn = Boolean(session?.user?.id && status === 'authenticated');
 
   return useMemo(
     () =>
@@ -16,8 +17,9 @@ export const useAuth = () => {
         getProviders,
         signIn,
         signOut,
-        sessionUserData: sessionUserData.data,
+        isSignedIn,
+        sessionUserData: sessionUserData,
       } as const),
-    [session, sessionUserData, status],
+    [isSignedIn, session, sessionUserData, status],
   );
 };

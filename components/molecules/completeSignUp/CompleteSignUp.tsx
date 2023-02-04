@@ -10,7 +10,7 @@ import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Input } from '@/components/molecules/input/Input';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './completeSignUp.module.scss';
 
@@ -45,10 +45,8 @@ export type SignUpSchemaData = z.infer<typeof SignUpSchema>;
 export const CompleteSignUp = () => {
   const { push } = useRouter();
   const { session, signOut } = useAuth();
-  const { data } = useAccount({ userId: session?.user?.id });
+  const { username, bio, name } = useUser({ userId: session?.user?.id });
   const queryClient = useQueryClient();
-
-  const userData = data?.user;
 
   const {
     register,
@@ -58,9 +56,9 @@ export const CompleteSignUp = () => {
     mode: 'onBlur',
     resolver: zodResolver(AccountDetailsSchema),
     defaultValues: {
-      username: userData?.username ?? '',
-      fullName: userData?.name ?? '',
-      bio: userData?.bio ?? '',
+      username: username ?? '',
+      fullName: name ?? '',
+      bio: bio ?? '',
     },
   });
 

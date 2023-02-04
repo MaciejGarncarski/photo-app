@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
@@ -23,7 +23,7 @@ const CommentDeletePostSchema = z.object({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session || !session.user?.id) {
     return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);

@@ -12,45 +12,39 @@ import { FormidableResult } from '@/pages/api/post';
 
 export const createPost = async (req: NextApiRequest, res: NextApiResponse, formData: FormidableResult) => {
   const { fields, files } = formData;
+  const { author, description } = fields;
 
   const images = files['images[]'];
-
   const imagesArray = Array.isArray(images) ? images : [images];
+
+  const uuid = v4();
+
+  const uploadData = async (image: formidable.File, index: number) => {
+    const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
+
+    if (!fileContents) {
+      throw new Error('No file contents.');
+    }
+
+    const { url } = await imageKit.upload({
+      file: fileContents,
+      fileName: `/${index}.webp`,
+      folder: `${author}/posts/${uuid}`,
+    });
+
+    return url;
+  };
 
   try {
     if (!Array.isArray(imagesArray)) {
-      return;
+      throw new Error('Images have to be an array.');
     }
 
-    const uuid = v4();
-    const { author, description } = fields;
-
-    const uploadData = async (image: formidable.File, index: number) => {
-      const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
-
-      if (!fileContents) {
-        throw new Error('No file contents.');
-      }
-
-      const { url } = await imageKit.upload({
-        file: fileContents,
-        fileName: `/${index}.webp`,
-        folder: `${author}/posts/${uuid}`,
-      });
-
-      console.log(url);
-      if (url) {
-        return url;
-      }
-    };
-
     const imageUrls = await Promise.all(
-      imagesArray?.map(async (img, idx) => {
-        if (!img) {
-          return;
+      imagesArray?.map((img, idx) => {
+        if (img) {
+          return uploadData(img, idx);
         }
-
-        return uploadData(img, idx);
       }),
     );
 

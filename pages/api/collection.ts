@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
@@ -31,7 +31,7 @@ const GetCollectionSchema = z.object({
 
 const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
   if (!session) {
     res.status(401).send({ status: 'unauthorized' });
     return;

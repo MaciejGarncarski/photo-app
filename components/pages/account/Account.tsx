@@ -12,7 +12,7 @@ import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './account.module.scss';
 
@@ -28,29 +28,24 @@ const listData = ['posts', 'followers', 'following'] as const;
 
 export const Account = ({ username: propsUsername }: AccountProps) => {
   const { session } = useAuth();
-  const { data, isLoading } = useAccount({ username: propsUsername });
+  const { isError, isLoading, id, name, username, bio, count } = useUser({ username: propsUsername });
   const { open, close, modalOpen } = useModal();
 
-  if (!data || isLoading) {
+  if (isLoading || !count || !id) {
     return <Loading />;
   }
 
-  if (!data.user) {
+  if (isError) {
     return <p>user error</p>;
   }
 
-  const { name, bio, username } = data.user;
-  const isOwner = session?.user?.id === data.user.id;
-
-  if (!username || !name) {
-    return null;
-  }
+  const isOwner = session?.user?.id === id;
 
   return (
     <div className={styles.container}>
       <NextSeo title={`@${username}`} />
       <main className={styles.account}>
-        <Avatar className={styles.avatar} userId={data.user.id} />
+        <Avatar className={styles.avatar} userId={id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
           {username}
         </motion.h2>
@@ -58,7 +53,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
           {listData.map((item) => {
             return (
               <li className={styles.listItem} key={item}>
-                <p className={styles.listItemNumber}>{data.count[item]}</p>
+                <p className={styles.listItemNumber}>{count[item]}</p>
                 <p className={styles.listItemText}>{item}</p>
               </li>
             );
@@ -66,7 +61,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         </motion.ul>
         <p className={styles.name}>{name}</p>
         <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
-        {!isOwner && session && <FollowButton className={styles.followButton} userId={data.user.id} />}
+        {!isOwner && session && <FollowButton className={styles.followButton} userId={id} />}
         {isOwner && (
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -89,8 +84,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
           </ListModal>
         )}
       </ModalContainer>
-
-      <AccountPosts id={data.user.id} />
+      <AccountPosts id={id} />
     </div>
   );
 };

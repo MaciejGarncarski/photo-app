@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { Header } from '@/components/organisms/header/Header';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './layout.module.scss';
 
@@ -38,8 +38,8 @@ export const Layout = ({ className, children }: LayoutProps) => {
   }, [localStorageData]);
 
   const { session, status } = useAuth();
-  const { data, isLoading } = useAccount({ userId: session?.user?.id });
-  const isNotCompleted = !data?.user?.username && status === 'authenticated';
+  const { username, isLoading } = useUser({ userId: session?.user?.id });
+  const isSignedUp = username && status === 'authenticated';
 
   const handleClose = () => {
     setIsCookiesOpen(false);
@@ -57,7 +57,7 @@ export const Layout = ({ className, children }: LayoutProps) => {
         <AnimatePresence>
           {isCookiesOpen && !localStorageData && <CookieAlert onClose={handleClose} onPermanentClose={handleCookies} />}
         </AnimatePresence>
-        {isNotCompleted && !isLoading ? <CompleteSignUp /> : <>{children}</>}
+        {!isSignedUp && !isLoading ? <CompleteSignUp /> : <>{children}</>}
       </div>
     </div>
   );

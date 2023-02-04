@@ -11,7 +11,7 @@ import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postSlider.module.scss';
@@ -27,8 +27,9 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
-  const { data } = useAccount({ userId: post.author_id });
+  const { username } = useUser({ userId: post.author_id });
   const { session } = useAuth();
+  const { id, isLiked } = post;
   const router = useRouter();
   useUpdateWidth(imageRef, setWidth);
   const { mutate } = usePostLike();
@@ -45,7 +46,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
       router.push('/auth/signin');
       return;
     }
-    mutate({ isLiked: post.isLiked ?? false, userId: session?.user?.id, postId: post.id });
+    mutate({ isLiked: isLiked ?? false, userId: session.user.id, postId: id });
   };
 
   const PostImage = ({ src, imagePriority }: { src: string; imagePriority?: boolean }) => {
@@ -56,7 +57,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
         priority={imagePriority ?? Boolean(priority)}
         width={300}
         height={300}
-        alt={`${data?.user?.username} - ${shortDescription}`}
+        alt={`${username} - ${shortDescription}`}
       />
     );
   };

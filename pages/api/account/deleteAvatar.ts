@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { imageKit } from '@/lib/imagekit';
@@ -15,7 +15,7 @@ const DeleteAvatarSchema = z.object({
 export type DeleteAvatarData = z.infer<typeof DeleteAvatarSchema>;
 
 const deleteAvatarHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
     return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);

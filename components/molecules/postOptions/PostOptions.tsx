@@ -6,7 +6,7 @@ import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type PostOptionsProps = {
@@ -16,15 +16,15 @@ type PostOptionsProps = {
 };
 
 export const PostOptions = ({ close, post, openCnonfirmation }: PostOptionsProps) => {
-  const { id, isInCollection, author } = post;
+  const { id: postId, isInCollection, author } = post;
   const { session } = useAuth();
-  const { data } = useAccount({ userId: session?.user?.id ?? '' });
+  const { id, role } = useUser({ userId: session?.user?.id ?? '' });
   const collectionMutation = useCollectionMutation();
 
-  const isAbleToModify = author.id === data?.user?.id || data?.user?.role === 'ADMIN';
+  const isAbleToModify = author.id === id || role === 'ADMIN';
 
   const handleCollection = () => {
-    collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postId: id });
+    collectionMutation.mutate({ type: isInCollection ? 'remove' : undefined, postId });
   };
 
   return (

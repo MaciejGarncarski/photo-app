@@ -11,7 +11,7 @@ import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { Account, useAccount } from '@/components/pages/account/useAccount';
+import { Account, useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './homepagePost.module.scss';
@@ -27,7 +27,7 @@ dayjs.extend(relativeTime);
 export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) => {
   const { session } = useAuth();
   const { author_id, description, created_at, likesCount } = post;
-  const { data, isLoading } = useAccount({ userId: author_id, authorData });
+  const { isLoading, username } = useUser({ userId: author_id, authorData });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
@@ -52,7 +52,7 @@ export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) 
     return <>{parse(descriptionWithNewLine)}</>;
   };
 
-  if (!data || isLoading) {
+  if (isLoading) {
     return <PostPlaceholder />;
   }
 
@@ -71,7 +71,7 @@ export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) 
           </p>
         )}
         <p className={styles.description}>
-          <span className={styles.author}>{data?.user?.username}</span>
+          <span className={styles.author}>{username}</span>
           <Description />
         </p>
         <p className={styles.date}>

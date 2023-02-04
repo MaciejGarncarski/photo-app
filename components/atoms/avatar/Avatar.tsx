@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './avatar.module.scss';
 
@@ -22,21 +22,22 @@ export const Avatar = ({
   width = DEFAULT_AVATAR_SIZE,
   height = DEFAULT_AVATAR_SIZE,
 }: AvatarProps) => {
-  const { data } = useAccount({ userId });
+  const { customImage, image, username } = useUser({ userId });
 
-  if (!data?.user) {
-    return null;
-  }
-
-  const hasNoImage = (!data.user.customImage && !data.user.image) || !userId;
+  const hasDefaultImage = image && !Boolean(customImage);
+  const hasCustomImage = customImage;
+  const hasNoImage = Boolean(!image && !customImage);
 
   return (
     <figure className={clsx(className, styles.avatarContainer)}>
       {hasNoImage && <IconUser className={styles.icon} />}
-      {!hasNoImage && (
+      {hasDefaultImage && (
+        <MotionImage src={image} alt={`${username}'s avatar`} width={width} height={height} className={styles.avatar} />
+      )}
+      {hasCustomImage && (
         <MotionImage
-          src={data.user.customImage ?? data.user.image ?? ''}
-          alt={`${data.user.username}'s avatar`}
+          src={customImage}
+          alt={`${username}'s avatar`}
           width={width}
           height={height}
           className={styles.avatar}

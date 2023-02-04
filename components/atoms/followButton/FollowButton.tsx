@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Loading } from '@/components/atoms/loading/Loading';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import { FollowersPutRequest } from '@/pages/api/followers';
 
@@ -13,15 +13,15 @@ type FollowButtonProps = {
 };
 
 export const FollowButton = ({ userId, className }: FollowButtonProps) => {
-  const { data } = useAccount({ userId });
+  const { isFollowing } = useUser({ userId });
   const queryClient = useQueryClient();
 
   const { isLoading, mutate } = useMutation(
     async () => {
-      if (data?.isFollowing) {
+      if (isFollowing) {
         await axios.delete(`/api/followers?followingUserId=${userId}`);
       }
-      if (!data?.isFollowing) {
+      if (!isFollowing) {
         await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
           followingUserId: userId,
         });
@@ -40,7 +40,7 @@ export const FollowButton = ({ userId, className }: FollowButtonProps) => {
 
   return (
     <Button className={className} onClick={() => mutate()}>
-      {data?.isFollowing ? 'unfollow' : 'follow'}
+      {isFollowing ? 'unfollow' : 'follow'}
     </Button>
   );
 };

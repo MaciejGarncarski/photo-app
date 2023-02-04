@@ -13,7 +13,7 @@ import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { Input } from '@/components/molecules/input/Input';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
@@ -27,7 +27,7 @@ type PropsTypes = {
 };
 
 export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTypes) => {
-  const { data, isLoading } = useAccount({ userId });
+  const { username, name, bio, isLoading } = useUser({ userId });
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const { close, modalOpen, open } = useModal();
@@ -35,9 +35,9 @@ export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTyp
   const { mutate, isLoading: isMutationLoading } = useEditAccount();
 
   const defaultValues = {
-    username: data?.user?.username ?? '',
-    fullName: data?.user?.name ?? '',
-    bio: data?.user?.bio ?? '',
+    username: username ?? '',
+    fullName: name ?? '',
+    bio: bio ?? '',
   };
 
   const {

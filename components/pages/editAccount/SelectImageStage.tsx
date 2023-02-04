@@ -8,7 +8,7 @@ import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './editAccount.module.scss';
@@ -29,7 +29,8 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
   const { session } = useAuth();
 
   const userId = session?.user?.id;
-  const { data } = useAccount({ userId });
+
+  const { customImage } = useUser({ userId });
 
   const { open, close, modalOpen } = useModal();
 
@@ -59,7 +60,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
         <Button type="button" onClick={stageCropImage}>
           Update avatar
         </Button>
-        {data?.user?.customImage && (
+        {customImage && (
           <Button type="button" variant="secondary" onClick={open}>
             remove avatar
           </Button>

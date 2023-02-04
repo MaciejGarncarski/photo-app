@@ -6,7 +6,7 @@ import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccount
 import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
 import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './navButtons.module.scss';
 
@@ -36,14 +36,14 @@ const listData: Array<ListData> = [
 ];
 
 export const NavButtons = () => {
-  const { session, status } = useAuth();
-  const { data } = useAccount({ userId: session?.user?.id });
+  const { session, status, isSignedIn } = useAuth();
+  const { username } = useUser({ userId: session?.user?.id });
 
-  if (status === 'loading') {
+  if (status === 'loading' || !session?.user) {
     return null;
   }
 
-  if (!session?.user?.id) {
+  if (!isSignedIn) {
     return <SignInButton />;
   }
 
@@ -52,7 +52,7 @@ export const NavButtons = () => {
       {listData.map(({ icon, onClick, href, title }) => {
         return <NavListButton icon={icon} onClick={onClick} href={href} title={title} key={title} />;
       })}
-      {data?.user?.username && <NavAccountButton userId={session.user.id ?? ''} />}
+      {username && <NavAccountButton userId={session.user.id ?? ''} />}
     </ul>
   );
 };

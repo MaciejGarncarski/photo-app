@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { imageKit } from '@/lib/imagekit';
@@ -14,7 +14,7 @@ const DeletePostSchema = z.object({
 });
 
 export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   const response = DeletePostSchema.safeParse(req.query);
 

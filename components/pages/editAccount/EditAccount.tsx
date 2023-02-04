@@ -4,7 +4,7 @@ import { NextSeo } from 'next-seo';
 import { Suspense, useState } from 'react';
 
 import { Loading } from '@/components/atoms/loading/Loading';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
 
@@ -34,7 +34,7 @@ export const EditAccount = ({ userId }: PropsTypes) => {
   const [stage, setStage] = useState<Stages>('selectImage');
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
 
-  const { data } = useAccount({ userId });
+  const { username } = useUser({ userId });
 
   const stageSelectImage = () => setStage('selectImage');
   const stageCropImage = () => setStage('cropImage');
@@ -42,7 +42,7 @@ export const EditAccount = ({ userId }: PropsTypes) => {
 
   return (
     <main id="main" className={styles.container}>
-      <NextSeo title={`@${data?.user?.username} - Edit account`} />
+      <NextSeo title={`@${username} - Edit account`} />
       <Suspense fallback={<Loading variants={['center']} />}>
         <AnimatePresence mode="wait">
           {stage === 'selectImage' && (

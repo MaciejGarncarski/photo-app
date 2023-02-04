@@ -14,18 +14,19 @@ export type Account = {
   };
 };
 
-type UseAccount = {
+type PropsTypes = {
   username?: string;
   userId?: string;
   isPrefetching?: boolean;
   authorData?: Account;
 };
 
-export const fetchAccount = async ({ userId, username, isPrefetching }: UseAccount) => {
+export const fetchAccount = async ({ userId, username, isPrefetching }: PropsTypes) => {
   if (userId) {
     const { data } = await axios.get<Account>(
       `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${userId}`,
     );
+
     return data;
   }
 
@@ -44,7 +45,7 @@ export type UsernameToIdResponse = {
   };
 };
 
-export const useAccount = ({ userId, username, authorData }: UseAccount) => {
+export const useUser = ({ userId, username, authorData }: PropsTypes) => {
   const query = useQuery({
     queryKey: ['account', userId, username],
     queryFn: async () => {
@@ -54,9 +55,13 @@ export const useAccount = ({ userId, username, authorData }: UseAccount) => {
     enabled: Boolean(userId) || Boolean(username),
   });
 
+  const user = query.data?.user;
+
   return {
-    ...query,
-    account: query.data?.user,
+    isLoading: query.isLoading,
+    isError: query.isError,
+    isFollowing: query.data?.isFollowing,
+    ...user,
     count: query.data?.count,
   };
 };

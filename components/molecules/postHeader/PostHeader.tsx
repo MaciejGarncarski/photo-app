@@ -14,7 +14,7 @@ import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
 import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useAccount } from '@/components/pages/account/useAccount';
+import { useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postHeader.module.scss';
@@ -37,11 +37,10 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
   const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
   const deletePostMutation = useDeletePost();
 
-  const { session } = useAuth();
-  const { data } = useAccount({ userId: session?.user?.id });
-  const { data: authorData } = useAccount({ userId: post.author_id });
+  const { session, isSignedIn } = useAuth();
+  const { username } = useUser({ userId: post.author_id });
 
-  const isAuthor = data?.user?.id === post.author_id;
+  const isAuthor = session?.user?.id === post.author_id;
 
   const handleDeletePost = () => {
     deletePostMutation.mutate({ postId: post.id });
@@ -49,7 +48,7 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
 
   const headerClassName = clsx(className, variant && styles[variant], styles.header);
 
-  if (!authorData) {
+  if (!username) {
     return (
       <Tag className={headerClassName}>
         <Loading variants={['very-small', 'left']} />
@@ -59,16 +58,11 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
 
   return (
     <Tag className={headerClassName}>
-      <Link href={`/${authorData.user?.username}`} className={styles.link}>
-        <Avatar
-          className={styles.avatar}
-          userId={authorData.user?.id}
-          width={POST_AVATAR_SIZE}
-          height={POST_AVATAR_SIZE}
-        />
-        <h2>{authorData.user?.username}</h2>
+      <Link href={`/${username}`} className={styles.link}>
+        <Avatar className={styles.avatar} userId={post.author_id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <h2>{username}</h2>
       </Link>
-      {data && (
+      {isSignedIn && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
           <Tooltip variant="right" content="Post menu">
