@@ -62,6 +62,8 @@
   z-index: 2;
   transition: box-shadow 0.2s ease;
 
+  cursor: pointer;
+
   &:hover,
   &:focus {
     outline: none;

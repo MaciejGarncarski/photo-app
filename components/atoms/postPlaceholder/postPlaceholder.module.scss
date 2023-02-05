@@ -1,3 +1,5 @@
+@use '/styles/common.scss';
+
 .placeholder {
   background-color: var(--bg-gray);
   width: var(--postWidth);
@@ -8,6 +10,10 @@
   box-shadow: var(--shadow-primary);
   margin: 0 auto;
   margin-bottom: 4rem;
+
+  @include common.mediaquery('lg') {
+    height: 60rem;
+  }
 }
 
 @keyframes skeleton-loading {

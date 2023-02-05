@@ -13,6 +13,8 @@ const customJestConfig: Config = {
 
   testEnvironment: 'jest-environment-jsdom',
 
+  collectCoverageFrom: ['components/**/*.tsx'],
+
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/public/$1',

@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 
 import { Layout } from '@/components/layout/Layout';
-import { DefaultSeoWrapper } from '@/components/seo/DefaultSeo';
+import { DefaultSeoWrapper } from '@/seo/DefaultSeo';
 
 import '/styles/globals.scss';
 

@@ -12,7 +12,7 @@
   --text-secondary: rgb(107, 107, 107);
   --text-placeholder: rgb(75, 73, 73);
 
-  --bg-blur: rgb(255, 255, 255, 0.93);
+  --bg-blur: rgb(255, 255, 255, 0.88);
   --bg-primary: rgb(255, 255, 255);
   --bg-secondary: rgb(249, 247, 247);
   --bg-gray: rgb(214, 214, 214);
@@ -37,7 +37,7 @@
   --itemSize: 2.75rem;
   --create-post-width: min(80rem, 80%);
 
-  --backdrop-blur: blur(15px);
+  --backdrop-blur: blur(16px) saturate(2);
 
   --postWidth: 32rem;
 

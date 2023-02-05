@@ -24,19 +24,27 @@ export const Avatar = ({
 }: AvatarProps) => {
   const { customImage, image, username } = useUser({ userId });
 
+  const hasNoImage = Boolean(!image && !customImage);
   const hasDefaultImage = image && !Boolean(customImage);
   const hasCustomImage = customImage;
-  const hasNoImage = Boolean(!image && !customImage);
 
   return (
     <figure className={clsx(className, styles.avatarContainer)}>
-      {hasNoImage && <IconUser className={styles.icon} />}
+      {hasNoImage && <IconUser data-testid="empty avatar" className={styles.icon} />}
       {hasDefaultImage && (
-        <MotionImage src={image} alt={`${username}'s avatar`} width={width} height={height} className={styles.avatar} />
+        <MotionImage
+          data-testid="default avatar"
+          src={image}
+          alt={`${username}'s avatar`}
+          width={width}
+          height={height}
+          className={styles.avatar}
+        />
       )}
       {hasCustomImage && (
         <MotionImage
           src={customImage}
+          data-testid="avatar"
           alt={`${username}'s avatar`}
           width={width}
           height={height}

@@ -11,6 +11,7 @@
   align-items: center;
   flex-direction: column;
   font-size: 3rem;
+
 }
 
 .itemLast {
@@ -23,6 +24,7 @@
   display: flex;
 
   &:hover {
+    opacity: 0.6;
     cursor: pointer;
   }
 }

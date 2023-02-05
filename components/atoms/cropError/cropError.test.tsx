@@ -10,27 +10,31 @@ import {
 } from '@/components/atoms/cropError/CropError';
 
 describe('<CropError />', () => {
-  test('should display dimension error', async () => {
+  it('should display nothing', async () => {
+    const { container } = render(<CropError errorType={null} />);
+    expect(container.firstElementChild).toBeNull();
+  });
+  it('should display dimension error', async () => {
     render(<CropError errorType="DIMENSIONS" />);
     const error = await screen.findByText(DimensionError);
     expect(error).toBeInTheDocument();
   });
-  test('should display file size error', async () => {
+  it('should display file size error', async () => {
     render(<CropError errorType="FILE_SIZE" />);
     const error = await screen.findByText(FileSizeError);
     expect(error).toBeInTheDocument();
   });
-  test('should display invalid type error', async () => {
+  it('should display invalid type error', async () => {
     render(<CropError errorType="INVALID_TYPE" />);
     const error = await screen.findByText(InvalidTypeError);
     expect(error).toBeInTheDocument();
   });
-  test('should display no image detected error', async () => {
+  it('should display no image detected error', async () => {
     render(<CropError errorType="NO_IMAGE_DETECTED" />);
     const error = await screen.findByText(NoImageDetectedError);
     expect(error).toBeInTheDocument();
   });
-  test('should display too many images error', async () => {
+  it('should display too many images error', async () => {
     render(<CropError errorType="TOO_MANY_IMAGES" />);
     const error = await screen.findByText(TooManyImagesError);
     expect(error).toBeInTheDocument();

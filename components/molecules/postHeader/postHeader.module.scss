@@ -15,8 +15,8 @@
   height: 3rem;
 
   @include common.mediaquery('lg') {
-    height: 3.5rem;
-    width: 3.5rem;
+    height: 4rem;
+    width: 4rem;
   }
 }
 
@@ -29,6 +29,7 @@
 
   @include common.mediaquery('lg') {
     font-size: 1.5rem;
+    gap: 1.5rem;
   }
 }
 

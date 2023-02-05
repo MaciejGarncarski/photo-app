@@ -9,7 +9,7 @@ export const useScrollPosition = () => {
 
   const throttledScroll = useMemo(
     () =>
-      throttle(400, () => {
+      throttle(200, () => {
         const isGoingUp = window.scrollY < lastScroll.current;
         setScrollPos(window.scrollY);
         setIsGoingUp(isGoingUp);

@@ -28,6 +28,7 @@ export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProp
           return (
             <Button
               className={styles.button}
+              data-testid={`aspect button ${aspect}`}
               variant={aspectRatio === aspect ? undefined : 'secondary'}
               onClick={() => setAspect(aspectRatio)}
               key={aspectRatio}

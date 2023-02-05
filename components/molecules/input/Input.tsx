@@ -28,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           type={type}
           id={labelText}
+          data-testid="input"
           className={clsx(error && styles.inputError, styles.input)}
           {...props}
         />
