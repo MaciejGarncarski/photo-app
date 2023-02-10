@@ -13,7 +13,7 @@
     "format": "prettier -w .",
     "test": "jest",
     "format:check": "prettier -c .",
-    "lint-strict-fix": "eslint --fix && yarn format",
+    "lint-strict-fix": "eslint --fix . && yarn format",
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
