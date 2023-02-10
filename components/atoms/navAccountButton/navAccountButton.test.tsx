@@ -1,5 +1,6 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 
+import { mockedUser } from '@/utils/tests/mockedData';
 import { render } from '@/utils/tests/utils';
 
 import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
@@ -21,21 +22,30 @@ jest.mock('next-auth/react', () => {
 
 describe('NavAccountButton', () => {
   describe('User integration', () => {
-    // it('should be initially hidden', async () => {
-    //   render(<NavAccountButton userId="user" />);
-    //   const menu = await screen.findByTestId('menu');
-    //   expect(menu).not.toBeInTheDocument();
-    // });
+    it('menu should be initially hidden', () => {
+      render(<NavAccountButton userId="user" />);
+      const menu = screen.queryByText('menu');
+      expect(menu).toBeNull();
+    });
 
     it('should be visible on mouseOver', () => {
       render(<NavAccountButton userId="user" />);
       const button = screen.getByTestId('button');
 
       fireEvent.mouseOver(button);
-
       const menu = screen.getByTestId('menu');
 
       expect(menu).toBeInTheDocument();
+    });
+
+    it('should open on avatar click', async () => {
+      render(<NavAccountButton userId="user" />);
+
+      const menu = screen.queryByTestId('menu');
+      const avatarBtn = await screen.findByText(`@${mockedUser.user.username}`);
+      fireEvent.click(avatarBtn);
+
+      await waitFor(() => expect(menu).toBeNull(), { timeout: 2500 });
     });
   });
 });

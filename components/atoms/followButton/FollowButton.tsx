@@ -1,11 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-
 import { Button } from '@/components/atoms/button/Button';
+import { useFollowMutation } from '@/components/atoms/followButton/useFollowMutation';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { useUser } from '@/components/pages/account/useUser';
-
-import { FollowersPutRequest } from '@/pages/api/followers';
 
 type FollowButtonProps = {
   userId: string;
@@ -14,25 +10,7 @@ type FollowButtonProps = {
 
 export const FollowButton = ({ userId, className }: FollowButtonProps) => {
   const { isFollowing } = useUser({ userId });
-  const queryClient = useQueryClient();
-
-  const { isLoading, mutate } = useMutation(
-    async () => {
-      if (isFollowing) {
-        await axios.delete(`/api/followers?followingUserId=${userId}`);
-      }
-      if (!isFollowing) {
-        await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
-          followingUserId: userId,
-        });
-      }
-    },
-    {
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(['account', userId]);
-      },
-    },
-  );
+  const { isLoading, mutate } = useFollowMutation(userId);
 
   if (isLoading) {
     return <Loading variants={['very-small']} />;

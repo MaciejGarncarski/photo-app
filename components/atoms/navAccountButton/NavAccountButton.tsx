@@ -34,9 +34,10 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   useEffect(() => {
     const handleTooltipClose = (mouseEv: MouseEvent) => {
       const target = mouseEv.target as HTMLElement;
-      if (!containerRef.current?.contains(target)) {
-        setIsOptionsOpen(false);
+      if (containerRef.current?.contains(target)) {
+        return;
       }
+      setIsOptionsOpen(false);
     };
 
     document.addEventListener('click', handleTooltipClose);

@@ -1,6 +1,6 @@
 import { IconCircleX, IconPhoto } from '@tabler/icons';
 import clsx from 'clsx';
-import { ChangeEvent, DragEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
 import { handleDropImage } from '@/utils/handleDropImage';
 
@@ -33,22 +33,23 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps
     setIsActive(false);
   };
 
-  const onDrop = useCallback(
-    (dropEv: DragEvent<HTMLDivElement>) => {
-      const dt = dropEv.dataTransfer;
-      if (!dt.files || !dt.files[0]) {
-        setError('NO_IMAGE_DETECTED');
-        return;
-      }
-      if (dt.files.length > 1) {
-        setError('TOO_MANY_IMAGES');
-        return;
-      }
-      const file = dt.files[0];
-      handleDropImage({ file, setError, setImgSrc });
-    },
-    [setError, setImgSrc],
-  );
+  const onDrop = (dropEv: DragEvent<HTMLDivElement>) => {
+    inactive(dropEv);
+    const { dataTransfer } = dropEv;
+
+    const file = dataTransfer.files[0];
+
+    if (!dataTransfer.files || !file) {
+      setError('NO_IMAGE_DETECTED');
+      return;
+    }
+    if (dataTransfer.files.length > 1) {
+      setError('TOO_MANY_IMAGES');
+      return;
+    }
+
+    handleDropImage({ file, setError, setImgSrc });
+  };
 
   return (
     <>
@@ -57,10 +58,7 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps
         className={clsx(isActive && styles.dropZoneActive, error && styles.dropZoneError, styles.dropZone)}
         onDragOver={active}
         onDragEnter={active}
-        onDrop={(dragEv) => {
-          inactive(dragEv);
-          onDrop(dragEv);
-        }}
+        onDrop={onDrop}
         onDragLeave={inactive}
         data-testid="dropZoneContainer"
       >
