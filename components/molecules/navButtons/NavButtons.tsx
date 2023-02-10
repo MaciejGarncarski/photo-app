@@ -39,11 +39,11 @@ export const NavButtons = () => {
   const { session, status, isSignedIn } = useAuth();
   const { username } = useUser({ userId: session?.user?.id });
 
-  if (status === 'loading' || !session?.user) {
+  if (status === 'loading') {
     return null;
   }
 
-  if (!isSignedIn) {
+  if (!isSignedIn || !session?.user?.id) {
     return <SignInButton />;
   }
 
