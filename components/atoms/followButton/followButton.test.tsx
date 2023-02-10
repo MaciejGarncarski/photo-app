@@ -1,4 +1,4 @@
-import { getByText } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import { render } from '@/utils/tests/utils';
 
@@ -6,9 +6,9 @@ import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 
 describe('FollowButton test', () => {
   it('should render follow button', () => {
-    const { container } = render(<FollowButton userId="random" />);
+    render(<FollowButton userId="user" />);
 
-    const button = getByText(container, /follow/i);
+    const button = screen.getByText(/follow/i);
     expect(button).toBeInTheDocument();
   });
 });

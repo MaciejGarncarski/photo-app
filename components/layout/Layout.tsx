@@ -37,9 +37,8 @@ export const Layout = ({ className, children }: LayoutProps) => {
     setIsCookiesOpen(localStorageData !== 'true');
   }, [localStorageData]);
 
-  const { session, status } = useAuth();
-  const { username, isLoading } = useUser({ userId: session?.user?.id });
-  const isSignedUp = username && status === 'authenticated';
+  const { session, isSignedIn } = useAuth();
+  const { isLoading } = useUser({ userId: session?.user?.id });
 
   const handleClose = () => {
     setIsCookiesOpen(false);
@@ -57,7 +56,7 @@ export const Layout = ({ className, children }: LayoutProps) => {
         <AnimatePresence>
           {isCookiesOpen && !localStorageData && <CookieAlert onClose={handleClose} onPermanentClose={handleCookies} />}
         </AnimatePresence>
-        {!isSignedUp && !isLoading ? <CompleteSignUp /> : <>{children}</>}
+        {!isSignedIn && !isLoading ? <CompleteSignUp /> : <>{children}</>}
       </div>
     </div>
   );

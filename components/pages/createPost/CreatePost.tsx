@@ -91,7 +91,6 @@ export const CreatePost = () => {
     return <LoadingHeading headingText="Uploading your post." />;
   }
 
-  const isEmpty = finalImages.length < 1;
   const isFull = finalImages.length === 3;
 
   return (

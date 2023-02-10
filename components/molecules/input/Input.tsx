@@ -7,31 +7,28 @@ import styles from './input.module.scss';
 type InputProps = {
   type?: JSX.IntrinsicElements['input']['type'] | 'textarea';
   labelText: string;
-  isDirty?: boolean;
-  isEmpty?: boolean;
   error?: FieldError;
   optional?: boolean;
   className?: string;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'text', labelText, isDirty, error, optional, isEmpty, className, ...props }, ref) => {
+  ({ type = 'text', labelText, error, optional, className, ...props }, ref) => {
     const containerClassName = clsx(className, error && styles.containerError, styles.container);
-    const labelClassName = clsx(isDirty && styles.labelActive, !isEmpty && styles.labelActive, styles.label);
+
+    const inputClassName = clsx(
+      {
+        [styles.inputError]: Boolean(error),
+      },
+      styles.input,
+    );
 
     return (
       <div className={containerClassName}>
-        <label className={labelClassName} htmlFor={labelText}>
+        <label className={styles.label} htmlFor={labelText}>
           {labelText} {optional && '(optional)'}
         </label>
-        <input
-          ref={ref}
-          type={type}
-          id={labelText}
-          data-testid="input"
-          className={clsx(error && styles.inputError, styles.input)}
-          {...props}
-        />
+        <input ref={ref} type={type} id={labelText} data-testid="input" className={inputClassName} {...props} />
         {error && <p className={styles.error}>{error.message}</p>}
       </div>
     );

@@ -11,7 +11,7 @@
   position: relative;
 
   @include common.mediaquery('lg') {
-    grid-template-columns: 1fr 3fr 0.5fr;
+    grid-template-columns: 1fr 3fr 0.75fr;
   }
 
 }
@@ -30,6 +30,7 @@
     justify-self: flex-start;
     grid-row: 1 / 4;
 
+    margin-left: 2rem;
     margin-top: 2rem;
   }
 }
@@ -75,6 +76,10 @@
 .listItemNumber {
   font-weight: 600;
   font-size: 2rem;
+
+  @include common.mediaquery('lg') {
+    font-size: unset;
+  }
 }
 
 .listItemText {
@@ -155,7 +160,17 @@
     position: static;
     font-size: 3rem;
     grid-row: 1/2;
+    gap: 1rem;
     grid-column: 3 / 4;
+  }
+}
+
+.menuButtonText {
+  display: none;
+
+  @include common.mediaquery('lg') {
+    text-transform: capitalize;
+    display: inline;
   }
 }
 

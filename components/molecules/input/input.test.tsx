@@ -1,34 +1,65 @@
 import { screen } from '@testing-library/react';
+import { cloneElement, ReactElement } from 'react';
 
 import { render } from '@/utils/tests/utils';
 
 import { Input } from '@/components/molecules/input/Input';
 
+export const snapshotComponent = (component: ReactElement) => {
+  const { asFragment, getByTestId } = render(
+    cloneElement(component, {
+      'data-testid': 'test',
+    }),
+  );
+
+  const renderedComponent = getByTestId('test');
+
+  expect(renderedComponent).toBeDefined();
+  expect(asFragment()).toMatchSnapshot();
+};
+
 describe('Input', () => {
-  it('Should display label', () => {
-    const label = 'testing label';
-    render(<Input labelText={label} type="input" />);
-
-    const input = screen.getByLabelText(label);
-
-    expect(input).toBeInTheDocument();
+  describe('match snapshot', () => {
+    snapshotComponent(<Input labelText="random" />);
   });
 
-  it('Should have correct type', () => {
-    const inputType = 'tel';
+  describe('Input props', () => {
+    it('Should pass with label prop', () => {
+      const label = 'testing label';
+      render(<Input labelText={label} type="input" />);
 
-    render(<Input labelText="label" type={inputType} />);
+      const input = screen.getByLabelText(label);
 
-    const input = screen.getByTestId('input') as HTMLInputElement;
+      expect(input).toBeInTheDocument();
+    });
 
-    expect(input.type).toBe(inputType);
+    it('Should pass with correct type', () => {
+      const inputType = 'tel';
+      render(<Input labelText="label" type={inputType} />);
+
+      const input = screen.getByTestId('input') as HTMLInputElement;
+
+      expect(input.type).toBe(inputType);
+    });
+
+    it('Should pass with optional text', () => {
+      render(<Input labelText="label" optional />);
+
+      const input = screen.getByLabelText(/(optional)/);
+      expect(input).toBeInTheDocument();
+    });
   });
 
-  it('Should render with optional text', () => {
-    render(<Input labelText="label" optional />);
+  describe('Input user integration', () => {
+    it('Should pass when error displayed and when has error className', () => {
+      render(<Input labelText="label" optional data-testid="input" error={{ type: 'max', message: 'max error' }} />);
 
-    const input = screen.getByLabelText(/(optional)/);
+      const errorMessage = screen.getByText(/max error/i);
 
-    expect(input).toBeInTheDocument();
+      const input = screen.getByTestId(/input/i);
+
+      expect(errorMessage).toBeInTheDocument();
+      expect(input.classList).toContain('inputError');
+    });
   });
 });

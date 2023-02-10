@@ -64,13 +64,14 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         {!isOwner && session && <FollowButton className={styles.followButton} userId={id} />}
         {isOwner && (
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileFocus={{ scale: 1.1 }}
+            whileHover={{ scale: 1.07 }}
+            whileFocus={{ scale: 1.07 }}
             type="button"
             onClick={open}
             className={styles.menuButton}
           >
             <span className="visually-hidden">{modalOpen ? 'Close menu' : 'Open menu'}</span>
+            <span className={styles.menuButtonText}>settings</span>
             <IconSettingsWrapper size="lg" />
           </motion.button>
         )}

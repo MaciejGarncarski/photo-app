@@ -51,7 +51,7 @@ export const CompleteSignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, errors, defaultValues },
+    formState: { errors },
   } = useForm<AccountDetails>({
     mode: 'onBlur',
     resolver: zodResolver(AccountDetailsSchema),
@@ -84,22 +84,9 @@ export const CompleteSignUp = () => {
         Complete your sign up
       </Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input labelText="Username" error={errors.username} isDirty={dirtyFields.username} {...register('username')} />
-        <Input
-          labelText="Full name"
-          error={errors.fullName}
-          isEmpty={defaultValues?.fullName?.trim() === ''}
-          isDirty={dirtyFields.fullName}
-          {...register('fullName')}
-        />
-        <Input
-          labelText="Bio"
-          error={errors.bio}
-          isEmpty={defaultValues?.bio?.trim() === ''}
-          isDirty={dirtyFields.bio}
-          optional
-          {...register('bio')}
-        />
+        <Input labelText="Username" error={errors.username} {...register('username')} />
+        <Input labelText="Full name" error={errors.fullName} {...register('fullName')} />
+        <Input labelText="Bio" error={errors.bio} optional {...register('bio')} />
         <div className={styles.buttons}>
           <Button type="button" variant="secondary" onClick={() => signOut()}>
             sign out

@@ -15,7 +15,7 @@ type DropZoneProps = {
   onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string) => void;
   error: ImageCropErrors;
-  setError: (error: ImageCropErrors | null) => void;
+  setError: (error: ImageCropErrors) => void;
 };
 
 export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps) => {
@@ -62,6 +62,7 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps
           onDrop(dragEv);
         }}
         onDragLeave={inactive}
+        data-testid="dropZoneContainer"
       >
         <input
           data-testid="fileInput"

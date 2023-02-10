@@ -30,22 +30,20 @@ export const Avatar = ({
 
   return (
     <figure className={clsx(className, styles.avatarContainer)}>
-      {hasNoImage && <IconUser data-testid="empty avatar" className={styles.icon} />}
+      {hasNoImage && (
+        <div data-testid="empty icon">
+          <IconUser className={styles.icon} />
+          <span className="visually-hidden">{username}</span>
+        </div>
+      )}
       {hasDefaultImage && (
-        <MotionImage
-          data-testid="default avatar"
-          src={image}
-          alt={`${username}'s avatar`}
-          width={width}
-          height={height}
-          className={styles.avatar}
-        />
+        <MotionImage src={image} alt={username ?? ''} width={width} height={height} className={styles.avatar} />
       )}
       {hasCustomImage && (
         <MotionImage
           src={customImage}
-          data-testid="avatar"
-          alt={`${username}'s avatar`}
+          alt={username ?? ''}
+          data-testid="customImage"
           width={width}
           height={height}
           className={styles.avatar}

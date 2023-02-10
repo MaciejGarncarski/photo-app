@@ -28,7 +28,7 @@ export const FollowButton = ({ userId, className }: FollowButtonProps) => {
       }
     },
     {
-      onSettled: async () => {
+      onSuccess: async () => {
         await queryClient.invalidateQueries(['account', userId]);
       },
     },

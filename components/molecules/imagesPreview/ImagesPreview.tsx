@@ -47,6 +47,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
                   className={styles.deleteIcon}
                 >
                   <IconTrash />
+                  <span className="visually-hidden">remove image</span>
                 </motion.button>
 
                 {imagesBase64 && (
@@ -58,7 +59,6 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
                     height={200}
                   />
                 )}
-                <span className="visually-hidden">remove image</span>
               </motion.div>
             );
           }

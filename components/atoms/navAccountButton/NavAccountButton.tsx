@@ -27,7 +27,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const { close, modalOpen, open } = useModal();
 
   const { signOut } = useAuth();
-  const { username, id, name } = useUser({ userId });
+  const { username, id } = useUser({ userId });
   const { isGoingUp } = useScrollPosition();
   const { isMobile } = useScreenWidth();
 
@@ -39,17 +39,9 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
       }
     };
 
-    const handleEscKey = (keyboardEv: KeyboardEvent) => {
-      if (keyboardEv.key === 'Escape') {
-        setIsOptionsOpen(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleEscKey);
     document.addEventListener('click', handleTooltipClose);
 
     return () => {
-      document.removeEventListener('keydown', handleEscKey);
       document.removeEventListener('click', handleTooltipClose);
     };
   }, []);
@@ -67,6 +59,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
       onFocus={isMobile ? undefined : handleOpen}
       onMouseLeave={handleClose}
       onBlur={handleClose}
+      data-testid="button"
       className={commonStyles.accountIconContainer}
     >
       <button
@@ -74,9 +67,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
         onClick={() => setIsOptionsOpen((prev) => !prev)}
         className={clsx(commonStyles.listItemChild, styles.button)}
       >
-        <span className="visually-hidden">
-          @{username} {name}
-        </span>
+        <span className="visually-hidden">{`@${username}`}</span>
         <Avatar className={styles.avatar} userId={id} />
       </button>
       <AnimatePresence>
@@ -87,6 +78,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
             animate="animate"
             initial="initial"
             exit="exit"
+            data-testid="menu"
             key="tooltip options"
           >
             <p className={styles.welcome}>Hi, {username}</p>
