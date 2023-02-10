@@ -16,19 +16,32 @@ yarn install
 yarn dev
 ```
 
-## List of functionalities 📃
-- Signing in via google or via magic link
-- Creating posts
-- Deleting posts
-- Saving posts to collection
+## Features 📃
+- Authentication
+- Posts system
 - Post likes system
 - Post comments system
+- <s>Chat</s> (soon) 
 
 ## Tech used 🔧
-- Next.js + Typescript
-- Sass
-- Prisma
-- Auth.js
-- Planetscale
-- Eslint + Prettier + Husky + Conventional Commits
-- Jest + React Testing Library
+- Frontend
+  - Typescript
+  - Next.js
+  - sass
+  - React-query
+- Backend
+  - Next API routes
+  - Next-auth
+  - Prisma
+  - Planetscale
+- Testing
+  - Jest
+  - React Testing Library
+  - MSW
+- Tools
+  - Eslint 
+  - Prettier 
+  - Husky 
+  - Conventional Commits config
+  - Github Actions CI
+  - Vercel
