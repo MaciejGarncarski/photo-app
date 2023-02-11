@@ -29,7 +29,9 @@ const listData = ['posts', 'followers', 'following'] as const;
 
 export const Account = ({ username: propsUsername }: AccountProps) => {
   const { session } = useAuth();
-  const { isError, isLoading, id, name, username, bio, count } = useUser({ username: propsUsername });
+  const { isError, isLoading, id, name, username, bio, count, customImage, image } = useUser({
+    username: propsUsername,
+  });
   const { open, close, modalOpen } = useModal();
 
   if (isLoading || !count || !id) {
@@ -44,7 +46,25 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
 
   return (
     <div className={styles.container}>
-      <NextSeo title={`@${username}`} />
+      <NextSeo
+        title={`@${username}`}
+        openGraph={{
+          title: `${username} profile`,
+          description: bio ?? '',
+          url: `https://photo-app-orpin.vercel.app/${username}`,
+          type: 'profile',
+          images: [
+            {
+              url: customImage ?? image ?? '',
+              alt: 'Profile photo',
+            },
+          ],
+          profile: {
+            username: username ?? '',
+            firstName: name ?? '',
+          },
+        }}
+      />
       <main className={styles.account}>
         <Avatar className={styles.avatar} userId={id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>

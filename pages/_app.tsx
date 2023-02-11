@@ -4,10 +4,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
+import { DefaultSeo } from 'next-seo';
+
+import { seoConfig } from '@/lib/next-seo.config';
 
 import { Layout } from '@/components/layout/Layout';
-
-import { DefaultSeoWrapper } from '@/seo/DefaultSeo';
 
 import '/styles/globals.scss';
 
@@ -23,9 +24,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
+        <DefaultSeo {...seoConfig} />
         <MotionConfig transition={{ duration: 0.2 }}>
           <Layout className={lato.className}>
-            <DefaultSeoWrapper />
             <Hydrate state={pageProps.dehydratedState}>
               <LazyMotion features={domAnimation}>
                 <div id="modal"></div>
