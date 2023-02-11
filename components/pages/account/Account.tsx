@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { Button } from '@/components/atoms/button/Button';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
@@ -66,10 +67,10 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         }}
       />
       <main className={styles.account}>
-        <Avatar className={styles.avatar} userId={id} />
         <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
           {username}
         </motion.h2>
+        <Avatar className={styles.avatar} userId={id} />
         <motion.ul initial={{ x: -10 }} animate={{ x: 0 }} className={styles.list}>
           {listData.map((item) => {
             return (
@@ -80,22 +81,16 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
             );
           })}
         </motion.ul>
-        <p className={styles.name}>{name}</p>
-        <p className={styles.bio}>{bio ?? 'No bio yet.'}</p>
-        {!isOwner && session && <FollowButton className={styles.followButton} userId={id} />}
+        {!isOwner && session && <FollowButton className={styles.button} userId={id} />}
         {isOwner && (
-          <motion.button
-            whileHover={{ scale: 1.07 }}
-            whileFocus={{ scale: 1.07 }}
-            type="button"
-            onClick={open}
-            className={styles.menuButton}
-          >
-            <span className="visually-hidden">{modalOpen ? 'Close menu' : 'Open menu'}</span>
+          <Button type="button" onClick={open} className={styles.button}>
+            <IconSettingsWrapper size="sm" />
             <span className={styles.menuButtonText}>settings</span>
-            <IconSettingsWrapper size="lg" />
-          </motion.button>
+            <span className="visually-hidden">{modalOpen ? 'Close menu' : 'Open menu'}</span>
+          </Button>
         )}
+        <p className={styles.name}>{name}</p>
+        <p className={styles.bio}>{bio || 'No bio yet.'}</p>
       </main>
       <ModalContainer>
         {modalOpen && (

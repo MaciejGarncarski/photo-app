@@ -14,7 +14,7 @@ export const FollowButton = ({ userId, className }: FollowButtonProps) => {
   const { isLoading, mutate } = useFollowMutation(userId);
 
   if (isLoading) {
-    return <Loading variants={['very-small']} />;
+    return <Loading variants={['very-small']} className={className} />;
   }
 
   return (

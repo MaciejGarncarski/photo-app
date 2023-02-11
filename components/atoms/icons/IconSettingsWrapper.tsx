@@ -3,7 +3,7 @@ import { IconMenu2 } from '@tabler/icons';
 import styles from './icons.module.scss';
 
 type PropsTypes = {
-  size?: 'lg' | 'xl';
+  size?: 'sm' | 'lg' | 'xl';
 };
 
 export const IconSettingsWrapper = ({ size }: PropsTypes) => {
