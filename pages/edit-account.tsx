@@ -1,16 +1,21 @@
 import { useAuth } from '@/hooks/useAuth';
 
 import { Loading } from '@/components/atoms/loading/Loading';
+import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { EditAccount } from '@/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {
-  const { session } = useAuth();
+  const { status, session } = useAuth();
 
-  if (!session?.user) {
+  if (status === 'loading' || !session?.user?.id) {
     return <Loading />;
   }
 
-  return <EditAccount userId={session?.user?.id} />;
+  if (status === 'unauthenticated') {
+    return <AccessDenied />;
+  }
+
+  return <EditAccount userId={session.user.id} />;
 };
 
 export default EditAccountPage;
