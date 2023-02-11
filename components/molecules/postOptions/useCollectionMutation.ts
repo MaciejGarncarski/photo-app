@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { z } from 'zod';
 
-import { useAuth } from '@/components/organisms/signIn/useAuth';
+import { useAuth } from '@/hooks/useAuth';
 
 import { PutCollectionSchema } from '@/pages/api/collection';
 

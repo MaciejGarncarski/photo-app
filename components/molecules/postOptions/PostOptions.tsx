@@ -1,12 +1,13 @@
 import { IconEdit, IconTrash } from '@tabler/icons';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useUser } from '@/hooks/useUser';
+
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 type PostOptionsProps = {

@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { createPortal } from 'react-dom';
 
+import { useAuth } from '@/hooks/useAuth';
 import { namedComponent } from '@/utils/namedComponent';
 
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
@@ -16,7 +17,6 @@ import { Children } from '@/components/layout/Layout';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postButtons.module.scss';

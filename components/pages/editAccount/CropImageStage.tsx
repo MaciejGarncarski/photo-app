@@ -2,9 +2,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { motion as m } from 'framer-motion';
 import { useState } from 'react';
 
+import { useAuth } from '@/hooks/useAuth';
+
 import { Button } from '@/components/atoms/button/Button';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';

@@ -1,7 +1,8 @@
+import { useUser } from '@/hooks/useUser';
+
 import { Button } from '@/components/atoms/button/Button';
 import { useFollowMutation } from '@/components/atoms/followButton/useFollowMutation';
 import { Loading } from '@/components/atoms/loading/Loading';
-import { useUser } from '@/components/pages/account/useUser';
 
 type FollowButtonProps = {
   userId: string;

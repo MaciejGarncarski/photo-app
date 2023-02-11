@@ -3,8 +3,9 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { Suspense, useState } from 'react';
 
+import { useUser } from '@/hooks/useUser';
+
 import { Loading } from '@/components/atoms/loading/Loading';
-import { useUser } from '@/components/pages/account/useUser';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
 

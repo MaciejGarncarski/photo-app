@@ -1,9 +1,8 @@
 import { renderHook, waitFor } from '@testing-library/react';
 
+import { useUser } from '@/hooks/useUser';
 import { mockedUser } from '@/utils/tests/mockedData';
 import { createWrapper } from '@/utils/tests/utils';
-
-import { useUser } from '@/components/pages/account/useUser';
 
 describe('useUserTest', () => {
   it('should pass when name is correct', async () => {

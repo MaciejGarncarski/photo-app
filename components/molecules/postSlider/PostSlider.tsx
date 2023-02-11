@@ -4,14 +4,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useUser } from '@/hooks/useUser';
+
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { StatusDots } from '@/components/molecules/postSlider/StatusDots';
 import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postSlider.module.scss';

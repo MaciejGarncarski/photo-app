@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { useUser } from '@/components/pages/account/useUser';
+import { useUser } from '@/hooks/useUser';
 
 import { FollowersPutRequest } from '@/pages/api/followers';
 

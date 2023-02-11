@@ -4,15 +4,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
+import { useUser } from '@/hooks/useUser';
+
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
-import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './navAccountButton.module.scss';
 import commonStyles from '@/components/molecules/navButtons/navButtons.module.scss';

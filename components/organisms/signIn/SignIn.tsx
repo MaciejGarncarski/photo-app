@@ -3,10 +3,11 @@ import { IconBrandGoogle } from '@tabler/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useAuth } from '@/hooks/useAuth';
+
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Input } from '@/components/molecules/input/Input';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
 
 import styles from './signIn.module.scss';
 
@@ -35,6 +36,10 @@ export const SignIn = () => {
     signIn('email', { email });
   };
 
+  const signInGoogle = async () => {
+    await signIn('google', { redirect: true });
+  };
+
   return (
     <main className={styles.container}>
       <Heading tag="h2">Sign in</Heading>
@@ -46,7 +51,7 @@ export const SignIn = () => {
         <p className={styles.orWith}>or</p>
       </div>
       <div className={styles.other}>
-        <Button className={styles.button} type="button" onClick={() => signIn('google', { redirect: true })}>
+        <Button className={styles.button} type="button" onClick={signInGoogle}>
           <IconBrandGoogle />
           <p className={styles.google}>Google</p>
         </Button>

@@ -1,5 +1,6 @@
+import { useAuth } from '@/hooks/useAuth';
+
 import { Loading } from '@/components/atoms/loading/Loading';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { EditAccount } from '@/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {

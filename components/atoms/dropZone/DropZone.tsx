@@ -2,12 +2,12 @@ import { IconCircleX, IconPhoto } from '@tabler/icons';
 import clsx from 'clsx';
 import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
+import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { handleDropImage } from '@/utils/handleDropImage';
 
 import { CropError } from '@/components/atoms/cropError/CropError';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
 
 import styles from './dropZone.module.scss';
 

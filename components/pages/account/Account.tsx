@@ -2,6 +2,9 @@ import { IconEdit } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { NextSeo } from 'next-seo';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useUser } from '@/hooks/useUser';
+
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
@@ -11,8 +14,6 @@ import { useModal } from '@/components/atoms/modal/useModal';
 import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './account.module.scss';
 

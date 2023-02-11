@@ -1,11 +1,12 @@
 import { NextSeo } from 'next-seo';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { useAuth } from '@/hooks/useAuth';
+
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
 import { useCollection } from '@/components/pages/collection/useCollection';
 
 import styles from './collection.module.scss';

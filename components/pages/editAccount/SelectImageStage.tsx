@@ -1,5 +1,8 @@
 import { motion as m, Variants } from 'framer-motion';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useUser } from '@/hooks/useUser';
+
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
@@ -7,8 +10,6 @@ import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './editAccount.module.scss';

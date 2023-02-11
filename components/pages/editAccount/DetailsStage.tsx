@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { MouseEvent, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useUser } from '@/hooks/useUser';
+
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
@@ -13,7 +15,6 @@ import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { Input } from '@/components/molecules/input/Input';
-import { useUser } from '@/components/pages/account/useUser';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';

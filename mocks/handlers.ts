@@ -1,8 +1,7 @@
 import { DefaultBodyType, PathParams, rest } from 'msw';
 
+import { Account } from '@/hooks/useUser';
 import { mockedUser } from '@/utils/tests/mockedData';
-
-import { Account } from '@/components/pages/account/useUser';
 
 export const handlers = [
   rest.get<DefaultBodyType, PathParams<string>, Account>('http://localhost/api/account/user', (req, res, ctx) => {

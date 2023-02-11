@@ -60,9 +60,12 @@
   bottom: 0;
   left: 1rem;
   z-index: 2;
-  transition: box-shadow 0.2s ease;
+  box-shadow: var(--shadow-primary);
 
-  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &:hover,
   &:focus {
@@ -92,15 +95,17 @@
   gap: 1rem;
   z-index: 2;
   list-style-type: none;
+
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-small);
+  padding: 0.75rem 1.5rem;
+  box-shadow: var(--shadow-secondary);
 }
 
 .dot {
-  --dot-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
 
-  border: 0;
-
-  border-radius: 100%;
   background-color: var(--color-primary);
-  width: var(--dot-size);
-  height: var(--dot-size);
+  border-radius: 100%;
 }

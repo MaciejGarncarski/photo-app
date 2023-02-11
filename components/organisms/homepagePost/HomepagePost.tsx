@@ -3,6 +3,9 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 
+import { useAuth } from '@/hooks/useAuth';
+import { Account, useUser } from '@/hooks/useUser';
+
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
@@ -10,8 +13,6 @@ import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { Account, useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './homepagePost.module.scss';

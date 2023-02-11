@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
+import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
+
 import { NavButtons } from '@/components/molecules/navButtons/NavButtons';
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
-import { useScrollPosition } from '@/components/organisms/header/useScrollPosition';
 
 import styles from './navbar.module.scss';
 

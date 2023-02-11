@@ -1,6 +1,6 @@
 import { PanInfo } from 'framer-motion';
 
-import { useScreenWidth } from '@/components/organisms/header/useScreenWidth';
+import { useScreenWidth } from '@/hooks/useScreenWidth';
 
 type ArgsTypes = {
   currentIndex: number;

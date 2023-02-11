@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 
-import { useUser } from '@/components/pages/account/useUser';
+import { useUser } from '@/hooks/useUser';
 
 import styles from './avatar.module.scss';
 

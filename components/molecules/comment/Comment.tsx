@@ -2,8 +2,10 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { m } from 'framer-motion';
-import parse from 'html-react-parser';
 import Link from 'next/link';
+
+import { useAuth } from '@/hooks/useAuth';
+import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
@@ -14,8 +16,6 @@ import { useDeleteComment } from '@/components/molecules/comment/useDeleteCommen
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { POST_AVATAR_SIZE } from '@/components/molecules/postHeader/PostHeader';
 import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 
 import styles from './comment.module.scss';
 
@@ -40,20 +40,17 @@ export const Comment = ({ commentData }: CommentProps) => {
 
   const isAbleToDelete = sessionUserData?.id === user_id || sessionUserData?.role === 'ADMIN';
 
-  const commentWithNewLine = comment_text.replace(/\r?\n/g, '<br />');
-
   const userAccountHref = `/${username}`;
 
   return (
     <m.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
+        <span className="visually-hidden">@{username}</span>
         <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
       <div className={styles.commentText}>
-        <Link href={userAccountHref}>
-          <h3 className={styles.author}>{username}</h3>
-        </Link>
-        <p className={styles.content}>{parse(commentWithNewLine)}</p>
+        <h3 className={styles.author}>{username}</h3>
+        <p className={styles.content}>{comment_text}</p>
       </div>
 
       <div className={styles.info}>

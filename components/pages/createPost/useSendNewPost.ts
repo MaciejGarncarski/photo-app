@@ -2,7 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '@/components/organisms/signIn/useAuth';
+import { useAuth } from '@/hooks/useAuth';
+
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 
 type MutationValues = {

@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useUser } from '@/hooks/useUser';
 import { namedComponent } from '@/utils/namedComponent';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
@@ -13,8 +15,6 @@ import { useModal } from '@/components/atoms/modal/useModal';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
-import { useAuth } from '@/components/organisms/signIn/useAuth';
-import { useUser } from '@/components/pages/account/useUser';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postHeader.module.scss';

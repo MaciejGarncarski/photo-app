@@ -15,16 +15,18 @@
     width: min(90rem, 80%);
     display: grid;
     grid-template-rows: auto 1fr;
-    grid-template-columns: 50rem 1fr;
+    grid-template-columns: 40rem 1fr;
     margin: auto;
     border-radius: var(--radius-medium);
-    height: 55rem;
+    min-height: 60rem;
+    max-height: 65rem;
   }
 
   @include common.mediaquery('xl') {
-    width: min(120rem, 80%);
-    grid-template-columns: 70rem 1fr;
-    height: 60rem;
+    width: min(140rem, 80%);
+    grid-template-columns: 85rem 1fr;
+    min-height: 60rem;
+    max-height: 70rem;
   }
 
 }
@@ -59,27 +61,35 @@
   }
 }
 
+.commentsHeading {
+  font-size: 2.5rem;
+}
+
 .comments {
-  height: 25rem;
+  height: 32rem;
   overflow-y: scroll;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
+
+  @include common.mobile-landscape {
+    height: 17rem;
+  }
+
 
   @include common.mediaquery('lg') {
     height: 100%;
     margin-top: 1rem;
-    max-height: 45rem;
-    overflow-y: auto;
+    max-height: 60rem;
   }
-
 }
 
 .commentsContainer {
   padding: 0 1rem;
+  margin-top: 1rem;
 
   @include common.mediaquery('lg') {
-    padding-right: 1rem;
-    margin-top: 1rem;
+    padding: 0 2.5rem;
   }
 }
 
@@ -91,20 +101,19 @@
 
   @include common.mediaquery('lg') {
     display: flex;
+    align-items: center;
     height: 100%;
-    gap: 20rem;
+    border-radius: var(--radius-medium);
   }
 }
 
 .sliderImage {
   z-index: 2;
-  margin-left: 5rem;
-
-  @include common.mediaquery('lg') {
-    margin-left: 3rem;
-  }
+  height: 100%;
+  object-fit: contain;
+  width: 40rem;
 
   @include common.mediaquery('xl') {
-    margin-left: 12rem;
+    width: 85rem;
   }
 }
