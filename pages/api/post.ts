@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   });
 
-  if (req.method === 'PUT') {
+  if (req.method === 'POST') {
     await createPost(req, res, formData);
     return;
   }

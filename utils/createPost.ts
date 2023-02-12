@@ -64,7 +64,6 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse, form
 
     res.status(httpCodes.success).send(responseMessages.success);
   } catch (error) {
-    console.log(error);
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };

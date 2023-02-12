@@ -31,7 +31,7 @@ const uplaodPost = async ({ description, images, author }: UploadPostArguments) 
     return null;
   });
 
-  return await axios.putForm<unknown, null, Request>('/api/post', {
+  return await axios.postForm<unknown, null, Request>('/api/post', {
     description,
     images: imagesFiles,
     author,
