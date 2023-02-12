@@ -1,4 +1,4 @@
-import { Fields, Files, IncomingForm } from 'formidable';
+import { Fields, Files } from 'formidable';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { createPost } from '@/utils/createPost';
@@ -15,26 +15,9 @@ export type FormidableResult = {
   files: Partial<Files>;
 };
 
-export const config = {
-  api: {
-    bodyParser: false,
-    responseLimit: '20mb',
-  },
-};
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const formData = await new Promise<FormidableResult>((resolve, reject) => {
-    const form = new IncomingForm({ multiples: true });
-    form.parse(req, (err, fields, files) => {
-      if (err) {
-        reject({ err });
-      }
-      resolve({ fields, files });
-    });
-  });
-
   if (req.method === 'POST') {
-    await createPost(req, res, formData);
+    await createPost(req, res);
     return;
   }
 

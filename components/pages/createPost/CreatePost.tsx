@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { v4 } from 'uuid';
 import { z } from 'zod';
 
 import { Button } from '@/components/atoms/button/Button';
@@ -20,6 +21,7 @@ import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
 import { useSendNewPost } from '@/components/pages/createPost/useSendNewPost';
+import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
 
 import styles from './createPost.module.scss';
 
@@ -43,6 +45,8 @@ export type ImagesBase64 = Array<
   | undefined
 >;
 
+type ImageUrl = string | undefined;
+
 export const CreatePost = () => {
   const router = useRouter();
 
@@ -55,7 +59,9 @@ export const CreatePost = () => {
   useConvertToBase64(finalImages, setFinalImagesBase64);
 
   const { open, close, modalOpen } = useModal();
-  const { mutate, isLoading, isSuccess } = useSendNewPost();
+
+  const uploadImage = useUploadImage();
+  const sendNewPost = useSendNewPost();
 
   const {
     register,
@@ -68,20 +74,37 @@ export const CreatePost = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<PostDetails> = ({ description }) => {
-    if (finalImages[0]?.file) {
-      mutate(
-        { description, images: finalImages },
-        {
-          onSuccess: async () => {
-            await router.push('/');
-          },
-          onError: () => {
-            toast.error('Could not add post.');
-          },
-        },
-      );
+  const onSubmit: SubmitHandler<PostDetails> = async ({ description }) => {
+    if (!finalImages[0]?.file) {
+      return;
     }
+
+    const uuid = v4();
+
+    const images = await Promise.all(
+      finalImages.map(async (image) => {
+        if (!image?.file) {
+          return;
+        }
+        return await uploadImage.mutateAsync({ imageBlob: image.file, imageUuid: uuid });
+      }),
+    );
+
+    const imageUrls = images.filter((img): img is string => !!img);
+
+    console.log(imageUrls);
+
+    await sendNewPost.mutateAsync(
+      { description, imageUrls },
+      {
+        onSuccess: async () => {
+          await router.push('/');
+        },
+        onError: () => {
+          toast.error('Could not add post.');
+        },
+      },
+    );
   };
 
   const handleRemoveImage = (id: number) => {
@@ -91,7 +114,7 @@ export const CreatePost = () => {
     setFinalImages(filteredState);
   };
 
-  if (isLoading || isSuccess) {
+  if (sendNewPost.isLoading || sendNewPost.isSuccess) {
     return <LoadingHeading headingText="Uploading your post." />;
   }
 

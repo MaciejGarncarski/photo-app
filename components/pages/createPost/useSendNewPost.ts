@@ -3,38 +3,18 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import { useAuth } from '@/hooks/useAuth';
-
-import { FinalImages } from '@/components/pages/createPost/CreatePost';
+import { CreatePostData } from '@/utils/createPost';
 
 type MutationValues = {
   description: string;
-  images: FinalImages;
+  imageUrls: Array<string>;
 };
 
-type UploadPostArguments = {
-  author: string;
-  description: string;
-  images: FinalImages;
-};
-
-type Request = {
-  author: string;
-  description: string;
-  images: Array<Blob | null>;
-};
-
-const uplaodPost = async ({ description, images, author }: UploadPostArguments) => {
-  const imagesFiles = images.map((img) => {
-    if (img?.file) {
-      return img.file;
-    }
-    return null;
-  });
-
-  return await axios.postForm<unknown, null, Request>('/api/post', {
+const uplaodPost = async ({ description, imageUrls, authorId }: CreatePostData) => {
+  return await axios.post<unknown, null, CreatePostData>('/api/post', {
     description,
-    images: imagesFiles,
-    author,
+    imageUrls,
+    authorId,
   });
 };
 
@@ -43,11 +23,11 @@ export const useSendNewPost = () => {
   const { session } = useAuth();
 
   return useMutation(
-    async ({ description, images }: MutationValues) => {
+    async ({ description, imageUrls }: MutationValues) => {
       if (!session?.user?.id) {
         return;
       }
-      return await uplaodPost({ author: session.user.id, description, images });
+      return await uplaodPost({ authorId: session.user.id, description, imageUrls });
     },
     {
       onSuccess: () => {

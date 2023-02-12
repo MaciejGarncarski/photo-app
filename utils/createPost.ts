@@ -1,57 +1,32 @@
-import formidable from 'formidable';
-import { promises as fs } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { v4 } from 'uuid';
+import { z } from 'zod';
 
-import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
-import { string } from '@/utils/string';
 
-import { FormidableResult } from '@/pages/api/post';
+const CreatePostSchema = z.object({
+  description: z.string(),
+  authorId: z.string(),
+  imageUrls: z.string().array(),
+});
 
-export const createPost = async (req: NextApiRequest, res: NextApiResponse, formData: FormidableResult) => {
-  const { fields, files } = formData;
-  const { author, description } = fields;
+export type CreatePostData = z.infer<typeof CreatePostSchema>;
 
-  const images = files['images[]'];
-  const imagesArray = Array.isArray(images) ? images : [images];
+export const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
+  const parsed = CreatePostSchema.safeParse(req.body);
 
-  const uuid = v4();
+  if (!parsed.success) {
+    console.log(parsed.error);
+    return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
+  }
 
-  const uploadData = async (image: formidable.File, index: number) => {
-    const fileContents = image?.filepath ? await fs.readFile(image.filepath) : null;
-
-    if (!fileContents) {
-      throw new Error('No file contents.');
-    }
-
-    const { url } = await imageKit.upload({
-      file: fileContents,
-      fileName: `/${index}.webp`,
-      folder: `${author}/posts/${uuid}`,
-    });
-
-    return url;
-  };
+  const { authorId, description, imageUrls } = parsed.data;
 
   try {
-    if (!Array.isArray(imagesArray)) {
-      throw new Error('Images have to be an array.');
-    }
-
-    const imageUrls = await Promise.all(
-      imagesArray?.map((img, idx) => {
-        if (img) {
-          return uploadData(img, idx);
-        }
-      }),
-    );
-
     await prisma.post.create({
       data: {
-        description: string(description),
-        author_id: string(author),
+        description: description,
+        author_id: authorId,
         image1: imageUrls[0],
         image2: imageUrls[1],
         image3: imageUrls[2],

@@ -7,7 +7,7 @@ type HandleDropImage = {
 };
 
 export const IMAGE_MIN_SIZE = 150;
-export const IMAGE_MAX_FILE_SIZE = 1_300_000;
+export const IMAGE_MAX_FILE_SIZE = 2_500_000;
 
 export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
   const reader = new FileReader();
