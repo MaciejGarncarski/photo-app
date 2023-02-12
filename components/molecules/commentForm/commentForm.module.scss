@@ -12,8 +12,15 @@
   resize: vertical;
   border-radius: var(--radius-small);
   border-bottom-right-radius: 0;
+  border: var(--border-primary);
   padding: 0.5rem;
-  border: var(--border-secondary);
+  transition: all 0.2s ease;
+
+
+  &:hover,
+  &:focus {
+    background-color: var(--bg-gray);
+  }
 }
 
 .postButton {

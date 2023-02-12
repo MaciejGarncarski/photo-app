@@ -16,7 +16,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(({ label, er
         {label}
       </label>
       <textarea id={id} ref={ref} className={styles.textArea} cols={30} rows={10} {...otherProps} />
-      <p>{error?.message}</p>
+      <p className={styles.error}>{error?.message}</p>
     </div>
   );
 });

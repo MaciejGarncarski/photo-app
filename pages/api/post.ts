@@ -18,6 +18,7 @@ export type FormidableResult = {
 export const config = {
   api: {
     bodyParser: false,
+    responseLimit: false,
   },
 };
 

@@ -26,9 +26,13 @@
   transition: all 0.2s ease-out;
   box-shadow: var(--shadow-secondary);
 
+  &:hover {
+    background-color: var(--bg-gray);
+  }
+
   &:focus {
     outline: none;
-    border-color: var(--color-primary);
+    border-color: transparent;
     box-shadow: var(--shadow-focus);
   }
 }

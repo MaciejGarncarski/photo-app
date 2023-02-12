@@ -5,7 +5,7 @@
   color: var(--color-white);
   font-weight: 500;
   border: none;
-  transition: all 0.2s ease;
+  transition: box-shadow 0.2s ease;
 
   &::first-letter {
     text-transform: uppercase;

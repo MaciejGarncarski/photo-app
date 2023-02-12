@@ -50,6 +50,12 @@ video {
   max-width: 100%;
 }
 
+button {
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 textarea,
 button,
 input {
