@@ -13,7 +13,7 @@ import styles from './dropZone.module.scss';
 
 type DropZoneProps = {
   onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
-  setImgSrc: (src: string) => void;
+  setImgSrc: (src: string | null) => void;
   error: ImageCropErrors;
   setError: (error: ImageCropErrors) => void;
 };

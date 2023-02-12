@@ -7,7 +7,7 @@ type CropErrorProps = {
 };
 
 export const DimensionError = 'Image dimensions are too small 🥺';
-export const FileSizeError = 'Image is too big 😲';
+export const FileSizeError = 'Image size is too big 😲';
 export const InvalidTypeError = 'Invalid file type 🤔';
 export const NoImageDetectedError = 'No image detected 😒';
 export const TooManyImagesError = 'Too many images at once 🤦‍♂️';

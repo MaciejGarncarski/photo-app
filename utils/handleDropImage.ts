@@ -3,11 +3,11 @@ import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 type HandleDropImage = {
   file: File;
   setError: (err: ImageCropErrors) => void;
-  setImgSrc: (err: string) => void;
+  setImgSrc: (err: string | null) => void;
 };
 
 export const IMAGE_MIN_SIZE = 150;
-export const IMAGE_MAX_FILE_SIZE = 36_700_160;
+export const IMAGE_MAX_FILE_SIZE = 1_300_000;
 
 export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
   const reader = new FileReader();
@@ -41,9 +41,9 @@ export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) 
       });
       image.src = URL.createObjectURL(file);
       setError(null);
-      setImgSrc(reader.result?.toString() || '');
+      setImgSrc(reader.result?.toString() || null);
     } catch (error) {
-      setImgSrc('');
+      setImgSrc(null);
       setError('INVALID_TYPE');
     }
   });

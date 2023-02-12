@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
 import { Button } from '@/components/atoms/button/Button';
@@ -75,6 +76,9 @@ export const CreatePost = () => {
           onSuccess: async () => {
             await router.push('/');
           },
+          onError: () => {
+            toast.error('Could not add post.');
+          },
         },
       );
     }
@@ -96,6 +100,7 @@ export const CreatePost = () => {
   return (
     <section aria-labelledby="Create new post" className={styles.createPost}>
       <NextSeo title="Create new post" />
+
       {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>

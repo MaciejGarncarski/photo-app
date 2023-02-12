@@ -41,6 +41,7 @@
     "react-dom": "18.2.0",
     "react-focus-lock": "^2.9.2",
     "react-hook-form": "^7.39.5",
+    "react-hot-toast": "^2.4.0",
     "react-image-crop": "^10.0.8",
     "react-infinite-scroll-hook": "^4.0.4",
     "sass": "^1.58.0",

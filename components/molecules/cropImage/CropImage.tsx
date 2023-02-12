@@ -35,7 +35,7 @@ export type ImageCropErrors =
 export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalImages }: PropsTypes) => {
   const [crop, setCrop] = useState<Crop>();
   const [cropCompleted, setCropCompleted] = useState<PixelCrop>();
-  const [imgSrc, setImgSrc] = useState('');
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [error, setError] = useState<ImageCropErrors>(null);
   const [isIdle, setIsIdle] = useState<boolean>(false);
 
@@ -51,7 +51,7 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   };
 
   const resetState = () => {
-    setImgSrc('');
+    setImgSrc(null);
     setCrop(undefined);
     setError(null);
     setIsCropping(false);
