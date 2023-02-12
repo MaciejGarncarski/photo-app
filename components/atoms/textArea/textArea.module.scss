@@ -1,3 +1,5 @@
+@use '/styles/common.scss';
+
 .textArea {
   border-radius: var(--radius-small);
   background-color: var(--bg-gray);
@@ -24,4 +26,14 @@
   text-transform: capitalize;
   position: relative;
   top: -0.5rem;
+}
+
+.error {
+  color: var(--color-error);
+  font-weight: 600;
+  font-size: 1.5rem;
+
+  @include common.mediaquery('lg') {
+    font-size: 2rem;
+  }
 }

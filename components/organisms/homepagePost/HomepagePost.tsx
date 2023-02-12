@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import parse from 'html-react-parser';
 import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
@@ -31,8 +30,7 @@ export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) 
   const { isLoading, username } = useUser({ userId: author_id, authorData });
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  const { isDescriptionLong, hasMultipleBreaks, descriptionWithNewLine, shortDescription } =
-    descriptionData(description);
+  const { isDescriptionLong, hasMultipleBreaks, shortDescription } = descriptionData(description);
 
   const fromNow = dayjs().to(dayjs(created_at));
   const formattedDate = dayjs(created_at).format('MMMM DD YYYY');
@@ -41,7 +39,7 @@ export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) 
     if (isDescriptionLong || hasMultipleBreaks) {
       return (
         <>
-          {parse(showMore ? descriptionWithNewLine : shortDescription)}
+          {showMore ? description : shortDescription}
           &nbsp;
           <button className={styles.showMore} type="button" onClick={() => setShowMore((prev) => !prev)}>
             show {showMore ? 'less' : 'more'}
@@ -50,7 +48,7 @@ export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) 
       );
     }
 
-    return <>{parse(descriptionWithNewLine)}</>;
+    return <>{description}</>;
   };
 
   if (isLoading) {

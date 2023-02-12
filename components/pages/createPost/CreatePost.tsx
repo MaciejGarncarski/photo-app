@@ -59,7 +59,7 @@ export const CreatePost = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields },
+    formState: { dirtyFields, errors },
   } = useForm<PostDetails>({
     resolver: zodResolver(PostDetailsSchema),
     defaultValues: {
@@ -91,13 +91,13 @@ export const CreatePost = () => {
     return <LoadingHeading headingText="Uploading your post." />;
   }
 
-  const isFull = finalImages.length === 3;
+  const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
 
   return (
     <section aria-labelledby="Create new post" className={styles.createPost}>
       <NextSeo title="Create new post" />
       {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
-      {finalImages.length < 3 && !isFull && (
+      {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
           <CreatePostItemContainer>
             <CropImage
@@ -114,12 +114,12 @@ export const CreatePost = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
           <Heading tag="h2">Info about post</Heading>
-          <TextArea label="description" {...register('description')} />
+          <TextArea label="description" {...register('description')} error={errors.description} />
           <div className={styles.actionButtons}>
             <Button variant="secondary" onClick={open}>
               Cancel
             </Button>
-            <Button type="submit" disabled={Boolean(!dirtyFields.description || !finalImages)}>
+            <Button type="submit" disabled={isSubmitDisabled}>
               Complete
             </Button>
           </div>
