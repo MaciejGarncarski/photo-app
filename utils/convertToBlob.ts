@@ -1,6 +1,6 @@
 import { PixelCrop } from 'react-image-crop';
 
-const IMG_QUALITY = 0.5;
+const IMG_QUALITY = 1;
 const TO_RADIANS = Math.PI / 180;
 
 export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) => {
@@ -49,7 +49,7 @@ export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) =>
           resolve(imgFile);
         }
       },
-      'image/png',
+      'image/webp',
       IMG_QUALITY,
     );
   });

@@ -32,10 +32,10 @@ const uploadImageHandler = async (req: NextApiRequest, res: NextApiResponse) => 
     const { authorId, uuid } = fields;
 
     if (Array.isArray(files.image)) {
-      return res.status(httpCodes.badRequest);
+      return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
     if (!files.image) {
-      return res.status(httpCodes.badRequest);
+      return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
 
     try {

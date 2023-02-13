@@ -16,7 +16,6 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
   const parsed = CreatePostSchema.safeParse(req.body);
 
   if (!parsed.success) {
-    console.log(parsed.error);
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 

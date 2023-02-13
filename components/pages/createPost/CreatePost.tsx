@@ -45,8 +45,6 @@ export type ImagesBase64 = Array<
   | undefined
 >;
 
-type ImageUrl = string | undefined;
-
 export const CreatePost = () => {
   const router = useRouter();
 
@@ -80,19 +78,23 @@ export const CreatePost = () => {
     }
 
     const uuid = v4();
-
     const images = await Promise.all(
       finalImages.map(async (image) => {
         if (!image?.file) {
           return;
         }
-        return await uploadImage.mutateAsync({ imageBlob: image.file, imageUuid: uuid });
+        return await uploadImage.mutateAsync(
+          { imageBlob: image.file, imageUuid: uuid },
+          {
+            onError: () => {
+              toast.error('Error');
+            },
+          },
+        );
       }),
     );
 
     const imageUrls = images.filter((img): img is string => !!img);
-
-    console.log(imageUrls);
 
     await sendNewPost.mutateAsync(
       { description, imageUrls },
@@ -114,7 +116,7 @@ export const CreatePost = () => {
     setFinalImages(filteredState);
   };
 
-  if (sendNewPost.isLoading || sendNewPost.isSuccess) {
+  if (uploadImage.isLoading || sendNewPost.isLoading || sendNewPost.isSuccess) {
     return <LoadingHeading headingText="Uploading your post." />;
   }
 
