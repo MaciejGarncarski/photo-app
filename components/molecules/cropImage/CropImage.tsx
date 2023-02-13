@@ -97,6 +97,9 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   return (
     <>
       <Heading tag="h2">Crop your image</Heading>
+      <Button type="button" onClick={resetState} variant="secondary" className={styles.button}>
+        Select diffrent image
+      </Button>
       <ReactCrop
         key={aspectRatio}
         crop={crop}
@@ -109,14 +112,9 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
       >
         <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} />
       </ReactCrop>
-      <div className={styles.buttons}>
-        <Button type="button" className={styles.saveCrop} onClick={saveCrop}>
-          Save crop
-        </Button>
-        <Button type="button" onClick={resetState} variant="secondary">
-          Select diffrent image
-        </Button>
-      </div>
+      <Button type="button" className={styles.button} onClick={saveCrop}>
+        Save crop
+      </Button>
     </>
   );
 };

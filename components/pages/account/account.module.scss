@@ -117,8 +117,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 
   @include common.mediaquery('lg') {
+    text-align: left;
     display: flex;
     flex-direction: row;
     gap: 0.5rem;

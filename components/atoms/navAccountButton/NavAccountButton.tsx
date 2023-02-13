@@ -28,7 +28,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const { close, modalOpen, open } = useModal();
 
   const { signOut } = useAuth();
-  const { username, id } = useUser({ userId });
+  const { username, id, isLoading } = useUser({ userId });
   const { isGoingUp } = useScrollPosition();
   const { isMobile } = useScreenWidth();
 
@@ -54,6 +54,20 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
   const canShowOnScroll = (isMobile && isGoingUp) || !isMobile;
 
   const accountHref = `/${username}`;
+
+  const ButtonContent = () => {
+    if (isLoading) {
+      return <Avatar />;
+    }
+
+    return (
+      <>
+        <span className="visually-hidden">@{username}</span>
+        <Avatar className={styles.avatar} userId={id} />
+      </>
+    );
+  };
+
   return (
     <li
       ref={containerRef}
@@ -69,8 +83,7 @@ export const NavAccountButton = ({ userId }: NavAccountIconProps) => {
         onClick={() => setIsOptionsOpen((prev) => !prev)}
         className={clsx(commonStyles.listItemChild, styles.button)}
       >
-        <span className="visually-hidden">{`@${username}`}</span>
-        <Avatar className={styles.avatar} userId={id} />
+        <ButtonContent />
       </button>
       <AnimatePresence>
         {isOptionsOpen && canShowOnScroll && (

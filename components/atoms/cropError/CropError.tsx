@@ -1,3 +1,5 @@
+import { IMAGE_MAX_FILE_SIZE } from '@/utils/handleDropImage';
+
 import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 
 import styles from './cropError.module.scss';
@@ -7,7 +9,7 @@ type CropErrorProps = {
 };
 
 export const DimensionError = 'Image dimensions are too small 🥺';
-export const FileSizeError = 'Image size is too big 😲';
+export const FileSizeError = `Maximum file size is ${IMAGE_MAX_FILE_SIZE / 1000000}MB 😲`;
 export const InvalidTypeError = 'Invalid file type 🤔';
 export const NoImageDetectedError = 'No image detected 😒';
 export const TooManyImagesError = 'Too many images at once 🤦‍♂️';

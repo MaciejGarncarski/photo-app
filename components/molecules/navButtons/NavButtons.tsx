@@ -2,7 +2,6 @@ import { IconHome, IconSquareRoundedPlus } from '@tabler/icons';
 import { ReactNode } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
 
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
@@ -38,7 +37,6 @@ const listData: Array<ListData> = [
 
 export const NavButtons = () => {
   const { session, status, isSignedIn } = useAuth();
-  const { username } = useUser({ userId: session?.user?.id });
 
   if (status === 'loading') {
     return null;
@@ -53,7 +51,7 @@ export const NavButtons = () => {
       {listData.map(({ icon, onClick, href, title }) => {
         return <NavListButton icon={icon} onClick={onClick} href={href} title={title} key={title} />;
       })}
-      {username && <NavAccountButton userId={session.user.id ?? ''} />}
+      <NavAccountButton userId={session.user.id ?? ''} />
     </ul>
   );
 };

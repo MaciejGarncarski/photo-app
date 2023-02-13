@@ -7,9 +7,10 @@
   justify-content: center;
   align-items: center;
   justify-self: center;
-  max-width: 70rem;
+  max-width: 27rem;
 
   @include common.mediaquery('lg') {
+    max-width: 70rem;
     margin: 3rem auto;
   }
 }
@@ -28,16 +29,11 @@
   }
 }
 
-
-
-.buttons {
-  display: grid;
-  gap: 2rem;
-  grid-template-rows: repeat(2, 1fr);
+.button {
+  width: 80%;
+  margin: 0 auto;
 
   @include common.mediaquery('lg') {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 7rem;
+    width: 70%;
   }
 }

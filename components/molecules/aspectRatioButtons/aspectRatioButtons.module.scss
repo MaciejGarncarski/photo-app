@@ -3,6 +3,11 @@
 .aspectRatioButtons {
   display: grid;
   gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 1rem;
+
 
   @include common.mediaquery('lg') {
     grid-template-columns: repeat(3, 1fr);
@@ -11,5 +16,16 @@
 }
 
 .button {
+
+  &:last-child {
+    grid-column: 1 / 3;
+  }
+
   text-transform: capitalize;
+
+  @include common.mediaquery('lg') {
+    &:last-child {
+      grid-column: auto;
+    }
+  }
 }

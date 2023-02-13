@@ -37,7 +37,10 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
       { image: finalImages[0]?.file, userId: session?.user?.id ?? '' },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries(['account']);
+          if (!session?.user?.id) {
+            return;
+          }
+          await queryClient.invalidateQueries(['account', session.user.id]);
           stagePersonalInfo();
         },
         onSettled: () => {

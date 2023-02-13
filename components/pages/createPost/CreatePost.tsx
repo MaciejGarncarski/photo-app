@@ -126,7 +126,6 @@ export const CreatePost = () => {
     <section aria-labelledby="Create new post" className={styles.createPost}>
       <NextSeo title="Create new post" />
 
-      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
           <CreatePostItemContainer>
@@ -140,6 +139,7 @@ export const CreatePost = () => {
           </CreatePostItemContainer>
         </div>
       )}
+      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>
