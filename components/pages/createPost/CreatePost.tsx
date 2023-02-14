@@ -8,6 +8,8 @@ import { toast } from 'react-hot-toast';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 
+import { useAuth } from '@/hooks/useAuth';
+
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
@@ -47,6 +49,7 @@ export type ImagesBase64 = Array<
 
 export const CreatePost = () => {
   const router = useRouter();
+  const { session } = useAuth();
 
   const [isCropping, setIsCropping] = useState<boolean>(false);
 
@@ -78,13 +81,15 @@ export const CreatePost = () => {
     }
 
     const uuid = v4();
+    const folder = `${session?.user?.id}/posts/${uuid}`;
+
     const images = await Promise.all(
       finalImages.map(async (image) => {
         if (!image?.file) {
           return;
         }
         return await uploadImage.mutateAsync(
-          { imageBlob: image.file, imageUuid: uuid },
+          { imageBlob: image.file, folder },
           {
             onError: () => {
               toast.error('Error');

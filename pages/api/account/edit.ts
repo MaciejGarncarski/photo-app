@@ -1,22 +1,21 @@
-import { IncomingForm } from 'formidable';
-import { promises as fs } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
+import { z } from 'zod';
 
-import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
-import { SignUpSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
-
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { FormidableResult } from '@/pages/api/post';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+const EditAccountSchema = z.object({
+  bio: z.string().nullish(),
+  fullName: z.string().nullish(),
+  username: z.string().nullish(),
+  userId: z.string(),
+  newAvatarUrl: z.string().nullish(),
+});
+
+export type EditAccountData = z.infer<typeof EditAccountSchema>;
 
 const editAccountHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
@@ -25,63 +24,26 @@ const editAccountHandler = async (req: NextApiRequest, res: NextApiResponse) => 
     return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
   }
 
-  const formData = await new Promise<FormidableResult>((resolve, reject) => {
-    const form = new IncomingForm({ multiples: false });
-    form.parse(req, (err, fields, files) => {
-      if (err) {
-        reject({ err });
-      }
-      resolve({ fields, files });
-    });
-  });
-
   if (req.method === 'POST') {
-    const { fields, files } = formData;
-
-    if (Array.isArray(files.image)) {
-      return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
-    }
-
-    const fileContents = files.image?.filepath ? await fs.readFile(files.image.filepath) : null;
-    const fieldsResponse = SignUpSchema.safeParse(fields);
+    const fieldsResponse = EditAccountSchema.safeParse(req.body);
 
     if (!fieldsResponse.success) {
       return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
     }
 
-    const { bio, fullName, username, userId } = fieldsResponse.data;
+    const { newAvatarUrl, bio, fullName, username, userId } = fieldsResponse.data;
 
     if (userId !== session.user?.id) {
       return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
     }
 
     try {
-      if (fileContents) {
-        const { url } = await imageKit.upload({
-          file: fileContents,
-          fileName: `/1.webp`,
-          folder: `${userId}/avatar/custom/`,
-        });
-        await prisma.user.update({
-          data: {
-            bio,
-            name: fullName,
-            username,
-            customImage: url,
-          },
-          where: {
-            id: userId,
-          },
-        });
-
-        return res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
-      }
-
-      await prisma.user.updateMany({
+      await prisma.user.update({
         data: {
           bio,
           name: fullName,
           username,
+          customImage: newAvatarUrl,
         },
         where: {
           id: userId,

@@ -1,20 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { SignUpSchemaData } from '@/components/molecules/completeSignUp/CompleteSignUp';
-
-export type EditAccountData = {
-  image?: Blob | null;
-} & SignUpSchemaData;
+import { EditAccountData } from '@/pages/api/account/edit';
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ userId, username, fullName, image, bio }: EditAccountData) => {
-      return await axios.postForm<unknown, unknown, EditAccountData>('/api/account/edit', {
+    async ({ userId, username, fullName, newAvatarUrl, bio }: EditAccountData) => {
+      return await axios.post<unknown, unknown, EditAccountData>('/api/account/edit', {
         userId,
-        image,
+        newAvatarUrl,
         bio,
         username,
         fullName,

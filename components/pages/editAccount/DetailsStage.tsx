@@ -33,7 +33,7 @@ export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTyp
   const formRef = useRef<HTMLFormElement>(null);
   const { close, modalOpen, open } = useModal();
 
-  const { mutate, isLoading: isMutationLoading } = useEditAccount();
+  const editAccount = useEditAccount();
 
   const defaultValues = {
     username: username ?? '',
@@ -62,11 +62,11 @@ export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTyp
     open();
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const { bio, fullName, username } = getValues();
 
-    mutate(
-      { bio, fullName, image: finalImages[0]?.file, userId, username },
+    await editAccount.mutateAsync(
+      { bio, fullName, userId, username },
       {
         onSuccess: () => {
           router.push(`/${username}`);
@@ -81,7 +81,7 @@ export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTyp
     return <Loading />;
   }
 
-  if (isMutationLoading) {
+  if (editAccount.isLoading) {
     return (
       <m.section variants={stageVariant} animate="animate" exit="exit" initial="initial">
         <Heading tag="h2">Saving changes...</Heading>

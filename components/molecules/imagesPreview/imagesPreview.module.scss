@@ -23,7 +23,7 @@
   align-items: center;
   position: relative;
 
-  &:hover>.deleteIconOverlay {
+  &:hover > .deleteIconOverlay {
     opacity: 1;
   }
 
@@ -49,7 +49,7 @@
   min-height: 10rem;
 
 
-  >svg {
+  > svg {
     width: 6rem;
     height: 6rem;
   }
@@ -68,9 +68,8 @@
   color: var(--text-primary);
   padding: 0.5rem;
   border: none;
-  cursor: pointer;
 
-  >svg {
+  > svg {
     width: 3rem;
     height: 3rem;
   }
@@ -80,7 +79,7 @@
     right: -1.5rem;
     top: -1.5rem;
 
-    >svg {
+    > svg {
       width: 4rem;
       height: 4rem;
     }

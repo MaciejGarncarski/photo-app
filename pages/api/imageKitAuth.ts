@@ -13,8 +13,7 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const token = v4();
-  const expire = (Date.now() + 3300) / 1000;
-
+  const expire = Math.floor(Date.now() / 1000) + 3300;
   const secret = serverEnv.IMG_KIT_PRIVATE;
 
   const signature = createHmac('sha-1', secret).update(token).update(expire.toString()).digest('hex');
