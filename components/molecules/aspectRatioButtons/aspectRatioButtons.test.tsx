@@ -5,15 +5,17 @@ import { render } from '@/utils/tests/utils';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 
 describe('AspectRatioButtons test', () => {
-  it('should change aspect ratio on click', () => {
-    const setAspect = jest.fn();
+  describe('integration', () => {
+    it('should change aspect ratio on click', () => {
+      const setAspect = jest.fn();
 
-    const { container } = render(<AspectRatioButtons aspect={1} setAspect={setAspect} />);
+      const { container } = render(<AspectRatioButtons aspect={1} setAspect={setAspect} />);
 
-    const aspectRatioBtn = getByText(container, 'square');
+      const aspectRatioBtn = getByText(container, 'square');
+      fireEvent.click(aspectRatioBtn);
 
-    fireEvent.click(aspectRatioBtn);
-    expect(aspectRatioBtn.classList).not.toContain('button-secondary');
-    expect(setAspect).toHaveBeenCalled();
+      expect(aspectRatioBtn.classList).not.toContain('button-secondary');
+      expect(setAspect).toHaveBeenCalled();
+    });
   });
 });

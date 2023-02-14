@@ -12,7 +12,7 @@
   gap: 2rem;
   padding: 2rem 1rem;
   text-align: center;
-  transition: 0.2s ease;
+  transition: var(--transition-fast);
   max-height: 30rem;
 
   svg {
@@ -21,7 +21,7 @@
   }
 
 
-  &>* {
+  & > * {
     pointer-events: none;
   }
 
@@ -73,7 +73,7 @@
   color: var(--color-white);
   font-weight: 500;
   border: none;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast);
   z-index: 1;
   pointer-events: all;
   cursor: pointer;
@@ -98,6 +98,6 @@
   pointer-events: none;
 }
 
-.input:focus~.buttonInput {
+.input:focus ~ .buttonInput {
   box-shadow: 0 0 0 0.35rem var(--bg-gray), 0 0 0 0.65rem var(--color-primary);
 }

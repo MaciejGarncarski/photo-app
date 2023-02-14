@@ -31,6 +31,7 @@
     "eslint-config-next": "13.0.5",
     "formidable": "^2.0.1",
     "framer-motion": "^8.5.2",
+    "hmacsha1": "^1.0.0",
     "html-react-parser": "^3.0.4",
     "imagekit": "^4.1.2",
     "next": "13.0.6",

@@ -12,6 +12,7 @@ export const serverSchema = z.object({
   EMAIL_SERVER_PORT: z.string(),
   EMAIL_FROM: z.string(),
   NODE_ENV: z.string(),
+  IMG_KIT_PRIVATE: z.string(),
 });
 
 /**
@@ -29,12 +30,13 @@ export const serverEnv = {
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   NODE_ENV: process.env.NODE_ENV,
+
+  IMG_KIT_PRIVATE: process.env.IMG_KIT_PRIVATE,
 };
 
 export const clientSchema = z.object({
   NEXT_PUBLIC_API_ROOT: z.string(),
   NEXT_PUBLIC_IMG_KIT_PUBLIC: z.string(),
-  NEXT_PUBLIC_IMG_KIT_PRIVATE: z.string(),
   NEXT_PUBLIC_IMG_KIT_ENDPOINT: z.string(),
 });
 
@@ -43,7 +45,6 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   NEXT_PUBLIC_IMG_KIT_ENDPOINT: process.env.NEXT_PUBLIC_IMG_KIT_ENDPOINT,
-  NEXT_PUBLIC_IMG_KIT_PRIVATE: process.env.NEXT_PUBLIC_IMG_KIT_PRIVATE,
   NEXT_PUBLIC_IMG_KIT_PUBLIC: process.env.NEXT_PUBLIC_IMG_KIT_PUBLIC,
   NEXT_PUBLIC_API_ROOT: process.env.NEXT_PUBLIC_API_ROOT,
 };

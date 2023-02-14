@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { useAuth } from '@/hooks/useAuth';
+import { clientEnv } from '@/utils/env.mjs';
 
 type MutationValues = {
   imageUuid: string;
@@ -13,13 +14,22 @@ type UploadImages = MutationValues & {
 };
 
 const uploadImage = async ({ imageUuid, authorId, imageBlob }: UploadImages) => {
-  const { data } = await axios.postForm<string>('/api/post/uploadImage', {
-    uuid: imageUuid,
-    authorId: authorId,
-    image: imageBlob,
+  const { data } = await axios.get('/api/imageKitAuth');
+
+  const { data: uploadedData } = await axios.postForm('https://upload.imagekit.io/api/v1/files/upload', {
+    signature: data.signature,
+    expire: data.expire,
+    token: data.token,
+
+    file: imageBlob,
+    fileName: `/image.webp`,
+    folder: `${authorId}/posts/${imageUuid}`,
+    publicKey: clientEnv.NEXT_PUBLIC_IMG_KIT_PUBLIC,
   });
 
-  return data;
+  if (uploadedData?.url) {
+    return uploadedData.url;
+  }
 };
 
 export const useUploadImage = () => {

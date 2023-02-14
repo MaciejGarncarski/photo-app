@@ -26,12 +26,12 @@ describe('Avatar', () => {
     snapshotComponent(<Avatar />);
   });
 
-  it('Should render avatar with no image.', () => {
+  it('no image', () => {
     render(<Avatar />);
     expect(screen.getByTestId('empty icon')).toBeInTheDocument();
   });
 
-  it('Should render users avatar', async () => {
+  it('with custom image', async () => {
     render(<Avatar userId="user" />);
     await waitFor(() => expect(screen.getByTestId('customImage')).toBeInTheDocument(), { timeout: 2000 });
   });

@@ -23,8 +23,8 @@ describe('Input', () => {
     snapshotComponent(<Input labelText="random" />);
   });
 
-  describe('Input props', () => {
-    it('Should pass with label prop', () => {
+  describe('props', () => {
+    it('label prop', () => {
       const label = 'testing label';
       render(<Input labelText={label} type="input" />);
 
@@ -33,7 +33,7 @@ describe('Input', () => {
       expect(input).toBeInTheDocument();
     });
 
-    it('Should pass with correct type', () => {
+    it('type prop', () => {
       const inputType = 'tel';
       render(<Input labelText="label" type={inputType} />);
 
@@ -42,7 +42,7 @@ describe('Input', () => {
       expect(input.type).toBe(inputType);
     });
 
-    it('Should pass with optional text', () => {
+    it('optional prop', () => {
       render(<Input labelText="label" optional />);
 
       const input = screen.getByLabelText(/(optional)/);
@@ -50,12 +50,11 @@ describe('Input', () => {
     });
   });
 
-  describe('Input user integration', () => {
+  describe('integration', () => {
     it('Should pass when error displayed and when has error className', () => {
       render(<Input labelText="label" optional data-testid="input" error={{ type: 'max', message: 'max error' }} />);
 
       const errorMessage = screen.getByText(/max error/i);
-
       const input = screen.getByTestId(/input/i);
 
       expect(errorMessage).toBeInTheDocument();

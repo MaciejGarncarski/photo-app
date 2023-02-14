@@ -22,13 +22,13 @@ jest.mock('next-auth/react', () => {
 
 describe('NavAccountButton', () => {
   describe('User integration', () => {
-    it('menu should be initially hidden', () => {
+    it('menu initially hidden', () => {
       render(<NavAccountButton userId="user" />);
       const menu = screen.queryByText('menu');
       expect(menu).toBeNull();
     });
 
-    it('should be visible on mouseOver', () => {
+    it('menu visible on mouseOver', () => {
       render(<NavAccountButton userId="user" />);
       const button = screen.getByTestId('button');
 
@@ -38,7 +38,7 @@ describe('NavAccountButton', () => {
       expect(menu).toBeInTheDocument();
     });
 
-    it('should open on avatar click', async () => {
+    it('menu visible on avatar click', async () => {
       render(<NavAccountButton userId="user" />);
 
       const menu = screen.queryByTestId('menu');

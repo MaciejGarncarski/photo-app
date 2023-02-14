@@ -23,7 +23,7 @@
   padding: 1rem;
   border: var(--border-primary);
   border-radius: var(--radius-small);
-  transition: all 0.2s ease-out;
+  transition: all var(--transition-fast)-out;
   box-shadow: var(--shadow-secondary);
 
   &:hover {

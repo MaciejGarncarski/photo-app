@@ -12,6 +12,7 @@
   background-color: var(--bg-primary);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-secondary);
+  border: var(--border-secondary);
   left: 50%;
   transform: translateX(-50%);
   font-size: 2rem;
@@ -24,52 +25,22 @@
     display: block;
   }
 
-  &::before {
-    content: " ";
-    left: 50%;
-    border: solid transparent;
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-width: var(--tooltip-arrow-size);
-    margin-left: calc(var(--tooltip-arrow-size) * -1);
-  }
 }
 
 .top {
-  top: -5rem;
+  top: -4.5rem;
   bottom: unset;
-
-  &::before {
-    transform: translateY(3rem);
-    filter: drop-shadow(0px 1px 0px var(--border-primary-color));
-    border-top-color: var(--bg-primary);
-  }
 }
 
 .bottom {
-  bottom: -5.5rem;
-
-  &::before {
-    transform: translateY(-3rem);
-    filter: drop-shadow(0px -1px 0px var(--border-primary-color));
-    border-bottom-color: var(--bg-primary);
-  }
+  bottom: -5rem;
 }
 
 .right {
   top: 50%;
-  left: 5rem;
+  left: 4rem;
   right: unset;
   transform: translateX(0) translateY(-50%);
-
-  &::before {
-    transform: translateX(-50%);
-    left: 0;
-    filter: drop-shadow(-1px 0px 0px var(--border-primary-color));
-    border-right-color: var(--bg-primary);
-  }
 }
 
 .left {
@@ -77,12 +48,4 @@
   right: 0;
   left: unset;
   transform: translateX(0) translateY(-50%);
-
-  &::before {
-    left: unset;
-    right: -1rem;
-    transform: translateX(50%);
-    filter: drop-shadow(1px 0px 0px var(--border-primary-color));
-    border-left-color: var(--bg-primary);
-  }
 }
