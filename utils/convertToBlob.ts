@@ -1,7 +1,6 @@
 import { PixelCrop } from 'react-image-crop';
 
-const IMG_QUALITY = 1;
-const TO_RADIANS = Math.PI / 180;
+const QUALITY = 1;
 
 export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) => {
   const canvas = document.createElement('canvas');
@@ -24,7 +23,6 @@ export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) =>
   const cropX = crop.x * scaleX;
   const cropY = crop.y * scaleY;
 
-  const rotateRads = 0 * TO_RADIANS;
   const centerX = image.naturalWidth / 2;
   const centerY = image.naturalHeight / 2;
 
@@ -32,7 +30,6 @@ export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) =>
 
   ctx.translate(-cropX, -cropY);
   ctx.translate(centerX, centerY);
-  ctx.rotate(rotateRads);
   ctx.scale(1, 1);
   ctx.translate(-centerX, -centerY);
   ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, 0, 0, image.naturalWidth, image.naturalHeight);
@@ -41,18 +38,16 @@ export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) =>
 
   const blob = await new Promise<Blob>((resolve) => {
     canvas.toBlob(
-      async (file) => {
-        if (file) {
-          const blobUrl = URL.createObjectURL(file);
-          const imgFile = await fetch(blobUrl).then((r) => r.blob());
-
-          resolve(imgFile);
+      async (blob) => {
+        if (!blob) {
+          return;
         }
+        resolve(blob);
       },
       'image/webp',
-      IMG_QUALITY,
+      QUALITY,
     );
   });
 
-  return { blob };
+  return blob;
 };

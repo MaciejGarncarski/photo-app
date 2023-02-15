@@ -37,3 +37,14 @@
     width: 70%;
   }
 }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include common.mediaquery('lg') {
+    gap: 5rem;
+    flex-direction: row;
+  }
+}

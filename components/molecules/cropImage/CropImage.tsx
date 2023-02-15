@@ -2,6 +2,7 @@
 import { ChangeEvent, SyntheticEvent, useRef, useState } from 'react';
 import { Crop, PixelCrop } from 'react-image-crop';
 import ReactCrop from 'react-image-crop';
+import { v4 } from 'uuid';
 
 import { centerAspectCrop } from '@/utils/centerAspectCrop';
 import { convertToBlob } from '@/utils/convertToBlob';
@@ -11,6 +12,9 @@ import { Button } from '@/components/atoms/button/Button';
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
+import { useModal } from '@/components/atoms/modal/useModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 
 import 'react-image-crop/src/ReactCrop.scss';
@@ -41,6 +45,8 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
 
   const imgRef = useRef<HTMLImageElement>(null);
 
+  const { open, close, modalOpen } = useModal();
+
   const onImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
     if (!aspectRatio) {
       return;
@@ -60,12 +66,15 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   const saveCrop = async () => {
     setIsIdle(true);
     if (imgRef.current && cropCompleted) {
-      const { blob } = await convertToBlob(imgRef.current, cropCompleted);
+      const blob = await convertToBlob(imgRef.current, cropCompleted);
+
+      const imageId = v4();
+
       setFinalImages([
         ...finalImages,
         {
           file: blob,
-          id: finalImages.length,
+          id: imageId,
         },
       ]);
       setIsIdle(false);
@@ -97,9 +106,6 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   return (
     <>
       <Heading tag="h2">Crop your image</Heading>
-      <Button type="button" onClick={resetState} variant="secondary" className={styles.button}>
-        Select diffrent image
-      </Button>
       <ReactCrop
         key={aspectRatio}
         crop={crop}
@@ -112,9 +118,18 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
       >
         <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} />
       </ReactCrop>
-      <Button type="button" className={styles.button} onClick={saveCrop}>
-        Save crop
-      </Button>
+      <div className={styles.buttons}>
+        <Button type="button" onClick={open} variant="secondary" className={styles.button}>
+          Select diffrent image
+        </Button>
+        <Button type="button" className={styles.button} onClick={saveCrop}>
+          Save crop
+        </Button>
+      </div>
+
+      <ModalContainer>
+        {modalOpen && <ConfirmationAlert headingText="Select diffrent image?" close={close} onConfirm={resetState} />}
+      </ModalContainer>
     </>
   );
 };

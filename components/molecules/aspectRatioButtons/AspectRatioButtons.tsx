@@ -22,7 +22,7 @@ type AspectRatioButtonsProps = {
 export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProps) => {
   return (
     <CreatePostItemContainer>
-      <Heading tag="h2">Type of crop</Heading>
+      <Heading tag="h2">Crop type</Heading>
       <div className={styles.aspectRatioButtons}>
         {buttonData.map(({ text, aspectRatio }) => {
           return (

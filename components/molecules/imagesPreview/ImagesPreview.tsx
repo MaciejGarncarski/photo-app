@@ -8,7 +8,7 @@ import { ImagesBase64 } from '@/components/pages/createPost/CreatePost';
 import styles from './imagesPreview.module.scss';
 
 type PropsTypes = {
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void;
   imagesBase64: ImagesBase64;
 };
 
@@ -37,7 +37,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
         {imagesBase64.map((finalImage) => {
           if (finalImage?.src) {
             return (
-              <motion.div key={`${finalImage.id} - preview`} className={styles.previewButton} variants={item}>
+              <motion.div key={finalImage.id} className={styles.previewButton} variants={item}>
                 <motion.button
                   whileFocus={{ scale: 1.1 }}
                   whileHover={{ scale: 1.1 }}
@@ -68,13 +68,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
 
         {Array.from({ length: emptyImagesLength }, (_, el) => el).map((id) => {
           return (
-            <motion.button
-              variants={item}
-              key={`${id} - empty space`}
-              disabled
-              type="button"
-              className={styles.emptySpace}
-            >
+            <motion.button variants={item} key={id} disabled type="button" className={styles.emptySpace}>
               <IconPhotoPlus />
               <span className="visually-hidden">empty space for image</span>
             </motion.button>

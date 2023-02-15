@@ -24,10 +24,10 @@ type HomePagePostProps = {
 
 dayjs.extend(relativeTime);
 
-export const HomepagePost = ({ post, authorData, priority }: HomePagePostProps) => {
+export const HomepagePost = ({ post, priority }: HomePagePostProps) => {
   const { session } = useAuth();
   const { author_id, description, created_at, likesCount } = post;
-  const { isLoading, username } = useUser({ userId: author_id, authorData });
+  const { isLoading, username } = useUser({ userId: author_id });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, hasMultipleBreaks, shortDescription } = descriptionData(description);

@@ -34,14 +34,14 @@ const PostDetailsSchema = z.object({
 type PostDetails = z.infer<typeof PostDetailsSchema>;
 
 type FinalImage = {
-  id: number;
+  id: string;
   file: Blob | null;
 };
 export type FinalImages = Array<FinalImage | undefined>;
 
 export type ImagesBase64 = Array<
   | {
-      id: number;
+      id: string;
       src: string;
     }
   | undefined
@@ -114,7 +114,7 @@ export const CreatePost = () => {
     );
   };
 
-  const handleRemoveImage = (id: number) => {
+  const handleRemoveImage = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
       return finalImg?.id !== id;
     });

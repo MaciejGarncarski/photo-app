@@ -4,9 +4,9 @@ import { ReactNode } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
-import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
 import { NavListButton } from '@/components/atoms/navListButton/NavListButton';
 import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
+import { NavAccountButton } from '@/components/molecules/navAccountButton/NavAccountButton';
 
 import styles from './navButtons.module.scss';
 
@@ -51,7 +51,7 @@ export const NavButtons = () => {
       {listData.map(({ icon, onClick, href, title }) => {
         return <NavListButton icon={icon} onClick={onClick} href={href} title={title} key={title} />;
       })}
-      <NavAccountButton userId={session.user.id ?? ''} />
+      <NavAccountButton />
     </ul>
   );
 };

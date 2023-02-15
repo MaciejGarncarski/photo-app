@@ -18,7 +18,13 @@ export const Home = () => {
   });
 
   if (isLoading || !data) {
-    return <PostPlaceholder />;
+    return (
+      <>
+        {[0, 1, 2].map((el) => {
+          return <PostPlaceholder key={el} />;
+        })}
+      </>
+    );
   }
 
   return (

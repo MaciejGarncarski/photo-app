@@ -18,7 +18,6 @@ type PropsTypes = {
   username?: string;
   userId?: string;
   isPrefetching?: boolean;
-  authorData?: Account;
 };
 
 export const fetchAccount = async ({ userId, username, isPrefetching }: PropsTypes) => {
@@ -45,13 +44,12 @@ export type UsernameToIdResponse = {
   };
 };
 
-export const useUser = ({ userId, username, authorData }: PropsTypes) => {
+export const useUser = ({ userId, username }: PropsTypes) => {
   const query = useQuery({
     queryKey: ['account', userId, username],
     queryFn: async () => {
       return await fetchAccount({ userId, username });
     },
-    initialData: authorData,
     enabled: Boolean(userId) || Boolean(username),
   });
 

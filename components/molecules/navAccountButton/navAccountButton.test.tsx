@@ -3,13 +3,13 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { mockedUser } from '@/utils/tests/mockedData';
 import { render } from '@/utils/tests/utils';
 
-import { NavAccountButton } from '@/components/atoms/navAccountButton/NavAccountButton';
+import { NavAccountButton } from '@/components/molecules/navAccountButton/NavAccountButton';
 
 jest.mock('next-auth/react', () => {
   const originalModule = jest.requireActual('next-auth/react');
   const mockSession = {
     expires: new Date(Date.now() + 2 * 86400).toISOString(),
-    user: { name: 'Maciej Garncarski' },
+    user: { name: mockedUser.user.name, id: mockedUser.user.id },
   };
   return {
     __esModule: true,
@@ -23,13 +23,13 @@ jest.mock('next-auth/react', () => {
 describe('NavAccountButton', () => {
   describe('User integration', () => {
     it('menu initially hidden', () => {
-      render(<NavAccountButton userId="user" />);
+      render(<NavAccountButton />);
       const menu = screen.queryByText('menu');
       expect(menu).toBeNull();
     });
 
     it('menu visible on mouseOver', () => {
-      render(<NavAccountButton userId="user" />);
+      render(<NavAccountButton />);
       const button = screen.getByTestId('button');
 
       fireEvent.mouseOver(button);
@@ -39,7 +39,7 @@ describe('NavAccountButton', () => {
     });
 
     it('menu visible on avatar click', async () => {
-      render(<NavAccountButton userId="user" />);
+      render(<NavAccountButton />);
 
       const menu = screen.queryByTestId('menu');
       const avatarBtn = await screen.findByText(`@${mockedUser.user.username}`);

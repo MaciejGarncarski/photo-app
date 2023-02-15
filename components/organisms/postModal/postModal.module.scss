@@ -25,7 +25,7 @@
   @include common.mediaquery('xl') {
     width: min(140rem, 80%);
     grid-template-columns: 85rem 1fr;
-    min-height: 60rem;
+    min-height: 65rem;
     max-height: 70rem;
   }
 

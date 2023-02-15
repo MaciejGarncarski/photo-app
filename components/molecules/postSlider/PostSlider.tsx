@@ -9,7 +9,7 @@ import { useUser } from '@/hooks/useUser';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
-import { StatusDots } from '@/components/molecules/postSlider/StatusDots';
+import { PostSliderProgress } from '@/components/molecules/postSlider/PostSliderProgress';
 import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
 import { descriptionData } from '@/components/organisms/homepagePost/description';
@@ -44,8 +44,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
 
   const handleLike = () => {
     if (!session?.user?.id) {
-      router.push('/auth/signin');
-      return;
+      return router.push('/auth/signin');
     }
     mutate({ isLiked: isLiked ?? false, userId: session.user.id, postId: id });
   };
@@ -56,8 +55,8 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
         className={clsx(imageClassName, styles.sliderImage)}
         src={src}
         priority={imagePriority ?? Boolean(priority)}
-        width={300}
-        height={300}
+        width={900}
+        height={900}
         alt={`${username} - ${shortDescription}`}
       />
     );
@@ -114,7 +113,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      <StatusDots currentIndex={currentIndex} images={postImages} />
+      <PostSliderProgress currentIndex={currentIndex} images={postImages} />
       {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
         <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
           <IconArrowRight />
