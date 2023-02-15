@@ -1,6 +1,6 @@
 import { PixelCrop } from 'react-image-crop';
 
-const QUALITY = 1;
+const QUALITY = 0.5;
 
 export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) => {
   const canvas = document.createElement('canvas');
@@ -38,7 +38,7 @@ export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) =>
 
   const blob = await new Promise<Blob>((resolve) => {
     canvas.toBlob(
-      async (blob) => {
+      (blob) => {
         if (!blob) {
           return;
         }
