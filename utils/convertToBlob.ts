@@ -1,6 +1,6 @@
 import { PixelCrop } from 'react-image-crop';
 
-const QUALITY = 0.5;
+const QUALITY = 0.25;
 
 export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) => {
   const canvas = document.createElement('canvas');

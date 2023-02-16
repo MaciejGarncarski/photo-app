@@ -43,6 +43,8 @@
   border: 0;
   box-shadow: var(--shadow-secondary);
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   filter: opacity(0.5);
@@ -52,6 +54,10 @@
   > svg {
     width: 6rem;
     height: 6rem;
+  }
+
+  @include common.mediaquery('lg') {
+    min-height: 15rem;
   }
 }
 
@@ -69,6 +75,12 @@
   padding: 0.5rem;
   border: none;
 
+  &:hover,
+  &:focus {
+    outline-offset: 3px;
+    background-color: var(--color-error);
+  }
+
   > svg {
     width: 3rem;
     height: 3rem;
@@ -84,5 +96,4 @@
       height: 4rem;
     }
   }
-
 }

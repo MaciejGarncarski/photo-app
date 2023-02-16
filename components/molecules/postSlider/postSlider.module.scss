@@ -38,13 +38,17 @@
   flex-shrink: 0;
   pointer-events: none;
   width: 32rem;
-  max-height: 37rem;
 
   @include common.mediaquery('lg') {
     width: 45rem;
     max-height: 45rem;
     object-fit: contain;
   }
+}
+
+.sliderImageLoading {
+  width: 0;
+  height: 0;
 }
 
 .button {

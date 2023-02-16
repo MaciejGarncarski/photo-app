@@ -70,7 +70,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
           return (
             <motion.button variants={item} key={id} disabled type="button" className={styles.emptySpace}>
               <IconPhotoPlus />
-              <span className="visually-hidden">empty space for image</span>
+              <p>empty</p>
             </motion.button>
           );
         })}

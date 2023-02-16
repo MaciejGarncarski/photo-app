@@ -1,4 +1,5 @@
 import { IconMessage, IconShare } from '@tabler/icons';
+import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -7,6 +8,7 @@ import { createPortal } from 'react-dom';
 
 import { useAuth } from '@/hooks/useAuth';
 import { namedComponent } from '@/utils/namedComponent';
+import { updateInfinitePostsLike } from '@/utils/updateInfinitePostsLike';
 
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
@@ -18,6 +20,8 @@ import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
 import { PostData } from '@/components/pages/collection/useCollection';
+
+import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 import styles from './postButtons.module.scss';
 
@@ -50,14 +54,14 @@ const Button = ({ children, onClick }: ButtonProps) => {
 };
 
 export const PostButtons = ({ post }: PostButtonsProps) => {
+  const queryClient = useQueryClient();
   const { isLiked, id, isInCollection } = post;
-
-  const { modalOpen, open, close } = useModal();
-  const { modalOpen: shareModalOpen, open: openShare, close: closeShare } = useModal();
 
   const { session } = useAuth();
   const { push } = useRouter();
-  const { mutate } = usePostLike();
+  const { modalOpen, open, close } = useModal();
+  const { modalOpen: shareModalOpen, open: openShare, close: closeShare } = useModal();
+  const postLikeMutation = usePostLike();
   const collectionMutation = useCollectionMutation();
 
   const handleLike = () => {
@@ -66,7 +70,11 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       return;
     }
 
-    mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId: id });
+    queryClient.setQueryData<InfiniteData<InfinitePosts<PostData>>>(['homepage infinite posts'], (oldData) =>
+      updateInfinitePostsLike(oldData, post),
+    );
+
+    postLikeMutation.mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId: id });
   };
 
   const handleCollection = () => {

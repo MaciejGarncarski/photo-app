@@ -55,8 +55,8 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
         className={clsx(imageClassName, styles.sliderImage)}
         src={src}
         priority={imagePriority ?? Boolean(priority)}
-        width={900}
-        height={900}
+        width={600}
+        height={600}
         alt={`${username} - ${shortDescription}`}
       />
     );
@@ -106,7 +106,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
             {postImages.map((image, idx) => {
               return (
                 <motion.figure className={styles.figure} key={`${post.id} ${image} ${currentIndex}`}>
-                  <PostImage src={image} imagePriority={priority && idx === 0} />
+                  <PostImage src={image} imagePriority={idx === 0} />
                 </motion.figure>
               );
             })}
