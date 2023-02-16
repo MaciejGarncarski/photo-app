@@ -15,19 +15,17 @@ import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { Input } from '@/components/molecules/input/Input';
-import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
 
 import styles from './editAccount.module.scss';
 
 type PropsTypes = {
-  finalImages: FinalImages;
   userId: string;
   stageSelectImage: () => void;
 };
 
-export const DetailsStage = ({ finalImages, userId, stageSelectImage }: PropsTypes) => {
+export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const { username, name, bio, isLoading } = useUser({ userId });
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);

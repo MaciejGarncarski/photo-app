@@ -1,6 +1,6 @@
 import { PixelCrop } from 'react-image-crop';
 
-const QUALITY = 0.25;
+const QUALITY = 0;
 
 export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) => {
   const canvas = document.createElement('canvas');
@@ -12,13 +12,13 @@ export const convertToBlob = async (image: HTMLImageElement, crop: PixelCrop) =>
 
   const scaleX = image.naturalWidth / image.width;
   const scaleY = image.naturalHeight / image.height;
-  const pixelRatio = window.devicePixelRatio;
+  const pixelRatio = window.devicePixelRatio || 1;
 
   canvas.width = Math.floor(crop.width * scaleX * pixelRatio);
   canvas.height = Math.floor(crop.height * scaleY * pixelRatio);
 
   ctx.scale(pixelRatio, pixelRatio);
-  ctx.imageSmoothingQuality = 'high';
+  ctx.imageSmoothingQuality = 'low';
 
   const cropX = crop.x * scaleX;
   const cropY = crop.y * scaleY;

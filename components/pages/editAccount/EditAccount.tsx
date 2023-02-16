@@ -66,12 +66,7 @@ export const EditAccount = ({ userId }: PropsTypes) => {
           )}
 
           {stage === 'personalInfo' && (
-            <LazyDetailsStage
-              key="detailsStage"
-              stageSelectImage={stageSelectImage}
-              finalImages={finalImages}
-              userId={userId}
-            />
+            <LazyDetailsStage key="detailsStage" stageSelectImage={stageSelectImage} userId={userId} />
           )}
         </AnimatePresence>
       </Suspense>
