@@ -17,7 +17,7 @@ type PostOptionsProps = {
 };
 
 export const PostOptions = ({ close, post, openCnonfirmation }: PostOptionsProps) => {
-  const { id: postId, isInCollection, author } = post;
+  const { postId, isInCollection, author } = post;
   const { session } = useAuth();
   const { id, role } = useUser({ userId: session?.user?.id ?? '' });
   const collectionMutation = useCollectionMutation();

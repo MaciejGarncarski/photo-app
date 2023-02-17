@@ -1,4 +1,4 @@
-import { Post, User } from '@prisma/client';
+import { PostImage, User } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -8,16 +8,20 @@ type UseCollection = {
   userId: string;
 };
 
-export type PostData = Post & {
+export type PostPlaceholders = Array<string | undefined>;
+
+export type PostData = {
+  postId: number;
+  author: User;
+  authorId: string;
+  description: string;
+  createdAt: Date;
+  postPlaceholders: PostPlaceholders;
+  imagesData: Array<PostImage | null>;
   likesCount: number;
   commentsCount: number;
   isLiked?: boolean | null;
   isInCollection?: boolean | null;
-  author: User;
-  _count: {
-    posts_likes: number;
-    posts_comments: number;
-  };
 };
 
 export const useCollection = ({ userId }: UseCollection) => {

@@ -43,7 +43,7 @@ export const CommentForm = ({ post }: CommentFormProps) => {
   );
 
   const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
-    mutate({ commentText: comment, postId: post.id });
+    mutate({ commentText: comment, postId: post.postId });
   };
 
   if (isLoading) {

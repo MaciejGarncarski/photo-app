@@ -19,26 +19,24 @@ const overlay: Variants = {
 export const MotionLink = motion(Link);
 
 export const AccountPost = ({ post }: AccountPostProps) => {
-  const { images, likesCount, commentsCount, id, image1 } = post;
+  const { imagesData, likesCount, commentsCount, postId } = post;
 
-  const hasOneImage = typeof images != 'undefined' && images;
-  const hasMultipleImages = typeof image1 != 'undefined' && image1;
-
-  if (!images && !image1) {
+  if (!imagesData[0]) {
     return null;
   }
+
+  const { url, width, height } = imagesData[0];
 
   return (
     <MotionLink
       shallow
-      href={`/post/${id}`}
+      href={`/post/${postId}`}
       initial="hidden"
       whileHover="visible"
       transition={{ type: 'tween', duration: 0.15 }}
       className={styles.container}
     >
-      {hasOneImage && <Image className={styles.image} src={images} alt="" width={300} height={300} priority />}
-      {hasMultipleImages && <Image className={styles.image} src={image1} alt="" width={300} height={300} priority />}
+      <Image className={styles.image} src={url} alt="" width={width} height={height} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>
           <IconHeart /> {likesCount}

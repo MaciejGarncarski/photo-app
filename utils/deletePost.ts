@@ -52,9 +52,23 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    if (post?.file_id) {
-      await imageKit.deleteFile(post?.file_id);
-    }
+    await Promise.all(
+      [post?.image1, post?.image2, post?.image3].map(async (el) => {
+        if (!el) {
+          return;
+        }
+
+        const postImage = await prisma.postImage.findFirst({
+          where: {
+            id: el,
+          },
+        });
+
+        if (postImage?.fileId) {
+          await imageKit.deleteFile(postImage?.fileId);
+        }
+      }),
+    );
 
     await res.revalidate('/');
     res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);

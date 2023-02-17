@@ -41,7 +41,7 @@ export const AccountPosts = ({ id }: AccountPostsProps) => {
     <div className={styles.posts}>
       {data.pages.map((page) => {
         return page.posts.map((post) => {
-          return <AccountPost key={post.id} post={post} />;
+          return <AccountPost key={post.postId} post={post} />;
         });
       })}
       {(isLoading || hasNextPage) && (

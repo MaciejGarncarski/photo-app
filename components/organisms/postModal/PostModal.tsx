@@ -24,7 +24,7 @@ export const PostModal = ({ post, close }: PostModalProps) => {
   const { isMobile } = useScreenWidth();
 
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
-    postId: post.id,
+    postId: post.postId,
   });
 
   const [sentryRef] = useInfiniteScroll({

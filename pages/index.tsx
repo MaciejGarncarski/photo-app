@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
 
     await Promise.all(
       postsData.map(async (post) => {
-        await queryClient.prefetchQuery(['account', post.author_id], () =>
+        await queryClient.prefetchQuery(['account', post.author_id, null], () =>
           fetchAccount({ userId: post.author_id, isPrefetching: true }),
         );
       }),

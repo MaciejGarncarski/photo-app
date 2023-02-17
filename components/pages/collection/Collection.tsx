@@ -43,7 +43,7 @@ export const Collection = () => {
       {isEmpty && <p>No saved posts.</p>}
       {data.pages.map((page) => {
         return page.posts.map((post, idx) => {
-          return <HomepagePost priority={idx < 6} key={post.id} post={post} />;
+          return <HomepagePost priority={idx < 6} key={post.postId} post={post} />;
         });
       })}
       {(isLoading || hasNextPage) && (

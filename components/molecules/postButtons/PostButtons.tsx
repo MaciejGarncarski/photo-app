@@ -55,7 +55,7 @@ const Button = ({ children, onClick }: ButtonProps) => {
 
 export const PostButtons = ({ post }: PostButtonsProps) => {
   const queryClient = useQueryClient();
-  const { isLiked, id, isInCollection } = post;
+  const { isLiked, postId, isInCollection } = post;
 
   const { session } = useAuth();
   const { push } = useRouter();
@@ -74,16 +74,16 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       updateInfinitePostsLike(oldData, post),
     );
 
-    postLikeMutation.mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId: id });
+    postLikeMutation.mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId });
   };
 
   const handleCollection = () => {
     if (isInCollection) {
-      collectionMutation.mutate({ type: 'remove', postId: id });
+      collectionMutation.mutate({ type: 'remove', postId });
       return;
     }
 
-    collectionMutation.mutate({ type: undefined, postId: id });
+    collectionMutation.mutate({ type: undefined, postId });
   };
 
   return (
@@ -121,7 +121,7 @@ export const PostButtons = ({ post }: PostButtonsProps) => {
       )}
       <AnimatePresence>
         {shareModalOpen && (
-          <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${id}`} />
+          <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
         )}
       </AnimatePresence>
       {modalOpen &&

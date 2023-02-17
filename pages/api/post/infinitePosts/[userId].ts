@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { infinitePostsCount } from '@/utils/infinitePostsCount';
 import { string } from '@/utils/string';
+import { transformPost } from '@/utils/transformPost';
 
 import { PostData } from '@/components/pages/collection/useCollection';
 
@@ -66,13 +67,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { postsCount, nextCursor } = infinitePostsCount({ count: _count.id, skipNumber });
 
-    const transformedPosts = posts.map((post) => {
-      return {
-        ...post,
-        likesCount: post._count.posts_likes,
-        commentsCount: post._count.posts_comments,
-      };
-    });
+    const transformedPosts = await Promise.all(
+      posts.map(async (post) => {
+        return await transformPost(post);
+      }),
+    );
 
     const response: InfinitePosts<PostData> = {
       posts: transformedPosts,

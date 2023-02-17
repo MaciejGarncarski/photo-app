@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -39,24 +39,24 @@ model Session {
 }
 
 model User {
-  id             String         @id @default(cuid())
-  email          String?        @unique
+  id             String        @id @default(cuid())
+  email          String?       @unique
   emailVerified  DateTime?
   name           String?
-  username       String?        @default(cuid())
+  username       String?       @default(cuid())
   bio            String?
   image          String?
   customImage    String?
-  role           Role           @default(USER)
+  role           Role          @default(USER)
   accounts       Account[]
   sessions       Session[]
   posts          Post[]
   posts_likes    PostLike[]
   posts_comments PostComment[]
-  fromUser       Follower[]     @relation("Follower")
-  toUser         Follower[]     @relation("Following")
+  fromUser       Follower[]    @relation("Follower")
+  toUser         Follower[]    @relation("Following")
   Collection     Collection[]
-  created_at     DateTime       @default(now()) @db.Timestamp(0)
+  created_at     DateTime      @default(now()) @db.Timestamp(0)
   CommentLike    CommentLike[]
 }
 
@@ -68,24 +68,32 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-
 model Post {
-  id             Int            @id @default(autoincrement()) @db.Int
-  author         User           @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  id             Int           @id @default(autoincrement()) @db.Int
+  author         User          @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id      String
-  description    String         @db.MediumText
-  created_at     DateTime       @default(now()) @db.Timestamp(0)
-  images         String?
-  image1         String?
-  image2         String?
-  image3         String?
-  file_id        String?
+  description    String        @db.MediumText
+  created_at     DateTime      @default(now()) @db.Timestamp(0)
+  image1         Int
+  image2         Int?
+  image3         Int?
   posts_likes    PostLike[]
   posts_comments PostComment[]
   post_saved     SavedPost[]
   Collection     Collection[]
 
   @@index([author_id])
+}
+
+model PostImage {
+  id           Int    @id @default(autoincrement()) @db.Int
+  fileId       String
+  name         String
+  url          String
+  thumbnailUrl String
+  width        Int
+  height       Int
+  size         Int
 }
 
 model SavedPost {
@@ -122,10 +130,10 @@ model PostComment {
 }
 
 model CommentLike {
-  id         Int          @id @default(autoincrement()) @db.Int
+  id         Int         @id @default(autoincrement()) @db.Int
   comment    PostComment @relation(fields: [comment_id], references: [id], onDelete: Cascade)
-  comment_id Int          @db.Int
-  user       User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  comment_id Int         @db.Int
+  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
 
   @@index([comment_id])

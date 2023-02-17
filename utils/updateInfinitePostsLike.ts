@@ -13,14 +13,11 @@ export const updateInfinitePostsLike = (oldData?: InfinitePost, newData?: PostDa
 
   const newPages = oldData.pages.map((newPage, idx) => {
     const newPosts = newPage.posts.map((item) => {
-      if (item.id === newData.id) {
-        const { posts_likes } = item._count;
-
+      if (item.postId === newData.postId) {
         if (item.isLiked) {
           return {
             ...item,
             isLiked: false,
-            _count: { ...item._count, posts_likes: posts_likes - 1 },
             likesCount: item.likesCount - 1,
           };
         }
@@ -28,7 +25,6 @@ export const updateInfinitePostsLike = (oldData?: InfinitePost, newData?: PostDa
         return {
           ...item,
           isLiked: true,
-          _count: { ...item._count, posts_likes: posts_likes + 1 },
           likesCount: item.likesCount + 1,
         };
       }

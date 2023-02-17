@@ -1,3 +1,4 @@
+import { PostImage } from '@prisma/client';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -24,21 +25,29 @@ type PropsTypes = {
   priority?: boolean;
 };
 
+type PostImageProps = {
+  src: string;
+  placeholder?: string;
+  imagePriority?: boolean;
+  width: number;
+  height: number;
+};
+
 export const PostSlider = ({ post, imageClassName, containerClassName, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
-  const { username } = useUser({ userId: post.author_id });
+  const { username } = useUser({ userId: post.authorId });
   const { session } = useAuth();
-  const { id, isLiked } = post;
+  const { postId, isLiked } = post;
   const router = useRouter();
   useUpdateWidth(imageRef, setWidth);
   const { mutate } = usePostLike();
 
-  const { description, image1, image2, image3, images } = post;
+  const { description, imagesData, postPlaceholders } = post;
   const { shortDescription } = descriptionData(description);
 
-  const postImages = [image1, image2, image3].flatMap((str) => (str ? [str] : []));
+  const postImages = imagesData.filter((img): img is PostImage => !!img);
   const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
   const customContainerClassName = clsx(containerClassName, styles.slider);
 
@@ -46,17 +55,19 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
     if (!session?.user?.id) {
       return router.push('/auth/signin');
     }
-    mutate({ isLiked: isLiked ?? false, userId: session.user.id, postId: id });
+    mutate({ isLiked: isLiked ?? false, userId: session.user.id, postId });
   };
 
-  const PostImage = ({ src, imagePriority }: { src: string; imagePriority?: boolean }) => {
+  const PostImage = ({ src, imagePriority, width, height, placeholder }: PostImageProps) => {
     return (
       <MotionImage
         className={clsx(imageClassName, styles.sliderImage)}
         src={src}
         priority={imagePriority ?? Boolean(priority)}
-        width={600}
-        height={600}
+        width={width}
+        height={height}
+        blurDataURL={placeholder}
+        placeholder={placeholder ? 'blur' : undefined}
         alt={`${username} - ${shortDescription}`}
       />
     );
@@ -68,15 +79,12 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
     }
     return (
       <div onDoubleClick={handleLike} className={customContainerClassName}>
-        <PostImage src={postImages[0]} />
-      </div>
-    );
-  }
-
-  if (postImages.length === 0 && images) {
-    return (
-      <div onDoubleClick={handleLike} className={customContainerClassName}>
-        <PostImage src={images} />
+        <PostImage
+          placeholder={postPlaceholders[0]}
+          src={postImages[0].url}
+          width={postImages[0].width}
+          height={postImages[0].height}
+        />
       </div>
     );
   }
@@ -104,9 +112,19 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
             ref={imageRef}
           >
             {postImages.map((image, idx) => {
+              if (!image) {
+                return null;
+              }
+
               return (
-                <motion.figure className={styles.figure} key={`${post.id} ${image} ${currentIndex}`}>
-                  <PostImage src={image} imagePriority={idx === 0} />
+                <motion.figure className={styles.figure} key={image.fileId}>
+                  <PostImage
+                    placeholder={postPlaceholders[idx]}
+                    src={image.url}
+                    width={image.width}
+                    height={image.height}
+                    imagePriority={idx === 0}
+                  />
                 </motion.figure>
               );
             })}

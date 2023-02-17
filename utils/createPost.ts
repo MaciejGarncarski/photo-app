@@ -7,7 +7,7 @@ import { httpCodes, responseMessages } from '@/utils/apiResponses';
 const CreatePostSchema = z.object({
   description: z.string(),
   authorId: z.string(),
-  imageUrls: z.string().array(),
+  imageUrls: z.number().array(),
 });
 
 export type CreatePostData = z.infer<typeof CreatePostSchema>;

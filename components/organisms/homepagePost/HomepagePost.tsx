@@ -3,7 +3,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
-import { Account, useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useUser';
 
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
@@ -18,7 +18,6 @@ import styles from './homepagePost.module.scss';
 
 type HomePagePostProps = {
   post: PostData;
-  authorData?: Account;
   priority: boolean;
 };
 
@@ -26,14 +25,14 @@ dayjs.extend(relativeTime);
 
 export const HomepagePost = ({ post, priority }: HomePagePostProps) => {
   const { session } = useAuth();
-  const { author_id, description, created_at, likesCount } = post;
-  const { isLoading, username } = useUser({ userId: author_id });
+  const { authorId, description, createdAt, likesCount, postPlaceholders } = post;
+  const { isLoading, username } = useUser({ userId: authorId });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, shortDescription } = descriptionData(description);
 
-  const fromNow = dayjs().to(dayjs(created_at));
-  const formattedDate = dayjs(created_at).format('MMMM DD YYYY');
+  const fromNow = dayjs().to(dayjs(createdAt));
+  const formattedDate = dayjs(createdAt).format('MMMM DD YYYY');
   const toggleShowMore = () => setShowMore((prev) => !prev);
 
   const Description = () => {
@@ -76,7 +75,7 @@ export const HomepagePost = ({ post, priority }: HomePagePostProps) => {
         </p>
         <p className={styles.date}>
           <Tooltip variant="top" content={formattedDate}>
-            <time dateTime={created_at.toString()}>{fromNow}</time>
+            <time dateTime={createdAt.toString()}>{fromNow}</time>
           </Tooltip>
         </p>
         {session?.user && <CommentForm post={post} />}

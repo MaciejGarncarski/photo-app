@@ -7,7 +7,7 @@ import { CreatePostData } from '@/utils/createPost';
 
 type MutationValues = {
   description: string;
-  imageUrls: Array<string>;
+  imageUrls: Array<number>;
 };
 
 const uplaodPost = async ({ description, imageUrls, authorId }: CreatePostData) => {

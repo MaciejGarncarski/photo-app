@@ -1,10 +1,11 @@
+import { PostImage } from '@prisma/client';
 import { PanInfo } from 'framer-motion';
 
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 
 type ArgsTypes = {
   currentIndex: number;
-  postImages: Array<string>;
+  postImages: Array<PostImage | null>;
   setCurrentIndex: (newValue: (value: number) => number) => void;
 };
 

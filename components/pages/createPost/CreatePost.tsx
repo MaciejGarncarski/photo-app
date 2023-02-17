@@ -89,7 +89,7 @@ export const CreatePost = () => {
           return;
         }
         return await uploadImage.mutateAsync(
-          { imageBlob: image.file, folder },
+          { imageBlob: image.file, folder, isPost: true },
           {
             onError: () => {
               toast.error('Error');
@@ -99,7 +99,7 @@ export const CreatePost = () => {
       }),
     );
 
-    const imageUrls = images.filter((img): img is string => !!img);
+    const imageUrls = images.filter((img): img is number => !!img);
 
     await sendNewPost.mutateAsync(
       { description, imageUrls },

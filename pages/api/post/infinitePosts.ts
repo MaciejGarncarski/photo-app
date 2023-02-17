@@ -4,6 +4,7 @@ import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
+import { transformPost } from '@/utils/transformPost';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
@@ -34,7 +35,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const skip = response.data.skip === 'null' ? 0 : response.data.skip || 0;
-  const isSignedUp = Boolean(session?.user?.id);
   const skipNumber = Number(skip);
 
   try {
@@ -66,34 +66,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const canLoadMore = postsCount > (skipNumber + 1) * POSTS_PER_SCROLL;
     const nextCursor = canLoadMore ? skipNumber + 1 : null;
 
-    const postsWithCollectionData = await Promise.all(
+    const postWithData = await Promise.all(
       posts.map(async (post) => {
-        const isInCollection = await prisma.collection.findFirst({
-          where: {
-            post_id: post.id,
-            user_id: session?.user?.id,
-          },
-        });
-
-        const isLiked = await prisma.postLike.findFirst({
-          where: {
-            post_id: post.id,
-            user_id: session?.user?.id,
-          },
-        });
-
-        return {
-          ...post,
-          likesCount: post._count.posts_likes,
-          commentsCount: post._count.posts_comments,
-          isLiked: session ? Boolean(isLiked) : false,
-          isInCollection: isSignedUp ? Boolean(isInCollection) : false,
-        };
+        return await transformPost(post, session);
       }),
     );
 
-    res.status(httpCodes.success).send({ posts: postsWithCollectionData, postsCount, cursor: nextCursor });
-  } catch (e) {
+    res.status(httpCodes.success).send({ posts: postWithData, postsCount, cursor: nextCursor });
+  } catch (error) {
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };

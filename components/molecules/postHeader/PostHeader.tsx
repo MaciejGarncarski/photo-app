@@ -37,13 +37,15 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
   const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
   const deletePostMutation = useDeletePost();
 
-  const { session, isSignedIn } = useAuth();
-  const { username } = useUser({ userId: post.author_id });
+  const { authorId, postId } = post;
 
-  const isAuthor = session?.user?.id === post.author_id;
+  const { session, isSignedIn } = useAuth();
+  const { username } = useUser({ userId: authorId });
+
+  const isAuthor = session?.user?.id === authorId;
 
   const handleDeletePost = () => {
-    deletePostMutation.mutate({ postId: post.id });
+    deletePostMutation.mutate({ postId });
   };
 
   const headerClassName = clsx(className, variant && styles[variant], styles.header);
@@ -59,12 +61,12 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Po
   return (
     <Tag className={headerClassName}>
       <Link href={`/${username}`} className={styles.link}>
-        <Avatar className={styles.avatar} userId={post.author_id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <Avatar className={styles.avatar} userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
         <h2>{username}</h2>
       </Link>
       {isSignedIn && (
         <div className={styles.options}>
-          {!isAuthor && <FollowButton className={styles.followBtn} userId={post.author_id} />}
+          {!isAuthor && <FollowButton className={styles.followBtn} userId={authorId} />}
           <Tooltip variant="right" content="Post menu">
             <button type="button" className={styles.optionsButton} onClick={open}>
               <IconMenu2 />
