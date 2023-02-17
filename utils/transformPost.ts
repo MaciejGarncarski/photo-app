@@ -53,7 +53,7 @@ export const transformPost = async (post: PostToTransform, session?: Session | n
         return;
       }
 
-      const { base64 } = await getPlaiceholder(postImage.url);
+      const { base64 } = await getPlaiceholder(postImage.thumbnailUrl);
       return base64;
     }),
   );

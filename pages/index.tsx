@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
   try {
     const postsData = await prisma.post.findMany({
       skip: 0,
-      take: 9,
+      take: 3,
 
       include: {
         author: true,

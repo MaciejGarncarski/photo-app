@@ -20,7 +20,7 @@ export const Home = () => {
   if (isLoading) {
     return (
       <>
-        {[0, 1, 2].map((el) => {
+        {[0, 1, 2, 3].map((el) => {
           return <PostPlaceholder key={el} />;
         })}
       </>

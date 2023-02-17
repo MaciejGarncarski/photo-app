@@ -23,9 +23,9 @@ type HomePagePostProps = {
 
 dayjs.extend(relativeTime);
 
-export const HomepagePost = ({ post, priority }: HomePagePostProps) => {
+export const HomepagePost = ({ post }: HomePagePostProps) => {
   const { session } = useAuth();
-  const { authorId, description, createdAt, likesCount, postPlaceholders } = post;
+  const { authorId, description, createdAt, likesCount } = post;
   const { isLoading, username } = useUser({ userId: authorId });
   const [showMore, setShowMore] = useState<boolean>(false);
 
@@ -56,9 +56,9 @@ export const HomepagePost = ({ post, priority }: HomePagePostProps) => {
   }
 
   return (
-    <article className={styles.post}>
+    <article className={styles.post} role="listitem">
       <PostHeader post={post} />
-      <PostSlider post={post} priority={priority} />
+      <PostSlider post={post} />
       <PostButtons post={post} />
       <footer className={styles.bottom}>
         {likesCount !== 0 && (

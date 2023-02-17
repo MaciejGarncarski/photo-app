@@ -22,18 +22,17 @@ type PropsTypes = {
   post: PostData;
   containerClassName?: string;
   imageClassName?: string;
-  priority?: boolean;
 };
 
 type PostImageProps = {
   src: string;
   placeholder?: string;
-  imagePriority?: boolean;
+  priority?: boolean;
   width: number;
   height: number;
 };
 
-export const PostSlider = ({ post, imageClassName, containerClassName, priority }: PropsTypes) => {
+export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -58,12 +57,12 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
     mutate({ isLiked: isLiked ?? false, userId: session.user.id, postId });
   };
 
-  const PostImage = ({ src, imagePriority, width, height, placeholder }: PostImageProps) => {
+  const PostImage = ({ src, priority, width, height, placeholder }: PostImageProps) => {
     return (
       <MotionImage
         className={clsx(imageClassName, styles.sliderImage)}
         src={src}
-        priority={imagePriority ?? Boolean(priority)}
+        priority={priority}
         width={width}
         height={height}
         blurDataURL={placeholder}
@@ -84,6 +83,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
           src={postImages[0].url}
           width={postImages[0].width}
           height={postImages[0].height}
+          priority
         />
       </div>
     );
@@ -123,7 +123,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName, priority 
                     src={image.url}
                     width={image.width}
                     height={image.height}
-                    imagePriority={idx === 0}
+                    priority={idx === 0}
                   />
                 </motion.figure>
               );

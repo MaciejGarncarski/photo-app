@@ -38,7 +38,7 @@
     "next-auth": "^4.19.2",
     "next-compose-plugins": "^2.2.1",
     "next-seo": "^5.15.0",
-    "nodemailer": "^6.8.0",
+    "nodemailer": "^6.9.1",
     "plaiceholder": "^2.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -87,10 +87,5 @@
     "nextjs-bundle-analysis": "^0.4.0",
     "prettier": "^2.8.0",
     "prisma": "^4.6.1"
-  },
-  "nextBundleAnalysis": {
-    "budget": null,
-    "budgetPercentIncreaseRed": 20,
-    "showDetails": true
   }
 }
