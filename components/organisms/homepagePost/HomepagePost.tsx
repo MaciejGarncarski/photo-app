@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
-import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
@@ -26,7 +25,7 @@ dayjs.extend(relativeTime);
 export const HomepagePost = ({ post }: HomePagePostProps) => {
   const { session } = useAuth();
   const { authorId, description, createdAt, likesCount } = post;
-  const { isLoading, username } = useUser({ userId: authorId });
+  const { username } = useUser({ userId: authorId });
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isDescriptionLong, shortDescription } = descriptionData(description);
@@ -50,10 +49,6 @@ export const HomepagePost = ({ post }: HomePagePostProps) => {
 
     return <>{description}</>;
   };
-
-  if (isLoading) {
-    return <PostPlaceholder />;
-  }
 
   return (
     <article className={styles.post} role="listitem">
