@@ -17,16 +17,6 @@ export const Home = () => {
     rootMargin: '0px 0px 400px 0px',
   });
 
-  if (isLoading) {
-    return (
-      <>
-        {[0, 1, 2, 3].map((el) => {
-          return <PostPlaceholder key={el} />;
-        })}
-      </>
-    );
-  }
-
   return (
     <main className={styles.posts} role="list">
       {data?.pages.map((page) => {
@@ -36,7 +26,9 @@ export const Home = () => {
       })}
       {isLoading && (
         <div ref={sentryRef}>
-          <PostPlaceholder />
+          {[0, 1, 2].map((el) => {
+            return <PostPlaceholder key={el} />;
+          })}
         </div>
       )}
     </main>
