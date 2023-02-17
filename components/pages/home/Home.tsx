@@ -28,13 +28,13 @@ export const Home = () => {
   }
 
   return (
-    <main className={styles.posts}>
+    <main className={styles.posts} role="list">
       {data?.pages.map((page) => {
         return page?.posts.map((post, idx) => {
           return <HomepagePost priority={idx < 4} key={post.postId} post={post} />;
         });
       })}
-      {(isLoading || hasNextPage) && (
+      {isLoading && (
         <div ref={sentryRef}>
           <PostPlaceholder />
         </div>
