@@ -56,6 +56,7 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
       await imageKit.deleteFile(post?.file_id);
     }
 
+    await res.revalidate('/');
     res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
   } catch (error) {
     res.status(httpCodes.forbidden).send(responseMessages.forbidden);

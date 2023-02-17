@@ -36,6 +36,7 @@ export const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
+    await res.revalidate('/');
     res.status(httpCodes.success).send(responseMessages.success);
   } catch (error) {
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
