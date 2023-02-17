@@ -32,14 +32,16 @@ export const getStaticProps = async () => {
       },
     });
 
-    postsData.forEach(async (post) => {
-      await queryClient.prefetchQuery(['account', post.author_id], () =>
-        fetchAccount({ userId: post.author_id, isPrefetching: true }),
-      );
-    });
-
     await queryClient.prefetchInfiniteQuery(['homepage infinite posts'], () =>
       fetchInfinitePosts({ isPrefetching: true, pageParam: 0 }),
+    );
+
+    await Promise.all(
+      postsData.map(async (post) => {
+        await queryClient.prefetchQuery(['account', post.author_id], () =>
+          fetchAccount({ userId: post.author_id, isPrefetching: true }),
+        );
+      }),
     );
 
     return {

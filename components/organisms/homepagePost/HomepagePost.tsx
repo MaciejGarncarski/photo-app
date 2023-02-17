@@ -30,18 +30,19 @@ export const HomepagePost = ({ post, priority }: HomePagePostProps) => {
   const { isLoading, username } = useUser({ userId: author_id });
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  const { isDescriptionLong, hasMultipleBreaks, shortDescription } = descriptionData(description);
+  const { isDescriptionLong, shortDescription } = descriptionData(description);
 
   const fromNow = dayjs().to(dayjs(created_at));
   const formattedDate = dayjs(created_at).format('MMMM DD YYYY');
+  const toggleShowMore = () => setShowMore((prev) => !prev);
 
   const Description = () => {
-    if (isDescriptionLong || hasMultipleBreaks) {
+    if (isDescriptionLong) {
       return (
         <>
           {showMore ? description : shortDescription}
           &nbsp;
-          <button className={styles.showMore} type="button" onClick={() => setShowMore((prev) => !prev)}>
+          <button className={styles.showMore} type="button" onClick={toggleShowMore}>
             show {showMore ? 'less' : 'more'}
           </button>
         </>

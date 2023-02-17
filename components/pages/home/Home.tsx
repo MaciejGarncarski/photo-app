@@ -17,7 +17,7 @@ export const Home = () => {
     rootMargin: '0px 0px 400px 0px',
   });
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return (
       <>
         {[0, 1, 2].map((el) => {
@@ -29,7 +29,7 @@ export const Home = () => {
 
   return (
     <main className={styles.posts}>
-      {data.pages.map((page) => {
+      {data?.pages.map((page) => {
         return page?.posts.map((post, idx) => {
           return <HomepagePost priority={idx < 4} key={post.id} post={post} />;
         });
