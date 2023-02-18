@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const serverSchema = z.object({
   DATABASE_URL: z.string().url(),
+  SHADOW_DATABASE_URL: z.string().url(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   NEXTAUTH_SECRET: z.string(),
@@ -20,6 +21,7 @@ export const serverSchema = z.object({
  */
 export const serverEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
+  SHADOW_DATABASE_URL: process.env.SHADOW_DATABASE_URL,
   EMAIL_FROM: process.env.EMAIL_FROM,
   EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
   EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
