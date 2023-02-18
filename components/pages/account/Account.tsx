@@ -12,6 +12,7 @@ import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrappe
 import { Loading } from '@/components/atoms/loading/Loading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
@@ -86,7 +87,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
           <Button type="button" onClick={open} className={styles.button}>
             <IconSettingsWrapper size="sm" />
             <span className={styles.menuButtonText}>settings</span>
-            <span className="visually-hidden">{modalOpen ? 'Close menu' : 'Open menu'}</span>
+            <VisuallyHiddenText text={modalOpen ? 'Close menu' : 'Open menu'} />
           </Button>
         )}
         <p className={styles.name}>{name}</p>

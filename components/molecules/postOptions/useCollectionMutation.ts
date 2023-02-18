@@ -4,6 +4,8 @@ import { z } from 'zod';
 
 import { useAuth } from '@/hooks/useAuth';
 
+import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+
 import { PutCollectionSchema } from '@/pages/api/collection';
 
 type CollectionMutation = {
@@ -30,7 +32,7 @@ export const useCollectionMutation = () => {
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries(['homepage infinite posts']);
+        await queryClient.invalidateQueries(HOME_POSTS_QUERY_KEY);
         await queryClient.invalidateQueries(['collection']);
       },
     },

@@ -1,6 +1,8 @@
 import { PostImage } from '@prisma/client';
 import { motion } from 'framer-motion';
 
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+
 import styles from './postSlider.module.scss';
 
 type PostSliderProps = {
@@ -23,9 +25,7 @@ export const PostSliderProgress = ({ currentIndex, images }: PostSliderProps) =>
             initial={{ opacity: 0.5 }}
             animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.5 }}
           >
-            <span className="visually-hidden">
-              image {currentIndex} of {images.length}
-            </span>
+            <VisuallyHiddenText text={`image ${currentIndex} of ${images.length}`} />
           </motion.li>
         );
       })}

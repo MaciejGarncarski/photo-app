@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
 import { CommentPostRequestSchema } from '@/pages/api/post/comment';
@@ -11,9 +12,13 @@ export const useCommentLike = ({ commentId }: Mutation) => {
 
   return useMutation(
     async () => {
-      await axios.post<unknown, null, Mutation>(`/api/post/comment`, {
-        commentId,
-      });
+      try {
+        await axios.post<unknown, null, Mutation>(`/api/post/comment`, {
+          commentId,
+        });
+      } catch (error) {
+        toast.error('Error, try again later.');
+      }
     },
     {
       onSettled: async () => {

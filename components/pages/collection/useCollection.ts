@@ -8,15 +8,12 @@ type UseCollection = {
   userId: string;
 };
 
-export type PostPlaceholders = Array<string | undefined>;
-
 export type PostData = {
   postId: number;
   author: User;
   authorId: string;
   description: string;
   createdAt: Date;
-  postPlaceholders: PostPlaceholders;
   imagesData: Array<PostImage | null>;
   likesCount: number;
   commentsCount: number;

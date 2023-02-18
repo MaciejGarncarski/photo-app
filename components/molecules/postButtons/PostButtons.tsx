@@ -1,27 +1,21 @@
-import { IconMessage, IconShare } from '@tabler/icons';
-import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useAuth } from '@/hooks/useAuth';
 import { namedComponent } from '@/utils/namedComponent';
-import { updateInfinitePostsLike } from '@/utils/updateInfinitePostsLike';
 
-import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
-import { Loading } from '@/components/atoms/loading/Loading';
+import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
-import { Children } from '@/components/layout/Layout';
-import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { useButtonData } from '@/components/molecules/postButtons/useButtonData';
+import { useHandleLike } from '@/components/molecules/postButtons/useHandleLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
 import { PostData } from '@/components/pages/collection/useCollection';
-
-import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 import styles from './postButtons.module.scss';
 
@@ -29,106 +23,67 @@ type PostButtonsProps = {
   post: PostData;
 };
 
-type ItemProps = {
-  isLast?: boolean;
-} & Children;
-
 type ButtonProps = {
   onClick: () => void;
-} & Children;
+  alt: string;
+  icon: ReactNode;
+};
 
 const PostModal = dynamic(() => {
   return namedComponent(import('@/components/organisms/postModal/PostModal'), 'PostModal');
 });
 
-const Item = ({ children, isLast }: ItemProps) => {
-  return <li className={clsx(isLast && styles.itemLast, styles.item)}>{children}</li>;
-};
-
-const Button = ({ children, onClick }: ButtonProps) => {
+const Button = ({ icon, onClick, alt }: ButtonProps) => {
   return (
-    <m.button whileTap={{ scale: 0.8 }} type="button" onClick={onClick} className={styles.button}>
-      {children}
-    </m.button>
+    <li className={styles.item}>
+      <motion.button whileTap={{ scale: 0.8 }} type="button" onClick={onClick} className={styles.button}>
+        {icon}
+        <VisuallyHiddenText text={alt} />
+      </motion.button>
+    </li>
   );
 };
 
 export const PostButtons = ({ post }: PostButtonsProps) => {
-  const queryClient = useQueryClient();
   const { isLiked, postId, isInCollection } = post;
 
-  const { session } = useAuth();
-  const { push } = useRouter();
   const { modalOpen, open, close } = useModal();
   const { modalOpen: shareModalOpen, open: openShare, close: closeShare } = useModal();
-  const postLikeMutation = usePostLike();
+  const { handleLike } = useHandleLike({ post });
+  const { buttonData } = useButtonData({ isLiked: Boolean(isLiked), openModal: open, openShare, handleLike });
   const collectionMutation = useCollectionMutation();
-
-  const handleLike = () => {
-    if (!session?.user?.id) {
-      push('/auth/signin');
-      return;
-    }
-
-    queryClient.setQueryData<InfiniteData<InfinitePosts<PostData>>>(['homepage infinite posts'], (oldData) =>
-      updateInfinitePostsLike(oldData, post),
-    );
-
-    postLikeMutation.mutate({ isLiked: isLiked ?? false, userId: session?.user?.id, postId });
-  };
 
   const handleCollection = () => {
     if (isInCollection) {
       collectionMutation.mutate({ type: 'remove', postId });
       return;
     }
-
     collectionMutation.mutate({ type: undefined, postId });
   };
 
   return (
     <ul className={styles.list}>
-      <Item>
-        <Button onClick={handleLike}>
-          <span className="visually-hidden">like</span>
-          {isLiked ? <IconHeartWrapper isActive /> : <IconHeartWrapper />}
-        </Button>
-      </Item>
-      <Item>
-        <Button onClick={open}>
-          <span className="visually-hidden">comment</span>
-          <IconMessage />
-        </Button>
-      </Item>
-      <Item>
-        <Button onClick={openShare}>
-          <span className="visually-hidden">share</span>
-          <IconShare />
-        </Button>
-      </Item>
-      {session?.user && (
-        <Item isLast>
-          {collectionMutation.isLoading ? (
-            <Loading variants={['very-small']} />
-          ) : (
-            <Tooltip variant="right" content={`${isInCollection ? 'Remove from' : 'Save to'} collection`}>
-              <Button onClick={handleCollection}>
-                {isInCollection ? <IconStarWrapper isActive /> : <IconStarWrapper />}
-              </Button>
-            </Tooltip>
-          )}
-        </Item>
-      )}
-      <AnimatePresence>
+      {buttonData.map(({ alt, icon, onClick }) => {
+        return <Button onClick={onClick} alt={alt} icon={icon} key={alt} />;
+      })}
+      <li className={clsx(styles.itemLast, styles.item)}>
+        <Tooltip variant="right" content={`${isInCollection ? 'Remove from' : 'Save to'} collection`}>
+          <motion.button whileTap={{ scale: 0.8 }} type="button" onClick={handleCollection} className={styles.button}>
+            {isInCollection ? <IconStarWrapper isActive /> : <IconStarWrapper />}
+            <VisuallyHiddenText text={isInCollection ? 'remove' : 'add'} />
+          </motion.button>
+        </Tooltip>
+      </li>
+      <ModalContainer>
         {shareModalOpen && (
           <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
         )}
-      </AnimatePresence>
+      </ModalContainer>
       {modalOpen &&
         createPortal(
-          <AnimatePresence mode="wait">
+          <ModalContainer>
             <PostModal post={post} close={close} />
-          </AnimatePresence>,
+          </ModalContainer>,
           document.body,
         )}
     </ul>

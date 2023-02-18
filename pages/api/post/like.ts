@@ -1,78 +1,67 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+
 export const PostLikeSchema = z.object({
   postId: z.string(),
-  userId: z.string(),
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
+  const session = await getServerSession(req, res, authOptions);
 
-  if (method === 'PUT') {
-    const response = PostLikeSchema.safeParse(req.body);
-
-    if (!response.success) {
-      return res.status(httpCodes.badRequest).send({
-        message: responseMessages.badRequest,
-      });
-    }
-
-    const { postId, userId } = response.data;
-
-    try {
-      const likeAlreadyExists = await prisma.postLike.findFirst({
-        where: {
-          post_id: Number(postId),
-          user_id: userId,
-        },
-      });
-
-      if (likeAlreadyExists) {
-        res.status(409).send({ status: 'error', message: 'Error while adding like' });
-        return;
-      }
-
-      await prisma.postLike.create({
-        data: {
-          post_id: Number(postId),
-          user_id: userId,
-        },
-        select: {
-          id: true,
-        },
-      });
-      res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
-    } catch (error) {
-      res.status(httpCodes.badRequest).send(responseMessages.badRequest);
-    }
+  if (method !== 'POST') {
+    return res.status(httpCodes.invalidMethod).send(responseMessages.invalidMethod);
   }
 
-  if (method === 'DELETE') {
-    const response = PostLikeSchema.safeParse(req.query);
+  if (!session?.user?.id) {
+    return res.status(httpCodes.unauthorized).send(responseMessages.unauthorized);
+  }
 
-    if (!response.success) {
-      return res.status(httpCodes.badRequest).send({
-        message: responseMessages.badRequest,
-      });
-    }
+  const response = PostLikeSchema.safeParse(req.body);
+  if (!response.success) {
+    return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
+  }
 
-    const { postId, userId } = response.data;
+  const { postId } = response.data;
 
-    try {
+  try {
+    const isLikedAlready = await prisma.postLike.findFirst({
+      where: {
+        post_id: Number(postId),
+        user_id: session.user?.id,
+      },
+    });
+
+    if (isLikedAlready) {
       await prisma.postLike.deleteMany({
         where: {
-          user_id: userId,
+          user_id: session.user?.id,
           post_id: Number(postId),
         },
       });
-      res.status(200).send({ status: 'resource updated successfully' });
-    } catch (error) {
-      res.status(400).send({ status: 'error', message: 'Error while adding like' });
+
+      return res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
     }
+
+    await prisma.postLike.create({
+      data: {
+        post_id: Number(postId),
+        user_id: session.user?.id,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    res.status(httpCodes.resourceSuccess).send(responseMessages.resourceSuccess);
+  } catch (error) {
+    res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };
 

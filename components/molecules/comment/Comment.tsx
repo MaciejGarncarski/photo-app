@@ -11,6 +11,7 @@ import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
@@ -45,7 +46,7 @@ export const Comment = ({ commentData }: CommentProps) => {
   return (
     <m.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
-        <span className="visually-hidden">@{username}</span>
+        <VisuallyHiddenText text={`@${username}`} />
         <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
       <div className={styles.commentText}>

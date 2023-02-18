@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { m } from 'framer-motion';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 
 import styles from './modal.module.scss';
 
@@ -25,7 +26,7 @@ export const ModalClose = ({ onClose, isExternal }: ModalCloseProps) => {
       onClick={handleClose}
     >
       <IconXWrapper size="sm" />
-      <span className="visually-hidden">Close dialog</span>
+      <VisuallyHiddenText text="Close modal" />
     </m.button>
   );
 };

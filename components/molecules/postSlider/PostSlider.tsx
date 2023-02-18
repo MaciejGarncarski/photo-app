@@ -2,14 +2,13 @@ import { PostImage } from '@prisma/client';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 
-import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
-import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { useHandleLike } from '@/components/molecules/postButtons/useHandleLike';
 import { PostSliderProgress } from '@/components/molecules/postSlider/PostSliderProgress';
 import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
@@ -33,31 +32,23 @@ type PostImageProps = {
 };
 
 export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
+  const { description, imagesData } = post;
+  const postImages = imagesData.filter((img): img is PostImage => !!img);
+
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
   const imageRef = useRef<HTMLDivElement>(null);
-  const { username } = useUser({ userId: post.authorId });
-  const { session } = useAuth();
-  const { postId, isLiked } = post;
-  const router = useRouter();
-  useUpdateWidth(imageRef, setWidth);
-  const { mutate } = usePostLike();
 
-  const { description, imagesData, postPlaceholders } = post;
+  const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
+  const { username } = useUser({ userId: post.authorId });
+
+  useUpdateWidth(imageRef, setWidth);
+
+  const customContainerClassName = clsx(containerClassName, styles.slider);
   const { shortDescription } = descriptionData(description);
 
-  const postImages = imagesData.filter((img): img is PostImage => !!img);
-  const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
-  const customContainerClassName = clsx(containerClassName, styles.slider);
-
-  const handleLike = () => {
-    if (!session?.user?.id) {
-      return router.push('/auth/signin');
-    }
-    mutate({ isLiked: isLiked ?? false, userId: session.user.id, postId });
-  };
-
-  const PostImage = ({ src, priority, width, height, placeholder }: PostImageProps) => {
+  const { handleLike } = useHandleLike({ post });
+  const PostImage = ({ src, priority, width, height }: PostImageProps) => {
     return (
       <MotionImage
         className={clsx(imageClassName, styles.sliderImage)}
@@ -65,8 +56,6 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
         priority={priority}
         width={width}
         height={height}
-        blurDataURL={placeholder}
-        placeholder={placeholder ? 'blur' : undefined}
         alt={`${username} - ${shortDescription}`}
       />
     );
@@ -77,15 +66,9 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       return null;
     }
     return (
-      <div onDoubleClick={handleLike} className={customContainerClassName}>
-        <PostImage
-          placeholder={postPlaceholders[0]}
-          src={postImages[0].url}
-          width={postImages[0].width}
-          height={postImages[0].height}
-          priority
-        />
-      </div>
+      <figure onDoubleClick={handleLike} className={customContainerClassName}>
+        <PostImage src={postImages[0].url} width={postImages[0].width} height={postImages[0].height} priority />
+      </figure>
     );
   }
 
@@ -94,7 +77,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       {currentIndex !== 0 && postImages.length > 0 && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
-          <span className="visually-hidden">Previous image</span>
+          <VisuallyHiddenText text="Previous image" />
         </button>
       )}
       <motion.div
@@ -118,13 +101,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
 
               return (
                 <motion.figure className={styles.figure} key={image.fileId}>
-                  <PostImage
-                    placeholder={postPlaceholders[idx]}
-                    src={image.url}
-                    width={image.width}
-                    height={image.height}
-                    priority={idx === 0}
-                  />
+                  <PostImage src={image.url} width={image.width} height={image.height} priority={idx === 0} />
                 </motion.figure>
               );
             })}
@@ -135,7 +112,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
         <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
           <IconArrowRight />
-          <span className="visually-hidden">Next image</span>
+          <VisuallyHiddenText text="Next image" />
         </button>
       )}
     </motion.div>

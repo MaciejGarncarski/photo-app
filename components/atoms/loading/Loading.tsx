@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+
 import styles from './loading.module.scss';
 
 type LoadingVariants = 'small' | 'very-small' | 'left' | 'center' | 'no-margin';
@@ -14,7 +16,7 @@ export const Loading = ({ variants, className }: LoadingProps) => {
 
   return (
     <div data-testid="loading" className={clsx(className, variantClassName, styles.container)}>
-      <span className="visually-hidden">loading</span>
+      <VisuallyHiddenText text="loading" />
     </div>
   );
 };

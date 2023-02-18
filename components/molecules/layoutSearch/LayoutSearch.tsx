@@ -3,6 +3,7 @@ import { MouseEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useClickOutside } from '@/components/molecules/layoutSearch/useClickOutside';
 
 import styles from './layoutSearch.module.scss';
@@ -49,12 +50,12 @@ export const LayoutSearch = () => {
             <IconSearch />
           </div>
         )}
-        <span className="visually-hidden">Search</span>
+        <VisuallyHiddenText text="Search" />
         <input className={styles.input} type="text" placeholder="Search" onClick={handleClick} {...register('input')} />
       </label>
       {isEnabled && (
         <button type="reset" onClick={handleReset} className={styles.resetIcon}>
-          <span className="visually-hidden">reset input</span>
+          <VisuallyHiddenText text="Reset" />
           <IconXWrapper />
         </button>
       )}

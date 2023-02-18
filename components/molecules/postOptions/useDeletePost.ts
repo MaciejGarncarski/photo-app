@@ -1,5 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
+
+import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
 
 type DeletePostMutation = {
   postId: number;
@@ -10,11 +13,15 @@ export const useDeletePost = () => {
 
   return useMutation(
     async ({ postId }: DeletePostMutation) => {
-      await axios.delete(`/api/post?postId=${postId}`);
+      try {
+        await axios.delete(`/api/post?postId=${postId}`);
+      } catch (error) {
+        toast.error('Error, try again later.');
+      }
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries(['homepage infinite posts']);
+        await queryClient.invalidateQueries(HOME_POSTS_QUERY_KEY);
       },
     },
   );

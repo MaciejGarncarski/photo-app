@@ -3,6 +3,7 @@ import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
 import { Heading } from '@/components/atoms/heading/Heading';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { ImagesBase64 } from '@/components/pages/createPost/CreatePost';
 
 import styles from './imagesPreview.module.scss';
@@ -47,7 +48,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
                   className={styles.deleteIcon}
                 >
                   <IconTrash />
-                  <span className="visually-hidden">remove image</span>
+                  <VisuallyHiddenText text="remove image" />
                 </motion.button>
 
                 {imagesBase64 && (

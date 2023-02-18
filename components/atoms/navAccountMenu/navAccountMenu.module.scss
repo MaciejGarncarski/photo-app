@@ -14,26 +14,8 @@
   flex-direction: column;
   font-size: 2rem;
 
-
-  &::before {
-    @include common.mediaquery('lg') {
-      content: '';
-    }
-
-    position: inherit;
-    --triangle-size: 1.25rem;
-    right: calc(var(--triangle-size) * 2);
-    top: calc(var(--triangle-size) * -1 + 3px);
-    border-left: var(--triangle-size) solid transparent;
-    border-right: var(--triangle-size) solid transparent;
-    border-bottom: var(--triangle-size) solid var(--bg-primary);
-    filter: drop-shadow(0 -1px 1px var(--border-secondary-color));
-  }
-
-
-
   @include common.mediaquery('lg') {
-    top: 4.5rem;
+    top: 4.25rem;
     left: unset;
     right: -2.5rem;
     min-width: 23rem;

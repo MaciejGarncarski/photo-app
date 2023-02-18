@@ -4,12 +4,12 @@
   list-style: none;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin: 0 3rem;
   width: 100%;
 
   @include common.mediaquery('lg') {
     justify-content: flex-end;
-    align-items: center;
     margin: 0;
   }
 

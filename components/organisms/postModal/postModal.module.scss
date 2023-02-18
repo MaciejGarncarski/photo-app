@@ -114,6 +114,7 @@
   width: 40rem;
 
   @include common.mediaquery('xl') {
+    max-height: 63rem;
     width: 85rem;
   }
 }

@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
 import { CreatePostData } from '@/utils/createPost';
@@ -27,7 +28,11 @@ export const useSendNewPost = () => {
       if (!session?.user?.id) {
         return;
       }
-      return await uplaodPost({ authorId: session.user.id, description, imageUrls });
+      try {
+        return await uplaodPost({ authorId: session.user.id, description, imageUrls });
+      } catch (error) {
+        toast.error('Error, try again later.');
+      }
     },
     {
       onSuccess: () => {

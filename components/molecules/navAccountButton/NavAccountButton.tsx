@@ -9,6 +9,7 @@ import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { NavAccountMenu } from '@/components/atoms/navAccountMenu/NavAccountMenu';
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useCloseTooltip } from '@/components/molecules/navAccountButton/useCloseTooltip';
 
 import styles from './navAccountButton.module.scss';
@@ -44,7 +45,7 @@ export const NavAccountButton = () => {
         onClick={() => setIsOptionsOpen((prev) => !prev)}
         className={clsx(commonStyles.listItemChild, styles.button)}
       >
-        <span className="visually-hidden">@{username}</span>
+        <VisuallyHiddenText text={`@${username}`} />
         <Avatar className={styles.avatar} userId={isLoading ? undefined : id} />
       </button>
 

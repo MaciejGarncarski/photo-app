@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 import { useUser } from '@/hooks/useUser';
 
@@ -11,13 +12,17 @@ export const useFollowMutation = (userId: string) => {
 
   return useMutation(
     async () => {
-      if (isFollowing) {
-        await axios.delete(`/api/followers?followingUserId=${userId}`);
-      }
-      if (!isFollowing) {
-        await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
-          followingUserId: userId,
-        });
+      try {
+        if (isFollowing) {
+          await axios.delete(`/api/followers?followingUserId=${userId}`);
+        }
+        if (!isFollowing) {
+          await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
+            followingUserId: userId,
+          });
+        }
+      } catch (error) {
+        toast.error('Error, try again later.');
       }
     },
     {

@@ -5,6 +5,7 @@ import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { DefaultSeo } from 'next-seo';
+import { Toaster } from 'react-hot-toast';
 
 import { seoConfig } from '@/lib/next-seo.config';
 
@@ -31,6 +32,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
               <LazyMotion features={domAnimation}>
                 <div id="modal"></div>
                 <Component {...pageProps} />
+                <Toaster />
               </LazyMotion>
             </Hydrate>
           </Layout>

@@ -5,6 +5,8 @@ import Image, { ImageProps } from 'next/image';
 
 import { useUser } from '@/hooks/useUser';
 
+import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+
 import styles from './avatar.module.scss';
 
 type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
@@ -33,7 +35,7 @@ export const Avatar = ({
       {hasNoImage && (
         <div data-testid="empty icon">
           <IconUser className={styles.icon} />
-          <span className="visually-hidden">{username}</span>
+          <VisuallyHiddenText text={username ?? ''} />
         </div>
       )}
       {hasDefaultImage && (

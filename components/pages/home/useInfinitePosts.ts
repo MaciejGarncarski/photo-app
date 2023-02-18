@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { clientEnv } from '@/utils/env.mjs';
@@ -6,6 +6,8 @@ import { clientEnv } from '@/utils/env.mjs';
 import { PostData } from '@/components/pages/collection/useCollection';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
+
+export const HOME_POSTS_QUERY_KEY: QueryKey = ['homepage infinite posts'];
 
 export const fetchInfinitePosts = async ({ pageParam = 0, isPrefetching = false }) => {
   const { data } = await axios.get<InfinitePosts<PostData>>(
@@ -15,7 +17,7 @@ export const fetchInfinitePosts = async ({ pageParam = 0, isPrefetching = false 
 };
 
 export const useInfinitePosts = () => {
-  return useInfiniteQuery(['homepage infinite posts'], fetchInfinitePosts, {
+  return useInfiniteQuery(HOME_POSTS_QUERY_KEY, fetchInfinitePosts, {
     refetchOnWindowFocus: false,
     getNextPageParam: (prevPosts) => {
       return prevPosts?.cursor ?? undefined;

@@ -44,8 +44,8 @@ export const SignIn = () => {
     <main className={styles.container}>
       <Heading tag="h2">Sign in</Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input labelText="E-mail" type="email" error={errors.email} {...register('email')} />
-        <Button type="submit">Sign in with email</Button>
+        <Input labelText="With Magic link" type="email" error={errors.email} {...register('email')} />
+        <Button type="submit">Sign in</Button>
       </form>
       <div className={styles.separator}>
         <p className={styles.orWith}>or</p>
