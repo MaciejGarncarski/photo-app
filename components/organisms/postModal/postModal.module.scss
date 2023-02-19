@@ -16,9 +16,10 @@
   @include common.mobile-landscape {
     width: auto;
     display: grid;
-    overflow-y: unset;
+    overflow-y: scroll;
     grid-template-columns: 25rem 25rem;
     grid-template-rows: auto auto auto 1fr;
+    border-radius: var(--radius-small);
   }
 
 
