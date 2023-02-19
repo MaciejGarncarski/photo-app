@@ -7,7 +7,7 @@ import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './accountPost.module.scss';
 
-type AccountPostProps = {
+type PropsTypes = {
   post: PostData;
 };
 
@@ -18,7 +18,7 @@ const overlay: Variants = {
 
 export const MotionLink = motion(Link);
 
-export const AccountPost = ({ post }: AccountPostProps) => {
+export const AccountPost = ({ post }: PropsTypes) => {
   const { imagesData, likesCount, commentsCount, postId } = post;
 
   if (!imagesData[0]) {

@@ -5,22 +5,14 @@ import { Children } from '@/components/layout/Layout';
 
 import styles from './button.module.scss';
 
-type ButtonProps = {
+type PropsTypes = {
   className?: string;
   disabled?: boolean;
   variant?: 'secondary';
 } & Children &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({
-  type = 'button',
-  disabled,
-  children,
-  variant,
-  onClick,
-  className,
-  onKeyDown,
-}: ButtonProps) => {
+export const Button = ({ type = 'button', disabled, children, variant, onClick, className, onKeyDown }: PropsTypes) => {
   return (
     <button
       onKeyDown={onKeyDown}

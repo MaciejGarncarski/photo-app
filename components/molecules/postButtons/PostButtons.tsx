@@ -23,7 +23,7 @@ import styles from './postButtons.module.scss';
 
 type ButtonData = Array<{ alt: string; icon: ReactElement; onClick: () => void; disabled: boolean }>;
 
-type PostButtonsProps = {
+type PropsTypes = {
   post: PostData;
   className?: string;
 };
@@ -56,7 +56,7 @@ const Button = ({ icon, onClick, alt, disabled }: ButtonProps) => {
   );
 };
 
-export const PostButtons = ({ post, className }: PostButtonsProps) => {
+export const PostButtons = ({ post, className }: PropsTypes) => {
   const { isLiked, postId, isInCollection } = post;
 
   const { modalOpen, open: openPostModal, close } = useModal();

@@ -9,7 +9,7 @@ import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/Visual
 
 import styles from './avatar.module.scss';
 
-type AvatarProps = Partial<Pick<ImageProps, 'width' | 'height'>> & {
+type PropsTypes = Partial<Pick<ImageProps, 'width' | 'height'>> & {
   userId?: string;
   className?: string;
 };
@@ -23,7 +23,7 @@ export const Avatar = ({
   className,
   width = DEFAULT_AVATAR_SIZE,
   height = DEFAULT_AVATAR_SIZE,
-}: AvatarProps) => {
+}: PropsTypes) => {
   const { customImage, image, username } = useUser({ userId });
 
   const hasNoImage = Boolean(!image && !customImage);

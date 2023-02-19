@@ -14,12 +14,12 @@ const buttonData: Array<ButtonData> = [
   { text: 'landscape', aspectRatio: 1.91 / 1 },
 ];
 
-type AspectRatioButtonsProps = {
+type PropsTypes = {
   setAspect: (aspect: number) => void;
   aspect: number;
 };
 
-export const AspectRatioButtons = ({ setAspect, aspect }: AspectRatioButtonsProps) => {
+export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
   return (
     <CreatePostItemContainer>
       <Heading tag="h2">Crop type</Heading>

@@ -11,12 +11,12 @@ import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postModal.module.scss';
 
-type PostModalProps = {
+type PropsTypes = {
   post: PostData;
   close: () => void;
 };
 
-export const PostModal = ({ post, close }: PostModalProps) => {
+export const PostModal = ({ post, close }: PropsTypes) => {
   return (
     <Backdrop close={close}>
       <motion.div role="dialog" className={styles.container}>

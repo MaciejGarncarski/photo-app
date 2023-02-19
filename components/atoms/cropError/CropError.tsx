@@ -4,7 +4,7 @@ import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 
 import styles from './cropError.module.scss';
 
-type CropErrorProps = {
+type PropsTypes = {
   errorType: ImageCropErrors;
 };
 
@@ -22,7 +22,7 @@ const messagesData: Record<string, string> = {
   TOO_MANY_IMAGES: TooManyImagesError,
 };
 
-export const CropError = ({ errorType }: CropErrorProps) => {
+export const CropError = ({ errorType }: PropsTypes) => {
   if (!errorType) {
     return null;
   }

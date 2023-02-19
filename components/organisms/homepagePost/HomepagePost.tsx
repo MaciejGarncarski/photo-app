@@ -5,12 +5,12 @@ import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './homepagePost.module.scss';
 
-type HomePagePostProps = {
+type PropsTypes = {
   post: PostData;
   priority: boolean;
 };
 
-export const HomepagePost = ({ post }: HomePagePostProps) => {
+export const HomepagePost = ({ post }: PropsTypes) => {
   return (
     <article className={styles.post} role="listitem">
       <PostHeader post={post} />

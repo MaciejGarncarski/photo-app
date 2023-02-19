@@ -7,7 +7,7 @@ import { Children } from '@/components/layout/Layout';
 
 import styles from './tooltip.module.scss';
 
-type TooltipProps = {
+type PropsTypes = {
   content: string;
   variant: 'top' | 'bottom' | 'right' | 'left';
 } & Children;
@@ -28,7 +28,7 @@ export const tooltipVariant: Variants = {
   },
 };
 
-export const Tooltip = ({ children, content, variant }: TooltipProps) => {
+export const Tooltip = ({ children, content, variant }: PropsTypes) => {
   const [active, setActive] = useState<boolean>(false);
 
   const show = () => setActive(true);

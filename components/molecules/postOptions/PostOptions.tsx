@@ -10,13 +10,13 @@ import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
 import { PostData } from '@/components/pages/collection/useCollection';
 
-type PostOptionsProps = {
+type PropsTypes = {
   close: () => void;
   post: PostData;
   openCnonfirmation: () => void;
 };
 
-export const PostOptions = ({ close, post, openCnonfirmation }: PostOptionsProps) => {
+export const PostOptions = ({ close, post, openCnonfirmation }: PropsTypes) => {
   const { postId, isInCollection, author } = post;
   const { session } = useAuth();
   const { id, role } = useUser({ userId: session?.user?.id ?? '' });

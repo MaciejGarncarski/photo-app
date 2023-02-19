@@ -13,7 +13,7 @@ export type Children = {
   children: ReactNode;
 };
 
-type LayoutProps = Children & {
+type PropsTypes = Children & {
   className: string;
 };
 
@@ -27,7 +27,7 @@ const CookiesPopup = dynamic(
   { ssr: false },
 );
 
-export const Layout = ({ className, children }: LayoutProps) => {
+export const Layout = ({ className, children }: PropsTypes) => {
   const [isCookiesOpen, setIsCookiesOpen] = useState<boolean>(true);
 
   const { session, isSignedIn } = useAuth();

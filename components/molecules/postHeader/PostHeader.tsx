@@ -19,7 +19,7 @@ import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postHeader.module.scss';
 
-type PostHeaderProps = {
+type PropsTypes = {
   tag?: 'header' | 'div';
   post: PostData;
   className?: string;
@@ -32,7 +32,7 @@ const PostOptions = dynamic(() => {
   return namedComponent(import('@/components/molecules/postOptions/PostOptions'), 'PostOptions');
 });
 
-export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PostHeaderProps) => {
+export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PropsTypes) => {
   const { open, close, modalOpen } = useModal();
   const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
   const deletePostMutation = useDeletePost();

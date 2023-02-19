@@ -4,7 +4,7 @@ import { FieldError } from 'react-hook-form';
 
 import styles from './input.module.scss';
 
-type InputProps = {
+type PropsTypes = {
   type?: JSX.IntrinsicElements['input']['type'] | 'textarea';
   labelText: string;
   error?: FieldError;
@@ -12,7 +12,7 @@ type InputProps = {
   className?: string;
 };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, PropsTypes>(
   ({ type = 'text', labelText, error, optional, className, ...props }, ref) => {
     const containerClassName = clsx(className, error && styles.containerError, styles.container);
 

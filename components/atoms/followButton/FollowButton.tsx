@@ -3,12 +3,12 @@ import { useUser } from '@/hooks/useUser';
 import { Button } from '@/components/atoms/button/Button';
 import { useFollowMutation } from '@/components/atoms/followButton/useFollowMutation';
 
-type FollowButtonProps = {
+type PropsTypes = {
   userId: string;
   className?: string;
 };
 
-export const FollowButton = ({ userId, className }: FollowButtonProps) => {
+export const FollowButton = ({ userId, className }: PropsTypes) => {
   const { isFollowing } = useUser({ userId });
   const { isLoading, mutate } = useFollowMutation(userId);
 

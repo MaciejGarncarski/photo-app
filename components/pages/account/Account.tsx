@@ -27,14 +27,14 @@ export type AccountID = {
   id: string;
 };
 
-type AccountProps = {
+type PropsTypes = {
   username: string;
   isModalOpen?: boolean;
 };
 
 const listData = ['posts', 'followers', 'following'] as const;
 
-export const Account = ({ username: propsUsername, isModalOpen }: AccountProps) => {
+export const Account = ({ username: propsUsername, isModalOpen }: PropsTypes) => {
   const { session } = useAuth();
   const { isError, isLoading, id, name, username, bio, count, customImage, image } = useUser({
     username: propsUsername,

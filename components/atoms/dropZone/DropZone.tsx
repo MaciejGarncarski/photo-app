@@ -11,14 +11,14 @@ import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
 
 import styles from './dropZone.module.scss';
 
-type DropZoneProps = {
+type PropsTypes = {
   onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string | null) => void;
   error: ImageCropErrors;
   setError: (error: ImageCropErrors) => void;
 };
 
-export const DropZone = ({ onChange, setImgSrc, setError, error }: DropZoneProps) => {
+export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { isMobile } = useScreenWidth();

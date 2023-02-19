@@ -5,12 +5,12 @@ import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/Visual
 
 import styles from './postSlider.module.scss';
 
-type PostSliderProps = {
+type PropsTypes = {
   currentIndex: number;
   images: Array<PostImage | null>;
 };
 
-export const PostSliderProgress = ({ currentIndex, images }: PostSliderProps) => {
+export const PostSliderProgress = ({ currentIndex, images }: PropsTypes) => {
   return (
     <ul className={styles.postSliderProgress}>
       {images.map((image, idx) => {

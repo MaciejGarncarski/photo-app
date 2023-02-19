@@ -6,12 +6,12 @@ import styles from './loading.module.scss';
 
 type LoadingVariants = 'small' | 'very-small' | 'left' | 'center' | 'no-margin';
 
-type LoadingProps = {
+type PropsTypes = {
   className?: string;
   variants?: Array<LoadingVariants>;
 };
 
-export const Loading = ({ variants, className }: LoadingProps) => {
+export const Loading = ({ variants, className }: PropsTypes) => {
   const variantClassName = variants?.map((variant) => styles[variant]);
 
   return (

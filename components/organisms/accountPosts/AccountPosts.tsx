@@ -10,11 +10,11 @@ import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
 import styles from './accountPosts.module.scss';
 
-type AccountPostsProps = {
+type PropsTypes = {
   id: string;
 };
 
-export const AccountPosts = ({ id }: AccountPostsProps) => {
+export const AccountPosts = ({ id }: PropsTypes) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
     [{ accountPosts: id }],
     async ({ pageParam = 0 }) => {

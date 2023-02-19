@@ -15,13 +15,13 @@ type CommentFormValues = {
   comment: string;
 };
 
-export type CommentFormProps = {
+type PropsTypes = {
   post: PostData;
 };
 
 type PutCommentRequest = z.infer<typeof CommentPutRequestSchema>;
 
-export const CommentForm = ({ post }: CommentFormProps) => {
+export const CommentForm = ({ post }: PropsTypes) => {
   const queryClient = useQueryClient();
 
   const {

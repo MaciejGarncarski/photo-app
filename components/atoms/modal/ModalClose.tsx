@@ -6,12 +6,12 @@ import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/Visual
 
 import styles from './modal.module.scss';
 
-type ModalCloseProps = {
+type PropsTypes = {
   onClose: () => void;
   isExternal?: boolean;
 };
 
-export const ModalClose = ({ onClose, isExternal }: ModalCloseProps) => {
+export const ModalClose = ({ onClose, isExternal }: PropsTypes) => {
   const handleClose = () => {
     onClose();
   };

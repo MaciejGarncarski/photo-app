@@ -21,13 +21,13 @@ import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInf
 
 import styles from './comment.module.scss';
 
-type CommentProps = {
+type PropsTypes = {
   commentData: PostCommentsWithIsLiked;
 };
 
 dayjs.extend(relativeTime);
 
-export const Comment = ({ commentData }: CommentProps) => {
+export const Comment = ({ commentData }: PropsTypes) => {
   const { sessionUserData } = useAuth();
   const { open, close, modalOpen } = useModal();
   const { username } = useUser({ userId: commentData.user_id });
