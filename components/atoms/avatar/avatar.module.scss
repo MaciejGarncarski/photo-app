@@ -1,27 +1,17 @@
 @use '/styles/common.scss';
 
-.avatarContainer {
-  min-width: 3rem;
-  min-height: 3rem;
-}
-
 .avatar {
   border-radius: 100%;
-  box-shadow: 0 0 0 2px var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary);
   font-size: var(--size);
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-
-  @include common.mediaquery('lg') {
-    margin-left: 0.25rem;
-  }
 }
 
 .icon {
   border-radius: 100%;
-  box-shadow: 0 0 0 2px var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary);
   width: 100%;
   height: 100%;
   object-fit: cover;

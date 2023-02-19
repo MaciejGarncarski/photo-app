@@ -33,7 +33,7 @@ export const AccountPost = ({ post }: AccountPostProps) => {
       href={`/post/${postId}`}
       initial="hidden"
       whileHover="visible"
-      transition={{ type: 'tween', duration: 0.15 }}
+      whileFocus="visible"
       className={styles.container}
     >
       <Image className={styles.image} src={url} alt="" width={width} height={height} priority />

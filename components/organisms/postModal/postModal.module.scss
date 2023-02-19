@@ -3,35 +3,49 @@
 .container {
   position: relative;
   z-index: 1;
-  width: min(60rem, 90%);
+  width: 35rem;
   background-color: var(--bg-primary);
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
+  overflow-y: scroll;
   border-radius: var(--radius-small);
+  max-height: 70vh;
+
+  @include common.mobile-landscape {
+    width: auto;
+    display: grid;
+    overflow-y: unset;
+    grid-template-columns: 25rem 25rem;
+    grid-template-rows: auto auto 1fr;
+  }
+
 
   @include common.mediaquery('lg') {
-    width: min(90rem, 80%);
-    display: grid;
-    grid-template-rows: auto 1fr;
-    grid-template-columns: 40rem 1fr;
-    margin: auto;
-    border-radius: var(--radius-medium);
-    min-height: 60rem;
+    width: auto;
+    overflow-y: unset;
     max-height: 65rem;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 55rem 35rem;
+    grid-template-rows: auto auto 1fr;
+    border-radius: var(--radius-medium);
   }
 
   @include common.mediaquery('xl') {
-    width: min(140rem, 80%);
-    grid-template-columns: 85rem 1fr;
-    min-height: 65rem;
     max-height: 70rem;
+    grid-template-columns: 80rem 50rem;
   }
 
 }
 
 .postHeader {
+
+  @include common.mobile-landscape {
+    grid-column: 2 / 3;
+  }
+
   @include common.mediaquery('lg') {
     grid-column: 2 / 3;
   }
@@ -56,31 +70,35 @@
     margin: 0;
     width: 100%;
     height: 100%;
-    border-top-left-radius: var(--radius-medium);
-    border-bottom-left-radius: var(--radius-medium);
   }
 }
 
 .commentsHeading {
   font-size: 2.5rem;
+
+  @include common.mobile-landscape {
+    font-size: 2rem;
+  }
 }
 
 .comments {
-  height: 32rem;
+  height: auto;
   overflow-y: scroll;
   display: flex;
   overflow-y: auto;
   flex-direction: column;
 
   @include common.mobile-landscape {
-    height: 17rem;
+    grid-column: 2 / 3;
+    height: 10rem;
   }
 
 
   @include common.mediaquery('lg') {
+    grid-column: 2 / 3;
     height: 100%;
     margin-top: 1rem;
-    max-height: 60rem;
+    max-height: 45rem;
   }
 }
 
@@ -88,20 +106,36 @@
   padding: 0 1rem;
   margin-top: 1rem;
 
+  @include common.mobile-landscape {
+    grid-column: 2 / 3;
+    margin-top: 0;
+    height: 10rem;
+  }
+
   @include common.mediaquery('lg') {
+    grid-column: 2 / 3;
     padding: 0 2.5rem;
   }
 }
 
+.postButtons {
+  grid-column: 2 / 3;
+  padding: 1rem 2.5rem;
+
+  @include common.mobile-landscape {
+    padding: 0 1rem;
+  }
+
+}
+
 .slider {
-  grid-row: 1 / 3;
+  grid-row: 1 / 4;
   position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
-  display: none;
 
   @include common.mediaquery('lg') {
-    display: flex;
-    align-items: center;
     height: 100%;
     border-radius: var(--radius-medium);
   }
@@ -111,10 +145,20 @@
   z-index: 2;
   height: 100%;
   object-fit: contain;
-  width: 40rem;
+  width: 35rem;
+  max-height: 35rem;
+
+  @include common.mobile-landscape {
+    max-height: 20rem;
+    width: 25rem;
+  }
+
+  @include common.mediaquery('lg') {
+    width: 55rem;
+    max-height: 65rem;
+  }
 
   @include common.mediaquery('xl') {
-    max-height: 63rem;
-    width: 85rem;
+    width: 80rem;
   }
 }

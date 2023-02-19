@@ -4,14 +4,20 @@
   position: relative;
   border: var(--border-secondary);
   cursor: pointer;
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-secondary);
 
+  overflow: hidden;
   aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  &:hover>.overlay {
-    opacity: 1;
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+
+
   }
 }
 
@@ -20,7 +26,6 @@
   height: 100%;
   background-color: var(--bg-primary);
   object-fit: contain;
-  box-shadow: 0 6px 10px 1px rgb(0, 0, 0, 0.1);
 
   @include common.mediaquery('lg') {
     min-height: 20rem;
@@ -33,7 +38,7 @@
   &:focus {
     outline-offset: 1rem;
 
-    &+.overlay {
+    & + .overlay {
       opacity: 1;
     }
 

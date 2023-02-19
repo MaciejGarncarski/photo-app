@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useScreenWidth } from '@/hooks/useScreenWidth';
-
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { Backdrop } from '@/components/atoms/modal/Backdrop';
 import { ModalClose } from '@/components/atoms/modal/ModalClose';
 import { Comment } from '@/components/molecules/comment/Comment';
+import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
 import { useInfiniteComments } from '@/components/organisms/postModal/useInfiniteComments';
@@ -21,8 +19,6 @@ type PostModalProps = {
 };
 
 export const PostModal = ({ post, close }: PostModalProps) => {
-  const { isMobile } = useScreenWidth();
-
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
     postId: post.postId,
   });
@@ -36,17 +32,18 @@ export const PostModal = ({ post, close }: PostModalProps) => {
   });
 
   if (!data) {
-    return <Loading />;
+    return null;
   }
 
   const commentsCount = data.pages[0].commentsCount;
 
   return (
-    <Backdrop mobileCenter close={close}>
+    <Backdrop close={close}>
       <motion.div role="dialog" className={styles.container}>
         <ModalClose onClose={close} isExternal />
-        {!isMobile && <PostHeader tag="div" className={styles.postHeader} post={post} />}
+        <PostHeader tag="div" className={styles.postHeader} post={post} />
         <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
+        <PostButtons post={post} className={styles.postButtons} />
         <section className={styles.commentsContainer}>
           <Heading tag="h2" className={styles.commentsHeading}>
             Comments

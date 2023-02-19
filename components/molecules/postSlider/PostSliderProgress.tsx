@@ -23,7 +23,7 @@ export const PostSliderProgress = ({ currentIndex, images }: PostSliderProps) =>
             key={image.id}
             className={styles.progressDot}
             initial={{ opacity: 0.5 }}
-            animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.5 }}
+            animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.45 }}
           >
             <VisuallyHiddenText text={`image ${currentIndex} of ${images.length}`} />
           </motion.li>

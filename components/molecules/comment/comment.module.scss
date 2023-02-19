@@ -21,17 +21,20 @@
     row-gap: 1.5rem;
   }
 
+  @include common.mobile-landscape {
+    grid-template-columns: 3rem 1fr;
+  }
 }
 
 .link {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .avatarContainer {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   @include common.mediaquery('lg') {
     margin-left: 0.5rem;
@@ -43,6 +46,11 @@
   margin-top: 0.25rem;
   width: 3rem;
   height: 3rem;
+
+  @include common.mobile-landscape {
+    width: 2rem;
+    height: 2rem;
+  }
 }
 
 %font-size {
@@ -51,6 +59,7 @@
   @include common.mediaquery('lg') {
     font-size: 2rem;
   }
+
 }
 
 .author {
@@ -79,6 +88,11 @@
   @include common.mediaquery('lg') {
     font-size: 1.75rem;
   }
+
+
+  @include common.mobile-landscape {
+    font-size: 1.25rem;
+  }
 }
 
 .info {
@@ -86,6 +100,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  padding-right: 1rem;
 }
 
 .likeBtn {
@@ -95,6 +110,10 @@
   border: none;
   background-color: transparent;
   align-items: center;
+
+  &:last-child {
+    margin-left: auto;
+  }
 
   > svg {
     width: 2rem;

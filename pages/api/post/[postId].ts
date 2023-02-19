@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
+import { transformPost } from '@/utils/transformPost';
 
 const PostByIdSchema = z.object({
   postId: z.string(),
@@ -24,33 +25,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       where: {
         id: Number(postId),
       },
-    });
-
-    const postComments = await prisma.postComment.aggregate({
-      where: {
-        post_id: Number(postId),
-      },
-      _count: {
-        id: true,
-      },
-    });
-
-    const postLikes = await prisma.postLike.aggregate({
-      where: {
-        post_id: Number(postId),
-      },
-      _count: {
-        id: true,
+      include: {
+        author: true,
+        _count: {
+          select: {
+            posts_likes: true,
+            posts_comments: true,
+          },
+        },
       },
     });
 
-    const data = {
-      post,
-      postCommentsCount: postComments._count.id,
-      postLikesCount: postLikes._count.id,
-    };
+    if (!post) {
+      return;
+    }
 
-    res.status(httpCodes.success).send({ data });
+    const postData = await transformPost(post);
+    res.status(httpCodes.success).send(postData);
   } catch (error) {
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }

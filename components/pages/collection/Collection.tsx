@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
-import { HomepagePost } from '@/components/organisms/homepagePost/HomepagePost';
+import { CollectionPost } from '@/components/organisms/collectionPost/CollectionPost';
 import { useCollection } from '@/components/pages/collection/useCollection';
 
 import styles from './collection.module.scss';
@@ -42,8 +42,8 @@ export const Collection = () => {
       </Heading>
       {isEmpty && <p>No saved posts.</p>}
       {data.pages.map((page) => {
-        return page.posts.map((post, idx) => {
-          return <HomepagePost priority={idx < 6} key={post.postId} post={post} />;
+        return page.posts.map((post) => {
+          return <CollectionPost post={post} key={post.postId} />;
         });
       })}
       {(isLoading || hasNextPage) && (

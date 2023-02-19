@@ -1,3 +1,4 @@
+import { IconTrash } from '@tabler/icons';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -64,6 +65,7 @@ export const Comment = ({ commentData }: CommentProps) => {
         </button>
         {isAbleToDelete && (
           <button type="button" onClick={open} className={styles.likeBtn}>
+            <IconTrash />
             delete
           </button>
         )}

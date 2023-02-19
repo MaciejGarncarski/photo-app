@@ -1,9 +1,11 @@
 import { IconEdit } from '@tabler/icons';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
+import { string } from '@/utils/string';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/button/Button';
@@ -16,6 +18,8 @@ import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/Visual
 import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
+import { PostModal } from '@/components/organisms/postModal/PostModal';
+import { usePost } from '@/components/pages/account/usePost';
 
 import styles from './account.module.scss';
 
@@ -25,16 +29,26 @@ export type AccountID = {
 
 type AccountProps = {
   username: string;
+  isModalOpen?: boolean;
 };
 
 const listData = ['posts', 'followers', 'following'] as const;
 
-export const Account = ({ username: propsUsername }: AccountProps) => {
+export const Account = ({ username: propsUsername, isModalOpen }: AccountProps) => {
   const { session } = useAuth();
   const { isError, isLoading, id, name, username, bio, count, customImage, image } = useUser({
     username: propsUsername,
   });
+
+  const postModal = useModal(isModalOpen);
   const { open, close, modalOpen } = useModal();
+  const router = useRouter();
+  const { data } = usePost({ postId: Number(string(router.query.id)) });
+
+  const postModalClose = () => {
+    postModal.close();
+    router.push(`/${propsUsername}`);
+  };
 
   if (isLoading || !count || !id) {
     return <Loading />;
@@ -68,11 +82,9 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
         }}
       />
       <main className={styles.account}>
-        <motion.h2 initial={{ x: -10 }} animate={{ x: 0 }} className={styles.username}>
-          {username}
-        </motion.h2>
+        <motion.h2 className={styles.username}>{username}</motion.h2>
         <Avatar className={styles.avatar} userId={id} />
-        <motion.ul initial={{ x: -10 }} animate={{ x: 0 }} className={styles.list}>
+        <motion.ul className={styles.list}>
           {listData.map((item) => {
             return (
               <li className={styles.listItem} key={item}>
@@ -102,6 +114,7 @@ export const Account = ({ username: propsUsername }: AccountProps) => {
           </ListModal>
         )}
       </ModalContainer>
+      <ModalContainer>{postModal.modalOpen && data && <PostModal post={data} close={postModalClose} />}</ModalContainer>
       <AccountPosts id={id} />
     </div>
   );

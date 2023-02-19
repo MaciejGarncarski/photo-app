@@ -9,14 +9,11 @@ export const useUpdateWidth = (imageRef: RefObject<HTMLDivElement>, setState: (n
   }, [imageRef, setState]);
 
   useEffect(() => {
-    if (!imageRef.current) {
-      return;
-    }
-    setState(imageRef.current.getBoundingClientRect().width);
+    updateWidth();
 
     window.addEventListener('resize', updateWidth);
     return () => {
       window.removeEventListener('resize', updateWidth);
     };
-  }, [imageRef, setState, updateWidth]);
+  }, [updateWidth]);
 };
