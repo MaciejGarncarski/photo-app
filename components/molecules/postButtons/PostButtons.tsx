@@ -12,6 +12,7 @@ import { IconStarWrapper } from '@/components/atoms/icons/IconStarWrapper';
 import { Loading } from '@/components/atoms/loading/Loading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
+import { PostLikesCount } from '@/components/atoms/postLikesCount/PostLikesCount';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useHandleLike } from '@/components/molecules/postButtons/useHandleLike';
 import { useCollectionMutation } from '@/components/molecules/postOptions/useCollectionMutation';
@@ -91,16 +92,19 @@ export const PostButtons = ({ post, className }: PostButtonsProps) => {
   ];
 
   return (
-    <ul className={clsx(className, styles.list)}>
-      {buttonData.map(({ alt, icon, onClick, disabled }) => {
-        return <Button onClick={onClick} alt={alt} icon={icon} key={alt} disabled={disabled} />;
-      })}
-      <ModalContainer>
-        {shareModalOpen && (
-          <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
-        )}
-      </ModalContainer>
-      {modalOpen && createPortal(<PostModal post={post} close={close} />, document.body)}
-    </ul>
+    <div>
+      <ul className={clsx(className, styles.list)}>
+        {buttonData.map(({ alt, icon, onClick, disabled }) => {
+          return <Button onClick={onClick} alt={alt} icon={icon} key={alt} disabled={disabled} />;
+        })}
+        <ModalContainer>
+          {shareModalOpen && (
+            <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
+          )}
+        </ModalContainer>
+        {modalOpen && createPortal(<PostModal post={post} close={close} />, document.body)}
+      </ul>
+      <PostLikesCount likesCount={post.likesCount} className={styles.likesCount} />
+    </div>
   );
 };

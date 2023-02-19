@@ -1,19 +1,30 @@
-import { RefObject, useCallback, useEffect } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-export const useUpdateWidth = (imageRef: RefObject<HTMLDivElement>, setState: (newState: number) => void) => {
-  const updateWidth = useCallback(() => {
-    if (!imageRef.current?.offsetWidth) {
+export const useUpdateWidth = () => {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    if (!imageRef.current) {
       return;
     }
-    setState(imageRef.current.offsetWidth);
-  }, [imageRef, setState]);
+    setWidth(imageRef.current.clientWidth);
+  }, []);
 
   useEffect(() => {
-    updateWidth();
-
-    window.addEventListener('resize', updateWidth);
-    return () => {
-      window.removeEventListener('resize', updateWidth);
+    const handleWindowResize = () => {
+      if (!imageRef.current) {
+        return;
+      }
+      setWidth(imageRef.current.clientWidth);
     };
-  }, [updateWidth]);
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  return { width, imageRef };
 };

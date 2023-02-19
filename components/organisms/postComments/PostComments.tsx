@@ -1,11 +1,17 @@
+import clsx from 'clsx';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { Comment } from '@/components/molecules/comment/Comment';
 import { useInfiniteComments } from '@/components/organisms/postModal/useInfiniteComments';
 
-import styles from './postComment.module.scss';
+import styles from './postComments.module.scss';
 
-export const PostComments = ({ postId }: { postId: number }) => {
+type PropsTypes = {
+  postId: number;
+  className?: string;
+};
+
+export const PostComments = ({ postId, className }: PropsTypes) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
     postId: postId,
   });
@@ -25,7 +31,7 @@ export const PostComments = ({ postId }: { postId: number }) => {
   const commentsCount = data.pages[0].commentsCount;
 
   return (
-    <div className={styles.comments} ref={sentryRef}>
+    <div className={clsx(className, styles.commentsList)} ref={sentryRef}>
       {commentsCount > 0 && (
         <>
           {data.pages.map((page) => {

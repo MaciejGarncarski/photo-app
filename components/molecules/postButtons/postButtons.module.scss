@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-start;
   gap: 2rem;
-  padding: 1rem;
+  padding-bottom: 0;
 }
 
 .item {
@@ -26,4 +26,9 @@
   &:hover {
     opacity: 0.6;
   }
+}
+
+.likesCount {
+  margin-left: 0.25rem;
+  padding-bottom: 1rem;
 }

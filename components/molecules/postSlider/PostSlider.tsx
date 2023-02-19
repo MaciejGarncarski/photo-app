@@ -2,7 +2,7 @@ import { PostImage } from '@prisma/client';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { useUser } from '@/hooks/useUser';
 
@@ -36,18 +36,15 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
   const postImages = imagesData.filter((img): img is PostImage => !!img);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [width, setWidth] = useState<number>(0);
-  const imageRef = useRef<HTMLDivElement>(null);
 
   const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
   const { username } = useUser({ userId: post.authorId });
 
-  useUpdateWidth(imageRef, setWidth);
-
+  const { imageRef, width } = useUpdateWidth();
   const customContainerClassName = clsx(containerClassName, styles.slider);
   const { shortDescription } = descriptionData(description);
-
   const { handleLike } = useHandleLike({ post });
+
   const PostImage = ({ src, priority, width, height }: PostImageProps) => {
     return (
       <MotionImage
@@ -86,21 +83,22 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
         dragElastic={0.4}
+        key={width}
         dragTransition={{ bounceStiffness: 500 }}
       >
         <AnimatePresence>
-          <motion.div
-            className={styles.imagesContainer}
-            animate={{ x: -1 * currentIndex * (width / postImages.length) }}
-            ref={imageRef}
-          >
+          <motion.div className={styles.imagesContainer} animate={{ x: -1 * currentIndex * width }}>
             {postImages.map((image, idx) => {
               if (!image) {
                 return null;
               }
 
               return (
-                <motion.figure className={styles.figure} key={image.fileId}>
+                <motion.figure
+                  ref={currentIndex === idx ? imageRef : undefined}
+                  className={styles.figure}
+                  key={image.fileId}
+                >
                   <PostImage src={image.url} width={image.width} height={image.height} priority={idx === 0} />
                 </motion.figure>
               );

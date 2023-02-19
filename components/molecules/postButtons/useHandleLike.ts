@@ -27,15 +27,37 @@ export const useHandleLike = ({ post }: PropsTypes) => {
     }
 
     const oldPosts = queryClient.getQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY);
+    const oldPost = queryClient.getQueryData<PostData>(['post', post.postId]);
 
     postLikeMutation.mutate(
       { postId: post.postId.toString() },
       {
         onError: () => {
+          queryClient.setQueryData<PostData>(['post', post.postId], oldPost);
           queryClient.setQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY, oldPosts);
         },
       },
     );
+    queryClient.setQueryData<PostData>(['post', post.postId], (oldPost) => {
+      if (!oldPost) {
+        return;
+      }
+
+      if (oldPost.isLiked) {
+        return {
+          ...oldPost,
+          isLiked: false,
+          likesCount: (oldPost?.likesCount ?? 0) - 1,
+        };
+      }
+
+      return {
+        ...oldPost,
+        isLiked: true,
+        likesCount: (oldPost?.likesCount ?? 0) + 1,
+      };
+    });
+
     queryClient.setQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY, (oldData) =>
       updateInfinitePostsLike(oldData, post),
     );

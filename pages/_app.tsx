@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
         <DefaultSeo {...seoConfig} />
-        <MotionConfig transition={{ duration: 0.2 }}>
+        <MotionConfig transition={{ duration: 0.15 }}>
           <Layout className={lato.className}>
             <Hydrate state={pageProps.dehydratedState}>
               <LazyMotion features={domAnimation}>

@@ -1,0 +1,45 @@
+@use '/styles/common.scss';
+
+.footer {
+  padding: 1rem;
+}
+
+
+%font-size {
+  font-size: 1.75rem;
+
+  @include common.mediaquery('lg') {
+    font-size: 2rem;
+  }
+}
+
+.description {
+  display: inline;
+  @extend %font-size;
+}
+
+.author {
+  font-weight: 600;
+  @extend %font-size;
+
+  &::after {
+    content: ' ';
+  }
+}
+
+.showMore {
+  background-color: transparent;
+  border: none;
+  color: var(--color-primary);
+  @extend %font-size;
+}
+
+.date {
+  padding: 1rem 0;
+
+  @include common.mediaquery('lg') {
+    padding: 1.5rem 0;
+  }
+
+  @extend %font-size;
+}
