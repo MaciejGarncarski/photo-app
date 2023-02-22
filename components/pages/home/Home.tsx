@@ -1,6 +1,8 @@
 import { atom } from 'jotai';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
@@ -46,9 +48,15 @@ export const Home = () => {
         <LayoutSearch />
         <section className={styles.asideItem}>
           <Heading tag="h3" className={styles.heading}>
-            Who to follow
+            Other users
           </Heading>
-          dsadasds
+          <ul className={styles.asideList}>
+            <li className={styles.asideListItem}>
+              <Avatar userId="maciek" className={styles.avatar} />
+              <p>@maciek</p>
+              <FollowButton className={styles.asideFollowButton} userId="maciek" />
+            </li>
+          </ul>
         </section>
       </aside>
     </div>

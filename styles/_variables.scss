@@ -25,7 +25,7 @@
   --transition-fast: 0.4s ease;
 
   --shadow: rgba(0, 0, 0, 0.12) 0px -1px 3px 0px, rgba(0, 0, 0, 0.24) 0px 1px 2px 0px;
-  --shadow-focus: 0 0 0 0.2rem var(--white), 0 0 0 0.4rem var(--color-primary);
+  --shadow-focus: 0 0 0 0.1rem var(--white), 0 0 0 0.3rem var(--color-primary);
 
   --radius-big: 1rem;
   --radius-medium: 0.5rem;
@@ -40,6 +40,6 @@
   }
 
   @include common.mediaquery('desktop') {
-    --post-width: calc(18rem + 15vw);
+    --post-width: calc(16rem + 15vw);
   }
 }

@@ -13,7 +13,7 @@
   border: var(--border-primary);
   box-shadow: var(--shadow);
   transition: all var(--transition-fast);
-  transition-property: background-color, box-shadow;
+  transition-property: background-color;
 
   &:hover,
   &:focus {

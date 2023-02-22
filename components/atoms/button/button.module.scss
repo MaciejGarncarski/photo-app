@@ -16,6 +16,7 @@
 
   &:focus {
     outline: none;
+    box-shadow: var(--shadow-focus);
   }
 
   &:not(:disabled) {
@@ -42,11 +43,7 @@
 
   &:hover,
   &:focus {
-    background-color: var(--bg-gray);
-  }
-
-  &:focus {
-    box-shadow: var(--shadow-focus);
+    background-color: var(--bg-primary);
   }
 
   &:disabled {

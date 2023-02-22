@@ -4,10 +4,16 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+
+  @include common.mediaquery('desktop') {
+    max-width: 70rem;
+    margin-top: 3rem;
+  }
 }
 
 .form {
   display: grid;
+  gap: 2rem;
 }
 
 .avatarButtons {
@@ -19,10 +25,7 @@
   @include common.mediaquery('desktop') {
     grid-template-rows: 1fr;
     width: 100%;
-    grid-template-columns: repeat(3, auto);
-  }
-
-  @include common.mediaquery('desktop') {
+    gap: 3rem;
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -30,6 +33,7 @@
 .stageContainer {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
 .buttons {
@@ -47,6 +51,7 @@
   justify-content: space-between;
 
   @include common.mediaquery('desktop') {
+    gap: 2rem;
     justify-content: flex-start;
   }
 }

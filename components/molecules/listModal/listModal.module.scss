@@ -22,7 +22,7 @@
   background-color: var(--white);
   text-align: center;
   padding: 1rem 2rem;
-  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+  border-radius: var(--radius-big) var(--radius-big) 0 0;
 
   @include common.mobile-landscape {
     padding: 0.75rem 2rem;
@@ -46,16 +46,16 @@
 
 .listItemFirst {
   border-bottom: 0;
-  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+  border-radius: var(--radius-big) var(--radius-big) 0 0;
 }
 
 .listItemLast {
   @include common.mobile-landscape {
-    border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+    border-radius: 0 0 var(--radius-big) var(--radius-big);
   }
 
   @include common.mediaquery('desktop') {
-    border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+    border-radius: 0 0 var(--radius-big) var(--radius-big);
   }
 }
 
