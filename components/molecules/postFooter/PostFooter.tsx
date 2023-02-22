@@ -1,15 +1,14 @@
-import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
+import { PostData } from '@/utils/transformPost';
 
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/postButtons/PostButtons';
-import { descriptionData } from '@/components/organisms/homepagePost/description';
-import { PostData } from '@/components/pages/collection/useCollection';
+import { descriptionData } from '@/components/organisms/homePost/description';
 
 import styles from './postFooter.module.scss';
 
@@ -33,7 +32,7 @@ export const PostFooter = ({ post, className }: PropsTypes) => {
   const toggleShowMore = () => setShowMore((prev) => !prev);
 
   return (
-    <footer className={clsx(className, styles.footer)}>
+    <footer className={styles.footer}>
       <PostButtons post={post} />
       <div className={styles.descriptionContainer}>
         <span className={styles.author}>{post.author.username}</span>

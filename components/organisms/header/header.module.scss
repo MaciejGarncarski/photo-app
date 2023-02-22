@@ -1,52 +1,74 @@
 @use '/styles/common.scss';
 
+
 .header {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  place-content: center;
+  @include common.mediaquery('desktop') {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    margin-left: 5vw;
+    width: var(--header-width);
+    border-right: 1px solid var(--color-gray);
 
-  border-bottom: var(--border-secondary);
-  padding: 0 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 3;
-
-  @include common.mediaquery('sm') {
-    padding: 0.5rem calc(2rem + 10vw);
-  }
-
-  @include common.mediaquery('lg') {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @include common.mediaquery('xl') {
-    padding: 0 calc(5rem + 17vw);
-  }
-
-
-  &::before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-    background-color: var(--bg-blur);
-    backdrop-filter: var(--backdrop-blur);
+    position: fixed;
+    top: 0;
+    left: 0;
+    gap: 4rem;
+    height: 100vh;
   }
 }
 
 .anchor {
-  display: flex;
-  align-self: center;
-  justify-self: flex-start;
+  display: none;
+
+  @include common.mediaquery('desktop') {
+    display: unset;
+  }
 }
 
-.heading {
-  font-size: 2.5rem;
-  font-weight: 900;
+.options {
+  margin-top: auto;
+  position: relative;
+}
 
-  @include common.mediaquery('lg') {
-    font-size: 3rem;
+.button {
+  display: none;
+
+  @include common.mediaquery('desktop') {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-big);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+
+    transition: var(--transition-fast);
   }
+
+  &:hover,
+  &:focus {
+    background-color: var(--bg-secondary);
+  }
+}
+
+.userInfo {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: left;
+  padding-right: 1rem;
+}
+
+.name {
+  max-width: 7rem;
+  font-weight: 600;
+  overflow: hidden;
+  flex-shrink: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-left: auto;
 }

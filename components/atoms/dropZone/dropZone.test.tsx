@@ -4,7 +4,7 @@ import { NoImageDetectedError, TooManyImagesError } from '@/components/atoms/cro
 import { DropZone } from '@/components/atoms/dropZone/DropZone';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 
-const inactiveText = /drag photo here/i;
+const inactiveText = /add some images/i;
 const activeText = /drop here/i;
 
 const CropImageWrapper = () => {

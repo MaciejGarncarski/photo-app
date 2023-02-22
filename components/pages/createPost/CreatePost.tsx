@@ -49,6 +49,7 @@ export type ImagesBase64 = Array<
 
 export const CreatePost = () => {
   const router = useRouter();
+  // const { sendMessage } = useRealtimeInfinitePosts();
   const { session } = useAuth();
 
   const [isCropping, setIsCropping] = useState<boolean>(false);
@@ -104,9 +105,6 @@ export const CreatePost = () => {
     await sendNewPost.mutateAsync(
       { description, imageUrls },
       {
-        onSuccess: async () => {
-          await router.push('/');
-        },
         onError: () => {
           toast.error('Could not add post.');
         },
@@ -122,7 +120,7 @@ export const CreatePost = () => {
   };
 
   if (uploadImage.isLoading || sendNewPost.isLoading || sendNewPost.isSuccess) {
-    return <LoadingHeading headingText="Uploading your post." />;
+    return <LoadingHeading headingText="Uploading your post" />;
   }
 
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;

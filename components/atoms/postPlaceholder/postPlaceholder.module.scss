@@ -1,9 +1,9 @@
 @use '/styles/common.scss';
 
 .placeholder {
-  background-color: var(--bg-gray);
-  width: var(--postWidth);
-  height: 50rem;
+  background-color: var(--bg-secondary);
+  width: var(--post-width);
+  height: 20rem;
   border-radius: var(--radius-medium);
   opacity: 0.5;
   animation: skeleton-loading 1s linear infinite alternate;
@@ -11,14 +11,14 @@
   margin: 0 auto;
   margin-bottom: 4rem;
 
-  @include common.mediaquery('lg') {
-    height: 60rem;
+  @include common.mediaquery('desktop') {
+    height: 40rem;
   }
 }
 
 @keyframes skeleton-loading {
   0% {
-    background-color: var(--bg-gray);
+    background-color: var(--bg-secondary);
   }
 
   100% {

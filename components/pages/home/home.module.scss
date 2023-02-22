@@ -1,13 +1,56 @@
 @use '/styles/common.scss';
 
+.home {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  @include common.mediaquery('desktop') {
+    justify-content: space-between;
+  }
+}
+
 .posts {
   display: grid;
-  grid-auto-columns: minmax(10rem, 45rem);
-  place-content: center;
-  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 2rem;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     grid-auto-columns: auto;
-    gap: 6rem;
+    margin: 0 auto;
+    margin-top: 3rem;
+    gap: 5rem;
   }
+}
+
+.aside {
+  display: none;
+
+  @include common.mediaquery('desktop') {
+    max-width: 25rem;
+    position: sticky;
+    right: 3rem;
+    top: 0;
+    height: 100vh;
+
+    padding-top: 3rem;
+    padding-left: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-grow: 1;
+
+    border-left: 1px solid var(--color-gray);
+  }
+}
+
+
+.asideItem {
+  border-radius: var(--radius-medium);
+  padding: 1rem;
+  box-shadow: var(--shadow-primary);
+  background-color: var(--bg-secondary);
 }

@@ -20,7 +20,7 @@
   gap: 5rem;
   justify-content: space-between;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     justify-content: flex-start;
   }
 }

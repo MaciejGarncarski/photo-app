@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 import { useUser } from '@/hooks/useUser';
+import { PostData } from '@/utils/transformPost';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
@@ -12,8 +13,7 @@ import { useHandleLike } from '@/components/molecules/postButtons/useHandleLike'
 import { PostSliderProgress } from '@/components/molecules/postSlider/PostSliderProgress';
 import { useSlider } from '@/components/molecules/postSlider/useSlider';
 import { useUpdateWidth } from '@/components/molecules/postSlider/useUpdateWidth';
-import { descriptionData } from '@/components/organisms/homepagePost/description';
-import { PostData } from '@/components/pages/collection/useCollection';
+import { descriptionData } from '@/components/organisms/homePost/description';
 
 import styles from './postSlider.module.scss';
 

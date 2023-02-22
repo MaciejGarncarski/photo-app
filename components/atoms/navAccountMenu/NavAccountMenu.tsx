@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
 
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
@@ -14,13 +13,14 @@ import styles from './navAccountMenu.module.scss';
 
 type PropsTypes = {
   onClick: () => void;
-  userId: string;
 };
 
-export const NavAccountMenu = ({ onClick, userId }: PropsTypes) => {
-  const { username } = useUser({ userId });
+export const NavAccountMenu = ({ onClick }: PropsTypes) => {
+  const {
+    signOut,
+    sessionUserData: { username },
+  } = useAuth();
   const { close, modalOpen, open } = useModal();
-  const { signOut } = useAuth();
 
   return (
     <>

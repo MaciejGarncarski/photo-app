@@ -1,6 +1,6 @@
 import { InfiniteData } from '@tanstack/react-query';
 
-import { PostData } from '@/components/pages/collection/useCollection';
+import { PostData } from '@/utils/transformPost';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 

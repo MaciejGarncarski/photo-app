@@ -19,7 +19,7 @@ export const CookiesPopup = ({ onClose }: PropsTypes) => {
     onClose();
   };
 
-  if (localStorage.getItem(ACCEPTED) === 'true') {
+  if (typeof window !== 'undefined' && localStorage.getItem(ACCEPTED) === 'true') {
     return null;
   }
 

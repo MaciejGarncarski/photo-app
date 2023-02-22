@@ -24,13 +24,13 @@ exports[` 1`] = `
 exports[` 2`] = `
 <DocumentFragment>
   <figure
-    class="avatarContainer"
+    class="avatar"
   >
     <div
       data-testid="empty icon"
     >
       <svg
-        class="icon"
+        class="icon icon-tabler icon-tabler-user"
         fill="none"
         height="24"
         stroke="currentColor"

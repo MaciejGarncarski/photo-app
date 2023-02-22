@@ -8,14 +8,13 @@ type PropsTypes = {
 export const PostLikesCount = ({ likesCount, className }: PropsTypes) => {
   return (
     <div className={className}>
-      {likesCount !== 0 && (
-        <p className={styles.count}>
-          {likesCount}
-          &nbsp;
-          {likesCount === 1 && 'like'}
-          {likesCount > 1 && 'likes'}
-        </p>
-      )}
+      <p className={styles.count}>
+        {likesCount}
+        &nbsp;
+        {likesCount === 0 && 'likes'}
+        {likesCount === 1 && 'like'}
+        {likesCount > 1 && 'likes'}
+      </p>
     </div>
   );
 };

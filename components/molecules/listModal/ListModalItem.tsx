@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-import { Loading } from '@/components/atoms/loading/Loading';
-
 import styles from './listModal.module.scss';
 
 type PropsTypes = {
@@ -50,10 +48,7 @@ export const ListModalItem = ({
   if (isLoading) {
     return (
       <li className={listClassName}>
-        <div className={styles.item}>
-          <Loading variants={['very-small', 'no-margin']} />
-          {loadingText}
-        </div>
+        <div className={styles.item}>{loadingText}</div>
       </li>
     );
   }

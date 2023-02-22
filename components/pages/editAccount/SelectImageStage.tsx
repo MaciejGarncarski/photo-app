@@ -5,7 +5,6 @@ import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
@@ -38,7 +37,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
   const { mutate, isLoading } = useDeleteAvatar();
 
   if (!userId) {
-    return <Loading />;
+    return null;
   }
   const removeAvatar = () => {
     mutate({ userId }, { onSettled: close });

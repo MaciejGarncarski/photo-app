@@ -9,13 +9,13 @@
   left: 0;
   right: 0;
   z-index: 3;
-  background-color: var(--bg-overlay);
+  background-color: var(--color-overlay);
 
   display: flex;
   justify-content: center;
   align-items: flex-end;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     align-items: center;
   }
 
@@ -33,29 +33,27 @@
   background-color: transparent;
   border: none;
   position: absolute;
-  right: 1.25rem;
-  top: 1.25rem;
-  position: absolute;
-  right: 1.25rem;
-  top: 1.25rem;
+  right: 1rem;
+  top: 1rem;
 
   &:hover {
     color: var(--color-primary);
   }
 
   @include common.mobile-landscape {
-    top: 0.65rem;
+    top: 0.25rem;
   }
 }
 
 .closeButtonExternal {
   right: 0rem;
-  top: -6.5rem;
-  border-radius: var(--radius-small);
-  padding: 0.75rem;
-  background-color: var(--bg-primary);
+  top: -3rem;
+  border-radius: var(--radius-medium);
+  padding: 0.4rem;
+  background-color: var(--white);
 
-  @include common.mediaquery('lg') {
-    right: -2rem;
+  @include common.mediaquery('desktop') {
+    top: -4rem;
+    right: -1rem;
   }
 }

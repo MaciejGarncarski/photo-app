@@ -2,8 +2,7 @@ import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { clientEnv } from '@/utils/env.mjs';
-
-import { PostData } from '@/components/pages/collection/useCollection';
+import { PostData } from '@/utils/transformPost';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
@@ -22,5 +21,6 @@ export const useInfinitePosts = () => {
     getNextPageParam: (prevPosts) => {
       return prevPosts?.cursor ?? undefined;
     },
+    refetchInterval: 12 * 1000,
   });
 };

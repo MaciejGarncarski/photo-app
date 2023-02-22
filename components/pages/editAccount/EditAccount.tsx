@@ -1,11 +1,10 @@
 import { AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 
 import { useUser } from '@/hooks/useUser';
 
-import { Loading } from '@/components/atoms/loading/Loading';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
 
@@ -44,32 +43,30 @@ export const EditAccount = ({ userId }: PropsTypes) => {
   return (
     <main id="main" className={styles.container}>
       <NextSeo title={`@${username} - Edit account`} />
-      <Suspense fallback={<Loading variants={['center']} />}>
-        <AnimatePresence mode="wait">
-          {stage === 'selectImage' && (
-            <SelectImageStage
-              key="selectImageStage"
-              stageCropImage={stageCropImage}
-              stagePersonalInfo={stagePersonalInfo}
-              stageSelectImage={stageSelectImage}
-            />
-          )}
+      <AnimatePresence mode="wait">
+        {stage === 'selectImage' && (
+          <SelectImageStage
+            key="selectImageStage"
+            stageCropImage={stageCropImage}
+            stagePersonalInfo={stagePersonalInfo}
+            stageSelectImage={stageSelectImage}
+          />
+        )}
 
-          {stage === 'cropImage' && (
-            <LazyCropImageStage
-              key="cropImageStage"
-              finalImages={finalImages}
-              setFinalImages={setFinalImages}
-              stagePersonalInfo={stagePersonalInfo}
-              stageSelectImage={stageSelectImage}
-            />
-          )}
+        {stage === 'cropImage' && (
+          <LazyCropImageStage
+            key="cropImageStage"
+            finalImages={finalImages}
+            setFinalImages={setFinalImages}
+            stagePersonalInfo={stagePersonalInfo}
+            stageSelectImage={stageSelectImage}
+          />
+        )}
 
-          {stage === 'personalInfo' && (
-            <LazyDetailsStage key="detailsStage" stageSelectImage={stageSelectImage} userId={userId} />
-          )}
-        </AnimatePresence>
-      </Suspense>
+        {stage === 'personalInfo' && (
+          <LazyDetailsStage key="detailsStage" stageSelectImage={stageSelectImage} userId={userId} />
+        )}
+      </AnimatePresence>
     </main>
   );
 };

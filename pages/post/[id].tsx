@@ -1,56 +1,19 @@
-import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 
-import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
-import { transformPost } from '@/utils/transformPost';
 
-import { Loading } from '@/components/atoms/loading/Loading';
 import { Account } from '@/components/pages/account/Account';
-import { PostData } from '@/components/pages/collection/useCollection';
+import { usePost } from '@/components/pages/account/usePost';
 
-const PostPage = ({ post }: { post: PostData }) => {
+const PostPage = () => {
   const router = useRouter();
+  const { data } = usePost({ postId: Number(string(router.query.id)) });
 
   if (!router.isReady) {
-    return <Loading />;
+    return null;
   }
 
-  return <Account isModalOpen username={post.author.username ?? ''} />;
-};
-
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const postData = await prisma.post.findFirst({
-    where: {
-      id: Number(string(query.id)),
-    },
-    include: {
-      author: true,
-      _count: {
-        select: {
-          posts_likes: true,
-          posts_comments: true,
-        },
-      },
-    },
-    orderBy: {
-      id: 'desc',
-    },
-  });
-
-  if (!postData) {
-    return {
-      props: {},
-    };
-  }
-
-  const post = await transformPost(postData);
-
-  return {
-    props: {
-      post: JSON.parse(JSON.stringify(post)),
-    },
-  };
+  return <Account isModalOpen username={data?.author.username ?? ''} postId={Number(string(router.query.id))} />;
 };
 
 export default PostPage;

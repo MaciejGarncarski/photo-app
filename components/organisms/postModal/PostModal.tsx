@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 
+import { PostData } from '@/utils/transformPost';
+
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Backdrop } from '@/components/atoms/modal/Backdrop';
 import { ModalClose } from '@/components/atoms/modal/ModalClose';
@@ -7,7 +9,6 @@ import { PostFooter } from '@/components/molecules/postFooter/PostFooter';
 import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
 import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
 import { PostComments } from '@/components/organisms/postComments/PostComments';
-import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postModal.module.scss';
 

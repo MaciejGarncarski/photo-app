@@ -33,6 +33,7 @@
     "html-react-parser": "^3.0.4",
     "html-to-image": "^1.11.11",
     "imagekit": "^4.1.2",
+    "jotai": "^2.0.2",
     "next": "^13.1.6",
     "next-auth": "^4.19.2",
     "next-compose-plugins": "^2.2.1",
@@ -45,6 +46,7 @@
     "react-hot-toast": "^2.4.0",
     "react-image-crop": "^10.0.8",
     "react-infinite-scroll-hook": "^4.0.4",
+    "react-use-websocket": "^4.3.1",
     "sass": "^1.58.0",
     "throttle-debounce": "^5.0.0",
     "ts-node": "^10.9.1",
@@ -55,6 +57,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
     "@commitlint/config-conventional": "^17.4.0",
+    "@swc-jotai/react-refresh": "^0.0.4",
     "@tanstack/react-query-devtools": "^4.24.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

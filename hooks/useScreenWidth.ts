@@ -9,7 +9,7 @@ export const useScreenWidth = () => {
 
   const throttledHandleResize = useMemo(() => {
     return throttle(THROTTLE_DELAY, () => {
-      const isMobileDevice = window.innerWidth < 800 || false;
+      const isMobileDevice = window.innerWidth < 1270 || false;
       setScreenWidth(window.innerWidth);
       setIsMobile(isMobileDevice);
     });

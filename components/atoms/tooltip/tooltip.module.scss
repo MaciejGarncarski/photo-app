@@ -9,35 +9,34 @@
 .tip {
   display: none;
   position: absolute;
-  background-color: var(--bg-primary);
-  border-radius: var(--radius-small);
-  box-shadow: var(--shadow-secondary);
+  background-color: var(--white);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow);
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2rem;
   white-space: nowrap;
   line-height: 1;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem;
   --tooltip-arrow-size: 1rem;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     display: block;
   }
 
 }
 
 .top {
-  top: -4.5rem;
+  top: -2rem;
   bottom: unset;
 }
 
 .bottom {
-  bottom: -5rem;
+  bottom: -3rem;
 }
 
 .right {
   top: 50%;
-  left: 4rem;
+  left: 2rem;
   right: unset;
   transform: translateX(0) translateY(-50%);
 }

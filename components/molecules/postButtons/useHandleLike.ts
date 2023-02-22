@@ -2,10 +2,10 @@ import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { useAuth } from '@/hooks/useAuth';
+import { PostData } from '@/utils/transformPost';
 import { updateInfinitePostsLike } from '@/utils/updateInfinitePostsLike';
 
 import { usePostLike } from '@/components/molecules/postButtons/usePostLike';
-import { PostData } from '@/components/pages/collection/useCollection';
 import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';

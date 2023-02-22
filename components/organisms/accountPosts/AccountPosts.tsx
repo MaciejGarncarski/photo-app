@@ -2,9 +2,9 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { PostData } from '@/utils/transformPost';
+
 import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
-import { Loading } from '@/components/atoms/loading/Loading';
-import { PostData } from '@/components/pages/collection/useCollection';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
@@ -34,7 +34,7 @@ export const AccountPosts = ({ id }: PropsTypes) => {
   });
 
   if (!data || isLoading) {
-    return <Loading />;
+    return null;
   }
 
   return (

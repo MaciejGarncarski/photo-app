@@ -2,17 +2,19 @@
 
 .avatar {
   border-radius: 100%;
-  box-shadow: 0 0 0 3px var(--color-primary);
-  font-size: var(--size);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  box-shadow: 0 0 0 2px var(--color-primary);
 
-.icon {
-  border-radius: 100%;
-  box-shadow: 0 0 0 3px var(--color-primary);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  svg,
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }

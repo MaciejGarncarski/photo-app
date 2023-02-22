@@ -1,6 +1,5 @@
-import { Lato } from '@next/font/google';
+import { Open_Sans } from '@next/font/google';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
@@ -13,9 +12,9 @@ import { Layout } from '@/components/layout/Layout';
 
 import '/styles/globals.scss';
 
-const lato = Lato({
-  weight: ['400', '700', '900'],
-  variable: '--font-lato',
+const customFont = Open_Sans({
+  weight: ['400', '500', '700'],
+  variable: '--font-customFont',
 });
 
 const queryClient = new QueryClient();
@@ -24,10 +23,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
         <DefaultSeo {...seoConfig} />
-        <MotionConfig transition={{ duration: 0.15 }}>
-          <Layout className={lato.className}>
+        <MotionConfig transition={{ duration: 0.35 }}>
+          <style jsx global>{`
+            html {
+              font-family: ${customFont.style.fontFamily};
+            }
+          `}</style>
+          <Layout>
             <Hydrate state={pageProps.dehydratedState}>
               <LazyMotion features={domAnimation}>
                 <div id="modal"></div>

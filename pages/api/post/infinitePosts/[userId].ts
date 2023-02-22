@@ -6,8 +6,7 @@ import { httpCodes, responseMessages } from '@/utils/apiResponses';
 import { infinitePostsCount } from '@/utils/infinitePostsCount';
 import { string } from '@/utils/string';
 import { transformPost } from '@/utils/transformPost';
-
-import { PostData } from '@/components/pages/collection/useCollection';
+import { PostData } from '@/utils/transformPost';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 

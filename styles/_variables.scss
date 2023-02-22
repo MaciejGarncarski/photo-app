@@ -1,51 +1,45 @@
 @use '/styles/common.scss';
 
 %variables {
+  --white: rgb(255, 255, 255);
+
   --color-primary: rgb(63, 114, 175);
   --color-secondary: rgb(137, 170, 231);
   --color-error: rgb(207, 60, 30);
-  --color-white: rgb(248, 246, 246);
   --color-disabled: rgb(63, 114, 175, 0.9);
-  --color-separator: rgb(133, 153, 173);
+  --color-gray: rgb(50, 50, 50, 0.15);
 
-  --text-primary: rgb(17, 45, 78);
-  --text-secondary: rgb(107, 107, 107);
-  --text-placeholder: rgb(75, 73, 73);
+  --color-overlay: rgb(20, 20, 20, 0.4);
 
-  --bg-blur: rgb(255, 255, 255, 0.88);
-  --bg-primary: rgb(255, 255, 255);
-  --bg-secondary: rgb(249, 247, 247);
-  --bg-gray: rgb(225, 225, 225);
-  --bg-black: rgb(0, 0, 0);
-  --bg-overlay: rgba(0, 0, 0, 0.6);
-  --bg-error: rgba(224, 1, 1, 0.1);
+  --text-black: rgb(0, 0, 0);
+  --text-gray: rgb(61, 61, 61);
 
-  --border-primary-color: rgb(201, 201, 201);
-  --border-secondary-color: rgb(219, 219, 219);
-  --border-primary: 1px solid var(--border-primary-color);
-  --border-secondary: 1px solid var(--border-secondary-color);
+  --filter-blur: blur(13px) saturate(1.2);
 
-  --radius-small: 0.8rem;
-  --radius-medium: 1.5rem;
+  --border-gray: 1px solid rgb(30, 30, 30, 0.1);
 
-  --transition-fast: 0.2s ease;
+  --bg-primary: rgb(230, 230, 230);
+  --bg-blur: rgb(255, 255, 255, 0.95);
+  --bg-secondary: rgb(15, 20, 25, 0.1);
 
-  --shadow-primary: 0 4px 10px 2px rgba(0, 0, 0, 0.15);
-  --shadow-secondary: 0 0 0 1px rgb(0, 0, 0, 12%), 0 2px 4px rgb(0, 0, 0, 5%), 0 12px 24px rgb(0, 0, 0, 5%);
+  --transition-fast: 0.4s ease;
 
-  --shadow-focus-size: 4px;
-  --shadow-focus: 0 0 0 var(--shadow-focus-size) var(--bg-secondary), 0 0 0 calc(var(--shadow-focus-size) * 2) var(--color-primary);
+  --shadow: rgba(0, 0, 0, 0.12) 0px -1px 3px 0px, rgba(0, 0, 0, 0.24) 0px 1px 2px 0px;
+  --shadow-focus: 0 0 0 0.2rem var(--white), 0 0 0 0.4rem var(--color-primary);
+
+  --radius-big: 1rem;
+  --radius-medium: 0.5rem;
+  --radius-small: 0.25rem;
 
 
-  --itemSize: 2.75rem;
-  --create-post-width: min(80rem, 80%);
+  --header-width: 18rem;
+  --post-width: 20rem;
 
-  --backdrop-blur: blur(18px) saturate(1.6);
+  @include common.mediaquery('tablet') {
+    --post-width: calc(13rem + 15vw);
+  }
 
-  --postWidth: 32rem;
-
-  @include common.mediaquery('lg') {
-    --postWidth: 45rem;
-    --itemSize: 3.5rem;
+  @include common.mediaquery('desktop') {
+    --post-width: calc(18rem + 15vw);
   }
 }

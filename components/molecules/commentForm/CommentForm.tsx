@@ -3,8 +3,9 @@ import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { PostData } from '@/utils/transformPost';
+
 import { Button } from '@/components/atoms/button/Button';
-import { PostData } from '@/components/pages/collection/useCollection';
 import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
 
 import { CommentPutRequestSchema } from '@/pages/api/post/comment';

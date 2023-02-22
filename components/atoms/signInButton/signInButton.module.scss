@@ -1,12 +1,13 @@
 .button {
-  border-radius: var(--radius-small);
-  padding: 0.7rem 2rem;
+  border-radius: var(--radius-medium);
+  padding: 0.5rem 1rem;
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--white);
   font-weight: 500;
   border: none;
   transition: box-shadow var(--transition-fast);
   text-align: center;
+  font-size: 1.5rem;
 
   &::first-letter {
     text-transform: uppercase;
@@ -14,6 +15,6 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.35rem var(--bg-secondary), 0 0 0 0.65rem var(--color-primary);
+    box-shadow: var(--shadow-focus)
   }
 }

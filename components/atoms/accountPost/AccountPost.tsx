@@ -1,11 +1,13 @@
-import { IconHeart, IconMessage } from '@tabler/icons';
+import { IconMessage } from '@tabler/icons';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { PostData } from '@/components/pages/collection/useCollection';
+import { PostData } from '@/utils/transformPost';
 
 import styles from './accountPost.module.scss';
+
+import { IconHeartWrapper } from '../icons/IconHeartWrapper';
 
 type PropsTypes = {
   post: PostData;
@@ -19,7 +21,7 @@ const overlay: Variants = {
 export const MotionLink = motion(Link);
 
 export const AccountPost = ({ post }: PropsTypes) => {
-  const { imagesData, likesCount, commentsCount, postId } = post;
+  const { imagesData, likesCount, commentsCount, postId, isLiked } = post;
 
   if (!imagesData[0]) {
     return null;
@@ -39,7 +41,7 @@ export const AccountPost = ({ post }: PropsTypes) => {
       <Image className={styles.image} src={url} alt="" width={width} height={height} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>
-          <IconHeart /> {likesCount}
+          <IconHeartWrapper isActive={isLiked} /> {likesCount}
         </p>
         <p className={styles.count}>
           <IconMessage /> {commentsCount}

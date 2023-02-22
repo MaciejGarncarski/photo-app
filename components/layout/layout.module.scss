@@ -1,20 +1,7 @@
 @use '/styles/common.scss';
 
-.children {
-  padding: 2rem 2rem;
-  max-width: 140rem;
-  margin: 0 auto;
-
-  @include common.mediaquery('lg') {
-    padding: 5rem 2rem;
+.layout {
+  @include common.mediaquery('desktop') {
+    margin-left: calc(6vw + var(--header-width));
   }
-}
-
-.full {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
 }

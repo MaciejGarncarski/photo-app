@@ -5,10 +5,9 @@
   place-content: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
-
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     gap: 10rem;
   }
 }
@@ -23,7 +22,7 @@
   align-items: center;
   position: relative;
 
-  &:hover > .deleteIconOverlay {
+  &:hover>.deleteIconOverlay {
     opacity: 1;
   }
 
@@ -38,26 +37,26 @@
 
 .emptySpace {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--white);
   border-radius: var(--radius-small);
   border: 0;
   box-shadow: var(--shadow-secondary);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
   justify-content: center;
   align-items: center;
   filter: opacity(0.5);
-  min-height: 10rem;
+  min-height: 5rem;
 
 
-  > svg {
-    width: 6rem;
-    height: 6rem;
+  >svg {
+    width: 2rem;
+    height: 2rem;
   }
 
-  @include common.mediaquery('lg') {
-    min-height: 15rem;
+  @include common.mediaquery('desktop') {
+    min-height: 8rem;
   }
 }
 
@@ -81,17 +80,17 @@
     background-color: var(--color-error);
   }
 
-  > svg {
+  >svg {
     width: 3rem;
     height: 3rem;
   }
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
 
     right: -1.5rem;
     top: -1.5rem;
 
-    > svg {
+    >svg {
       width: 4rem;
       height: 4rem;
     }

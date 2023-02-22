@@ -3,7 +3,7 @@
 .container {
   max-width: 85%;
   min-width: 75%;
-  background-color: var(--bg-primary);
+  background-color: var(--white);
   border-radius: var(--radius-medium);
   position: relative;
   padding: 2rem 3rem;
@@ -12,10 +12,10 @@
   flex-direction: column;
   gap: 3rem;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     min-width: unset;
-    gap: 4rem;
-    padding: 4rem 5rem;
+    gap: 2rem;
+    padding: 2rem 2.5rem;
   }
 }
 
@@ -24,15 +24,16 @@
 }
 
 .heading {
+  font-size: 2rem;
   text-align: center;
 }
 
 .buttonsRow {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
   justify-content: center;
 
-  @include common.mediaquery('lg') {
-    gap: 4rem;
+  @include common.mediaquery('desktop') {
+    gap: 3rem;
   }
 }

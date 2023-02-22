@@ -3,37 +3,19 @@
 .dropZone {
   box-shadow: var(--shadow-secondary);
   border-radius: var(--radius-small);
-  background-color: var(--bg-gray);
+  background-color: var(--bg-secondary);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem 1rem;
   text-align: center;
   transition: var(--transition-fast);
-  max-height: 30rem;
+  gap: 1rem;
+  padding: 2rem 0;
 
-  svg {
-    width: 5rem;
-    height: 5rem;
-  }
-
-
-  & > * {
+  &>* {
     pointer-events: none;
-  }
-
-  @include common.mediaquery('lg') {
-
-    svg {
-      width: 8rem;
-      height: 8rem;
-    }
-
-    gap: 3rem;
-    padding: 5rem 3rem;
   }
 }
 
@@ -50,7 +32,7 @@
 }
 
 .dropZoneError {
-  background-color: var(--bg-error);
+  background-color: rgb(100, 0, 0, 0.2);
 }
 
 .dropZoneActive {
@@ -58,7 +40,8 @@
 }
 
 .dropIcon {
-  font-size: 7rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .dropIconError {
@@ -67,15 +50,15 @@
 }
 
 .buttonInput {
-  border-radius: var(--radius-small);
-  padding: 0.9rem 2.5rem;
+  border-radius: var(--radius-medium);
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--white);
   font-weight: 500;
   border: none;
   transition: all var(--transition-fast);
   z-index: 1;
   pointer-events: all;
+  padding: 0.35rem 0.7rem;
 
   &::first-letter {
     text-transform: uppercase;
@@ -83,7 +66,6 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.35rem var(--bg-gray), 0 0 0 0.65rem var(--color-primary);
   }
 
   &:hover {
@@ -96,8 +78,4 @@
   background-color: var(--color-disabled);
   opacity: 0.7;
   pointer-events: none;
-}
-
-.input:focus ~ .buttonInput {
-  box-shadow: 0 0 0 0.35rem var(--bg-gray), 0 0 0 0.65rem var(--color-primary);
 }

@@ -1,23 +1,21 @@
 import { IconMenu2 } from '@tabler/icons';
-import clsx from 'clsx';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
-import { namedComponent } from '@/utils/namedComponent';
+import { PostData } from '@/utils/transformPost';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useDeletePost } from '@/components/molecules/postOptions/useDeletePost';
-import { PostData } from '@/components/pages/collection/useCollection';
 
 import styles from './postHeader.module.scss';
+
+import { PostOptions } from '../postOptions/PostOptions';
 
 type PropsTypes = {
   tag?: 'header' | 'div';
@@ -27,10 +25,6 @@ type PropsTypes = {
 };
 
 export const POST_AVATAR_SIZE = 40;
-
-const PostOptions = dynamic(() => {
-  return namedComponent(import('@/components/molecules/postOptions/PostOptions'), 'PostOptions');
-});
 
 export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PropsTypes) => {
   const { open, close, modalOpen } = useModal();
@@ -48,25 +42,19 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Pr
     deletePostMutation.mutate({ postId });
   };
 
-  const headerClassName = clsx(className, variant && styles[variant], styles.header);
-
   if (!username) {
-    return (
-      <Tag className={headerClassName}>
-        <Loading variants={['very-small', 'left']} />
-      </Tag>
-    );
+    return <Tag></Tag>;
   }
 
   return (
-    <Tag className={headerClassName}>
-      <Link href={`/${username}`} className={styles.link}>
-        <Avatar className={styles.avatar} userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+    <Tag className={styles.header}>
+      <Link href={`/${username}`} className={styles.userAnchor}>
+        <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
         <h2>{username}</h2>
       </Link>
       {isSignedIn && (
         <div className={styles.options}>
-          {!isAuthor && <FollowButton className={styles.followBtn} userId={authorId} />}
+          {!isAuthor && <FollowButton className={styles.followButton} userId={authorId} />}
           <Tooltip variant="right" content="Post menu">
             <button type="button" className={styles.optionsButton} onClick={open}>
               <IconMenu2 />

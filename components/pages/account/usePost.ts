@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { PostData } from '@/components/pages/collection/useCollection';
+import { PostData } from '@/utils/transformPost';
 
 export const usePost = ({ postId }: { postId: number }) => {
   return useQuery(

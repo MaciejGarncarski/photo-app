@@ -12,18 +12,16 @@
   position: relative;
   width: 100%;
 
-  @include common.mediaquery('sm') {
+  @include common.mediaquery('desktop') {
     width: auto;
     min-width: 40rem;
   }
 }
 
 .heading {
-  background-color: var(--bg-primary);
+  background-color: var(--white);
   text-align: center;
-  font-size: 2rem;
-  flex-grow: 1;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   border-radius: var(--radius-medium) var(--radius-medium) 0 0;
 
   @include common.mobile-landscape {
@@ -32,15 +30,16 @@
 }
 
 .listItem {
-  border-top: var(--border-primary);
+  border-top: var(--border-gray);
   font-weight: 700;
   overflow: hidden;
 
   &>button,
   a {
+
     &:hover,
     &:focus {
-      background-color: var(--bg-gray);
+      background-color: var(--bg-primary);
     }
   }
 }
@@ -55,7 +54,7 @@
     border-radius: 0 0 var(--radius-medium) var(--radius-medium);
   }
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     border-radius: 0 0 var(--radius-medium) var(--radius-medium);
   }
 }
@@ -66,15 +65,14 @@
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
 
   border: 0;
-  background-color: var(--bg-primary);
+  background-color: var(--white);
   width: 100%;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     gap: 2rem;
-    padding: 1.5rem 3rem;
   }
 
   @include common.mobile-landscape {

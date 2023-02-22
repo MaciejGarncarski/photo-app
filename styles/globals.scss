@@ -1,6 +1,10 @@
 @use 'common.scss';
 @use 'variables';
 
+:root {
+  @extend %variables;
+}
+
 *,
 *::before,
 *::after {
@@ -12,34 +16,11 @@
   margin: 0;
 }
 
-html {
-  display: grid;
-  font-size: 62.5%;
-  height: 100%;
-
-  @include common.mediaquery('lg') {
-    min-height: 100%;
-    font-size: 50%;
-  }
-
-  @include common.mediaquery('xxl') {
-    font-size: 62.5%;
-  }
-}
-
-body {
-  min-height: 100vh;
-  font-size: clamp(100%, calc(1rem + 2vw), 24px);
-}
-
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: var(--bg-secondary);
   color: var(--text-primary);
+  background-color: var(--white);
+  font-family: var(--font-customFont);
 }
 
 img,
@@ -51,6 +32,10 @@ video {
 }
 
 button {
+  background-color: transparent;
+  border: 0;
+
+
   &:not(:disabled) {
     cursor: pointer;
   }
@@ -64,14 +49,9 @@ input {
 }
 
 a {
+  font: inherit;
   color: inherit;
   text-decoration: none;
-}
-
-
-:root {
-  @extend %variables;
-
 }
 
 .visually-hidden {
@@ -86,37 +66,7 @@ a {
 
 
 .icon-tabler {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   stroke-width: 1.75;
-}
-
-#__next {
-  isolation: isolate;
-}
-
-
-
-h1 {
-  font-size: 2em;
-}
-
-h2 {
-  font-size: 1.8em;
-}
-
-h3 {
-  font-size: 1.6em;
-}
-
-h4 {
-  font-size: 1.4em;
-}
-
-h5 {
-  font-size: 1.2em;
-}
-
-h6 {
-  font-size: 1em;
 }

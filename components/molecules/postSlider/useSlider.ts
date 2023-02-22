@@ -1,18 +1,15 @@
 import { PostImage } from '@prisma/client';
 import { PanInfo } from 'framer-motion';
 
-import { useScreenWidth } from '@/hooks/useScreenWidth';
-
 type ArgsTypes = {
   currentIndex: number;
   postImages: Array<PostImage | null>;
   setCurrentIndex: (newValue: (value: number) => number) => void;
 };
 
-export const useSlider = ({ currentIndex, postImages, setCurrentIndex }: ArgsTypes) => {
-  const { isMobile } = useScreenWidth();
-  const CHANGE_IMG_OFFSET = isMobile ? 50 : 150;
+const CHANGE_IMG_OFFSET = 40;
 
+export const useSlider = ({ currentIndex, postImages, setCurrentIndex }: ArgsTypes) => {
   const prevImage = () => {
     if (currentIndex === 0) {
       return;

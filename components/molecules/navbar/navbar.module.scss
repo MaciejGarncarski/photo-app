@@ -1,25 +1,22 @@
 @use '/styles/common.scss';
 
 .nav {
-  position: fixed;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-blur);
-  backdrop-filter: var(--backdrop-blur);
+  padding: 0.2rem 0;
+
+  background-color: var(--white);
+  border-top: var(--border-gray);
+
+  position: fixed;
   bottom: 0;
   left: 0;
-  padding: 0.55rem 0;
-  border-top: var(--border-secondary);
+  width: 100%;
   z-index: 3;
+}
 
-  @include common.mediaquery('lg') {
-    position: static;
-    border: 0;
-    z-index: 0;
-    justify-content: flex-end;
-    padding: 0;
-    background-color: transparent;
-  }
+.navDesktop {
+  background-color: transparent;
 }

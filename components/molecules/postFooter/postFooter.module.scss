@@ -1,45 +1,35 @@
 @use '/styles/common.scss';
 
 .footer {
-  padding: 1rem;
+    padding: 0.5rem 1rem;
+
+    @include common.mediaquery('desktop') {
+        padding: 1rem;
+    }
 }
 
-
-%font-size {
-  font-size: 1.75rem;
-
-  @include common.mediaquery('lg') {
-    font-size: 2rem;
-  }
+.descriptionContainer {
+    margin-top: 0.5rem;
 }
 
 .description {
-  display: inline;
-  @extend %font-size;
+    display: inline;
 }
 
 .author {
-  font-weight: 600;
-  @extend %font-size;
+    font-weight: 600;
 
-  &::after {
-    content: ' ';
-  }
+    &::after {
+        content: ' ';
+    }
 }
 
 .showMore {
-  background-color: transparent;
-  border: none;
-  color: var(--color-primary);
-  @extend %font-size;
+    background-color: transparent;
+    border: none;
+    color: var(--color-primary);
 }
 
 .date {
-  padding: 1rem 0;
-
-  @include common.mediaquery('lg') {
-    padding: 1.5rem 0;
-  }
-
-  @extend %font-size;
+    padding: 0.5rem 0;
 }

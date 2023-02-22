@@ -4,18 +4,8 @@
   display: flex;
   align-items: center;
   background-color: var(--bg-secondary);
-  border-radius: var(--radius-small);
-  box-shadow: var(--shadow-secondary);
-  margin: 0.75rem 0;
-
-  @include common.mediaquery('lg') {
-    margin: 1.25rem 2rem;
-  }
-
-
-  @media screen and (max-width: 900px) and (orientation: landscape) {
-    margin: 0.25rem 0;
-  }
+  border-radius: var(--radius-medium);
+  padding: 0 1rem;
 }
 
 .label {
@@ -27,29 +17,14 @@
   border: none;
   background-color: transparent;
   width: 100%;
-  font-size: 2rem;
-  padding: 0.75rem 1.25rem;
 }
 
 .searchIcon {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 1.5rem;
 
-  --size: 4rem;
+  --size: 3rem;
   width: var(--size);
   height: var(--size);
-}
-
-.resetIcon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: none;
-  border: none;
-  height: 100%;
-  border-top-right-radius: var(--radius-medium);
-  border-bottom-right-radius: var(--radius-medium);
-  padding: 0 1rem;
 }

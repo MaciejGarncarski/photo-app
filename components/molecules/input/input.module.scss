@@ -27,7 +27,7 @@
   box-shadow: var(--shadow-secondary);
 
   &:hover {
-    background-color: var(--bg-gray);
+    background-color: var(--bg-secondary);
   }
 
   &:focus {
@@ -46,19 +46,11 @@
 .error {
   color: var(--color-error);
   font-weight: 600;
-  font-size: 1.5rem;
-
-  @include common.mediaquery('lg') {
-    font-size: 2rem;
-  }
 }
 
 .textarea {
   border: none;
   padding: 1.5rem;
   max-width: calc(100% - 1px);
-  font-size: 2rem;
   resize: vertical;
-
-
 }

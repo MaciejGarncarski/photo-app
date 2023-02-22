@@ -20,9 +20,9 @@ export const MotionImage = motion(Image);
 
 export const Avatar = ({
   userId,
-  className,
   width = DEFAULT_AVATAR_SIZE,
   height = DEFAULT_AVATAR_SIZE,
+  className,
 }: PropsTypes) => {
   const { customImage, image, username } = useUser({ userId });
 
@@ -31,25 +31,16 @@ export const Avatar = ({
   const hasCustomImage = customImage;
 
   return (
-    <figure className={clsx(className, styles.avatarContainer)}>
+    <figure className={clsx(className, styles.avatar)}>
       {hasNoImage && (
         <div data-testid="empty icon">
-          <IconUser className={styles.icon} />
+          <IconUser />
           <VisuallyHiddenText text={username ?? ''} />
         </div>
       )}
-      {hasDefaultImage && (
-        <MotionImage src={image} alt={username ?? ''} width={width} height={height} className={styles.avatar} />
-      )}
+      {hasDefaultImage && <MotionImage src={image} alt={username ?? ''} width={width} height={height} />}
       {hasCustomImage && (
-        <MotionImage
-          src={customImage}
-          alt={username ?? ''}
-          data-testid="customImage"
-          width={width}
-          height={height}
-          className={styles.avatar}
-        />
+        <MotionImage src={customImage} alt={username ?? ''} data-testid="customImage" width={width} height={height} />
       )}
     </figure>
   );

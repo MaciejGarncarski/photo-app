@@ -9,7 +9,7 @@
   justify-self: center;
   max-width: 27rem;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     max-width: 70rem;
     margin: 3rem auto;
   }
@@ -21,7 +21,7 @@
   gap: 2rem;
 
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     gap: 0;
     align-items: center;
     flex-direction: row;
@@ -33,7 +33,7 @@
   width: 80%;
   margin: 0 auto;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     width: 70%;
   }
 }
@@ -43,7 +43,7 @@
   flex-direction: column;
   gap: 3rem;
 
-  @include common.mediaquery('lg') {
+  @include common.mediaquery('desktop') {
     gap: 5rem;
     flex-direction: row;
   }

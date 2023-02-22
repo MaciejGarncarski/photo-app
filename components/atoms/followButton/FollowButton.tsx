@@ -13,7 +13,7 @@ export const FollowButton = ({ userId, className }: PropsTypes) => {
   const { isLoading, mutate } = useFollowMutation(userId);
 
   return (
-    <Button className={className} onClick={() => mutate()}>
+    <Button className={className} variant={isFollowing ? 'secondary' : undefined} onClick={() => mutate()}>
       {isLoading ? 'Loading...' : <>{isFollowing ? 'unfollow' : 'follow'}</>}
     </Button>
   );

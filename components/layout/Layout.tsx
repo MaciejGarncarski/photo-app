@@ -1,33 +1,19 @@
-import { AnimatePresence } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import { ReactNode, useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
-import { Header } from '@/components/organisms/header/Header';
-
 import styles from './layout.module.scss';
+
+import { Header } from '../organisms/header/Header';
 
 export type Children = {
   children: ReactNode;
 };
 
-type PropsTypes = Children & {
-  className: string;
-};
+type PropsTypes = Children;
 
-const CompleteSignUp = dynamic(
-  () => import('@/components/molecules/completeSignUp/CompleteSignUp').then(({ CompleteSignUp }) => CompleteSignUp),
-  { ssr: false },
-);
-
-const CookiesPopup = dynamic(
-  () => import('@/components/molecules/cookiesPopup/CookiesPopup').then(({ CookiesPopup }) => CookiesPopup),
-  { ssr: false },
-);
-
-export const Layout = ({ className, children }: PropsTypes) => {
+export const Layout = ({ children }: PropsTypes) => {
   const [isCookiesOpen, setIsCookiesOpen] = useState<boolean>(true);
 
   const { session, isSignedIn } = useAuth();
@@ -38,12 +24,11 @@ export const Layout = ({ className, children }: PropsTypes) => {
   };
 
   return (
-    <div className={className}>
+    <div className={styles.layout}>
       <Header />
-      <div className={styles.children}>
-        <AnimatePresence>{isCookiesOpen && <CookiesPopup onClose={handleClose} />}</AnimatePresence>
-        {!isSignedIn && !isLoading ? <CompleteSignUp /> : <>{children}</>}
-      </div>
+      {/* {!isSignedIn && !isLoading ? <CompleteSignUp /> : <>{children}</>} */}
+      {children}
+      {/* <AnimatePresence>{isCookiesOpen && <CookiesPopup onClose={handleClose} />}</AnimatePresence> */}
     </div>
   );
 };

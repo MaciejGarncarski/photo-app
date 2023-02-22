@@ -8,7 +8,6 @@ import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Loading } from '@/components/atoms/loading/Loading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
@@ -76,14 +75,13 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const isError = Boolean(errors.bio || errors.fullName || errors.username);
 
   if (isLoading) {
-    return <Loading />;
+    return null;
   }
 
   if (editAccount.isLoading) {
     return (
       <m.section variants={stageVariant} animate="animate" exit="exit" initial="initial">
         <Heading tag="h2">Saving changes...</Heading>
-        <Loading />
       </m.section>
     );
   }

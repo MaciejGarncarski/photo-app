@@ -2,7 +2,6 @@ import { IconSearch } from '@tabler/icons';
 import { MouseEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useClickOutside } from '@/components/molecules/layoutSearch/useClickOutside';
 
@@ -45,20 +44,18 @@ export const LayoutSearch = () => {
   return (
     <form ref={formRef} className={styles.form}>
       <label className={styles.label}>
-        {!isEnabled && (
-          <div className={styles.searchIcon}>
-            <IconSearch />
-          </div>
-        )}
+        <div className={styles.searchIcon}>
+          <IconSearch />
+        </div>
         <VisuallyHiddenText text="Search" />
-        <input className={styles.input} type="text" placeholder="Search" onClick={handleClick} {...register('input')} />
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Search PhotoApp"
+          onClick={handleClick}
+          {...register('input')}
+        />
       </label>
-      {isEnabled && (
-        <button type="reset" onClick={handleReset} className={styles.resetIcon}>
-          <VisuallyHiddenText text="Reset" />
-          <IconXWrapper />
-        </button>
-      )}
     </form>
   );
 };

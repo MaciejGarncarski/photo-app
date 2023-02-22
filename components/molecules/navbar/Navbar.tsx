@@ -20,22 +20,18 @@ export const Navbar = () => {
   const { isMobile } = useScreenWidth();
   const { isGoingUp } = useScrollPosition();
 
-  if (isMobile) {
-    return (
-      <motion.nav
-        variants={navbarVariants}
-        initial="hidden"
-        animate={isGoingUp ? 'visible' : 'hidden'}
-        className={styles.nav}
-      >
-        <NavButtons />
-      </motion.nav>
-    );
+  if (!isMobile) {
+    return null;
   }
 
   return (
-    <nav className={styles.nav}>
+    <motion.nav
+      variants={navbarVariants}
+      initial="hidden"
+      animate={isGoingUp ? 'visible' : 'hidden'}
+      className={styles.nav}
+    >
       <NavButtons />
-    </nav>
+    </motion.nav>
   );
 };
