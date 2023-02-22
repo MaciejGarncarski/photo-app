@@ -26,10 +26,6 @@
   }
 }
 
-.active {
-  background-color: var(--bg-secondary);
-}
-
 .listItemContent {
   display: flex;
   align-items: center;
@@ -57,6 +53,15 @@
   &:hover,
   &:focus {
     background-color: var(--bg-secondary);
+  }
+}
+
+.active {
+  background-color: var(--bg-secondary);
+  font-weight: 600;
+
+  svg {
+    stroke-width: 2.5;
   }
 }
 
