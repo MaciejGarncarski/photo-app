@@ -8,7 +8,7 @@
   margin-top: 1rem;
 
   @include common.mediaquery('desktop') {
-    gap: 10rem;
+    gap: 3rem;
   }
 }
 
@@ -71,7 +71,7 @@
   justify-content: center;
   align-items: center;
   color: var(--text-primary);
-  padding: 0.5rem;
+  padding: 0.3rem;
   border: none;
 
   &:hover,
@@ -81,18 +81,17 @@
   }
 
   >svg {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   @include common.mediaquery('desktop') {
-
     right: -1.5rem;
     top: -1.5rem;
 
     >svg {
-      width: 4rem;
-      height: 4rem;
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 }

@@ -1,19 +1,20 @@
+@use '/styles/common.scss';
+
 .addComment {
-  display: grid;
-  grid-template-columns: 8fr 1fr;
-  gap: 1.5rem;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .commentInput {
-  min-width: 100%;
   height: 2.5rem;
   min-height: 2.5rem;
   resize: vertical;
+  width: 80%;
   border-radius: var(--radius-medium);
-  border-bottom-right-radius: 0;
-  border: 1px solid var(--color-secondary);
   padding: 0.5rem;
+  border: var(--border-gray);
   transition: background-color var(--transition-fast);
 
 
@@ -21,4 +22,17 @@
   &:focus {
     background-color: var(--bg-gray);
   }
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  @include common.mediaquery('desktop') {
+    width: 80%;
+  }
+}
+
+.postButton {
+  padding: 0.5rem 1rem;
 }

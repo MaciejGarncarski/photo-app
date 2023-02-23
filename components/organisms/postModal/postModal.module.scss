@@ -25,7 +25,7 @@
   @include common.mediaquery('desktop') {
     width: auto;
     overflow-y: unset;
-    max-height: 40rem;
+    max-height: 45rem;
     margin: auto;
     display: grid;
     grid-template-columns: 45rem 30rem;
@@ -130,5 +130,6 @@
 
   @include common.mediaquery('desktop') {
     width: 45rem;
+    max-height: 45rem;
   }
 }

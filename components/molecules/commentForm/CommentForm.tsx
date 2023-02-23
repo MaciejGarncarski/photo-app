@@ -63,7 +63,7 @@ export const CommentForm = ({ post }: PropsTypes) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>
-      <textarea className={styles.commentInput} {...register('comment')} rows={3} cols={25}></textarea>
+      <textarea className={styles.commentInput} {...register('comment')}></textarea>
       <Button type="submit" className={styles.postButton} disabled={!isDirty}>
         post
       </Button>

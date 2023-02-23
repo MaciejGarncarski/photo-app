@@ -110,6 +110,10 @@
   gap: 5vw;
   grid-template-columns: repeat(3, 1fr);
 
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-medium);
+  padding: 0.75rem 0.5rem;
+
   @include common.mediaquery('desktop') {
     margin: 0;
     display: flex;
