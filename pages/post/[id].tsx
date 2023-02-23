@@ -10,7 +10,7 @@ const PostPage = () => {
   const { data } = usePost({ postId: Number(string(router.query.id)) });
 
   if (!router.isReady) {
-    return null;
+    return <Account isModalOpen username={data?.author.username ?? ''} />;
   }
 
   return <Account isModalOpen username={data?.author.username ?? ''} postId={Number(string(router.query.id))} />;

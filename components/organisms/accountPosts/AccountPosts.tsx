@@ -34,21 +34,32 @@ export const AccountPosts = ({ id }: PropsTypes) => {
   });
 
   if (!data || isLoading) {
-    return null;
+    return (
+      <div className={styles.posts}>
+        {Array.from({ length: 6 }, (_, item) => item).map((el) => {
+          return <div className={styles.placeholder} key={el} />;
+        })}
+      </div>
+    );
   }
 
   return (
-    <div className={styles.posts}>
-      {data.pages.map((page) => {
-        return page.posts.map((post) => {
-          return <AccountPost key={post.postId} post={post} />;
-        });
-      })}
+    <>
+      <div className={styles.posts}>
+        {data.pages.map((page) => {
+          return page.posts.map((post) => {
+            return <AccountPost key={post.postId} post={post} />;
+          });
+        })}
+      </div>
+
       {(isLoading || hasNextPage) && (
-        <div ref={sentryRef}>
-          <p>loading...</p>
+        <div ref={sentryRef} className={styles.posts}>
+          {Array.from({ length: 6 }, (_, item) => item).map((el) => {
+            return <div className={styles.placeholder} key={el} />;
+          })}
         </div>
       )}
-    </div>
+    </>
   );
 };

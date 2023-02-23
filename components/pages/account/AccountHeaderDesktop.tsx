@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/hooks/useAuth';
+import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
@@ -21,9 +22,14 @@ type PropsTypes = {
 };
 
 export const AccountHeaderDesktop = ({ username, isOwner, modalOpen, open }: PropsTypes) => {
+  const { isMobile } = useScreenWidth();
   const { session } = useAuth();
   const userData = useUser({ username });
   const { id, bio, name, count } = userData;
+
+  if (isMobile === true) {
+    return null;
+  }
 
   return (
     <main className={styles.accountDesktop}>

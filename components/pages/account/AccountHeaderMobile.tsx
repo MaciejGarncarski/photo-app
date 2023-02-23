@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/hooks/useAuth';
+import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
@@ -24,6 +25,11 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
   const { session } = useAuth();
   const userData = useUser({ username });
   const { id, bio, name, count } = userData;
+  const { isMobile } = useScreenWidth();
+
+  if (!isMobile) {
+    return null;
+  }
 
   return (
     <main className={styles.account}>

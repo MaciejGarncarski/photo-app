@@ -1,5 +1,9 @@
+import clsx from 'clsx';
+
 import styles from './postPlaceholder.module.scss';
 
-export const PostPlaceholder = () => {
-  return <div role="status" className={styles.placeholder}></div>;
+type Sizes = 'small' | 'normal';
+
+export const PostPlaceholder = ({ size }: { size?: Sizes }) => {
+  return <div role="status" className={clsx(size && styles[size], styles.placeholder)}></div>;
 };

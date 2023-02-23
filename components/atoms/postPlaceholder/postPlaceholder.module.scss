@@ -3,7 +3,7 @@
 .placeholder {
   background-color: var(--bg-secondary);
   width: var(--post-width);
-  height: 20rem;
+  height: 25rem;
   border-radius: var(--radius-medium);
   opacity: 0.5;
   animation: skeleton-loading 1s linear infinite alternate;
@@ -23,5 +23,14 @@
 
   100% {
     background-color: rgb(190, 190, 190);
+  }
+}
+
+.small {
+  height: 12rem;
+  margin: 0;
+
+  @include common.mediaquery('desktop') {
+    height: 15rem;
   }
 }

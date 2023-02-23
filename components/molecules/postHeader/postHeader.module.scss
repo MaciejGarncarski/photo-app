@@ -9,7 +9,6 @@
     }
 }
 
-
 .userAnchor {
     display: flex;
     align-items: center;
@@ -25,5 +24,9 @@
 }
 
 .followButton {
-    padding: 0.35rem 0.5rem;
+    padding: 0.35rem 0rem;
+
+    @include common.mediaquery('tablet') {
+        padding: 0.5rem 1rem;
+    }
 }

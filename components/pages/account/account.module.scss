@@ -3,7 +3,7 @@
 .container {
   max-width: 80rem;
   margin-inline: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding-bottom: 4rem;
 }
 
@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: 1fr;
   position: relative;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .accountDesktop {
@@ -41,14 +41,12 @@
   --account-avatar-size: 6rem;
   width: var(--account-avatar-size);
   height: var(--account-avatar-size);
-  margin: 1rem 0;
   justify-self: center;
 
   @include common.mediaquery('desktop') {
     --account-avatar-size: 9rem;
     width: var(--account-avatar-size);
     height: var(--account-avatar-size);
-    margin: 0;
     place-self: center;
     position: relative;
     top: 1rem;
@@ -109,7 +107,7 @@
   list-style: none;
   margin: 0 auto;
   display: grid;
-  gap: 10vw;
+  gap: 5vw;
   grid-template-columns: repeat(3, 1fr);
 
   @include common.mediaquery('desktop') {

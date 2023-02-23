@@ -1,6 +1,8 @@
 import { atom } from 'jotai';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { useOtherUsers } from '@/hooks/useOtherUsers';
+
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
@@ -16,6 +18,7 @@ export const newPostsAtom = atom<boolean>(false);
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
+  const otherUsers = useOtherUsers();
   // useRealtimeInfinitePosts();
 
   const [sentryRef] = useInfiniteScroll({
@@ -46,17 +49,25 @@ export const Home = () => {
 
       <aside className={styles.aside}>
         <LayoutSearch />
+
         <section className={styles.asideItem}>
-          <Heading tag="h3" className={styles.heading}>
+          <Heading tag="h2" className={styles.heading}>
             Other users
           </Heading>
-          <ul className={styles.asideList}>
-            <li className={styles.asideListItem}>
-              <Avatar userId="maciek" className={styles.avatar} />
-              <p>@maciek</p>
-              <FollowButton className={styles.asideFollowButton} userId="maciek" />
-            </li>
-          </ul>
+          {otherUsers.data && (
+            <ul className={styles.asideList}>
+              {otherUsers?.data &&
+                otherUsers.data.map(({ id, username }) => {
+                  return (
+                    <li key={id} className={styles.asideListItem}>
+                      <Avatar userId={id} className={styles.avatar} />
+                      <p className={styles.username}>@{username}</p>
+                      <FollowButton className={styles.asideFollowButton} userId={id} />
+                    </li>
+                  );
+                })}
+            </ul>
+          )}
         </section>
       </aside>
     </div>
