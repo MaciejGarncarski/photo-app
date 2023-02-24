@@ -1,6 +1,8 @@
 import { atom } from 'jotai';
+import Link from 'next/link';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { useAuth } from '@/hooks/useAuth';
 import { useOtherUsers } from '@/hooks/useOtherUsers';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
@@ -18,6 +20,7 @@ export const newPostsAtom = atom<boolean>(false);
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
+  const { isSignedIn } = useAuth();
   const otherUsers = useOtherUsers();
   // useRealtimeInfinitePosts();
 
@@ -60,9 +63,11 @@ export const Home = () => {
                 otherUsers.data.map(({ id, username }) => {
                   return (
                     <li key={id} className={styles.asideListItem}>
-                      <Avatar userId={id} className={styles.avatar} />
-                      <p className={styles.username}>@{username}</p>
-                      <FollowButton className={styles.asideFollowButton} userId={id} />
+                      <Link href={`/${username}`} className={styles.link}>
+                        <Avatar userId={id} className={styles.avatar} />
+                        <p className={styles.username}>@{username}</p>
+                      </Link>
+                      {isSignedIn && <FollowButton className={styles.asideFollowButton} userId={id} />}
                     </li>
                   );
                 })}

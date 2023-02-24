@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth';
 
 import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
-import { SignIn } from '@/components/organisms/signIn/SignIn';
+import { SignIn } from '@/components/pages/signIn/SignIn';
 
 const AuthPage = () => {
   const { status } = useAuth();

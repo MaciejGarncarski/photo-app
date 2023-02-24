@@ -22,15 +22,21 @@
     border-radius: var(--radius-small);
   }
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     width: auto;
     overflow-y: unset;
-    max-height: 45rem;
     margin: auto;
     display: grid;
-    grid-template-columns: 45rem 30rem;
+    max-height: 27rem;
+    grid-template-columns: 27rem 18rem;
     grid-template-rows: auto auto 1fr;
     border-radius: var(--radius-medium);
+  }
+
+
+  @include common.mediaquery('desktop') {
+    max-height: 45rem;
+    grid-template-columns: 45rem 30rem;
   }
 }
 
@@ -88,6 +94,10 @@
     height: 5em;
   }
 
+  @include common.mediaquery('tablet') {
+    max-height: 20rem;
+  }
+
 
   @include common.mediaquery('desktop') {
     grid-column: 2 / 3;
@@ -124,8 +134,8 @@
   }
 
   @include common.mediaquery('tablet') {
-    width: 25rem;
-    max-height: 25rem;
+    width: 27rem;
+    max-height: 27rem;
   }
 
   @include common.mediaquery('desktop') {

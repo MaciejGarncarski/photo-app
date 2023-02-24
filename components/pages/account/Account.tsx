@@ -28,8 +28,6 @@ type PropsTypes = {
   postId?: number;
 };
 
-export const listData = ['posts', 'followers', 'following'] as const;
-
 export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
   const { signOut, sessionUserData } = useAuth();
   const userData = useUser({ username });

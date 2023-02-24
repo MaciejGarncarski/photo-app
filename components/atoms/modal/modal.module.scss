@@ -50,7 +50,8 @@
   top: -3rem;
   border-radius: var(--radius-medium);
   padding: 0.4rem;
-  background-color: var(--text-black);
+  background-color: var(--white);
+  box-shadow: var(--shadow);
 
   @include common.mediaquery('desktop') {
     top: -4rem;
