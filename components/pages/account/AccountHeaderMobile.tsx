@@ -52,6 +52,7 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
         <Button type="button" onClick={open} className={styles.button}>
           <IconSettingsWrapper size="sm" />
           <VisuallyHiddenText text={modalOpen ? 'Close menu' : 'Open menu'} />
+          <span className={styles.menuButtonText}>settings</span>
         </Button>
       )}
       <p className={styles.name}>{name}</p>

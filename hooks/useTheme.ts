@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
-const themeAtom = atomWithStorage<string>('theme', 'light');
+const themeAtom = atomWithStorage('theme', 'light');
 
 export const useTheme = () => {
   const [theme, setTheme] = useAtom(themeAtom);
@@ -9,12 +9,12 @@ export const useTheme = () => {
   const handleTheme = () => {
     if (theme === 'dark') {
       setTheme('light');
-      document.documentElement.classList.add('dark');
-      return;
+      // document.documentElement.classList.remove('dark');
     }
-
-    setTheme('dark');
-    document.documentElement.classList.remove('dark');
+    if (theme === 'light') {
+      setTheme('dark');
+      // document.documentElement.classList.add('dark');
+    }
   };
 
   return { theme, handleTheme };

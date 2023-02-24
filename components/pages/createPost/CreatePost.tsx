@@ -27,7 +27,7 @@ import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
 
 import styles from './createPost.module.scss';
 
-const PostDetailsSchema = z.object({
+export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded' }),
 });
 

@@ -1,7 +1,6 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useLayoutEffect } from 'react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
+import { useTheme } from '@/hooks/useTheme';
 
 import styles from './layout.module.scss';
 
@@ -14,21 +13,21 @@ export type Children = {
 type PropsTypes = Children;
 
 export const Layout = ({ children }: PropsTypes) => {
-  const [isCookiesOpen, setIsCookiesOpen] = useState<boolean>(true);
+  const { theme } = useTheme();
 
-  const { session, isSignedIn } = useAuth();
-  const { isLoading } = useUser({ userId: session?.user?.id });
-
-  const handleClose = () => {
-    setIsCookiesOpen(false);
-  };
+  useLayoutEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   return (
     <div className={styles.layout}>
       <Header />
-      {/* {!isSignedIn && !isLoading ? <CompleteSignUp /> : <>{children}</>} */}
-      {children}
-      {/* <AnimatePresence>{isCookiesOpen && <CookiesPopup onClose={handleClose} />}</AnimatePresence> */}
+      <div>{children}</div>
     </div>
   );
 };

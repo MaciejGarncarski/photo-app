@@ -31,7 +31,7 @@ type PropsTypes = {
 export const listData = ['posts', 'followers', 'following'] as const;
 
 export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
-  const { session, signOut } = useAuth();
+  const { signOut, sessionUserData } = useAuth();
   const userData = useUser({ username });
   const { data, isError } = usePost({ postId: Number(postId) });
 
@@ -54,7 +54,7 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     router.push(`/${username}`);
   };
 
-  const isOwner = session?.user?.id === id;
+  const isOwner = sessionUserData.id === id;
 
   return (
     <div className={styles.container}>

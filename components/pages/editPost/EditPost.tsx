@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -7,12 +8,13 @@ import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
+import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { Input } from '@/components/molecules/input/Input';
 
 import styles from './editPost.module.scss';
 
 import { usePost } from '../account/usePost';
+import { PostDetailsSchema } from '../createPost/CreatePost';
 
 export const EditPost = ({ postId }: { postId: number }) => {
   const router = useRouter();
@@ -27,6 +29,7 @@ export const EditPost = ({ postId }: { postId: number }) => {
     getValues,
   } = useForm({
     mode: 'all',
+    resolver: zodResolver(PostDetailsSchema),
     defaultValues: {
       description: data?.description ?? '',
     },
@@ -55,7 +58,7 @@ export const EditPost = ({ postId }: { postId: number }) => {
     <section className={styles.editPost}>
       <Heading tag="h2">Edit post</Heading>
       <form className={styles.form}>
-        <Input labelText="Description" type="text" {...register('description')} error={errors.description} />
+        <TextArea label="Description" {...register('description')} error={errors.description} />
 
         <div className={styles.buttons}>
           <Button type="button" variant="secondary" onClick={cancelModal.open}>

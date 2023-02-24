@@ -11,7 +11,7 @@ type PropsTypes = {
 };
 
 export const Settings = ({ close }: PropsTypes) => {
-  const { handleTheme, theme } = useTheme();
+  const { theme, handleTheme } = useTheme();
   const { sessionUserData } = useAuth();
 
   const ThemeButton = () => {
