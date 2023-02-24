@@ -5,6 +5,10 @@
   @extend %variables;
 }
 
+:root[class="dark"] {
+  @extend %variablesDarkTheme;
+}
+
 *,
 *::before,
 *::after {
@@ -18,8 +22,10 @@
 
 html,
 body {
-  color: var(--text-primary);
+  color: var(--text-black);
   background-color: var(--white);
+  transition: all var(--transition-fast);
+  transition-property: background-color, color;
   font-family: var(--font-customFont);
 }
 

@@ -37,7 +37,7 @@
 
 .emptySpace {
   background-color: var(--color-primary);
-  color: var(--white);
+  color: var(--text-black);
   border-radius: var(--radius-small);
   border: 0;
   box-shadow: var(--shadow-secondary);
@@ -46,7 +46,6 @@
   gap: 0.25rem;
   justify-content: center;
   align-items: center;
-  filter: opacity(0.5);
   min-height: 5rem;
 
 

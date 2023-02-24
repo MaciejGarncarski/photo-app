@@ -68,7 +68,9 @@
 .title {
   display: none;
 
+
   @include common.mediaquery('desktop') {
+    text-transform: capitalize;
     display: unset;
   }
 }

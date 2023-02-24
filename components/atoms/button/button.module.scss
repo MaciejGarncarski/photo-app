@@ -3,10 +3,9 @@
 .button {
   border-radius: var(--radius-medium);
   background-color: var(--color-primary);
-  color: var(--white);
+  color: rgb(255, 255, 255);
   font-weight: 500;
   border: none;
-  transition: all var(--transition-fast);
   padding: 0.4rem 0.65rem;
   text-align: center;
   display: flex;
@@ -17,11 +16,6 @@
     box-shadow: var(--shadow-focus);
   }
 
-  &:not(:disabled) {
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
 
   &:disabled {
     background-color: var(--color-disabled);

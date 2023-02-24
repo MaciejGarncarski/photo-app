@@ -43,3 +43,18 @@
     --post-width: calc(16rem + 15vw);
   }
 }
+
+
+
+%variablesDarkTheme {
+  --white: rgb(43, 46, 53);
+  --color-gray: rgb(200, 200, 200, 0.3);
+  --color-overlay: rgb(40, 40, 40, 0.7);
+  --text-black: rgb(230, 230, 230);
+  --text-gray: rgb(214, 214, 214);
+  --border-gray: 1px solid rgba(255, 255, 255, 0.5);
+  --shadow: rgba(255, 255, 255, 0.4) 0px -1px 1px 0px, rgba(255, 255, 255, 0.5) 0px 1px 2px 0px;
+  --bg-primary: rgb(129, 129, 129);
+  --bg-secondary: rgba(255, 255, 255, 0.2);
+
+}
