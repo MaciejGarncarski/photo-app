@@ -6,7 +6,7 @@
   height: 25rem;
   border-radius: var(--radius-medium);
   opacity: 0.5;
-  animation: skeleton-loading 1s linear infinite alternate;
+  animation: var(--placeholder-animation);
   box-shadow: var(--shadow-primary);
   margin: 0 auto;
   margin-bottom: 4rem;
@@ -16,15 +16,7 @@
   }
 }
 
-@keyframes skeleton-loading {
-  0% {
-    background-color: var(--bg-secondary);
-  }
 
-  100% {
-    background-color: rgb(190, 190, 190);
-  }
-}
 
 .small {
   height: 12rem;

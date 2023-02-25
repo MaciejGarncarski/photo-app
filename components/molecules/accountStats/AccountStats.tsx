@@ -7,7 +7,7 @@ import { useModal } from '@/components/atoms/modal/useModal';
 
 import styles from './accountStats.module.scss';
 
-import { StatsModal } from './StatsModal';
+import { StatsModal } from '../statsModal/StatsModal';
 
 type Titles = 'posts' | 'followers' | 'following';
 

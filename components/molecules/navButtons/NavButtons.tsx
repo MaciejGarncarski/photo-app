@@ -17,7 +17,6 @@ import { Settings } from '../settings/Settings';
 export type ListData = {
   icon: ReactNode;
   title: string;
-  pathname: string;
   href: string;
 };
 
@@ -39,29 +38,26 @@ export const NavButtons = () => {
       icon: <IconHome />,
       title: 'Home',
       href: '/',
-      pathname: '/',
     },
     {
       icon: <IconSquareRoundedPlus />,
       title: 'Create post',
       href: '/create-post',
-      pathname: '/create-post',
     },
     {
       icon: <IconUser />,
       title: 'Profile',
       href: `/${sessionUserData.username}`,
-      pathname: '/[username]',
     },
   ];
 
   return (
     <>
       <ul className={styles.list}>
-        {listData.map(({ icon, href, title, pathname }) => {
+        {listData.map(({ icon, href, title }) => {
           return (
             <li key={title} className={styles.listItem}>
-              <Link href={href} className={clsx(router.pathname === pathname && styles.active, styles.listItemContent)}>
+              <Link href={href} className={clsx(router.asPath === href && styles.active, styles.listItemContent)}>
                 <span>{icon}</span>
                 <span className={styles.title}>{title}</span>
               </Link>

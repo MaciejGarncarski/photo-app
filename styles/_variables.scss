@@ -24,8 +24,9 @@
 
   --transition-fast: 0.4s ease;
 
+  --placeholder-animation: skeleton-loading 1s linear infinite alternate;
   --shadow: rgba(0, 0, 0, 0.12) 0px -1px 3px 0px, rgba(0, 0, 0, 0.24) 0px 1px 2px 0px;
-  --shadow-focus: 0 0 0 0.1rem var(--white), 0 0 0 0.3rem var(--color-primary);
+  --shadow-focus: 0 0 0 0.2rem var(--white), 0 0 0 0.35rem var(--color-primary);
 
   --radius-big: 1.2rem;
   --radius-medium: 0.5rem;

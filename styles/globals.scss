@@ -76,3 +76,13 @@ a {
   height: 1.5rem;
   stroke-width: 1.75;
 }
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--bg-secondary);
+  }
+
+  100% {
+    background-color: rgb(190, 190, 190);
+  }
+}

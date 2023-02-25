@@ -1,0 +1,55 @@
+@use '/styles/common.scss';
+
+
+.container {
+    background-color: var(--white);
+    padding: 1rem 0;
+    width: clamp(25rem, 30%, 30rem);
+    border-radius: var(--radius-medium);
+    position: relative;
+}
+
+.heading {
+    text-align: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    min-height: 10rem;
+    max-height: 20rem;
+    overflow-y: visible;
+    padding-top: 2rem;
+    gap: 1rem;
+}
+
+.placeholder {
+    margin: 0 2rem;
+    background-color: var(--bg-primary);
+    height: 2.5rem;
+    border-radius: var(--radius-small);
+    animation: var(--placeholder-animation);
+}
+
+
+.listItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5rem;
+    transition: transform var(--transition-fast);
+    padding: 0 2rem;
+}
+
+.itemLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
