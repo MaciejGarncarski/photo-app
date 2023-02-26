@@ -17,11 +17,13 @@
   gap: 3rem;
   margin-top: 2rem;
   margin-bottom: 4rem;
+  min-height: 100%;
 
   @include common.mediaquery('desktop') {
     grid-auto-columns: auto;
     margin: 0 auto;
     margin-top: 3rem;
+    margin-bottom: 4rem;
     gap: 5rem;
   }
 }

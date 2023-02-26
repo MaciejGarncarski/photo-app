@@ -28,7 +28,7 @@ export const Home = () => {
     hasNextPage: hasNextPage || false,
     onLoadMore: fetchNextPage,
     disabled: isError,
-    rootMargin: '0px 0px 400px 0px',
+    rootMargin: '0px 0px 500px 0px',
   });
 
   return (
@@ -40,7 +40,7 @@ export const Home = () => {
             return <HomePost priority={idx < 4} key={post.postId} post={post} />;
           });
         })}
-        {isLoading && (
+        {(isLoading || hasNextPage) && (
           <div ref={sentryRef}>
             {[0, 1, 2].map((el) => {
               return <PostPlaceholder key={el} />;

@@ -21,6 +21,7 @@
   grid-template-rows: repeat(3, 1fr);
   width: 80%;
   margin-inline: auto;
+  gap: 2rem;
 
   @include common.mediaquery('desktop') {
     grid-template-rows: 1fr;

@@ -1,4 +1,4 @@
-import { motion as m, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
@@ -48,7 +48,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
   }
 
   return (
-    <m.section
+    <motion.section
       variants={stageVariant}
       animate="animate"
       exit="exit"
@@ -72,6 +72,6 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
       <ModalContainer>
         {modalOpen && <ConfirmationAlert headingText="Delete Avatar?" close={close} onConfirm={removeAvatar} />}
       </ModalContainer>
-    </m.section>
+    </motion.section>
   );
 };
