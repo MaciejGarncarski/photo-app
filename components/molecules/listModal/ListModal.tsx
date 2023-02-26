@@ -16,7 +16,7 @@ type PropsTypes = {
 export const ListModal = ({ close, headingText, children }: PropsTypes) => {
   return (
     <Backdrop close={close}>
-      <motion.div initial={{ y: -100 }} animate={{ y: 0 }} exit={{ scale: 0.7, y: -5 }} className={styles.container}>
+      <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100, opacity: 0 }} className={styles.container}>
         <h3 className={styles.heading}>{headingText}</h3>
         <ReactFocusLock>
           <ModalClose onClose={close} />

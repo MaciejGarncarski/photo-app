@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2021",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,12 +21,25 @@
     "incremental": true,
     "sourceMap": true,
     "noImplicitAny": true,
-
     "paths": {
-      "@/*": ["./*"],
-      "~/*": ["./public/*"]
+      "@/*": [
+        "./*"
+      ],
+      "~/*": [
+        "./public/*"
+      ]
     },
   },
-  "include": ["types.d.ts", "next-env.d.ts", "jest.setup.js", "jest.config.ts", "**/*.ts", "**/*.tsx", "utils/env.mjs"],
-  "exclude": ["node_modules"],
+  "include": [
+    "types.d.ts",
+    "next-env.d.ts",
+    "jest.setup.js",
+    "jest.config.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "utils/env.mjs"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
 }

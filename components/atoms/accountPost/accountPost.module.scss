@@ -16,8 +16,6 @@
   &:focus {
     outline: none;
     box-shadow: var(--shadow-focus);
-
-
   }
 }
 
@@ -37,7 +35,6 @@
     &+.overlay {
       opacity: 1;
     }
-
   }
 }
 
@@ -53,7 +50,8 @@
   align-items: center;
   gap: 0.75rem;
   background-color: rgb(35, 35, 35, 0.55);
-  color: var(--white);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
 
   font-size: 1.5rem;
 
@@ -64,7 +62,7 @@
 
   @include common.mediaquery('desktop') {
     font-size: 2.5rem;
-    gap: 1.25rem;
+    gap: 2rem;
 
     svg {
       width: 2.5rem;
@@ -78,4 +76,7 @@
   justify-content: center;
   align-items: center;
 
+  @include common.mediaquery('desktop') {
+    gap: 0.25rem;
+  }
 }

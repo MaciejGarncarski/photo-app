@@ -50,12 +50,12 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Pr
     <Tag className={styles.header}>
       <Link href={`/${username}`} className={styles.userAnchor}>
         <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
-        <h2>{username}</h2>
+        <h2 className={styles.username}>{username}</h2>
       </Link>
       {isSignedIn && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton className={styles.followButton} userId={authorId} />}
-          <Tooltip variant="right" content="Post menu">
+          <Tooltip variant="right" content="Post options">
             <button type="button" className={styles.optionsButton} onClick={open}>
               <IconMenu2 />
             </button>

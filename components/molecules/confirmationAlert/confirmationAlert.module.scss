@@ -1,13 +1,11 @@
 @use '/styles/common.scss';
 
 .container {
-  max-width: 85%;
-  min-width: 75%;
+  width: clamp(20rem, 30%, 30rem);
   background-color: var(--white);
   border-radius: var(--radius-medium);
   position: relative;
-  padding: 2rem 3rem;
-
+  padding: 3rem 0;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -15,7 +13,6 @@
   @include common.mediaquery('desktop') {
     min-width: unset;
     gap: 2rem;
-    padding: 2rem 2.5rem;
   }
 }
 

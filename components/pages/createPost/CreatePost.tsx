@@ -27,7 +27,7 @@ import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
 
 import styles from './createPost.module.scss';
 
-const PostDetailsSchema = z.object({
+export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded' }),
 });
 
@@ -49,10 +49,7 @@ export type ImagesBase64 = Array<
 
 export const CreatePost = () => {
   const router = useRouter();
-  // const { sendMessage } = useRealtimeInfinitePosts();
   const { session } = useAuth();
-
-  const [isCropping, setIsCropping] = useState<boolean>(false);
 
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
@@ -93,7 +90,7 @@ export const CreatePost = () => {
           { imageBlob: image.file, folder, isPost: true },
           {
             onError: () => {
-              toast.error('Error');
+              toast.error('Could not add post.');
             },
           },
         );
@@ -128,21 +125,14 @@ export const CreatePost = () => {
   return (
     <section aria-labelledby="Create new post" className={styles.createPost}>
       <NextSeo title="Create new post" />
-
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
           <CreatePostItemContainer>
-            <CropImage
-              isCropping={isCropping}
-              setIsCropping={setIsCropping}
-              setFinalImages={setFinalImages}
-              finalImages={finalImages}
-              aspectRatio={aspectRatio}
-            />
+            <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={aspectRatio} />
           </CreatePostItemContainer>
         </div>
       )}
-      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
+      <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
       {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>

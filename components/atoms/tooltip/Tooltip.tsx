@@ -14,16 +14,15 @@ type PropsTypes = {
 
 export const tooltipVariant: Variants = {
   initial: {
-    opacity: 0.7,
+    opacity: 0,
   },
   animate: {
+    transition: {
+      duration: 0.1,
+    },
     opacity: 1,
   },
   exit: {
-    transition: {
-      type: 'tween',
-      duration: 0.25,
-    },
     opacity: 0,
   },
 };

@@ -23,7 +23,7 @@ type WithButton = {
 type WithLink = {
   type: 'link';
   href: string;
-  onClick?: never;
+  onClick?: () => void;
   disabled?: never;
 };
 
@@ -62,7 +62,7 @@ export const ListModalItem = ({
         </button>
       )}
       {type === 'link' && (
-        <Link href={href} className={styles.item}>
+        <Link href={href} className={styles.item} onClick={onClick}>
           {icon}
           {children}
         </Link>

@@ -45,10 +45,12 @@ export const SignIn = () => {
       <Heading tag="h2">Sign in</Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input labelText="With Magic link" type="email" error={errors.email} {...register('email')} />
-        <Button type="submit">Sign in</Button>
+        <Button type="submit" className={styles.signInButton}>
+          Sign in
+        </Button>
       </form>
       <div className={styles.separator}>
-        <p className={styles.orWith}>or</p>
+        <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
         <Button className={styles.button} type="button" onClick={signInGoogle}>

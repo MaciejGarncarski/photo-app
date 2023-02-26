@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { ChangeEvent, SyntheticEvent, useRef, useState } from 'react';
-import { Crop, PixelCrop } from 'react-image-crop';
-import ReactCrop from 'react-image-crop';
+import { ChangeEvent, useCallback, useState } from 'react';
+import Cropper, { Area } from 'react-easy-crop';
 import { v4 } from 'uuid';
 
-import { centerAspectCrop } from '@/utils/centerAspectCrop';
 import { convertToBlob } from '@/utils/convertToBlob';
 import { handleDropImage } from '@/utils/handleDropImage';
 
@@ -17,14 +15,11 @@ import { useModal } from '@/components/atoms/modal/useModal';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 
-import 'react-image-crop/src/ReactCrop.scss';
 import styles from './cropImage.module.scss';
 
 type PropsTypes = {
   aspectRatio: number;
   finalImages: FinalImages;
-  isCropping: boolean;
-  setIsCropping: (isAdding: boolean) => void;
   setFinalImages: (finalImages: FinalImages) => void;
 };
 
@@ -36,38 +31,32 @@ export type ImageCropErrors =
   | 'NO_IMAGE_DETECTED'
   | 'TOO_MANY_IMAGES';
 
-export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalImages }: PropsTypes) => {
-  const [crop, setCrop] = useState<Crop>();
-  const [cropCompleted, setCropCompleted] = useState<PixelCrop>();
+export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTypes) => {
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
+
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [error, setError] = useState<ImageCropErrors>(null);
   const [isIdle, setIsIdle] = useState<boolean>(false);
 
-  const imgRef = useRef<HTMLImageElement>(null);
+  const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
 
   const { open, close, modalOpen } = useModal();
 
-  const onImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
-    if (!aspectRatio) {
-      return;
-    }
-    const { width, height } = e.currentTarget;
-    setIsCropping(true);
-    setCrop(centerAspectCrop(width, height, aspectRatio));
-  };
-
   const resetState = () => {
     setImgSrc(null);
-    setCrop(undefined);
+    setCrop({ x: 0, y: 0 });
     setError(null);
-    setIsCropping(false);
   };
 
   const saveCrop = async () => {
     setIsIdle(true);
-    if (imgRef.current && cropCompleted) {
-      const blob = await convertToBlob(imgRef.current, cropCompleted);
-
+    if (croppedAreaPixels && imgSrc) {
+      const blob = await convertToBlob(imgSrc, croppedAreaPixels);
       const imageId = v4();
 
       setFinalImages([
@@ -106,18 +95,17 @@ export const CropImage = ({ aspectRatio, finalImages, setIsCropping, setFinalIma
   return (
     <>
       <Heading tag="h2">Crop your image</Heading>
-      <ReactCrop
-        key={aspectRatio}
-        crop={crop}
-        onChange={(_, percentCrop) => {
-          setCrop(percentCrop);
-        }}
-        aspect={aspectRatio}
-        className={styles.reactCrop}
-        onComplete={(c) => setCropCompleted(c)}
-      >
-        <img ref={imgRef} alt="Crop me" src={imgSrc} onLoad={onImageLoad} />
-      </ReactCrop>
+      <div className={styles.cropContainer}>
+        <Cropper
+          image={imgSrc}
+          aspect={aspectRatio}
+          crop={crop}
+          zoom={zoom}
+          onCropChange={setCrop}
+          onZoomChange={setZoom}
+          onCropComplete={onCropComplete}
+        />
+      </div>
       <div className={styles.buttons}>
         <Button type="button" onClick={open} variant="secondary" className={styles.button}>
           Select diffrent image

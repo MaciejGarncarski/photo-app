@@ -1,6 +1,12 @@
 import { atom } from 'jotai';
+import Link from 'next/link';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { useAuth } from '@/hooks/useAuth';
+import { useOtherUsers } from '@/hooks/useOtherUsers';
+
+import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
@@ -14,7 +20,8 @@ export const newPostsAtom = atom<boolean>(false);
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
-  // useRealtimeInfinitePosts();
+  const { isSignedIn } = useAuth();
+  const otherUsers = useOtherUsers();
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
@@ -44,11 +51,27 @@ export const Home = () => {
 
       <aside className={styles.aside}>
         <LayoutSearch />
+
         <section className={styles.asideItem}>
-          <Heading tag="h3" className={styles.heading}>
-            Who to follow
+          <Heading tag="h2" className={styles.heading}>
+            Other users
           </Heading>
-          dsadasds
+          {otherUsers.data && (
+            <ul className={styles.asideList}>
+              {otherUsers?.data &&
+                otherUsers.data.map(({ id, username }) => {
+                  return (
+                    <li key={id} className={styles.asideListItem}>
+                      <Link href={`/${username}`} className={styles.link}>
+                        <Avatar userId={id} className={styles.avatar} />
+                        <p className={styles.username}>@{username}</p>
+                      </Link>
+                      {isSignedIn && <FollowButton className={styles.asideFollowButton} userId={id} />}
+                    </li>
+                  );
+                })}
+            </ul>
+          )}
         </section>
       </aside>
     </div>

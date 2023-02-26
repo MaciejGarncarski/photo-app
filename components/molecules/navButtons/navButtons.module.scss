@@ -5,14 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem;
 
   @include common.mediaquery('desktop') {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-
-    gap: 1.5rem;
   }
 }
 
@@ -24,10 +22,6 @@
   @include common.mediaquery('desktop') {
     display: block;
   }
-}
-
-.active {
-  background-color: var(--bg-secondary);
 }
 
 .listItemContent {
@@ -60,10 +54,21 @@
   }
 }
 
+.active {
+  background-color: var(--bg-secondary);
+  font-weight: 600;
+
+  svg {
+    stroke-width: 2.5;
+  }
+}
+
 .title {
   display: none;
 
+
   @include common.mediaquery('desktop') {
+    text-transform: capitalize;
     display: unset;
   }
 }

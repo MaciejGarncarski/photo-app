@@ -3,7 +3,7 @@
 .container {
   position: relative;
   z-index: 1;
-  width: 36rem;
+  width: 23rem;
   background-color: var(--white);
   left: 0;
   right: 0;
@@ -17,21 +17,26 @@
     width: auto;
     display: grid;
     overflow-y: scroll;
-    grid-template-columns: 15rem 15rem;
+    grid-template-columns: 15rem 17rem;
     grid-template-rows: auto auto auto 1fr;
     border-radius: var(--radius-small);
   }
 
-
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     width: auto;
     overflow-y: unset;
-    max-height: 40rem;
     margin: auto;
     display: grid;
-    grid-template-columns: 45rem 30rem;
+    max-height: 27rem;
+    grid-template-columns: 27rem 18rem;
     grid-template-rows: auto auto 1fr;
     border-radius: var(--radius-medium);
+  }
+
+
+  @include common.mediaquery('desktop') {
+    max-height: 45rem;
+    grid-template-columns: 45rem 30rem;
   }
 }
 
@@ -46,7 +51,7 @@
     grid-column: 2 / 3;
   }
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     grid-column: 2 / 3;
   }
 }
@@ -59,10 +64,6 @@
 .postButtons {
   grid-column: 2 / 3;
   padding-right: 1rem;
-
-  @include common.mobile-landscape {
-    padding: 0 1rem;
-  }
 }
 
 
@@ -73,7 +74,7 @@
   @include common.mobile-landscape {
     grid-column: 2 / 3;
     margin-top: 0;
-    height: 10rem;
+    height: 3rem;
   }
 
   @include common.mediaquery('desktop') {
@@ -90,7 +91,11 @@
 
   @include common.mobile-landscape {
     grid-column: 2 / 3;
-    height: 10rem;
+    height: 5em;
+  }
+
+  @include common.mediaquery('tablet') {
+    max-height: 20rem;
   }
 
 
@@ -109,6 +114,7 @@
   align-items: center;
   width: 100%;
 
+
   @include common.mediaquery('desktop') {
     height: 100%;
     border-right: 1px solid var(--color-gray);
@@ -119,20 +125,21 @@
   z-index: 2;
   height: 100%;
   object-fit: contain;
-  width: 36rem;
-  max-height: 36rem;
+  width: 23rem;
+  max-height: 23rem;
 
   @include common.mobile-landscape {
-    max-height: 20rem;
-    width: 25rem;
+    width: 15rem;
+    max-height: 15rem;
   }
 
-  @include common.mediaquery('desktop') {
-    width: 55rem;
-    max-height: 65rem;
+  @include common.mediaquery('tablet') {
+    width: 27rem;
+    max-height: 27rem;
   }
 
   @include common.mediaquery('desktop') {
     width: 45rem;
+    max-height: 45rem;
   }
 }

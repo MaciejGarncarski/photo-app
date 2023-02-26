@@ -1,4 +1,4 @@
-import { IconMenu2 } from '@tabler/icons';
+import { IconSettings } from '@tabler/icons';
 
 import styles from './icons.module.scss';
 
@@ -8,7 +8,7 @@ type PropsTypes = {
 
 export const IconSettingsWrapper = ({ size }: PropsTypes) => {
   if (size) {
-    return <IconMenu2 className={styles[size]} />;
+    return <IconSettings className={styles[size]} />;
   }
-  return <IconMenu2 />;
+  return <IconSettings />;
 };

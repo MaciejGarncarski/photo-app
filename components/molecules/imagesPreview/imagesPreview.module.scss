@@ -8,7 +8,7 @@
   margin-top: 1rem;
 
   @include common.mediaquery('desktop') {
-    gap: 10rem;
+    gap: 3rem;
   }
 }
 
@@ -37,7 +37,7 @@
 
 .emptySpace {
   background-color: var(--color-primary);
-  color: var(--white);
+  color: rgb(255, 255, 255);
   border-radius: var(--radius-small);
   border: 0;
   box-shadow: var(--shadow-secondary);
@@ -46,7 +46,6 @@
   gap: 0.25rem;
   justify-content: center;
   align-items: center;
-  filter: opacity(0.5);
   min-height: 5rem;
 
 
@@ -71,7 +70,7 @@
   justify-content: center;
   align-items: center;
   color: var(--text-primary);
-  padding: 0.5rem;
+  padding: 0.3rem;
   border: none;
 
   &:hover,
@@ -81,18 +80,17 @@
   }
 
   >svg {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   @include common.mediaquery('desktop') {
-
     right: -1.5rem;
     top: -1.5rem;
 
     >svg {
-      width: 4rem;
-      height: 4rem;
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 }

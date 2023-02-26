@@ -3,7 +3,7 @@
 .container {
   max-width: 80rem;
   margin-inline: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding-bottom: 4rem;
 }
 
@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: 1fr;
   position: relative;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .accountDesktop {
@@ -41,14 +41,12 @@
   --account-avatar-size: 6rem;
   width: var(--account-avatar-size);
   height: var(--account-avatar-size);
-  margin: 1rem 0;
   justify-self: center;
 
   @include common.mediaquery('desktop') {
     --account-avatar-size: 9rem;
     width: var(--account-avatar-size);
     height: var(--account-avatar-size);
-    margin: 0;
     place-self: center;
     position: relative;
     top: 1rem;
@@ -102,50 +100,5 @@
     position: relative;
     margin: 0;
     font-size: 1.25rem;
-  }
-}
-
-.list {
-  list-style: none;
-  margin: 0 auto;
-  display: grid;
-  gap: 10vw;
-  grid-template-columns: repeat(3, 1fr);
-
-  @include common.mediaquery('desktop') {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 2.5rem;
-  }
-}
-
-.listItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  flex-grow: 1;
-
-  @include common.mediaquery('desktop') {
-    text-align: left;
-    display: flex;
-    flex-direction: row;
-    font-size: 1.25rem;
-    gap: 0.5rem;
-  }
-}
-
-.listItemNumber {
-  font-weight: 600;
-}
-
-.listItemText {
-  color: var(--text-secondary);
-
-  &::first-letter {
-    text-transform: uppercase;
   }
 }

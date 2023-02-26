@@ -22,9 +22,9 @@
   border: none;
   padding: 1rem;
   border: var(--border-primary);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-medium);
   transition: all var(--transition-fast)-out;
-  box-shadow: var(--shadow-secondary);
+  box-shadow: var(--shadow);
 
   &:hover {
     background-color: var(--bg-secondary);

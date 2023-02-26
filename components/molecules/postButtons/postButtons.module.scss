@@ -4,15 +4,17 @@
     gap: 3rem;
 }
 
+.listItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .button {
     display: flex;
     align-items: center;
     gap: 0.25rem;
     font-size: 1.25rem;
-
-    &:focus {
-        box-shadow: var(--shadow-focus);
-    }
 }
 
 .buttonsCount {

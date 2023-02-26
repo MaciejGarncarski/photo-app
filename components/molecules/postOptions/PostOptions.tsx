@@ -15,7 +15,7 @@ type PropsTypes = {
 };
 
 export const PostOptions = ({ close, post, openCnonfirmation }: PropsTypes) => {
-  const { author } = post;
+  const { author, postId } = post;
   const { session } = useAuth();
   const { id, role } = useUser({ userId: session?.user?.id ?? '' });
 
@@ -25,7 +25,7 @@ export const PostOptions = ({ close, post, openCnonfirmation }: PropsTypes) => {
     <ListModal close={close} headingText="Post options">
       {isAbleToModify && (
         <>
-          <ListModalItem type="link" href={`/post/${id}/edit`} icon={<IconEdit />}>
+          <ListModalItem type="link" href={`/post/${postId}/edit`} icon={<IconEdit />}>
             Edit
           </ListModalItem>
           <ListModalItem type="button" onClick={openCnonfirmation} icon={<IconTrash />}>

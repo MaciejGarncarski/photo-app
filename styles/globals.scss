@@ -5,6 +5,10 @@
   @extend %variables;
 }
 
+:root[class="dark"] {
+  @extend %variablesDarkTheme;
+}
+
 *,
 *::before,
 *::after {
@@ -18,8 +22,10 @@
 
 html,
 body {
-  color: var(--text-primary);
+  color: var(--text-black);
   background-color: var(--white);
+  transition: all var(--transition-fast);
+  transition-property: background-color, color;
   font-family: var(--font-customFont);
 }
 
@@ -69,4 +75,14 @@ a {
   width: 1.5rem;
   height: 1.5rem;
   stroke-width: 1.75;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--bg-secondary);
+  }
+
+  100% {
+    background-color: rgb(190, 190, 190);
+  }
 }

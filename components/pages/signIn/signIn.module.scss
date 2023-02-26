@@ -1,26 +1,37 @@
 @use '/styles/common.scss';
 
 .container {
-  width: var(--create-post-width);
-  margin: 0 auto;
+  width: clamp(20rem, 70%, 80rem);
+  margin: 2rem auto;
+  margin-bottom: 4rem;
 }
 
 .form {
   display: grid;
-  gap: 3rem;
-  margin-top: 5rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 
   @include common.mediaquery('desktop') {
     width: 50%;
     margin: 0 auto;
-    margin-top: 7rem;
+    margin-top: 3rem;
   }
 }
 
+.signInButton {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+
 .separator {
   height: 2px;
-  background-color: var(--color-separator);
-  margin-top: 7rem;
+  background-color: var(--bg-secondary);
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,13 +40,12 @@
   @include common.mediaquery('desktop') {
     width: 50%;
     margin: 0 auto;
-    margin-top: 7rem;
+    margin-top: 3rem;
   }
-
 }
 
 .orWith {
-  background-color: var(--bg-secondary);
+  background-color: var(--white);
   text-transform: uppercase;
   padding: 0 1rem;
   position: relative;
@@ -48,14 +58,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 5rem;
+  margin-top: 2rem;
 
   @include common.mediaquery('desktop') {
     width: 50%;
     margin: 0 auto;
-    margin-top: 7rem;
+    margin-top: 3rem;
   }
-
 
 }
 
@@ -65,14 +74,14 @@
   padding: 0.5rem 1rem;
 
 
-  > svg {
+  >svg {
     stroke-width: 3;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 
 .google {
   font-weight: 600;
-  margin-left: 0.75rem;
+  margin-left: 0.5rem;
 }

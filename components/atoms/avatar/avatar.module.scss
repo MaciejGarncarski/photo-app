@@ -1,16 +1,16 @@
 @use '/styles/common.scss';
 
 .avatar {
-  border-radius: 100%;
-  box-shadow: 0 0 0 2px var(--color-primary);
-
   width: 2rem;
   height: 2rem;
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px var(--color-primary);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   flex-shrink: 0;
+  background-color: var(--white);
 
   svg,
   img {

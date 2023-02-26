@@ -8,7 +8,7 @@ import { FollowersPutRequest } from '@/pages/api/followers';
 
 export const useFollowMutation = (userId: string) => {
   const queryClient = useQueryClient();
-  const { isFollowing } = useUser({ userId });
+  const { isFollowing, username } = useUser({ userId });
 
   return useMutation(
     async () => {
@@ -28,6 +28,8 @@ export const useFollowMutation = (userId: string) => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries(['account', userId]);
+        await queryClient.invalidateQueries(['account', null, username]);
+        await queryClient.invalidateQueries(['other users']);
       },
     },
   );

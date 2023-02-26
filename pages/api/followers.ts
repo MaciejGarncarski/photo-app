@@ -35,12 +35,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       data: { followingUserId },
     } = response;
 
+    const data = {
+      from: session.user.id,
+      to: followingUserId,
+    };
+
     try {
-      await prisma.follower.create({
-        data: {
-          from: session.user.id,
-          to: followingUserId,
+      const isUserReal = await prisma.user.findFirst({
+        where: {
+          id: followingUserId,
         },
+      });
+
+      if (!isUserReal) {
+        return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
+      }
+
+      const isAlreadyFollower = await prisma.follower.findFirst({
+        where: data,
+      });
+
+      if (isAlreadyFollower) {
+        return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
+      }
+
+      await prisma.follower.create({
+        data,
         select: {
           created_at: true,
           id: true,

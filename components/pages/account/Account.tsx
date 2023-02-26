@@ -1,9 +1,8 @@
-import { IconEdit } from '@tabler/icons';
+import { IconDoorExit, IconEdit } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { useAuth } from '@/hooks/useAuth';
-import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useUser } from '@/hooks/useUser';
 
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
@@ -29,13 +28,10 @@ type PropsTypes = {
   postId?: number;
 };
 
-export const listData = ['posts', 'followers', 'following'] as const;
-
 export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
-  const { session } = useAuth();
+  const { signOut, sessionUserData } = useAuth();
   const userData = useUser({ username });
   const { data, isError } = usePost({ postId: Number(postId) });
-  const { isMobile } = useScreenWidth();
 
   const postModal = useModal(isModalOpen);
   const { open, close, modalOpen } = useModal();
@@ -56,21 +52,21 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     router.push(`/${username}`);
   };
 
-  const isOwner = session?.user?.id === id;
+  const isOwner = sessionUserData.id === id;
 
   return (
     <div className={styles.container}>
       <NextSeo title={`@${username}`} />
-      {isMobile ? (
-        <AccountHeaderMobile username={username} modalOpen={modalOpen} open={open} isOwner={isOwner} />
-      ) : (
-        <AccountHeaderDesktop username={username} modalOpen={modalOpen} open={open} isOwner={isOwner} />
-      )}
+      <AccountHeaderMobile username={username} modalOpen={modalOpen} open={open} isOwner={isOwner} />
+      <AccountHeaderDesktop username={username} modalOpen={modalOpen} open={open} isOwner={isOwner} />
       <ModalContainer>
         {modalOpen && (
           <ListModal close={close} headingText="Account options">
-            <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} isLast>
+            <ListModalItem type="link" href="/edit-account" icon={<IconEdit />}>
               Edit account
+            </ListModalItem>
+            <ListModalItem type="button" onClick={() => signOut()} icon={<IconDoorExit />} isLast>
+              Sign out
             </ListModalItem>
           </ListModal>
         )}

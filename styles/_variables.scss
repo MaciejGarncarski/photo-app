@@ -3,8 +3,8 @@
 %variables {
   --white: rgb(255, 255, 255);
 
-  --color-primary: rgb(63, 114, 175);
-  --color-secondary: rgb(137, 170, 231);
+  --color-primary: rgb(71, 136, 214);
+  --color-secondary: rgb(149, 182, 241);
   --color-error: rgb(207, 60, 30);
   --color-disabled: rgb(63, 114, 175, 0.9);
   --color-gray: rgb(50, 50, 50, 0.15);
@@ -24,12 +24,13 @@
 
   --transition-fast: 0.4s ease;
 
+  --placeholder-animation: skeleton-loading 1s linear infinite alternate;
   --shadow: rgba(0, 0, 0, 0.12) 0px -1px 3px 0px, rgba(0, 0, 0, 0.24) 0px 1px 2px 0px;
-  --shadow-focus: 0 0 0 0.2rem var(--white), 0 0 0 0.4rem var(--color-primary);
+  --shadow-focus: 0 0 0 0.2rem var(--white), 0 0 0 0.35rem var(--color-primary);
 
-  --radius-big: 1rem;
+  --radius-big: 1.2rem;
   --radius-medium: 0.5rem;
-  --radius-small: 0.25rem;
+  --radius-small: 0.35rem;
 
 
   --header-width: 18rem;
@@ -40,6 +41,21 @@
   }
 
   @include common.mediaquery('desktop') {
-    --post-width: calc(18rem + 15vw);
+    --post-width: calc(16rem + 15vw);
   }
+}
+
+
+
+%variablesDarkTheme {
+  --white: rgb(32, 37, 51);
+  --color-gray: rgb(200, 200, 200, 0.3);
+  --color-overlay: rgb(40, 40, 40, 0.7);
+  --text-black: rgb(230, 230, 230);
+  --text-gray: rgb(214, 214, 214);
+  --border-gray: 1px solid rgba(200, 200, 200, 0.4);
+  --shadow: rgba(255, 255, 255, 0.4) 0px -1px 1px 0px, rgba(255, 255, 255, 0.5) 0px 1px 2px 0px;
+  --bg-primary: rgb(129, 129, 129);
+  --bg-secondary: rgba(255, 255, 255, 0.2);
+
 }

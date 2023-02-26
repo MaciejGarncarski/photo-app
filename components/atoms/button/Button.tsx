@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import { ButtonHTMLAttributes } from 'react';
 
 import { Children } from '@/components/layout/Layout';
@@ -14,14 +15,16 @@ type PropsTypes = {
 
 export const Button = ({ type = 'button', disabled, children, variant, onClick, className, onKeyDown }: PropsTypes) => {
   return (
-    <button
+    <motion.button
       onKeyDown={onKeyDown}
       onClick={onClick}
       type={type}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.9 }}
       disabled={disabled}
       className={clsx(variant && styles[`button-${variant}`], className, styles.button)}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };

@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { motion as m } from 'framer-motion';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
@@ -23,7 +22,6 @@ type PropsTypes = {
 
 export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo, stageSelectImage }: PropsTypes) => {
   const queryClient = useQueryClient();
-  const [isCropping, setIsCropping] = useState<boolean>(false);
 
   const uploadImage = useUploadImage();
   const editAccount = useEditAccount();
@@ -62,14 +60,15 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
   };
 
   return (
-    <m.div variants={stageVariant} animate="animate" exit="exit" initial="initial" className={styles.stageContainer}>
-      <CropImage
-        isCropping={isCropping}
-        setIsCropping={setIsCropping}
-        finalImages={finalImages}
-        setFinalImages={setFinalImages}
-        aspectRatio={1}
-      />
+    <motion.div
+      variants={stageVariant}
+      animate="animate"
+      exit="exit"
+      initial="initial"
+      className={styles.stageContainer}
+    >
+      <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={1} />
+
       <div className={styles.buttons}>
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
           go back
@@ -82,6 +81,6 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
           Save new image
         </Button>
       </div>
-    </m.div>
+    </motion.div>
   );
 };

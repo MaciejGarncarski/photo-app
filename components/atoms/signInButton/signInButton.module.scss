@@ -1,13 +1,16 @@
+@use '/styles/common.scss';
+
 .button {
   border-radius: var(--radius-medium);
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.7rem;
   background-color: var(--color-primary);
-  color: var(--white);
+  color: rgb(255, 255, 255);
   font-weight: 500;
   border: none;
   transition: box-shadow var(--transition-fast);
   text-align: center;
   font-size: 1.5rem;
+  margin-left: 3rem;
 
   &::first-letter {
     text-transform: uppercase;
@@ -17,4 +20,13 @@
     outline: none;
     box-shadow: var(--shadow-focus)
   }
+
+  @include common.mediaquery('desktop') {
+    padding: 0.5rem 1rem;
+    margin-left: 0.75rem;
+    margin-top: 1.5rem;
+    display: block;
+    width: fit-content;
+  }
+
 }

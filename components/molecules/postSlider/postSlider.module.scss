@@ -31,7 +31,7 @@
 
 .sliderImage {
   height: auto;
-  background-color: var(--white);
+  background-color: var(--text-black);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,7 +61,7 @@
 
   border: none;
   background-color: var(--color-primary);
-  color: var(--white);
+  color: rgb(255, 255, 255);
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -101,8 +101,7 @@
   z-index: 2;
   list-style-type: none;
   padding: 0.35rem 0.5rem;
-  background-color: var(--bg-blur);
-  backdrop-filter: var(--backdrop-blur);
+  background-color: var(--white);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-secondary);
 }
