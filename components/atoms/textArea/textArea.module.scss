@@ -14,6 +14,7 @@
   box-shadow: var(--shadow);
   transition: all var(--transition-fast);
   transition-property: background-color;
+  margin-top: 0.5rem;
 
   &:hover,
   &:focus {
@@ -30,7 +31,6 @@
 .label {
   color: var(--text-secondary);
   text-transform: capitalize;
-  position: relative;
 }
 
 .error {

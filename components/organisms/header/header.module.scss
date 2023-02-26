@@ -57,18 +57,27 @@
   flex-direction: column;
   text-align: left;
   padding-right: 1rem;
+
+  
 }
 
 .name {
-  max-width: 7rem;
+  max-width: 8rem;
   font-weight: 600;
   overflow: hidden;
-  flex-shrink: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex-shrink: 1;
 }
 
 .icon {
   flex-shrink: 0;
   margin-left: auto;
+}
+
+.username{
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

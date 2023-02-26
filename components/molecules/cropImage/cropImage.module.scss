@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   justify-self: center;
-  max-width: 27rem;
+  max-width: 18rem;
 
   @include common.mediaquery('desktop') {
     max-width: 70rem;
@@ -16,17 +16,17 @@
 }
 
 .cropContainer {
+  position: relative;
+  overflow: hidden;
+  min-height: 20rem;
+  width: clamp(17rem, 60%, 50rem);
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-big);
+  box-shadow: var(--shadow-focus);
 
-
-  @include common.mediaquery('desktop') {
-    gap: 0;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-  }
 }
 
 .button {
@@ -41,7 +41,8 @@
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  margin-top: 2rem;
+  gap: 1rem;
 
   @include common.mediaquery('desktop') {
     gap: 5rem;

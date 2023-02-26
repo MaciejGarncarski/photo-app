@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import clsx from 'clsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -12,9 +13,11 @@ import { CommentPutRequestSchema } from '@/pages/api/post/comment';
 
 import styles from './commentForm.module.scss';
 
-type CommentFormValues = {
-  comment: string;
-};
+const commentFormSchema = z.object({
+  comment: z.string().max(50),
+});
+
+type CommentFormValues = z.infer<typeof commentFormSchema>;
 
 type PropsTypes = {
   post: PostData;
@@ -29,7 +32,7 @@ export const CommentForm = ({ post }: PropsTypes) => {
     register,
     handleSubmit,
     reset,
-    formState: { isDirty },
+    formState: { isDirty, errors },
   } = useForm<CommentFormValues>({
     defaultValues: {
       comment: '',
@@ -63,7 +66,10 @@ export const CommentForm = ({ post }: PropsTypes) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>
-      <textarea className={styles.commentInput} {...register('comment')}></textarea>
+      <textarea
+        className={clsx(errors.comment && styles.commentInputError, styles.commentInput)}
+        {...register('comment')}
+      ></textarea>
       <Button type="submit" className={styles.postButton} disabled={!isDirty}>
         post
       </Button>

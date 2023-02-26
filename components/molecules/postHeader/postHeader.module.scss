@@ -16,6 +16,16 @@
     font-size: 0.8rem;
 }
 
+.username {
+    max-width: 6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include common.mediaquery('desktop') {
+        max-width: 10rem;
+    }
+}
+
 .options {
     margin-left: auto;
     display: flex;

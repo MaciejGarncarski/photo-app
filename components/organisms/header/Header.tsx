@@ -33,7 +33,7 @@ export const Header = () => {
                 <Avatar userId={sessionUserData.id} className={styles.avatar} />
                 <span className={styles.userInfo}>
                   <span className={styles.name}>{sessionUserData.name}</span>
-                  <span>@{sessionUserData.username}</span>
+                  <span className={styles.username}>@{sessionUserData.username}</span>
                 </span>
 
                 <span className={styles.icon}>

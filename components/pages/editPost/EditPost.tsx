@@ -4,14 +4,11 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '@/hooks/useAuth';
-
 import { Button } from '@/components/atoms/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
-import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 
 import styles from './editPost.module.scss';
@@ -21,14 +18,13 @@ import { PostDetailsSchema } from '../createPost/CreatePost';
 
 export const EditPost = ({ postId }: { postId: number }) => {
   const router = useRouter();
-  const { status, sessionUserData } = useAuth();
   const { data, isLoading } = usePost({ postId });
 
   const saveModal = useModal();
   const cancelModal = useModal();
 
   const {
-    formState: { errors },
+    formState: { errors, isDirty },
     register,
     getValues,
   } = useForm({
@@ -54,14 +50,6 @@ export const EditPost = ({ postId }: { postId: number }) => {
     mutate({ description });
   };
 
-  if (status === 'loading') {
-    return null;
-  }
-
-  if (status !== 'authenticated' || data?.authorId !== sessionUserData.id) {
-    return <AccessDenied />;
-  }
-
   if (!data || isLoading) {
     return <p>loading</p>;
   }
@@ -76,7 +64,7 @@ export const EditPost = ({ postId }: { postId: number }) => {
           <Button type="button" variant="secondary" onClick={cancelModal.open}>
             Cancel
           </Button>
-          <Button type="button" onClick={saveModal.open}>
+          <Button type="button" disabled={!isDirty} onClick={saveModal.open}>
             Save
           </Button>
         </div>

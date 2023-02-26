@@ -43,6 +43,7 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) =
       setError('NO_IMAGE_DETECTED');
       return;
     }
+
     if (dataTransfer.files.length > 1) {
       setError('TOO_MANY_IMAGES');
       return;

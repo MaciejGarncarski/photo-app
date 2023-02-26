@@ -51,8 +51,6 @@ export const CreatePost = () => {
   const router = useRouter();
   const { session } = useAuth();
 
-  const [isCropping, setIsCropping] = useState<boolean>(false);
-
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>();
@@ -92,7 +90,7 @@ export const CreatePost = () => {
           { imageBlob: image.file, folder, isPost: true },
           {
             onError: () => {
-              toast.error('Error');
+              toast.error('Could not add post.');
             },
           },
         );
@@ -130,17 +128,11 @@ export const CreatePost = () => {
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
           <CreatePostItemContainer>
-            <CropImage
-              isCropping={isCropping}
-              setIsCropping={setIsCropping}
-              setFinalImages={setFinalImages}
-              finalImages={finalImages}
-              aspectRatio={aspectRatio}
-            />
+            <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={aspectRatio} />
           </CreatePostItemContainer>
         </div>
       )}
-      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
+      <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
       {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreatePostItemContainer>

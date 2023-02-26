@@ -52,4 +52,7 @@
 .username {
     font-weight: 600;
     font-size: 1.25rem;
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -9,6 +9,8 @@ type HandleDropImage = {
 export const IMAGE_MIN_SIZE = 150;
 export const IMAGE_MAX_FILE_SIZE = 12_500_000;
 
+const SUPPORTED_FILE_TYPES = ['jpeg', 'jpg', 'png', 'webp'];
+
 export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
   const reader = new FileReader();
 
@@ -20,7 +22,7 @@ export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) 
     return;
   }
 
-  if (!fileType.includes('image')) {
+  if (!SUPPORTED_FILE_TYPES.includes(fileType[1])) {
     setError('INVALID_TYPE');
     return;
   }

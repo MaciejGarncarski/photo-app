@@ -30,7 +30,7 @@ export const Settings = ({ close }: PropsTypes) => {
     <>
       <ListModal close={close} headingText={`Hi ${sessionUserData.username ?? ''}`}>
         {isSignedIn && (
-          <ListModalItem type="link" href={`/${sessionUserData.username}`} icon={<IconUser />}>
+          <ListModalItem type="link" href={`/${sessionUserData.username}`} onClick={close} icon={<IconUser />}>
             Your profile
           </ListModalItem>
         )}
