@@ -57,6 +57,9 @@ model User {
   toUser         Follower[]    @relation("Following")
   created_at     DateTime      @default(now()) @db.Timestamp(0)
   CommentLike    CommentLike[]
+
+  sentMessages     Message[] @relation("Sent")
+  receivedMessages Message[] @relation("Received")
 }
 
 model VerificationToken {
@@ -153,4 +156,17 @@ model Follower {
 
   @@index([to])
   @@index([from])
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  text        String
+  sender_id   User     @relation(fields: [sender], references: [id], name: "Sent", onDelete: Cascade)
+  sender      String
+  receiver_id User     @relation(fields: [receiver], references: [id], name: "Received", onDelete: Cascade)
+  receiver    String
+  created_at  DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([sender])
+  @@index([receiver])
 }

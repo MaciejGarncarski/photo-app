@@ -4,6 +4,12 @@
     gap: 3rem;
 }
 
+.listItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .button {
     display: flex;
     align-items: center;

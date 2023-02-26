@@ -2,6 +2,6 @@
 
 .layout {
   @include common.mediaquery('desktop') {
-    margin-left: calc(6vw + var(--header-width));
+    margin-left: calc(5vw + var(--header-width));
   }
 }

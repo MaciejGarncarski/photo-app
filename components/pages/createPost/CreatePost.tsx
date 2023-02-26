@@ -49,7 +49,6 @@ export type ImagesBase64 = Array<
 
 export const CreatePost = () => {
   const router = useRouter();
-  // const { sendMessage } = useRealtimeInfinitePosts();
   const { session } = useAuth();
 
   const [isCropping, setIsCropping] = useState<boolean>(false);
@@ -128,7 +127,6 @@ export const CreatePost = () => {
   return (
     <section aria-labelledby="Create new post" className={styles.createPost}>
       <NextSeo title="Create new post" />
-
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
           <CreatePostItemContainer>

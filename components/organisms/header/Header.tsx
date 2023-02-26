@@ -7,7 +7,6 @@ import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
-import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
 import { Navbar } from '@/components/molecules/navbar/Navbar';
 import { NavbarForDesktop } from '@/components/molecules/navbar/NavbarForDesktop';
 import { Settings } from '@/components/molecules/settings/Settings';
@@ -28,8 +27,6 @@ export const Header = () => {
       <Navbar />
       {!isMobile && !sessionUserData.isLoading && (
         <div className={styles.options}>
-          {!isSignedIn && !isMobile && <SignInButton />}
-
           {isSignedIn && (
             <>
               <button type="button" className={styles.button} onClick={modalOpen ? close : open}>

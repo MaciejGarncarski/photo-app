@@ -47,7 +47,7 @@ export const PostButtons = ({ post, className }: PropsTypes) => {
     <ul className={styles.list}>
       {buttonData.map(({ alt, icon, onClick, disabled, count }) => {
         return (
-          <li key={alt}>
+          <li key={alt} className={styles.listItem}>
             <motion.button
               className={styles.button}
               type="button"

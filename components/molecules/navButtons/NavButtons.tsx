@@ -21,16 +21,12 @@ export type ListData = {
 };
 
 export const NavButtons = () => {
-  const { sessionUserData, session, status, isSignedIn } = useAuth();
+  const { sessionUserData, status, isSignedIn } = useAuth();
   const router = useRouter();
   const { open, close, modalOpen } = useModal();
 
   if (status === 'loading') {
     return null;
-  }
-
-  if (!isSignedIn || !session?.user?.id) {
-    return <SignInButton />;
   }
 
   const listData: Array<ListData> = [
@@ -39,6 +35,12 @@ export const NavButtons = () => {
       title: 'Home',
       href: '/',
     },
+    // TODO!
+    // {
+    //   icon: <IconMessage />,
+    //   title: 'Chat',
+    //   href: '/chat',
+    // },
     {
       icon: <IconSquareRoundedPlus />,
       title: 'Create post',
@@ -54,16 +56,17 @@ export const NavButtons = () => {
   return (
     <>
       <ul className={styles.list}>
-        {listData.map(({ icon, href, title }) => {
-          return (
-            <li key={title} className={styles.listItem}>
-              <Link href={href} className={clsx(router.asPath === href && styles.active, styles.listItemContent)}>
-                <span>{icon}</span>
-                <span className={styles.title}>{title}</span>
-              </Link>
-            </li>
-          );
-        })}
+        {isSignedIn &&
+          listData.map(({ icon, href, title }) => {
+            return (
+              <li key={title} className={styles.listItem}>
+                <Link href={href} className={clsx(router.asPath === href && styles.active, styles.listItemContent)}>
+                  <span>{icon}</span>
+                  <span className={styles.title}>{title}</span>
+                </Link>
+              </li>
+            );
+          })}
         <li className={styles.listItem}>
           <button type="button" className={styles.listItemContent} onClick={open}>
             <span>
@@ -73,6 +76,7 @@ export const NavButtons = () => {
           </button>
         </li>
       </ul>
+      {!isSignedIn && <SignInButton />}
       <ModalContainer>{modalOpen && <Settings close={close} />}</ModalContainer>
     </>
   );

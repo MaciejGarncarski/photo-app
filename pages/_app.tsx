@@ -1,8 +1,8 @@
-import { Open_Sans } from '@next/font/google';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
+import { Open_Sans } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import { DefaultSeo } from 'next-seo';
 import { Toaster } from 'react-hot-toast';

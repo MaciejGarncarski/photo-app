@@ -22,7 +22,6 @@ export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
   const { isSignedIn } = useAuth();
   const otherUsers = useOtherUsers();
-  // useRealtimeInfinitePosts();
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,

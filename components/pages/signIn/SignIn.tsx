@@ -50,7 +50,7 @@ export const SignIn = () => {
         </Button>
       </form>
       <div className={styles.separator}>
-        <p className={styles.orWith}>or</p>
+        <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
         <Button className={styles.button} type="button" onClick={signInGoogle}>

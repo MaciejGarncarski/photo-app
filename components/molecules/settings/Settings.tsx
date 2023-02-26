@@ -16,7 +16,7 @@ type PropsTypes = {
 
 export const Settings = ({ close }: PropsTypes) => {
   const { theme, handleTheme } = useTheme();
-  const { sessionUserData, signOut } = useAuth();
+  const { sessionUserData, signOut, isSignedIn } = useAuth();
   const signOutModal = useModal();
 
   const ThemeButton = () => {
@@ -28,16 +28,20 @@ export const Settings = ({ close }: PropsTypes) => {
 
   return (
     <>
-      <ListModal close={close} headingText={`Hi ${sessionUserData.username}`}>
-        <ListModalItem type="link" href={`/${sessionUserData.username}`} icon={<IconUser />}>
-          Your profile
-        </ListModalItem>
-        <ListModalItem type="button" onClick={handleTheme} icon={<ThemeButton />}>
+      <ListModal close={close} headingText={`Hi ${sessionUserData.username ?? ''}`}>
+        {isSignedIn && (
+          <ListModalItem type="link" href={`/${sessionUserData.username}`} icon={<IconUser />}>
+            Your profile
+          </ListModalItem>
+        )}
+        <ListModalItem type="button" onClick={handleTheme} isLast={!isSignedIn} icon={<ThemeButton />}>
           Change theme to {theme === 'dark' ? 'light' : 'dark'}
         </ListModalItem>
-        <ListModalItem type="button" onClick={signOutModal.open} isLast icon={<IconDoorExit />}>
-          Sign Out
-        </ListModalItem>
+        {isSignedIn && (
+          <ListModalItem type="button" onClick={signOutModal.open} isLast icon={<IconDoorExit />}>
+            Sign Out
+          </ListModalItem>
+        )}
       </ListModal>
       <ModalContainer>
         {signOutModal.modalOpen && (

@@ -16,8 +16,6 @@
   &:focus {
     outline: none;
     box-shadow: var(--shadow-focus);
-
-
   }
 }
 
@@ -37,7 +35,6 @@
     &+.overlay {
       opacity: 1;
     }
-
   }
 }
 

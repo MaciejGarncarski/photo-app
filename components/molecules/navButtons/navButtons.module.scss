@@ -5,14 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem;
 
   @include common.mediaquery('desktop') {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-
-    gap: 1.5rem;
   }
 }
 

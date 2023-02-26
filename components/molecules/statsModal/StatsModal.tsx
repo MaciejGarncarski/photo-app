@@ -1,10 +1,9 @@
-import { User } from '@prisma/client';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ReactFocusLock from 'react-focus-lock';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
+
+import { useFollowers } from '@/hooks/useFollowers';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/followButton/FollowButton';
@@ -23,33 +22,11 @@ type PropsTypes = {
   };
 };
 
-type StatsResponse = {
-  users: Array<User>;
-  usersCount: number;
-  canLoadMore: boolean;
-  nextCursor: number | null;
-};
-
-export const USERS_PER_SCROLL = 6;
-
 export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
   const { close } = modal;
+  const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({ userId, type });
 
-  const { data, hasNextPage, isLoading, fetchNextPage } = useInfiniteQuery(
-    [type, userId],
-    async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<StatsResponse>(
-        `/api/getFollowers?userId=${userId}&type=${type}&skip=${pageParam ?? 0}`,
-      );
-      return data;
-    },
-    {
-      refetchOnWindowFocus: false,
-      getNextPageParam: (prevPosts) => {
-        return prevPosts?.nextCursor ?? undefined;
-      },
-    },
-  );
+  const isEmpty = data?.pages[0].users.length === 0;
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
@@ -65,9 +42,14 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
         <h3 className={styles.heading}>{type.toUpperCase()}</h3>
         <ReactFocusLock>
           <ModalClose onClose={close} />
+          {isEmpty && (
+            <p className={styles.list}>
+              <span className={styles.listItem}>No data.</span>
+            </p>
+          )}
           {isLoading ? (
             <ul className={styles.list} ref={sentryRef}>
-              {Array.from({ length: USERS_PER_SCROLL }, (_, item) => item).map((el) => {
+              {Array.from({ length: 3 }, (_, item) => item).map((el) => {
                 return <li className={styles.placeholder} key={el}></li>;
               })}
             </ul>

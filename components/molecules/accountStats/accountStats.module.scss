@@ -35,6 +35,11 @@
 
 .listItemNumber {
     font-weight: 600;
+    width: 100%;
+
+    @include common.mediaquery('desktop') {
+        width: auto;
+    }
 }
 
 .listItemText {

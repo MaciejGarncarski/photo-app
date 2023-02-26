@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import { useTheme } from '@/hooks/useTheme';
 
@@ -15,7 +15,7 @@ type PropsTypes = Children;
 export const Layout = ({ children }: PropsTypes) => {
   const { theme } = useTheme();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     }
