@@ -27,6 +27,7 @@ exports[` 2`] = `
     class="avatar"
   >
     <div
+      class="noImage"
       data-testid="empty icon"
     >
       <svg
