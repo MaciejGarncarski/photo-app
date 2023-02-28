@@ -33,7 +33,7 @@ export const Avatar = ({
   return (
     <figure className={clsx(className, styles.avatar)}>
       {hasNoImage && (
-        <div data-testid="empty icon">
+        <div data-testid="empty icon" className={styles.noImage}>
           <IconUser />
           <VisuallyHiddenText text={username ?? ''} />
         </div>

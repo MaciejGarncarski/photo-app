@@ -22,7 +22,7 @@ export const PostModal = ({ post, close }: PropsTypes) => {
     <Backdrop close={close}>
       <motion.div role="dialog" className={styles.container}>
         <ModalClose onClose={close} isExternal />
-        <PostHeader tag="div" className={styles.postHeader} post={post} />
+        <PostHeader tag="div" post={post} />
         <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
         <PostFooter post={post} className={styles.postFooter} />
 

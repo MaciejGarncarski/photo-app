@@ -48,6 +48,7 @@
     "react-infinite-scroll-hook": "^4.0.4",
     "react-use-websocket": "^4.3.1",
     "sass": "^1.58.0",
+    "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
     "throttle-debounce": "^5.0.0",
     "ts-node": "^10.9.1",

@@ -1,5 +1,6 @@
 import { IconMenu2 } from '@tabler/icons';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
@@ -20,13 +21,11 @@ import { PostOptions } from '../postOptions/PostOptions';
 type PropsTypes = {
   tag?: 'header' | 'div';
   post: PostData;
-  className?: string;
-  variant?: 'no-margin-left';
 };
 
 export const POST_AVATAR_SIZE = 40;
 
-export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: PropsTypes) => {
+export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const { open, close, modalOpen } = useModal();
   const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
   const deletePostMutation = useDeletePost();
@@ -39,7 +38,11 @@ export const PostHeader = ({ tag: Tag = 'header', post, variant, className }: Pr
   const isAuthor = session?.user?.id === authorId;
 
   const handleDeletePost = () => {
-    deletePostMutation.mutate({ postId });
+    toast.promise(deletePostMutation.mutateAsync({ postId }), {
+      error: 'Error!',
+      loading: 'Deleting post...',
+      success: 'Deleted!',
+    });
   };
 
   if (!username) {
