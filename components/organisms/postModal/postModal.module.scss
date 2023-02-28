@@ -44,17 +44,6 @@
   grid-column: 2 / 3;
 }
 
-.postHeader {
-  padding: 0.5rem 1rem;
-
-  @include common.mobile-landscape {
-    grid-column: 2 / 3;
-  }
-
-  @include common.mediaquery('tablet') {
-    grid-column: 2 / 3;
-  }
-}
 
 .postFooter {
   padding: 0 1rem;

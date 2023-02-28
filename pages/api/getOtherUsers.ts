@@ -20,7 +20,7 @@ const otherUsersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: session?.user?.id,
         },
       },
-      take: 3,
+      take: 4,
     });
 
     return res.status(httpCodes.success).send(users);

@@ -35,7 +35,6 @@ export const NavButtons = () => {
       title: 'Home',
       href: '/',
     },
-    // TODO!
     // {
     //   icon: <IconMessage />,
     //   title: 'Chat',

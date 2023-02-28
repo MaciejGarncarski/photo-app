@@ -47,7 +47,7 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
               <span className={styles.listItem}>No data.</span>
             </p>
           )}
-          {isLoading ? (
+          {isLoading || hasNextPage ? (
             <ul className={styles.list} ref={sentryRef}>
               {Array.from({ length: 3 }, (_, item) => item).map((el) => {
                 return <li className={styles.placeholder} key={el}></li>;

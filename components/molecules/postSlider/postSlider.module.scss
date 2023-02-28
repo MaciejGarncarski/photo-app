@@ -14,12 +14,16 @@
 .slider {
   display: flex;
   align-items: center;
-  min-height: 10rem;
+  min-height: 13rem;
   position: relative;
   overflow: hidden;
 
   @include common.mobile-landscape {
     min-height: 15rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    min-height: 20rem;
   }
 }
 
@@ -31,7 +35,6 @@
 
 .sliderImage {
   height: auto;
-  background-color: var(--text-black);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +46,7 @@
 
   @include common.mediaquery('tablet') {
     max-height: 37rem;
+    min-height: 30rem;
     object-fit: contain;
   }
 }

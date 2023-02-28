@@ -10,7 +10,6 @@ import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
-import { LayoutSearch } from '@/components/molecules/layoutSearch/LayoutSearch';
 import { HomePost } from '@/components/organisms/homePost/HomePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
@@ -28,7 +27,7 @@ export const Home = () => {
     hasNextPage: hasNextPage || false,
     onLoadMore: fetchNextPage,
     disabled: isError,
-    rootMargin: '0px 0px 400px 0px',
+    rootMargin: '0px 0px 200px 0px',
   });
 
   return (
@@ -40,7 +39,7 @@ export const Home = () => {
             return <HomePost priority={idx < 4} key={post.postId} post={post} />;
           });
         })}
-        {isLoading && (
+        {(isLoading || hasNextPage) && (
           <div ref={sentryRef}>
             {[0, 1, 2].map((el) => {
               return <PostPlaceholder key={el} />;
@@ -50,8 +49,6 @@ export const Home = () => {
       </main>
 
       <aside className={styles.aside}>
-        <LayoutSearch />
-
         <section className={styles.asideItem}>
           <Heading tag="h2" className={styles.heading}>
             Other users
