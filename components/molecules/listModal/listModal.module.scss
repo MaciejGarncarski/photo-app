@@ -19,7 +19,7 @@
 }
 
 .heading {
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   text-align: center;
   padding: 1rem 2rem;
   border-radius: var(--radius-medium) var(--radius-medium) 0 0;
@@ -32,9 +32,11 @@
 .listItem {
   font-weight: 700;
   overflow: hidden;
+  border-top: var(--border-gray);
 
   &>button,
   a {
+    transition: background-color var(--transition-fast);
 
     &:hover,
     &:focus {
@@ -67,7 +69,7 @@
   padding: 1rem 1.5rem;
 
   border: 0;
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   width: 100%;
 
   @include common.mediaquery('desktop') {

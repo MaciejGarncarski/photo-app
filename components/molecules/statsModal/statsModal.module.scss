@@ -2,7 +2,7 @@
 
 
 .container {
-    background-color: var(--white);
+    background-color: var(--bg-primary);
     padding: 1rem 0;
     width: clamp(25rem, 30%, 30rem);
     border-radius: var(--radius-medium);
@@ -26,10 +26,11 @@
 
 .placeholder {
     margin: 0 2rem;
-    background-color: var(--bg-primary);
+    background-size: 500%;
+    background-image: var(--gradient);
+    animation: var(--placeholder-animation);
     height: 2.5rem;
     border-radius: var(--radius-small);
-    animation: var(--placeholder-animation);
 }
 
 
@@ -37,9 +38,13 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 5rem;
-    transition: transform var(--transition-fast);
+    gap: 1rem;
+    transition: transform var(--transition);
     padding: 0 2rem;
+
+    @include common.mediaquery('desktop') {
+        gap: 5rem;
+    }
 }
 
 .itemLink {
@@ -52,7 +57,11 @@
 .username {
     font-weight: 600;
     font-size: 1.25rem;
-    max-width: 12rem;
+    max-width: 8rem;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @include common.mediaquery('desktop') {
+        max-width: 12rem;
+    }
 }

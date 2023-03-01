@@ -14,12 +14,12 @@ import styles from './postFooter.module.scss';
 
 type PropsTypes = {
   post: PostData;
-  className?: string;
+  parentModalOpen?: boolean;
 };
 
 dayjs.extend(relativeTime);
 
-export const PostFooter = ({ post, className }: PropsTypes) => {
+export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { isSignedIn } = useAuth();
@@ -33,7 +33,7 @@ export const PostFooter = ({ post, className }: PropsTypes) => {
 
   return (
     <footer className={styles.footer}>
-      <PostButtons post={post} />
+      <PostButtons post={post} parentModalOpen={parentModalOpen} />
       <div className={styles.descriptionContainer}>
         <span className={styles.author}>{post.author.username}</span>
 

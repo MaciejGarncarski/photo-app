@@ -75,7 +75,7 @@
     padding: 1rem 1.5rem;
 
     border: 0;
-    background-color: var(--white);
+    background-color: var(--bg-primary);
     width: 100%;
 
     @include common.mediaquery('desktop') {

@@ -25,15 +25,13 @@ export const stageVariant: Variants = {
   exit: { scale: 0.7, opacity: 0 },
 };
 
-export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTypes) => {
-  const { session } = useAuth();
-
-  const userId = session?.user?.id;
+export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTypes) => {
+  const {
+    sessionUserData: { id: userId },
+  } = useAuth();
 
   const { customImage } = useUser({ userId });
-
   const { open, close, modalOpen } = useModal();
-
   const { mutate, isLoading } = useDeleteAvatar();
 
   if (!userId) {
@@ -55,7 +53,9 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
       initial="initial"
       className={styles.stageContainer}
     >
-      <Heading tag="h2">Edit your account</Heading>
+      <Heading tag="h2" className={styles.heading}>
+        Manage your account
+      </Heading>
       <div className={styles.avatarButtons}>
         <Button type="button" onClick={stageCropImage}>
           Update avatar
@@ -70,7 +70,7 @@ export const SelectImageStage = ({ stageCropImage, stagePersonalInfo }: PropsTyp
         </Button>
       </div>
       <ModalContainer>
-        {modalOpen && <ConfirmationAlert headingText="Delete Avatar?" close={close} onConfirm={removeAvatar} />}
+        {modalOpen && <ConfirmationAlert headingText="Remove your avatar?" close={close} onConfirm={removeAvatar} />}
       </ModalContainer>
     </motion.section>
   );

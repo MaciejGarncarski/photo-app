@@ -23,8 +23,8 @@
 html,
 body {
   color: var(--text-black);
-  background-color: var(--white);
-  transition: all var(--transition-fast);
+  background-color: var(--bg-primary);
+  transition: all var(--transition);
   transition-property: background-color, color;
   font-family: var(--font-customFont);
 }
@@ -79,10 +79,10 @@ a {
 
 @keyframes skeleton-loading {
   0% {
-    background-color: var(--bg-secondary);
+    background-position: 90%;
   }
 
   100% {
-    background-color: rgb(190, 190, 190);
+    background-position: -50%;
   }
 }

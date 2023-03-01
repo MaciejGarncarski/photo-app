@@ -1,8 +1,6 @@
 @use '/styles/common.scss';
 
 %variables {
-  --white: rgb(255, 255, 255);
-
   --color-primary: rgb(71, 136, 214);
   --color-secondary: rgb(149, 182, 241);
   --color-error: rgb(207, 60, 30);
@@ -16,17 +14,19 @@
 
   --filter-blur: blur(13px) saturate(1.2);
 
-  --border-gray: 1px solid rgb(30, 30, 30, 0.1);
+  --border-gray: 1px solid rgb(197, 197, 197);
 
-  --bg-primary: rgb(230, 230, 230);
+  --bg-primary: rgb(255, 255, 255);
   --bg-blur: rgb(255, 255, 255, 0.95);
+  --bg-error: rgb(190, 40, 40, 0.3);
   --bg-secondary: rgb(15, 20, 25, 0.1);
 
-  --transition-fast: 0.4s ease;
+  --transition: 0.4s ease;
+  --transition-fast: 0.2s ease;
 
-  --placeholder-animation: skeleton-loading 1s linear infinite alternate;
-  --shadow: rgba(0, 0, 0, 0.12) 0px -1px 3px 0px, rgba(0, 0, 0, 0.24) 0px 1px 2px 0px;
-  --shadow-focus: 0 0 0 0.2rem var(--white), 0 0 0 0.35rem var(--color-primary);
+  --gradient: linear-gradient(90deg, #ddd 0px, #e8e8e8 16%, #ddd 32%);
+  --placeholder-animation: skeleton-loading 1.5s infinite linear;
+  --shadow-focus: 0 0 0 0.3rem var(--bg-primary), 0 0 0 0.5rem var(--color-primary);
 
   --radius-big: 1.2rem;
   --radius-medium: 0.5rem;
@@ -48,14 +48,11 @@
 
 
 %variablesDarkTheme {
-  --white: rgb(32, 37, 51);
   --color-gray: rgb(200, 200, 200, 0.3);
   --color-overlay: rgb(40, 40, 40, 0.7);
   --text-black: rgb(230, 230, 230);
   --text-gray: rgb(214, 214, 214);
-  --border-gray: 1px solid rgba(200, 200, 200, 0.4);
-  --shadow: rgba(255, 255, 255, 0.4) 0px -1px 1px 0px, rgba(255, 255, 255, 0.5) 0px 1px 2px 0px;
-  --bg-primary: rgb(129, 129, 129);
+  --border-gray: 1px solid rgba(100, 100, 100);
+  --bg-primary: rgb(32, 37, 51);
   --bg-secondary: rgba(255, 255, 255, 0.2);
-
 }

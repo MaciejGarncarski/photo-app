@@ -4,7 +4,7 @@
   position: relative;
   z-index: 1;
   width: 23rem;
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   left: 0;
   right: 0;
   bottom: 0;
@@ -42,12 +42,6 @@
 
 .likesCount {
   grid-column: 2 / 3;
-}
-
-
-.postFooter {
-  padding: 0 1rem;
-  padding-top: 1rem;
 }
 
 .postButtons {

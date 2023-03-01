@@ -11,10 +11,10 @@
   padding: 1rem;
   background-color: transparent;
   border: var(--border-primary);
-  box-shadow: var(--shadow);
-  transition: all var(--transition-fast);
+  transition: all var(--transition);
   transition-property: background-color;
   margin-top: 0.5rem;
+  border: var(--border-gray);
 
   &:hover,
   &:focus {

@@ -21,10 +21,9 @@
   background-color: transparent;
   border: none;
   padding: 1rem;
-  border: var(--border-primary);
+  border: var(--border-gray);
   border-radius: var(--radius-medium);
-  transition: all var(--transition-fast)-out;
-  box-shadow: var(--shadow);
+  transition: all var(--transition);
 
   &:hover {
     background-color: var(--bg-secondary);

@@ -15,16 +15,17 @@ import styles from './postModal.module.scss';
 type PropsTypes = {
   post: PostData;
   close: () => void;
+  modalOpen: boolean;
 };
 
-export const PostModal = ({ post, close }: PropsTypes) => {
+export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
   return (
     <Backdrop close={close}>
       <motion.div role="dialog" className={styles.container}>
         <ModalClose onClose={close} isExternal />
         <PostHeader tag="div" post={post} />
         <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
-        <PostFooter post={post} className={styles.postFooter} />
+        <PostFooter post={post} parentModalOpen={modalOpen} />
 
         <section className={styles.commentsContainer}>
           <Heading tag="h2" className={styles.commentsHeading}>

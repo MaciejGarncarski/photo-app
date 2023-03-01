@@ -1,13 +1,13 @@
 @use '/styles/common.scss';
 
 .placeholder {
-  background-color: var(--bg-secondary);
   width: var(--post-width);
   height: 25rem;
   border-radius: var(--radius-medium);
   opacity: 0.5;
+  background-size: 500%;
+  background-image: var(--gradient);
   animation: var(--placeholder-animation);
-  box-shadow: var(--shadow-primary);
   margin: 0 auto;
   margin-bottom: 4rem;
 

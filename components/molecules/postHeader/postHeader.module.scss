@@ -3,6 +3,7 @@
 .header {
     display: flex;
     padding: 0.5rem 1rem;
+    border-bottom: var(--border-gray);
 
     @include common.mediaquery('desktop') {
         padding: 1rem;

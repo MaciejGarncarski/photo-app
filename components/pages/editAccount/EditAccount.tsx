@@ -3,10 +3,8 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
-import { useUser } from '@/hooks/useUser';
-
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
-import { SelectImageStage } from '@/components/pages/editAccount/SelectImageStage';
+import { SelectOptionStage } from '@/components/pages/editAccount/SelectOptionStage';
 
 import styles from './editAccount.module.scss';
 
@@ -34,19 +32,17 @@ export const EditAccount = ({ userId }: PropsTypes) => {
   const [stage, setStage] = useState<Stages>('selectImage');
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
 
-  const { username } = useUser({ userId });
-
   const stageSelectImage = () => setStage('selectImage');
   const stageCropImage = () => setStage('cropImage');
   const stagePersonalInfo = () => setStage('personalInfo');
 
   return (
     <main id="main" className={styles.container}>
-      <NextSeo title={`@${username} - Edit account`} />
+      <NextSeo title="Edit account" />
       <AnimatePresence mode="wait">
         {stage === 'selectImage' && (
-          <SelectImageStage
-            key="selectImageStage"
+          <SelectOptionStage
+            key="selectOptionStage"
             stageCropImage={stageCropImage}
             stagePersonalInfo={stagePersonalInfo}
             stageSelectImage={stageSelectImage}

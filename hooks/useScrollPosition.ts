@@ -12,7 +12,11 @@ export const useScrollPosition = () => {
       throttle(200, () => {
         const isGoingUp = window.scrollY < lastScroll.current;
         setScrollPos(window.scrollY);
-        setIsGoingUp(isGoingUp);
+
+        if (window.innerHeight > 900) {
+          setIsGoingUp(isGoingUp);
+        }
+
         lastScroll.current = scrollY > 0 ? scrollY : 0;
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

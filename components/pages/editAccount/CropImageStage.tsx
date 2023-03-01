@@ -8,7 +8,7 @@ import { Button } from '@/components/atoms/button/Button';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
-import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
+import { stageVariant } from '@/components/pages/editAccount/SelectOptionStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
 
 import styles from './editAccount.module.scss';

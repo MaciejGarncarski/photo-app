@@ -7,6 +7,7 @@ import { useUser } from '@/hooks/useUser';
 
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
+import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ListModal } from '@/components/molecules/listModal/ListModal';
 import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
@@ -34,7 +35,9 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
   const { data, isError } = usePost({ postId: Number(postId) });
 
   const postModal = useModal(isModalOpen);
-  const { open, close, modalOpen } = useModal();
+  const settingsModal = useModal();
+  const signOutModal = useModal();
+
   const router = useRouter();
 
   if (!userData.count) {
@@ -54,24 +57,41 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
 
   const isOwner = sessionUserData.id === id;
 
+  const accountHeaderProps = {
+    username,
+    modalOpen: settingsModal.modalOpen,
+    open: settingsModal.open,
+    isOwner,
+  };
+
   return (
     <div className={styles.container}>
       <NextSeo title={`@${username}`} />
-      <AccountHeaderMobile username={username} modalOpen={modalOpen} open={open} isOwner={isOwner} />
-      <AccountHeaderDesktop username={username} modalOpen={modalOpen} open={open} isOwner={isOwner} />
+      <AccountHeaderMobile {...accountHeaderProps} />
+      <AccountHeaderDesktop {...accountHeaderProps} />
+
       <ModalContainer>
-        {modalOpen && (
-          <ListModal close={close} headingText="Account options">
+        {settingsModal.modalOpen && (
+          <ListModal close={settingsModal.close} headingText="Account options">
             <ListModalItem type="link" href="/edit-account" icon={<IconEdit />}>
               Edit account
             </ListModalItem>
-            <ListModalItem type="button" onClick={() => signOut()} icon={<IconDoorExit />} isLast>
+            <ListModalItem type="button" onClick={signOutModal.open} icon={<IconDoorExit />} isLast>
               Sign out
             </ListModalItem>
           </ListModal>
         )}
       </ModalContainer>
-      <ModalContainer>{postModal.modalOpen && data && <PostModal post={data} close={postModalClose} />}</ModalContainer>
+      <ModalContainer>
+        {signOutModal.modalOpen && (
+          <ConfirmationAlert headingText="Sign out?" onConfirm={signOut} onCancel={signOutModal.close} close={close} />
+        )}
+      </ModalContainer>
+      <ModalContainer>
+        {postModal.modalOpen && data && (
+          <PostModal modalOpen={postModal.modalOpen} post={data} close={postModalClose} />
+        )}
+      </ModalContainer>
       <AccountPosts id={id ?? ''} />
     </div>
   );

@@ -14,7 +14,7 @@ import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AccountDetails, AccountDetailsSchema } from '@/components/molecules/completeSignUp/CompleteSignUp';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { Input } from '@/components/molecules/input/Input';
-import { stageVariant } from '@/components/pages/editAccount/SelectImageStage';
+import { stageVariant } from '@/components/pages/editAccount/SelectOptionStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
 
 import styles from './editAccount.module.scss';

@@ -15,8 +15,8 @@
   border-radius: var(--radius-medium);
   padding: 0.5rem;
   border: var(--border-gray);
-  transition: background-color var(--transition-fast);
-  background-color: var(--white);
+  transition: background-color var(--transition);
+  background-color: var(--bg-primary);
 
 
   &:hover,

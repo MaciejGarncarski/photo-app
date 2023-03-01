@@ -2,11 +2,9 @@
 
 .container {
   position: relative;
-  border: var(--border-secondary);
-  cursor: pointer;
+  border: var(--border-gray);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-secondary);
-
   overflow: hidden;
   aspect-ratio: 1;
   display: flex;
@@ -22,16 +20,14 @@
 .image {
   width: 100%;
   height: 100%;
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   object-fit: contain;
-
 }
 
 .link {
   display: flex;
 
   &:focus {
-
     &+.overlay {
       opacity: 1;
     }
@@ -53,21 +49,16 @@
   color: rgb(255, 255, 255);
   font-weight: 600;
 
-  font-size: 1.5rem;
+  --text-size: 1.5rem;
+  font-size: var(--text-size);
 
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--text-size);
+    height: var(--text-size);
   }
 
   @include common.mediaquery('desktop') {
-    font-size: 2.5rem;
-    gap: 2rem;
-
-    svg {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
+    --text-size: 2.5rem;
   }
 }
 

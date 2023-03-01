@@ -9,9 +9,8 @@
 .tip {
   display: none;
   position: absolute;
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow);
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;

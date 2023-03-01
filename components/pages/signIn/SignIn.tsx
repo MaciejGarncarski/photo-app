@@ -42,7 +42,9 @@ export const SignIn = () => {
 
   return (
     <main className={styles.container}>
-      <Heading tag="h2">Sign in</Heading>
+      <Heading tag="h2" className={styles.heading}>
+        Sign in
+      </Heading>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input labelText="With Magic link" type="email" error={errors.email} {...register('email')} />
         <Button type="submit" className={styles.signInButton}>
@@ -53,9 +55,9 @@ export const SignIn = () => {
         <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
-        <Button className={styles.button} type="button" onClick={signInGoogle}>
+        <Button className={styles.otherButton} type="button" onClick={signInGoogle}>
           <IconBrandGoogle />
-          <p className={styles.google}>Google</p>
+          <p className={styles.googleIcon}>Google</p>
         </Button>
       </div>
     </main>

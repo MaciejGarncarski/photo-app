@@ -85,7 +85,7 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) =
             <>
               <IconPhoto className={styles.dropIcon} />
 
-              {isMobile ? <p>Add some images.</p> : <p>Drag photo here.</p>}
+              {isMobile ? <p>Add image here.</p> : <p>Drag photo here.</p>}
             </>
           )}
           {error && !isActive && (

@@ -1,18 +1,19 @@
 @use '/styles/common.scss';
 
 .container {
-  width: clamp(20rem, 30%, 30rem);
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   border-radius: var(--radius-medium);
   position: relative;
-  padding: 3rem 0;
+  padding: 3rem 1rem;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 
   @include common.mediaquery('desktop') {
     min-width: unset;
-    gap: 2rem;
+    gap: 3rem;
+    padding: 2.5rem 5rem;
   }
 }
 
@@ -27,10 +28,11 @@
 
 .buttonsRow {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   justify-content: center;
 
   @include common.mediaquery('desktop') {
-    gap: 3rem;
+    gap: 0;
+    justify-content: space-between;
   }
 }

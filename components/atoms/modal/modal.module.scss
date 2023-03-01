@@ -36,28 +36,40 @@
   right: 1rem;
   top: 0.75rem;
   background-color: var(--bg-secondary);
+  border: var(--border-gray);
   padding: 0.25rem;
   border-radius: 100%;
+  transition: all var(--transition-fast);
 
-  &:hover {
-    color: var(--color-primary);
+  &:hover,
+  &:focus {
+    box-shadow: var(--shadow-focus);
+    color: rgb(255, 255, 255);
+    background-color: var(--color-primary);
   }
 
   @include common.mobile-landscape {
     top: 0.25rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    top: 1rem;
   }
 }
 
 .closeButtonExternal {
   right: 0rem;
   top: -3rem;
-  border-radius: var(--radius-medium);
   padding: 0.4rem;
-  background-color: var(--white);
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-medium);
+  background-color: var(--bg-primary);
+
+  @include common.mediaquery('tablet') {
+    top: -3rem;
+  }
 
   @include common.mediaquery('desktop') {
-    top: -4rem;
+    top: -5rem;
     right: -1rem;
   }
 }

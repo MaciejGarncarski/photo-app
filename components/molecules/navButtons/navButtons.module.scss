@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
 
   @include common.mediaquery('desktop') {
     flex-direction: column;
@@ -32,8 +32,7 @@
 
   padding: 0.5rem;
   font-size: 1.25rem;
-
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--transition);
 
 
   svg {

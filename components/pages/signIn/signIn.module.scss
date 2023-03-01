@@ -1,20 +1,35 @@
-@use '/styles/common.scss';
+@use '/styles/common';
 
 .container {
-  width: clamp(20rem, 70%, 80rem);
+  width: clamp(25rem, 40vw, 70rem);
   margin: 2rem auto;
   margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include common.mediaquery('desktop') {
+    gap: 5rem;
+    margin-top: 5rem;
+  }
+
 }
 
 .form {
   display: grid;
   gap: 1.5rem;
-  margin-top: 2rem;
 
   @include common.mediaquery('desktop') {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 3rem;
+    gap: 2.5rem
+  }
+
+}
+
+.heading {
+  font-size: 2.5rem;
+
+  @include common.mediaquery('desktop') {
+    font-size: 3rem;
   }
 }
 
@@ -35,17 +50,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
-
-  @include common.mediaquery('desktop') {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 3rem;
-  }
 }
 
 .orWith {
-  background-color: var(--white);
+  background-color: var(--bg-primary);
   text-transform: uppercase;
   padding: 0 1rem;
   position: relative;
@@ -58,21 +66,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 2rem;
-
-  @include common.mediaquery('desktop') {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 3rem;
-  }
-
 }
 
-.button {
+.otherButton {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-
+  width: 50%;
+  padding: 0.75rem 0;
 
   >svg {
     stroke-width: 3;
@@ -81,7 +81,7 @@
   }
 }
 
-.google {
+.googleIcon {
   font-weight: 600;
   margin-left: 0.5rem;
 }

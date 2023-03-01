@@ -26,9 +26,10 @@ type ButtonData = Array<{
 type PropsTypes = {
   post: PostData;
   className?: string;
+  parentModalOpen?: boolean;
 };
 
-export const PostButtons = ({ post, className }: PropsTypes) => {
+export const PostButtons = ({ post, className, parentModalOpen }: PropsTypes) => {
   const { isLiked, postId, likesCount, commentsCount } = post;
 
   const { modalOpen, open: openPostModal, close } = useModal();
@@ -39,7 +40,13 @@ export const PostButtons = ({ post, className }: PropsTypes) => {
 
   const buttonData: ButtonData = [
     { alt: 'like', icon: likeIcon, onClick: handleLike, disabled: false, count: likesCount },
-    { alt: 'comment', icon: <IconMessage />, onClick: openPostModal, disabled: false, count: commentsCount },
+    {
+      alt: 'comment',
+      icon: <IconMessage />,
+      onClick: parentModalOpen ? () => null : openPostModal,
+      disabled: false,
+      count: commentsCount,
+    },
     { alt: 'share', icon: <IconShare />, onClick: openShare, disabled: false },
   ];
 
@@ -67,7 +74,7 @@ export const PostButtons = ({ post, className }: PropsTypes) => {
           <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
         )}
       </ModalContainer>
-      {modalOpen && createPortal(<PostModal post={post} close={close} />, document.body)}
+      {modalOpen && createPortal(<PostModal modalOpen={modalOpen} post={post} close={close} />, document.body)}
     </ul>
   );
 };

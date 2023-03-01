@@ -6,15 +6,17 @@ export const useScreenWidth = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const isMobileDevice = window.innerWidth < 1279 || false;
       setScreenWidth(window.innerWidth);
+
+      const isMobileDevice = window.innerWidth < 1279 || false;
       setIsMobile(isMobileDevice);
     };
+
+    window.addEventListener('resize', handleResize);
     handleResize();
-    window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      return window.removeEventListener('resize', handleResize);
     };
   }, []);
 

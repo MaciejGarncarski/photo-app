@@ -1,7 +1,7 @@
 @use '/styles/common.scss';
 
 .homePost {
-    box-shadow: var(--shadow);
-    border-radius: var(--radius-medium);
+    border-radius: var(--radius-small);
     width: var(--post-width);
+    border: var(--border-gray);
 }

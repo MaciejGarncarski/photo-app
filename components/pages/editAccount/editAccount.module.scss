@@ -4,10 +4,21 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+  margin: 2rem auto;
+  width: clamp(20rem, 80vw, 50rem);
 
   @include common.mediaquery('desktop') {
-    max-width: 70rem;
+    margin: 0 auto;
     margin-top: 3rem;
+  }
+}
+
+.heading {
+  font-size: 2rem;
+  text-align: center;
+
+  @include common.mediaquery('desktop') {
+    text-align: left;
   }
 }
 
@@ -39,8 +50,10 @@
 
 .buttons {
   display: grid;
+  gap: 2rem;
 
   @include common.mediaquery('desktop') {
+    gap: 0;
     display: flex;
     justify-content: space-between;
   }
