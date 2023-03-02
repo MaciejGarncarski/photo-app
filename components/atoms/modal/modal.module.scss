@@ -51,10 +51,6 @@
   @include common.mobile-landscape {
     top: 0.25rem;
   }
-
-  @include common.mediaquery('desktop') {
-    top: 1rem;
-  }
 }
 
 .closeButtonExternal {

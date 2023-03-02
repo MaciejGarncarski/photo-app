@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/button/Button';
-import { Heading } from '@/components/atoms/heading/Heading';
+import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
@@ -81,14 +81,14 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   if (editAccount.isLoading) {
     return (
       <m.section variants={stageVariant} animate="animate" exit="exit" initial="initial">
-        <Heading tag="h2">Saving changes...</Heading>
+        <EditAccountHeading text="Saving changes" />
       </m.section>
     );
   }
 
   return (
     <>
-      <Heading tag="h2">Edit account details</Heading>
+      <EditAccountHeading text="Edit account details" />
       <m.form
         variants={stageVariant}
         animate="animate"

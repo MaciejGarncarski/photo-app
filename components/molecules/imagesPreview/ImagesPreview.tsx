@@ -13,19 +13,19 @@ type PropsTypes = {
   imagesBase64: ImagesBase64;
 };
 
-const container: Variants = {
+export const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
     },
   },
 };
 
-const item: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
+export const itemVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.3, rotate: -4 },
+  show: { opacity: 1, scale: 1, rotate: 0 },
 };
 
 export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
@@ -34,11 +34,11 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
   return (
     <div>
       <Heading tag="h2">Images in post</Heading>
-      <motion.div className={styles.previewContainer} variants={container} initial="hidden" animate="show">
+      <motion.div className={styles.previewContainer} variants={containerVariants} initial="hidden" animate="show">
         {imagesBase64.map((finalImage) => {
           if (finalImage?.src) {
             return (
-              <motion.div key={finalImage.id} className={styles.previewButton} variants={item}>
+              <motion.div key={finalImage.id} className={styles.previewButton} variants={itemVariants}>
                 <motion.button
                   whileFocus={{ scale: 1.1 }}
                   whileHover={{ scale: 1.1 }}
@@ -69,7 +69,7 @@ export const ImagesPreview = ({ imagesBase64, onRemove }: PropsTypes) => {
 
         {Array.from({ length: emptyImagesLength }, (_, el) => el).map((id) => {
           return (
-            <motion.button variants={item} key={id} disabled type="button" className={styles.emptySpace}>
+            <motion.button variants={itemVariants} key={id} disabled type="button" className={styles.emptySpace}>
               <IconPhotoPlus />
               <p>empty</p>
             </motion.button>

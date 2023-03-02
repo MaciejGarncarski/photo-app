@@ -5,9 +5,9 @@
   --color-secondary: rgb(149, 182, 241);
   --color-error: rgb(207, 60, 30);
   --color-disabled: rgb(63, 114, 175, 0.9);
-  --color-gray: rgb(50, 50, 50, 0.15);
+  --color-gray: rgb(200, 200, 200);
 
-  --color-overlay: rgb(20, 20, 20, 0.4);
+  --color-overlay: rgb(20, 20, 20, 0.6);
 
   --text-black: rgb(0, 0, 0);
   --text-gray: rgb(61, 61, 61);
@@ -19,13 +19,15 @@
   --bg-primary: rgb(255, 255, 255);
   --bg-blur: rgb(255, 255, 255, 0.95);
   --bg-error: rgb(190, 40, 40, 0.3);
-  --bg-secondary: rgb(15, 20, 25, 0.1);
+  --bg-secondary: rgb(235, 235, 235);
 
   --transition: 0.4s ease;
   --transition-fast: 0.2s ease;
 
-  --gradient: linear-gradient(90deg, #ddd 0px, #e8e8e8 16%, #ddd 32%);
+  --gradient: linear-gradient(90deg, #ccc 0px, #ffffff 16%, #ccc 32%);
   --placeholder-animation: skeleton-loading 1.5s infinite linear;
+  --placeholder-bg-size: 500%;
+
   --shadow-focus: 0 0 0 0.3rem var(--bg-primary), 0 0 0 0.5rem var(--color-primary);
 
   --radius-big: 1.2rem;
@@ -35,6 +37,7 @@
 
   --header-width: 18rem;
   --post-width: 20rem;
+
 
   @include common.mediaquery('tablet') {
     --post-width: calc(13rem + 15vw);
@@ -48,9 +51,9 @@
 
 
 %variablesDarkTheme {
-  --color-gray: rgb(200, 200, 200, 0.3);
-  --color-overlay: rgb(40, 40, 40, 0.7);
+  --color-overlay: rgba(70, 70, 70, 0.75);
   --text-black: rgb(230, 230, 230);
+  --color-gray: rgb(100, 100, 100);
   --text-gray: rgb(214, 214, 214);
   --border-gray: 1px solid rgba(100, 100, 100);
   --bg-primary: rgb(32, 37, 51);

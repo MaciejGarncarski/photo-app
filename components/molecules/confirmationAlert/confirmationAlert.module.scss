@@ -30,9 +30,4 @@
   display: flex;
   gap: 3rem;
   justify-content: center;
-
-  @include common.mediaquery('desktop') {
-    gap: 0;
-    justify-content: space-between;
-  }
 }

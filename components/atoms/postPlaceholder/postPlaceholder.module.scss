@@ -5,7 +5,7 @@
   height: 25rem;
   border-radius: var(--radius-medium);
   opacity: 0.5;
-  background-size: 500%;
+  background-size: var(--placeholder-bg-size);
   background-image: var(--gradient);
   animation: var(--placeholder-animation);
   margin: 0 auto;

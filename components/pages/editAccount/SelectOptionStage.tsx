@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/button/Button';
-import { Heading } from '@/components/atoms/heading/Heading';
+import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
 import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
@@ -53,9 +53,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
       initial="initial"
       className={styles.stageContainer}
     >
-      <Heading tag="h2" className={styles.heading}>
-        Manage your account
-      </Heading>
+      <EditAccountHeading text="Manage your account" />
       <div className={styles.avatarButtons}>
         <Button type="button" onClick={stageCropImage}>
           Update avatar

@@ -1,8 +1,12 @@
+import { motion } from 'framer-motion';
+
 import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
 
 import styles from './aspectRatioButtons.module.scss';
+
+import { containerVariants, itemVariants } from '../imagesPreview/ImagesPreview';
 
 type ButtonData = {
   text: string;
@@ -23,21 +27,22 @@ export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
   return (
     <CreatePostItemContainer>
       <Heading tag="h2">Crop type</Heading>
-      <div className={styles.aspectRatioButtons}>
+      <motion.div className={styles.aspectRatioButtons} variants={containerVariants} initial="hidden" animate="show">
         {buttonData.map(({ text, aspectRatio }) => {
           return (
-            <Button
-              className={styles.button}
-              data-testid={`aspect button ${aspect}`}
-              variant={aspectRatio === aspect ? undefined : 'secondary'}
-              onClick={() => setAspect(aspectRatio)}
-              key={aspectRatio}
-            >
-              {text}
-            </Button>
+            <motion.div key={aspectRatio} variants={itemVariants} className={styles.container}>
+              <Button
+                className={styles.button}
+                data-testid={`aspect button ${aspect}`}
+                variant={aspectRatio === aspect ? undefined : 'secondary'}
+                onClick={() => setAspect(aspectRatio)}
+              >
+                {text}
+              </Button>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </CreatePostItemContainer>
   );
 };

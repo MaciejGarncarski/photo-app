@@ -1,24 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
-import { v4 } from 'uuid';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useAuth } from '@/hooks/useAuth';
-
-import { Button } from '@/components/atoms/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
-import { Heading } from '@/components/atoms/heading/Heading';
 import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
-import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
+import { CreatePostForm } from '@/components/molecules/createPostForm/CreatePostForm';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
@@ -27,40 +22,24 @@ import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
 
 import styles from './createPost.module.scss';
 
+import { FinalImages, ImagesBase64, PostDetails } from './types';
+import { useOnSubmit } from './useOnSubmit';
+
 export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded' }),
 });
 
-type PostDetails = z.infer<typeof PostDetailsSchema>;
-
-type FinalImage = {
-  id: string;
-  file: Blob | null;
-};
-export type FinalImages = Array<FinalImage | undefined>;
-
-export type ImagesBase64 = Array<
-  | {
-      id: string;
-      src: string;
-    }
-  | undefined
->;
-
 export const CreatePost = () => {
   const router = useRouter();
-  const { session } = useAuth();
 
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>();
 
-  useConvertToBase64(finalImages, setFinalImagesBase64);
-
-  const { open, close, modalOpen } = useModal();
-
   const uploadImage = useUploadImage();
   const sendNewPost = useSendNewPost();
+  const { open, close, modalOpen } = useModal();
+  useConvertToBase64(finalImages, setFinalImagesBase64);
 
   const {
     register,
@@ -73,41 +52,7 @@ export const CreatePost = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<PostDetails> = async ({ description }) => {
-    if (!finalImages[0]?.file) {
-      return;
-    }
-
-    const uuid = v4();
-    const folder = `${session?.user?.id}/posts/${uuid}`;
-
-    const images = await Promise.all(
-      finalImages.map(async (image) => {
-        if (!image?.file) {
-          return;
-        }
-        return await uploadImage.mutateAsync(
-          { imageBlob: image.file, folder, isPost: true },
-          {
-            onError: () => {
-              toast.error('Could not add post.');
-            },
-          },
-        );
-      }),
-    );
-
-    const imageUrls = images.filter((img): img is number => !!img);
-
-    await sendNewPost.mutateAsync(
-      { description, imageUrls },
-      {
-        onError: () => {
-          toast.error('Could not add post.');
-        },
-      },
-    );
-  };
+  const { onSubmit } = useOnSubmit({ finalImages });
 
   const handleRemoveImage = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
@@ -123,7 +68,12 @@ export const CreatePost = () => {
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
 
   return (
-    <section aria-labelledby="Create new post" className={styles.createPost}>
+    <motion.section
+      aria-labelledby="Create new post"
+      className={styles.createPost}
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+    >
       <NextSeo title="Create new post" />
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
@@ -134,24 +84,17 @@ export const CreatePost = () => {
       )}
       <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
       {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CreatePostItemContainer>
-          <Heading tag="h2">Info about post</Heading>
-          <TextArea label="description" {...register('description')} error={errors.description} />
-          <div className={styles.actionButtons}>
-            <Button variant="secondary" onClick={open}>
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isSubmitDisabled}>
-              Complete
-            </Button>
-          </div>
-        </CreatePostItemContainer>
-      </form>
+      <CreatePostForm
+        disabled={isSubmitDisabled}
+        errors={errors}
+        onSubmit={handleSubmit(onSubmit)}
+        open={open}
+        register={register}
+      />
 
       <ModalContainer>
         {modalOpen && <ConfirmationAlert headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />}
       </ModalContainer>
-    </section>
+    </motion.section>
   );
 };

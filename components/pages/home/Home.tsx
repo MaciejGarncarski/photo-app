@@ -41,9 +41,7 @@ export const Home = () => {
         })}
         {(isLoading || hasNextPage) && (
           <div ref={sentryRef}>
-            {[0, 1, 2].map((el) => {
-              return <PostPlaceholder key={el} />;
-            })}
+            <PostPlaceholder />
           </div>
         )}
       </main>

@@ -1,12 +1,12 @@
 @use '/styles/common.scss';
 
 .button {
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   background-color: var(--color-primary);
   color: rgb(255, 255, 255);
-  font-weight: 500;
+  font-weight: 700;
   border: none;
-  padding: 0.4rem 0.65rem;
+  padding: 0.5rem 0.8rem;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -24,10 +24,11 @@
 
 
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   @include common.mediaquery('desktop') {
+    border-radius: var(--radius-small);
     padding: 0.5rem 0.9rem;
   }
 }

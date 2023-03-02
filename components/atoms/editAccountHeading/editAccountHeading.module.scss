@@ -1,0 +1,11 @@
+@use '/styles/common';
+
+.heading {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+
+    @include common.mediaquery('desktop') {
+        text-align: left;
+    }
+}

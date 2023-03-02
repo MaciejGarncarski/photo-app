@@ -23,7 +23,9 @@
 }
 
 .placeholder {
-  background-color: var(--bg-primary);
+  background-image: var(--gradient);
+  background-size: --placeholder-bg-size;
+  animation: var(--placeholder-animation);
   height: 100%;
   border-radius: var(--radius-small);
   min-height: 10rem;
