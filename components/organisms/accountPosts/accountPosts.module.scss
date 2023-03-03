@@ -24,7 +24,7 @@
 
 .placeholder {
   background-image: var(--gradient);
-  background-size: --placeholder-bg-size;
+  background-size: var(--placeholder-bg-size);
   animation: var(--placeholder-animation);
   height: 100%;
   border-radius: var(--radius-small);
@@ -32,19 +32,5 @@
 
   @include common.mediaquery('desktop') {
     min-height: 20rem;
-  }
-
-  animation: flicker 2s ease-in-out infinite alternate;
-
-}
-
-
-@keyframes flicker {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0.25;
   }
 }

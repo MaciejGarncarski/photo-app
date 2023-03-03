@@ -20,6 +20,7 @@
   box-shadow: var(--shadow-secondary);
   justify-content: center;
   align-items: center;
+  border: var(--border-gray);
   position: relative;
 
   &:hover>.deleteIconOverlay {

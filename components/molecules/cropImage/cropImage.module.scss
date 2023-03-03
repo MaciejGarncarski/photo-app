@@ -1,37 +1,26 @@
 @use '/styles/common.scss';
 
-.reactCrop {
-  border-radius: var(--radius-medium);
-  border: 4px solid var(--color-primary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-self: center;
-  max-width: 18rem;
-
-  @include common.mediaquery('desktop') {
-    max-width: 70rem;
-    margin: 3rem auto;
-  }
-}
-
 .cropContainer {
   position: relative;
   overflow: hidden;
   min-height: 20rem;
-  width: clamp(17rem, 60%, 50rem);
+  width: clamp(17rem, 40vw, 60rem);
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: var(--radius-big);
+  border-radius: var(--radius-medium);
   box-shadow: var(--shadow-focus);
-
 }
 
 .button {
   width: 80%;
   margin: 0 auto;
+
+  &:last-child {
+    flex-grow: 1;
+  }
+
 
   @include common.mediaquery('desktop') {
     width: 70%;
