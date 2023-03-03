@@ -3,25 +3,9 @@
 .chat {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-.users {
-    max-width: 100%;
-    overflow-x: scroll;
-    padding: 1rem;
-
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-}
-
-.user {
-    flex-shrink: 0;
-}
-
-.middle {
-    min-height: calc(100vh - 10rem);
-}
 
 .header {
     display: flex;
@@ -33,14 +17,14 @@
 
 .messages {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
     justify-content: flex-start;
     list-style: none;
-    padding: 1rem 2rem;
-    gap: 2rem;
-    max-height: 40rem;
-    overflow-y: scroll;
+    padding: 5rem 2rem;
+    gap: 3rem;
+    max-height: 50rem;
+    overflow-y: auto;
 }
 
 .message {
@@ -59,7 +43,7 @@
 }
 
 .loading {
-    padding-bottom: 10rem;
+    padding-bottom: 3rem;
 }
 
 .messageFriend {
@@ -73,12 +57,11 @@
 }
 
 .form {
-    width: 100%;
-    background-color: var(--bg-secondary);
     display: flex;
     align-items: stretch;
     padding: 0.5rem;
     gap: 2rem;
+    background-color: var(--bg-secondary);
 
     @include common.mediaquery('desktop') {
         padding: 0.5rem 3rem;

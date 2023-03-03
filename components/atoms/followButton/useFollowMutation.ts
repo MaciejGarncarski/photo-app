@@ -12,20 +12,17 @@ export const useFollowMutation = (userId: string) => {
 
   return useMutation(
     async () => {
-      try {
-        if (isFollowing) {
-          await axios.delete(`/api/followers?followingUserId=${userId}`);
-        }
-        if (!isFollowing) {
-          await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
-            followingUserId: userId,
-          });
-        }
-      } catch (error) {
-        toast.error('Error, try again later.');
+      if (isFollowing) {
+        await axios.delete(`/api/followers?followingUserId=${userId}`);
+      }
+      if (!isFollowing) {
+        await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
+          followingUserId: userId,
+        });
       }
     },
     {
+      onError: () => toast.error('Error, try again later.'),
       onSuccess: async () => {
         await queryClient.invalidateQueries(['account', userId]);
         await queryClient.invalidateQueries(['account', null, username]);

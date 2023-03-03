@@ -7,7 +7,7 @@
   padding-bottom: 4rem;
 }
 
-.account {
+.accountMobile {
   display: grid;
   grid-template-columns: 1fr;
   position: relative;
@@ -23,7 +23,7 @@
   display: flex;
   gap: 8rem;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 3rem;
 }
 

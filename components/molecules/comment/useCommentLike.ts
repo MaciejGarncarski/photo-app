@@ -12,15 +12,12 @@ export const useCommentLike = ({ commentId }: Mutation) => {
 
   return useMutation(
     async () => {
-      try {
-        await axios.post<unknown, null, Mutation>(`/api/post/comment`, {
-          commentId,
-        });
-      } catch (error) {
-        toast.error('Error, try again later.');
-      }
+      await axios.post<unknown, null, Mutation>(`/api/post/comment`, {
+        commentId,
+      });
     },
     {
+      onError: () => toast.error('Error, try again later.'),
       onSettled: async () => {
         await queryClient.invalidateQueries(['infinite comments']);
       },

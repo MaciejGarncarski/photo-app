@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { atom } from 'jotai';
 import Link from 'next/link';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
@@ -10,6 +11,7 @@ import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { HomePost } from '@/components/organisms/homePost/HomePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
@@ -32,7 +34,7 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
-      <main className={styles.posts} role="list">
+      <motion.main className={styles.posts} variants={containerVariants} animate="show" initial="hidden" role="list">
         <NewPostNotification />
         {data?.pages.map((page) => {
           return page?.posts.map((post, idx) => {
@@ -44,7 +46,7 @@ export const Home = () => {
             <PostPlaceholder />
           </div>
         )}
-      </main>
+      </motion.main>
 
       <aside className={styles.aside}>
         <section className={styles.asideItem}>

@@ -6,7 +6,7 @@ import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
 import { InfiniteMessages } from '@/components/pages/chat/useChatMessages';
 
-const MESSAGES_PER_SCROLL = 6;
+const MESSAGES_PER_PAGE = 6;
 
 const MessagesSchema = z.object({
   page: z.string(),
@@ -29,6 +29,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { page, userId, friendId } = response.data;
+  const currentPage = Number(page);
+
   try {
     const condition = {
       OR: [
@@ -52,8 +54,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     const messages = await prisma.message.findMany({
-      skip: Number(page) * MESSAGES_PER_SCROLL,
-      take: MESSAGES_PER_SCROLL,
+      skip: currentPage * MESSAGES_PER_PAGE,
+      take: MESSAGES_PER_PAGE,
       orderBy: {
         created_at: 'desc',
       },
@@ -68,13 +70,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const postsCount = _count.id;
-    const currentPage = Number(page);
-    const lastPage = Math.round(postsCount / MESSAGES_PER_SCROLL);
+    const maxPages = postsCount / MESSAGES_PER_PAGE;
+    const totalPages = maxPages % 1 !== 0 ? Math.round(maxPages) + 1 : maxPages;
+
+    console.log(messages);
 
     const result: InfiniteMessages = {
       currentPage,
-      lastPage,
-      messages: [...messages].reverse(),
+      totalPages,
+      messages: messages,
       messagesCount: _count.id,
     };
 

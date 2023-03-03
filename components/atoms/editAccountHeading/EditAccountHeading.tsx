@@ -1,6 +1,6 @@
-import styles from './editAccountHeading.module.scss';
+import { Heading } from '@/components/atoms/heading/Heading';
 
-import { Heading } from '../heading/Heading';
+import styles from './editAccountHeading.module.scss';
 
 export const EditAccountHeading = ({ text }: { text: string }) => {
   return (

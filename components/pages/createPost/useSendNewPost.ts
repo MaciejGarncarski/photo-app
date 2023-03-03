@@ -28,13 +28,11 @@ export const useSendNewPost = () => {
       if (!session?.user?.id) {
         return;
       }
-      try {
-        return await uplaodPost({ authorId: session.user.id, description, imageUrls });
-      } catch (error) {
-        toast.error('Error, try again later.');
-      }
+
+      return await uplaodPost({ authorId: session.user.id, description, imageUrls });
     },
     {
+      onError: () => toast.error('Error, try again later.'),
       onSuccess: () => {
         push('/');
       },

@@ -10,7 +10,7 @@ type PropsTypes = {
 export type InfiniteMessages = {
   messages: Array<Message>;
   messagesCount: number;
-  lastPage: number;
+  totalPages: number;
   currentPage: number;
 };
 
@@ -26,7 +26,7 @@ export const useChatMessages = ({ userId, friendId }: PropsTypes) => {
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (prevMessages) => {
-        return prevMessages?.currentPage === prevMessages.lastPage ? undefined : prevMessages.currentPage + 1;
+        return prevMessages?.currentPage === prevMessages.totalPages ? undefined : prevMessages.currentPage + 1;
       },
     },
   );

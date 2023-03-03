@@ -32,7 +32,7 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
   }
 
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.account}>
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.accountMobile}>
       <motion.h2 className={styles.username}>{username}</motion.h2>
       <Avatar className={styles.avatar} userId={id} />
       <AccountStats userId={id} />

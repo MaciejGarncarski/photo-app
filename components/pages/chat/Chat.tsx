@@ -2,7 +2,7 @@ import { IconSend } from '@tabler/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import clsx from 'clsx';
-import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { useAuth } from '@/hooks/useAuth';
@@ -26,9 +26,6 @@ export const Chat = ({ friendId }: PropsTypes) => {
   const { username, name } = useUser({ userId: friendId });
   const { session } = useAuth();
   const queryClient = useQueryClient();
-
-  const scrollableRootRef = useRef<HTMLUListElement | null>(null);
-  const lastScrollDistanceToBottomRef = useRef<number>();
 
   const { data } = useFollowers({
     userId: session?.user?.id ?? '',
@@ -56,81 +53,43 @@ export const Chat = ({ friendId }: PropsTypes) => {
     loading: chatMessages.isLoading,
     hasNextPage: chatMessages.hasNextPage || false,
     onLoadMore: chatMessages.fetchNextPage,
-    disabled: true,
-    rootMargin: '400px 0px 0px 0px',
+    disabled: !chatMessages.hasNextPage,
+    rootMargin: '200px 0px 0px 0px',
   });
 
-  useEffect(() => {
-    const scrollableRoot = scrollableRootRef.current;
-    const lastScrollDistanceToBottom = lastScrollDistanceToBottomRef.current ?? 0;
-    if (scrollableRoot) {
-      scrollableRoot.scrollTop = scrollableRoot.scrollHeight - lastScrollDistanceToBottom;
-    }
-  }, [rootRef]);
+  console.log(chatMessages.data?.pages);
 
-  const rootRefSetter = useCallback(
-    (node: HTMLUListElement) => {
-      rootRef(node);
-      if (scrollableRootRef.current) {
-        scrollableRootRef.current = node;
-      }
-    },
-    [rootRef],
-  );
-
-  const handleRootScroll = useCallback(() => {
-    const rootNode = scrollableRootRef.current;
-    if (rootNode) {
-      const scrollDistanceToBottom = rootNode.scrollHeight - rootNode.scrollTop;
-      lastScrollDistanceToBottomRef.current = scrollDistanceToBottom;
-    }
-  }, []);
-
-  if (chatMessages.isLoading || !chatMessages.data) {
+  if (!chatMessages.data) {
     return <Heading tag="h2">Loading..</Heading>;
   }
 
   return (
     <section className={styles.chat}>
-      <nav>
-        <ul className={styles.users}>
-          {data?.pages.map((page) => {
-            return page.users.map(({ id }) => {
-              return (
-                <li className={styles.user} key={id}>
-                  <Avatar userId={id} />
-                </li>
-              );
-            });
-          })}
-        </ul>
-      </nav>
-      <div className={styles.middle}>
-        <header className={styles.header}>
-          <Avatar userId={friendId} />
-          <Heading tag="h2">
-            {name}, @{username}
-          </Heading>
-        </header>
+      <header className={styles.header}>
+        <Avatar userId={friendId} />
+        <Heading tag="h2">
+          {name}, @{username}
+        </Heading>
+      </header>
 
-        <ul className={styles.messages} ref={rootRefSetter} onScroll={handleRootScroll}>
-          {chatMessages.hasNextPage && (
-            <li ref={infiniteRef} className={styles.loading}>
-              <p>loading...</p>
-            </li>
-          )}
-          {chatMessages.data.pages.map((page) => {
-            return page.messages.map(({ created_at, id, sender, text }) => {
-              return (
-                <li className={clsx(sender !== session?.user?.id && styles.messageFriend, styles.message)} key={id}>
-                  <Avatar userId={sender} />
-                  <p>{text}</p>
-                </li>
-              );
-            });
-          })}
-        </ul>
-      </div>
+      <ul className={styles.messages} ref={rootRef}>
+        {chatMessages.data.pages.map((page) => {
+          return page.messages.map(({ id, sender, text }) => {
+            return (
+              <li className={clsx(sender !== session?.user?.id && styles.messageFriend, styles.message)} key={id}>
+                <Avatar userId={sender} />
+                <p>{text}</p>
+              </li>
+            );
+          });
+        })}
+
+        {chatMessages.hasNextPage && (
+          <li ref={infiniteRef} className={styles.loading}>
+            <p>loading...</p>
+          </li>
+        )}
+      </ul>
 
       <form className={styles.form} onSubmit={onSubmit}>
         <input

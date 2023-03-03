@@ -13,13 +13,10 @@ export const useDeletePost = () => {
 
   return useMutation(
     async ({ postId }: DeletePostMutation) => {
-      try {
-        await axios.delete(`/api/post?postId=${postId}`);
-      } catch (error) {
-        toast.error('Error, try again later.');
-      }
+      await axios.delete(`/api/post?postId=${postId}`);
     },
     {
+      onError: () => toast.error('Error, try again later.'),
       onSettled: async () => {
         await queryClient.invalidateQueries(HOME_POSTS_QUERY_KEY);
       },

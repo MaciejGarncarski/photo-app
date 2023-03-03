@@ -32,8 +32,8 @@
 
   padding: 0.5rem;
   font-size: 1.25rem;
-  transition: background-color var(--transition);
-
+  transition: all var(--transition);
+  transition-property: background-color, box-shadow;
 
   svg {
     width: 1.5rem;
@@ -50,6 +50,8 @@
   &:hover,
   &:focus {
     background-color: var(--bg-secondary);
+    box-shadow: var(--shadow-focus);
+    outline: none;
   }
 }
 

@@ -13,15 +13,10 @@ type PropsTypes = {
   post: PostData;
 };
 
-const overlay: Variants = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
-
 const postItemVaraints: Variants = {
   hidden: {
-    scale: 0.7,
-    rotate: -5,
+    scale: 0.8,
+    rotate: -3,
   },
   show: {
     scale: 1,
@@ -43,14 +38,14 @@ export const AccountPost = ({ post }: PropsTypes) => {
   return (
     <MotionLink shallow variants={postItemVaraints} href={`/post/${postId}`} className={styles.container}>
       <Image className={styles.image} src={url} alt="" width={width} height={height} priority />
-      <motion.div variants={overlay} className={styles.overlay}>
-        <p className={styles.count}>
+      <ul className={styles.overlay}>
+        <li className={styles.count}>
           <IconHeartWrapper isActive={isLiked} /> {likesCount}
-        </p>
-        <p className={styles.count}>
+        </li>
+        <li className={styles.count}>
           <IconMessage /> {commentsCount}
-        </p>
-      </motion.div>
+        </li>
+      </ul>
     </MotionLink>
   );
 };

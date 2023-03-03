@@ -63,6 +63,7 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
                         <Avatar userId={id} />
                         <span className={styles.username}>@{username}</span>
                       </Link>
+
                       <FollowButton userId={id} />
                     </li>
                   );

@@ -64,7 +64,7 @@ export const Comment = ({ commentData }: PropsTypes) => {
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
         {isAbleToDelete && (
-          <button type="button" onClick={open} className={styles.likeBtn}>
+          <button type="button" onClick={open} className={clsx(styles.buttonLast, styles.likeBtn)}>
             <IconTrash />
             delete
           </button>

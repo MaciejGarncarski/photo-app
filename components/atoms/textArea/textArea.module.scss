@@ -12,7 +12,7 @@
   background-color: transparent;
   border: var(--border-primary);
   transition: all var(--transition);
-  transition-property: background-color;
+  transition-property: background-color, box-shadow;
   margin-top: 0.5rem;
   border: var(--border-gray);
 

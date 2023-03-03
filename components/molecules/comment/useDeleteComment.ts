@@ -11,13 +11,10 @@ export const useDeleteComment = () => {
 
   return useMutation(
     async ({ commentId }: Mutation) => {
-      try {
-        await axios.delete(`/api/post/comment?commentId=${commentId}`);
-      } catch (error) {
-        toast.error('Error, try again later.');
-      }
+      await axios.delete(`/api/post/comment?commentId=${commentId}`);
     },
     {
+      onError: () => toast.error('Error, try again later.'),
       onSettled: async () => {
         await queryClient.invalidateQueries(['infinite comments']);
       },
