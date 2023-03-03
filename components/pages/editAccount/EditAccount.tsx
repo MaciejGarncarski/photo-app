@@ -3,10 +3,11 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
-import { FinalImages } from '@/components/pages/createPost/CreatePost';
 import { SelectOptionStage } from '@/components/pages/editAccount/SelectOptionStage';
 
 import styles from './editAccount.module.scss';
+
+import { FinalImages } from '../createPost/types';
 
 type PropsTypes = {
   userId: string;

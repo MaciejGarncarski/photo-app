@@ -25,11 +25,10 @@ type ButtonData = Array<{
 
 type PropsTypes = {
   post: PostData;
-  className?: string;
   parentModalOpen?: boolean;
 };
 
-export const PostButtons = ({ post, className, parentModalOpen }: PropsTypes) => {
+export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
   const { isLiked, postId, likesCount, commentsCount } = post;
 
   const { modalOpen, open: openPostModal, close } = useModal();

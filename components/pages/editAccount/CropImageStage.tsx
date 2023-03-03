@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 import { Button } from '@/components/atoms/button/Button';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
-import { FinalImages } from '@/components/pages/createPost/CreatePost';
+import { FinalImages } from '@/components/pages/createPost/types';
 import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
 import { stageVariant } from '@/components/pages/editAccount/SelectOptionStage';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';

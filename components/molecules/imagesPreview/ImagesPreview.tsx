@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
-import { ImagesBase64 } from '@/components/pages/createPost/CreatePost';
+import { ImagesBase64 } from '@/components/pages/createPost/types';
 
 import styles from './imagesPreview.module.scss';
 

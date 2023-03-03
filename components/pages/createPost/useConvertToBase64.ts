@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { FinalImages, ImagesBase64 } from '@/components/pages/createPost/CreatePost';
+import { FinalImages, ImagesBase64 } from './types';
 
 export const useConvertToBase64 = (images: FinalImages, setImagesBase64: (finalImg: ImagesBase64) => void) => {
   useEffect(() => {

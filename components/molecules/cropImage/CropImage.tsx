@@ -13,7 +13,7 @@ import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { FinalImages } from '@/components/pages/createPost/CreatePost';
+import { FinalImages } from '@/components/pages/createPost/types';
 
 import styles from './cropImage.module.scss';
 
