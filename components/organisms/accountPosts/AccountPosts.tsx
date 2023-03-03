@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { motion, Variants } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { PostData } from '@/utils/transformPost';
@@ -12,6 +13,18 @@ import styles from './accountPosts.module.scss';
 
 type PropsTypes = {
   id: string;
+};
+
+const postContainerVariants: Variants = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
 };
 
 export const AccountPosts = ({ id }: PropsTypes) => {
@@ -45,20 +58,25 @@ export const AccountPosts = ({ id }: PropsTypes) => {
 
   return (
     <>
-      <div className={styles.posts}>
+      <motion.div variants={postContainerVariants} initial="hidden" animate="show" className={styles.posts}>
         {data.pages.map((page) => {
           return page.posts.map((post) => {
             return <AccountPost key={post.postId} post={post} />;
           });
         })}
-      </div>
-
+      </motion.div>
       {(isLoading || hasNextPage) && (
-        <div ref={sentryRef} className={styles.posts}>
+        <motion.div
+          variants={postContainerVariants}
+          initial="hidden"
+          animate="show"
+          ref={sentryRef}
+          className={styles.posts}
+        >
           {Array.from({ length: 6 }, (_, item) => item).map((el) => {
-            return <div className={styles.placeholder} key={el} />;
+            return <motion.div className={styles.placeholder} key={el} />;
           })}
-        </div>
+        </motion.div>
       )}
     </>
   );

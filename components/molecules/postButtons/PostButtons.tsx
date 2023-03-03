@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 
+import { lock } from '@/utils/bodyLock';
 import { PostData } from '@/utils/transformPost';
 
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
@@ -31,22 +32,27 @@ type PropsTypes = {
 export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
   const { isLiked, postId, likesCount, commentsCount } = post;
 
-  const { modalOpen, open: openPostModal, close } = useModal();
-  const { modalOpen: shareModalOpen, open: openShare, close: closeShare } = useModal();
+  const postModal = useModal();
+  const shareModal = useModal();
   const { handleLike } = useHandleLike({ post });
 
   const likeIcon = <IconHeartWrapper isActive={Boolean(isLiked)} />;
+
+  const postModalOpen = () => {
+    postModal.open();
+    lock();
+  };
 
   const buttonData: ButtonData = [
     { alt: 'like', icon: likeIcon, onClick: handleLike, disabled: false, count: likesCount },
     {
       alt: 'comment',
       icon: <IconMessage />,
-      onClick: parentModalOpen ? () => null : openPostModal,
+      onClick: parentModalOpen ? () => null : postModalOpen,
       disabled: false,
       count: commentsCount,
     },
-    { alt: 'share', icon: <IconShare />, onClick: openShare, disabled: false },
+    { alt: 'share', icon: <IconShare />, onClick: shareModal.open, disabled: false },
   ];
 
   return (
@@ -69,11 +75,12 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
         );
       })}
       <ModalContainer>
-        {shareModalOpen && (
-          <ShareModal close={closeShare} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
+        {shareModal.modalOpen && (
+          <ShareModal close={shareModal.close} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
         )}
       </ModalContainer>
-      {modalOpen && createPortal(<PostModal modalOpen={modalOpen} post={post} close={close} />, document.body)}
+      {postModal.modalOpen &&
+        createPortal(<PostModal modalOpen={postModal.modalOpen} post={post} close={postModal.close} />, document.body)}
     </ul>
   );
 };

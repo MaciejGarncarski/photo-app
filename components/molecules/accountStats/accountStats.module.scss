@@ -9,7 +9,7 @@
     background-color: var(--bg-secondary);
     border-radius: var(--radius-medium);
     padding: 0.5rem;
-    width: clamp(10rem, 80%, 20rem);
+    width: clamp(10rem, 80vw, 40rem);
 
     @include common.mediaquery('desktop') {
         margin: 0;

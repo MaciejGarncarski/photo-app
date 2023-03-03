@@ -10,6 +10,7 @@ import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 
 import styles from './account.module.scss';
 
@@ -32,7 +33,7 @@ export const AccountHeaderDesktop = ({ username, isOwner, modalOpen, open }: Pro
 
   return (
     <main className={styles.accountDesktop}>
-      <div className={styles.leftCol}>
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.leftCol}>
         <Avatar className={styles.avatar} userId={id} />
         {!isOwner && session && <FollowButton className={styles.button} userId={id ?? ''} />}
         {isOwner && (
@@ -42,13 +43,13 @@ export const AccountHeaderDesktop = ({ username, isOwner, modalOpen, open }: Pro
             <VisuallyHiddenText text={modalOpen ? 'Close menu' : 'Open menu'} />
           </Button>
         )}
-      </div>
-      <div className={styles.rightCol}>
+      </motion.div>
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.rightCol}>
         <motion.h2 className={styles.username}>{username}</motion.h2>
         <AccountStats userId={id} />
-        <p className={styles.name}>{name}</p>
-        <p className={styles.bio}>{bio || 'No bio yet.'}</p>
-      </div>
+        <motion.p className={styles.name}>{name}</motion.p>
+        <motion.p className={styles.bio}>{bio || 'No bio yet.'}</motion.p>
+      </motion.div>
     </main>
   );
 };

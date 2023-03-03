@@ -58,7 +58,8 @@
   }
 
   @include common.mediaquery('desktop') {
-    --text-size: 2.5rem;
+    gap: 2rem;
+    --text-size: 4rem;
   }
 }
 

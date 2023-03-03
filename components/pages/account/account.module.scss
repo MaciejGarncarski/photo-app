@@ -12,6 +12,10 @@
   grid-template-columns: 1fr;
   position: relative;
   gap: 1.5rem;
+
+  @include common.mediaquery('tablet') {
+    gap: 2.5rem;
+  }
 }
 
 .accountDesktop {
@@ -20,6 +24,7 @@
   gap: 8rem;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 3rem;
 }
 
 .leftCol {
@@ -34,7 +39,7 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 figure.avatar {

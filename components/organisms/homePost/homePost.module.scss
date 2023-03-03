@@ -4,4 +4,8 @@
     border-radius: var(--radius-small);
     width: var(--post-width);
     border: var(--border-gray);
+
+    @include common.mediaquery('desktop') {
+        border-radius: var(--radius-medium);
+    }
 }

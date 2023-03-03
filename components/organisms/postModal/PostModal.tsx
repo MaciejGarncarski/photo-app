@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 
+import { unlock } from '@/utils/bodyLock';
 import { PostData } from '@/utils/transformPost';
 
 import { Heading } from '@/components/atoms/heading/Heading';
@@ -19,10 +20,15 @@ type PropsTypes = {
 };
 
 export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
+  const onClose = () => {
+    unlock();
+    close();
+  };
+
   return (
-    <Backdrop close={close}>
+    <Backdrop close={onClose}>
       <motion.div role="dialog" className={styles.container}>
-        <ModalClose onClose={close} isExternal />
+        <ModalClose onClose={onClose} isExternal />
         <PostHeader tag="div" post={post} />
         <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
         <PostFooter post={post} parentModalOpen={modalOpen} />

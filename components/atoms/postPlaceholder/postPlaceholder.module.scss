@@ -2,8 +2,8 @@
 
 .placeholder {
   width: var(--post-width);
-  height: 22rem;
-  border-radius: var(--radius-medium);
+  height: 24rem;
+  border-radius: var(--radius-small);
   opacity: 0.5;
   background-size: var(--placeholder-bg-size);
   background-image: var(--gradient);
@@ -11,8 +11,13 @@
   margin: 0 auto;
   margin-bottom: 4rem;
 
+  @include common.mediaquery('tablet') {
+    height: 35rem;
+  }
+
   @include common.mediaquery('desktop') {
-    height: 40rem;
+    border-radius: var(--radius-big);
+    height: 45rem;
   }
 }
 
@@ -21,6 +26,10 @@
 .small {
   height: 12rem;
   margin: 0;
+
+  @include common.mediaquery('tablet') {
+    height: 20rem;
+  }
 
   @include common.mediaquery('desktop') {
     height: 15rem;

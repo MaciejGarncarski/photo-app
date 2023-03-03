@@ -1,9 +1,11 @@
 import { IconDoorExit, IconEdit } from '@tabler/icons';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
+import { useEffect } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
+import { lock } from '@/utils/bodyLock';
 
 import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
 import { useModal } from '@/components/atoms/modal/useModal';
@@ -37,6 +39,12 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
   const postModal = useModal(isModalOpen);
   const settingsModal = useModal();
   const signOutModal = useModal();
+
+  useEffect(() => {
+    if (isModalOpen) {
+      lock();
+    }
+  }, [isModalOpen]);
 
   const router = useRouter();
 

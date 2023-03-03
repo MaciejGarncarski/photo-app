@@ -18,6 +18,17 @@ const overlay: Variants = {
   hidden: { opacity: 0 },
 };
 
+const postItemVaraints: Variants = {
+  hidden: {
+    scale: 0.7,
+    rotate: -5,
+  },
+  show: {
+    scale: 1,
+    rotate: 0,
+  },
+};
+
 export const MotionLink = motion(Link);
 
 export const AccountPost = ({ post }: PropsTypes) => {
@@ -30,14 +41,7 @@ export const AccountPost = ({ post }: PropsTypes) => {
   const { url, width, height } = imagesData[0];
 
   return (
-    <MotionLink
-      shallow
-      href={`/post/${postId}`}
-      initial="hidden"
-      whileHover="visible"
-      whileFocus="visible"
-      className={styles.container}
-    >
+    <MotionLink shallow variants={postItemVaraints} href={`/post/${postId}`} className={styles.container}>
       <Image className={styles.image} src={url} alt="" width={width} height={height} priority />
       <motion.div variants={overlay} className={styles.overlay}>
         <p className={styles.count}>

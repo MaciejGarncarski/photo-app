@@ -10,6 +10,7 @@ import { FollowButton } from '@/components/atoms/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 
 import styles from './account.module.scss';
 
@@ -31,7 +32,7 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
   }
 
   return (
-    <main className={styles.account}>
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.account}>
       <motion.h2 className={styles.username}>{username}</motion.h2>
       <Avatar className={styles.avatar} userId={id} />
       <AccountStats userId={id} />
@@ -45,6 +46,6 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
       )}
       <p className={styles.name}>{name}</p>
       <p className={styles.bio}>{bio || 'No bio yet.'}</p>
-    </main>
+    </motion.div>
   );
 };

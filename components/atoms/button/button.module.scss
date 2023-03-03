@@ -28,7 +28,7 @@
   }
 
   @include common.mediaquery('desktop') {
-    border-radius: var(--radius-small);
+    border-radius: var(--radius-medium);
     padding: 0.5rem 0.9rem;
   }
 }
