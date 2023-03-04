@@ -2,16 +2,18 @@ import { IconSend } from '@tabler/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import clsx from 'clsx';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
+import io from 'socket.io-client';
 
 import { useAuth } from '@/hooks/useAuth';
-import { useFollowers } from '@/hooks/useFollowers';
 import { useUser } from '@/hooks/useUser';
+import { clientEnv } from '@/utils/env.mjs';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { ChatUsers } from '@/components/molecules/chatUsers/ChatUsers';
 
 import styles from './chat.module.scss';
 
@@ -21,16 +23,19 @@ type PropsTypes = {
   friendId: string;
 };
 
+const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
+
 export const Chat = ({ friendId }: PropsTypes) => {
   const [inputVal, setInputVal] = useState<string>('');
   const { username, name } = useUser({ userId: friendId });
   const { session } = useAuth();
   const queryClient = useQueryClient();
 
-  const { data } = useFollowers({
-    userId: session?.user?.id ?? '',
-    type: 'followers',
-  });
+  useEffect(() => {
+    socket.on('new message', () => {
+      queryClient.invalidateQueries(['chat', session?.user?.id, friendId]);
+    });
+  }, [queryClient, friendId, session?.user?.id]);
 
   const addMessage = useMutation(async () => {
     await axios.post('/api/chat/addMessage', {
@@ -42,32 +47,37 @@ export const Chat = ({ friendId }: PropsTypes) => {
 
   const chatMessages = useChatMessages({ friendId, userId: session?.user?.id ?? '' });
 
-  const onSubmit = (ev: FormEvent) => {
-    ev.preventDefault();
-    addMessage.mutate();
-    setInputVal('');
-    queryClient.invalidateQueries(['chat', session?.user?.id, friendId]);
-  };
-
   const [infiniteRef, { rootRef }] = useInfiniteScroll({
     loading: chatMessages.isLoading,
     hasNextPage: chatMessages.hasNextPage || false,
     onLoadMore: chatMessages.fetchNextPage,
     disabled: !chatMessages.hasNextPage,
-    rootMargin: '200px 0px 0px 0px',
+    rootMargin: '300px 0px 0px 0px',
   });
-
-  console.log(chatMessages.data?.pages);
 
   if (!chatMessages.data) {
     return <Heading tag="h2">Loading..</Heading>;
   }
 
+  const message = {
+    receiver: friendId,
+    sender: session?.user?.id,
+    message: inputVal,
+  };
+
+  const onSubmit = (ev: FormEvent) => {
+    ev.preventDefault();
+    socket.emit('send message', message);
+    setInputVal('');
+  };
+
   return (
     <section className={styles.chat}>
+      <ChatUsers />
+
       <header className={styles.header}>
         <Avatar userId={friendId} />
-        <Heading tag="h2">
+        <Heading tag="h2" className={styles.heading}>
           {name}, @{username}
         </Heading>
       </header>
@@ -99,7 +109,7 @@ export const Chat = ({ friendId }: PropsTypes) => {
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
         />
-        <button type="submit" className={styles.button} disabled={addMessage.isLoading}>
+        <button type="submit" className={styles.button} disabled={addMessage.isLoading || inputVal.trim() === ''}>
           <IconSend />
           <VisuallyHiddenText text="send" />
         </button>

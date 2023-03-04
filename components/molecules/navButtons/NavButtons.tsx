@@ -1,4 +1,4 @@
-import { IconHome, IconSettings, IconSquareRoundedPlus, IconUser } from '@tabler/icons';
+import { IconHome, IconMessage, IconSettings, IconSquareRoundedPlus, IconUser } from '@tabler/icons';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -35,11 +35,11 @@ export const NavButtons = () => {
       title: 'Home',
       href: '/',
     },
-    // {
-    //   icon: <IconMessage />,
-    //   title: 'Chat',
-    //   href: '/chat',
-    // },
+    {
+      icon: <IconMessage />,
+      title: 'Chat',
+      href: '/chat',
+    },
     {
       icon: <IconSquareRoundedPlus />,
       title: 'Create post',

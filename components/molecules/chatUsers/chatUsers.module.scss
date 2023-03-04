@@ -1,0 +1,19 @@
+@use '/styles/common';
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    gap: 2rem;
+    background-color: var(--bg-secondary);
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}

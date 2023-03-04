@@ -6,6 +6,6 @@
     border: var(--border-gray);
 
     @include common.mediaquery('desktop') {
-        border-radius: var(--radius-medium);
+        border-radius: var(--radius-big);
     }
 }

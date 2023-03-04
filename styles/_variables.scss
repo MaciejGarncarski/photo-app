@@ -53,7 +53,8 @@
 %variablesDarkTheme {
   --color-overlay: rgba(70, 70, 70, 0.75);
   --text-black: rgb(230, 230, 230);
-  --color-gray: rgb(100, 100, 100);
+  --color-gray: rgb(124, 124, 124);
+  --gradient: linear-gradient(90deg, var(--color-gray) 0px, #ababab 10%, var(--color-gray) 20%);
   --text-gray: rgb(214, 214, 214);
   --border-gray: 1px solid rgba(100, 100, 100);
   --bg-primary: rgb(32, 37, 51);

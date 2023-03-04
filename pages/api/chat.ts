@@ -73,8 +73,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const maxPages = postsCount / MESSAGES_PER_PAGE;
     const totalPages = maxPages % 1 !== 0 ? Math.round(maxPages) + 1 : maxPages;
 
-    console.log(messages);
-
     const result: InfiniteMessages = {
       currentPage,
       totalPages,

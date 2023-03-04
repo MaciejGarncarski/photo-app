@@ -6,13 +6,16 @@
     position: relative;
 }
 
-
 .header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     background-color: var(--bg-secondary);
+}
+
+.heading {
+    font-size: 1rem;
 }
 
 .messages {
@@ -21,10 +24,14 @@
     align-items: flex-start;
     justify-content: flex-start;
     list-style: none;
-    padding: 5rem 2rem;
+    padding: 2rem 2rem;
     gap: 3rem;
-    max-height: 50rem;
+    max-height: 26rem;
     overflow-y: auto;
+
+    @include common.mediaquery('desktop') {
+        max-height: 75vh;
+    }
 }
 
 .message {
@@ -64,16 +71,21 @@
     background-color: var(--bg-secondary);
 
     @include common.mediaquery('desktop') {
-        padding: 0.5rem 3rem;
+        padding: 1rem 3rem;
     }
 }
 
 .input {
     flex-grow: 1;
-    background-color: transparent;
+    background-color: var(--bg-primary);
     border-radius: var(--radius-small);
     padding: 0 0.5rem;
     border: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: var(--shadow-focus);
+    }
 }
 
 .button {
@@ -84,4 +96,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+
+    &:focus {
+        outline: none;
+        box-shadow: var(--shadow-focus);
+    }
 }

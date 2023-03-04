@@ -6,7 +6,7 @@
     border-bottom: var(--border-gray);
 
     @include common.mediaquery('desktop') {
-        padding: 1rem;
+        padding: 1rem 2rem;
     }
 }
 
