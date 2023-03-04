@@ -44,15 +44,16 @@
   @include common.mediaquery('desktop') {
     padding: 1rem;
     padding-right: 1.5rem;
+
+    &:hover,
+    &:focus {
+      background-color: var(--bg-secondary);
+      box-shadow: var(--shadow-focus);
+      outline: none;
+    }
   }
 
 
-  &:hover,
-  &:focus {
-    background-color: var(--bg-secondary);
-    box-shadow: var(--shadow-focus);
-    outline: none;
-  }
 }
 
 .active {
