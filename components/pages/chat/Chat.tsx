@@ -1,7 +1,6 @@
 import { IconSend } from '@tabler/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import clsx from 'clsx';
 import { FormEvent, useEffect, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import io from 'socket.io-client';
@@ -11,6 +10,7 @@ import { useUser } from '@/hooks/useUser';
 import { clientEnv } from '@/utils/env.mjs';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { ChatUsers } from '@/components/molecules/chatUsers/ChatUsers';
@@ -32,8 +32,10 @@ export const Chat = ({ friendId }: PropsTypes) => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    socket.on('new message', () => {
-      queryClient.invalidateQueries(['chat', session?.user?.id, friendId]);
+    socket.on('new message', (data) => {
+      const { receiver, sender } = data;
+      queryClient.invalidateQueries(['chat', receiver, sender]);
+      queryClient.invalidateQueries(['chat', sender, receiver]);
     });
   }, [queryClient, friendId, session?.user?.id]);
 
@@ -84,13 +86,8 @@ export const Chat = ({ friendId }: PropsTypes) => {
 
       <ul className={styles.messages} ref={rootRef}>
         {chatMessages.data.pages.map((page) => {
-          return page.messages.map(({ id, sender, text }) => {
-            return (
-              <li className={clsx(sender !== session?.user?.id && styles.messageFriend, styles.message)} key={id}>
-                <Avatar userId={sender} />
-                <p>{text}</p>
-              </li>
-            );
+          return page.messages.map((message) => {
+            return <ChatMessage message={message} key={message.id} />;
           });
         })}
 

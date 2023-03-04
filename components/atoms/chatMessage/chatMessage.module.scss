@@ -1,0 +1,53 @@
+@use '/styles/common';
+
+.message {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: auto;
+    color: rgb(30, 30, 30);
+}
+
+.content {
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-big);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 10rem;
+
+    @include common.mediaquery('desktop') {
+        max-width: 20rem;
+    }
+
+    &>button {
+        order: 2;
+    }
+
+    &>figure {
+        order: 2;
+    }
+}
+
+.messageReceiver {
+    margin-left: 0;
+    color: inherit;
+
+    &>.content {
+        background-color: var(--bg-secondary);
+    }
+}
+
+.contentReceiver {
+    &>button {
+        order: 0;
+    }
+
+    &>figure {
+        order: 0;
+    }
+}
+
+.options {
+    color: var(--text-black);
+}
