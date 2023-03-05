@@ -2,11 +2,14 @@ import { ChatRoom } from '@prisma/client';
 import { IconSend } from '@tabler/icons';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import io from 'socket.io-client';
 
 import { useAuth } from '@/hooks/useAuth';
+import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { useUser } from '@/hooks/useUser';
 import { clientEnv } from '@/utils/env.mjs';
 
@@ -30,6 +33,8 @@ type PropsTypes = {
 export const Chat = ({ chatRoomData }: PropsTypes) => {
   const [inputVal, setInputVal] = useState<string>('');
   const { session } = useAuth();
+  const { isMobile } = useScreenWidth();
+  const { isGoingUp } = useScrollPosition();
 
   const { userOne_id, userTwo_id, id } = chatRoomData;
   const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
@@ -104,7 +109,12 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
         )}
       </ul>
 
-      <form className={styles.form} onSubmit={onSubmit}>
+      <motion.form
+        initial={{ y: 0 }}
+        animate={isGoingUp && isMobile ? { y: '-2.5rem' } : { y: 0 }}
+        className={styles.form}
+        onSubmit={onSubmit}
+      >
         <input
           type="text"
           placeholder="Write something.."
@@ -116,7 +126,7 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
           <IconSend />
           <VisuallyHiddenText text="send" />
         </button>
-      </form>
+      </motion.form>
     </section>
   );
 };
