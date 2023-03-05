@@ -31,12 +31,12 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
   const [inputVal, setInputVal] = useState<string>('');
   const { session } = useAuth();
 
-  const { userOne_id, userTwo_id } = chatRoomData;
+  const { userOne_id, userTwo_id, id } = chatRoomData;
   const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
 
   const { username, name } = useUser({ userId: friendId });
 
-  useChatSubscription(socket);
+  useChatSubscription(socket, id);
 
   const addMessage = useMutation(async () => {
     await axios.post('/api/chat/addMessage', {
