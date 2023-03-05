@@ -3,7 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 type StatsResponse = {
-  users: Array<User>;
+  users: Array<{ user: User; chatRoomId: number }>;
   usersCount: number;
   canLoadMore: boolean;
   nextCursor: number | null;

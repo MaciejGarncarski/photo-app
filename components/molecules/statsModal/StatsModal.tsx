@@ -56,7 +56,9 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
           ) : (
             <ul className={styles.list}>
               {data?.pages.map((page) => {
-                return page.users.map(({ id, username }) => {
+                return page.users.map(({ user }) => {
+                  const { id, username } = user;
+
                   return (
                     <li key={id} className={styles.listItem}>
                       <Link href={`/${username}`} className={styles.itemLink} onClick={close}>

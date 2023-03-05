@@ -1,7 +1,8 @@
+import { ChatRoom } from '@prisma/client';
 import { IconSend } from '@tabler/icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import io from 'socket.io-client';
 
@@ -14,31 +15,28 @@ import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { ChatUsers } from '@/components/molecules/chatUsers/ChatUsers';
-import { useLoadingToast } from '@/components/pages/chat/useLoadingToast';
+import { useChatSubscription } from '@/components/pages/chat/useChatSubscription';
 
 import styles from './chat.module.scss';
 
 import { useChatMessages } from './useChatMessages';
 
-type PropsTypes = {
-  friendId: string;
-};
-
 const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
 
-export const Chat = ({ friendId }: PropsTypes) => {
-  const [inputVal, setInputVal] = useState<string>('');
-  const { username, name } = useUser({ userId: friendId });
-  const { session } = useAuth();
-  const queryClient = useQueryClient();
+type PropsTypes = {
+  chatRoomData: ChatRoom;
+};
 
-  useEffect(() => {
-    socket.on('new message', (data) => {
-      const { receiver, sender } = data;
-      queryClient.invalidateQueries(['chat', receiver, sender]);
-      queryClient.invalidateQueries(['chat', sender, receiver]);
-    });
-  }, [queryClient, friendId, session?.user?.id]);
+export const Chat = ({ chatRoomData }: PropsTypes) => {
+  const [inputVal, setInputVal] = useState<string>('');
+  const { session } = useAuth();
+
+  const { userOne_id, userTwo_id } = chatRoomData;
+  const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
+
+  const { username, name } = useUser({ userId: friendId });
+
+  useChatSubscription(socket);
 
   const addMessage = useMutation(async () => {
     await axios.post('/api/chat/addMessage', {
@@ -49,7 +47,6 @@ export const Chat = ({ friendId }: PropsTypes) => {
   });
 
   const chatMessages = useChatMessages({ friendId, userId: session?.user?.id ?? '' });
-  useLoadingToast(socket);
 
   const [infiniteRef] = useInfiniteScroll({
     loading: chatMessages.isLoading,
@@ -67,6 +64,11 @@ export const Chat = ({ friendId }: PropsTypes) => {
     receiver: friendId,
     sender: session?.user?.id,
     message: inputVal,
+  };
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputVal(e.target.value);
+    // socket.emit('typing', { receiver: friendId, sender: session?.user?.id });
   };
 
   const onSubmit = (ev: FormEvent) => {
@@ -95,7 +97,9 @@ export const Chat = ({ friendId }: PropsTypes) => {
 
         {chatMessages.hasNextPage && (
           <li ref={infiniteRef} className={styles.loading}>
-            <p>loading...</p>
+            <div role="status">
+              <VisuallyHiddenText text="Loading older messages" />
+            </div>
           </li>
         )}
       </ul>
@@ -106,7 +110,7 @@ export const Chat = ({ friendId }: PropsTypes) => {
           placeholder="Write something.."
           className={styles.input}
           value={inputVal}
-          onChange={(e) => setInputVal(e.target.value)}
+          onChange={onChange}
         />
         <button type="submit" className={styles.button} disabled={addMessage.isLoading || inputVal.trim() === ''}>
           <IconSend />

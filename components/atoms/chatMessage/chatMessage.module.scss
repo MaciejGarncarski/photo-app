@@ -2,14 +2,30 @@
 
 .message {
     display: flex;
-    gap: 0.25rem;
+    align-items: center;
     margin-left: auto;
     color: rgb(30, 30, 30);
-
+    position: relative;
 
     &>button {
         order: 2;
     }
+}
+
+.time {
+    top: -1.1rem;
+    left: unset;
+    right: 2rem;
+    position: absolute;
+    font-size: 0.75rem;
+    text-align: right;
+    width: 7rem;
+}
+
+.timeReceiver {
+    right: unset;
+    left: 2rem;
+    text-align: left;
 }
 
 .content {

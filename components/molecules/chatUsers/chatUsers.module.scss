@@ -2,14 +2,16 @@
 
 .nav {
     display: flex;
+    align-items: center;
     flex-direction: row;
-    gap: 2rem;
+    gap: 3rem;
     background-color: var(--bg-primary);
     width: var(--width);
     position: fixed;
     top: 0;
     height: 5rem;
     padding: 1rem;
+    z-index: 1;
 }
 
 .link {
@@ -17,5 +19,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    border-radius: var(--radius-small);
+}
+
+.linkActive {
+    box-shadow: var(--shadow-focus);
+}
+
+.username {
+    font-weight: 600;
 }
