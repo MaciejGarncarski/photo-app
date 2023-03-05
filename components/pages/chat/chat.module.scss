@@ -46,6 +46,14 @@
     }
 }
 
+.loading {
+    height: 13rem;
+    width: 100%;
+    margin-bottom: 6rem;
+    border-radius: var(--radius-big);
+    background-color: var(--color-gray);
+}
+
 .form {
     display: flex;
     align-items: center;

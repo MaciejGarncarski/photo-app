@@ -58,7 +58,7 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
     hasNextPage: chatMessages.hasNextPage || false,
     onLoadMore: chatMessages.fetchNextPage,
     disabled: !chatMessages.hasNextPage,
-    rootMargin: '300px 0px 0px 0px',
+    rootMargin: '50px 0px 0px 0px',
   });
 
   if (!chatMessages.data || chatMessages.isLoading) {
@@ -73,7 +73,6 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputVal(e.target.value);
-    // socket.emit('typing', { receiver: friendId, sender: session?.user?.id });
   };
 
   const onSubmit = (ev: FormEvent) => {
@@ -100,7 +99,7 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
           });
         })}
 
-        {chatMessages.hasNextPage && (
+        {(chatMessages.hasNextPage || chatMessages.isLoading) && (
           <li ref={infiniteRef} className={styles.loading}>
             <div role="status">
               <VisuallyHiddenText text="Loading older messages" />
