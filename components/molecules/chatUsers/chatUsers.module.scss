@@ -4,8 +4,12 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    background-color: var(--bg-secondary);
-    max-width: 100%;
+    background-color: var(--bg-primary);
+    width: var(--width);
+    position: fixed;
+    top: 0;
+    height: 5rem;
+    padding: 1rem;
 }
 
 .link {

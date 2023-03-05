@@ -51,7 +51,7 @@ export const Chat = ({ friendId }: PropsTypes) => {
   const chatMessages = useChatMessages({ friendId, userId: session?.user?.id ?? '' });
   useLoadingToast(socket);
 
-  const [infiniteRef, { rootRef }] = useInfiniteScroll({
+  const [infiniteRef] = useInfiniteScroll({
     loading: chatMessages.isLoading,
     hasNextPage: chatMessages.hasNextPage || false,
     onLoadMore: chatMessages.fetchNextPage,
@@ -86,7 +86,7 @@ export const Chat = ({ friendId }: PropsTypes) => {
         </Heading>
       </header>
 
-      <ul className={styles.messages} ref={rootRef}>
+      <ul className={styles.messages}>
         {chatMessages.data.pages.map((page) => {
           return page.messages.map((message) => {
             return <ChatMessage message={message} key={message.id} />;
