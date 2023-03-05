@@ -5,6 +5,11 @@
     gap: 0.25rem;
     margin-left: auto;
     color: rgb(30, 30, 30);
+
+
+    &>button {
+        order: 2;
+    }
 }
 
 .content {
@@ -27,6 +32,8 @@
     &>figure {
         order: 2;
     }
+
+
 }
 
 .messageReceiver {
@@ -35,6 +42,10 @@
 
     &>.content {
         background-color: var(--bg-secondary);
+    }
+
+    &>button {
+        order: 0;
     }
 }
 

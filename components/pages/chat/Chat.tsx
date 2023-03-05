@@ -14,6 +14,7 @@ import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { ChatUsers } from '@/components/molecules/chatUsers/ChatUsers';
+import { useLoadingToast } from '@/components/pages/chat/useLoadingToast';
 
 import styles from './chat.module.scss';
 
@@ -48,6 +49,7 @@ export const Chat = ({ friendId }: PropsTypes) => {
   });
 
   const chatMessages = useChatMessages({ friendId, userId: session?.user?.id ?? '' });
+  useLoadingToast(socket);
 
   const [infiniteRef, { rootRef }] = useInfiniteScroll({
     loading: chatMessages.isLoading,
@@ -57,7 +59,7 @@ export const Chat = ({ friendId }: PropsTypes) => {
     rootMargin: '300px 0px 0px 0px',
   });
 
-  if (!chatMessages.data) {
+  if (!chatMessages.data || chatMessages.isLoading) {
     return <Heading tag="h2">Loading..</Heading>;
   }
 

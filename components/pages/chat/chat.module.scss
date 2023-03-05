@@ -4,16 +4,21 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 100vh;
+    padding-bottom: 3rem;
+
+    @include common.mediaquery('desktop') {
+        padding-bottom: 0;
+    }
 }
 
 .header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     background-color: var(--bg-secondary);
-
-    height: 5rem;
+    height: auto;
 }
 
 .heading {
@@ -28,12 +33,7 @@
     list-style: none;
     padding: 2rem 2rem;
     gap: 2rem;
-    max-height: calc(100vh - 18rem);
     overflow-y: auto;
-
-    @include common.mediaquery('desktop') {
-        max-height: calc(100vh - 15rem);
-    }
 }
 
 .form {
@@ -42,7 +42,6 @@
     padding: 0.5rem;
     gap: 0.5rem;
     background-color: var(--bg-secondary);
-    height: 5rem;
 
     @include common.mediaquery('desktop') {
         gap: 2rem;

@@ -3,13 +3,9 @@
 .nav {
     display: flex;
     flex-direction: row;
-    padding: 1rem;
     gap: 2rem;
     background-color: var(--bg-secondary);
     max-width: 100%;
-    overflow-x: auto;
-    height: 5rem;
-
 }
 
 .link {
