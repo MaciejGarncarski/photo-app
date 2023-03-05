@@ -18,6 +18,16 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       },
     });
 
+    if (!chatRoomData) {
+      return {
+        redirect: {
+          permanent: true,
+          destination: '/chat',
+        },
+        props: {},
+      };
+    }
+
     return {
       props: {
         chatRoomData,
