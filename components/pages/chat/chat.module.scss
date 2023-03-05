@@ -57,7 +57,6 @@
     bottom: 0;
     width: var(--width);
 
-
     @include common.mediaquery('desktop') {
         gap: 2rem;
         padding: 1rem 3rem;

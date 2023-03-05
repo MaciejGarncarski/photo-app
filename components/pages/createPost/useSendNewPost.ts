@@ -2,11 +2,13 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
+import { io } from 'socket.io-client';
 
 import { useAuth } from '@/hooks/useAuth';
 import { CreatePostData } from '@/utils/createPost';
+import { clientEnv } from '@/utils/env.mjs';
 
-type MutationValues = {
+export type MutationValues = {
   description: string;
   imageUrls: Array<number>;
 };
@@ -18,6 +20,8 @@ const uplaodPost = async ({ description, imageUrls, authorId }: CreatePostData) 
     authorId,
   });
 };
+
+const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
 
 export const useSendNewPost = () => {
   const { push } = useRouter();
@@ -35,6 +39,7 @@ export const useSendNewPost = () => {
       onError: () => toast.error('Error, try again later.'),
       onSuccess: () => {
         push('/');
+        socket.emit('new post');
       },
     },
   );
