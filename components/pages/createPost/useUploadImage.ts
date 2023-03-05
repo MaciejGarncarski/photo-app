@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { clientEnv } from '@/utils/env.mjs';
 
-type UploadImages = {
+export type UploadImages = {
   imageBlob: Blob;
   folder: string;
   isPost?: boolean;

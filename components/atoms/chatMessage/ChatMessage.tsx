@@ -3,6 +3,8 @@ import { IconDotsVertical, IconTrash } from '@tabler/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import clsx from 'clsx';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useAuth } from '@/hooks/useAuth';
 
@@ -19,12 +21,17 @@ type PropsTypes = {
   message: Message;
 };
 
+dayjs.extend(relativeTime);
+
 export const ChatMessage = ({ message }: PropsTypes) => {
   const queryClient = useQueryClient();
   const { modalOpen, open, close } = useModal();
   const { session } = useAuth();
   const { sender, text, created_at, id, receiver } = message;
-  const isSender = sender === session?.user?.id;
+  const isReceiver = sender !== session?.user?.id;
+
+  const fromNow = dayjs().to(dayjs(created_at));
+  const formattedDate = dayjs(created_at).format('DD.MM.YY | HH:mm');
 
   const { mutate } = useMutation(
     async () => {
@@ -41,12 +48,16 @@ export const ChatMessage = ({ message }: PropsTypes) => {
   );
 
   return (
-    <li className={clsx(isSender && styles.messageReceiver, styles.message)}>
-      <button type="button" onClick={open} className={styles.options}>
-        <IconDotsVertical /> <VisuallyHiddenText text="options" />
-      </button>
-
-      <div className={clsx(isSender && styles.contentReceiver, styles.content)}>
+    <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
+      {!isReceiver && (
+        <button type="button" onClick={open} className={styles.options}>
+          <IconDotsVertical /> <VisuallyHiddenText text="options" />
+        </button>
+      )}
+      <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>
+        <time dateTime={fromNow}>{formattedDate}</time>
+      </p>
+      <div className={clsx(isReceiver && styles.contentReceiver, styles.content)}>
         <Avatar userId={sender} />
         <p>{text}</p>
       </div>

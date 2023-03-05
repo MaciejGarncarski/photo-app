@@ -11,7 +11,7 @@
   top: 0;
   overflow-y: scroll;
   border-radius: var(--radius-small) var(--radius-small) 0 0;
-  max-height: 80vh;
+  max-height: 72vh;
 
   @include common.mobile-landscape {
     width: auto;

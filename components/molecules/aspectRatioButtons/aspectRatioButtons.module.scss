@@ -16,22 +16,21 @@
 
 .button {
   width: 100%;
-
-  &:last-child {
-    grid-column: 1 / 3;
-  }
-
   text-transform: capitalize;
-
-  @include common.mediaquery('desktop') {
-    &:last-child {
-      grid-column: auto;
-    }
-  }
 }
 
 .container {
   display: flex;
   justify-content: stretch;
   align-items: center;
+
+  &:last-child {
+    grid-column: 1 / 3;
+  }
+
+  @include common.mediaquery('desktop') {
+    &:last-child {
+      grid-column: auto;
+    }
+  }
 }

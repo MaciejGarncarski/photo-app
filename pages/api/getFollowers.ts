@@ -58,9 +58,42 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const canLoadMore = usersCount > (+skip + 1) * USERS_PER_SCROLL;
       const nextCursor = canLoadMore ? +skip + 1 : null;
 
-      const mappedUsers = users.map((user) => user.from_user);
+      const usersWithChatRooms = await Promise.all(
+        users.map(async (user) => {
+          const chatRoom = await prisma.chatRoom.findFirst({
+            where: {
+              OR: [
+                {
+                  userOne_id: userId,
+                  userTwo_id: user.from_user.id,
+                },
+                { userTwo_id: userId, userOne_id: user.from_user.id },
+              ],
+            },
+          });
 
-      return res.status(httpCodes.success).send({ users: mappedUsers, usersCount, canLoadMore, nextCursor });
+          if (!chatRoom) {
+            const { id } = await prisma.chatRoom.create({
+              data: {
+                userOne_id: userId,
+                userTwo_id: user.from_user.id,
+              },
+            });
+
+            return {
+              user: user.from_user,
+              chatRoomId: id,
+            };
+          }
+
+          return {
+            user: user.from_user,
+            chatRoomId: chatRoom.id,
+          };
+        }),
+      );
+
+      return res.status(httpCodes.success).send({ users: usersWithChatRooms, usersCount, canLoadMore, nextCursor });
     }
 
     if (type === 'following') {
@@ -77,8 +110,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      const mappedUsers = users.map((user) => user.to_user);
-
       const { _count } = await prisma.follower.aggregate({
         _count: {
           id: true,
@@ -94,7 +125,42 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const canLoadMore = usersCount > (+skip + 1) * USERS_PER_SCROLL;
       const nextCursor = canLoadMore ? +skip + 1 : null;
 
-      return res.status(httpCodes.success).send({ users: mappedUsers, usersCount, canLoadMore, nextCursor });
+      const usersWithChatRooms = await Promise.all(
+        users.map(async (user) => {
+          const chatRoom = await prisma.chatRoom.findFirst({
+            where: {
+              OR: [
+                {
+                  userOne_id: userId,
+                  userTwo_id: user.to_user.id,
+                },
+                { userTwo_id: userId, userOne_id: user.to_user.id },
+              ],
+            },
+          });
+
+          if (!chatRoom) {
+            const { id } = await prisma.chatRoom.create({
+              data: {
+                userOne_id: userId,
+                userTwo_id: user.to_user.id,
+              },
+            });
+
+            return {
+              user: user.to_user,
+              chatRoomId: id,
+            };
+          }
+
+          return {
+            user: user.to_user,
+            chatRoomId: chatRoom.id,
+          };
+        }),
+      );
+
+      return res.status(httpCodes.success).send({ users: usersWithChatRooms, usersCount, canLoadMore, nextCursor });
     }
   } catch (error) {
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
