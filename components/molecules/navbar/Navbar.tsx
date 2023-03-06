@@ -1,7 +1,6 @@
 import { motion, Variants } from 'framer-motion';
 
 import { useScreenWidth } from '@/hooks/useScreenWidth';
-import { useScrollPosition } from '@/hooks/useScrollPosition';
 
 import { NavButtons } from '@/components/molecules/navButtons/NavButtons';
 
@@ -18,19 +17,13 @@ const navbarVariants: Variants = {
 
 export const Navbar = () => {
   const { isMobile } = useScreenWidth();
-  const { isGoingUp } = useScrollPosition();
 
   if (!isMobile) {
     return null;
   }
 
   return (
-    <motion.nav
-      variants={navbarVariants}
-      initial="hidden"
-      animate={isGoingUp ? 'visible' : 'hidden'}
-      className={styles.nav}
-    >
+    <motion.nav variants={navbarVariants} initial="hidden" animate="visible" className={styles.nav}>
       <NavButtons />
     </motion.nav>
   );

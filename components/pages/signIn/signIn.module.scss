@@ -1,7 +1,7 @@
 @use '/styles/common';
 
 .container {
-  width: clamp(25rem, 40vw, 70rem);
+  width: clamp(18rem, 40vw, 70rem);
   margin: 2rem auto;
   margin-bottom: 4rem;
   display: flex;

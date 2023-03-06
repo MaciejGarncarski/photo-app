@@ -36,7 +36,6 @@ export const Home = () => {
     <div className={styles.home}>
       <motion.main className={styles.posts} variants={containerVariants} animate="show" initial="hidden" role="list">
         <NewPostNotification />
-        <PostPlaceholder />
         {data?.pages.map((page) => {
           return page?.posts.map((post, idx) => {
             return <HomePost priority={idx < 4} key={post.postId} post={post} />;

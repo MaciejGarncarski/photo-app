@@ -5,16 +5,17 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1rem;
     background-color: var(--bg-primary);
     overflow-y: auto;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     z-index: 1;
     width: 100%;
     height: 100%;
 
     @include common.mediaquery('desktop') {
         padding: 2rem 4rem;
+        gap: 3rem;
     }
 }
 
@@ -41,6 +42,7 @@
 
     @include common.mediaquery('desktop') {
         width: auto;
+        gap: 1rem;
     }
 }
 
@@ -53,8 +55,13 @@
 }
 
 .avatar {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
+
+    @include common.mediaquery('desktop') {
+        width: 4rem;
+        height: 4rem;
+    }
 }
 
 .linkActive {
@@ -62,6 +69,27 @@
     box-shadow: var(--shadow-focus);
 }
 
-.username {
+.name {
+    display: flex;
+    flex-direction: column;
+
+    @include common.mediaquery('desktop') {
+        font-size: 1.5rem;
+    }
+}
+
+.fullName {
     font-weight: 600;
+}
+
+.username {
+    max-width: 18rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.8em;
+    color: var(--text-gray);
+
+    @include common.mediaquery('desktop') {
+        max-width: unset;
+    }
 }

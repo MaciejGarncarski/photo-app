@@ -69,7 +69,7 @@ export const ChatUsers = () => {
   return (
     <motion.nav ref={rootRef} className={styles.nav} variants={containerVariants} initial="hidden" animate="show">
       <Heading tag="h2" className={styles.heading}>
-        Select other user to chat :)
+        Select other user to chat with.
       </Heading>
       {data.pages.map((page) => {
         return page.users.map(({ user, chatRoomId }) => {
@@ -82,7 +82,10 @@ export const ChatUsers = () => {
               className={clsx(isActive && styles.linkActive, styles.link)}
             >
               <Avatar className={styles.avatar} userId={user.id} />
-              <p className={styles.username}>@{user.username}</p>
+              <span className={styles.name}>
+                <span className={styles.fullName}>{user.name}</span>
+                <span className={styles.username}>@{user.username}</span>
+              </span>
             </MotionLink>
           );
         });
