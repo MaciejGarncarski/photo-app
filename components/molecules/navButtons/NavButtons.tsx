@@ -38,7 +38,7 @@ export const NavButtons = () => {
     {
       icon: <IconMessage />,
       title: 'Chat',
-      href: '/chat/',
+      href: '/chat',
     },
     {
       icon: <IconSquareRoundedPlus />,

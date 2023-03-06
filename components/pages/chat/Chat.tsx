@@ -1,6 +1,7 @@
 import { ChatRoom } from '@prisma/client';
 import { IconArrowLeft, IconLoader2, IconSend } from '@tabler/icons';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
@@ -13,7 +14,7 @@ import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/button/Button';
 import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
+import { Loader } from '@/components/atoms/loader/Loader';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useChat } from '@/components/pages/chat/useChat';
 
@@ -33,12 +34,11 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
   const { userOne_id, userTwo_id } = chatRoomData;
   const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
 
+  const { name, username } = useUser({ userId: friendId });
   const { chatMessages, infiniteRef, inputVal, onChange, onSubmit } = useChat({
     chatRoomId: chatRoomData.id,
     friendId,
   });
-
-  const { name, username } = useUser({ userId: friendId });
 
   useEffect(() => {
     if (bottomRef.current && !chatMessages.isLoading) {
@@ -47,7 +47,7 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
   }, [chatMessages.isLoading]);
 
   if (chatMessages.isLoading || !chatMessages.data) {
-    return <LoadingHeading headingText="loading" />;
+    return <Loader />;
   }
 
   return (
@@ -56,10 +56,12 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
         <Button type="button" onClick={() => router.push('/chat')}>
           <IconArrowLeft />
         </Button>
-        <Avatar userId={friendId} />
-        <Heading tag="h2" className={styles.heading}>
-          {name && `${name},`} @{username}
-        </Heading>
+        <Link href={`/${username}`} className={styles.userHeader}>
+          <Avatar userId={friendId} />
+          <Heading tag="h2" className={styles.heading}>
+            {name && `${name},`} @{username}
+          </Heading>
+        </Link>
       </header>
 
       <ul className={styles.messages}>

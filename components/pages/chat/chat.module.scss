@@ -18,7 +18,8 @@
 .header {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: flex-start;
+    gap: 1.5rem;
     padding: 1rem;
     background-color: var(--bg-primary);
     width: var(--width);
@@ -26,10 +27,28 @@
     top: 0;
     border-bottom: var(--border-gray);
     z-index: 1;
+
+    @include common.mediaquery('desktop') {
+        padding: 1rem 3rem;
+    }
 }
 
 .heading {
     font-size: 1rem;
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include common.mediaquery('tablet') {
+        max-width: unset;
+    }
+}
+
+.userHeader {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .messages {

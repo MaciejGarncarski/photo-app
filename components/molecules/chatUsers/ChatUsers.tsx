@@ -68,7 +68,9 @@ export const ChatUsers = () => {
 
   return (
     <motion.nav ref={rootRef} className={styles.nav} variants={containerVariants} initial="hidden" animate="show">
-      <Heading tag="h2">Select other user to chat :)</Heading>
+      <Heading tag="h2" className={styles.heading}>
+        Select other user to chat :)
+      </Heading>
       {data.pages.map((page) => {
         return page.users.map(({ user, chatRoomId }) => {
           const isActive = chatRoomId === Number(string(router.query.chatRoom));
@@ -79,7 +81,7 @@ export const ChatUsers = () => {
               href={`/chat/${chatRoomId}`}
               className={clsx(isActive && styles.linkActive, styles.link)}
             >
-              <Avatar userId={user.id} />
+              <Avatar className={styles.avatar} userId={user.id} />
               <p className={styles.username}>@{user.username}</p>
             </MotionLink>
           );
