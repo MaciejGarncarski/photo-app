@@ -1,11 +1,14 @@
 import { ChatRoom } from '@prisma/client';
 import { GetServerSideProps } from 'next';
+import { getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
 import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { Chat } from '@/components/pages/chat/Chat';
+
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const FriendChatPage = ({ chatRoomData }: { chatRoomData: ChatRoom }) => {
   if (!chatRoomData) {
@@ -15,7 +18,19 @@ const FriendChatPage = ({ chatRoomData }: { chatRoomData: ChatRoom }) => {
   return <Chat chatRoomData={chatRoomData} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ res, req, query }) => {
+  const session = await getServerSession(req, res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: '/',
+      },
+      props: {},
+    };
+  }
+
   try {
     const chatRoomData = await prisma.chatRoom.findFirst({
       where: {

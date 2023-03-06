@@ -49,9 +49,11 @@ export const ChatMessage = ({ message }: PropsTypes) => {
 
   return (
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
-      <button type="button" onClick={open} className={styles.options}>
-        <IconDotsVertical /> <VisuallyHiddenText text="options" />
-      </button>
+      {!isReceiver && (
+        <button type="button" onClick={open} className={styles.options}>
+          <IconDotsVertical /> <VisuallyHiddenText text="options" />
+        </button>
+      )}
       <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>
         <time dateTime={fromNow}>{formattedDate}</time>
       </p>

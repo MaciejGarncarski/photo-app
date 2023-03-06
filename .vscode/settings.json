@@ -8,25 +8,5 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     "**/node_modules": true
-  },
-  "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#79aee8",
-    "activityBar.background": "#79aee8",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#be216c",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "commandCenter.border": "#15202b99",
-    "sash.hoverBorder": "#79aee8",
-    "statusBar.background": "#4d94e1",
-    "statusBar.foreground": "#15202b",
-    "statusBarItem.hoverBackground": "#247ad7",
-    "statusBarItem.remoteBackground": "#4d94e1",
-    "statusBarItem.remoteForeground": "#15202b",
-    "titleBar.activeBackground": "#4d94e1",
-    "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveBackground": "#4d94e199",
-    "titleBar.inactiveForeground": "#15202b99"
-  },
-  "peacock.color": "#4D94E1"
+  }
 }
