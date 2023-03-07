@@ -6,13 +6,12 @@ import { ReactNode } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
-import { SignInButton } from '@/components/atoms/signInButton/SignInButton';
+import { SignInButton } from '@/components/atoms/buttons/signInButton/SignInButton';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
+import { Settings } from '@/components/organisms/settings/Settings';
 
 import styles from './navButtons.module.scss';
-
-import { Settings } from '../settings/Settings';
 
 export type ListData = {
   icon: ReactNode;

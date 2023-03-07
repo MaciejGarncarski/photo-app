@@ -1,6 +1,6 @@
 import { IMAGE_MAX_FILE_SIZE } from '@/utils/handleDropImage';
 
-import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
+import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
 
 import styles from './cropError.module.scss';
 

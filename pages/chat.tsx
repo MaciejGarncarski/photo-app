@@ -1,4 +1,4 @@
-import { ChatUsers } from '@/components/molecules/chatUsers/ChatUsers';
+import { ChatUsers } from '@/components/organisms/chatUsers/ChatUsers';
 
 const ChatPage = () => {
   return <ChatUsers />;

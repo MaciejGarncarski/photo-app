@@ -9,13 +9,13 @@ import { z } from 'zod';
 
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { CreatePostForm } from '@/components/molecules/createPostForm/CreatePostForm';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
 import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
 import { useSendNewPost } from '@/components/pages/createPost/useSendNewPost';
 import { useUploadImage } from '@/components/pages/createPost/useUploadImage';

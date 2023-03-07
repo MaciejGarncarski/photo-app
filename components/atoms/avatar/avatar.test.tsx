@@ -4,7 +4,7 @@ import { mockedUser } from '@/utils/tests/mockedData';
 import { render } from '@/utils/tests/utils';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { snapshotComponent } from '@/components/molecules/input/input.test';
+import { snapshotComponent } from '@/components/atoms/input/input.test';
 
 jest.mock('next-auth/react', () => {
   const originalModule = jest.requireActual('next-auth/react');

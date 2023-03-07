@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useOtherUsers } from '@/hooks/useOtherUsers';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';

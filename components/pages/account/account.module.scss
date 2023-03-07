@@ -62,14 +62,20 @@ figure.avatar {
 .username {
   text-align: center;
   align-self: center;
+  max-width: 75%;
+  overflow: hidden;
+  margin: 0 auto;
+  text-overflow: ellipsis;
 
   &::before {
     content: '@';
   }
 
   @include common.mediaquery('desktop') {
+    margin: unset;
     text-align: left;
     align-self: flex-start;
+    max-width: unset;
     font-size: 2rem;
   }
 }

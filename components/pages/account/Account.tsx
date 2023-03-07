@@ -7,12 +7,12 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 import { lock } from '@/utils/bodyLock';
 
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { ListModal } from '@/components/molecules/listModal/ListModal';
-import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
+import { ListModal } from '@/components/organisms/listModal/ListModal';
+import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
 import { PostModal } from '@/components/organisms/postModal/PostModal';
 import { usePost } from '@/components/pages/account/usePost';
 

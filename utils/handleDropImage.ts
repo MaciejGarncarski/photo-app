@@ -1,4 +1,4 @@
-import { ImageCropErrors } from '@/components/molecules/cropImage/CropImage';
+import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
 
 type HandleDropImage = {
   file: File;

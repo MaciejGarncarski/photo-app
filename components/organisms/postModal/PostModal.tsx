@@ -4,11 +4,11 @@ import { unlock } from '@/utils/bodyLock';
 import { PostData } from '@/utils/transformPost';
 
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Backdrop } from '@/components/atoms/modal/Backdrop';
-import { ModalClose } from '@/components/atoms/modal/ModalClose';
-import { PostFooter } from '@/components/molecules/postFooter/PostFooter';
-import { PostHeader } from '@/components/molecules/postHeader/PostHeader';
-import { PostSlider } from '@/components/molecules/postSlider/PostSlider';
+import { Backdrop } from '@/components/molecules/modal/Backdrop';
+import { ModalClose } from '@/components/molecules/modal/ModalClose';
+import { PostFooter } from '@/components/molecules/post/postFooter/PostFooter';
+import { PostHeader } from '@/components/molecules/post/postHeader/PostHeader';
+import { PostSlider } from '@/components/molecules/post/postSlider/PostSlider';
 import { PostComments } from '@/components/organisms/postComments/PostComments';
 
 import styles from './postModal.module.scss';

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/button/Button';
+import { Button } from '@/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { TextArea } from '@/components/atoms/textArea/TextArea';

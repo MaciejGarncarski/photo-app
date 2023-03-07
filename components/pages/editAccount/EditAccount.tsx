@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
-import { SelectOptionStage } from '@/components/pages/editAccount/SelectOptionStage';
+import { SelectOptionStage } from '@/components/organisms/editAccountStages/SelectOptionStage';
 
 import styles from './editAccount.module.scss';
 
@@ -15,14 +15,16 @@ type PropsTypes = {
 
 const LazyCropImageStage = dynamic(
   async () => {
-    return import('@/components/pages/editAccount/CropImageStage').then(({ CropImageStage }) => CropImageStage);
+    return import('@/components/organisms/editAccountStages/CropImageStage').then(
+      ({ CropImageStage }) => CropImageStage,
+    );
   },
   { ssr: false },
 );
 
 const LazyDetailsStage = dynamic(
   async () => {
-    return import('@/components/pages/editAccount/DetailsStage').then(({ DetailsStage }) => DetailsStage);
+    return import('@/components/organisms/editAccountStages/DetailsStage').then(({ DetailsStage }) => DetailsStage);
   },
   { ssr: false },
 );

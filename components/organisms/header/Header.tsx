@@ -5,11 +5,11 @@ import { useAuth } from '@/hooks/useAuth';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
 import { Navbar } from '@/components/molecules/navbar/Navbar';
 import { NavbarForDesktop } from '@/components/molecules/navbar/NavbarForDesktop';
-import { Settings } from '@/components/molecules/settings/Settings';
+import { Settings } from '@/components/organisms/settings/Settings';
 
 import styles from './header.module.scss';
 

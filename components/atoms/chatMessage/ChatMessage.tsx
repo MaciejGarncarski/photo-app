@@ -1,7 +1,5 @@
 import { Message } from '@prisma/client';
 import { IconDotsVertical, IconTrash } from '@tabler/icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -9,11 +7,12 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { useAuth } from '@/hooks/useAuth';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
+import { useDeleteChatMessage } from '@/components/atoms/chatMessage/useDeleteChatMessage';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
-import { ListModal } from '@/components/molecules/listModal/ListModal';
-import { ListModalItem } from '@/components/molecules/listModal/ListModalItem';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
+import { ListModal } from '@/components/organisms/listModal/ListModal';
+import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
 
 import styles from './chatMessage.module.scss';
 
@@ -24,7 +23,6 @@ type PropsTypes = {
 dayjs.extend(relativeTime);
 
 export const ChatMessage = ({ message }: PropsTypes) => {
-  const queryClient = useQueryClient();
   const { modalOpen, open, close } = useModal();
   const { session } = useAuth();
   const { sender, text, created_at, id, receiver } = message;
@@ -33,19 +31,7 @@ export const ChatMessage = ({ message }: PropsTypes) => {
   const fromNow = dayjs().to(dayjs(created_at));
   const formattedDate = dayjs(created_at).format('DD.MM.YY | HH:mm');
 
-  const { mutate } = useMutation(
-    async () => {
-      return axios.delete(`/api/chat/${id}`);
-    },
-    {
-      onSettled: () => {
-        close();
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries(['chat', sender, receiver]);
-      },
-    },
-  );
+  const { mutate } = useDeleteChatMessage({ receiver, sender });
 
   return (
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
@@ -64,7 +50,7 @@ export const ChatMessage = ({ message }: PropsTypes) => {
       <ModalContainer>
         {modalOpen && (
           <ListModal close={close} headingText="Message options">
-            <ListModalItem isLast icon={<IconTrash />} type="button" onClick={mutate}>
+            <ListModalItem isLast icon={<IconTrash />} type="button" onClick={() => mutate({ id })}>
               Delete
             </ListModalItem>
           </ListModal>

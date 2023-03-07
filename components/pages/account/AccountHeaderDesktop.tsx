@@ -5,8 +5,8 @@ import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { Button } from '@/components/atoms/button/Button';
-import { FollowButton } from '@/components/atoms/followButton/FollowButton';
+import { Button } from '@/components/atoms/buttons/button/Button';
+import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';

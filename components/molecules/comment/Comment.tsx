@@ -10,13 +10,13 @@ import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { POST_AVATAR_SIZE } from '@/components/molecules/postHeader/PostHeader';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
+import { POST_AVATAR_SIZE } from '@/components/molecules/post/postHeader/PostHeader';
 import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
 
 import styles from './comment.module.scss';

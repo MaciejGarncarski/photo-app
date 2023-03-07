@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prismadb';
 import { fetchAccount } from '@/hooks/useUser';
 
 import { Home } from '@/components/pages/home/Home';
+import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+import { fetchInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
 const HomePage = () => {
   return <Home />;
@@ -29,6 +31,10 @@ export const getStaticProps = async () => {
       orderBy: {
         id: 'desc',
       },
+    });
+
+    queryClient.prefetchInfiniteQuery(HOME_POSTS_QUERY_KEY, () => {
+      fetchInfinitePosts({ pageParam: 0, isPrefetching: true });
     });
 
     await Promise.all(

@@ -1,18 +1,9 @@
 import { IconArrowUp } from '@tabler/icons';
-import { useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import { useAtom } from 'jotai';
-import { useEffect } from 'react';
-import { io } from 'socket.io-client';
 
-import { clientEnv } from '@/utils/env.mjs';
-
-import { newPostsAtom } from '@/components/pages/home/Home';
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+import { useNewPost } from '@/components/atoms/newPostNotification/useNewPost';
 
 import styles from './newPostNotification.module.scss';
-
-const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
 
 const notificationVariant: Variants = {
   hidden: {
@@ -32,20 +23,7 @@ const notificationVariant: Variants = {
 };
 
 export const NewPostNotification = () => {
-  const [hasNewPosts, setHasNewPosts] = useAtom(newPostsAtom);
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    socket.on('new post', () => {
-      setHasNewPosts(true);
-    });
-  }, [setHasNewPosts]);
-
-  const handleRefetchPosts = async () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    await queryClient.invalidateQueries(HOME_POSTS_QUERY_KEY);
-    setHasNewPosts(false);
-  };
+  const { hasNewPosts, handleRefetchPosts } = useNewPost();
 
   return (
     <AnimatePresence>

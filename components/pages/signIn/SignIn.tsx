@@ -5,9 +5,9 @@ import { z } from 'zod';
 
 import { useAuth } from '@/hooks/useAuth';
 
-import { Button } from '@/components/atoms/button/Button';
+import { Button } from '@/components/atoms/buttons/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Input } from '@/components/molecules/input/Input';
+import { Input } from '@/components/atoms/input/Input';
 
 import styles from './signIn.module.scss';
 

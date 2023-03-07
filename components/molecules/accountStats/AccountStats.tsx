@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 
 import { useUser } from '@/hooks/useUser';
 
-import { ModalContainer } from '@/components/atoms/modal/ModalContainer';
-import { useModal } from '@/components/atoms/modal/useModal';
+import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { useModal } from '@/components/molecules/modal/useModal';
 
 import styles from './accountStats.module.scss';
 
-import { StatsModal } from '../statsModal/StatsModal';
+import { StatsModal } from '../../organisms/statsModal/StatsModal';
 
 type Titles = 'posts' | 'followers' | 'following';
 

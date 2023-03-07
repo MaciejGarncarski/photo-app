@@ -1,9 +1,9 @@
 import { motion, Variants } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { Button } from '@/components/atoms/button/Button';
-import { Backdrop } from '@/components/atoms/modal/Backdrop';
-import { ModalClose } from '@/components/atoms/modal/ModalClose';
+import { Button } from '@/components/atoms/buttons/button/Button';
+import { Backdrop } from '@/components/molecules/modal/Backdrop';
+import { ModalClose } from '@/components/molecules/modal/ModalClose';
 
 import styles from './confirmationAlert.module.scss';
 

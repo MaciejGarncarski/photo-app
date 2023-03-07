@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { Button } from '@/components/atoms/button/Button';
+import { Button } from '@/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loader } from '@/components/atoms/loader/Loader';

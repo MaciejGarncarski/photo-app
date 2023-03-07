@@ -1,0 +1,75 @@
+@use '/styles/common.scss';
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background-color: var(--color-overlay);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  @include common.mediaquery('desktop') {
+    align-items: center;
+  }
+
+  @include common.mobile-landscape {
+    padding-bottom: 3rem;
+  }
+}
+
+.backdropMobileCenter {
+  align-items: center;
+}
+
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+  background-color: var(--bg-secondary);
+  border: none;
+  padding: 0.25rem;
+  border-radius: 100%;
+  transition: all var(--transition-fast);
+
+  &:hover,
+  &:focus {
+    box-shadow: var(--shadow-focus);
+    color: rgb(255, 255, 255);
+    background-color: var(--color-primary);
+  }
+
+  @include common.mobile-landscape {
+    top: 0.25rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    right: 1rem;
+  }
+}
+
+.closeButtonExternal {
+  right: 0rem;
+  top: -3rem;
+  padding: 0.4rem;
+  border-radius: var(--radius-medium);
+  background-color: var(--bg-primary);
+
+  @include common.mediaquery('tablet') {
+    top: -3rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    top: -5rem;
+    right: -1rem;
+  }
+}
