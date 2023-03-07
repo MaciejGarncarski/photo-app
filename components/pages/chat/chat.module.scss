@@ -104,10 +104,14 @@
     position: fixed;
     bottom: 2.5rem;
     width: 100%;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     background-color: var(--bg-primary);
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
 
     @include common.mediaquery('desktop') {
+        padding: 1rem 2rem;
         bottom: 0;
     }
 }
@@ -116,28 +120,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    width: var(--width);
     border-radius: var(--radius-big);
     padding: 0 1rem;
     background-color: var(--bg-secondary);
     border: none;
+    width: 100%;
 
     @include common.mediaquery('desktop') {
-        justify-content: space-between;
         gap: 2rem;
     }
 }
 
 .input {
-    flex-grow: 1;
-    border: var(--border-gray);
     background-color: transparent;
-    padding: 1rem 0.5rem;
+    padding: 0.7rem 0.5rem;
     border: none;
+    flex-grow: 1;
+    max-width: 80%;
 
-    @include common.mediaquery('desktop') {
+    @include common.mediaquery('tablet') {
         max-width: unset;
+        padding: 1rem 0.5rem;
     }
 }
 
