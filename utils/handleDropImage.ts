@@ -1,15 +1,14 @@
 import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
 
+export const IMAGE_MIN_SIZE = 150;
+export const IMAGE_MAX_FILE_SIZE = 12_500_000;
+const SUPPORTED_FILE_TYPES = ['jpeg', 'jpg', 'png', 'webp'];
+
 type HandleDropImage = {
   file: File;
   setError: (err: ImageCropErrors) => void;
   setImgSrc: (err: string | null) => void;
 };
-
-export const IMAGE_MIN_SIZE = 150;
-export const IMAGE_MAX_FILE_SIZE = 12_500_000;
-
-const SUPPORTED_FILE_TYPES = ['jpeg', 'jpg', 'png', 'webp'];
 
 export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
   const reader = new FileReader();

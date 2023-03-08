@@ -1,19 +1,21 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import styles from './input.module.scss';
 
 type PropsTypes = {
-  type?: JSX.IntrinsicElements['input']['type'] | 'textarea';
+  type?: 'text' | 'number' | 'tel' | 'email' | 'password';
   labelText: string;
   error?: FieldError;
   optional?: boolean;
   className?: string;
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 };
 
 export const Input = forwardRef<HTMLInputElement, PropsTypes>(
-  ({ type = 'text', labelText, error, optional, className, ...props }, ref) => {
+  ({ type = 'text', labelText, error, optional, className, onChange, value, ...props }, ref) => {
     const containerClassName = clsx(className, error && styles.containerError, styles.container);
 
     const inputClassName = clsx(
@@ -28,7 +30,16 @@ export const Input = forwardRef<HTMLInputElement, PropsTypes>(
         <label className={styles.label} htmlFor={labelText}>
           {labelText} {optional && '(optional)'}
         </label>
-        <input ref={ref} type={type} id={labelText} data-testid="input" className={inputClassName} {...props} />
+        <input
+          ref={ref}
+          type={type}
+          id={labelText}
+          data-testid="input"
+          className={inputClassName}
+          onChange={onChange}
+          value={value}
+          {...props}
+        />
         {error && <p className={styles.error}>{error.message}</p>}
       </div>
     );

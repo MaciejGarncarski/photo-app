@@ -17,8 +17,6 @@ import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPrevie
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
-import { useSendNewPost } from '@/components/pages/createPost/useSendNewPost';
-import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
 
 import styles from './createPost.module.scss';
 
@@ -30,15 +28,14 @@ export const PostDetailsSchema = z.object({
 });
 
 export const CreatePost = () => {
-  const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>();
+  const router = useRouter();
 
-  const uploadImage = useUploadImage();
-  const sendNewPost = useSendNewPost();
   const { open, close, modalOpen } = useModal();
+  const { onSubmit } = useOnSubmit({ finalImages, setIsLoading });
   useConvertToBase64(finalImages, setFinalImagesBase64);
 
   const {
@@ -52,8 +49,6 @@ export const CreatePost = () => {
     },
   });
 
-  const { onSubmit } = useOnSubmit({ finalImages });
-
   const handleRemoveImage = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
       return finalImg?.id !== id;
@@ -61,7 +56,7 @@ export const CreatePost = () => {
     setFinalImages(filteredState);
   };
 
-  if (uploadImage.isLoading || sendNewPost.isLoading || sendNewPost.isSuccess) {
+  if (isLoading) {
     return <LoadingHeading headingText="Uploading your post" />;
   }
 

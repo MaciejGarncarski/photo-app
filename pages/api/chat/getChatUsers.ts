@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
-const USERS_PER_SCROLL = 5;
+const USERS_PER_SCROLL = 8;
 
 const schema = z.object({
   userId: z.string(),
@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const users = await prisma.user.findMany({
       where: condition,
-      skip: Number(currentPage),
+      skip: Number(currentPage) * USERS_PER_SCROLL,
       take: USERS_PER_SCROLL,
     });
 
@@ -44,10 +44,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         id: true,
       },
     });
-
-    const usersCount = _count.id;
-    const canLoadMore = usersCount > (+currentPage + 1) * USERS_PER_SCROLL;
-    const nextCursor = canLoadMore ? +currentPage + 1 : null;
 
     const usersWithChatRooms = await Promise.all(
       users.map(async (user) => {
@@ -84,7 +80,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }),
     );
 
-    return res.status(httpCodes.success).send({ users: usersWithChatRooms, usersCount, canLoadMore, nextCursor });
+    const usersCount = _count.id;
+    const maxPages = usersCount / USERS_PER_SCROLL;
+    const roundedMaxPages = Math.round(maxPages);
+    const totalPages = roundedMaxPages;
+
+    return res
+      .status(httpCodes.success)
+      .send({ users: usersWithChatRooms, usersCount, totalPages, currentPage: +currentPage });
   } catch (error) {
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }

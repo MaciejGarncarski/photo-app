@@ -26,7 +26,7 @@ describe('Input', () => {
   describe('props', () => {
     it('label prop', () => {
       const label = 'testing label';
-      render(<Input labelText={label} type="input" />);
+      render(<Input labelText={label} type="text" />);
 
       const input = screen.getByLabelText(label);
 

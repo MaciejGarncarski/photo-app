@@ -16,6 +16,7 @@ exports[` 1`] = `
       data-testid="test"
       id="random"
       type="text"
+      value=""
     />
   </div>
 </DocumentFragment>

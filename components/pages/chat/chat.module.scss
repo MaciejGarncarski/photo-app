@@ -111,6 +111,7 @@
     align-items: stretch;
 
     @include common.mediaquery('desktop') {
+        width: var(--width);
         padding: 1rem 2rem;
         bottom: 0;
     }
