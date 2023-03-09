@@ -13,6 +13,7 @@ import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loader } from '@/components/atoms/loader/Loader';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { useChat } from '@/components/pages/chat/useChat';
 
 import styles from './chat.module.scss';
@@ -43,6 +44,10 @@ export const Chat = ({ chatRoomData }: PropsTypes) => {
 
   if (chatMessages.isLoading || !chatMessages.data) {
     return <Loader />;
+  }
+
+  if (userOne_id !== session?.user?.id || userTwo_id !== session?.user?.id) {
+    return <AccessDenied />;
   }
 
   return (

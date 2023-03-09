@@ -22,15 +22,9 @@
   }
 }
 
-.placeholder {
-  background-image: var(--gradient);
-  background-size: var(--placeholder-bg-size);
-  animation: var(--placeholder-animation);
-  height: 100%;
-  border-radius: var(--radius-small);
-  min-height: 10rem;
-
-  @include common.mediaquery('tablet') {
-    min-height: 24rem;
-  }
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8rem;
 }

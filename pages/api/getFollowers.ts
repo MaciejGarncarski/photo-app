@@ -30,28 +30,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     if (type === 'followers') {
+      const condition = {
+        to: userId,
+      };
+
       const users = await prisma.follower.findMany({
         skip: Number(skip),
         take: USERS_PER_SCROLL,
         select: {
           from_user: true,
         },
-        where: {
-          to_user: {
-            id: userId,
-          },
-        },
+        where: condition,
       });
 
       const { _count } = await prisma.follower.aggregate({
         _count: {
           id: true,
         },
-        where: {
-          to_user: {
-            id: userId,
-          },
-        },
+        where: condition,
       });
 
       const usersCount = _count.id;
@@ -97,28 +93,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (type === 'following') {
+      const condition = {
+        from: userId,
+      };
+
       const users = await prisma.follower.findMany({
         skip: Number(skip),
         take: USERS_PER_SCROLL,
         select: {
           to_user: true,
         },
-        where: {
-          from_user: {
-            id: userId,
-          },
-        },
+        where: condition,
       });
 
       const { _count } = await prisma.follower.aggregate({
         _count: {
           id: true,
         },
-        where: {
-          from_user: {
-            id: userId,
-          },
-        },
+        where: condition,
       });
 
       const usersCount = _count.id;

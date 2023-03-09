@@ -2,7 +2,8 @@
 
 .aspectRatioButtons {
   display: grid;
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 1rem;
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(2, 1fr);
@@ -17,6 +18,8 @@
 .button {
   width: 100%;
   text-transform: capitalize;
+  font-size: 1.25rem;
+  padding: 0.75rem 0;
 }
 
 .container {

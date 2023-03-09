@@ -21,6 +21,5 @@ export const useInfinitePosts = () => {
     getNextPageParam: (prevPosts) => {
       return prevPosts?.cursor ?? undefined;
     },
-    refetchInterval: 12 * 1000,
   });
 };

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ReactFocusLock from 'react-focus-lock';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
+import { useAuth } from '@/hooks/useAuth';
 import { useFollowers } from '@/hooks/useFollowers';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
@@ -23,6 +24,7 @@ type PropsTypes = {
 };
 
 export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
+  const { session } = useAuth();
   const { close } = modal;
   const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({ userId, type });
 
@@ -66,7 +68,7 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
                         <span className={styles.username}>@{username}</span>
                       </Link>
 
-                      <FollowButton userId={id} />
+                      {user.id !== session?.user?.id && <FollowButton userId={id} />}
                     </li>
                   );
                 });

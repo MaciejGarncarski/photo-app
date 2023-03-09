@@ -5,13 +5,17 @@
   border-radius: var(--radius-medium);
   position: relative;
   padding: 3rem 1rem;
-  max-width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
+  width: 85%;
+
+  @include common.mediaquery('tablet') {
+    width: 60%;
+  }
 
   @include common.mediaquery('desktop') {
-    min-width: unset;
+    width: auto;
     gap: 3rem;
     padding: 2.5rem 5rem;
   }

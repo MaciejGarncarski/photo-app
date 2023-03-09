@@ -17,6 +17,7 @@ export type ListData = {
   icon: ReactNode;
   title: string;
   href: string;
+  shouldShowWhileGuest: boolean;
 };
 
 export const NavButtons = () => {
@@ -33,38 +34,45 @@ export const NavButtons = () => {
       icon: <IconHome />,
       title: 'Home',
       href: '/',
+      shouldShowWhileGuest: true,
     },
     {
       icon: <IconMessage />,
       title: 'Chat',
       href: '/chat',
+      shouldShowWhileGuest: false,
     },
     {
       icon: <IconSquareRoundedPlus />,
       title: 'Create post',
       href: '/create-post',
+      shouldShowWhileGuest: false,
     },
     {
       icon: <IconUser />,
       title: 'Profile',
       href: `/${sessionUserData.username}`,
+      shouldShowWhileGuest: false,
     },
   ];
 
   return (
     <>
       <ul className={styles.list}>
-        {isSignedIn &&
-          listData.map(({ icon, href, title }) => {
-            return (
-              <li key={title} className={styles.listItem}>
-                <Link href={href} className={clsx(router.asPath === href && styles.active, styles.listItemContent)}>
-                  <span>{icon}</span>
-                  <span className={styles.title}>{title}</span>
-                </Link>
-              </li>
-            );
-          })}
+        {listData.map(({ icon, href, title, shouldShowWhileGuest }) => {
+          if (!shouldShowWhileGuest && status === 'unauthenticated') {
+            return null;
+          }
+
+          return (
+            <li key={title} className={styles.listItem}>
+              <Link href={href} className={clsx(router.asPath === href && styles.active, styles.listItemContent)}>
+                <span>{icon}</span>
+                <span className={styles.title}>{title}</span>
+              </Link>
+            </li>
+          );
+        })}
         <li className={styles.listItem}>
           <button type="button" className={styles.listItemContent} onClick={open}>
             <span>

@@ -33,7 +33,7 @@ export const useChat = ({ chatRoomId, friendId }: PropsTypes) => {
     onLoadMore: chatMessages.fetchNextPage,
     disabled: !chatMessages.hasNextPage,
     delayInMs: 100,
-    rootMargin: '50px 0px 0px 0px',
+    rootMargin: '500px 0px 0px 0px',
   });
 
   const message = {

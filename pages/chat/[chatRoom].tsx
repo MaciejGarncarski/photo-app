@@ -21,6 +21,8 @@ const FriendChatPage = ({ chatRoomData }: { chatRoomData: ChatRoom }) => {
 export const getServerSideProps: GetServerSideProps = async ({ res, req, query }) => {
   const session = await getServerSession(req, res, authOptions);
 
+  const sessionUserId = session?.user?.id;
+
   if (!session) {
     return {
       redirect: {
@@ -37,6 +39,16 @@ export const getServerSideProps: GetServerSideProps = async ({ res, req, query }
         id: Number(string(query.chatRoom)),
       },
     });
+
+    if (chatRoomData?.userOne_id !== sessionUserId || chatRoomData?.userTwo_id !== sessionUserId) {
+      return {
+        redirect: {
+          permanent: true,
+          destination: '/chat',
+        },
+        props: {},
+      };
+    }
 
     if (!chatRoomData) {
       return {

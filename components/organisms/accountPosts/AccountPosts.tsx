@@ -1,13 +1,9 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { motion, Variants } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { PostData } from '@/utils/transformPost';
-
 import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
-
-import { InfinitePosts } from '@/pages/api/post/infinitePosts';
+import { Loader } from '@/components/atoms/loader/Loader';
+import { useAccountPosts } from '@/components/organisms/accountPosts/useAccountPosts';
 
 import styles from './accountPosts.module.scss';
 
@@ -28,22 +24,14 @@ const postContainerVariants: Variants = {
 };
 
 export const AccountPosts = ({ id }: PropsTypes) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
-    [{ accountPosts: id }],
-    async ({ pageParam = 0 }) => {
-      const { data: axiosData } = await axios.get<InfinitePosts<PostData>>(
-        `/api/post/infinitePosts/${id}?skip=${pageParam}`,
-      );
-      return axiosData;
-    },
-  );
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useAccountPosts({ userId: id });
 
-  const [sentryRef] = useInfiniteScroll({
+  const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
     hasNextPage: hasNextPage || false,
     onLoadMore: fetchNextPage,
-    disabled: isError,
-    rootMargin: '0px 0px 400px 0px',
+    disabled: isError || !hasNextPage,
+    rootMargin: '0px 0px 300px 0px',
   });
 
   if (!data || isLoading) {
@@ -65,18 +53,10 @@ export const AccountPosts = ({ id }: PropsTypes) => {
           });
         })}
       </motion.div>
-      {(isLoading || hasNextPage) && (
-        <motion.div
-          variants={postContainerVariants}
-          initial="hidden"
-          animate="show"
-          ref={sentryRef}
-          className={styles.posts}
-        >
-          {Array.from({ length: 6 }, (_, item) => item).map((el) => {
-            return <motion.div className={styles.placeholder} key={el} />;
-          })}
-        </motion.div>
+      {hasNextPage && data.pages[0].postsCount === 0 && (
+        <div ref={infiniteRef} className={styles.loading}>
+          <Loader />
+        </div>
       )}
     </>
   );
