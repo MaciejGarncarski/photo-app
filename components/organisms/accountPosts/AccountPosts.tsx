@@ -53,10 +53,14 @@ export const AccountPosts = ({ id }: PropsTypes) => {
           });
         })}
       </motion.div>
-      {hasNextPage && data.pages[0].postsCount === 0 && (
-        <div ref={infiniteRef} className={styles.loading}>
-          <Loader />
-        </div>
+      {data.pages[0].postsCount !== 0 && (
+        <>
+          {hasNextPage && (
+            <div ref={infiniteRef} className={styles.loading}>
+              <Loader />
+            </div>
+          )}
+        </>
       )}
     </>
   );

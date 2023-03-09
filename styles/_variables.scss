@@ -30,7 +30,7 @@
 
   --shadow-focus: 0 0 0 0.3rem var(--bg-primary), 0 0 0 0.5rem var(--color-primary);
 
-  --radius-big: 1.2rem;
+  --radius-big: 0.95rem;
   --radius-medium: 0.5rem;
   --radius-small: 0.35rem;
 
@@ -40,7 +40,7 @@
 
 
   @include common.mediaquery('tablet') {
-    --post-width: calc(13rem + 15vw);
+    --post-width: calc(18rem + 15vw);
   }
 
   @include common.mediaquery('desktop') {

@@ -61,6 +61,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const { _count } = await prisma.post.aggregate({
+      where: {
+        author_id: userId,
+      },
       _count: {
         id: true,
       },
