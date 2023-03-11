@@ -7,8 +7,8 @@ import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { clientEnv } from '@/utils/env.mjs';
 
-import { useChatMessages } from '@/components/pages/chat/useChatMessages';
-import { useChatSubscription } from '@/components/pages/chat/useChatSubscription';
+import { useChatMessages } from '@/components/pages/chatRoom/useChatMessages';
+import { useChatSubscription } from '@/components/pages/chatRoom/useChatSubscription';
 
 type PropsTypes = {
   chatRoomId: number;
@@ -19,21 +19,24 @@ const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
 
 export const useChat = ({ chatRoomId, friendId }: PropsTypes) => {
   const [inputVal, setInputVal] = useState<string>('');
+
   const { session } = useAuth();
   const { isMobile } = useScreenWidth();
   const { isGoingUp } = useScrollPosition();
 
   useChatSubscription(socket, chatRoomId);
 
-  const chatMessages = useChatMessages({ friendId, userId: session?.user?.id ?? '' });
+  const { isLoading, fetchNextPage, hasNextPage, isError, data } = useChatMessages({
+    friendId,
+    userId: session?.user?.id ?? '',
+  });
 
   const [infiniteRef] = useInfiniteScroll({
-    loading: chatMessages.isLoading,
-    hasNextPage: chatMessages.hasNextPage || false,
-    onLoadMore: chatMessages.fetchNextPage,
-    disabled: !chatMessages.hasNextPage,
-    delayInMs: 100,
-    rootMargin: '500px 0px 0px 0px',
+    loading: isLoading,
+    hasNextPage: hasNextPage || false,
+    onLoadMore: fetchNextPage,
+    disabled: !hasNextPage || isError,
+    rootMargin: '500px 0px 200px 0px',
   });
 
   const message = {
@@ -55,7 +58,9 @@ export const useChat = ({ chatRoomId, friendId }: PropsTypes) => {
   return {
     onChange,
     onSubmit,
-    chatMessages,
+    data,
+    isLoading,
+    hasNextPage,
     infiniteRef,
     isMobile,
     isGoingUp,

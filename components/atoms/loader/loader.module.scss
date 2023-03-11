@@ -10,9 +10,9 @@
     >svg {
         width: 5rem;
         height: 5rem;
+        animation: rotate 1s infinite linear forwards;
     }
 
-    animation: rotate 1s infinite linear forwards;
 }
 
 @keyframes rotate {

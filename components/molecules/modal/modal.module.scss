@@ -48,6 +48,10 @@
     background-color: var(--color-primary);
   }
 
+  &:focus {
+    outline: none;
+  }
+
   @include common.mobile-landscape {
     top: 0.25rem;
   }

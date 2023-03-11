@@ -51,7 +51,7 @@
 
 
 .buttonInput {
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   background-color: var(--color-primary);
   color: rgb(255, 255, 255);
   font-weight: 500;
@@ -59,7 +59,7 @@
   transition: all var(--transition);
   z-index: 1;
   pointer-events: all;
-  padding: 0.35rem 0.7rem;
+  padding: 0.5rem 1rem;
 
   &::first-letter {
     text-transform: uppercase;

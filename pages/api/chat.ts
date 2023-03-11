@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apiResponses';
 
-import { InfiniteMessages } from '@/components/pages/chat/useChatMessages';
+import { InfiniteMessages } from '@/components/pages/chatRoom/useChatMessages';
 
 const MESSAGES_PER_PAGE = 6;
 

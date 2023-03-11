@@ -9,6 +9,7 @@ const USERS_PER_SCROLL = 8;
 const schema = z.object({
   userId: z.string(),
   currentPage: z.string(),
+  searchedUser: z.string().optional(),
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -21,9 +22,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
   }
 
-  const { userId, currentPage } = response.data;
+  const { userId, currentPage, searchedUser } = response.data;
 
   const condition = {
+    OR: [{ username: { contains: searchedUser } }, { name: { contains: searchedUser } }],
     NOT: [
       {
         id: userId,

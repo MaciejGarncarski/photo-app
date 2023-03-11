@@ -51,6 +51,9 @@
   display: inline;
   font-size: 1rem;
   flex-shrink: 0;
+  max-width: 7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content {

@@ -80,7 +80,14 @@
   margin-left: auto;
 }
 
-.username {
+.names {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.fullName {
   font-weight: 600;
   font-size: 1.25rem;
   max-width: 9rem;
@@ -88,9 +95,15 @@
   text-overflow: ellipsis;
 }
 
+.username {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .avatar {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .link {
