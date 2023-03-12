@@ -8,7 +8,7 @@ const CreatePostPage = () => {
   const { status } = useAuth();
 
   if (status === 'loading') {
-    return <Loader />;
+    return <Loader variant="margin-top" />;
   }
 
   if (status === 'unauthenticated') {

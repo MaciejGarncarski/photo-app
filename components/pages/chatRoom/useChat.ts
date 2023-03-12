@@ -31,12 +31,17 @@ export const useChat = ({ chatRoomId, friendId }: PropsTypes) => {
     userId: session?.user?.id ?? '',
   });
 
+  const fetchNext = () => {
+    window.scrollBy({ top: 300 });
+    fetchNextPage();
+  };
+
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
-    hasNextPage: hasNextPage || false,
-    onLoadMore: fetchNextPage,
+    hasNextPage: Boolean(hasNextPage),
+    onLoadMore: fetchNext,
     disabled: !hasNextPage || isError,
-    rootMargin: '500px 0px 200px 0px',
+    rootMargin: '0px 0px 50% 0px',
   });
 
   const message = {

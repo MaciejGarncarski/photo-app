@@ -24,8 +24,6 @@ html,
 body {
   color: var(--text-black);
   background-color: var(--bg-primary);
-  transition: all var(--transition);
-  transition-property: background-color, color;
   font-family: var(--font-customFont);
 }
 

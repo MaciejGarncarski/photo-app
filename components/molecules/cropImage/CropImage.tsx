@@ -41,6 +41,11 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
     setFinalImages,
   });
 
+  const onConfirm = () => {
+    close();
+    resetState();
+  };
+
   if (!imgSrc || error) {
     return <DropZone onChange={onChange} error={error} setImgSrc={setImgSrc} setError={setError} />;
   }
@@ -73,7 +78,7 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
       </div>
 
       <ModalContainer>
-        {modalOpen && <ConfirmationAlert headingText="Select diffrent image?" close={close} onConfirm={resetState} />}
+        {modalOpen && <ConfirmationAlert headingText="Select diffrent image?" close={close} onConfirm={onConfirm} />}
       </ModalContainer>
     </>
   );

@@ -73,30 +73,23 @@
     }
 }
 
+.noMessages {
+    text-align: center;
+    width: 100%;
+}
+
 .loading {
-    margin-bottom: 10rem;
+    margin-top: 10rem;
+    padding-bottom: 12rem;
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--color-primary);
 
     >svg {
         width: 5rem;
         height: 5rem;
-    }
-
-    animation: rotate 1s infinite linear forwards;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
     }
 }
 

@@ -4,7 +4,7 @@
   position: relative;
   overflow: hidden;
   min-height: 20rem;
-  width: clamp(17rem, 40vw, 60rem);
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -14,17 +14,8 @@
 }
 
 .button {
-  width: 80%;
-  margin: 0 auto;
-
-  &:last-child {
-    flex-grow: 1;
-  }
-
-
-  @include common.mediaquery('desktop') {
-    width: 70%;
-  }
+  width: 100%;
+  padding: 0.75rem 0;
 }
 
 .buttons {

@@ -29,7 +29,7 @@ export const SearchUserForm = ({ inputVal, setInputVal }: PropsTypes) => {
         value={inputVal}
         onChange={(ev) => setInputVal(ev.target.value)}
       />
-      <Button type="reset" onClick={resetState}>
+      <Button type="reset" onClick={resetState} disabled={inputVal === ''}>
         Reset
       </Button>
     </form>

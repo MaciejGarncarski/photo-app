@@ -69,6 +69,7 @@ export const CreatePost = () => {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
+      {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
       <NextSeo title="Create new post" />
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
@@ -78,7 +79,6 @@ export const CreatePost = () => {
         </div>
       )}
       <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
-      {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
       <CreatePostForm
         disabled={isSubmitDisabled}
         errors={errors}

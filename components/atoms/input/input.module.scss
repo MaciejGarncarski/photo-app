@@ -24,6 +24,7 @@
   border: var(--border-gray);
   border-radius: var(--radius-medium);
   transition: all var(--transition);
+  transition-property: background-color, box-shadow;
 
   &:hover {
     background-color: var(--bg-secondary);

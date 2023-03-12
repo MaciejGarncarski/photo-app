@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { v4 } from 'uuid';
@@ -14,13 +15,14 @@ type PropsTypes = {
 };
 
 export const useOnSubmit = ({ finalImages, setIsLoading }: PropsTypes) => {
+  const router = useRouter();
   const { session } = useAuth();
   const uploadImage = useUploadImage();
   const sendNewPost = useSendNewPost();
 
   const mutationSettings = {
-    onSettled: () => {
-      setIsLoading(false);
+    onSuccess: () => {
+      router.push('/');
     },
     onError: () => {
       toast.error('Could not add post.');

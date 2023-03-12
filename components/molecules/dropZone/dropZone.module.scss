@@ -32,7 +32,7 @@
 }
 
 .dropZoneError {
-  background-color: rgb(100, 0, 0, 0.2);
+  background-color: var(--bg-error);
 }
 
 .dropZoneActive {
@@ -57,6 +57,7 @@
   font-weight: 500;
   border: none;
   transition: all var(--transition);
+  transition-property: background-color, box-shadow, transform;
   z-index: 1;
   pointer-events: all;
   padding: 0.5rem 1rem;

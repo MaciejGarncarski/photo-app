@@ -15,7 +15,7 @@ const EditPostPage = () => {
   const { status, sessionUserData } = useAuth();
 
   if (status === 'loading') {
-    return <Loader />;
+    return <Loader variant="margin-top" />;
   }
 
   if (status !== 'authenticated' || data?.authorId !== sessionUserData.id) {

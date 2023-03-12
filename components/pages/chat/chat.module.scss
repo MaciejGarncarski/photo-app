@@ -25,7 +25,7 @@
     width: 100%;
 
     @include common.mediaquery('desktop') {
-        max-width: 40%;
+        width: auto;
     }
 }
 

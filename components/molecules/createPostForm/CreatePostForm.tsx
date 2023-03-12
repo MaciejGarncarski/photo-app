@@ -28,7 +28,7 @@ export const CreatePostForm = ({ disabled, errors, onSubmit, open, register }: P
             Cancel
           </Button>
           <Button type="submit" disabled={disabled}>
-            Complete
+            Upload new post
           </Button>
         </div>
       </CreatePostItemContainer>

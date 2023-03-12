@@ -1,5 +1,5 @@
 import { ChatRoom as ChatRoomType } from '@prisma/client';
-import { IconArrowLeft, IconLoader2, IconSend } from '@tabler/icons';
+import { IconArrowLeft, IconSend } from '@tabler/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
@@ -61,14 +61,20 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
       </header>
 
       <ul className={styles.messages}>
+        {data.pages[0].messagesCount === 0 && (
+          <li className={styles.noMessages}>
+            <p>No messages yet.</p>
+          </li>
+        )}
+
         {data.pages.map((page) => {
           return page.messages.map((message) => {
             return <ChatMessage message={message} key={message.id} />;
           });
         })}
-        {(hasNextPage || isLoading) && (
+        {(isLoading || hasNextPage) && (
           <li ref={infiniteRef} className={styles.loading}>
-            <IconLoader2 />
+            <Loader />
             <VisuallyHiddenText text="Loading older messages" />
           </li>
         )}

@@ -24,7 +24,7 @@ jest.mock('next-auth/react', () => {
 describe('<CreatePost />', () => {
   test('button should be disabled when no description provided', async () => {
     render(<CreatePost />);
-    const button = await screen.findByText(/complete/i);
+    const button = await screen.findByText(/Upload new post/i);
     expect(button).toHaveAttribute('disabled', '');
   });
 });

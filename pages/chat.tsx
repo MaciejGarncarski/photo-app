@@ -8,7 +8,7 @@ const ChatPage = () => {
   const { isSignedIn, status } = useAuth();
 
   if (status === 'loading') {
-    return <Loader />;
+    return <Loader variant="margin-top" />;
   }
 
   if (!isSignedIn) {

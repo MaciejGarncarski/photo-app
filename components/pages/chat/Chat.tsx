@@ -12,7 +12,7 @@ import styles from './chat.module.scss';
 
 export const Chat = () => {
   const [inputVal, setInputVal] = useState<string>('');
-  const debouncedInputVal = useDebounce(inputVal, 400);
+  const debouncedInputVal = useDebounce(inputVal, 1000);
   const { data, isLoading, hasNextPage, infiniteRef } = useChatUsers({ searchedUser: debouncedInputVal });
 
   return (

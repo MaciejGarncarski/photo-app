@@ -8,7 +8,7 @@ const EditAccountPage = () => {
   const { status, session } = useAuth();
 
   if (status === 'loading' || !session?.user?.id) {
-    return <Loader />;
+    return <Loader variant="margin-top" />;
   }
 
   if (status === 'unauthenticated') {
