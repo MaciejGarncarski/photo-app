@@ -19,9 +19,6 @@
     align-items: center;
   }
 
-  @include common.mobile-landscape {
-    padding-bottom: 3rem;
-  }
 }
 
 .backdropMobileCenter {
@@ -54,7 +51,7 @@
   }
 
   @include common.mobile-landscape {
-    top: 0.25rem;
+    top: 0.5rem;
   }
 
   @include common.mediaquery('desktop') {

@@ -11,12 +11,35 @@
   align-items: center;
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow-focus);
+
+  @include common.mediaquery('desktop') {
+    min-height: 25rem;
+  }
+}
+
+.info {
+  text-align: left;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  >svg {
+    flex-basis: 4rem;
+  }
 }
 
 .button {
   width: 100%;
-  padding: 0.75rem 0;
+
+  @include common.mediaquery('desktop') {
+    font-size: 1.25rem;
+    padding: 0.75rem 0;
+  }
 }
+
 
 .buttons {
   display: flex;

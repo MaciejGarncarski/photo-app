@@ -12,6 +12,10 @@
   position: relative;
   width: 100%;
 
+  @include common.mobile-landscape {
+    width: 75%;
+  }
+
   @include common.mediaquery('desktop') {
     width: auto;
     min-width: 40rem;
@@ -51,10 +55,6 @@
 }
 
 .listItemLast {
-  @include common.mobile-landscape {
-    border-radius: 0 0 var(--radius-medium) var(--radius-medium);
-  }
-
   @include common.mediaquery('desktop') {
     border-radius: 0 0 var(--radius-medium) var(--radius-medium);
   }

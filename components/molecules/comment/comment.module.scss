@@ -18,7 +18,7 @@
 
   @include common.mediaquery('desktop') {
     column-gap: 1rem;
-    row-gap: 1.5rem;
+    row-gap: 1rem;
   }
 
   @include common.mobile-landscape {

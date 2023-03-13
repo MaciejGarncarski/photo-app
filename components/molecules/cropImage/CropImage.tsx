@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { IconMouse } from '@tabler/icons';
 import Cropper from 'react-easy-crop';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
@@ -68,6 +69,9 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
           onCropComplete={onCropComplete}
         />
       </div>
+      <p className={styles.info}>
+        <IconMouse /> Use scroll to zoom in your picture
+      </p>
       <div className={styles.buttons}>
         <Button type="button" onClick={open} variant="secondary" className={styles.button}>
           Select diffrent image

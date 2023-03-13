@@ -8,7 +8,7 @@ import { transformPost } from '@/utils/transformPost';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-export const POSTS_PER_SCROLL = 3;
+export const POSTS_PER_SCROLL = 8;
 
 export type InfinitePosts<T> = {
   posts: Array<T>;
