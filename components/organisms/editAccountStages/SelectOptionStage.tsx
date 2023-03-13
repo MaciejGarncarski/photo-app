@@ -5,7 +5,7 @@ import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
-import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
@@ -42,7 +42,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
   };
 
   if (isLoading) {
-    return <LoadingHeading headingText="Removing your avatar.." />;
+    return <TextWithLoader headingText="Removing your avatar.." />;
   }
 
   return (

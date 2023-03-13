@@ -13,16 +13,15 @@ type PropsTypes = {
 } & Children &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({ type = 'button', disabled, children, variant, onClick, className, onKeyDown }: PropsTypes) => {
+export const Button = ({ type = 'button', disabled, children, variant, onClick, className }: PropsTypes) => {
   return (
     <motion.button
-      onKeyDown={onKeyDown}
       onClick={onClick}
       type={type}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
       disabled={disabled}
-      className={clsx(variant && styles[`button-${variant}`], className, styles.button)}
+      className={clsx(className, variant && styles[`button-${variant}`], styles.button)}
     >
       {children}
     </motion.button>

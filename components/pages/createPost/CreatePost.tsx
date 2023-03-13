@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
-import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { CreatePostForm } from '@/components/molecules/createPostForm/CreatePostForm';
@@ -57,7 +57,7 @@ export const CreatePost = () => {
   };
 
   if (isLoading) {
-    return <LoadingHeading headingText="Uploading your post" />;
+    return <TextWithLoader headingText="Uploading your post" />;
   }
 
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;

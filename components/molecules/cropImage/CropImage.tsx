@@ -4,7 +4,7 @@ import Cropper from 'react-easy-crop';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { LoadingHeading } from '@/components/atoms/loadingHeading/LoadingHeading';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useCropImage } from '@/components/molecules/cropImage/useCropImage';
 import { DropZone } from '@/components/molecules/dropZone/DropZone';
@@ -52,7 +52,7 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
   }
 
   if (isIdle) {
-    return <LoadingHeading headingText="Your image is being cropped, be patient." />;
+    return <TextWithLoader headingText="Your image is being cropped, be patient." />;
   }
 
   return (
