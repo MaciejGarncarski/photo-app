@@ -8,7 +8,7 @@ export const HeartAnimation = () => {
     <motion.div
       className={styles.heartAnimation}
       initial={{ scale: 0 }}
-      animate={{ scale: [0.5, 1.5, 1], transition: { type: 'tween', duration: 0.5 } }}
+      animate={{ scale: 1, transition: { type: 'spring' } }}
       exit={{ scale: 0, opacity: 0 }}
     >
       <IconHeart />

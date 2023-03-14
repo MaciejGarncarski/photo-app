@@ -43,6 +43,7 @@
   flex-shrink: 0;
   pointer-events: none;
   width: var(--post-width);
+  user-select: none;
 
   @include common.mediaquery('tablet') {
     max-height: 37rem;
