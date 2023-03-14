@@ -1,0 +1,20 @@
+.heartAnimation {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    >svg {
+        color: white;
+        fill: white;
+        width: 7.5rem;
+        height: 7.5rem;
+    }
+}

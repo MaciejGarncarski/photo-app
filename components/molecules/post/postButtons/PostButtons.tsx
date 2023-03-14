@@ -65,7 +65,7 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
               type="button"
               disabled={disabled}
               onClick={onClick}
-              whileTap={{ scale: 0.8 }}
+              whileTap={{ scale: 0.6, transition: { type: 'tween', duration: 0.1 } }}
             >
               {icon}
               <VisuallyHiddenText text={alt} />

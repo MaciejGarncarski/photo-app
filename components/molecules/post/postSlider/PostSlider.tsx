@@ -2,12 +2,13 @@ import { PostImage } from '@prisma/client';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/transformPost';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
+import { HeartAnimation } from '@/components/atoms/heartAnimation/HeartAnimation';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useHandleLike } from '@/components/molecules/post/postButtons/useHandleLike';
 import { PostSliderProgress } from '@/components/molecules/post/postSlider/PostSliderProgress';
@@ -31,9 +32,13 @@ type PostImageProps = {
   height: number;
 };
 
+const TIMEOUT = 1100;
+
 export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
-  const { description, imagesData } = post;
+  const { description, imagesData, isLiked } = post;
   const postImages = imagesData.filter((img): img is PostImage => !!img);
+  const [isLikeAnimationShown, setIsLikeAnimationShown] = useState<boolean>(false);
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -44,6 +49,19 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
   const customContainerClassName = clsx(containerClassName, styles.slider);
   const { shortDescription } = descriptionData(description);
   const { handleLike } = useHandleLike({ post });
+
+  const handleLikeWithAnimation = () => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
+    if (!isLiked) {
+      setIsLikeAnimationShown(true);
+      timeoutId.current = setTimeout(() => {
+        setIsLikeAnimationShown(false);
+      }, TIMEOUT);
+      handleLike();
+    }
+  };
 
   const PostImage = ({ src, priority, width, height }: PostImageProps) => {
     return (
@@ -63,14 +81,16 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       return null;
     }
     return (
-      <figure onDoubleClick={handleLike} className={customContainerClassName}>
+      <figure onDoubleClick={handleLikeWithAnimation} className={customContainerClassName}>
         <PostImage src={postImages[0].url} width={postImages[0].width} height={postImages[0].height} priority />
+        <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
       </figure>
     );
   }
 
   return (
-    <motion.div onDoubleClick={handleLike} className={customContainerClassName}>
+    <motion.div onDoubleClick={handleLikeWithAnimation} className={customContainerClassName}>
+      <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
       {currentIndex !== 0 && postImages.length > 0 && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
