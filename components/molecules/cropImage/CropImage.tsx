@@ -52,7 +52,7 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
   }
 
   if (isIdle) {
-    return <TextWithLoader headingText="Your image is being cropped, be patient." />;
+    return <TextWithLoader text="Your image is being cropped, be patient." />;
   }
 
   return (

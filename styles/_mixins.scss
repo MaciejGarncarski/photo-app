@@ -1,5 +1,5 @@
 @mixin mediaquery($query) {
-  $breakpoints: ('tablet': '(min-width: 750px) and (orientation: portrait)',
+  $breakpoints: ('tablet': '(min-width: 750px)',
     'desktop': '(min-width: 1279px)',
   );
 
@@ -15,7 +15,7 @@
 }
 
 @mixin mobile-landscape {
-  @media screen and (max-width: 1200px) and (max-height: 650px) and (orientation: landscape) {
+  @media screen and (max-width: 1200px) and (orientation: landscape) {
     @content;
   }
 }

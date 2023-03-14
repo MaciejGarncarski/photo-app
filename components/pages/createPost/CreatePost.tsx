@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useConvertToBase64 } from '@/hooks/useConvertToBase64';
+
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
@@ -16,7 +18,6 @@ import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
-import { useConvertToBase64 } from '@/components/pages/createPost/useConvertToBase64';
 
 import styles from './createPost.module.scss';
 
@@ -57,7 +58,7 @@ export const CreatePost = () => {
   };
 
   if (isLoading) {
-    return <TextWithLoader headingText="Uploading your post" />;
+    return <TextWithLoader text="Uploading your post" />;
   }
 
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;

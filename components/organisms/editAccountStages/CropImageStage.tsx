@@ -1,15 +1,15 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { toast } from 'react-hot-toast';
+import Image from 'next/image';
+import { useState } from 'react';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useConvertToBase64 } from '@/hooks/useConvertToBase64';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
-import { FinalImages } from '@/components/pages/createPost/types';
-import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
-import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
+import { useUploadAvatar } from '@/components/organisms/editAccountStages/useUploadAvatar';
+import { FinalImages, ImagesBase64 } from '@/components/pages/createPost/types';
 
 import styles from './stages.module.scss';
 
@@ -21,41 +21,24 @@ type PropsTypes = {
 };
 
 export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo, stageSelectImage }: PropsTypes) => {
-  const { session } = useAuth();
-  const queryClient = useQueryClient();
-  const uploadImage = useUploadImage();
-  const editAccount = useEditAccount();
+  const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>([undefined]);
+  useConvertToBase64(finalImages, setFinalImagesBase64);
 
-  const isFinalImageEmpty = finalImages.filter((image) => !!image).length === 0;
+  const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({
+    finalImages,
+    setFinalImages,
+    stagePersonalInfo,
+  });
 
-  const onSaveImage = async () => {
-    if (isFinalImageEmpty) {
-      return;
-    }
-    if (!finalImages[0]?.file) {
-      return toast.error('Image not detected');
-    }
-    if (!session?.user?.id) {
-      return;
-    }
-    const userId = session.user.id;
-
-    const folder = `${userId}/avatar/custom/`;
-    const imageUrl = await uploadImage.mutateAsync({ imageBlob: finalImages[0].file, folder });
-
-    await editAccount.mutateAsync(
-      { newAvatarUrl: imageUrl, userId },
-      {
-        onSuccess: async () => {
-          await queryClient.invalidateQueries(['account', userId]);
-          stagePersonalInfo();
-        },
-        onSettled: () => {
-          setFinalImages([undefined]);
-        },
-      },
-    );
+  const selectDiffrentImg = () => {
+    setFinalImages([]);
   };
+
+  if (editAccountLoading || uploadImageLoading) {
+    return <TextWithLoader text="Uploading new avatar.." />;
+  }
+
+  const isNewAvatarReady = Boolean(finalImagesBase64[0]?.src);
 
   return (
     <motion.div
@@ -65,15 +48,34 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
       initial="initial"
       className={styles.stageContainer}
     >
-      <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={1} />
-
+      {isNewAvatarReady ? (
+        <figure className={styles.preview}>
+          <figcaption className={styles.previewFigcaption}>new avatar preview</figcaption>
+          {finalImagesBase64[0]?.src && (
+            <Image
+              alt="avatar preview"
+              src={finalImagesBase64[0]?.src}
+              width={300}
+              height={300}
+              className={styles.previewImg}
+            />
+          )}
+        </figure>
+      ) : (
+        <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={1} />
+      )}
       <div className={styles.buttons}>
+        {isNewAvatarReady && (
+          <Button type="button" variant="secondary" onClick={selectDiffrentImg}>
+            select diffrent image
+          </Button>
+        )}
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
           go back
         </Button>
         <Button
           type="button"
-          disabled={uploadImage.isLoading || editAccount.isLoading || isFinalImageEmpty}
+          disabled={editAccountLoading || uploadImageLoading || isFinalImageEmpty}
           onClick={onSaveImage}
         >
           Save new image

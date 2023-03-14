@@ -51,7 +51,6 @@ export const EditAccount = ({ userId }: PropsTypes) => {
             stageSelectImage={stageSelectImage}
           />
         )}
-
         {stage === 'cropImage' && (
           <LazyCropImageStage
             key="cropImageStage"

@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion as m } from 'framer-motion';
-import { useRouter } from 'next/router';
-import { MouseEvent, useRef } from 'react';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -15,7 +14,7 @@ import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/Conf
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
-import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
+import { useEditDetails } from '@/components/organisms/editAccountStages/useEditDetails';
 
 import styles from './stages.module.scss';
 
@@ -48,11 +47,8 @@ export type AccountDetails = z.infer<typeof AccountDetailsSchema>;
 
 export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const { username, name, bio, isLoading } = useUser({ userId });
-  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const { close, modalOpen, open } = useModal();
-
-  const editAccount = useEditAccount();
 
   const defaultValues = {
     username: username ?? '',
@@ -71,28 +67,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
     defaultValues,
   });
 
-  const onReset = (clickEv: MouseEvent<HTMLButtonElement>) => {
-    clickEv.preventDefault();
-    reset();
-  };
-
-  const onClick = (clickEv: MouseEvent<HTMLButtonElement>) => {
-    clickEv.preventDefault();
-    open();
-  };
-
-  const onSubmit = async () => {
-    const { bio, fullName, username } = getValues();
-
-    await editAccount.mutateAsync(
-      { bio, fullName, userId, username },
-      {
-        onSuccess: () => {
-          router.push(`/${username}`);
-        },
-      },
-    );
-  };
+  const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, open, reset, userId });
 
   const isError = Boolean(errors.bio || errors.fullName || errors.username);
 
@@ -100,7 +75,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
     return null;
   }
 
-  if (editAccount.isLoading) {
+  if (editAccountLoading) {
     return (
       <m.section variants={stageVariant} animate="animate" exit="exit" initial="initial">
         <EditAccountHeading text="Saving changes" />

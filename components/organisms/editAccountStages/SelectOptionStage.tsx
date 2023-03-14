@@ -42,7 +42,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
   };
 
   if (isLoading) {
-    return <TextWithLoader headingText="Removing your avatar.." />;
+    return <TextWithLoader text="Removing your avatar.." />;
   }
 
   return (
