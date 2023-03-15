@@ -1,11 +1,8 @@
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { PostData } from '@/utils/transformPost';
 
-import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { CommentForm } from '@/components/molecules/post/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/post/postButtons/PostButtons';
 import { descriptionData } from '@/components/organisms/homePost/description';
@@ -17,18 +14,13 @@ type PropsTypes = {
   parentModalOpen?: boolean;
 };
 
-dayjs.extend(relativeTime);
-
 export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
+  const { isSignedIn } = useAuth();
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  const { isSignedIn } = useAuth();
-
-  const { createdAt, description } = post;
-
+  const { description } = post;
   const { isDescriptionLong, shortDescription } = descriptionData(description);
-  const fromNow = dayjs().to(dayjs(createdAt));
-  const formattedDate = dayjs(createdAt).format('MMMM DD YYYY');
+
   const toggleShowMore = () => setShowMore((prev) => !prev);
 
   return (
@@ -49,11 +41,6 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
           <p className={styles.description}>{description}</p>
         )}
       </div>
-      <p className={styles.date}>
-        <Tooltip variant="top" content={formattedDate}>
-          <time dateTime={createdAt.toString()}>{fromNow}</time>
-        </Tooltip>
-      </p>
       {isSignedIn && <CommentForm post={post} />}
     </footer>
   );

@@ -51,6 +51,7 @@ export const useUser = ({ userId, username }: PropsTypes) => {
       return await fetchAccount({ userId, username });
     },
     enabled: Boolean(userId) || Boolean(username),
+    refetchOnWindowFocus: false,
   });
 
   const user = query.data?.user;

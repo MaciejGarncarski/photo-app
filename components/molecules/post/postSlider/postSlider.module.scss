@@ -3,7 +3,6 @@
 .imagesContainer {
   position: relative;
   display: flex;
-
   height: 100%;
 
   &:hover {
@@ -17,6 +16,7 @@
   min-height: 13rem;
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-medium);
 
   @include common.mobile-landscape {
     min-height: 15rem;
@@ -76,6 +76,8 @@
   left: 1rem;
   z-index: 2;
   box-shadow: var(--shadow-primary);
+
+  transition: box-shadow var(--transition-fast);
 
   &:hover,
   &:focus {

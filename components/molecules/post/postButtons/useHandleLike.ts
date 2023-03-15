@@ -1,5 +1,5 @@
 import { InfiniteData, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
 import { PostData } from '@/utils/transformPost';
@@ -15,15 +15,13 @@ type PropsTypes = {
 };
 
 export const useHandleLike = ({ post }: PropsTypes) => {
-  const router = useRouter();
   const queryClient = useQueryClient();
   const postLikeMutation = usePostLike();
   const { session } = useAuth();
 
   const handleLike = () => {
     if (!session?.user?.id) {
-      router.push('/auth/signin');
-      return;
+      return toast.error('Sign in first.');
     }
 
     const oldPosts = queryClient.getQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY);

@@ -1,9 +1,12 @@
 @use '/styles/common.scss';
 
 .homePost {
-    border-radius: var(--radius-small);
     width: var(--post-width);
-    border: var(--border-gray);
+
+    @include common.mediaquery('tablet') {
+        border: var(--border-gray);
+        border-radius: var(--radius-medium);
+    }
 
     @include common.mediaquery('desktop') {
         border-radius: var(--radius-big);

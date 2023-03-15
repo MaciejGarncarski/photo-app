@@ -1,7 +1,10 @@
 @use '/styles/common.scss';
 
 .footer {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
     @include common.mediaquery('desktop') {
         padding: 1rem;
@@ -9,7 +12,6 @@
 }
 
 .descriptionContainer {
-    margin-top: 0.5rem;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -17,22 +19,17 @@
 
 .description {
     display: inline;
+    color: var(--text-gray);
 }
 
 .author {
     font-weight: 600;
+    padding-right: 0.5rem;
 
-    &::after {
-        content: ' ';
-    }
 }
 
 .showMore {
     background-color: transparent;
     border: none;
     color: var(--color-primary);
-}
-
-.date {
-    padding: 0.5rem 0;
 }

@@ -6,12 +6,13 @@ import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/Visual
 import styles from './loader.module.scss';
 
 type PropsTypes = {
-  variant?: 'margin-top';
+  variant?: 'margin-top' | 'small';
+  color?: 'white' | 'blue';
 };
 
-export const Loader = ({ variant }: PropsTypes) => {
+export const Loader = ({ variant, color }: PropsTypes) => {
   return (
-    <span className={clsx(variant && styles[variant], styles.loading)}>
+    <span className={clsx(color && styles[color], variant && styles[variant], styles.loading)}>
       <IconLoader2 />
       <VisuallyHiddenText text="Loading" />
     </span>

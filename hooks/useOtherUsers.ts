@@ -9,5 +9,6 @@ export const useOtherUsers = () => {
       const { data } = await axios.get<User[]>('/api/getOtherUsers');
       return data;
     },
+    refetchOnWindowFocus: false,
   });
 };

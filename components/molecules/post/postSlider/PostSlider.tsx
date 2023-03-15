@@ -32,7 +32,7 @@ type PostImageProps = {
   height: number;
 };
 
-const TIMEOUT = 1100;
+const TIMEOUT = 1000;
 
 export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
   const { description, imagesData, isLiked } = post;
@@ -54,13 +54,15 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
     if (timeoutId.current) {
       clearTimeout(timeoutId.current);
     }
+
     if (!isLiked) {
-      setIsLikeAnimationShown(true);
-      timeoutId.current = setTimeout(() => {
-        setIsLikeAnimationShown(false);
-      }, TIMEOUT);
       handleLike();
     }
+
+    setIsLikeAnimationShown(true);
+    timeoutId.current = setTimeout(() => {
+      setIsLikeAnimationShown(false);
+    }, TIMEOUT);
   };
 
   const PostImage = ({ src, priority, width, height }: PostImageProps) => {
@@ -108,10 +110,6 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
         <AnimatePresence>
           <motion.div className={styles.imagesContainer} animate={{ x: -1 * currentIndex * width }}>
             {postImages.map((image, idx) => {
-              if (!image) {
-                return null;
-              }
-
               return (
                 <motion.figure
                   ref={currentIndex === idx ? imageRef : undefined}

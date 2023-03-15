@@ -1,4 +1,6 @@
 import { IconMenu2 } from '@tabler/icons';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
@@ -23,17 +25,19 @@ type PropsTypes = {
   post: PostData;
 };
 
-export const POST_AVATAR_SIZE = 40;
+export const POST_AVATAR_SIZE = 50;
+
+dayjs.extend(relativeTime);
 
 export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
+  const { username } = useUser({ userId: post.authorId });
+  const { session, isSignedIn } = useAuth();
   const { open, close, modalOpen } = useModal();
   const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
   const deletePostMutation = useDeletePost();
 
-  const { authorId, postId } = post;
-
-  const { session, isSignedIn } = useAuth();
-  const { username } = useUser({ userId: authorId });
+  const { authorId, postId, createdAt } = post;
+  const fromNow = dayjs(createdAt).fromNow();
 
   const isAuthor = session?.user?.id === authorId;
 
@@ -52,17 +56,24 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   return (
     <Tag className={styles.header}>
       <Link href={`/${username}`} className={styles.userAnchor}>
-        <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
-        <h2 className={styles.username}>{username}</h2>
+        <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} className={styles.avatar} />
+        <div>
+          <h2 className={styles.username}>{username}</h2>
+          <p>
+            <time dateTime={createdAt.toString()}>{fromNow}</time>
+          </p>
+        </div>
       </Link>
       {isSignedIn && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton className={styles.followButton} userId={authorId} />}
-          <Tooltip variant="right" content="Post options">
-            <button type="button" className={styles.optionsButton} onClick={open}>
-              <IconMenu2 />
-            </button>
-          </Tooltip>
+          {isAuthor && (
+            <Tooltip variant="right" content="Post options">
+              <button type="button" className={styles.optionsButton} onClick={open}>
+                <IconMenu2 />
+              </button>
+            </Tooltip>
+          )}
         </div>
       )}
       <ModalContainer>

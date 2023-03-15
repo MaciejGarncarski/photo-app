@@ -25,7 +25,7 @@
   --transition-fast: 0.2s ease;
 
   --gradient: linear-gradient(90deg, var(--color-gray) 0px, #ededed 20%, var(--color-gray) 40%);
-  --placeholder-animation: skeleton-loading 2s infinite linear;
+  --placeholder-animation: skeleton-loading 1.5s infinite linear;
   --placeholder-bg-size: 500%;
 
   --shadow-focus: 0 0 0 0.3rem var(--bg-primary), 0 0 0 0.5rem var(--color-primary);
@@ -54,8 +54,8 @@
   --color-overlay: rgba(70, 70, 70, 0.75);
   --text-black: rgb(230, 230, 230);
   --color-gray: rgb(124, 124, 124);
-  --gradient: linear-gradient(90deg, var(--color-gray) 0px, #ababab 10%, var(--color-gray) 20%);
-  --text-gray: rgb(214, 214, 214);
+  --gradient: linear-gradient(90deg, var(--color-gray) 0px, #929292 10%, var(--color-gray) 20%);
+  --text-gray: rgb(200, 200, 200);
   --border-gray: 1px solid rgb(90, 90, 90);
   --bg-primary: rgb(32, 37, 51);
   --bg-blur: rgb(40, 40, 40, 0.95);

@@ -16,16 +16,17 @@
 
 
     >svg {
-        filter: drop-shadow(0 4px 10px rgb(20, 20, 20, 0.6));
+        filter: drop-shadow(0 2px 8px rgb(20, 20, 20, 0.5));
         color: white;
         fill: white;
 
-        width: 6rem;
-        height: 6rem;
+        --heart-size: 6rem;
+
+        width: var(--heart-size);
+        height: var(--heart-size);
 
         @include common.mediaquery('desktop') {
-            width: 9rem;
-            height: 9rem;
+            --heart-size: 10rem;
         }
     }
 }
