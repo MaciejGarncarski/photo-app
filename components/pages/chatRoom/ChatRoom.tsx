@@ -42,7 +42,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
   }, [isLoading]);
 
   if (isLoading || !data) {
-    return <Loader />;
+    return <Loader variant="margin-top" />;
   }
 
   return (

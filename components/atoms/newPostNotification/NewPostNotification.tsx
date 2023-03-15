@@ -30,7 +30,7 @@ export const NewPostNotification = () => {
 
   return (
     <AnimatePresence>
-      {hasNewPosts && scrollPos > 400 && (
+      {hasNewPosts && scrollPos > 300 && (
         <motion.button
           type="button"
           className={styles.notification}

@@ -25,7 +25,6 @@ export const Avatar = ({
   className,
 }: PropsTypes) => {
   const { customImage, image, username } = useUser({ userId });
-
   const hasNoImage = Boolean(!image && !customImage);
   const hasDefaultImage = image && !Boolean(customImage);
   const hasCustomImage = customImage;
