@@ -1,3 +1,5 @@
+@use '/styles/common';
+
 .heartAnimation {
     z-index: 2;
     position: absolute;
@@ -11,10 +13,19 @@
     align-items: center;
     height: 100%;
 
+
+
     >svg {
+        filter: drop-shadow(0 4px 10px rgb(20, 20, 20, 0.6));
         color: white;
         fill: white;
-        width: 9rem;
-        height: 9rem;
+
+        width: 6rem;
+        height: 6rem;
+
+        @include common.mediaquery('desktop') {
+            width: 9rem;
+            height: 9rem;
+        }
     }
 }
