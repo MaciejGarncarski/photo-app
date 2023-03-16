@@ -5,7 +5,6 @@ import { useUser } from '@/hooks/useUser';
 
 export const useAuth = () => {
   const { data: session, status } = useSession();
-
   const sessionUserData = useUser({ userId: session?.user?.id });
   const isSignedIn = Boolean(session?.user?.id && status === 'authenticated');
 

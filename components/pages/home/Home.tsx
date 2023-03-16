@@ -44,6 +44,7 @@ export const Home = () => {
         {(isLoading || hasNextPage) && (
           <div ref={sentryRef}>
             <PostPlaceholder />
+            <PostPlaceholder />
           </div>
         )}
       </motion.main>

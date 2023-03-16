@@ -10,6 +10,7 @@ import { Button } from '@/components/atoms/buttons/button/Button';
 import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
 import { Input } from '@/components/atoms/input/Input';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
@@ -76,11 +77,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   }
 
   if (editAccountLoading) {
-    return (
-      <m.section variants={stageVariant} animate="animate" exit="exit" initial="initial">
-        <EditAccountHeading text="Saving changes" />
-      </m.section>
-    );
+    return <TextWithLoader text="Saving changes" />;
   }
 
   return (

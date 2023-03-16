@@ -43,6 +43,7 @@ model User {
   email          String?       @unique
   emailVerified  DateTime?
   name           String?
+  password       String?
   username       String?       @default(cuid())
   bio            String?
   image          String?

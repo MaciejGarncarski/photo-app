@@ -1,35 +1,94 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { User } from '@prisma/client';
+import bcrypt from 'bcrypt';
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import EmailProvider from 'next-auth/providers/email';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { prisma } from '@/lib/prismadb';
 import { serverEnv } from '@/utils/env.mjs';
 
+const saltRounds = 10;
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     GoogleProvider({
       clientId: serverEnv.GOOGLE_CLIENT_ID,
       clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
     }),
-    EmailProvider({
-      server: {
-        host: serverEnv.EMAIL_SERVER_HOST,
-        port: serverEnv.EMAIL_SERVER_PORT,
-        auth: {
-          user: serverEnv.EMAIL_SERVER_USER,
-          pass: serverEnv.EMAIL_SERVER_PASSWORD,
+    CredentialsProvider({
+      name: 'credentials',
+      credentials: {
+        email: {
+          type: 'text',
+        },
+        password: {
+          type: 'password',
         },
       },
-      from: serverEnv.EMAIL_FROM,
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) {
+          return null;
+        }
+
+        const { email, password } = credentials;
+
+        try {
+          const isUserCreated = await prisma.user.findFirst({
+            where: {
+              email,
+            },
+          });
+
+          if (!isUserCreated) {
+            bcrypt.hash(password, saltRounds, async (err, hash) => {
+              if (err) {
+                return null;
+              }
+
+              const createdUser = await prisma.user.create({
+                data: {
+                  email,
+                  password: hash,
+                },
+                select: {
+                  id: true,
+                  role: true,
+                  created_at: true,
+                },
+              });
+
+              return createdUser;
+            });
+          }
+
+          const user = await prisma.user.findFirst({
+            where: {
+              email,
+            },
+          });
+
+          if (user?.password) {
+            const isPasswordEqual = await bcrypt.compare(password, user.password);
+            if (isPasswordEqual) {
+              return user;
+            }
+          }
+        } catch (error) {
+          return null;
+        }
+
+        return null;
+      },
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      if (session.user) {
-        session.user = user;
-      }
+    async session({ session, token }) {
+      session.user = token.user as User;
       return session;
     },
 
@@ -39,6 +98,7 @@ export const authOptions: NextAuthOptions = {
       }
       if (user) {
         token.id = user.id;
+        token.user = user;
       }
       return token;
     },
