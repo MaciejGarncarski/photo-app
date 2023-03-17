@@ -1,4 +1,4 @@
-import { IconLoader2 } from '@tabler/icons';
+import { IconLoader2 } from '@tabler/icons-react';
 import clsx from 'clsx';
 
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';

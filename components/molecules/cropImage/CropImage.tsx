@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { IconMouse } from '@tabler/icons';
+import { IconMouse } from '@tabler/icons-react';
 import Cropper from 'react-easy-crop';
 
 import { Button } from '@/components/atoms/buttons/button/Button';

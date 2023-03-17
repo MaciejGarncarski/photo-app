@@ -1,4 +1,4 @@
-import { IconCircleX, IconPhoto } from '@tabler/icons';
+import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { ChangeEvent } from 'react';
 

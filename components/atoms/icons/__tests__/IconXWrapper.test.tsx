@@ -5,7 +5,7 @@ import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 describe('IconWrapperX test', () => {
   it('renders correctly', () => {
     render(<IconXWrapper />);
-    expect(document.querySelector('svg')?.classList).toHaveLength(3);
+    expect(document.querySelector('svg')?.classList).toHaveLength(2);
   });
   it('renders with size prop', () => {
     render(<IconXWrapper size="xl" />);

@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { motion as m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -83,7 +83,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   return (
     <>
       <EditAccountHeading text="Edit account details" />
-      <m.form
+      <motion.form
         variants={stageVariant}
         animate="animate"
         exit="exit"
@@ -111,7 +111,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
             {modalOpen && <ConfirmationAlert headingText="Save changes?" close={close} onConfirm={onSubmit} />}
           </ModalContainer>
         </div>
-      </m.form>
+      </motion.form>
     </>
   );
 };

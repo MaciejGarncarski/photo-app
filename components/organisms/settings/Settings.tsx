@@ -1,4 +1,4 @@
-import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons';
+import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';

@@ -1,4 +1,4 @@
-import { IconUser } from '@tabler/icons';
+import { IconUser } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';

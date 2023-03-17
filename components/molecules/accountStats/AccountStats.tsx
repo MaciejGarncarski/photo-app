@@ -2,40 +2,20 @@ import { motion } from 'framer-motion';
 
 import { useUser } from '@/hooks/useUser';
 
+import { useListData } from '@/components/molecules/accountStats/useListData';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
-import { useModal } from '@/components/molecules/modal/useModal';
 
 import styles from './accountStats.module.scss';
 
 import { StatsModal } from '../../organisms/statsModal/StatsModal';
-
-type Titles = 'posts' | 'followers' | 'following';
-
-type ListData = Array<{ title: Titles; onClick: () => void }>;
 
 type PropsTypes = {
   userId: string;
 };
 
 export const AccountStats = ({ userId }: PropsTypes) => {
-  const followingModal = useModal();
-  const followersModal = useModal();
+  const { followersModal, followingModal, listData } = useListData();
   const { count } = useUser({ userId });
-
-  const listData: ListData = [
-    {
-      title: 'posts',
-      onClick: () => window.scrollBy({ top: 200, behavior: 'smooth' }),
-    },
-    {
-      title: 'followers',
-      onClick: followersModal.open,
-    },
-    {
-      title: 'following',
-      onClick: followingModal.open,
-    },
-  ];
 
   if (!count) {
     return null;

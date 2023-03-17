@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { IconBrandGoogle, IconTestPipe } from '@tabler/icons';
+import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';

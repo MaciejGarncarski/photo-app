@@ -1,4 +1,4 @@
-import { IconHome, IconMessage, IconSettings, IconSquareRoundedPlus, IconUser } from '@tabler/icons';
+import { IconSettings } from '@tabler/icons-react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,7 +9,16 @@ import { useAuth } from '@/hooks/useAuth';
 import { SignInButton } from '@/components/atoms/buttons/signInButton/SignInButton';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
-import { Settings } from '@/components/organisms/settings/Settings';
+import { useListData } from '@/components/molecules/navButtons/useListData';
+
+const Settings = dynamic(() => import('@/components/organisms/settings/Settings').then((mod) => mod.Settings), {
+  ssr: false,
+  loading: () => <Loader variant="margin-top" />,
+});
+
+import dynamic from 'next/dynamic';
+
+import { Loader } from '@/components/atoms/loader/Loader';
 
 import styles from './navButtons.module.scss';
 
@@ -21,40 +30,14 @@ export type ListData = {
 };
 
 export const NavButtons = () => {
-  const { sessionUserData, status, isSignedIn } = useAuth();
+  const { status, isSignedIn } = useAuth();
   const router = useRouter();
   const { open, close, modalOpen } = useModal();
+  const { listData } = useListData();
 
   if (status === 'loading') {
     return null;
   }
-
-  const listData: Array<ListData> = [
-    {
-      icon: <IconHome />,
-      title: 'Home',
-      href: '/',
-      shouldShowWhileGuest: true,
-    },
-    {
-      icon: <IconMessage />,
-      title: 'Chat',
-      href: '/chat',
-      shouldShowWhileGuest: false,
-    },
-    {
-      icon: <IconSquareRoundedPlus />,
-      title: 'Create post',
-      href: '/create-post',
-      shouldShowWhileGuest: false,
-    },
-    {
-      icon: <IconUser />,
-      title: 'Profile',
-      href: `/${sessionUserData.username}`,
-      shouldShowWhileGuest: false,
-    },
-  ];
 
   return (
     <>

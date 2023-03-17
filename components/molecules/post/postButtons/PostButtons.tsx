@@ -1,28 +1,15 @@
-import { IconMessage, IconShare } from '@tabler/icons';
 import { motion } from 'framer-motion';
-import { ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 
-import { lock } from '@/utils/bodyLock';
 import { PostData } from '@/utils/transformPost';
 
-import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { useHandleLike } from '@/components/molecules/post/postButtons/useHandleLike';
+import { usePostButtonsData } from '@/components/molecules/post/postButtons/usePostButtonsData';
 import { PostModal } from '@/components/organisms/postModal/PostModal';
 import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
 
 import styles from './postButtons.module.scss';
-
-type ButtonData = Array<{
-  alt: string;
-  icon: ReactElement;
-  onClick: () => void;
-  disabled: boolean;
-  count?: number;
-}>;
 
 type PropsTypes = {
   post: PostData;
@@ -30,42 +17,19 @@ type PropsTypes = {
 };
 
 export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
-  const { isLiked, postId, likesCount, commentsCount } = post;
-
-  const postModal = useModal();
-  const shareModal = useModal();
-  const { handleLike } = useHandleLike({ post });
-
-  const likeIcon = <IconHeartWrapper isActive={Boolean(isLiked)} />;
-
-  const postModalOpen = () => {
-    postModal.open();
-    lock();
-  };
-
-  const buttonData: ButtonData = [
-    { alt: 'like', icon: likeIcon, onClick: handleLike, disabled: false, count: likesCount },
-    {
-      alt: 'comment',
-      icon: <IconMessage />,
-      onClick: parentModalOpen ? () => null : postModalOpen,
-      disabled: false,
-      count: commentsCount,
-    },
-    { alt: 'share', icon: <IconShare />, onClick: shareModal.open, disabled: false },
-  ];
+  const { postId } = post;
+  const { buttonData, postModal, shareModal } = usePostButtonsData({ post, parentModalOpen });
 
   return (
     <ul className={styles.list}>
-      {buttonData.map(({ alt, icon, onClick, disabled, count }) => {
+      {buttonData.map(({ alt, icon, onClick, count }) => {
         return (
           <li key={alt} className={styles.listItem}>
             <motion.button
               className={styles.button}
               type="button"
-              disabled={disabled}
               onClick={onClick}
-              whileTap={{ scale: 0.6, transition: { type: 'tween', duration: 0.1 } }}
+              whileTap={{ scale: 0.8, transition: { type: 'tween', duration: 0.1 } }}
             >
               {icon}
               <VisuallyHiddenText text={alt} />

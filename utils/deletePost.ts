@@ -52,8 +52,10 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
+    const images = [post?.image1, post?.image2, post?.image3];
+
     await Promise.all(
-      [post?.image1, post?.image2, post?.image3].map(async (el) => {
+      images.map(async (el) => {
         if (!el) {
           return;
         }

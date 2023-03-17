@@ -18,10 +18,6 @@
 .heading {
     text-align: center;
     padding-bottom: 1rem;
-
-    @include common.mediaquery('desktop') {
-        padding: 0;
-    }
 }
 
 .list {
@@ -34,7 +30,6 @@
     padding-top: 1rem;
 
     @include common.mediaquery('desktop') {
-        margin-top: 1rem;
         padding: 2rem 0;
         gap: 0.5rem;
     }

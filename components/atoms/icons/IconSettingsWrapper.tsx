@@ -1,4 +1,4 @@
-import { IconSettings } from '@tabler/icons';
+import { IconSettings } from '@tabler/icons-react';
 
 import styles from './icons.module.scss';
 

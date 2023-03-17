@@ -1,8 +1,7 @@
-import { IconTrash } from '@tabler/icons';
+import { IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
@@ -25,8 +24,6 @@ type PropsTypes = {
   commentData: PostCommentsWithIsLiked;
 };
 
-dayjs.extend(relativeTime);
-
 export const Comment = ({ commentData }: PropsTypes) => {
   const { sessionUserData } = useAuth();
   const { open, close, modalOpen } = useModal();
@@ -45,7 +42,7 @@ export const Comment = ({ commentData }: PropsTypes) => {
   const userAccountHref = `/${username}`;
 
   return (
-    <m.article className={styles.comment}>
+    <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <VisuallyHiddenText text={`@${username}`} />
         <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
@@ -72,6 +69,6 @@ export const Comment = ({ commentData }: PropsTypes) => {
       </div>
 
       <ModalContainer>{modalOpen && <ConfirmationAlert close={close} onConfirm={handleDelete} />}</ModalContainer>
-    </m.article>
+    </motion.article>
   );
 };

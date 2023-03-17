@@ -1,4 +1,4 @@
-import { IconPhotoPlus, IconTrash } from '@tabler/icons';
+import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 

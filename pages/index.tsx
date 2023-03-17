@@ -1,15 +1,19 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { prisma } from '@/lib/prismadb';
 import { fetchAccount } from '@/hooks/useUser';
 
 import { Home } from '@/components/pages/home/Home';
 
+dayjs.extend(relativeTime);
+
 const HomePage = () => {
   return <Home />;
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const queryClient = new QueryClient();
 
   try {
@@ -43,7 +47,6 @@ export const getStaticProps = async () => {
       props: {
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
-      revalidate: 120,
     };
   } catch (error) {
     return {

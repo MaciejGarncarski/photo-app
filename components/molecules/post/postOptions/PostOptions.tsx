@@ -1,4 +1,4 @@
-import { IconEdit, IconTrash } from '@tabler/icons';
+import { IconEdit, IconTrash } from '@tabler/icons-react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';

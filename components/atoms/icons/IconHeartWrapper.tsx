@@ -1,4 +1,4 @@
-import { IconHeart } from '@tabler/icons';
+import { IconHeart } from '@tabler/icons-react';
 import clsx from 'clsx';
 
 type PropsTypes = {

@@ -1,4 +1,4 @@
-import { IconHeart } from '@tabler/icons';
+import { IconHeart } from '@tabler/icons-react';
 import { motion, Variants } from 'framer-motion';
 
 import styles from './heartAnimation.module.scss';

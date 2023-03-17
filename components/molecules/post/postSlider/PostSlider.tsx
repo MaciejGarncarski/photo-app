@@ -1,5 +1,5 @@
 import { PostImage } from '@prisma/client';
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRef, useState } from 'react';

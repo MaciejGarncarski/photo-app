@@ -1,4 +1,4 @@
-import { IconSearch } from '@tabler/icons';
+import { IconSearch } from '@tabler/icons-react';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';

@@ -1,4 +1,4 @@
-import { IconLogin } from '@tabler/icons';
+import { IconLogin } from '@tabler/icons-react';
 import Link from 'next/link';
 
 import styles from './signInButton.module.scss';

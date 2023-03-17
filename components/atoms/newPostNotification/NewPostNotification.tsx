@@ -1,4 +1,4 @@
-import { IconArrowUp } from '@tabler/icons';
+import { IconArrowUp } from '@tabler/icons-react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 import { useScrollPosition } from '@/hooks/useScrollPosition';

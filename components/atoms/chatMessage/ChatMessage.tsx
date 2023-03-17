@@ -1,8 +1,7 @@
 import { Message } from '@prisma/client';
-import { IconDotsVertical, IconTrash } from '@tabler/icons';
+import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useAuth } from '@/hooks/useAuth';
 
@@ -19,8 +18,6 @@ import styles from './chatMessage.module.scss';
 type PropsTypes = {
   message: Message;
 };
-
-dayjs.extend(relativeTime);
 
 export const ChatMessage = ({ message }: PropsTypes) => {
   const { modalOpen, open, close } = useModal();

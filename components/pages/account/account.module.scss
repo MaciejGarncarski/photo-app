@@ -5,6 +5,10 @@
   margin-inline: auto;
   margin-top: 1rem;
   padding-bottom: 4rem;
+
+  @include common.mediaquery('desktop') {
+    margin-left: 12rem;
+  }
 }
 
 .accountMobile {

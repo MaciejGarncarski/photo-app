@@ -1,4 +1,4 @@
-import { IconDots } from '@tabler/icons';
+import { IconDots } from '@tabler/icons-react';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';

@@ -1,5 +1,5 @@
 import { ChatRoom as ChatRoomType } from '@prisma/client';
-import { IconArrowLeft, IconSend } from '@tabler/icons';
+import { IconArrowLeft, IconSend } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';

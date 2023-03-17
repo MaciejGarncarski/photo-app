@@ -35,10 +35,11 @@ export const AccountPosts = ({ id }: PropsTypes) => {
   });
 
   if (!data || isLoading) {
+    const placeholders = Array.from({ length: 6 }, (_, item) => item);
     return (
       <div className={styles.posts}>
-        {Array.from({ length: 6 }, (_, item) => item).map((el) => {
-          return <div className={styles.placeholder} key={el} />;
+        {placeholders.map((idx) => {
+          return <div className={styles.placeholder} key={idx} />;
         })}
       </div>
     );

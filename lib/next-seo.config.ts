@@ -1,7 +1,7 @@
 import { NextSeoProps } from 'next-seo';
 
 const description =
-  'Fullstack Next,js social app. In photo-app you can sign up via google and upload your favourite photos.';
+  'PhotoApp is social media application created in the modern tech stack. In this app, you can chat with friends, create posts, comment on them and follow other users. It was my first attempt to create a backend in Next.js, so I learned a lot of things while creating this app.';
 
 export const APP_NAME = 'PhotoApp';
 

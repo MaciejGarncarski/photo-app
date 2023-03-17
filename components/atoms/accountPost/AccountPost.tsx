@@ -1,4 +1,4 @@
-import { IconMessage } from '@tabler/icons';
+import { IconMessage2 } from '@tabler/icons-react';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,7 +43,7 @@ export const AccountPost = ({ post }: PropsTypes) => {
           <IconHeartWrapper isActive={isLiked} /> {likesCount}
         </li>
         <li className={styles.count}>
-          <IconMessage /> {commentsCount}
+          <IconMessage2 /> {commentsCount}
         </li>
       </ul>
     </MotionLink>
