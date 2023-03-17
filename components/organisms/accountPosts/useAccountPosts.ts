@@ -1,10 +1,8 @@
-import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { clientEnv } from '@/utils/env.mjs';
 import { PostData } from '@/utils/transformPost';
-
-export const HOME_POSTS_QUERY_KEY: QueryKey = ['homepage infinite posts'];
 
 type FetchPost = {
   pageParam?: number;

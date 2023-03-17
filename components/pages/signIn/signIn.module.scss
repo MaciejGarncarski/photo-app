@@ -12,17 +12,17 @@
     gap: 4rem;
     margin-top: 5rem;
   }
-
 }
 
 .info {
   background-color: var(--bg-secondary);
   padding: 1rem 1.5rem;
-  border-radius: var(--radius-big);
+  border-radius: var(--radius-medium);
   line-height: 2;
 
   @include common.mediaquery('desktop') {
-    padding: 2rem;
+    border-radius: var(--radius-big);
+    padding: 1.5rem 2.5rem;
   }
 }
 

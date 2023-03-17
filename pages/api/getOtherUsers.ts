@@ -21,6 +21,9 @@ const otherUsersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       },
       take: 4,
+      orderBy: {
+        id: 'desc',
+      },
     });
 
     return res.status(httpCodes.success).send(users);

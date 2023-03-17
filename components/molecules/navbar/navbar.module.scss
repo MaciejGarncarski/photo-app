@@ -6,8 +6,9 @@
   justify-content: center;
   align-items: center;
   padding: 0.2rem 0;
-  background-color: var(--bg-primary);
-  border-top: var(--border-gray);
+  background-color: var(--bg-blur);
+  border-top: 1px solid rgb(15, 15, 15, 0.15);
+  backdrop-filter: var(--filter-blur);
   position: fixed;
   bottom: 0;
   left: 0;

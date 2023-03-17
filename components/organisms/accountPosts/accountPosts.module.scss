@@ -21,7 +21,7 @@
   }
 
   @include common.mediaquery('desktop') {
-    gap: 1rem;
+    gap: 3rem;
     padding: 0 3rem;
     margin-top: 5rem;
     grid-template-columns: repeat(3, 1fr);

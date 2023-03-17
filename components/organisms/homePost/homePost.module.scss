@@ -7,8 +7,4 @@
         border: var(--border-gray);
         border-radius: var(--radius-medium);
     }
-
-    @include common.mediaquery('desktop') {
-        border-radius: var(--radius-big);
-    }
 }

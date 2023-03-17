@@ -70,7 +70,7 @@ export const SignIn = () => {
         <Input labelText="email" type="email" error={errors.email} {...register('email')} />
         <Input labelText="password" type="password" error={errors.password} {...register('password')} />
         <Button type="submit" className={styles.signInButton}>
-          Sign in
+          Continue
         </Button>
       </form>
       <div className={styles.otherOptions}>
@@ -95,7 +95,7 @@ export const SignIn = () => {
           <li>Email: test@test.pl</li>
           <li>Password: 12345</li>
         </ul>
-        <p>Or click button above named &quot;Demo account&quot;</p>
+        <p>Also you can click button above named &quot;Demo account&quot;.</p>
       </div>
     </main>
   );

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 
+import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/transformPost';
 
@@ -36,6 +37,7 @@ const TIMEOUT = 1000;
 
 export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
   const { description, imagesData, isLiked } = post;
+  const { isSignedIn } = useAuth();
   const postImages = imagesData.filter((img): img is PostImage => !!img);
   const [isLikeAnimationShown, setIsLikeAnimationShown] = useState<boolean>(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,10 +61,12 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
       handleLike();
     }
 
-    setIsLikeAnimationShown(true);
-    timeoutId.current = setTimeout(() => {
-      setIsLikeAnimationShown(false);
-    }, TIMEOUT);
+    if (isSignedIn) {
+      setIsLikeAnimationShown(true);
+      timeoutId.current = setTimeout(() => {
+        setIsLikeAnimationShown(false);
+      }, TIMEOUT);
+    }
   };
 
   const PostImage = ({ src, priority, width, height }: PostImageProps) => {

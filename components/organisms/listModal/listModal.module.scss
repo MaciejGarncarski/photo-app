@@ -73,7 +73,8 @@
   width: 100%;
 
   @include common.mediaquery('desktop') {
-    gap: 2rem;
+    padding: 1rem 2rem;
+    gap: 1.25rem;
   }
 
   @include common.mobile-landscape {

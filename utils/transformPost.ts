@@ -54,6 +54,6 @@ export const transformPost = async (post: PostToTransform, session?: Session | n
     description: post.description,
     imagesData: postImages,
     postId: post.id,
-    isLiked: Boolean(isLiked),
+    isLiked: session ? Boolean(isLiked) : false,
   };
 };

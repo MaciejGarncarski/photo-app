@@ -11,10 +11,10 @@ import { EditPost } from '@/components/pages/editPost/EditPost';
 const EditPostPage = () => {
   const router = useRouter();
   const postId = Number(string(router.query.id));
-  const { data } = usePost({ postId });
+  const { data, isLoading } = usePost({ postId });
   const { status, sessionUserData } = useAuth();
 
-  if (status === 'loading') {
+  if (status === 'loading' || isLoading) {
     return <Loader variant="margin-top" />;
   }
 

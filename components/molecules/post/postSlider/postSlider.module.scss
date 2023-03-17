@@ -23,6 +23,7 @@
   }
 
   @include common.mediaquery('desktop') {
+    border-radius: 0;
     min-height: 20rem;
   }
 }
