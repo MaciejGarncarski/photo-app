@@ -35,15 +35,10 @@ export const AccountPosts = ({ id }: PropsTypes) => {
   });
 
   if (!data || isLoading) {
-    const placeholders = Array.from({ length: 6 }, (_, item) => item);
-    return (
-      <div className={styles.posts}>
-        {placeholders.map((idx) => {
-          return <div className={styles.placeholder} key={idx} />;
-        })}
-      </div>
-    );
+    return <Loader variant="margin-top" />;
   }
+
+  const hasPosts = data.pages[0].postsCount !== 0;
 
   return (
     <>
@@ -54,14 +49,10 @@ export const AccountPosts = ({ id }: PropsTypes) => {
           });
         })}
       </motion.div>
-      {data.pages[0].postsCount !== 0 && (
-        <>
-          {hasNextPage && (
-            <div ref={infiniteRef} className={styles.loading}>
-              <Loader />
-            </div>
-          )}
-        </>
+      {hasNextPage && hasPosts && (
+        <div ref={infiniteRef} className={styles.loading}>
+          <Loader />
+        </div>
       )}
     </>
   );

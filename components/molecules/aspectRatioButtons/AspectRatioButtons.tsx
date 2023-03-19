@@ -3,20 +3,10 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
+import { buttonData } from '@/components/molecules/aspectRatioButtons/buttonData';
+import { containerVariants, itemVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 
 import styles from './aspectRatioButtons.module.scss';
-
-import { containerVariants, itemVariants } from '../imagesPreview/ImagesPreview';
-
-type ButtonData = {
-  text: string;
-  aspectRatio: number;
-};
-const buttonData: Array<ButtonData> = [
-  { text: 'square', aspectRatio: 1 },
-  { text: 'portrait', aspectRatio: 4 / 5 },
-  { text: 'landscape', aspectRatio: 1.91 / 1 },
-];
 
 type PropsTypes = {
   setAspect: (aspect: number) => void;

@@ -25,21 +25,23 @@ export const useDropZone = ({ setError, setImgSrc }: ArgumentsTypes) => {
 
   const onDrop = (dropEv: DragEvent<HTMLDivElement>) => {
     inactive(dropEv);
-    const { dataTransfer } = dropEv;
+    const {
+      dataTransfer: { files },
+    } = dropEv;
 
-    const file = dataTransfer.files[0];
+    const firstFile = files[0];
 
-    if (!dataTransfer.files || !file) {
+    if (!files || !firstFile) {
       setError('NO_IMAGE_DETECTED');
       return;
     }
 
-    if (dataTransfer.files.length > 1) {
+    if (files.length > 1) {
       setError('TOO_MANY_IMAGES');
       return;
     }
 
-    handleDropImage({ file, setError, setImgSrc });
+    handleDropImage({ file: firstFile, setError, setImgSrc });
   };
 
   return { active, inactive, onDrop, isActive, inputRef };

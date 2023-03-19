@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import ReactFocusLock from 'react-focus-lock';
 
 import { unlock } from '@/utils/bodyLock';
 import { PostData } from '@/utils/transformPost';
@@ -19,6 +20,18 @@ type PropsTypes = {
   modalOpen: boolean;
 };
 
+const modalVariants: Variants = {
+  hidden: {
+    y: 20,
+    opacity: 0,
+  },
+  visible: { y: 0, opacity: 1 },
+  exit: {
+    opacity: 0,
+    scale: 0.8,
+  },
+};
+
 export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
   const onClose = () => {
     unlock();
@@ -27,19 +40,28 @@ export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
 
   return (
     <Backdrop close={onClose}>
-      <motion.div role="dialog" className={styles.container}>
-        <ModalClose onClose={onClose} isExternal />
-        <PostHeader tag="div" post={post} />
-        <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
-        <PostFooter post={post} parentModalOpen={modalOpen} />
+      <ReactFocusLock>
+        <ModalClose onClose={onClose} outside />
+        <motion.div
+          variants={modalVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          role="dialog"
+          className={styles.container}
+        >
+          <PostHeader tag="div" post={post} />
+          <PostSlider post={post} containerClassName={styles.slider} imageClassName={styles.sliderImage} />
+          <PostFooter post={post} parentModalOpen={modalOpen} />
 
-        <section className={styles.commentsContainer}>
-          <Heading tag="h2" className={styles.commentsHeading}>
-            Comments
-          </Heading>
-          <PostComments postId={post.postId} className={styles.commentsList} />
-        </section>
-      </motion.div>
+          <section className={styles.commentsContainer}>
+            <Heading tag="h2" className={styles.commentsHeading}>
+              Comments
+            </Heading>
+            <PostComments postId={post.postId} className={styles.commentsList} />
+          </section>
+        </motion.div>
+      </ReactFocusLock>
     </Backdrop>
   );
 };

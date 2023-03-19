@@ -25,7 +25,7 @@ import { FinalImages, ImagesBase64, PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';
 
 export const PostDetailsSchema = z.object({
-  description: z.string().max(200, { message: 'Maximum characters exceeded' }),
+  description: z.string().max(200, { message: 'Maximum characters exceeded.' }),
 });
 
 export const CreatePost = () => {
@@ -50,7 +50,7 @@ export const CreatePost = () => {
     },
   });
 
-  const handleRemoveImage = (id: string) => {
+  const onRemove = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
       return finalImg?.id !== id;
     });
@@ -79,7 +79,7 @@ export const CreatePost = () => {
         </div>
       )}
       <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
-      {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={handleRemoveImage} />}
+      {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={onRemove} />}
       <CreatePostForm
         disabled={isSubmitDisabled}
         errors={errors}

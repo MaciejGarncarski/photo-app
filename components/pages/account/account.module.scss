@@ -7,7 +7,7 @@
   padding-bottom: 4rem;
 
   @include common.mediaquery('desktop') {
-    margin-left: 12rem;
+    margin-left: calc(10vw + 2rem);
   }
 }
 
@@ -23,7 +23,6 @@
 }
 
 .accountDesktop {
-  padding: 0 6rem;
   display: flex;
   gap: 8rem;
   justify-content: flex-start;

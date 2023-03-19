@@ -1,3 +1,7 @@
 .commentsList {
   padding: 0;
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 2rem;
 }

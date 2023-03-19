@@ -36,23 +36,25 @@
 .listItem {
   font-weight: 700;
   overflow: hidden;
-  border-top: var(--border-gray);
 
   &>button,
   a {
-    transition: background-color var(--transition-fast);
+    transition: all var(--transition-fast);
+    transition-property: background-color, transform;
 
-    &:hover,
+
+    &:hover {
+      background-color: var(--bg-focus);
+    }
+
     &:focus {
-      background-color: var(--color-gray);
+      outline: none;
+      transform: scale(1.02);
+      background-color: var(--bg-focus);
     }
   }
 }
 
-.listItemFirst {
-  border-bottom: 0;
-  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
-}
 
 .listItemLast {
   @include common.mediaquery('desktop') {
@@ -67,7 +69,6 @@
   justify-content: flex-start;
   gap: 1rem;
   padding: 1rem 1.5rem;
-
   border: 0;
   background-color: var(--bg-primary);
   width: 100%;

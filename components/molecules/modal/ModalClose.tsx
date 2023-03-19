@@ -7,17 +7,17 @@ import styles from './modal.module.scss';
 
 type PropsTypes = {
   onClose: () => void;
-  isExternal?: boolean;
+  outside?: boolean;
 };
 
-export const ModalClose = ({ onClose, isExternal }: PropsTypes) => {
+export const ModalClose = ({ onClose, outside }: PropsTypes) => {
   const handleClose = () => {
     onClose();
   };
 
   return (
     <button
-      className={clsx(isExternal && styles.closeButtonExternal, styles.closeButton)}
+      className={clsx(outside && styles.closeButtonExternal, styles.closeButton)}
       type="button"
       onClick={handleClose}
     >

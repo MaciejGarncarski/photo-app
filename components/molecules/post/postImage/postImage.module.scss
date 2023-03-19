@@ -1,0 +1,32 @@
+@use '/styles/common';
+
+.loader {
+    position: absolute;
+    width: var(--post-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgLoading {
+    opacity: 0;
+}
+
+.sliderImage {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    max-width: unset;
+    flex-shrink: 0;
+    width: var(--post-width);
+    pointer-events: none;
+    user-select: none;
+
+    @include common.mediaquery('tablet') {
+        max-height: 37rem;
+        min-height: 30rem;
+        object-fit: contain;
+    }
+}

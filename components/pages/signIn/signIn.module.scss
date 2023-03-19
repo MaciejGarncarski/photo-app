@@ -10,7 +10,9 @@
 
   @include common.mediaquery('desktop') {
     gap: 4rem;
-    margin-top: 5rem;
+    margin: 0;
+    margin-left: 17rem;
+    margin-top: 2rem;
   }
 }
 
@@ -55,68 +57,4 @@
   padding: 0.6rem 0;
   font-weight: 600;
   font-size: 1.25rem;
-}
-
-.orWith {
-  background-color: var(--bg-primary);
-  text-transform: uppercase;
-  padding: 0 1rem;
-  display: inline-block;
-  z-index: 1;
-  font-weight: 600;
-}
-
-.separator {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &::before {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background-color: var(--bg-secondary);
-    position: absolute;
-    top: 50%;
-    left: 0;
-  }
-}
-
-.otherOptions {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-
-
-.other {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-direction: column;
-  gap: 2rem;
-
-  @include common.mediaquery('desktop') {
-    flex-direction: row;
-  }
-}
-
-.otherButton {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 0;
-  flex-grow: 1;
-
-  >svg {
-    stroke-width: 3;
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-}
-
-.otherButtonText {
-  font-weight: 600;
-  margin-left: 0.5rem;
 }

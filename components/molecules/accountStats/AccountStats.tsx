@@ -24,16 +24,14 @@ export const AccountStats = ({ userId }: PropsTypes) => {
   return (
     <>
       <motion.ul className={styles.list}>
-        {listData.map(({ onClick, title }) => {
-          return (
-            <li className={styles.listItem} key={title}>
-              <button type="button" className={styles.button} onClick={onClick}>
-                <span className={styles.listItemNumber}>{count[title]}</span>
-                <span className={styles.listItemText}>{title}</span>
-              </button>
-            </li>
-          );
-        })}
+        {listData.map(({ onClick, title }) => (
+          <li className={styles.listItem} key={title}>
+            <button type="button" className={styles.button} onClick={onClick}>
+              <span className={styles.listItemNumber}>{count[title]}</span>
+              <span className={styles.listItemText}>{title}</span>
+            </button>
+          </li>
+        ))}
       </motion.ul>
       <ModalContainer>
         {followingModal.modalOpen && <StatsModal type="following" modal={followingModal} userId={userId} />}

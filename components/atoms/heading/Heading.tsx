@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
 import { Children } from '@/components/layout/Layout';
 
@@ -14,6 +15,12 @@ type PropsTypes = Children & {
   variant?: HeadingVariants;
 };
 
-export const Heading = ({ children, variant, tag: Tag = 'h2', className }: PropsTypes) => {
-  return <Tag className={clsx(variant && styles[variant], className, styles.heading)}>{children}</Tag>;
+export const Heading = ({ children, variant, tag: Tag = 'h2', className, ...rest }: PropsTypes) => {
+  const MotionTag = motion<Omit<PropsTypes, 'tag'>>(Tag);
+
+  return (
+    <MotionTag className={clsx(variant && styles[variant], className, styles.heading)} {...rest}>
+      {children}
+    </MotionTag>
+  );
 };

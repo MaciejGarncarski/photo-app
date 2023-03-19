@@ -34,30 +34,6 @@
   align-items: center;
 }
 
-.sliderImage {
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  object-fit: cover;
-  max-width: unset;
-  flex-shrink: 0;
-  pointer-events: none;
-  width: var(--post-width);
-  user-select: none;
-
-  @include common.mediaquery('tablet') {
-    max-height: 37rem;
-    min-height: 30rem;
-    object-fit: contain;
-  }
-}
-
-.sliderImageLoading {
-  width: 0;
-  height: 0;
-}
-
 .button {
   --button-width: 2.5rem;
   width: var(--button-width);

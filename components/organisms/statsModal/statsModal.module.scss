@@ -27,12 +27,6 @@
     min-height: 10rem;
     max-height: 20rem;
     overflow-y: auto;
-    padding-top: 1rem;
-
-    @include common.mediaquery('desktop') {
-        padding: 2rem 0;
-        gap: 0.5rem;
-    }
 }
 
 .placeholder {
@@ -57,12 +51,13 @@
 .itemLink {
     display: flex;
     align-items: center;
-    padding: 1rem 1rem;
+    padding: 0.75rem 1rem;
     gap: 1rem;
     flex-grow: 1;
     border-radius: var(--radius-medium);
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: var(--bg-secondary);
     }
 }

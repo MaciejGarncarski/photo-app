@@ -7,7 +7,6 @@ import styles from './listModal.module.scss';
 type PropsTypes = {
   icon: ReactNode;
   children: ReactNode;
-  isFirst?: boolean;
   isLast?: boolean;
   isLoading?: boolean;
   loadingText?: string;
@@ -38,12 +37,11 @@ export const ListModalItem = ({
   disabled,
   href,
   onClick,
-  isFirst,
   isLast,
   isLoading,
   loadingText,
 }: ModalListItemProps) => {
-  const listClassName = clsx(isLast && styles.listItemLast, isFirst && styles.listItemFirst, styles.listItem);
+  const listClassName = clsx(isLast && styles.listItemLast, styles.listItem);
 
   if (isLoading) {
     return (

@@ -20,6 +20,7 @@
   --bg-blur: rgb(255, 255, 255, 0.9);
   --bg-error: rgba(204, 73, 73, 0.25);
   --bg-secondary: rgb(235, 235, 235);
+  --bg-focus: rgb(235, 235, 235);
 
   --transition: 0.4s ease;
   --transition-fast: 0.2s ease;
@@ -29,6 +30,7 @@
   --placeholder-bg-size: 500%;
 
   --shadow-focus: 0 0 0 0.3rem var(--bg-primary), 0 0 0 0.5rem var(--color-primary);
+
 
   --radius-big: 0.95rem;
   --radius-medium: 0.5rem;
@@ -60,4 +62,5 @@
   --bg-primary: rgb(32, 37, 51);
   --bg-blur: rgb(40, 40, 40, 0.85);
   --bg-secondary: rgba(255, 255, 255, 0.2);
+  --bg-focus: rgb(80, 80, 80);
 }

@@ -1,4 +1,5 @@
 import { InfiniteData, useQueryClient } from '@tanstack/react-query';
+import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
@@ -10,33 +11,40 @@ import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
+const TIMEOUT = 1000;
+
 type PropsTypes = {
   post: PostData;
 };
 
+type InfinitePostsQuery = InfiniteData<InfinitePosts<PostData>>;
+
 export const useHandleLike = ({ post }: PropsTypes) => {
-  const queryClient = useQueryClient();
+  const [isLikeAnimationShown, setIsLikeAnimationShown] = useState<boolean>(false);
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const postLikeMutation = usePostLike();
-  const { session } = useAuth();
+  const { isSignedIn } = useAuth();
+  const queryClient = useQueryClient();
+  const { isLiked, postId } = post;
 
   const handleLike = () => {
-    if (!session?.user?.id) {
+    if (!isSignedIn) {
       return toast.error('Sign in first.');
     }
 
-    const oldPosts = queryClient.getQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY);
-    const oldPost = queryClient.getQueryData<PostData>(['post', post.postId]);
+    const oldPostsList = queryClient.getQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY);
+    const oldPost = queryClient.getQueryData<PostData>(['post', postId]);
 
     postLikeMutation.mutate(
-      { postId: post.postId.toString() },
+      { postId: postId.toString() },
       {
         onError: () => {
-          queryClient.setQueryData<PostData>(['post', post.postId], oldPost);
-          queryClient.setQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY, oldPosts);
+          queryClient.setQueryData<PostData>(['post', postId], oldPost);
+          queryClient.setQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY, oldPostsList);
         },
       },
     );
-    queryClient.setQueryData<PostData>(['post', post.postId], (oldPost) => {
+    queryClient.setQueryData<PostData>(['post', postId], (oldPost) => {
       if (!oldPost) {
         return;
       }
@@ -56,10 +64,27 @@ export const useHandleLike = ({ post }: PropsTypes) => {
       };
     });
 
-    queryClient.setQueryData<InfiniteData<InfinitePosts<PostData>>>(HOME_POSTS_QUERY_KEY, (oldData) =>
+    queryClient.setQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY, (oldData) =>
       updateInfinitePostsLike(oldData, post),
     );
   };
 
-  return { handleLike };
+  const handleLikeWithAnimation = () => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
+
+    if (!isLiked) {
+      handleLike();
+    }
+
+    if (isSignedIn) {
+      setIsLikeAnimationShown(true);
+      timeoutId.current = setTimeout(() => {
+        setIsLikeAnimationShown(false);
+      }, TIMEOUT);
+    }
+  };
+
+  return { handleLike, handleLikeWithAnimation, isLikeAnimationShown };
 };

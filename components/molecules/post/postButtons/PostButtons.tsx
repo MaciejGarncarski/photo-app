@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { createPortal } from 'react-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { PostData } from '@/utils/transformPost';
 
@@ -43,8 +42,10 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
           <ShareModal close={shareModal.close} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
         )}
       </ModalContainer>
-      {postModal.modalOpen &&
-        createPortal(<PostModal modalOpen={postModal.modalOpen} post={post} close={postModal.close} />, document.body)}
+
+      <AnimatePresence>
+        {postModal.modalOpen && <PostModal modalOpen={postModal.modalOpen} post={post} close={postModal.close} />}
+      </AnimatePresence>
     </ul>
   );
 };
