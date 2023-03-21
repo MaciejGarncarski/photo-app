@@ -1,14 +1,12 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { User } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import * as argon2 from 'argon2';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { prisma } from '@/lib/prismadb';
 import { serverEnv } from '@/utils/env.mjs';
-
-const saltRounds = 10;
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -46,25 +44,21 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (user && user?.password) {
-            const isPasswordEqual = await bcrypt.compare(password, user.password);
+            const isPasswordEqual = await argon2.verify(user.password, password);
             return isPasswordEqual ? user : null;
           }
 
-          if (!user) {
-            const hash = bcrypt.hashSync(password, saltRounds);
-            const createdUser = await prisma.user.create({
-              data: {
-                email,
-                password: hash,
-              },
-            });
-            return createdUser;
-          }
+          const hash = await argon2.hash(password);
+          const createdUser = await prisma.user.create({
+            data: {
+              email,
+              password: hash,
+            },
+          });
+          return createdUser;
         } catch (error) {
           return null;
         }
-
-        return null;
       },
     }),
   ],
