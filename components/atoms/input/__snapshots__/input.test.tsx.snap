@@ -18,6 +18,9 @@ exports[` 1`] = `
       type="text"
       value=""
     />
+    <p
+      class="error"
+    />
   </div>
 </DocumentFragment>
 `;

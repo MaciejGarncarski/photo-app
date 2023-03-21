@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, PropsTypes>(
           value={value}
           {...props}
         />
-        {error && <p className={styles.error}>{error.message}</p>}
+        <p className={styles.error}>{error && error.message}</p>
       </div>
     );
   },

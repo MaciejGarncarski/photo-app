@@ -2,9 +2,10 @@ import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
+import { ImagesBase64 } from '@/utils/getFinalImagesBase64';
+
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
-import { ImagesBase64 } from '@/components/pages/createPost/types';
 
 import styles from './imagesPreview.module.scss';
 

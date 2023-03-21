@@ -30,6 +30,7 @@ export const authOptions: NextAuthOptions = {
           type: 'password',
         },
       },
+
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
           return null;
@@ -38,45 +39,26 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials;
 
         try {
-          const isUserCreated = await prisma.user.findFirst({
-            where: {
-              email,
-            },
-          });
-
-          if (!isUserCreated) {
-            bcrypt.hash(password, saltRounds, async (err, hash) => {
-              if (err) {
-                return null;
-              }
-
-              const createdUser = await prisma.user.create({
-                data: {
-                  email,
-                  password: hash,
-                },
-                select: {
-                  id: true,
-                  role: true,
-                  created_at: true,
-                },
-              });
-
-              return createdUser;
-            });
-          }
-
           const user = await prisma.user.findFirst({
             where: {
               email,
             },
           });
 
-          if (user?.password) {
+          if (user && user?.password) {
             const isPasswordEqual = await bcrypt.compare(password, user.password);
-            if (isPasswordEqual) {
-              return user;
-            }
+            return isPasswordEqual ? user : null;
+          }
+
+          if (!user) {
+            const hash = bcrypt.hashSync(password, saltRounds);
+            const createdUser = await prisma.user.create({
+              data: {
+                email,
+                password: hash,
+              },
+            });
+            return createdUser;
           }
         } catch (error) {
           return null;

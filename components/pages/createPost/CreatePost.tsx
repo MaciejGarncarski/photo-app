@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormProps } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useConvertToBase64 } from '@/hooks/useConvertToBase64';
+import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
 
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
@@ -21,34 +21,35 @@ import { useModal } from '@/components/molecules/modal/useModal';
 
 import styles from './createPost.module.scss';
 
-import { FinalImages, ImagesBase64, PostDetails } from './types';
+import { FinalImages, PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';
 
 export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded.' }),
 });
 
+const formOptions: UseFormProps<PostDetails> = {
+  resolver: zodResolver(PostDetailsSchema),
+  defaultValues: {
+    description: '',
+  },
+};
+
 export const CreatePost = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
-  const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>();
   const router = useRouter();
 
   const { open, close, modalOpen } = useModal();
   const { onSubmit } = useOnSubmit({ finalImages, setIsLoading });
-  useConvertToBase64(finalImages, setFinalImagesBase64);
+  const { imagesBase64 } = getFinalImagesBase64(finalImages);
 
   const {
     register,
     handleSubmit,
     formState: { dirtyFields, errors },
-  } = useForm<PostDetails>({
-    resolver: zodResolver(PostDetailsSchema),
-    defaultValues: {
-      description: '',
-    },
-  });
+  } = useForm<PostDetails>(formOptions);
 
   const onRemove = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
@@ -57,11 +58,11 @@ export const CreatePost = () => {
     setFinalImages(filteredState);
   };
 
+  const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
+
   if (isLoading) {
     return <TextWithLoader text="Uploading your post" />;
   }
-
-  const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
 
   return (
     <motion.section
@@ -79,7 +80,7 @@ export const CreatePost = () => {
         </div>
       )}
       <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
-      {finalImagesBase64 && <ImagesPreview imagesBase64={finalImagesBase64} onRemove={onRemove} />}
+      {imagesBase64 && <ImagesPreview imagesBase64={imagesBase64} onRemove={onRemove} />}
       <CreatePostForm
         disabled={isSubmitDisabled}
         errors={errors}

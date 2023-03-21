@@ -1,0 +1,20 @@
+@use '/styles/common';
+
+.form {
+    display: grid;
+    gap: 1.5rem;
+
+    @include common.mediaquery('desktop') {
+        gap: 2.5rem
+    }
+
+}
+
+.signInButton {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 0;
+    font-weight: 600;
+    font-size: 1.25rem;
+}

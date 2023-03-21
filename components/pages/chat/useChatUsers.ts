@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
+import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 
@@ -15,14 +15,13 @@ export type ChatUsersResponse = {
   currentPage: number;
 };
 
-type Arguments = {
-  searchedUser: string;
-};
-
-export const useChatUsers = ({ searchedUser }: Arguments) => {
+export const useChatUsers = () => {
+  const [inputVal, setInputVal] = useState<string>('');
+  const [searchedUser, setSearchedUser] = useState<string>('');
+  const [isEnabled, setIsEnabled] = useState<boolean>(inputVal === '' || false);
   const { session } = useAuth();
 
-  const { data, isLoading, hasNextPage, fetchNextPage } = useInfiniteQuery(
+  const chatUsers = useInfiniteQuery(
     ['chat users', session?.user?.id, searchedUser],
     async ({ pageParam = 0 }) => {
       const { data: responseData } = await axios.get<ChatUsersResponse>(
@@ -32,20 +31,23 @@ export const useChatUsers = ({ searchedUser }: Arguments) => {
       return responseData;
     },
     {
+      enabled: isEnabled,
       refetchOnWindowFocus: false,
       getNextPageParam: (prevMessages) => {
         return prevMessages?.currentPage === prevMessages.totalPages ? undefined : prevMessages.currentPage + 1;
       },
+      onSettled: () => {
+        setIsEnabled(false);
+      },
     },
   );
 
-  const [infiniteRef] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: hasNextPage || false,
-    onLoadMore: fetchNextPage,
-    disabled: !hasNextPage,
-    rootMargin: '0px 0px 500px 0px',
-  });
-
-  return { infiniteRef, data, isLoading, hasNextPage, fetchNextPage };
+  return {
+    chatUsers,
+    inputVal,
+    setInputVal,
+    isEnabled,
+    setIsEnabled,
+    setSearchedUser,
+  };
 };

@@ -21,8 +21,10 @@ export const useNewPost = () => {
   }, [setHasNewPosts]);
 
   const handleRefetchPosts = async () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     await queryClient.invalidateQueries(HOME_POSTS_QUERY_KEY);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 200);
     setHasNewPosts(false);
   };
 

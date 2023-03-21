@@ -25,6 +25,7 @@ type PropsTypes = {
 };
 
 export const POST_AVATAR_SIZE = 50;
+// dayjs.extend(relativeTime);
 
 export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const { username } = useUser({ userId: post.authorId });

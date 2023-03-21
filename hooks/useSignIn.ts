@@ -2,8 +2,14 @@ import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { z } from 'zod';
 
-import { SignInFormValues } from '@/components/pages/signIn/SignIn';
+export const SignInSchema = z.object({
+  email: z.string().email({ message: 'Invalid email.' }),
+  password: z.string().min(5, { message: 'Password is too short.' }),
+});
+
+export type SignInFormValues = z.infer<typeof SignInSchema>;
 
 export const useSignIn = () => {
   const router = useRouter();
@@ -11,12 +17,12 @@ export const useSignIn = () => {
   const onSubmit: SubmitHandler<SignInFormValues> = async ({ email, password }) => {
     const request = await signIn('credentials', { redirect: false, email, password });
 
-    if (request?.ok) {
-      router.push('/');
+    if (request?.error || !request) {
+      return toast.error('Error, try again later.');
     }
 
-    if (request?.error) {
-      toast.error('Error, try again later.');
+    if (request.ok) {
+      return router.push('/');
     }
   };
 

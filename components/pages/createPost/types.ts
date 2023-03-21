@@ -9,11 +9,3 @@ type FinalImage = {
   file: Blob | null;
 };
 export type FinalImages = Array<FinalImage | undefined>;
-
-export type ImagesBase64 = Array<
-  | {
-      id: string;
-      src: string;
-    }
-  | undefined
->;

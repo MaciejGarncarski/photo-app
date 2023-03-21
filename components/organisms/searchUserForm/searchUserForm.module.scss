@@ -5,20 +5,20 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    gap: 0.5rem;
+    gap: 1rem;
     border-radius: var(--radius-big);
     border: var(--border-gray);
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     background-color: var(--bg-secondary);
 
     @include common.mediaquery('desktop') {
-        max-width: 40%;
+        width: 25rem;
     }
 }
 
 .input {
-    flex-grow: 1;
     padding: 1rem 0.5rem;
     border: none;
     background-color: transparent;
+    flex-grow: 1;
 }

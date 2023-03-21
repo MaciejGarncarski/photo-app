@@ -32,6 +32,7 @@ type PropsTypes = {
 };
 
 export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
+  const router = useRouter();
   const { signOut, sessionUserData } = useAuth();
   const userData = useUser({ username });
   const { data, isError } = usePost({ postId: Number(postId) });
@@ -40,13 +41,15 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
   const settingsModal = useModal();
   const signOutModal = useModal();
 
+  const { id } = userData;
+
+  const isOwner = sessionUserData.id === id;
+
   useEffect(() => {
     if (isModalOpen) {
       lock();
     }
-  }, [isModalOpen]);
-
-  const router = useRouter();
+  });
 
   if (!userData.count) {
     return null;
@@ -56,14 +59,10 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     return <p>user error</p>;
   }
 
-  const { id } = userData;
-
   const postModalClose = () => {
     postModal.close();
     router.push(`/${username}`);
   };
-
-  const isOwner = sessionUserData.id === id;
 
   const accountHeaderProps = {
     username,

@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
 
-import { useConvertToBase64 } from '@/hooks/useConvertToBase64';
+import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
 import { useUploadAvatar } from '@/components/organisms/editAccountStages/useUploadAvatar';
-import { FinalImages, ImagesBase64 } from '@/components/pages/createPost/types';
+import { FinalImages } from '@/components/pages/createPost/types';
 
 import styles from './stages.module.scss';
 
@@ -21,8 +20,7 @@ type PropsTypes = {
 };
 
 export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo, stageSelectImage }: PropsTypes) => {
-  const [finalImagesBase64, setFinalImagesBase64] = useState<ImagesBase64>([undefined]);
-  useConvertToBase64(finalImages, setFinalImagesBase64);
+  const { imagesBase64 } = getFinalImagesBase64(finalImages);
 
   const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({
     finalImages,
@@ -38,7 +36,7 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
     return <TextWithLoader text="Uploading new avatar.." />;
   }
 
-  const isNewAvatarReady = Boolean(finalImagesBase64[0]?.src);
+  const isNewAvatarReady = Boolean(imagesBase64[0]?.src);
 
   return (
     <motion.div
@@ -51,10 +49,10 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
       {isNewAvatarReady ? (
         <figure className={styles.preview}>
           <figcaption className={styles.previewFigcaption}>new avatar preview</figcaption>
-          {finalImagesBase64[0]?.src && (
+          {imagesBase64[0]?.src && (
             <Image
               alt="avatar preview"
-              src={finalImagesBase64[0]?.src}
+              src={imagesBase64[0]?.src}
               width={300}
               height={300}
               className={styles.previewImg}
