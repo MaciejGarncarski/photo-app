@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
-import { httpCodes, responseMessages } from '@/utils/apiResponses';
+import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 
 const USERS_PER_SCROLL = 6;
 

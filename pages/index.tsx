@@ -1,13 +1,9 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { prisma } from '@/lib/prismadb';
 import { fetchAccount } from '@/hooks/useUser';
 
 import { Home } from '@/components/pages/home/Home';
-
-dayjs.extend(relativeTime);
 
 const HomePage = () => {
   return <Home />;

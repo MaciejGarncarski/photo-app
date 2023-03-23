@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { createPost } from '@/utils/createPost';
-import { deletePost } from '@/utils/deletePost';
+import { createPost } from '@/utils/apis/createPost';
+import { deletePost } from '@/utils/apis/deletePost';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {

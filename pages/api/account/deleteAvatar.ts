@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
-import { httpCodes, responseMessages } from '@/utils/apiResponses';
+import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 

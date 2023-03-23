@@ -86,12 +86,15 @@ model Post {
   posts_likes    PostLike[]
   posts_comments PostComment[]
   post_saved     SavedPost[]
+  PostImage      PostImage[]
 
   @@index([author_id])
 }
 
 model PostImage {
   id           Int    @id @default(autoincrement()) @db.Int
+  post         Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id      Int    @db.Int
   fileId       String
   name         String
   url          String
@@ -99,6 +102,8 @@ model PostImage {
   width        Int
   height       Int
   size         Int
+  
+  @@index([post_id])
 }
 
 model SavedPost {
@@ -176,10 +181,10 @@ model ChatRoom {
 model Message {
   id          String   @id @default(cuid())
   text        String
-  sender_id      User     @relation(fields: [sender], references: [id], name: "Sent", onDelete: Cascade)
-  sender   String
-  receiver_id    User     @relation(fields: [receiver], references: [id], name: "Received", onDelete: Cascade)
-  receiver String
+  sender_id   User     @relation(fields: [sender], references: [id], name: "Sent", onDelete: Cascade)
+  sender      String
+  receiver_id User     @relation(fields: [receiver], references: [id], name: "Received", onDelete: Cascade)
+  receiver    String
   created_at  DateTime @default(now()) @db.Timestamp(0)
 
   @@index([sender])

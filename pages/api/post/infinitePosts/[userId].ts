@@ -2,11 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
-import { httpCodes, responseMessages } from '@/utils/apiResponses';
-import { infinitePostsCount } from '@/utils/infinitePostsCount';
+import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
+import { PostData, transformPost } from '@/utils/apis/transformPost';
+import { getInfinitePostsCount } from '@/utils/getInfinitePostsCount';
 import { string } from '@/utils/string';
-import { transformPost } from '@/utils/transformPost';
-import { PostData } from '@/utils/transformPost';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
 
@@ -64,7 +63,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const { postsCount, nextCursor } = infinitePostsCount({ count: _count.id, skipNumber });
+    const { postsCount, nextCursor } = getInfinitePostsCount({ count: _count.id, skipNumber });
 
     const transformedPosts = await Promise.all(
       posts.map(async (post) => {

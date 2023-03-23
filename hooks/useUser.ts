@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { clientEnv } from '@/utils/env.mjs';
+import { clientEnv } from '@/utils/env';
 
 export type Account = {
   isFollowing: boolean;

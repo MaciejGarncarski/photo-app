@@ -1,7 +1,8 @@
-import { InfiniteData } from '@tanstack/react-query';
+import { UseInfiniteQueryResult } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
 import { useRouter } from 'next/router';
+import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { string } from '@/utils/string';
 
@@ -27,13 +28,22 @@ const linkVariants: Variants = {
 };
 
 type PropsTypes = {
-  data?: InfiniteData<ChatUsersResponse>;
-  isLoading: boolean;
+  chatUsers: UseInfiniteQueryResult<ChatUsersResponse, unknown>;
+  isEnabled: boolean;
 };
 
-export const ChatUsersList = ({ data, isLoading }: PropsTypes) => {
+export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   const router = useRouter();
+  const { data, isLoading, fetchNextPage, hasNextPage, isError } = chatUsers;
   const isDataLoaded = data && !isLoading;
+
+  const [infiniteRef] = useInfiniteScroll({
+    loading: isLoading && isEnabled,
+    hasNextPage: hasNextPage || false,
+    onLoadMore: fetchNextPage,
+    disabled: isError || !hasNextPage,
+    rootMargin: '0px 0px 300px 0px',
+  });
 
   if (!isDataLoaded) {
     return (
@@ -49,27 +59,34 @@ export const ChatUsersList = ({ data, isLoading }: PropsTypes) => {
   }
 
   return (
-    <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
-      {data.pages.map((page) => {
-        return page.users.map(({ user, chatRoomId }) => {
-          const isActive = chatRoomId === Number(string(router.query.chatRoom));
-          return (
-            <li key={user.id}>
-              <MotionLink
-                variants={linkVariants}
-                href={`/chat/${chatRoomId}`}
-                className={clsx(isActive && styles.linkActive, styles.link)}
-              >
-                <Avatar className={styles.avatar} userId={user.id} />
-                <span className={styles.name}>
-                  <span className={styles.fullName}>{user.name}</span>
-                  <span className={styles.username}>@{user.username}</span>
-                </span>
-              </MotionLink>
-            </li>
-          );
-        });
-      })}
-    </motion.ul>
+    <nav>
+      <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
+        {data.pages.map((page) => {
+          return page.users.map(({ user, chatRoomId }) => {
+            const isActive = chatRoomId === Number(string(router.query.chatRoom));
+            return (
+              <li key={user.id}>
+                <MotionLink
+                  variants={linkVariants}
+                  href={`/chat/${chatRoomId}`}
+                  className={clsx(isActive && styles.linkActive, styles.link)}
+                >
+                  <Avatar className={styles.avatar} userId={user.id} />
+                  <span className={styles.name}>
+                    <span className={styles.fullName}>{user.name}</span>
+                    <span className={styles.username}>@{user.username}</span>
+                  </span>
+                </MotionLink>
+              </li>
+            );
+          });
+        })}
+        {isLoading && (
+          <div ref={infiniteRef}>
+            <Loader />
+          </div>
+        )}
+      </motion.ul>
+    </nav>
   );
 };

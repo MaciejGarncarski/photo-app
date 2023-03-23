@@ -65,7 +65,7 @@ export const CreatePost = () => {
   }
 
   return (
-    <motion.section
+    <motion.main
       aria-labelledby="Create new post"
       className={styles.createPost}
       initial={{ y: 100, opacity: 0 }}
@@ -91,6 +91,6 @@ export const CreatePost = () => {
       <ModalContainer>
         {modalOpen && <ConfirmationAlert headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />}
       </ModalContainer>
-    </motion.section>
+    </motion.main>
   );
 };

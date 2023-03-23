@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { PostData } from '@/utils/transformPost';
+import { PostData } from '@/utils/apis/transformPost';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { useAddComment } from '@/components/molecules/post/commentForm/useAddComment';

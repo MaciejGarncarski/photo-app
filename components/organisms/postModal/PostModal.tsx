@@ -1,8 +1,8 @@
 import { motion, Variants } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
+import { PostData } from '@/utils/apis/transformPost';
 import { unlock } from '@/utils/bodyLock';
-import { PostData } from '@/utils/transformPost';
 
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Backdrop } from '@/components/molecules/modal/Backdrop';

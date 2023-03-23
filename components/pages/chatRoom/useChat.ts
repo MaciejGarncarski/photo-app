@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 import { useAuth } from '@/hooks/useAuth';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
-import { clientEnv } from '@/utils/env.mjs';
+import { clientEnv } from '@/utils/env';
 
 import { useChatMessages } from '@/components/pages/chatRoom/useChatMessages';
 import { useChatSubscription } from '@/components/pages/chatRoom/useChatSubscription';

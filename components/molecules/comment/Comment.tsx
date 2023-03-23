@@ -1,6 +1,7 @@
 import { IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -23,6 +24,7 @@ import styles from './comment.module.scss';
 type PropsTypes = {
   commentData: PostCommentsWithIsLiked;
 };
+dayjs.extend(relativeTime);
 
 export const Comment = ({ commentData }: PropsTypes) => {
   const { sessionUserData } = useAuth();

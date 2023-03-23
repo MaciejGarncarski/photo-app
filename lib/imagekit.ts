@@ -1,6 +1,6 @@
 import ImageKit from 'imagekit';
 
-import { clientEnv, serverEnv } from '@/utils/env.mjs';
+import { clientEnv, serverEnv } from '@/utils/env';
 
 export const imageKit = new ImageKit({
   publicKey: clientEnv.NEXT_PUBLIC_IMG_KIT_PUBLIC,

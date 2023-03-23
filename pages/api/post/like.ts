@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
-import { httpCodes, responseMessages } from '@/utils/apiResponses';
+import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 

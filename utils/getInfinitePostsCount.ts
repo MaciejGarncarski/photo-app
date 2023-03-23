@@ -5,7 +5,7 @@ type InfinitePostsCount = {
   skipNumber: number;
 };
 
-export const infinitePostsCount = ({ count, skipNumber }: InfinitePostsCount) => {
+export const getInfinitePostsCount = ({ count, skipNumber }: InfinitePostsCount) => {
   const canLoadMore = count > (skipNumber + 1) * POSTS_PER_SCROLL;
   const nextCursor = canLoadMore ? skipNumber + 1 : null;
 

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import { useUser } from '@/hooks/useUser';
-import { PostData } from '@/utils/transformPost';
+import { PostData } from '@/utils/apis/transformPost';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { Loader } from '@/components/atoms/loader/Loader';

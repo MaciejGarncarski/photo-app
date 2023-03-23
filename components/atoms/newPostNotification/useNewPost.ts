@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-import { clientEnv } from '@/utils/env.mjs';
+import { clientEnv } from '@/utils/env.js';
 
 import { newPostsAtom } from '@/components/pages/home/Home';
 import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';

@@ -34,7 +34,7 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
-      <motion.main className={styles.posts} variants={containerVariants} animate="show" initial="hidden" role="list">
+      <motion.ul className={styles.posts} variants={containerVariants} animate="show" initial="hidden">
         <NewPostNotification />
         {data?.pages.map((page) => {
           return page?.posts.map((post, idx) => {
@@ -47,7 +47,7 @@ export const Home = () => {
             <PostPlaceholder />
           </div>
         )}
-      </motion.main>
+      </motion.ul>
 
       <aside className={styles.aside}>
         <section className={styles.asideItem}>

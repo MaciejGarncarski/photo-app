@@ -1,11 +1,12 @@
 import { IconMenu2 } from '@tabler/icons-react';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
-import { PostData } from '@/utils/transformPost';
+import { PostData } from '@/utils/apis/transformPost';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
@@ -25,7 +26,7 @@ type PropsTypes = {
 };
 
 export const POST_AVATAR_SIZE = 50;
-// dayjs.extend(relativeTime);
+dayjs.extend(relativeTime);
 
 export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const { username } = useUser({ userId: post.authorId });

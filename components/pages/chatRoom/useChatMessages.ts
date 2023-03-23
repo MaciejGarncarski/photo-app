@@ -19,7 +19,7 @@ export const useChatMessages = ({ userId, friendId }: PropsTypes) => {
     ['chat', userId, friendId],
     async ({ pageParam = 0 }) => {
       const { data } = await axios.get<InfiniteMessages>(
-        `/api/chat/?userId=${userId}&friendId=${friendId}&page=${pageParam}`,
+        `/api/chat/chat?userId=${userId}&friendId=${friendId}&page=${pageParam}`,
       );
       return data;
     },

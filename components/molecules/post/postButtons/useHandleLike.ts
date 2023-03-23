@@ -3,8 +3,8 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/hooks/useAuth';
-import { PostData } from '@/utils/transformPost';
-import { updateInfinitePostsLike } from '@/utils/updateInfinitePostsLike';
+import { PostData } from '@/utils/apis/transformPost';
+import { updateInfinitePostsLike } from '@/utils/apis/updateInfinitePostsLike';
 
 import { usePostLike } from '@/components/molecules/post/postButtons/usePostLike';
 import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';

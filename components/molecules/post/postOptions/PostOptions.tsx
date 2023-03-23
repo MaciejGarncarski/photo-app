@@ -2,7 +2,7 @@ import { IconEdit, IconTrash } from '@tabler/icons-react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
-import { PostData } from '@/utils/transformPost';
+import { PostData } from '@/utils/apis/transformPost';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { ListModal } from '@/components/organisms/listModal/ListModal';

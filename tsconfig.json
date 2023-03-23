@@ -37,7 +37,7 @@
     "jest.config.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/env.mjs"
+    "utils/env.js"
   ],
   "exclude": [
     "node_modules"

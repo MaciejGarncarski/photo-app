@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { clientEnv } from '@/utils/env.mjs';
+import { clientEnv } from '@/utils/env';
 
 export type UploadImages = {
   imageBlob: Blob;

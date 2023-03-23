@@ -7,8 +7,8 @@ import { SessionProvider } from 'next-auth/react';
 import { DefaultSeo } from 'next-seo';
 import { Toaster } from 'react-hot-toast';
 
-import { seoConfig } from '@/lib/next-seo.config';
 import { useIsLoading } from '@/hooks/useIsLoading';
+import { seoConfig } from '@/utils/next-seo.config';
 
 import { Loader } from '@/components/atoms/loader/Loader';
 import { Layout } from '@/components/layout/Layout';

@@ -3,8 +3,8 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 
 import { useAuth } from '@/hooks/useAuth';
-import { CreatePostData } from '@/utils/createPost';
-import { clientEnv } from '@/utils/env.mjs';
+import { CreatePostData } from '@/utils/apis/createPost';
+import { clientEnv } from '@/utils/env';
 
 export type MutationValues = {
   description: string;

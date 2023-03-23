@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
-import { PostData } from '@/utils/transformPost';
+import { PostData } from '@/utils/apis/transformPost';
 
 import { CommentForm } from '@/components/molecules/post/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/post/postButtons/PostButtons';
