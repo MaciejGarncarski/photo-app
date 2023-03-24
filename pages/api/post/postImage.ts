@@ -41,14 +41,14 @@ const postImageHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { fileId, height, name, thumbnailUrl, url, width, size } = parsed.data;
 
   try {
-    const postImage = await prisma.postImage.create({
+    const { id } = await prisma.postImage.create({
       data: {
         fileId,
-        height,
+        url,
+        thumbnailUrl,
         name,
         size,
-        thumbnailUrl,
-        url,
+        height,
         width,
       },
       select: {
@@ -56,7 +56,7 @@ const postImageHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    return res.status(httpCodes.success).send(postImage.id);
+    return res.status(httpCodes.success).send(id);
   } catch (error) {
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }

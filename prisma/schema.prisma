@@ -86,15 +86,12 @@ model Post {
   posts_likes    PostLike[]
   posts_comments PostComment[]
   post_saved     SavedPost[]
-  PostImage      PostImage[]
 
   @@index([author_id])
 }
 
 model PostImage {
   id           Int    @id @default(autoincrement()) @db.Int
-  post         Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
-  post_id      Int    @db.Int
   fileId       String
   name         String
   url          String
@@ -103,7 +100,6 @@ model PostImage {
   height       Int
   size         Int
   
-  @@index([post_id])
 }
 
 model SavedPost {

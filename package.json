@@ -51,7 +51,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
     "@commitlint/config-conventional": "^17.4.0",
-    "@swc-jotai/react-refresh": "^0.0.4",
     "@tanstack/react-query-devtools": "^4.24.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -83,10 +82,5 @@
     "nextjs-bundle-analysis": "^0.4.0",
     "prettier": "^2.8.0",
     "prisma": "^4.10.1"
-  },
-  "nextBundleAnalysis": {
-    "budget": null,
-    "budgetPercentIncreaseRed": 20,
-    "showDetails": true
   }
 }
