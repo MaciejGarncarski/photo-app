@@ -32,7 +32,6 @@ describe('DropZone test', () => {
       fireEvent.dragLeave(dropZone);
       expect(dropZone).toHaveTextContent(inactiveText);
     });
-
     describe('file drop', () => {
       it('should show error if user somehow dropped no files', () => {
         render(<CropImageWrapper />);

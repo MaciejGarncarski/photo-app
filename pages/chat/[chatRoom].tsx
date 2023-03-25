@@ -5,14 +5,14 @@ import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
-import { Loader } from '@/components/atoms/loader/Loader';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ChatRoom } from '@/components/pages/chatRoom/ChatRoom';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const FriendChatPage = ({ chatRoomData }: { chatRoomData: ChatRoomType }) => {
   if (!chatRoomData) {
-    return <Loader />;
+    return <TextWithLoader text="Connecting to chat" />;
   }
 
   return <ChatRoom chatRoomData={chatRoomData} />;

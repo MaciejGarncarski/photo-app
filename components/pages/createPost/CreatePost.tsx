@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
+import { atom, useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
@@ -24,6 +25,8 @@ import styles from './createPost.module.scss';
 import { FinalImages, PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';
 
+export const isCroppingAtom = atom<boolean>(false);
+
 export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded.' }),
 });
@@ -40,6 +43,7 @@ export const CreatePost = () => {
   const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const router = useRouter();
+  const [isCropping] = useAtom(isCroppingAtom);
 
   const { open, close, modalOpen } = useModal();
   const { onSubmit } = useOnSubmit({ finalImages, setIsLoading });
@@ -59,6 +63,7 @@ export const CreatePost = () => {
   };
 
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
+  const canShowPreviews = imagesBase64 && !isCropping;
 
   if (isLoading) {
     return <TextWithLoader text="Uploading your post" />;
@@ -79,8 +84,8 @@ export const CreatePost = () => {
           </CreatePostItemContainer>
         </div>
       )}
-      <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />
-      {imagesBase64 && <ImagesPreview imagesBase64={imagesBase64} onRemove={onRemove} />}
+      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
+      {canShowPreviews && <ImagesPreview imagesBase64={imagesBase64} onRemove={onRemove} />}
       <CreatePostForm
         disabled={isSubmitDisabled}
         errors={errors}

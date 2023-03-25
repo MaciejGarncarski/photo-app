@@ -1,8 +1,10 @@
+import { useAtom } from 'jotai';
 import { DragEvent, useRef, useState } from 'react';
 
 import { handleDropImage } from '@/utils/handleDropImage';
 
 import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
+import { isCroppingAtom } from '@/components/pages/createPost/CreatePost';
 
 type ArgumentsTypes = {
   setError: (error: ImageCropErrors) => void;
@@ -11,6 +13,7 @@ type ArgumentsTypes = {
 
 export const useDropZone = ({ setError, setImgSrc }: ArgumentsTypes) => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [, setIsCropping] = useAtom(isCroppingAtom);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const active = (dragEv: DragEvent<HTMLDivElement>) => {
@@ -41,6 +44,7 @@ export const useDropZone = ({ setError, setImgSrc }: ArgumentsTypes) => {
       return;
     }
 
+    setIsCropping(true);
     handleDropImage({ file: firstFile, setError, setImgSrc });
   };
 

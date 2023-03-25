@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { PostData } from '@/utils/apis/transformPost';
+import { getDescriptionData } from '@/utils/getDescriptionData';
 
 import { CommentForm } from '@/components/molecules/post/commentForm/CommentForm';
 import { PostButtons } from '@/components/molecules/post/postButtons/PostButtons';
-import { descriptionData } from '@/components/organisms/homePost/description';
 
 import styles from './postFooter.module.scss';
 
@@ -19,7 +19,7 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const { description } = post;
-  const { isDescriptionLong, shortDescription } = descriptionData(description);
+  const { isDescriptionLong, shortDescription } = getDescriptionData(description);
 
   const toggleShowMore = () => setShowMore((prev) => !prev);
 

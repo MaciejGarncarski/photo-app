@@ -1,3 +1,4 @@
+import { useAtom } from 'jotai';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 import { v4 } from 'uuid';
@@ -5,6 +6,7 @@ import { v4 } from 'uuid';
 import { convertToBlob } from '@/utils/convertToBlob';
 import { handleDropImage } from '@/utils/handleDropImage';
 
+import { isCroppingAtom } from '@/components/pages/createPost/CreatePost';
 import { FinalImages } from '@/components/pages/createPost/types';
 
 export type ImageCropErrors =
@@ -28,6 +30,8 @@ export const useCropImage = ({ setFinalImages, finalImages }: ArgumentsTypes) =>
   const [error, setError] = useState<ImageCropErrors>(null);
   const [isIdle, setIsIdle] = useState<boolean>(false);
 
+  const [, setIsCropping] = useAtom(isCroppingAtom);
+
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -36,6 +40,7 @@ export const useCropImage = ({ setFinalImages, finalImages }: ArgumentsTypes) =>
     setImgSrc(null);
     setCrop({ x: 0, y: 0 });
     setError(null);
+    setIsCropping(false);
   };
 
   const saveCrop = async () => {
@@ -65,6 +70,7 @@ export const useCropImage = ({ setFinalImages, finalImages }: ArgumentsTypes) =>
     }
 
     if (changeEv.target.files.length > 0) {
+      setIsCropping(true);
       handleDropImage({ file: changeEv.target.files[0], setError, setImgSrc });
     }
   };

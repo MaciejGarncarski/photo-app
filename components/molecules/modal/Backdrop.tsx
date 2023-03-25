@@ -27,9 +27,10 @@ export const Backdrop = ({ close, mobileCenter, children }: PropsTypes) => {
   const backdropClassName = clsx(mobileCenter && styles.backdropMobileCenter, styles.backdrop);
 
   const handleEscapeKey = (keyEv: KeyboardEvent) => {
-    if (keyEv.key === 'Escape') {
-      close();
+    if (keyEv.key !== 'Escape') {
+      return;
     }
+    close();
   };
 
   const handleOverlayClick = (mouseEv: MouseEvent) => {

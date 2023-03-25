@@ -12,6 +12,7 @@ import { Button } from '@/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Loader } from '@/components/atoms/loader/Loader';
+import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
 import { useChat } from '@/components/pages/chatRoom/useChat';
 
@@ -42,7 +43,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
   }, [isLoading]);
 
   if (isLoading || !data) {
-    return <Loader variant="margin-top" />;
+    return <TextWithLoader text="Connecting to chat" />;
   }
 
   return (

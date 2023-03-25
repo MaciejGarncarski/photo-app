@@ -3,10 +3,10 @@ import { useState } from 'react';
 
 import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/apis/transformPost';
+import { getDescriptionData } from '@/utils/getDescriptionData';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
 import { Loader } from '@/components/atoms/loader/Loader';
-import { descriptionData } from '@/components/organisms/homePost/description';
 
 import styles from './postImage.module.scss';
 
@@ -28,7 +28,7 @@ export const PostImage = ({ image, post, className }: PropsTypes) => {
   const { username } = useUser({ userId: authorId });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const { shortDescription } = descriptionData(description);
+  const { shortDescription } = getDescriptionData(description);
 
   return (
     <>
