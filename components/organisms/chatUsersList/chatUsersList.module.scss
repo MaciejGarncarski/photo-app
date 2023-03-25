@@ -35,7 +35,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 1rem;
-    border-radius: var(--radius-medium);
+    border-radius: var(--radius-big);
     background-color: var(--bg-primary);
     padding: 0.5rem 1rem;
     width: 100%;
@@ -54,7 +54,7 @@
     @include common.mediaquery('desktop') {
         width: auto;
         gap: 1rem;
-        padding: 0.5rem;
+        padding: 0.75rem 1.5rem;
     }
 }
 

@@ -37,8 +37,8 @@
 }
 
 .emptySpace {
-  background-color: var(--color-primary);
-  color: rgb(255, 255, 255);
+  background-color: var(--bg-secondary);
+  color: var(--text-black);
   border-radius: var(--radius-small);
   border: 0;
   box-shadow: var(--shadow-secondary);

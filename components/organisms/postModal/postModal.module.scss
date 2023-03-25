@@ -16,7 +16,7 @@
   @include common.mobile-landscape {
     width: auto;
     display: grid;
-    height: 18rem;
+    height: 16rem;
     grid-template-columns: 42vw 17rem;
     grid-template-rows: auto auto 1fr;
     border-radius: var(--radius-small);
