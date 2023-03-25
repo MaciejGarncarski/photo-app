@@ -1,7 +1,7 @@
 {
     "name": "PhotoApp",
     "short_name": "PhotoApp",
-    "start_url": "https://photo-app-orpin.vercel.app/",
+    "start_url": "/",
     "icons": [
         {
             "src": "/icons/android-chrome-192x192.png",
