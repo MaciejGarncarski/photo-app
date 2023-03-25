@@ -1,12 +1,6 @@
-import Link from 'next/link';
+import { FourOFour } from '@/components/pages/fourOFour/FourOFour';
 
-const FourOFour = () => {
-  return (
-    <main>
-      <h2>404</h2>
-      <p>not found</p>
-      <Link href="/">go back to homepage</Link>
-    </main>
-  );
+const FourOFourPage = () => {
+  return <FourOFour />;
 };
-export default FourOFour;
+export default FourOFourPage;

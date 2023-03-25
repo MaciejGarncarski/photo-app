@@ -15,4 +15,12 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+/** @type {import('next-pwa').pwaConfig} */
+const pwaConfig = {
+  dest: 'public',
+  register: true,
+};
+
+const withPWA = require('next-pwa')(pwaConfig);
+
+module.exports = withBundleAnalyzer(withPWA(nextConfig));

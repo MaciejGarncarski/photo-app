@@ -9,4 +9,43 @@ export const seoConfig: NextSeoProps = {
   titleTemplate: `%s • ${APP_NAME}`,
   defaultTitle: APP_NAME,
   description,
+  additionalLinkTags: [
+    {
+      rel: 'icon',
+      sizes: '32x32',
+      href: '/icons/favicon-32x32.png',
+    },
+    {
+      rel: 'icon',
+      sizes: '16x16',
+      href: '/icons/favicon-16x16.png',
+    },
+    {
+      rel: 'mask-icon',
+      href: '/icons/safari-pinned-tab.svg',
+      color: '#5bbad5',
+    },
+    {
+      rel: 'manifest',
+      href: '/icons/site.webmanifest',
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/icons/apple-touch-icon.png',
+    },
+  ],
+  additionalMetaTags: [
+    {
+      name: 'application-name',
+      content: 'PhotoApp',
+    },
+    { name: 'apple-mobile-web-app-title', content: 'PhotoApp' },
+    { name: 'apple-mobile-web-app-capable', content: 'yes' },
+    { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+    { name: 'format-detection', content: 'telephone=no' },
+    { name: 'mobile-web-app-capable', content: 'yes' },
+    { name: 'msapplication-config', content: '/icons/browserconfig.xml' },
+    { name: 'theme-color', content: '#000000' },
+  ],
 };
