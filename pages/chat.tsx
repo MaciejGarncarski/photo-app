@@ -5,9 +5,9 @@ import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { Chat } from '@/components/pages/chat/Chat';
 
 const ChatPage = () => {
-  const { isSignedIn, status } = useAuth();
+  const { isSignedIn, isLoading } = useAuth();
 
-  if (status === 'loading') {
+  if (isLoading) {
     return <Loader variant="margin-top" />;
   }
 

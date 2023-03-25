@@ -5,13 +5,13 @@ import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { EditAccount } from '@/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {
-  const { status, session } = useAuth();
+  const { isLoading, isAuthenticated, session } = useAuth();
 
-  if (status === 'loading' || !session?.user?.id) {
+  if (isLoading || !session?.user?.id) {
     return <Loader variant="margin-top" />;
   }
 
-  if (status === 'unauthenticated') {
+  if (!isAuthenticated) {
     return <AccessDenied />;
   }
 

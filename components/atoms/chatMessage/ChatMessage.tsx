@@ -27,8 +27,6 @@ export const ChatMessage = ({ message }: PropsTypes) => {
   const { session } = useAuth();
   const { sender, text, created_at, id, receiver } = message;
   const isReceiver = sender !== session?.user?.id;
-
-  const fromNow = dayjs().to(dayjs(created_at));
   const formattedDate = dayjs(created_at).format('DD.MM.YY | HH:mm');
 
   const { mutate } = useDeleteChatMessage({ receiver, sender });
@@ -41,7 +39,7 @@ export const ChatMessage = ({ message }: PropsTypes) => {
         </button>
       )}
       <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>
-        <time dateTime={fromNow}>{formattedDate}</time>
+        <time dateTime={created_at.toString()}>{formattedDate}</time>
       </p>
       <div className={clsx(isReceiver && styles.contentReceiver, styles.content)}>
         <Avatar userId={sender} />

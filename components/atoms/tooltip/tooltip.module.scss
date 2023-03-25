@@ -11,6 +11,7 @@
   position: absolute;
   background-color: var(--bg-primary);
   border-radius: var(--radius-small);
+  z-index: 1;
   border: var(--border-gray);
   left: 50%;
   transform: translateX(-50%);

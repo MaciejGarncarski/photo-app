@@ -18,6 +18,8 @@ const Settings = dynamic(() => import('@/components/organisms/settings/Settings'
 
 import dynamic from 'next/dynamic';
 
+import { lock, unlock } from '@/utils/bodyLock';
+
 import { Loader } from '@/components/atoms/loader/Loader';
 
 import styles from './navButtons.module.scss';
@@ -34,6 +36,16 @@ export const NavButtons = () => {
   const router = useRouter();
   const { open, close, modalOpen } = useModal();
   const { listData } = useListData();
+
+  const openSettings = () => {
+    open();
+    lock();
+  };
+
+  const closeSettings = () => {
+    close();
+    unlock();
+  };
 
   if (status === 'loading') {
     return null;
@@ -57,7 +69,7 @@ export const NavButtons = () => {
           );
         })}
         <li className={styles.listItem}>
-          <button type="button" className={styles.listItemContent} onClick={open}>
+          <button type="button" className={styles.listItemContent} onClick={openSettings}>
             <span>
               <IconSettings />
             </span>
@@ -66,7 +78,7 @@ export const NavButtons = () => {
         </li>
       </ul>
       {!isSignedIn && <SignInButton />}
-      <ModalContainer>{modalOpen && <Settings close={close} />}</ModalContainer>
+      <ModalContainer>{modalOpen && <Settings close={closeSettings} />}</ModalContainer>
     </>
   );
 };

@@ -35,7 +35,6 @@ type PropsTypes = {
 export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   const router = useRouter();
   const { data, isLoading, fetchNextPage, hasNextPage, isError } = chatUsers;
-  const isDataLoaded = data && !isLoading;
 
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading && isEnabled,
@@ -45,7 +44,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
     rootMargin: '0px 0px 300px 0px',
   });
 
-  if (!isDataLoaded) {
+  if (!data) {
     return (
       <div className={styles.loader}>
         <Loader />
@@ -59,7 +58,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   }
 
   return (
-    <nav>
+    <nav className={styles.nav}>
       <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
         {data.pages.map((page) => {
           return page.users.map(({ user, chatRoomId }) => {
@@ -81,7 +80,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
             );
           });
         })}
-        {isLoading && (
+        {(hasNextPage || isLoading) && (
           <div ref={infiniteRef}>
             <Loader />
           </div>

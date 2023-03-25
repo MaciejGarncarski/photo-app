@@ -35,7 +35,6 @@ export const Comment = ({ commentData }: PropsTypes) => {
 
   const commentLike = useCommentLike({ commentId: id });
   const commentDelete = useDeleteComment();
-
   const handleLike = () => commentLike.mutate();
   const handleDelete = () => commentDelete.mutate({ commentId: id });
 

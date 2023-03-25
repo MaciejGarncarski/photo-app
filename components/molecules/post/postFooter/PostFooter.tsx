@@ -27,8 +27,7 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
     <footer className={styles.footer}>
       <PostButtons post={post} parentModalOpen={parentModalOpen} />
       <div className={styles.descriptionContainer}>
-        <span className={styles.author}>{post.author.username}</span>
-
+        <p className={styles.author}>{post.author.username}</p>
         {isDescriptionLong ? (
           <>
             <p className={styles.description}>{showMore ? description : shortDescription}</p>

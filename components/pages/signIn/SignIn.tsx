@@ -1,29 +1,9 @@
-import { Variants } from 'framer-motion';
-
 import { Heading } from '@/components/atoms/heading/Heading';
 import { OtherSignInOptions } from '@/components/molecules/otherSignInOptions/OtherSignInOptions';
 import { SignInForm } from '@/components/organisms/signInForm/SignInForm';
+import { animation } from '@/components/pages/signIn/signIn.animation';
 
 import styles from './signIn.module.scss';
-
-const itemVariant: Variants = {
-  hidden: {
-    y: 50,
-    opacity: 0,
-    scale: 0.9,
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-  },
-};
-
-export const animation = {
-  variants: itemVariant,
-  initial: 'hidden',
-  animate: 'visible',
-};
 
 export const SignIn = () => {
   return (

@@ -5,13 +5,13 @@ import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { SignIn } from '@/components/pages/signIn/SignIn';
 
 const AuthPage = () => {
-  const { status } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
-  if (status === 'loading') {
+  if (isLoading) {
     return <Loader variant="margin-top" />;
   }
 
-  if (status === 'authenticated') {
+  if (!isAuthenticated) {
     return <AccessDenied />;
   }
 

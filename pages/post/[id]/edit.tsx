@@ -11,14 +11,14 @@ import { EditPost } from '@/components/pages/editPost/EditPost';
 const EditPostPage = () => {
   const router = useRouter();
   const postId = Number(string(router.query.id));
-  const { data, isLoading } = usePost({ postId });
-  const { status, sessionUserData } = useAuth();
+  const { data, isLoading: isDataLoading } = usePost({ postId });
+  const { isLoading, isAuthenticated, sessionUserData } = useAuth();
 
-  if (status === 'loading' || isLoading) {
+  if (isDataLoading || isLoading) {
     return <Loader variant="margin-top" />;
   }
 
-  if (status !== 'authenticated' || data?.authorId !== sessionUserData.id) {
+  if (!isAuthenticated || data?.authorId !== sessionUserData.id) {
     return <AccessDenied />;
   }
 

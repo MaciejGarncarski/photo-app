@@ -16,6 +16,8 @@ export const useAuth = () => {
         getProviders,
         signIn,
         signOut,
+        isLoading: status === 'loading',
+        isAuthenticated: status === 'authenticated',
         isSignedIn,
         sessionUserData: sessionUserData,
       } as const),

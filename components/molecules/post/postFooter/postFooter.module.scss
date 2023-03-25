@@ -11,21 +11,18 @@
     }
 }
 
-.descriptionContainer {
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
 .description {
     display: inline;
     color: var(--text-gray);
+    line-height: 1.2;
 }
 
 .author {
     font-weight: 600;
     padding-right: 0.5rem;
-
+    display: inline-block;
+    line-height: 1.2;
 }
 
 .showMore {

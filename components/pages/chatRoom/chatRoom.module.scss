@@ -145,10 +145,10 @@
     align-items: center;
     flex-shrink: 0;
     transition: opacity var(--transition);
+    padding: 0.3rem;
 
     &:focus {
-        outline: none;
-        box-shadow: var(--shadow-focus);
+        border-radius: 100%;
     }
 
     &:disabled {

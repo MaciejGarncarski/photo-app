@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
-import { lock } from '@/utils/bodyLock';
+import { lock, unlock } from '@/utils/bodyLock';
 
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
@@ -49,7 +49,7 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     if (isModalOpen) {
       lock();
     }
-  });
+  }, [isModalOpen]);
 
   if (!userData.count) {
     return null;
@@ -64,10 +64,20 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     router.push(`/${username}`);
   };
 
+  const openSettings = () => {
+    settingsModal.open();
+    lock();
+  };
+
+  const closeSettings = () => {
+    settingsModal.close();
+    unlock();
+  };
+
   const accountHeaderProps = {
     username,
     modalOpen: settingsModal.modalOpen,
-    open: settingsModal.open,
+    open: openSettings,
     isOwner,
   };
 
@@ -79,7 +89,7 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
 
       <ModalContainer>
         {settingsModal.modalOpen && (
-          <ListModal close={settingsModal.close} headingText="Account options">
+          <ListModal close={closeSettings} headingText="Account options">
             <ListModalItem type="link" href="/edit-account" icon={<IconEdit />}>
               Edit account
             </ListModalItem>

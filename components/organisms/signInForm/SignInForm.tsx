@@ -6,7 +6,7 @@ import { SignInFormValues, SignInSchema, useSignIn } from '@/hooks/useSignIn';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { Input } from '@/components/atoms/input/Input';
-import { animation } from '@/components/pages/signIn/SignIn';
+import { animation } from '@/components/pages/signIn/signIn.animation';
 
 import styles from './signInForm.module.scss';
 

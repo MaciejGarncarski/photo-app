@@ -28,7 +28,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools position="top-right" />
+        <ReactQueryDevtools position="top-left" />
         <DefaultSeo {...seoConfig} />
         <MotionConfig transition={{ duration: 0.3 }}>
           <style jsx global>{`

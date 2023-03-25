@@ -11,12 +11,12 @@
   top: 0;
   overflow-y: scroll;
   border-radius: var(--radius-small) var(--radius-small) 0 0;
-  height: 80vh;
+  height: 31rem;
 
   @include common.mobile-landscape {
     width: auto;
     display: grid;
-    height: 20rem;
+    height: 18rem;
     grid-template-columns: 42vw 17rem;
     grid-template-rows: auto auto 1fr;
     border-radius: var(--radius-small);
@@ -57,7 +57,6 @@
   @include common.mobile-landscape {
     grid-column: 2 / 3;
     margin-top: 0;
-    max-height: 10rem;
   }
 
   @include common.mediaquery('tablet') {

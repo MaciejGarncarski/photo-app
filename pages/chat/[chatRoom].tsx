@@ -5,14 +5,14 @@ import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prismadb';
 import { string } from '@/utils/string';
 
-import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
+import { Loader } from '@/components/atoms/loader/Loader';
 import { ChatRoom } from '@/components/pages/chatRoom/ChatRoom';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const FriendChatPage = ({ chatRoomData }: { chatRoomData: ChatRoomType }) => {
   if (!chatRoomData) {
-    return <AccessDenied />;
+    return <Loader />;
   }
 
   return <ChatRoom chatRoomData={chatRoomData} />;
