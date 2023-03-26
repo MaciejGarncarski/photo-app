@@ -1,10 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { IconMouse } from '@tabler/icons-react';
+import { IconHandFinger, IconMouse } from '@tabler/icons-react';
+import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
+import { useIsCropping } from '@/hooks/useIsCropping';
+import { useScreenWidth } from '@/hooks/useScreenWidth';
+
 import { Button } from '@/components/atoms/buttons/button/Button';
+import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
+import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useCropImage } from '@/components/molecules/cropImage/useCropImage';
 import { DropZone } from '@/components/molecules/dropZone/DropZone';
@@ -15,13 +21,15 @@ import { FinalImages } from '@/components/pages/createPost/types';
 import styles from './cropImage.module.scss';
 
 type PropsTypes = {
-  aspectRatio: number;
   finalImages: FinalImages;
   setFinalImages: (finalImages: FinalImages) => void;
 };
 
-export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTypes) => {
+export const CropImage = ({ finalImages, setFinalImages }: PropsTypes) => {
   const { open, close, modalOpen } = useModal();
+  const { isMobile } = useScreenWidth();
+  const { isCropping } = useIsCropping();
+  const [aspectRatio, setAspectRatio] = useState<number>(1);
 
   const {
     onCropComplete,
@@ -56,7 +64,7 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
   }
 
   return (
-    <>
+    <CreatePostItemContainer>
       <Heading tag="h2">Crop your image</Heading>
       <div className={styles.cropContainer}>
         <Cropper
@@ -70,8 +78,10 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
         />
       </div>
       <p className={styles.info}>
-        <IconMouse /> Use scroll to zoom in your picture
+        {isMobile ? <IconHandFinger /> : <IconMouse />}
+        <span>{isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture</span>
       </p>
+      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       <div className={styles.buttons}>
         <Button type="button" onClick={open} variant="secondary" className={styles.button}>
           Select diffrent image
@@ -84,6 +94,6 @@ export const CropImage = ({ aspectRatio, finalImages, setFinalImages }: PropsTyp
       <ModalContainer>
         {modalOpen && <ConfirmationAlert headingText="Select diffrent image?" close={close} onConfirm={onConfirm} />}
       </ModalContainer>
-    </>
+    </CreatePostItemContainer>
   );
 };

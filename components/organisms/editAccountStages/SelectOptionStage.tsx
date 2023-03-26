@@ -2,6 +2,7 @@ import { motion, Variants } from 'framer-motion';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
+import { unlock } from '@/utils/bodyLock';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
@@ -38,7 +39,15 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
     return null;
   }
   const removeAvatar = () => {
-    mutate({ userId }, { onSettled: close });
+    mutate(
+      { userId },
+      {
+        onSettled: () => {
+          close();
+          unlock();
+        },
+      },
+    );
   };
 
   if (isLoading) {
@@ -56,7 +65,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
       <EditAccountHeading text="Manage your account" />
       <div className={styles.avatarButtons}>
         <Button type="button" onClick={stageCropImage}>
-          Update avatar
+          {customImage ? 'Update avatar' : 'Upload avatar'}
         </Button>
         {customImage && (
           <Button type="button" variant="secondary" onClick={open}>
@@ -64,7 +73,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
           </Button>
         )}
         <Button type="button" variant="secondary" onClick={stagePersonalInfo}>
-          Edit details
+          Edit account details
         </Button>
       </div>
       <ModalContainer>

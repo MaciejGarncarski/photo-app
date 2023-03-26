@@ -60,7 +60,7 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
           )}
         </figure>
       ) : (
-        <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={1} />
+        <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
       )}
       <div className={styles.buttons}>
         {isNewAvatarReady && (

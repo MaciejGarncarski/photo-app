@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/apis/transformPost';
+import { unlock } from '@/utils/bodyLock';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
@@ -40,8 +41,14 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
 
   const isAuthor = session?.user?.id === authorId;
 
+  const onSettled = () => {
+    closeConfirmation();
+    unlock();
+    close();
+  };
+
   const handleDeletePost = () => {
-    toast.promise(deletePostMutation.mutateAsync({ postId }), {
+    toast.promise(deletePostMutation.mutateAsync({ postId }, { onSettled }), {
       error: 'Error!',
       loading: 'Deleting post...',
       success: 'Deleted!',

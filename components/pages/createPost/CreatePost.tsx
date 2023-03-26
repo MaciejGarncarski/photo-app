@@ -1,18 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
-import { atom, useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { useForm, UseFormProps } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useIsCropping } from '@/hooks/useIsCropping';
 import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
 
-import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
-import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { CreatePostForm } from '@/components/molecules/createPostForm/CreatePostForm';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
@@ -24,8 +22,6 @@ import styles from './createPost.module.scss';
 
 import { FinalImages, PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';
-
-export const isCroppingAtom = atom<boolean>(false);
 
 export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded.' }),
@@ -40,10 +36,9 @@ const formOptions: UseFormProps<PostDetails> = {
 
 export const CreatePost = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [aspectRatio, setAspectRatio] = useState<number>(1);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const router = useRouter();
-  const [isCropping] = useAtom(isCroppingAtom);
+  const { isCropping } = useIsCropping();
 
   const { open, close, modalOpen } = useModal();
   const { onSubmit } = useOnSubmit({ finalImages, setIsLoading });
@@ -79,12 +74,9 @@ export const CreatePost = () => {
       <NextSeo title="Create new post" />
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
-          <CreatePostItemContainer>
-            <CropImage setFinalImages={setFinalImages} finalImages={finalImages} aspectRatio={aspectRatio} />
-          </CreatePostItemContainer>
+          <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
         </div>
       )}
-      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       {canShowPreviews && <ImagesPreview imagesBase64={imagesBase64} onRemove={onRemove} />}
       <CreatePostForm
         disabled={isSubmitDisabled}

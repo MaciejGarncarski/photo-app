@@ -103,7 +103,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
               Reset
             </Button>
           </div>
-          <Button type="submit" onClick={onClick} disabled={isError}>
+          <Button type="submit" onClick={onClick} disabled={isError || !isDirty}>
             Save changes
           </Button>
 

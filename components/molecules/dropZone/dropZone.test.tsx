@@ -8,7 +8,7 @@ const inactiveText = /add image here/i;
 const activeText = /drop here/i;
 
 const CropImageWrapper = () => {
-  return <CropImage aspectRatio={1} finalImages={[undefined]} setFinalImages={jest.fn()} />;
+  return <CropImage finalImages={[undefined]} setFinalImages={jest.fn()} />;
 };
 
 describe('DropZone test', () => {

@@ -1,12 +1,11 @@
-import { useAtom } from 'jotai';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 import { v4 } from 'uuid';
 
+import { useIsCropping } from '@/hooks/useIsCropping';
 import { convertToBlob } from '@/utils/convertToBlob';
 import { handleDropImage } from '@/utils/handleDropImage';
 
-import { isCroppingAtom } from '@/components/pages/createPost/CreatePost';
 import { FinalImages } from '@/components/pages/createPost/types';
 
 export type ImageCropErrors =
@@ -30,7 +29,7 @@ export const useCropImage = ({ setFinalImages, finalImages }: ArgumentsTypes) =>
   const [error, setError] = useState<ImageCropErrors>(null);
   const [isIdle, setIsIdle] = useState<boolean>(false);
 
-  const [, setIsCropping] = useAtom(isCroppingAtom);
+  const { setIsCropping } = useIsCropping();
 
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
