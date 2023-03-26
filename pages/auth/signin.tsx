@@ -11,7 +11,7 @@ const AuthPage = () => {
     return <Loader variant="margin-top" />;
   }
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     return <AccessDenied />;
   }
 
