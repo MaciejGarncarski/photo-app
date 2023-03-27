@@ -19,10 +19,11 @@ import styles from './postSlider.module.scss';
 type PropsTypes = {
   post: PostData;
   containerClassName?: string;
+  priority: boolean;
   imageClassName?: string;
 };
 
-export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTypes) => {
+export const PostSlider = ({ post, priority, imageClassName, containerClassName }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { imagesData } = post;
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
@@ -41,7 +42,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
 
     return (
       <figure onDoubleClick={handleLikeWithAnimation} className={customContainerClassName}>
-        <PostImage image={{ height, width, priority: true, src: url }} className={imageClassName} post={post} />
+        <PostImage image={{ height, width, priority, src: url }} className={imageClassName} post={post} />
         <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
       </figure>
     );
@@ -69,11 +70,7 @@ export const PostSlider = ({ post, imageClassName, containerClassName }: PropsTy
             {postImages.map(({ height, width, fileId, url }, idx) => {
               return (
                 <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage
-                    image={{ src: url, height, width, priority: idx === 0 }}
-                    className={imageClassName}
-                    post={post}
-                  />
+                  <PostImage image={{ src: url, height, width, priority }} className={imageClassName} post={post} />
                 </motion.figure>
               );
             })}

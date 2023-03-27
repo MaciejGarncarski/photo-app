@@ -11,12 +11,12 @@ type PropsTypes = {
   priority: boolean;
 };
 
-export const HomePost = ({ post }: PropsTypes) => {
+export const HomePost = ({ post, priority }: PropsTypes) => {
   return (
     <li>
       <article className={styles.homePost}>
         <PostHeader post={post} />
-        <PostSlider post={post} />
+        <PostSlider post={post} priority={priority} />
         <PostFooter post={post} />
       </article>
     </li>
