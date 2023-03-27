@@ -13,10 +13,12 @@ type PropsTypes = {
 
 export const HomePost = ({ post }: PropsTypes) => {
   return (
-    <article role="listitem" className={styles.homePost}>
-      <PostHeader post={post} />
-      <PostSlider post={post} />
-      <PostFooter post={post} />
-    </article>
+    <li>
+      <article className={styles.homePost}>
+        <PostHeader post={post} />
+        <PostSlider post={post} />
+        <PostFooter post={post} />
+      </article>
+    </li>
   );
 };

@@ -42,10 +42,10 @@ export const Home = () => {
           });
         })}
         {(isLoading || hasNextPage) && (
-          <div ref={sentryRef}>
+          <li ref={sentryRef}>
             <PostPlaceholder />
             <PostPlaceholder />
-          </div>
+          </li>
         )}
       </motion.ul>
 
