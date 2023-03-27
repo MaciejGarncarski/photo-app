@@ -4,8 +4,6 @@ import { motion, Variants } from 'framer-motion';
 import { useRouter } from 'next/router';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { string } from '@/utils/string';
-
 import { MotionLink } from '@/components/atoms/accountPost/AccountPost';
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Loader } from '@/components/atoms/loader/Loader';
@@ -62,7 +60,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
       <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
         {data.pages.map((page) => {
           return page.users.map(({ user, chatRoomId }) => {
-            const isActive = chatRoomId === Number(string(router.query.chatRoom));
+            const isActive = chatRoomId === Number(router.query.chatRoom as string);
             return (
               <li key={user.id}>
                 <MotionLink

@@ -3,7 +3,6 @@ import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { string } from '@/utils/string';
 
 const COMMENTS_PER_SCROLL = 10;
 
@@ -25,18 +24,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(httpCodes.invalidMethod).send(responseMessages.invalidMethod);
   }
 
-  const { skip, postId } = response.data;
+  const { skip: skipAsString, postId } = response.data;
+  const skip = parseInt(skipAsString);
+  const postIdAsNumber = parseInt(postId);
 
-  const skipNumber = Number(string(skip));
   const takeNumber = COMMENTS_PER_SCROLL;
 
   try {
     const comments = await prisma.postComment.findMany({
-      skip: skipNumber * takeNumber,
+      skip: skip * takeNumber,
       take: takeNumber,
 
       where: {
-        post_id: Number(string(postId)),
+        post_id: postIdAsNumber,
       },
 
       orderBy: {
@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { _count } = await prisma.postComment.aggregate({
       where: {
-        post_id: Number(string(postId)),
+        post_id: postIdAsNumber,
       },
       _count: {
         id: true,
@@ -73,8 +73,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     const commentsCount = _count.id;
-    const canLoadMore = commentsCount > (skipNumber + 1) * COMMENTS_PER_SCROLL;
-    const nextCursor = canLoadMore ? skipNumber + 1 : null;
+    const canLoadMore = commentsCount > (skip + 1) * COMMENTS_PER_SCROLL;
+    const nextCursor = canLoadMore ? skip + 1 : null;
 
     res.status(httpCodes.success).send({ comments: commentsWithLikes, commentsCount, cursor: nextCursor });
   } catch (e) {

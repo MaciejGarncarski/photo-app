@@ -41,7 +41,7 @@
   }
 
   @include common.mediaquery('desktop') {
-    --post-width: calc(16rem + 15vw);
+    --post-width: calc(18rem + 15vw);
   }
 }
 

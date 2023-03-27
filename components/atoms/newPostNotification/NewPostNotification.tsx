@@ -40,7 +40,7 @@ export const NewPostNotification = () => {
           onClick={handleRefetchPosts}
         >
           <IconArrowUp />
-          new posts
+          New posts
         </motion.button>
       )}
     </AnimatePresence>

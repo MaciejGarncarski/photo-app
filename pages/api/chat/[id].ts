@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { string } from '@/utils/string';
 
 const chatHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -13,7 +12,7 @@ const chatHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       await prisma.message.deleteMany({
         where: {
-          id: string(id),
+          id: id as string,
         },
       });
 

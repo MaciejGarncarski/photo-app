@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 import { transformPost } from '@/utils/apis/transformPost';
+
+import { authOptions } from '../auth/[...nextauth]';
 
 const PostByIdSchema = z.object({
   postId: z.string(),
@@ -11,6 +14,7 @@ const PostByIdSchema = z.object({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const response = PostByIdSchema.safeParse(req.query);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!response.success) {
     return res.status(httpCodes.badRequest).send({
@@ -40,7 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    const postData = await transformPost(post);
+    const postData = await transformPost(post, session);
     res.status(httpCodes.success).send(postData);
   } catch (error) {
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);

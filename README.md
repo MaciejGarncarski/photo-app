@@ -19,7 +19,9 @@
 
 ## Overview
 
-Fullstack Next.js social app. In photo-app you can sign up via google and upload your favourite photos.
+PhotoApp is social media application created in the modern tech stack.
+In this app, you can create posts, comment on them, follow and chat with other users. It was my first attempt to create a backend in Next.js, so I learned a
+lot of things while creating PhotoApp.
 
 ## Live
 
@@ -60,6 +62,7 @@ yarn dev
 - Next API routes
 - Next-auth
 - Prisma
+- Websockets
 - Planetscale
 
 ### Testing

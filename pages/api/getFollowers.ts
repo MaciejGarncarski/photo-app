@@ -55,15 +55,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const nextCursor = canLoadMore ? +skip + 1 : null;
 
       const usersWithChatRooms = await Promise.all(
-        users.map(async (user) => {
+        users.map(async ({ from_user }) => {
           const chatRoom = await prisma.chatRoom.findFirst({
             where: {
               OR: [
                 {
                   userOne_id: userId,
-                  userTwo_id: user.from_user.id,
+                  userTwo_id: from_user.id,
                 },
-                { userTwo_id: userId, userOne_id: user.from_user.id },
+                { userTwo_id: userId, userOne_id: from_user.id },
               ],
             },
           });
@@ -72,18 +72,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const { id } = await prisma.chatRoom.create({
               data: {
                 userOne_id: userId,
-                userTwo_id: user.from_user.id,
+                userTwo_id: from_user.id,
               },
             });
 
             return {
-              user: user.from_user,
+              user: from_user,
               chatRoomId: id,
             };
           }
 
           return {
-            user: user.from_user,
+            user: from_user,
             chatRoomId: chatRoom.id,
           };
         }),
@@ -118,15 +118,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const nextCursor = canLoadMore ? +skip + 1 : null;
 
       const usersWithChatRooms = await Promise.all(
-        users.map(async (user) => {
+        users.map(async ({ to_user }) => {
           const chatRoom = await prisma.chatRoom.findFirst({
             where: {
               OR: [
                 {
                   userOne_id: userId,
-                  userTwo_id: user.to_user.id,
+                  userTwo_id: to_user.id,
                 },
-                { userTwo_id: userId, userOne_id: user.to_user.id },
+                { userTwo_id: userId, userOne_id: to_user.id },
               ],
             },
           });
@@ -135,18 +135,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const { id } = await prisma.chatRoom.create({
               data: {
                 userOne_id: userId,
-                userTwo_id: user.to_user.id,
+                userTwo_id: to_user.id,
               },
             });
 
             return {
-              user: user.to_user,
+              user: to_user,
               chatRoomId: id,
             };
           }
 
           return {
-            user: user.to_user,
+            user: to_user,
             chatRoomId: chatRoom.id,
           };
         }),
@@ -155,6 +155,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(httpCodes.success).send({ users: usersWithChatRooms, usersCount, canLoadMore, nextCursor });
     }
   } catch (error) {
+    // console.log(error);
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };

@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 
 import { prisma } from '@/lib/prismadb';
-import { string } from '@/utils/string';
 
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ChatRoom } from '@/components/pages/chatRoom/ChatRoom';
@@ -38,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res, req, query }
   try {
     const chatRoomData = await prisma.chatRoom.findFirst({
       where: {
-        id: Number(string(query.chatRoom)),
+        id: parseInt(query.chatRoom as string),
         OR: [
           {
             userOne_id: userId,

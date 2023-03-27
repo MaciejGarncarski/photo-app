@@ -1,17 +1,15 @@
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import ReactFocusLock from 'react-focus-lock';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useAuth } from '@/hooks/useAuth';
 import { useFollowers } from '@/hooks/useFollowers';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { Backdrop } from '@/components/molecules/modal/Backdrop';
 import { ModalClose } from '@/components/molecules/modal/ModalClose';
 
 import styles from './statsModal.module.scss';
+
+import { StatsModalItem } from './StatsModalItem';
 
 type PropsTypes = {
   userId: string;
@@ -24,7 +22,6 @@ type PropsTypes = {
 };
 
 export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
-  const { session } = useAuth();
   const { close } = modal;
   const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({ userId, type });
 
@@ -45,9 +42,9 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
         <ReactFocusLock>
           <ModalClose onClose={close} />
           {isEmpty && (
-            <p className={styles.list}>
-              <span className={styles.listItem}>No data.</span>
-            </p>
+            <ul className={styles.list}>
+              <li className={styles.listItem}>No data.</li>
+            </ul>
           )}
           {isLoading || hasNextPage ? (
             <ul className={styles.list} ref={sentryRef}>
@@ -59,18 +56,7 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
             <ul className={styles.list}>
               {data?.pages.map((page) => {
                 return page.users.map(({ user }) => {
-                  const { id, username } = user;
-
-                  return (
-                    <li key={id} className={styles.listItem}>
-                      <Link href={`/${username}`} className={styles.itemLink} onClick={close}>
-                        <Avatar userId={id} />
-                        <span className={styles.username}>@{username}</span>
-                      </Link>
-
-                      {user.id !== session?.user?.id && <FollowButton userId={id} />}
-                    </li>
-                  );
+                  return <StatsModalItem user={user} key={user.id} />;
                 });
               })}
             </ul>

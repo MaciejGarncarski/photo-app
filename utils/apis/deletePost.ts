@@ -5,7 +5,6 @@ import { z } from 'zod';
 import { imageKit } from '@/lib/imagekit';
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
@@ -24,7 +23,7 @@ export const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { postId } = response.data;
 
-  const postIDToNum = Number(string(postId));
+  const postIDToNum = parseInt(postId);
 
   try {
     const post = await prisma.post.findFirst({

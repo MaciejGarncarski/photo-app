@@ -4,7 +4,6 @@ import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
@@ -79,7 +78,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(httpCodes.unauthorized).send({ message: responseMessages.unauthorized });
     }
 
-    const followingUserId = string(req.query.followingUserId);
+    const followingUserId = req.query.followingUserId as string;
 
     try {
       await prisma.follower.deleteMany({

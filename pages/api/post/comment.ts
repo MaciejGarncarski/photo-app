@@ -4,7 +4,6 @@ import { z } from 'zod';
 
 import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { string } from '@/utils/string';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
@@ -40,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       data: { commentText, postId },
     } = response;
 
-    const userId = string(session?.user?.id);
+    const userId = session?.user?.id;
 
     try {
       await prisma.postComment.create({
