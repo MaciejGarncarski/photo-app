@@ -1,7 +1,6 @@
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import { useEffect } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
@@ -45,18 +44,8 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
 
   const isOwner = sessionUserData.id === id;
 
-  useEffect(() => {
-    if (isModalOpen) {
-      lock();
-    }
-  }, [isModalOpen]);
-
-  if (!userData.count) {
-    return null;
-  }
-
-  if (isError) {
-    return <p>user error</p>;
+  if (isModalOpen) {
+    lock();
   }
 
   const postModalClose = () => {
@@ -80,6 +69,14 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     open: openSettings,
     isOwner,
   };
+
+  if (!userData.count) {
+    return null;
+  }
+
+  if (isError) {
+    return <p>user error</p>;
+  }
 
   return (
     <div className={styles.container}>

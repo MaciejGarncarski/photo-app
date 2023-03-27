@@ -18,7 +18,7 @@ export const useSignIn = () => {
     const request = await signIn('credentials', { redirect: false, email, password });
 
     if (request?.error || !request) {
-      return toast.error('Error, try again later.');
+      return toast.error('Invalid email or password.');
     }
 
     if (request.ok) {

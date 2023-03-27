@@ -22,8 +22,12 @@
     min-height: 15rem;
   }
 
-  @include common.mediaquery('desktop') {
+
+  @include common.mediaquery('tablet') {
     border-radius: 0;
+  }
+
+  @include common.mediaquery('desktop') {
     min-height: 20rem;
   }
 }
