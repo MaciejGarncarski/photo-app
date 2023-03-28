@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useForm, UseFormProps } from 'react-hook-form';
-import { z } from 'zod';
 
 import { useUser } from '@/hooks/useUser';
+import { unlock } from '@/utils/bodyLock';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
@@ -14,6 +14,7 @@ import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
+import { AccountDetails, AccountDetailsSchema } from '@/components/organisms/editAccountStages/accountDetailts';
 import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
 import { useEditDetails } from '@/components/organisms/editAccountStages/useEditDetails';
 
@@ -23,28 +24,6 @@ type PropsTypes = {
   userId: string;
   stageSelectImage: () => void;
 };
-
-const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
-const smallCharactersRegexp = /^[a-z0-9_\-]+$/;
-
-export const fullName = z.string().min(4, { message: 'Full name must contain at least 2 characters' }).optional();
-export const username = z
-  .string()
-  .min(4, { message: 'Username must contain at least 4 characters' })
-  .regex(usernameRegex, { message: 'Invalid username' })
-  .regex(smallCharactersRegexp, { message: 'Only lowercase characters allowed' })
-  .max(9, { message: 'Only 9 characters allowed' })
-  .optional();
-
-export const bio = z.string().max(200, { message: 'Bio contains too many characters' }).optional();
-
-export const AccountDetailsSchema = z.object({
-  username,
-  fullName,
-  bio,
-});
-
-export type AccountDetails = z.infer<typeof AccountDetailsSchema>;
 
 export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const { username, name, bio, isLoading } = useUser({ userId });
@@ -71,6 +50,11 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, open, reset, userId });
 
   const isError = Boolean(errors.bio || errors.fullName || errors.username);
+
+  const closeConfirmation = () => {
+    close();
+    unlock();
+  };
 
   if (isLoading) {
     return null;
@@ -106,9 +90,10 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
           <Button type="submit" onClick={onClick} disabled={isError || !isDirty}>
             Save changes
           </Button>
-
           <ModalContainer>
-            {modalOpen && <ConfirmationAlert headingText="Save changes?" close={close} onConfirm={onSubmit} />}
+            {modalOpen && (
+              <ConfirmationAlert headingText="Save changes?" close={closeConfirmation} onConfirm={onSubmit} />
+            )}
           </ModalContainer>
         </div>
       </motion.form>

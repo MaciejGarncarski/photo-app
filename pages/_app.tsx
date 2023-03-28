@@ -1,5 +1,4 @@
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { Open_Sans } from 'next/font/google';
@@ -28,7 +27,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools position="top-left" />
         <DefaultSeo {...seoConfig} />
         <MotionConfig transition={{ duration: 0.3 }}>
           <style jsx global>{`

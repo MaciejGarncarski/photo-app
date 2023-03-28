@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { MouseEvent } from 'react';
 import { UseFormGetValues } from 'react-hook-form';
 
-import { AccountDetails } from '@/components/organisms/editAccountStages/DetailsStage';
+import { AccountDetails } from '@/components/organisms/editAccountStages/accountDetailts';
 import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
 
 type UseEditDetailsArguments = {

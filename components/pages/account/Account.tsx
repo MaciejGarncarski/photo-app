@@ -101,7 +101,7 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
       </ModalContainer>
       <ModalContainer>
         {signOutModal.modalOpen && (
-          <ConfirmationAlert headingText="Sign out?" onConfirm={signOut} onCancel={signOutModal.close} close={close} />
+          <ConfirmationAlert headingText="Sign out?" onConfirm={signOut} close={signOutModal.close} />
         )}
       </ModalContainer>
       <ModalContainer>

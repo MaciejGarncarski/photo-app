@@ -9,7 +9,6 @@ import styles from './confirmationAlert.module.scss';
 
 type PropsTypes = {
   onConfirm: () => void;
-  onCancel?: () => void;
   close: () => void;
   headingText?: string;
 };
@@ -31,11 +30,9 @@ const alertVariants: Variants = {
   },
 };
 
-export const ConfirmationAlert = ({ headingText, onConfirm, onCancel, close }: PropsTypes) => {
-  const handleCancel = onCancel ? onCancel : close;
-
+export const ConfirmationAlert = ({ headingText, onConfirm, close }: PropsTypes) => {
   return (
-    <Backdrop close={handleCancel} mobileCenter>
+    <Backdrop close={close} mobileCenter>
       <motion.div
         role="dialog"
         className={styles.container}
@@ -46,9 +43,9 @@ export const ConfirmationAlert = ({ headingText, onConfirm, onCancel, close }: P
       >
         <h3 className={styles.heading}>{headingText || 'Are you sure?'}</h3>
         <ReactFocusLock>
-          <ModalClose onClose={handleCancel} />
+          <ModalClose onClose={close} />
           <div className={styles.buttonsRow}>
-            <Button type="button" onClick={handleCancel} variant="secondary" className={styles.button}>
+            <Button type="button" onClick={close} variant="secondary" className={styles.button}>
               cancel
             </Button>
             <Button type="button" onClick={onConfirm} className={styles.button}>

@@ -15,8 +15,6 @@
     - [Testing](#testing)
     - [Tools](#tools)
   - [Screenshots](#screenshots)
-    - [Deskstop](#deskstop)
-    - [Mobile](#mobile)
 
 ## Overview
 
@@ -103,14 +101,11 @@ yarn dev
 
 ## Screenshots
 
-### Deskstop
+![home](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/home.png)
 
-![Desktop home](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/desktop/desktop-home-dark.png)
+![chat](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)
 
-![Desktop create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/desktop/create-post.png)
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/create-post.png)
 
-![Desktop profile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/desktop/profile.png)
+![profile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/profile.png)
 
-### Mobile
-
-![Desktop mobile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/mobile/mobile-home-light.png)
