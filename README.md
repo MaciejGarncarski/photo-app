@@ -6,6 +6,7 @@
   - [Live](#live)
   - [Installation \& running](#installation--running)
     - [Install node dependencies](#install-node-dependencies)
+    - [Add .env](#add-env)
     - [Start dev server](#start-dev-server)
   - [Features](#features)
   - [Tech used](#tech-used)
@@ -34,6 +35,26 @@ lot of things while creating PhotoApp.
 ```bash
 yarn install
 ```
+
+### Add .env
+
+```
+# .env 
+
+DATABASE_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+IMG_KIT_PRIVATE=
+
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+
+NEXT_PUBLIC_API_ROOT=
+NEXT_PUBLIC_IMG_KIT_PUBLIC=
+NEXT_PUBLIC_IMG_KIT_ENDPOINT=
+NEXT_PUBLIC_WS_URL=
+```
+
 
 ### Start dev server
 
