@@ -44,7 +44,8 @@ yarn dev
 ## Features
 
 - Authentication
-- Posts system
+- Chat
+- Uploading post system
 - Post likes system
 - Post comments system
 
@@ -54,7 +55,7 @@ yarn dev
 
 - TypeScript
 - Next.js
-- SASS
+- SASS with css-modules
 - React Query
 
 ### Backend
@@ -62,7 +63,7 @@ yarn dev
 - Next API routes
 - Next-auth
 - Prisma
-- Websockets
+- Websockets server
 - Planetscale
 
 ### Testing

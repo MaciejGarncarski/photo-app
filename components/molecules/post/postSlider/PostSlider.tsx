@@ -70,7 +70,11 @@ export const PostSlider = ({ post, priority, imageClassName, containerClassName 
             {postImages.map(({ height, width, fileId, url }, idx) => {
               return (
                 <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage image={{ src: url, height, width, priority }} className={imageClassName} post={post} />
+                  <PostImage
+                    image={{ src: url, height, width, priority: priority && idx > 1 }}
+                    className={imageClassName}
+                    post={post}
+                  />
                 </motion.figure>
               );
             })}
