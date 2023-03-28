@@ -15,6 +15,11 @@
     - [Testing](#testing)
     - [Tools](#tools)
   - [Screenshots](#screenshots)
+    - [Home](#home)
+    - [Chat selection](#chat-selection)
+    - [Chat room](#chat-room)
+    - [Create post](#create-post)
+    - [Profile](#profile)
 
 ## Overview
 
@@ -101,11 +106,19 @@ yarn dev
 
 ## Screenshots
 
+
+### Home
 ![home](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/home.png)
 
+### Chat selection
 ![chat](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)
 
+### Chat room
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat-room.png)
+
+### Create post
 ![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/create-post.png)
 
+### Profile
 ![profile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/profile.png)
 
