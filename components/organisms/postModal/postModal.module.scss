@@ -12,6 +12,7 @@
   overflow-y: scroll;
   border-radius: var(--radius-small) var(--radius-small) 0 0;
   height: 31rem;
+  padding: 0.5rem 0;
 
   @include common.mobile-landscape {
     width: auto;
@@ -23,6 +24,7 @@
   }
 
   @include common.mediaquery('tablet') {
+    padding: 0;
     width: auto;
     overflow-y: unset;
     margin: auto;
