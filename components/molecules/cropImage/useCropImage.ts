@@ -18,29 +18,29 @@ export type ImageCropErrors =
 
 type ArgumentsTypes = {
   setFinalImages: (finalImg: FinalImages) => void;
+  setIsIdle: (val: boolean) => void;
+  setError: (val: ImageCropErrors) => void;
+  setImgSrc: (val: string | null) => void;
+  resetState: () => void;
   finalImages: FinalImages;
+  imgSrc: string | null;
 };
 
-export const useCropImage = ({ setFinalImages, finalImages }: ArgumentsTypes) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
+export const useCropImage = ({
+  setFinalImages,
+  finalImages,
+  setError,
+  setImgSrc,
+  setIsIdle,
+  imgSrc,
+  resetState,
+}: ArgumentsTypes) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
-  const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const [error, setError] = useState<ImageCropErrors>(null);
-  const [isIdle, setIsIdle] = useState<boolean>(false);
-
   const { setIsCropping } = useIsCropping();
 
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
-
-  const resetState = () => {
-    setImgSrc(null);
-    setCrop({ x: 0, y: 0 });
-    setError(null);
-    setIsCropping(false);
-  };
 
   const saveCrop = async () => {
     setIsIdle(true);
@@ -77,16 +77,6 @@ export const useCropImage = ({ setFinalImages, finalImages }: ArgumentsTypes) =>
   return {
     saveCrop,
     onCropComplete,
-    isIdle,
-    crop,
-    zoom,
-    error,
-    setCrop,
-    setZoom,
-    setError,
-    imgSrc,
-    setImgSrc,
     onChange,
-    resetState,
   };
 };

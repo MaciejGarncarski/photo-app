@@ -24,7 +24,6 @@ export const serverEnv = {
 };
 
 export const clientSchema = z.object({
-  NEXT_PUBLIC_API_ROOT: z.string(),
   NEXT_PUBLIC_IMG_KIT_PUBLIC: z.string(),
   NEXT_PUBLIC_IMG_KIT_ENDPOINT: z.string(),
   NEXT_PUBLIC_WS_URL: z.string(),
@@ -36,6 +35,5 @@ export const clientSchema = z.object({
 export const clientEnv = {
   NEXT_PUBLIC_IMG_KIT_ENDPOINT: process.env.NEXT_PUBLIC_IMG_KIT_ENDPOINT,
   NEXT_PUBLIC_IMG_KIT_PUBLIC: process.env.NEXT_PUBLIC_IMG_KIT_PUBLIC,
-  NEXT_PUBLIC_API_ROOT: process.env.NEXT_PUBLIC_API_ROOT,
   NEXT_PUBLIC_WS_URL: process.env.NEXT_PUBLIC_WS_URL,
 };

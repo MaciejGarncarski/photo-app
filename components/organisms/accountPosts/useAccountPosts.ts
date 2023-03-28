@@ -2,11 +2,9 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { PostData } from '@/utils/apis/transformPost';
-import { clientEnv } from '@/utils/env';
 
 type FetchPost = {
   pageParam?: number;
-  isPrefetching?: boolean;
   userId: string;
 };
 
@@ -21,11 +19,9 @@ type InfiniteAccountPosts = {
   totalPages: number;
 };
 
-const fetchPosts = async ({ pageParam = 0, isPrefetching = false, userId }: FetchPost) => {
+const fetchPosts = async ({ pageParam = 0, userId }: FetchPost) => {
   const { data } = await axios.get<InfiniteAccountPosts>(
-    `${
-      isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''
-    }/api/account/infinitePosts?userId=${userId}&currentPage=${pageParam}`,
+    `/api/account/infinitePosts?userId=${userId}&currentPage=${pageParam}`,
   );
   return data;
 };

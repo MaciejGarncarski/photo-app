@@ -12,7 +12,7 @@ import { Heading } from '@/components/atoms/heading/Heading';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useCropImage } from '@/components/molecules/cropImage/useCropImage';
+import { ImageCropErrors, useCropImage } from '@/components/molecules/cropImage/useCropImage';
 import { DropZone } from '@/components/molecules/dropZone/DropZone';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
@@ -26,28 +26,32 @@ type PropsTypes = {
 };
 
 export const CropImage = ({ finalImages, setFinalImages }: PropsTypes) => {
+  const [aspectRatio, setAspectRatio] = useState<number>(1);
+  const [zoom, setZoom] = useState(1);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const [error, setError] = useState<ImageCropErrors>(null);
+  const [isIdle, setIsIdle] = useState<boolean>(false);
+
   const { open, close, modalOpen } = useModal();
   const { isMobile } = useScreenWidth();
-  const { isCropping } = useIsCropping();
-  const [aspectRatio, setAspectRatio] = useState<number>(1);
+  const { isCropping, setIsCropping } = useIsCropping();
 
-  const {
-    onCropComplete,
-    saveCrop,
-    imgSrc,
-    isIdle,
-    zoom,
-    crop,
-    error,
-    setCrop,
-    setZoom,
-    setError,
-    setImgSrc,
-    onChange,
-    resetState,
-  } = useCropImage({
+  const resetState = () => {
+    setImgSrc(null);
+    setCrop({ x: 0, y: 0 });
+    setError(null);
+    setIsCropping(false);
+  };
+
+  const { onCropComplete, saveCrop, onChange } = useCropImage({
     finalImages,
     setFinalImages,
+    resetState,
+    setError,
+    imgSrc,
+    setImgSrc,
+    setIsIdle,
   });
 
   const onConfirm = () => {

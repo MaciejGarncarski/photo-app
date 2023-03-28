@@ -2,8 +2,6 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { clientEnv } from '@/utils/env';
-
 export type Account = {
   isFollowing: boolean;
   user: User | null;
@@ -17,22 +15,19 @@ export type Account = {
 type PropsTypes = {
   username?: string;
   userId?: string;
-  isPrefetching?: boolean;
 };
 
-export const fetchAccount = async ({ userId, username, isPrefetching }: PropsTypes) => {
+export const fetchAccount = async ({ userId, username }: PropsTypes) => {
+  const url = '/api/account';
+
   if (userId) {
-    const { data } = await axios.get<Account>(
-      `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${userId}`,
-    );
+    const { data } = await axios.get<Account>(`${url}/${userId}`);
 
     return data;
   }
 
   if (username) {
-    const { data } = await axios.get<Account>(
-      `${isPrefetching ? clientEnv.NEXT_PUBLIC_API_ROOT : ''}/api/account/${username}?type=username`,
-    );
+    const { data } = await axios.get<Account>(`${url}/${username}?type=username`);
     return data;
   }
 };
