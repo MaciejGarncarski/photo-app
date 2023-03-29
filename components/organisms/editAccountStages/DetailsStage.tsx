@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { useForm, UseFormProps } from 'react-hook-form';
 
 import { useUser } from '@/hooks/useUser';
-import { unlock } from '@/utils/bodyLock';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
@@ -53,7 +52,6 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
 
   const closeConfirmation = () => {
     close();
-    unlock();
   };
 
   if (isLoading) {

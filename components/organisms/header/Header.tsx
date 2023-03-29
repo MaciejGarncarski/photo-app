@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
-import { lock, unlock } from '@/utils/bodyLock';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
@@ -19,16 +18,6 @@ export const Header = () => {
   const { sessionUserData, isSignedIn } = useAuth();
   const { close, modalOpen, open } = useModal();
 
-  const openSettings = () => {
-    open();
-    lock();
-  };
-
-  const closeSettings = () => {
-    close();
-    unlock();
-  };
-
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.anchor}>
@@ -40,7 +29,7 @@ export const Header = () => {
         <div className={styles.options}>
           {isSignedIn && (
             <>
-              <button type="button" className={styles.button} onClick={modalOpen ? closeSettings : openSettings}>
+              <button type="button" className={styles.button} onClick={modalOpen ? close : open}>
                 <Avatar userId={sessionUserData.id} className={styles.avatar} />
                 <span className={styles.userInfo}>
                   <span className={styles.name}>{sessionUserData.name}</span>
@@ -51,7 +40,7 @@ export const Header = () => {
                   <IconDots />
                 </span>
               </button>
-              <ModalContainer>{modalOpen && <Settings close={closeSettings} />}</ModalContainer>
+              <ModalContainer>{modalOpen && <Settings close={close} />}</ModalContainer>
             </>
           )}
         </div>

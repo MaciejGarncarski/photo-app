@@ -2,7 +2,6 @@ import { IconMessage2, IconShare } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
 import { PostData } from '@/utils/apis/transformPost';
-import { lock } from '@/utils/bodyLock';
 
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { useModal } from '@/components/molecules/modal/useModal';
@@ -27,7 +26,6 @@ export const usePostButtonsData = ({ post, parentModalOpen }: Arguments) => {
 
   const postModalOpen = () => {
     postModal.open();
-    lock();
   };
   const { isLiked, likesCount, commentsCount } = post;
 

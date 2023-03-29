@@ -2,7 +2,6 @@ import { motion, Variants } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { PostData } from '@/utils/apis/transformPost';
-import { unlock } from '@/utils/bodyLock';
 
 import { Heading } from '@/components/atoms/heading/Heading';
 import { Backdrop } from '@/components/molecules/modal/Backdrop';
@@ -33,15 +32,10 @@ const modalVariants: Variants = {
 };
 
 export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
-  const onClose = () => {
-    unlock();
-    close();
-  };
-
   return (
-    <Backdrop close={onClose}>
+    <Backdrop close={close}>
       <ReactFocusLock>
-        <ModalClose onClose={onClose} outside />
+        <ModalClose onClose={close} outside />
         <motion.div
           variants={modalVariants}
           initial="hidden"
