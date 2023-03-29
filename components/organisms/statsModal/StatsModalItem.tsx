@@ -2,6 +2,7 @@ import { User } from '@prisma/client';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
+import { unlock } from '@/utils/bodyLock';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
@@ -14,7 +15,7 @@ export const StatsModalItem = ({ user }: { user: User }) => {
 
   return (
     <li key={id} className={styles.listItem}>
-      <Link href={`/${username}`} className={styles.itemLink} onClick={close}>
+      <Link href={`/${username}`} className={styles.itemLink} onClick={unlock}>
         <Avatar userId={id} />
         <span className={styles.username}>@{username}</span>
       </Link>
