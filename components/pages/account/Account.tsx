@@ -80,7 +80,7 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
       <ModalContainer>
         {settingsModal.modalOpen && (
           <ListModal close={settingsModal.close} headingText="Account options">
-            <ListModalItem type="link" href="/edit-account" icon={<IconEdit />}>
+            <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} onClick={settingsModal.close}>
               Edit account
             </ListModalItem>
             <ListModalItem type="button" onClick={signOutModal.open} icon={<IconDoorExit />} isLast>

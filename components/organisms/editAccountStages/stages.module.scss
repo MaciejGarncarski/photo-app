@@ -4,7 +4,9 @@
     display: grid;
     gap: 2rem;
 
-    margin-top: 3rem;
+    @include common.mediaquery('desktop') {
+        margin-top: 3rem;
+    }
 }
 
 .preview {
@@ -69,12 +71,10 @@
 
 .buttons {
     display: grid;
-    margin-top: 2rem;
     gap: 1rem;
 
     @include common.mediaquery('desktop') {
         gap: 4rem;
-        margin-top: 0;
         display: flex;
         justify-content: space-between;
     }

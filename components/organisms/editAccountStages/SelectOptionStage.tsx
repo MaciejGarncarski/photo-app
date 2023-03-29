@@ -38,6 +38,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
   if (!userId) {
     return null;
   }
+
   const removeAvatar = () => {
     mutate(
       { userId },
