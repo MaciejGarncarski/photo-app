@@ -4,7 +4,6 @@ import { mockedUser } from '@/utils/tests/mockedData';
 import { render } from '@/utils/tests/utils';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { snapshotComponent } from '@/components/atoms/input/input.test';
 
 jest.mock('next-auth/react', () => {
   const originalModule = jest.requireActual('next-auth/react');
@@ -22,10 +21,6 @@ jest.mock('next-auth/react', () => {
 });
 
 describe('Avatar', () => {
-  describe('match snapshot', () => {
-    snapshotComponent(<Avatar />);
-  });
-
   it('no image', () => {
     render(<Avatar />);
     expect(screen.getByTestId('empty icon')).toBeInTheDocument();

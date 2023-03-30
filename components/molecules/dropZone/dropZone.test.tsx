@@ -50,7 +50,6 @@ describe('DropZone test', () => {
       it('should show error if user dropped more than 1 file', () => {
         render(<CropImageWrapper />);
         const dropZone = screen.getByTestId(/dropZoneContainer/i);
-
         const file = new File(['filefile'], 'file1.png');
 
         fireEvent.drop(dropZone, {

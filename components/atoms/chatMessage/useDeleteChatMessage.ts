@@ -18,9 +18,6 @@ export const useDeleteChatMessage = ({ sender, receiver }: Arguments) => {
       return axios.delete(`/api/chat/${id}`);
     },
     {
-      onSettled: () => {
-        close();
-      },
       onSuccess: () => {
         queryClient.invalidateQueries(['chat', sender, receiver]);
       },
