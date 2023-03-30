@@ -16,7 +16,7 @@
 
 
     >svg {
-        filter: drop-shadow(0 2px 8px rgb(20, 20, 20, 0.5));
+        filter: drop-shadow(0 2px 8px var(--color-gray-transparent));
         color: white;
         fill: white;
 

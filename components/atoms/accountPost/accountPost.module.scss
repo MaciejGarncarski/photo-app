@@ -47,8 +47,8 @@
   align-items: center;
   list-style: none;
   gap: 0.75rem;
-  background-color: rgb(35, 35, 35, 0.5);
-  color: rgb(255, 255, 255);
+  background-color: var(--color-gray-transparent);
+  color: var(--color-white);
   font-weight: 700;
   opacity: 0;
 
