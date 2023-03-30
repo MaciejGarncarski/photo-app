@@ -3,6 +3,7 @@ import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/apis/transformPost';
+import { unlock } from '@/utils/bodyLock';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
 import { ListModal } from '@/components/organisms/listModal/ListModal';
@@ -25,7 +26,7 @@ export const PostOptions = ({ close, post, openCnonfirmation }: PropsTypes) => {
     <ListModal close={close} headingText="Post options">
       {isAbleToModify && (
         <>
-          <ListModalItem type="link" href={`/post/${postId}/edit`} icon={<IconEdit />}>
+          <ListModalItem type="link" href={`/post/${postId}/edit`} icon={<IconEdit />} onClick={unlock}>
             Edit
           </ListModalItem>
           <ListModalItem type="button" onClick={openCnonfirmation} icon={<IconTrash />}>
