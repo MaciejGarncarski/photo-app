@@ -51,7 +51,9 @@ export const Home = () => {
 
       <aside className={styles.aside}>
         <section className={styles.asideItem}>
-          <Heading tag="h2">New PhotoApp users</Heading>
+          <Heading tag="h2" size="medium">
+            New PhotoApp users
+          </Heading>
           {otherUsers.data && (
             <ul className={styles.asideList}>
               {otherUsers?.data &&

@@ -1,4 +1,5 @@
 import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
+import { ReactElement, useMemo } from 'react';
 
 import { useSignIn } from '@/hooks/useSignIn';
 
@@ -6,8 +7,26 @@ import { Button } from '@/components/atoms/buttons/button/Button';
 
 import styles from './otherSignInOptions.module.scss';
 
+type ButtonsData = Array<{ onClick: () => void; text: string; icon: ReactElement }>;
+
 export const OtherSignInOptions = () => {
   const { signInDemo, signInGoogle } = useSignIn();
+
+  const buttonsData: ButtonsData = useMemo(
+    () => [
+      {
+        onClick: signInDemo,
+        text: 'Demo account',
+        icon: <IconTestPipe />,
+      },
+      {
+        onClick: signInGoogle,
+        text: 'Google',
+        icon: <IconBrandGoogle />,
+      },
+    ],
+    [signInDemo, signInGoogle],
+  );
 
   return (
     <div className={styles.otherOptions}>
@@ -15,14 +34,16 @@ export const OtherSignInOptions = () => {
         <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
-        <Button type="button" onClick={signInDemo} variant="primary">
-          <IconTestPipe />
-          <p className={styles.otherButtonText}>Demo account</p>
-        </Button>
-        <Button type="button" onClick={signInGoogle} variant="primary">
-          <IconBrandGoogle />
-          <p className={styles.otherButtonText}>Google</p>
-        </Button>
+        {buttonsData.map(({ icon, onClick, text }) => {
+          return (
+            <div className={styles.button} key={text}>
+              <Button type="button" variant="primary" onClick={onClick}>
+                {icon}
+                {text}
+              </Button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

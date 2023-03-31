@@ -16,7 +16,9 @@ type PropsTypes = {
 export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
   return (
     <CreatePostItemContainer>
-      <Heading tag="h2">Crop type</Heading>
+      <Heading tag="h2" size="medium">
+        Crop type
+      </Heading>
       <motion.div className={styles.aspectRatioButtons} variants={containerVariants} initial="hidden" animate="show">
         {buttonData.map(({ text, aspectRatio }) => {
           return (

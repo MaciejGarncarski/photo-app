@@ -1,8 +1,10 @@
 @use '@/styles/common.scss';
 
 .avatar {
-  width: 2rem;
-  height: 2rem;
+
+  --avatar-size: 2rem;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   border-radius: 100%;
   border: 3px solid var(--color-gray);
   display: flex;
@@ -19,18 +21,27 @@
 }
 
 .small {
-  width: 2.5rem;
-  height: 2.5rem;
+  --avatar-size: 2.5rem;
+
+  @include common.mediaquery('desktop') {
+    --avatar-size: 2.75rem;
+  }
 }
 
 .medium {
-  width: 4.5rem;
-  height: 4.5rem;
+  --avatar-size: 3.5rem;
+
+  @include common.mediaquery('desktop') {
+    --avatar-size: 4.5rem;
+  }
 }
 
 .big {
-  width: 9rem;
-  height: 9rem;
+  --avatar-size: 6.5rem;
+
+  @include common.mediaquery('desktop') {
+    --avatar-size: 9rem;
+  }
 }
 
 .noImage {

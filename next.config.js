@@ -17,7 +17,7 @@ const nextConfig = {
 
 /** @type {import('next-pwa').pwaConfig} */
 const pwaConfig = {
-  dest: 'src/public',
+  dest: 'public',
   disable: process.env.NODE_ENV === 'development',
   register: true,
 };

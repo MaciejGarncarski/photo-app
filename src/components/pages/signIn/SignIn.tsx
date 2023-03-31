@@ -8,13 +8,15 @@ import styles from './signIn.module.scss';
 export const SignIn = () => {
   return (
     <main className={styles.container}>
-      <Heading tag="h2" {...animation}>
+      <Heading tag="h2" size="big" {...animation}>
         Sign in
       </Heading>
       <SignInForm />
       <OtherSignInOptions />
       <div className={styles.info} {...animation}>
-        <Heading tag="h3">How to sign in with demo account?</Heading>
+        <Heading tag="h3" size="small">
+          How to sign in with demo account?
+        </Heading>
         <p>Sign in with these credentials: </p>
         <ul className={styles.list}>
           <li>Email: test@test.pl</li>

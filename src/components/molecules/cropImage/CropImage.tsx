@@ -69,7 +69,9 @@ export const CropImage = ({ finalImages, setFinalImages }: PropsTypes) => {
 
   return (
     <CreatePostItemContainer>
-      <Heading tag="h2">Crop your image</Heading>
+      <Heading tag="h2" size="medium">
+        Crop your image
+      </Heading>
       <div className={styles.cropContainer}>
         <Cropper
           image={imgSrc}

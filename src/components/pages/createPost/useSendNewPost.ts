@@ -1,10 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { io } from 'socket.io-client';
 
 import { useAuth } from '@/hooks/useAuth';
 import { CreatePostData } from '@/utils/apis/createPost';
-import { clientEnv } from '@/utils/env';
+import { socket } from '@/utils/socket';
 
 export type MutationValues = {
   description: string;
@@ -18,8 +17,6 @@ const uplaodPost = async ({ description, imageUrls, authorId }: CreatePostData) 
     authorId,
   });
 };
-
-const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
 
 export const useSendNewPost = () => {
   const { session } = useAuth();

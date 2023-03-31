@@ -30,9 +30,11 @@ export const SignInForm = () => {
     <motion.form {...animation} className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Input labelText="email" type="email" error={errors.email?.message} {...register('email')} />
       <Input labelText="password" type="password" error={errors.password?.message} {...register('password')} />
-      <Button variant="primary" type="submit">
-        Continue
-      </Button>
+      <div className={styles.continueButton}>
+        <Button type="submit" variant="primary">
+          continue
+        </Button>
+      </div>
     </motion.form>
   );
 };

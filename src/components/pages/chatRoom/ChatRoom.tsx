@@ -55,7 +55,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
         </Button>
         <Link href={`/${username}`} className={styles.userHeader}>
           <Avatar userId={friendId} size="small" />
-          <Heading tag="h2">
+          <Heading tag="h2" size="medium">
             {name && `${name},`} @{username}
           </Heading>
         </Link>

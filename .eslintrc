@@ -22,7 +22,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "ignorePatterns": [
-    "src/public/*"
+    "public/*"
   ],
   "rules": {
     "prettier/prettier": "error",

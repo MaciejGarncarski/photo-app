@@ -10,7 +10,7 @@ yarn-lock.yaml
 .swc/
 .vscode/
 node_modules/
-.src/public/
+.public/
 **/*.scss
 tsconfig.json
 jest.setup.js

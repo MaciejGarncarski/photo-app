@@ -22,5 +22,9 @@ export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
         },
       });
     });
+
+    return () => {
+      socket.off('new post');
+    };
   }, [chatRoomId, queryClient, socket]);
 };

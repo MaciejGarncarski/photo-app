@@ -11,7 +11,9 @@ export const Chat = () => {
   return (
     <section className={styles.container}>
       <div className={styles.heading}>
-        <Heading tag="h2">Select other user.</Heading>
+        <Heading tag="h2" size="big">
+          Select other user.
+        </Heading>
       </div>
       <SearchUserForm
         inputVal={inputVal}

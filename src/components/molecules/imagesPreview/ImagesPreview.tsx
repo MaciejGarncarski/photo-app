@@ -35,7 +35,9 @@ export const ImagesPreview = ({ onRemove, imagesBase64 }: PropsTypes) => {
 
   return (
     <div>
-      <Heading tag="h2">Images in post</Heading>
+      <Heading tag="h2" size="medium">
+        Images in post
+      </Heading>
       <motion.div className={styles.previewContainer} variants={containerVariants} initial="hidden" animate="show">
         {imagesBase64.map((finalImage) => {
           if (!finalImage?.src) {

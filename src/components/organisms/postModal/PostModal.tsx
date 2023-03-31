@@ -50,7 +50,9 @@ export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
           </div>
           <PostFooter post={post} parentModalOpen={modalOpen} />
           <section className={styles.commentsContainer}>
-            <Heading tag="h2">Comments</Heading>
+            <Heading tag="h2" size="medium">
+              Comments
+            </Heading>
             <PostComments postId={post.postId} />
           </section>
         </motion.div>

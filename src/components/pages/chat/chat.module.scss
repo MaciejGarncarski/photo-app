@@ -22,11 +22,9 @@
 }
 
 .heading {
-    font-size: 1.5rem;
     text-align: center;
 
     @include common.mediaquery('desktop') {
         text-align: left;
-        font-size: 2rem;
     }
 }

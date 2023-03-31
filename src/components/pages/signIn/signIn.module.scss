@@ -1,7 +1,7 @@
 @use '@/styles/common.scss';
 
 .container {
-  width: clamp(18rem, 40vw, 70rem);
+  width: clamp(18rem, 35vw, 70rem);
   margin: 2rem auto;
   padding-bottom: 6rem;
   display: flex;
@@ -11,7 +11,7 @@
   @include common.mediaquery('desktop') {
     gap: 4rem;
     margin: 0;
-    margin-left: 17rem;
+    margin-left: 20vw;
     margin-top: 2rem;
   }
 }

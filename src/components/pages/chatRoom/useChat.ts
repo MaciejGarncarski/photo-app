@@ -1,11 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import { io } from 'socket.io-client';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
-import { clientEnv } from '@/utils/env';
+import { socket } from '@/utils/socket';
 
 import { useChatMessages } from '@/components/pages/chatRoom/useChatMessages';
 import { useChatSubscription } from '@/components/pages/chatRoom/useChatSubscription';
@@ -14,8 +13,6 @@ type PropsTypes = {
   chatRoomId: number;
   friendId: string;
 };
-
-const socket = io(clientEnv.NEXT_PUBLIC_WS_URL, { transports: ['websocket'] });
 
 export const useChat = ({ chatRoomId, friendId }: PropsTypes) => {
   const [inputVal, setInputVal] = useState<string>('');

@@ -12,6 +12,10 @@ export const seoConfig: NextSeoProps = {
   additionalLinkTags: [
     {
       rel: 'icon',
+      href: '/icons/favicon.ico',
+    },
+    {
+      rel: 'icon',
       sizes: '32x32',
       href: '/icons/favicon-32x32.png',
     },
