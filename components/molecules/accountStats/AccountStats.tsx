@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
 
-import { useUser } from '@/hooks/useUser';
-
 import { useListData } from '@/components/molecules/accountStats/useListData';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 
@@ -14,24 +12,21 @@ type PropsTypes = {
 };
 
 export const AccountStats = ({ userId }: PropsTypes) => {
-  const { followersModal, followingModal, listData } = useListData();
-  const { count } = useUser({ userId });
-
-  if (!count) {
-    return null;
-  }
+  const { followersModal, followingModal, listData } = useListData({ userId });
 
   return (
     <>
       <motion.ul className={styles.list}>
-        {listData.map(({ onClick, title }) => (
-          <li className={styles.listItem} key={title}>
-            <button type="button" className={styles.button} onClick={onClick}>
-              <span className={styles.listItemNumber}>{count[title]}</span>
-              <span className={styles.listItemText}>{title}</span>
-            </button>
-          </li>
-        ))}
+        {listData.map(({ onClick, title, count }) => {
+          return (
+            <li className={styles.listItem} key={title}>
+              <button type="button" className={styles.button} onClick={onClick}>
+                <span className={styles.listItemNumber}>{count}</span>
+                <span className={styles.listItemText}>{title}</span>
+              </button>
+            </li>
+          );
+        })}
       </motion.ul>
       <ModalContainer>
         {followingModal.modalOpen && <StatsModal type="following" modal={followingModal} userId={userId} />}

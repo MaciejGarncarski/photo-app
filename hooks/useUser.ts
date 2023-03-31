@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export type Account = {
+export type AccountFromApi = {
   isFollowing: boolean;
   user: User | null;
   count: {
@@ -21,13 +21,13 @@ export const fetchAccount = async ({ userId, username }: PropsTypes) => {
   const url = '/api/account';
 
   if (userId) {
-    const { data } = await axios.get<Account>(`${url}/${userId}`);
+    const { data } = await axios.get<AccountFromApi>(`${url}/${userId}`);
 
     return data;
   }
 
   if (username) {
-    const { data } = await axios.get<Account>(`${url}/${username}?type=username`);
+    const { data } = await axios.get<AccountFromApi>(`${url}/${username}?type=username`);
     return data;
   }
 };
@@ -54,8 +54,10 @@ export const useUser = ({ userId, username }: PropsTypes) => {
   return {
     isLoading: query.isLoading,
     isError: query.isError,
-    isFollowing: query.data?.isFollowing,
+    isFollowing: Boolean(query.data?.isFollowing),
     ...user,
-    count: query.data?.count,
+    followersCount: query.data?.count.followers || 0,
+    friendsCount: query.data?.count.following || 0,
+    postsCount: query.data?.count.posts || 0,
   };
 };

@@ -63,10 +63,6 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
     isOwner,
   };
 
-  if (!userData.count) {
-    return null;
-  }
-
   if (isError) {
     return <p>user error</p>;
   }

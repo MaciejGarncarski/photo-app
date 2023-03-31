@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
-import { useForm, UseFormProps } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useIsCropping } from '@/hooks/useIsCropping';
@@ -27,13 +27,6 @@ export const PostDetailsSchema = z.object({
   description: z.string().max(200, { message: 'Maximum characters exceeded.' }),
 });
 
-const formOptions: UseFormProps<PostDetails> = {
-  resolver: zodResolver(PostDetailsSchema),
-  defaultValues: {
-    description: '',
-  },
-};
-
 export const CreatePost = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
@@ -48,7 +41,12 @@ export const CreatePost = () => {
     register,
     handleSubmit,
     formState: { dirtyFields, errors },
-  } = useForm<PostDetails>(formOptions);
+  } = useForm<PostDetails>({
+    resolver: zodResolver(PostDetailsSchema),
+    defaultValues: {
+      description: '',
+    },
+  });
 
   const onRemove = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {

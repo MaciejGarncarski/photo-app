@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
-import { useForm, UseFormProps } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { SignInFormValues, SignInSchema, useSignIn } from '@/hooks/useSignIn';
 
@@ -10,15 +10,6 @@ import { animation } from '@/components/pages/signIn/signIn.animation';
 
 import styles from './signInForm.module.scss';
 
-const formOptions: UseFormProps<SignInFormValues> = {
-  resolver: zodResolver(SignInSchema),
-  mode: 'all',
-  defaultValues: {
-    email: '',
-    password: '',
-  },
-};
-
 export const SignInForm = () => {
   const { onSubmit } = useSignIn();
 
@@ -26,7 +17,14 @@ export const SignInForm = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<SignInFormValues>(formOptions);
+  } = useForm<SignInFormValues>({
+    resolver: zodResolver(SignInSchema),
+    mode: 'all',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   return (
     <motion.form {...animation} className={styles.form} onSubmit={handleSubmit(onSubmit)}>

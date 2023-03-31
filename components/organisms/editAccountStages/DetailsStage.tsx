@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { useForm, UseFormProps } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { useUser } from '@/hooks/useUser';
 
@@ -29,7 +29,12 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const formRef = useRef<HTMLFormElement>(null);
   const { close, modalOpen, open } = useModal();
 
-  const formOptions: UseFormProps = {
+  const {
+    register,
+    reset,
+    getValues,
+    formState: { isDirty, errors },
+  } = useForm<AccountDetails>({
     defaultValues: {
       username: username ?? '',
       fullName: name ?? '',
@@ -37,14 +42,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
     },
     mode: 'all',
     resolver: zodResolver(AccountDetailsSchema),
-  };
-
-  const {
-    register,
-    reset,
-    getValues,
-    formState: { isDirty, errors },
-  } = useForm<AccountDetails>(formOptions);
+  });
 
   const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, open, reset, userId });
 
