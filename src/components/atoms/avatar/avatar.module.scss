@@ -1,0 +1,47 @@
+@use '@/styles/common.scss';
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  border: 3px solid var(--color-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--bg-primary);
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.small {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.medium {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.big {
+  width: 9rem;
+  height: 9rem;
+}
+
+.noImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &>svg {
+    width: 100%;
+    height: 90%;
+  }
+}

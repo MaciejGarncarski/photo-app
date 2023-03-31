@@ -1,0 +1,19 @@
+@use '@/styles/common.scss';
+
+.createPost {
+  display: grid;
+  width: clamp(19rem, 70%, 60rem);
+  margin: 2rem auto;
+  margin-bottom: 4rem;
+  gap: 2rem;
+
+  @include common.mediaquery('desktop') {
+    margin-left: 12rem;
+    gap: 4rem;
+  }
+}
+
+.addPhoto {
+  display: grid;
+  width: 100%;
+}

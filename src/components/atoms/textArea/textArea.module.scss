@@ -1,0 +1,40 @@
+@use '@/styles/common.scss';
+
+.textArea {
+  border-radius: var(--radius-small);
+  border: none;
+  min-width: 100%;
+  width: 100%;
+  resize: vertical;
+  min-height: 12rem;
+  height: 12rem;
+  padding: 1rem;
+  background-color: transparent;
+  border: var(--border-primary);
+  transition: all var(--transition);
+  transition-property: background-color, box-shadow;
+  margin-top: 0.5rem;
+  border: var(--border-gray);
+
+  &:hover,
+  &:focus {
+    background-color: var(--bg-secondary);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+    border-color: var(--color-primary);
+  }
+}
+
+.label {
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.error {
+  color: var(--color-error);
+  font-weight: 700;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,30 @@
+@use '@/styles/common.scss';
+
+.heartAnimation {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    &>svg {
+        filter: drop-shadow(0 2px 8px var(--color-gray-transparent));
+        color: white;
+        fill: white;
+
+        --heart-size: 6rem;
+
+        width: var(--heart-size);
+        height: var(--heart-size);
+
+        @include common.mediaquery('desktop') {
+            --heart-size: 10rem;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+@use '@/styles/common.scss';
+
+.container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  margin-bottom: 5rem;
+  width: clamp(20rem, 80vw, 50rem);
+
+  @include common.mediaquery('desktop') {
+    margin: 0 auto;
+    margin-top: 6rem;
+  }
+}

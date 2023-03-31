@@ -1,0 +1,35 @@
+@use '@/styles/common.scss';
+
+.addComment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.commentInput {
+  height: 2.5rem;
+  min-height: 2.5rem;
+  resize: vertical;
+  width: 80%;
+  border-radius: var(--radius-medium);
+  padding: 0.5rem;
+  border: var(--border-gray);
+  transition: background-color var(--transition);
+  background-color: var(--bg-primary);
+
+
+  &:hover,
+  &:focus {
+    background-color: var(--bg-gray);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+
+  @include common.mediaquery('desktop') {
+    width: 80%;
+  }
+}

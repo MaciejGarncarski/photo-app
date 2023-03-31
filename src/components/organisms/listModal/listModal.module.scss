@@ -1,0 +1,84 @@
+@use '@/styles/common.scss';
+
+.list {
+  list-style: none;
+}
+
+.headingContainer {
+  display: flex;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+
+  @include common.mobile-landscape {
+    width: 75%;
+  }
+
+  @include common.mediaquery('desktop') {
+    width: auto;
+    min-width: 40rem;
+  }
+}
+
+.heading {
+  background-color: var(--bg-primary);
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+
+  @include common.mobile-landscape {
+    padding: 0.75rem 2rem;
+  }
+}
+
+.listItem {
+  font-weight: 700;
+  overflow: hidden;
+
+  &>button,
+  a {
+    transition: all var(--transition-fast);
+    transition-property: background-color, transform;
+
+
+    &:hover {
+      background-color: var(--bg-focus);
+    }
+
+    &:focus {
+      outline: none;
+      transform: scale(1.02);
+      background-color: var(--bg-focus);
+    }
+  }
+}
+
+
+.listItemLast {
+  @include common.mediaquery('desktop') {
+    border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  background-color: var(--bg-primary);
+  width: 100%;
+
+  @include common.mediaquery('desktop') {
+    padding: 1rem 2rem;
+    gap: 1.25rem;
+  }
+
+  @include common.mobile-landscape {
+    padding: 0.75rem 2rem;
+  }
+}

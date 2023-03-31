@@ -1,0 +1,91 @@
+@use '@/styles/common.scss';
+
+.form {
+    display: grid;
+    gap: 2rem;
+
+    @include common.mediaquery('desktop') {
+        margin-top: 3rem;
+    }
+}
+
+.preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.previewImg {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: var(--radius-small);
+
+    @include common.mediaquery('tablet') {
+        width: 70%;
+    }
+}
+
+.previewFigcaption {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: left;
+    width: 100%;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+.avatarButtons {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    width: 80%;
+    margin-inline: auto;
+    gap: 2rem;
+
+    @include common.mediaquery('desktop') {
+        width: 100%;
+        gap: 4rem;
+        font-size: 1.25rem;
+        display: flex;
+        justify-content: center;
+
+        >button {
+            padding: 0.5em 1em;
+        }
+    }
+}
+
+.stageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include common.mediaquery('desktop') {
+        gap: 4rem;
+    }
+}
+
+.buttons {
+    display: grid;
+    gap: 1rem;
+
+    @include common.mediaquery('desktop') {
+        gap: 4rem;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.buttonsLastStage {
+    display: flex;
+    justify-content: space-between;
+
+    @include common.mediaquery('desktop') {
+        gap: 2rem;
+        justify-content: flex-start;
+    }
+}

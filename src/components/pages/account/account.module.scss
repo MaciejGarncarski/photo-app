@@ -1,0 +1,88 @@
+@use '@/styles/common.scss';
+
+.container {
+  max-width: 70rem;
+  margin-inline: auto;
+  margin-top: 1rem;
+  padding-bottom: 4rem;
+
+  @include common.mediaquery('desktop') {
+    margin-left: calc(10vw + 2rem);
+  }
+}
+
+.accountMobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include common.mediaquery('tablet') {
+    gap: 2.5rem;
+  }
+}
+
+.accountDesktop {
+  display: flex;
+  gap: 8rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 5rem;
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightCol {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.username {
+  text-align: center;
+  align-self: center;
+  max-width: 75%;
+  overflow: hidden;
+  margin: 0 auto;
+  text-overflow: ellipsis;
+
+  &::before {
+    content: '@';
+  }
+
+  @include common.mediaquery('desktop') {
+    margin: unset;
+    text-align: left;
+    align-self: flex-start;
+    max-width: unset;
+    font-size: 2rem;
+  }
+}
+
+.name {
+  font-weight: 700;
+  text-align: center;
+
+  @include common.mediaquery('desktop') {
+    font-size: 1.25rem;
+    text-align: left;
+  }
+}
+
+.bio {
+  color: var(--text-secondary);
+  text-align: center;
+
+  @include common.mediaquery('desktop') {
+    text-align: left;
+    font-size: 1.25rem;
+  }
+}

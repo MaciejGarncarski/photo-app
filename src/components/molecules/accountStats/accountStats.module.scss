@@ -1,0 +1,95 @@
+@use '@/styles/common.scss';
+
+
+.list {
+    list-style: none;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-medium);
+    padding: 0.5rem;
+    width: clamp(10rem, 80vw, 40rem);
+
+    @include common.mediaquery('desktop') {
+        margin: 0;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2.5rem;
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+.listItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    @include common.mediaquery('desktop') {
+        font-size: 1.25rem;
+    }
+}
+
+.listItemNumber {
+    font-weight: 700;
+    width: 100%;
+
+    @include common.mediaquery('desktop') {
+        width: auto;
+    }
+}
+
+.listItemText {
+    color: var(--text-secondary);
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+
+    @include common.mediaquery('desktop') {
+        text-align: left;
+    }
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    @include common.mediaquery('desktop') {
+        text-align: left;
+        gap: 0.5rem;
+        flex-direction: row;
+    }
+}
+
+.modalListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+
+    border: 0;
+    background-color: var(--bg-primary);
+    width: 100%;
+
+    @include common.mediaquery('desktop') {
+        gap: 2rem;
+    }
+
+    @include common.mobile-landscape {
+        padding: 0.75rem 2rem;
+    }
+}
+
+.itemLink {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-grow: 1;
+}

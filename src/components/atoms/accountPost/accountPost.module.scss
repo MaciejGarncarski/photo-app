@@ -1,0 +1,89 @@
+@use '@/styles/common.scss';
+
+.container {
+  position: relative;
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-post);
+  overflow: hidden;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow var(--transition);
+
+  --shadow-size: 3px;
+  box-shadow: 0 0 0 var(--shadow-size) var(--bg-primary), 0 0 0 calc(var(--shadow-size) * 2) var(--bg-secondary);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus,
+  &:hover {
+    box-shadow: var(--shadow-focus);
+  }
+
+  @include common.mediaquery('desktop') {
+    --shadow-size: 5px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  object-fit: contain;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: var(--radius-small);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 0.75rem;
+  background-color: var(--color-gray-transparent);
+  color: var(--color-white);
+  font-weight: 700;
+  opacity: 0;
+
+  transition: opacity var(--transition);
+
+  --text-size: 1.5rem;
+  font-size: var(--text-size);
+
+  svg {
+    width: var(--text-size);
+    height: var(--text-size);
+  }
+
+  @include common.mediaquery('desktop') {
+    gap: 2rem;
+    --text-size: 3rem;
+  }
+}
+
+.container {
+
+  &:focus,
+  &:hover {
+    &>.overlay {
+      opacity: 1;
+    }
+  }
+}
+
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include common.mediaquery('desktop') {
+    gap: 0.25rem;
+  }
+}

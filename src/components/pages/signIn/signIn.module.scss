@@ -1,0 +1,42 @@
+@use '@/styles/common.scss';
+
+.container {
+  width: clamp(18rem, 40vw, 70rem);
+  margin: 2rem auto;
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include common.mediaquery('desktop') {
+    gap: 4rem;
+    margin: 0;
+    margin-left: 17rem;
+    margin-top: 2rem;
+  }
+}
+
+.info {
+  background-color: var(--bg-secondary);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-medium);
+  line-height: 2;
+
+  @include common.mediaquery('desktop') {
+    border-radius: var(--radius-big);
+    padding: 1.5rem 2.5rem;
+  }
+}
+
+.list {
+  list-style-position: inside;
+}
+
+
+.heading {
+  font-size: 2.5rem;
+
+  @include common.mediaquery('desktop') {
+    font-size: 3rem;
+  }
+}

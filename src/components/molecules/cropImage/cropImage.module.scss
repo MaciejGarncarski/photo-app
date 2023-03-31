@@ -1,0 +1,47 @@
+@use '@/styles/common.scss';
+
+.cropContainer {
+  position: relative;
+  overflow: hidden;
+  min-height: 20rem;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-focus);
+
+  @include common.mediaquery('desktop') {
+    min-height: 25rem;
+  }
+}
+
+.info {
+  text-align: left;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  >svg {
+    flex-basis: 4rem;
+  }
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 1rem;
+
+  @include common.mediaquery('desktop') {
+    gap: 5rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
