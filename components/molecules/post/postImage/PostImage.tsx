@@ -6,7 +6,7 @@ import { PostData } from '@/utils/apis/transformPost';
 import { getDescriptionData } from '@/utils/getDescriptionData';
 
 import { MotionImage } from '@/components/atoms/avatar/Avatar';
-import { Loader } from '@/components/atoms/loader/Loader';
+import { Loader } from '@/components/molecules/loader/Loader';
 
 import styles from './postImage.module.scss';
 
@@ -17,11 +17,10 @@ type PropsTypes = {
     priority: boolean;
     src: string;
   };
-  className?: string;
   post: PostData;
 };
 
-export const PostImage = ({ image, post, className }: PropsTypes) => {
+export const PostImage = ({ image, post }: PropsTypes) => {
   const { description, authorId } = post;
   const { priority, width, height, src } = image;
 
@@ -38,7 +37,7 @@ export const PostImage = ({ image, post, className }: PropsTypes) => {
         </div>
       )}
       <MotionImage
-        className={clsx(isLoading && styles.imgLoading, className, styles.sliderImage)}
+        className={clsx({ [styles.imgLoading]: isLoading }, styles.sliderImage)}
         src={src}
         priority={priority}
         width={width}

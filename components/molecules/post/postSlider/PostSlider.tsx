@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { PostData } from '@/utils/apis/transformPost';
 
 import { HeartAnimation } from '@/components/atoms/heartAnimation/HeartAnimation';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { useHandleLike } from '@/components/molecules/post/postButtons/useHandleLike';
 import { PostImage } from '@/components/molecules/post/postImage/PostImage';
 import { PostSliderProgress } from '@/components/molecules/post/postSlider/PostSliderProgress';
@@ -18,18 +18,15 @@ import styles from './postSlider.module.scss';
 
 type PropsTypes = {
   post: PostData;
-  containerClassName?: string;
   priority: boolean;
-  imageClassName?: string;
 };
 
-export const PostSlider = ({ post, priority, imageClassName, containerClassName }: PropsTypes) => {
+export const PostSlider = ({ post, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { imagesData } = post;
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
   const { imageRef, width } = useUpdateWidth();
 
-  const customContainerClassName = clsx(containerClassName, styles.slider);
   const postImages = imagesData.filter((img): img is PostImageType => !!img);
   const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
 
@@ -41,20 +38,20 @@ export const PostSlider = ({ post, priority, imageClassName, containerClassName 
     const { height, width, url } = postImages[0];
 
     return (
-      <figure onDoubleClick={handleLikeWithAnimation} className={customContainerClassName}>
-        <PostImage image={{ height, width, priority, src: url }} className={imageClassName} post={post} />
+      <figure onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
+        <PostImage image={{ height, width, priority, src: url }} post={post} />
         <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
       </figure>
     );
   }
 
   return (
-    <motion.div onDoubleClick={handleLikeWithAnimation} className={customContainerClassName}>
+    <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
       <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
       {currentIndex !== 0 && postImages.length > 0 && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
-          <VisuallyHiddenText text="Previous image" />
+          <VisuallyHidden>Previous image</VisuallyHidden>
         </button>
       )}
       <motion.div
@@ -70,11 +67,7 @@ export const PostSlider = ({ post, priority, imageClassName, containerClassName 
             {postImages.map(({ height, width, fileId, url }, idx) => {
               return (
                 <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage
-                    image={{ src: url, height, width, priority: priority && idx > 1 }}
-                    className={imageClassName}
-                    post={post}
-                  />
+                  <PostImage image={{ src: url, height, width, priority: priority && idx > 1 }} post={post} />
                 </motion.figure>
               );
             })}
@@ -85,7 +78,7 @@ export const PostSlider = ({ post, priority, imageClassName, containerClassName 
       {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
         <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
           <IconArrowRight />
-          <VisuallyHiddenText text="Next image" />
+          <VisuallyHidden>Next image</VisuallyHidden>
         </button>
       )}
     </motion.div>

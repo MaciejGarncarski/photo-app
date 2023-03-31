@@ -42,7 +42,7 @@
   }
 }
 
-.button-secondary {
+.secondary {
   @extend .button;
   background-color: var(--bg-primary);
   color: var(--color-primary);

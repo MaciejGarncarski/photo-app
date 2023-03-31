@@ -1,8 +1,8 @@
 type Button = {
-  variant?: 'secondary';
+  variant: 'secondary' | 'primary';
   onClick?: () => void;
   disabled?: boolean;
-  type?: 'submit' | 'button';
+  type: 'submit' | 'button' | 'reset';
   text: string;
 };
 
@@ -18,6 +18,7 @@ export const getButtonList = (open: () => void, submitDisabled: boolean) => {
       disabled: submitDisabled,
       type: 'submit',
       text: 'Upload new post',
+      variant: 'primary',
     },
   ];
 

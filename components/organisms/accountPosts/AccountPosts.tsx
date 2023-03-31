@@ -2,7 +2,7 @@ import { motion, Variants } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
-import { Loader } from '@/components/atoms/loader/Loader';
+import { Loader } from '@/components/molecules/loader/Loader';
 import { useAccountPosts } from '@/components/organisms/accountPosts/useAccountPosts';
 
 import styles from './accountPosts.module.scss';

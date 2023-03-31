@@ -6,11 +6,9 @@ import styles from './layout.module.scss';
 
 import { Header } from '../organisms/header/Header';
 
-export type Children = {
+type PropsTypes = {
   children: ReactNode;
 };
-
-type PropsTypes = Children;
 
 export const Layout = ({ children }: PropsTypes) => {
   const { theme } = useTheme();

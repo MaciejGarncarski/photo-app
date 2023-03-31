@@ -9,8 +9,8 @@ import { Toaster } from 'react-hot-toast';
 import { useIsLoading } from '@/hooks/useIsLoading';
 import { seoConfig } from '@/utils/next-seo.config';
 
-import { Loader } from '@/components/atoms/loader/Loader';
 import { Layout } from '@/components/layout/Layout';
+import { Loader } from '@/components/molecules/loader/Loader';
 
 import '/styles/globals.scss';
 

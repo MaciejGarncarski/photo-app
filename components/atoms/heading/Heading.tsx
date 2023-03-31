@@ -1,25 +1,25 @@
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
-
-import { Children } from '@/components/layout/Layout';
+import { ReactNode } from 'react';
 
 import styles from './heading.module.scss';
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-type HeadingVariants = 'center';
-
-type PropsTypes = Children & {
+type PropsTypes = {
   tag: HeadingTag;
-  className?: string;
-  variant?: HeadingVariants;
+  children: ReactNode;
 };
 
-export const Heading = ({ children, variant, tag: Tag = 'h2', className, ...rest }: PropsTypes) => {
-  const MotionTag = motion<Omit<PropsTypes, 'tag'>>(Tag);
+type MotionTag = {
+  children: ReactNode;
+  className: string;
+};
+
+export const Heading = ({ children, tag: Tag = 'h2', ...rest }: PropsTypes) => {
+  const MotionTag = motion<MotionTag>(Tag);
 
   return (
-    <MotionTag className={clsx(variant && styles[variant], className, styles.heading)} {...rest}>
+    <MotionTag className={styles.heading} {...rest}>
       {children}
     </MotionTag>
   );

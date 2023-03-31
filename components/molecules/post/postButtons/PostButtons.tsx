@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { PostData } from '@/utils/apis/transformPost';
 
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { usePostButtonsData } from '@/components/molecules/post/postButtons/usePostButtonsData';
 import { PostModal } from '@/components/organisms/postModal/PostModal';
@@ -31,7 +31,7 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
               whileTap={{ scale: 0.8, transition: { type: 'tween', duration: 0.1 } }}
             >
               {icon}
-              <VisuallyHiddenText text={alt} />
+              <VisuallyHidden>{alt}</VisuallyHidden>
               <span className={styles.buttonCount}>{count}</span>
             </motion.button>
           </li>

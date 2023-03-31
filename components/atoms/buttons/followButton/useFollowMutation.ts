@@ -4,9 +4,11 @@ import { toast } from 'react-hot-toast';
 
 import { useUser } from '@/hooks/useUser';
 
-import { FollowersPutRequest } from '@/pages/api/followers';
+type FollowMutation = {
+  userId: string;
+};
 
-export const useFollowMutation = (userId: string) => {
+export const useFollowMutation = ({ userId }: FollowMutation) => {
   const queryClient = useQueryClient();
   const { isFollowing, username } = useUser({ userId });
 
@@ -16,7 +18,7 @@ export const useFollowMutation = (userId: string) => {
         await axios.delete(`/api/followers?followingUserId=${userId}`);
       }
       if (!isFollowing) {
-        await axios.put<unknown, null, FollowersPutRequest>('/api/followers', {
+        await axios.put('/api/followers', {
           followingUserId: userId,
         });
       }

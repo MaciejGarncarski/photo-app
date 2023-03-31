@@ -11,8 +11,6 @@ const FollowersPutRequestSchema = z.object({
   followingUserId: z.string(),
 });
 
-export type FollowersPutRequest = z.infer<typeof FollowersPutRequestSchema>;
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   const session = await getServerSession(req, res, authOptions);

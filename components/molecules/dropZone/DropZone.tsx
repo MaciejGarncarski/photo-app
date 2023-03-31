@@ -24,9 +24,7 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) =
 
   return (
     <>
-      <Heading tag="h2" className={styles.heading}>
-        Upload image
-      </Heading>
+      <Heading tag="h2">Upload image</Heading>
       <div
         className={clsx(isActive && styles.dropZoneActive, error && styles.dropZoneError, styles.dropZone)}
         onDragOver={active}

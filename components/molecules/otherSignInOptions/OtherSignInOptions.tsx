@@ -15,11 +15,11 @@ export const OtherSignInOptions = () => {
         <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
-        <Button className={styles.otherButton} type="button" onClick={signInDemo}>
+        <Button type="button" onClick={signInDemo} variant="primary">
           <IconTestPipe />
           <p className={styles.otherButtonText}>Demo account</p>
         </Button>
-        <Button className={styles.otherButton} type="button" onClick={signInGoogle}>
+        <Button type="button" onClick={signInGoogle} variant="primary">
           <IconBrandGoogle />
           <p className={styles.otherButtonText}>Google</p>
         </Button>

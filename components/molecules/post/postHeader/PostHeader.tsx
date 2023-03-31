@@ -62,7 +62,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   return (
     <Tag className={styles.header}>
       <Link href={`/${username}`} className={styles.userAnchor}>
-        <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} className={styles.avatar} />
+        <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
         <div>
           <h2 className={styles.username}>{username}</h2>
           <p>
@@ -72,7 +72,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
       </Link>
       {isSignedIn && (
         <div className={styles.options}>
-          {!isAuthor && <FollowButton className={styles.followButton} userId={authorId} />}
+          {!isAuthor && <FollowButton userId={authorId} />}
           {isAuthor && (
             <Tooltip variant="right" content="Post options">
               <button type="button" className={styles.optionsButton} onClick={open}>

@@ -3,11 +3,10 @@ import clsx from 'clsx';
 
 type PropsTypes = {
   isActive?: boolean;
-  className?: string;
 };
 
-export const IconHeartWrapper = ({ isActive, className }: PropsTypes) => {
-  const customClassName = clsx(className, 'icon icon-tabler icon-tabler-message');
+export const IconHeartWrapper = ({ isActive }: PropsTypes) => {
+  const customClassName = clsx('icon icon-tabler icon-tabler-message');
 
   if (isActive) {
     return <IconHeart className={customClassName} color="#dd2020" fill="#dd2020" />;

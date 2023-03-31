@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { ImagesBase64 } from '@/utils/getFinalImagesBase64';
 
 import { Heading } from '@/components/atoms/heading/Heading';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './imagesPreview.module.scss';
 
@@ -53,7 +53,7 @@ export const ImagesPreview = ({ onRemove, imagesBase64 }: PropsTypes) => {
                 className={styles.deleteIcon}
               >
                 <IconTrash />
-                <VisuallyHiddenText text="remove image" />
+                <VisuallyHidden>remove image</VisuallyHidden>
               </motion.button>
 
               {imagesBase64 && (

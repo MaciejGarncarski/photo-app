@@ -45,10 +45,10 @@ export const ConfirmationAlert = ({ headingText, onConfirm, close }: PropsTypes)
         <ReactFocusLock>
           <ModalClose onClose={close} />
           <div className={styles.buttonsRow}>
-            <Button type="button" onClick={close} variant="secondary" className={styles.button}>
+            <Button type="button" onClick={close} variant="secondary">
               cancel
             </Button>
-            <Button type="button" onClick={onConfirm} className={styles.button}>
+            <Button type="button" onClick={onConfirm} variant="primary">
               confirm
             </Button>
           </div>

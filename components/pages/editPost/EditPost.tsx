@@ -52,7 +52,7 @@ export const EditPost = ({ postId }: { postId: number }) => {
           <Button type="button" variant="secondary" onClick={cancelModal.open}>
             Cancel
           </Button>
-          <Button type="button" disabled={!isDirty} onClick={saveModal.open}>
+          <Button type="button" variant="primary" disabled={!isDirty} onClick={saveModal.open}>
             Save
           </Button>
         </div>

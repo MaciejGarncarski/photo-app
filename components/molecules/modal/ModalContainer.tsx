@@ -1,8 +1,11 @@
 import { AnimatePresence } from 'framer-motion';
+import { ReactNode } from 'react';
 
-import { Children } from '@/components/layout/Layout';
+type PropsTypes = {
+  children: ReactNode;
+};
 
-export const ModalContainer = ({ children }: Children) => {
+export const ModalContainer = ({ children }: PropsTypes) => {
   return (
     <AnimatePresence initial={false} mode="wait">
       {children}

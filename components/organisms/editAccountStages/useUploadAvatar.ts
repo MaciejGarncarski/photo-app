@@ -35,7 +35,7 @@ export const useUploadAvatar = ({ finalImages, setFinalImages, stagePersonalInfo
     const folder = `${userId}/avatar/custom/`;
     const imageUrl = await uploadImage.mutateAsync({ imageBlob: finalImages[0].file, folder });
 
-    await editAccount.mutateAsync(
+    editAccount.mutate(
       { newAvatarUrl: imageUrl, userId },
       {
         onSuccess: async () => {

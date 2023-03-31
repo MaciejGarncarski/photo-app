@@ -18,7 +18,7 @@ const Settings = dynamic(() => import('@/components/organisms/settings/Settings'
 
 import dynamic from 'next/dynamic';
 
-import { Loader } from '@/components/atoms/loader/Loader';
+import { Loader } from '@/components/molecules/loader/Loader';
 
 import styles from './navButtons.module.scss';
 

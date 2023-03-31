@@ -8,7 +8,7 @@ import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 
@@ -34,13 +34,13 @@ export const AccountHeaderDesktop = ({ username, isOwner, modalOpen, open }: Pro
   return (
     <main className={styles.accountDesktop}>
       <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.leftCol}>
-        <Avatar className={styles.avatar} userId={id} />
-        {!isOwner && session && <FollowButton className={styles.button} userId={id ?? ''} />}
+        <Avatar userId={id} />
+        {!isOwner && session && <FollowButton userId={id ?? ''} />}
         {isOwner && (
-          <Button type="button" onClick={open} className={styles.button}>
+          <Button type="button" variant="primary" onClick={open}>
             <IconSettingsWrapper size="sm" />
             <span className={styles.menuButtonText}>settings</span>
-            <VisuallyHiddenText text={modalOpen ? 'Close menu' : 'Open menu'} />
+            <VisuallyHidden>{modalOpen ? 'Close menu' : 'Open menu'}</VisuallyHidden>
           </Button>
         )}
       </motion.div>

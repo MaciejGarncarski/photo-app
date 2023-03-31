@@ -51,9 +51,7 @@ export const Home = () => {
 
       <aside className={styles.aside}>
         <section className={styles.asideItem}>
-          <Heading tag="h2" className={styles.heading}>
-            New PhotoApp users
-          </Heading>
+          <Heading tag="h2">New PhotoApp users</Heading>
           {otherUsers.data && (
             <ul className={styles.asideList}>
               {otherUsers?.data &&
@@ -61,13 +59,13 @@ export const Home = () => {
                   return (
                     <li key={id} className={styles.asideListItem}>
                       <Link href={`/${username}`} className={styles.link}>
-                        <Avatar userId={id} className={styles.avatar} />
+                        <Avatar userId={id} />
                         <div className={styles.names}>
                           <p className={styles.fullName}>{name}</p>
                           <p className={styles.username}>@{username}</p>
                         </div>
                       </Link>
-                      {isSignedIn && <FollowButton className={styles.asideFollowButton} userId={id} />}
+                      {isSignedIn && <FollowButton userId={id} />}
                     </li>
                   );
                 })}

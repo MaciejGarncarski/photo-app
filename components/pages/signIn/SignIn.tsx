@@ -8,7 +8,7 @@ import styles from './signIn.module.scss';
 export const SignIn = () => {
   return (
     <main className={styles.container}>
-      <Heading tag="h2" className={styles.heading} {...animation}>
+      <Heading tag="h2" {...animation}>
         Sign in
       </Heading>
       <SignInForm />

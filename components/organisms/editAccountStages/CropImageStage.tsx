@@ -73,6 +73,7 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
         </Button>
         <Button
           type="button"
+          variant="primary"
           disabled={editAccountLoading || uploadImageLoading || isFinalImageEmpty}
           onClick={onSaveImage}
         >

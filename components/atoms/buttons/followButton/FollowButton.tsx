@@ -3,16 +3,15 @@ import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { useFollowMutation } from '@/components/atoms/buttons/followButton/useFollowMutation';
-import { Loader } from '@/components/atoms/loader/Loader';
+import { Loader } from '@/components/molecules/loader/Loader';
 
 type PropsTypes = {
   userId: string;
-  className?: string;
 };
 
-export const FollowButton = ({ userId, className }: PropsTypes) => {
+export const FollowButton = ({ userId }: PropsTypes) => {
   const { isFollowing } = useUser({ userId });
-  const { isLoading, mutate } = useFollowMutation(userId);
+  const { isLoading, mutate } = useFollowMutation({ userId });
   const { isSignedIn } = useAuth();
 
   if (!isSignedIn) {
@@ -20,7 +19,7 @@ export const FollowButton = ({ userId, className }: PropsTypes) => {
   }
 
   return (
-    <Button className={className} variant={isFollowing ? 'secondary' : undefined} onClick={() => mutate()}>
+    <Button type="button" variant={isFollowing ? 'secondary' : 'primary'} onClick={() => mutate(undefined)}>
       {isLoading ? (
         <Loader variant="small" color={isFollowing ? 'blue' : 'white'} />
       ) : (

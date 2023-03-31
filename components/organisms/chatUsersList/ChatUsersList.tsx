@@ -6,8 +6,8 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { MotionLink } from '@/components/atoms/accountPost/AccountPost';
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { Loader } from '@/components/atoms/loader/Loader';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { Loader } from '@/components/molecules/loader/Loader';
 import { ChatUsersResponse } from '@/components/pages/chat/useChatUsers';
 
 import styles from './chatUsersList.module.scss';
@@ -68,7 +68,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
                   href={`/chat/${chatRoomId}`}
                   className={clsx(isActive && styles.linkActive, styles.link)}
                 >
-                  <Avatar className={styles.avatar} userId={user.id} />
+                  <Avatar userId={user.id} />
                   <span className={styles.name}>
                     <span className={styles.fullName}>{user.name}</span>
                     <span className={styles.username}>@{user.username}</span>

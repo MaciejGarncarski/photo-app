@@ -30,7 +30,7 @@ export const Header = () => {
           {isSignedIn && (
             <>
               <button type="button" className={styles.button} onClick={modalOpen ? close : open}>
-                <Avatar userId={sessionUserData.id} className={styles.avatar} />
+                <Avatar userId={sessionUserData.id} />
                 <span className={styles.userInfo}>
                   <span className={styles.name}>{sessionUserData.name}</span>
                   <span className={styles.username}>@{sessionUserData.username}</span>

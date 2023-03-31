@@ -87,10 +87,10 @@ export const CropImage = ({ finalImages, setFinalImages }: PropsTypes) => {
       </p>
       {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
       <div className={styles.buttons}>
-        <Button type="button" onClick={open} variant="secondary" className={styles.button}>
+        <Button type="button" onClick={open} variant="secondary">
           Select diffrent image
         </Button>
-        <Button type="button" className={styles.button} onClick={saveCrop}>
+        <Button type="button" onClick={saveCrop} variant="primary">
           Save crop
         </Button>
       </div>

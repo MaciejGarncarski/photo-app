@@ -3,7 +3,7 @@ import { FormEvent } from 'react';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './searchUserForm.module.scss';
 
@@ -36,13 +36,13 @@ export const SearchUserForm = ({ inputVal, setInputVal, setIsEnabled, setSearche
         value={inputVal}
         onChange={(ev) => setInputVal(ev.target.value)}
       />
-      <Button type="submit" disabled={inputVal === ''}>
+      <Button type="submit" variant="primary" disabled={inputVal === ''}>
         <IconSearch />
-        <VisuallyHiddenText text="Search user" />
+        <VisuallyHidden>Search user</VisuallyHidden>
       </Button>
-      <Button type="reset" onClick={resetState} disabled={inputVal === ''}>
+      <Button type="reset" variant="primary" onClick={resetState} disabled={inputVal === ''}>
         <IconXWrapper />
-        <VisuallyHiddenText text="reset input" />
+        <VisuallyHidden>Reset input</VisuallyHidden>
       </Button>
     </form>
   );

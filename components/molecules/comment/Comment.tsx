@@ -10,7 +10,7 @@ import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
@@ -45,8 +45,8 @@ export const Comment = ({ commentData }: PropsTypes) => {
   return (
     <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
-        <VisuallyHiddenText text={`@${username}`} />
-        <Avatar userId={user_id} className={styles.avatar} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <VisuallyHidden>{`@${username}`}</VisuallyHidden>
+        <Avatar userId={user_id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>

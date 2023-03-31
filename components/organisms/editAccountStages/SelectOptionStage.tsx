@@ -65,7 +65,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
     >
       <EditAccountHeading text="Manage your account" />
       <div className={styles.avatarButtons}>
-        <Button type="button" onClick={stageCropImage}>
+        <Button type="button" variant="primary" onClick={stageCropImage}>
           {customImage ? 'Update avatar' : 'Upload avatar'}
         </Button>
         {customImage && (

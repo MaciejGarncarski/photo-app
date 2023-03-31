@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './modal.module.scss';
 
@@ -22,7 +22,7 @@ export const ModalClose = ({ onClose, outside }: PropsTypes) => {
       onClick={handleClose}
     >
       <IconXWrapper size="sm" />
-      <VisuallyHiddenText text="Close modal" />
+      <VisuallyHidden>Close modal</VisuallyHidden>
     </button>
   );
 };

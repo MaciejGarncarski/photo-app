@@ -1,16 +1,15 @@
 import clsx from 'clsx';
 import { AnimatePresence, Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-
-import { Children } from '@/components/layout/Layout';
+import { ReactNode, useState } from 'react';
 
 import styles from './tooltip.module.scss';
 
 type PropsTypes = {
   content: string;
   variant: 'top' | 'bottom' | 'right' | 'left';
-} & Children;
+  children: ReactNode;
+};
 
 export const tooltipVariant: Variants = {
   initial: {

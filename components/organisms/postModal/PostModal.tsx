@@ -45,19 +45,12 @@ export const PostModal = ({ post, close, modalOpen }: PropsTypes) => {
           className={styles.container}
         >
           <PostHeader tag="div" post={post} />
-          <PostSlider
-            post={post}
-            containerClassName={styles.slider}
-            priority={true}
-            imageClassName={styles.sliderImage}
-          />
+          <PostSlider post={post} priority={true} />
           <PostFooter post={post} parentModalOpen={modalOpen} />
 
           <section className={styles.commentsContainer}>
-            <Heading tag="h2" className={styles.commentsHeading}>
-              Comments
-            </Heading>
-            <PostComments postId={post.postId} className={styles.commentsList} />
+            <Heading tag="h2">Comments</Heading>
+            <PostComments postId={post.postId} />
           </section>
         </motion.div>
       </ReactFocusLock>

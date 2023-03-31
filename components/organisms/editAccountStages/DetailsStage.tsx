@@ -81,11 +81,11 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
             <Button type="button" variant="secondary" onClick={stageSelectImage}>
               go back
             </Button>
-            <Button type="reset" disabled={!isDirty} onClick={onReset}>
+            <Button type="reset" variant="primary" onClick={onReset} disabled={!isDirty}>
               Reset
             </Button>
           </div>
-          <Button type="submit" onClick={onClick} disabled={isError || !isDirty}>
+          <Button type="submit" variant="primary" onClick={onClick} disabled={isError || !isDirty}>
             Save changes
           </Button>
           <ModalContainer>

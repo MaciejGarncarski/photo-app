@@ -22,9 +22,9 @@ export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
           return (
             <motion.div key={aspectRatio} variants={itemVariants} className={styles.container}>
               <Button
-                className={styles.button}
+                type="button"
                 data-testid={`aspect button ${aspect}`}
-                variant={aspectRatio === aspect ? undefined : 'secondary'}
+                variant={aspectRatio === aspect ? 'primary' : 'secondary'}
                 onClick={() => setAspect(aspectRatio)}
               >
                 {text}

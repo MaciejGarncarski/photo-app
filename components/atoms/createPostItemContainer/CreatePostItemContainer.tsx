@@ -1,7 +1,11 @@
-import { Children } from '@/components/layout/Layout';
+import { ReactNode } from 'react';
 
 import styles from './createPostItemContainer.module.scss';
 
-export const CreatePostItemContainer = ({ children }: Children) => {
+type PropsTypes = {
+  children: ReactNode;
+};
+
+export const CreatePostItemContainer = ({ children }: PropsTypes) => {
   return <section className={styles.container}>{children}</section>;
 };

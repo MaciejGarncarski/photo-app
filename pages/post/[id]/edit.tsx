@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 
 import { useAuth } from '@/hooks/useAuth';
 
-import { Loader } from '@/components/atoms/loader/Loader';
 import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
+import { Loader } from '@/components/molecules/loader/Loader';
 import { usePost } from '@/components/pages/account/usePost';
 import { EditPost } from '@/components/pages/editPost/EditPost';
 

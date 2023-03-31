@@ -20,15 +20,6 @@ export const useOnSubmit = ({ finalImages, setIsLoading }: PropsTypes) => {
   const uploadImage = useUploadImage();
   const sendNewPost = useSendNewPost();
 
-  const mutationSettings = {
-    onSuccess: () => {
-      router.push('/');
-    },
-    onError: () => {
-      toast.error('Could not add post.');
-    },
-  };
-
   const onSubmit: SubmitHandler<PostDetails> = async ({ description }) => {
     if (!finalImages[0]?.file) {
       return;
@@ -45,12 +36,26 @@ export const useOnSubmit = ({ finalImages, setIsLoading }: PropsTypes) => {
           return;
         }
 
-        return await uploadImage.mutateAsync({ imageBlob: image.file, folder, isPost: true }, mutationSettings);
+        try {
+          return await uploadImage.mutateAsync({ imageBlob: image.file, folder, isPost: true });
+        } catch (error) {
+          toast.error('Could not add post.');
+        }
       }),
     );
 
     const imageUrls = images.filter((img): img is number => !!img);
-    await sendNewPost.mutateAsync({ description, imageUrls }, mutationSettings);
+    sendNewPost.mutate(
+      { description, imageUrls },
+      {
+        onSuccess: () => {
+          router.push('/');
+        },
+        onError: () => {
+          toast.error('Could not add post.');
+        },
+      },
+    );
   };
   return { onSubmit };
 };

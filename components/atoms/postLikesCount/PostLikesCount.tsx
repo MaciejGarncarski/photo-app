@@ -2,12 +2,11 @@ import styles from './postLikesCount.module.scss';
 
 type PropsTypes = {
   likesCount: number;
-  className?: string;
 };
 
-export const PostLikesCount = ({ likesCount, className }: PropsTypes) => {
+export const PostLikesCount = ({ likesCount }: PropsTypes) => {
   return (
-    <div className={className}>
+    <div>
       <p className={styles.count}>
         {likesCount}
         &nbsp;

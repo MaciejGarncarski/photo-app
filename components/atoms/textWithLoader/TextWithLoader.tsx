@@ -1,4 +1,4 @@
-import { Loader } from '@/components/atoms/loader/Loader';
+import { Loader } from '@/components/molecules/loader/Loader';
 
 import styles from './textWithLoader.module.scss';
 

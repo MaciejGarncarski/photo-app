@@ -47,7 +47,7 @@ export const CommentForm = ({ post }: PropsTypes) => {
         className={clsx(errors.comment && styles.commentInputError, styles.commentInput)}
         {...register('comment')}
       />
-      <Button type="submit" className={styles.postButton} disabled={!isDirty}>
+      <Button type="submit" disabled={!isDirty} variant="primary">
         post
       </Button>
     </form>

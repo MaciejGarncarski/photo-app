@@ -16,12 +16,12 @@ export const useEditDetails = ({ reset, open, getValues, userId }: UseEditDetail
   const router = useRouter();
   const editAccount = useEditAccount();
 
-  const onReset = (clickEv: MouseEvent<HTMLButtonElement>) => {
+  const onReset = (clickEv: MouseEvent) => {
     clickEv.preventDefault();
     reset();
   };
 
-  const onClick = (clickEv: MouseEvent<HTMLButtonElement>) => {
+  const onClick = (clickEv: MouseEvent) => {
     clickEv.preventDefault();
     open();
   };
@@ -29,7 +29,7 @@ export const useEditDetails = ({ reset, open, getValues, userId }: UseEditDetail
   const onSubmit = async () => {
     const { bio, fullName, username } = getValues();
 
-    await editAccount.mutateAsync(
+    editAccount.mutate(
       { bio, fullName, userId, username },
       {
         onSuccess: () => {

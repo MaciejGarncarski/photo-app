@@ -11,9 +11,9 @@ import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { Loader } from '@/components/atoms/loader/Loader';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Loader } from '@/components/molecules/loader/Loader';
 import { useChat } from '@/components/pages/chatRoom/useChat';
 
 import styles from './chatRoom.module.scss';
@@ -49,13 +49,13 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
   return (
     <section className={styles.chat}>
       <header className={styles.header}>
-        <Button type="button" onClick={() => router.push('/chat')}>
+        <Button variant="primary" type="button" onClick={() => router.push('/chat')}>
           <IconArrowLeft />
           <span className={styles.goBack}>Go back</span>
         </Button>
         <Link href={`/${username}`} className={styles.userHeader}>
           <Avatar userId={friendId} />
-          <Heading tag="h2" className={styles.heading}>
+          <Heading tag="h2">
             {name && `${name},`} @{username}
           </Heading>
         </Link>
@@ -76,7 +76,6 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
         {(isLoading || hasNextPage) && (
           <li ref={infiniteRef} className={styles.loading}>
             <Loader />
-            <VisuallyHiddenText text="Loading older messages" />
           </li>
         )}
       </ul>
@@ -92,7 +91,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
           />
           <button type="submit" className={styles.button} disabled={inputVal.trim() === ''}>
             <IconSend />
-            <VisuallyHiddenText text="send" />
+            <VisuallyHidden>Send message</VisuallyHidden>
           </button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth';
 
-import { Loader } from '@/components/atoms/loader/Loader';
 import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
+import { Loader } from '@/components/molecules/loader/Loader';
 import { EditAccount } from '@/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {

@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { useDeleteChatMessage } from '@/components/atoms/chatMessage/useDeleteChatMessage';
-import { VisuallyHiddenText } from '@/components/atoms/visuallyHiddenText/VisuallyHiddenText';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { ListModal } from '@/components/organisms/listModal/ListModal';
@@ -35,7 +35,7 @@ export const ChatMessage = ({ message }: PropsTypes) => {
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
       {!isReceiver && (
         <button type="button" onClick={open} className={styles.options}>
-          <IconDotsVertical /> <VisuallyHiddenText text="options" />
+          <IconDotsVertical /> <VisuallyHidden>Options</VisuallyHidden>
         </button>
       )}
       <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>
