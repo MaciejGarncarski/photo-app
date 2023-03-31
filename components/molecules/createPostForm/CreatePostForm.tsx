@@ -25,7 +25,7 @@ export const CreatePostForm = ({ disabled, errors, onSubmit, open, register }: P
     <motion.form onSubmit={onSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <CreatePostItemContainer>
         <Heading tag="h2">Info about post</Heading>
-        <TextArea label="description" {...register('description')} error={errors.description} />
+        <TextArea label="description" {...register('description')} error={errors.description?.message} />
         <div className={styles.actionButtons}>
           {buttonList.map(({ text, disabled, onClick, type, variant }) => (
             <Button key={text} disabled={disabled} onClick={onClick} type={type} variant={variant}>

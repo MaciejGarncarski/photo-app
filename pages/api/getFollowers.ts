@@ -155,7 +155,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(httpCodes.success).send({ users: usersWithChatRooms, usersCount, canLoadMore, nextCursor });
     }
   } catch (error) {
-    // console.log(error);
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 };

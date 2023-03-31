@@ -1,6 +1,6 @@
-import { FourOFour } from '@/components/pages/fourOFour/FourOFour';
+import { NotFoundPage } from '@/components/pages/notFoundPage/NotFoundPage';
 
-const FourOFourPage = () => {
-  return <FourOFour />;
+const NotFound = () => {
+  return <NotFoundPage />;
 };
-export default FourOFourPage;
+export default NotFound;

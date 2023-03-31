@@ -30,8 +30,8 @@ export const SignInForm = () => {
 
   return (
     <motion.form {...animation} className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <Input labelText="email" type="email" error={errors.email} {...register('email')} />
-      <Input labelText="password" type="password" error={errors.password} {...register('password')} />
+      <Input labelText="email" type="email" error={errors.email?.message} {...register('email')} />
+      <Input labelText="password" type="password" error={errors.password?.message} {...register('password')} />
       <Button variant="primary" type="submit">
         Continue
       </Button>

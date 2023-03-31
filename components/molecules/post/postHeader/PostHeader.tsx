@@ -10,9 +10,9 @@ import { PostData } from '@/utils/apis/transformPost';
 import { unlock } from '@/utils/bodyLock';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
+import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { useDeletePost } from '@/components/molecules/post/postOptions/useDeletePost';
@@ -26,7 +26,6 @@ type PropsTypes = {
   post: PostData;
 };
 
-export const POST_AVATAR_SIZE = 50;
 dayjs.extend(relativeTime);
 
 export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
@@ -62,7 +61,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   return (
     <Tag className={styles.header}>
       <Link href={`/${username}`} className={styles.userAnchor}>
-        <Avatar userId={authorId} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <Avatar userId={authorId} size="small" />
         <div>
           <h2 className={styles.username}>{username}</h2>
           <p>

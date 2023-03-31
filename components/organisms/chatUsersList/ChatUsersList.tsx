@@ -68,7 +68,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
                   href={`/chat/${chatRoomId}`}
                   className={clsx(isActive && styles.linkActive, styles.link)}
                 >
-                  <Avatar userId={user.id} />
+                  <Avatar userId={user.id} size="medium" />
                   <span className={styles.name}>
                     <span className={styles.fullName}>{user.name}</span>
                     <span className={styles.username}>@{user.username}</span>

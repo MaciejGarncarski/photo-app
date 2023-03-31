@@ -6,10 +6,10 @@ import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/buttons/button/Button';
-import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
+import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 
 import styles from './account.module.scss';
@@ -34,7 +34,7 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
   return (
     <motion.main variants={containerVariants} initial="hidden" animate="show" className={styles.accountMobile}>
       <motion.h2 className={styles.username}>{username}</motion.h2>
-      <Avatar userId={id} />
+      <Avatar userId={id} size="medium" />
       <AccountStats userId={id} />
       {!isOwner && session && <FollowButton userId={id ?? ''} />}
       {isOwner && (

@@ -28,7 +28,7 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(['account', userId]);
         await queryClient.invalidateQueries(['account', null, username]);
-        await queryClient.invalidateQueries(['other users']);
+        await queryClient.invalidateQueries(['other-users']);
       },
     },
   );

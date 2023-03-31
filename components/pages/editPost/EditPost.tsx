@@ -47,7 +47,7 @@ export const EditPost = ({ postId }: { postId: number }) => {
     <section className={styles.editPost}>
       <Heading tag="h2">Edit post</Heading>
       <form className={styles.form}>
-        <TextArea label="Description" {...register('description')} error={errors.description} />
+        <TextArea label="Description" {...register('description')} error={errors.description?.message} />
         <div className={styles.buttons}>
           <Button type="button" variant="secondary" onClick={cancelModal.open}>
             Cancel

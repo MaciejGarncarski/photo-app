@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 import { Heading } from '@/components/atoms/heading/Heading';
 
-import styles from './fourOFour.module.scss';
+import styles from './notFoundPage.module.scss';
 
-export const FourOFour = () => {
+export const NotFoundPage = () => {
   return (
     <main className={styles.main}>
       <Heading tag="h2">404</Heading>

@@ -19,16 +19,6 @@
     }
 }
 
-.avatar {
-    width: 3.5rem;
-    height: 3.5rem;
-
-    @include common.mediaquery('desktop') {
-        width: 4rem;
-        height: 4rem;
-    }
-}
-
 .link {
     display: flex;
     flex-direction: row;

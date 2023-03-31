@@ -12,9 +12,10 @@
 }
 
 .accountMobile {
-  display: grid;
-  grid-template-columns: 1fr;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   gap: 1.5rem;
 
   @include common.mediaquery('tablet') {
@@ -33,7 +34,7 @@
 .leftCol {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
 }
@@ -44,23 +45,6 @@
   flex-direction: column;
   gap: 1.5rem;
 }
-
-figure.avatar {
-  --account-avatar-size: 6rem;
-  width: var(--account-avatar-size);
-  height: var(--account-avatar-size);
-  justify-self: center;
-
-  @include common.mediaquery('desktop') {
-    --account-avatar-size: 9rem;
-    width: var(--account-avatar-size);
-    height: var(--account-avatar-size);
-    place-self: center;
-    position: relative;
-    top: 1rem;
-  }
-}
-
 
 .username {
   text-align: center;
@@ -99,20 +83,6 @@ figure.avatar {
 
   @include common.mediaquery('desktop') {
     text-align: left;
-    font-size: 1.25rem;
-  }
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  text-transform: capitalize;
-  justify-self: center;
-  gap: 0.5rem;
-
-  @include common.mediaquery('desktop') {
-    position: relative;
-    margin: 0;
     font-size: 1.25rem;
   }
 }

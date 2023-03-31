@@ -1,11 +1,10 @@
 import { forwardRef, useId } from 'react';
-import { FieldError } from 'react-hook-form';
 
 import styles from './textArea.module.scss';
 
 type PropsTypes = {
   label: string;
-  error?: FieldError;
+  error?: string;
 };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(({ label, error, ...otherProps }, ref) => {
@@ -16,7 +15,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(({ label, er
         {label}
       </label>
       <textarea id={id} ref={ref} className={styles.textArea} cols={30} rows={10} {...otherProps} />
-      <p className={styles.error}>{error?.message}</p>
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 });

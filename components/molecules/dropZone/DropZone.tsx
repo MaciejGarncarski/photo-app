@@ -6,6 +6,7 @@ import { useScreenWidth } from '@/hooks/useScreenWidth';
 
 import { CropError } from '@/components/atoms/cropError/CropError';
 import { Heading } from '@/components/atoms/heading/Heading';
+import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
 import { useDropZone } from '@/components/molecules/dropZone/useDropZone';
 
@@ -33,15 +34,16 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) =
         onDragLeave={inactive}
         data-testid="dropZoneContainer"
       >
-        <input
-          data-testid="fileInput"
-          type="file"
-          id="dropZoneInput"
-          accept="image/*"
-          className={clsx('visually-hidden', styles.input)}
-          ref={inputRef}
-          onChange={onChange}
-        />
+        <VisuallyHidden>
+          <input
+            type="file"
+            id="dropZoneInput"
+            accept="image/*"
+            className={clsx('visually-hidden', styles.input)}
+            ref={inputRef}
+            onChange={onChange}
+          />
+        </VisuallyHidden>
 
         <div className={styles.dropZoneState}>
           {isActive && (

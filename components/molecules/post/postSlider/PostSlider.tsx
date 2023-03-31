@@ -29,34 +29,14 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
 
   const postImages = imagesData.filter((img): img is PostImageType => !!img);
   const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
-
-  if (postImages.length === 1) {
-    if (!postImages[0]) {
-      return null;
-    }
-
-    const { height, width, url } = postImages[0];
-
-    return (
-      <figure onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
-        <PostImage image={{ height, width, priority, src: url }} post={post} />
-        <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
-      </figure>
-    );
-  }
+  const isSingleImage = postImages.length === 1;
 
   return (
     <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
       <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
-      {currentIndex !== 0 && postImages.length > 0 && (
-        <button type="button" className={styles.button} onClick={prevImage}>
-          <IconArrowLeft />
-          <VisuallyHidden>Previous image</VisuallyHidden>
-        </button>
-      )}
       <motion.div
         className={styles.imagesContainer}
-        drag="x"
+        drag={isSingleImage ? undefined : 'x'}
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
         dragElastic={0.3}
@@ -74,12 +54,18 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      <PostSliderProgress currentIndex={currentIndex} images={postImages} />
-      {currentIndex !== postImages.length - 1 && postImages.length > 0 && (
-        <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
-          <IconArrowRight />
-          <VisuallyHidden>Next image</VisuallyHidden>
-        </button>
+      {!isSingleImage && (
+        <>
+          <button type="button" className={styles.button} onClick={prevImage}>
+            <IconArrowLeft />
+            <VisuallyHidden>Previous image</VisuallyHidden>
+          </button>
+          <PostSliderProgress currentIndex={currentIndex} images={postImages} />
+          <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
+            <IconArrowRight />
+            <VisuallyHidden>Next image</VisuallyHidden>
+          </button>
+        </>
       )}
     </motion.div>
   );

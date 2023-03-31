@@ -7,10 +7,10 @@ import { useAuth } from '@/hooks/useAuth';
 import { useOtherUsers } from '@/hooks/useOtherUsers';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
+import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { HomePost } from '@/components/organisms/homePost/HomePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
@@ -59,13 +59,17 @@ export const Home = () => {
                   return (
                     <li key={id} className={styles.asideListItem}>
                       <Link href={`/${username}`} className={styles.link}>
-                        <Avatar userId={id} />
+                        <Avatar userId={id} size="small" />
                         <div className={styles.names}>
                           <p className={styles.fullName}>{name}</p>
                           <p className={styles.username}>@{username}</p>
                         </div>
                       </Link>
-                      {isSignedIn && <FollowButton userId={id} />}
+                      {isSignedIn && (
+                        <div className={styles.asideFollowButton}>
+                          <FollowButton userId={id} />
+                        </div>
+                      )}
                     </li>
                   );
                 })}

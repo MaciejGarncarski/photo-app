@@ -1,6 +1,7 @@
 import { IconUser } from '@tabler/icons-react';
+import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import Image, { ImageProps } from 'next/image';
+import Image from 'next/image';
 
 import { useUser } from '@/hooks/useUser';
 
@@ -8,33 +9,40 @@ import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHi
 
 import styles from './avatar.module.scss';
 
+type Sizes = 'small' | 'medium' | 'big';
+
 type PropsTypes = {
   userId?: string;
-  width?: number;
-  height?: number;
+  size: Sizes;
 };
 
-const DEFAULT_AVATAR_SIZE = 140;
+const AVATAR_SIZE = 140;
 
 export const MotionImage = motion(Image);
 
-export const Avatar = ({ userId, width = DEFAULT_AVATAR_SIZE, height = DEFAULT_AVATAR_SIZE }: PropsTypes) => {
+export const Avatar = ({ userId, size }: PropsTypes) => {
   const { customImage, image, username } = useUser({ userId });
   const hasNoImage = Boolean(!image && !customImage);
   const hasDefaultImage = image && !Boolean(customImage);
   const hasCustomImage = customImage;
 
   return (
-    <figure className={styles.avatar}>
+    <figure className={clsx(styles[size], styles.avatar)}>
       {hasNoImage && (
-        <div data-testid="empty icon" className={styles.noImage}>
+        <div className={styles.noImage}>
           <IconUser />
           <VisuallyHidden>{username || ''}</VisuallyHidden>
         </div>
       )}
-      {hasDefaultImage && <MotionImage src={image} alt={username ?? ''} width={width} height={height} />}
+      {hasDefaultImage && <MotionImage src={image} alt={username ?? ''} width={AVATAR_SIZE} height={AVATAR_SIZE} />}
       {hasCustomImage && (
-        <MotionImage src={customImage} alt={username ?? ''} data-testid="customImage" width={width} height={height} />
+        <MotionImage
+          src={customImage}
+          alt={username ?? ''}
+          data-testid="customImage"
+          width={AVATAR_SIZE}
+          height={AVATAR_SIZE}
+        />
       )}
     </figure>
   );

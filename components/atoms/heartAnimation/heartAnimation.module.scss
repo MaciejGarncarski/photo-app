@@ -13,9 +13,7 @@
     align-items: center;
     height: 100%;
 
-
-
-    >svg {
+    &>svg {
         filter: drop-shadow(0 2px 8px var(--color-gray-transparent));
         color: white;
         fill: white;

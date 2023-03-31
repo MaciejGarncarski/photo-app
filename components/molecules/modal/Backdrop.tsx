@@ -48,7 +48,6 @@ export const Backdrop = ({ close, mobileCenter, children }: PropsTypes) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      data-testid="backdrop"
     >
       {children}
     </motion.div>,

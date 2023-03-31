@@ -5,9 +5,9 @@ import { useUser } from '@/hooks/useUser';
 import { unlock } from '@/utils/bodyLock';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
-import { EditAccountHeading } from '@/components/atoms/editAccountHeading/EditAccountHeading';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
+import { EditAccountHeading } from '@/components/molecules/editAccountHeading/EditAccountHeading';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';

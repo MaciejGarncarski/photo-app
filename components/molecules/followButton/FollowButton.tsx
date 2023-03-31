@@ -2,7 +2,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
-import { useFollowMutation } from '@/components/atoms/buttons/followButton/useFollowMutation';
+import { useFollowMutation } from '@/components/molecules/followButton/useFollowMutation';
 import { Loader } from '@/components/molecules/loader/Loader';
 
 type PropsTypes = {

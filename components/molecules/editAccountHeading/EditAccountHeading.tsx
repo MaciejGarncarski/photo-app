@@ -1,0 +1,11 @@
+import { Heading } from '@/components/atoms/heading/Heading';
+
+import styles from './editAccountHeading.module.scss';
+
+export const EditAccountHeading = ({ text }: { text: string }) => {
+  return (
+    <div className={styles.heading}>
+      <Heading tag="h2">{text}</Heading>
+    </div>
+  );
+};

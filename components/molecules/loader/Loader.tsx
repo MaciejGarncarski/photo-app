@@ -12,7 +12,11 @@ type PropsTypes = {
 
 export const Loader = ({ variant, color }: PropsTypes) => {
   return (
-    <span className={clsx(color && styles[color], variant && styles[variant], styles.loading)}>
+    <span
+      className={clsx(color && styles[color], variant && styles[variant], styles.loading)}
+      aria-busy="true"
+      aria-live="polite"
+    >
       <IconLoader2 />
       <VisuallyHidden>Loading</VisuallyHidden>
     </span>

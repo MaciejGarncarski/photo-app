@@ -6,10 +6,10 @@ import { useUser } from '@/hooks/useUser';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/buttons/button/Button';
-import { FollowButton } from '@/components/atoms/buttons/followButton/FollowButton';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
+import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 
 import styles from './account.module.scss';
@@ -34,7 +34,7 @@ export const AccountHeaderDesktop = ({ username, isOwner, modalOpen, open }: Pro
   return (
     <main className={styles.accountDesktop}>
       <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.leftCol}>
-        <Avatar userId={id} />
+        <Avatar userId={id} size="big" />
         {!isOwner && session && <FollowButton userId={id ?? ''} />}
         {isOwner && (
           <Button type="button" variant="primary" onClick={open}>

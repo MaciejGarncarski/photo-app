@@ -16,7 +16,6 @@ import { useDeleteComment } from '@/components/molecules/comment/useDeleteCommen
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
-import { POST_AVATAR_SIZE } from '@/components/molecules/post/postHeader/PostHeader';
 import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
 
 import styles from './comment.module.scss';
@@ -46,7 +45,7 @@ export const Comment = ({ commentData }: PropsTypes) => {
     <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <VisuallyHidden>{`@${username}`}</VisuallyHidden>
-        <Avatar userId={user_id} width={POST_AVATAR_SIZE} height={POST_AVATAR_SIZE} />
+        <Avatar userId={user_id} size="small" />
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>

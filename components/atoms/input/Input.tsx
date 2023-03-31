@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 import { ChangeEvent, forwardRef } from 'react';
-import { FieldError } from 'react-hook-form';
 
 import styles from './input.module.scss';
 
 type PropsTypes = {
   type?: 'text' | 'number' | 'tel' | 'email' | 'password';
   labelText: string;
-  error?: FieldError;
+  error?: string;
   optional?: boolean;
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
@@ -39,7 +38,7 @@ export const Input = forwardRef<HTMLInputElement, PropsTypes>(
           value={value}
           {...props}
         />
-        <p className={styles.error}>{error && error.message}</p>
+        {error && <p className={styles.error}>{error}</p>}
       </div>
     );
   },

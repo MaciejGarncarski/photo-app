@@ -42,7 +42,7 @@ export const ChatMessage = ({ message }: PropsTypes) => {
         <time dateTime={created_at.toString()}>{formattedDate}</time>
       </p>
       <div className={clsx(isReceiver && styles.contentReceiver, styles.content)}>
-        <Avatar userId={sender} />
+        <Avatar userId={sender} size="small" />
         <p>{text}</p>
       </div>
       <ModalContainer>
