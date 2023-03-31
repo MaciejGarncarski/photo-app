@@ -30,6 +30,8 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
   const postImages = imagesData.filter((img): img is PostImageType => !!img);
   const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
   const isSingleImage = postImages.length === 1;
+  const isNotFirstIndex = currentIndex !== 0;
+  const isNotLastIndex = currentIndex !== postImages.length - 1;
 
   return (
     <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
@@ -56,15 +58,19 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
       </motion.div>
       {!isSingleImage && (
         <>
-          <button type="button" className={styles.button} onClick={prevImage}>
-            <IconArrowLeft />
-            <VisuallyHidden>Previous image</VisuallyHidden>
-          </button>
+          {isNotFirstIndex && (
+            <button type="button" className={styles.button} onClick={prevImage}>
+              <IconArrowLeft />
+              <VisuallyHidden>Previous image</VisuallyHidden>
+            </button>
+          )}
           <PostSliderProgress currentIndex={currentIndex} images={postImages} />
-          <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
-            <IconArrowRight />
-            <VisuallyHidden>Next image</VisuallyHidden>
-          </button>
+          {isNotLastIndex && (
+            <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
+              <IconArrowRight />
+              <VisuallyHidden>Next image</VisuallyHidden>
+            </button>
+          )}
         </>
       )}
     </motion.div>
