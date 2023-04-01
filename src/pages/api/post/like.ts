@@ -2,10 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
-import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+
+import { prisma } from '../../../../prisma/prismadb';
 
 export const PostLikeSchema = z.object({
   postId: z.string(),

@@ -2,12 +2,12 @@ import { ChatRoom as ChatRoomType } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { prisma } from '@/lib/prismadb';
-
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ChatRoom } from '@/components/pages/chatRoom/ChatRoom';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+
+import { prisma } from '../../../prisma/prismadb';
 
 const FriendChatPage = ({ chatRoomData }: { chatRoomData: ChatRoomType }) => {
   if (!chatRoomData) {

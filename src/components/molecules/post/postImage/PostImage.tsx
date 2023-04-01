@@ -33,7 +33,7 @@ export const PostImage = ({ image, post }: PropsTypes) => {
     <>
       {isLoading && (
         <div className={styles.loader}>
-          <Loader />
+          <Loader color="blue" size="normal" />;
         </div>
       )}
       <MotionImage

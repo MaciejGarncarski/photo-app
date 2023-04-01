@@ -1,7 +1,7 @@
 import { Post, PostImage, User } from '@prisma/client';
 import { Session } from 'next-auth';
 
-import { prisma } from '@/lib/prismadb';
+import { prisma } from '../../../prisma/prismadb';
 
 export type PostData = {
   author: User;

@@ -39,7 +39,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <Layout>
             <Hydrate state={pageProps.dehydratedState}>
               <div id="modal"></div>
-              {isLoading ? <Loader variant="margin-top" /> : <Component {...pageProps} />}
+              {isLoading ? <Loader color="blue" size="normal" /> : <Component {...pageProps} />}
               <Toaster />
             </Hydrate>
           </Layout>

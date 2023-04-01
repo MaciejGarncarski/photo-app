@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prismadb';
+import { prisma } from '../../../prisma/prismadb';
 
 export const getMoreUserData = async (userId: string, sessionUserId?: string) => {
   const countedPosts = await prisma.post.aggregate({

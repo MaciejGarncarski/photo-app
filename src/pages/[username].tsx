@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { prisma } from '@/lib/prismadb';
-
 import { Account } from '@/components/pages/account/Account';
+
+import { prisma } from '../../prisma/prismadb';
 
 const UserAccount = () => {
   const { query } = useRouter();

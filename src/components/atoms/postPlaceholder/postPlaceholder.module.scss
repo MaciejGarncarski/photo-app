@@ -1,12 +1,10 @@
 @use '@/styles/common.scss';
 
-
 %gradient {
   background-size: var(--placeholder-bg-size);
   background-image: var(--gradient);
   animation: var(--placeholder-animation);
 }
-
 
 .placeholder {
   width: var(--post-width);

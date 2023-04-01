@@ -1,31 +1,30 @@
 @use '@/styles/common.scss';
 
 .form {
-    display: grid;
-    gap: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
 
-    @include common.mediaquery('desktop') {
-        gap: 2.5rem
-    }
-
+  @include common.mediaquery('desktop') {
+    gap: 2.5rem;
+  }
 }
 
 .signInButton {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    padding: 0.6rem 0;
-    font-weight: 700;
-    font-size: 1.25rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 0;
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
 .continueButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    >button {
-        flex-grow: 1;
-        padding: 0.8rem 0;
-    }
+  > button {
+    flex-grow: 1;
+    padding: 0.8rem 0;
+  }
 }

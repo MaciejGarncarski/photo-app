@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
+
+import { prisma } from '../../../../prisma/prismadb';
 
 const chatHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;

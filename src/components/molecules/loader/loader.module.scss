@@ -1,51 +1,49 @@
 @use '@/styles/common.scss';
 
 .loading {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-primary);
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-primary);
 
-    >svg {
-        width: 5rem;
-        height: 5rem;
-        animation: rotate 1s infinite linear forwards;
-    }
-
+  > svg {
+    width: 5rem;
+    height: 5rem;
+    animation: rotate 1s infinite linear forwards;
+  }
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-
 .margin-top {
-    margin-top: 3rem;
+  margin-top: 3rem;
 
-    @include common.mediaquery('desktop') {
-        margin-top: 6rem;
-    }
+  @include common.mediaquery('desktop') {
+    margin-top: 6rem;
+  }
 }
 
 .small {
-    >svg {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
+  > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .white {
-    color: var(--color-white);
+  color: var(--color-white);
 }
 
 .blue {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }

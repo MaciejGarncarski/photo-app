@@ -14,7 +14,7 @@ import { Heading } from '@/components/atoms/heading/Heading';
 import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { Loader } from '@/components/molecules/loader/Loader';
-import { useChat } from '@/components/pages/chatRoom/useChat';
+import { useChatRoom } from '@/components/pages/chatRoom/useChatRoom';
 
 import styles from './chatRoom.module.scss';
 
@@ -31,7 +31,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
   const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
 
   const { name, username } = useUser({ userId: friendId });
-  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage } = useChat({
+  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage } = useChatRoom({
     chatRoomId: chatRoomData.id,
     friendId,
   });
@@ -75,7 +75,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
         })}
         {(isLoading || hasNextPage) && (
           <li ref={infiniteRef} className={styles.loading}>
-            <Loader />
+            <Loader color="blue" size="normal" />;
           </li>
         )}
       </ul>

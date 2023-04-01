@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 import { PostData, transformPost } from '@/utils/apis/transformPost';
 import { getInfinitePostsCount } from '@/utils/getInfinitePostsCount';
 
 import { InfinitePosts } from '@/pages/api/post/infinitePosts';
+
+import { prisma } from '../../../../../prisma/prismadb';
 
 const POSTS_PER_SCROLL = 9;
 

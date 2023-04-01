@@ -13,7 +13,7 @@ import { useListData } from '@/components/molecules/navButtons/useListData';
 
 const Settings = dynamic(() => import('@/components/organisms/settings/Settings').then((mod) => mod.Settings), {
   ssr: false,
-  loading: () => <Loader variant="margin-top" />,
+  loading: () => <Loader color="blue" size="normal" />,
 });
 
 import dynamic from 'next/dynamic';

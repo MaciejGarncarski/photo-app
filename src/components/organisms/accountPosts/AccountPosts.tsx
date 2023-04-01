@@ -35,7 +35,7 @@ export const AccountPosts = ({ id }: PropsTypes) => {
   });
 
   if (!data || isLoading) {
-    return <Loader variant="margin-top" />;
+    return <Loader color="blue" size="normal" />;
   }
 
   const hasPosts = data.pages[0].postsCount !== 0;
@@ -51,7 +51,7 @@ export const AccountPosts = ({ id }: PropsTypes) => {
       </motion.div>
       {hasNextPage && hasPosts && (
         <div ref={infiniteRef} className={styles.loading}>
-          <Loader />
+          <Loader color="blue" size="normal" />;
         </div>
       )}
     </>

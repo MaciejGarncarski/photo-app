@@ -1,22 +1,22 @@
 .list {
-    display: flex;
-    list-style: none;
-    gap: 3rem;
+  display: flex;
+  list-style: none;
+  gap: 3rem;
 }
 
 .listItem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1.25rem;
 }
 
 .buttonsCount {
-    display: flex;
+  display: flex;
 }

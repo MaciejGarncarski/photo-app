@@ -1,5 +1,6 @@
 @mixin mediaquery($query) {
-  $breakpoints: ('tablet': '(min-width: 750px)',
+  $breakpoints: (
+    'tablet': '(min-width: 750px)',
     'desktop': '(min-width: 1279px)',
   );
 
@@ -7,9 +8,7 @@
     @media screen and #{map-get($breakpoints, $query)} {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @error "ERROR: No breakpoint specified for query '#{$query}'";
   }
 }

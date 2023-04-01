@@ -14,7 +14,7 @@ type PropsTypes = {
   friendId: string;
 };
 
-export const useChat = ({ chatRoomId, friendId }: PropsTypes) => {
+export const useChatRoom = ({ chatRoomId, friendId }: PropsTypes) => {
   const [inputVal, setInputVal] = useState<string>('');
 
   const { session } = useAuth();

@@ -23,10 +23,9 @@
   border: var(--border-gray);
   position: relative;
 
-  &:hover>.deleteIconOverlay {
+  &:hover > .deleteIconOverlay {
     opacity: 1;
   }
-
 }
 
 .imgPreview {
@@ -49,7 +48,7 @@
   align-items: center;
   min-height: 5rem;
 
-  >svg {
+  > svg {
     width: 2rem;
     height: 2rem;
   }
@@ -78,7 +77,7 @@
     background-color: var(--color-error);
   }
 
-  >svg {
+  > svg {
     color: var(--color-icon-gray);
     width: 2rem;
     height: 2rem;
@@ -88,7 +87,7 @@
     right: -1.5rem;
     top: -1.5rem;
 
-    >svg {
+    > svg {
       width: 2.5rem;
       height: 2.5rem;
     }

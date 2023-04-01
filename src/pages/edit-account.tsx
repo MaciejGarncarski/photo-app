@@ -1,18 +1,13 @@
 import { useAuth } from '@/hooks/useAuth';
 
-import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
 import { Loader } from '@/components/molecules/loader/Loader';
 import { EditAccount } from '@/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {
-  const { isLoading, isAuthenticated, session } = useAuth();
+  const { isLoading, session } = useAuth();
 
   if (isLoading || !session?.user?.id) {
-    return <Loader variant="margin-top" />;
-  }
-
-  if (!isAuthenticated) {
-    return <AccessDenied />;
+    return <Loader color="blue" size="normal" />;
   }
 
   return <EditAccount userId={session.user.id} />;

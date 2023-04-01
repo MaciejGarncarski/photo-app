@@ -1,75 +1,71 @@
 @use '@/styles/common.scss';
 
-
 .container {
-    background-color: var(--bg-primary);
-    padding: 1rem 0;
-    width: clamp(25rem, 30%, 30rem);
-    border-radius: var(--radius-big) var(--radius-big) 0 0;
-    position: relative;
+  background-color: var(--bg-primary);
+  padding: 1rem 0;
+  width: clamp(25rem, 30%, 30rem);
+  border-radius: var(--radius-big) var(--radius-big) 0 0;
+  position: relative;
 
-
-    @include common.mediaquery('desktop') {
-        border-radius: var(--radius-medium);
-
-    }
+  @include common.mediaquery('desktop') {
+    border-radius: var(--radius-medium);
+  }
 }
 
 .heading {
-    text-align: center;
-    padding-bottom: 1rem;
+  text-align: center;
+  padding-bottom: 1rem;
 }
 
 .list {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    min-height: 10rem;
-    max-height: 20rem;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  min-height: 10rem;
+  max-height: 20rem;
+  overflow-y: auto;
 }
 
 .placeholder {
-    margin: 0.5rem 1.5rem;
-    background-size: var(--placeholder-bg-size);
-    background-image: var(--gradient);
-    animation: var(--placeholder-animation);
-    min-height: 2.5rem;
-    border-radius: var(--radius-small);
+  margin: 0.5rem 1.5rem;
+  background-size: var(--placeholder-bg-size);
+  background-image: var(--gradient);
+  animation: var(--placeholder-animation);
+  min-height: 2.5rem;
+  border-radius: var(--radius-small);
 }
 
-
 .listItem {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 2rem;
-    transition: transform var(--transition);
-    margin: 0.25rem 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  transition: transform var(--transition);
+  margin: 0.25rem 1rem;
 }
 
 .itemLink {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    gap: 1rem;
-    flex-grow: 1;
-    border-radius: var(--radius-medium);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  gap: 1rem;
+  flex-grow: 1;
+  border-radius: var(--radius-medium);
 
-    &:hover,
-    &:focus {
-        background-color: var(--bg-secondary);
-    }
+  &:hover,
+  &:focus {
+    background-color: var(--bg-secondary);
+  }
 }
 
 .username {
-    font-weight: 700;
-    font-size: 1.25rem;
-    max-width: 8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 1.25rem;
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-    @include common.mediaquery('desktop') {
-        max-width: 12rem;
-    }
+  @include common.mediaquery('desktop') {
+    max-width: 12rem;
+  }
 }

@@ -1,56 +1,56 @@
 @use '@/styles/common.scss';
 
 .orWith {
-    background-color: var(--bg-primary);
-    text-transform: uppercase;
-    padding: 0 1rem;
-    display: inline-block;
-    z-index: 1;
-    font-weight: 700;
+  background-color: var(--bg-primary);
+  text-transform: uppercase;
+  padding: 0 1rem;
+  display: inline-block;
+  z-index: 1;
+  font-weight: 700;
 }
 
 .separator {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    &::before {
-        content: '';
-        width: 100%;
-        height: 2px;
-        background-color: var(--bg-secondary);
-        position: absolute;
-        top: 50%;
-        left: 0;
-    }
+  &::before {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: var(--bg-secondary);
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
 }
 
 .otherOptions {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
 .other {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-direction: column;
-    gap: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 2rem;
 
-    @include common.mediaquery('desktop') {
-        flex-direction: row;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
+  @include common.mediaquery('desktop') {
+    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .button {
-    >button {
-        display: flex;
-        gap: 1rem;
-        width: 100%;
-        padding: 0.8rem;
-    }
+  > button {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.8rem;
+  }
 }

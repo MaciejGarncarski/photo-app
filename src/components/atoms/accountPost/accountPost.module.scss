@@ -69,10 +69,9 @@
 }
 
 .container {
-
   &:focus,
   &:hover {
-    &>.overlay {
+    & > .overlay {
       opacity: 1;
     }
   }

@@ -2,11 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
-import { imageKit } from '@/lib/imagekit';
-import { prisma } from '@/lib/prismadb';
+import { imageKit } from '@/utils/imagekit';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+
+import { prisma } from '../../../prisma/prismadb';
 
 const DeletePostSchema = z.object({
   postId: z.string(),

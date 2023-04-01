@@ -1,6 +1,5 @@
 @use '@/styles/common.scss';
 
-
 .tooltip {
   position: relative;
   display: inline-block;
@@ -23,7 +22,6 @@
   @include common.mediaquery('desktop') {
     display: block;
   }
-
 }
 
 .top {

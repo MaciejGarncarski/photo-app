@@ -2,14 +2,10 @@ import { Message } from '@prisma/client';
 import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { useAuth } from '@/hooks/useAuth';
-import { formatDate } from '@/utils/formatDate';
-
 import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { useDeleteChatMessage } from '@/components/atoms/chatMessage/useDeleteChatMessage';
+import { useChatMessage } from '@/components/atoms/chatMessage/useChatMessage';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
-import { useModal } from '@/components/molecules/modal/useModal';
 import { ListModal } from '@/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
 
@@ -20,13 +16,12 @@ type PropsTypes = {
 };
 
 export const ChatMessage = ({ message }: PropsTypes) => {
-  const { modalOpen, open, close } = useModal();
-  const { session } = useAuth();
-  const { sender, text, created_at, id, receiver } = message;
-  const isReceiver = sender !== session?.user?.id;
-  const formattedDate = formatDate(created_at);
-
-  const { mutate } = useDeleteChatMessage({ receiver, sender });
+  const { sender, receiver, text, created_at, id } = message;
+  const { close, formattedDate, isReceiver, modalOpen, mutate, open } = useChatMessage({
+    sender,
+    receiver,
+    created_at,
+  });
 
   return (
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>

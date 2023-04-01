@@ -5,7 +5,7 @@
   @extend %variables;
 }
 
-:root[class="dark"] {
+:root[class='dark'] {
   color-scheme: dark;
   @extend %variablesDarkTheme;
 }
@@ -39,7 +39,6 @@ video {
 button {
   background-color: transparent;
   border: 0;
-
 
   &:not(:disabled) {
     cursor: pointer;

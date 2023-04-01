@@ -45,7 +45,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   if (!data) {
     return (
       <div className={styles.loader}>
-        <Loader />
+        <Loader color="blue" size="normal" />;
       </div>
     );
   }
@@ -80,7 +80,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
         })}
         {(hasNextPage || isLoading) && (
           <div ref={infiniteRef}>
-            <Loader />
+            <Loader color="blue" size="normal" />;
           </div>
         )}
       </motion.ul>

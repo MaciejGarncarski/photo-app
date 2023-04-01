@@ -1,10 +1,10 @@
 @use '@/styles/common.scss';
 
 .homePost {
-    width: var(--post-width);
+  width: var(--post-width);
 
-    @include common.mediaquery('tablet') {
-        border: var(--border-gray);
-        border-radius: var(--radius-medium);
-    }
+  @include common.mediaquery('tablet') {
+    border: var(--border-gray);
+    border-radius: var(--radius-medium);
+  }
 }

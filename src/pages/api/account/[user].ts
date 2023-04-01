@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 import { getMoreUserData } from '@/utils/apis/getMoreUserData';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+
+import { prisma } from '../../../../prisma/prismadb';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { type, user } = req.query;

@@ -11,6 +11,5 @@ yarn-lock.yaml
 .vscode/
 node_modules/
 .public/
-**/*.scss
 tsconfig.json
 jest.setup.js

@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { prisma } from '@/lib/prismadb';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
 
 import { InfiniteMessages } from '@/components/pages/chatRoom/useChatMessages';
+
+import { prisma } from '../../../../prisma/prismadb';
 
 const MESSAGES_PER_PAGE = 6;
 
