@@ -1,4 +1,4 @@
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
@@ -9,6 +9,7 @@ import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/Conf
 import { EditAccountHeading } from '@/components/molecules/editAccountHeading/EditAccountHeading';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
+import { stageVariant } from '@/components/organisms/editAccountStages/stage.animation';
 import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './stages.module.scss';
@@ -17,12 +18,6 @@ type PropsTypes = {
   stageSelectImage: () => void;
   stageCropImage: () => void;
   stagePersonalInfo: () => void;
-};
-
-export const stageVariant: Variants = {
-  initial: { y: 20, opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-  exit: { scale: 0.7, opacity: 0 },
 };
 
 export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTypes) => {

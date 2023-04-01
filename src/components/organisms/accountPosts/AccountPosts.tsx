@@ -1,26 +1,15 @@
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
 import { Loader } from '@/components/molecules/loader/Loader';
+import { postContainerVariants } from '@/components/organisms/accountPosts/AccountPosts.animation';
 import { useAccountPosts } from '@/components/organisms/accountPosts/useAccountPosts';
 
 import styles from './accountPosts.module.scss';
 
 type PropsTypes = {
   id: string;
-};
-
-const postContainerVariants: Variants = {
-  hidden: {
-    opacity: 0,
-  },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
 };
 
 export const AccountPosts = ({ id }: PropsTypes) => {

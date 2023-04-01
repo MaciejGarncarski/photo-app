@@ -1,26 +1,19 @@
 import { IconHeart } from '@tabler/icons-react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+
+import { heartVariants } from '@/components/atoms/heartAnimation/HeartAnimation.animation';
 
 import styles from './heartAnimation.module.scss';
 
-const variants: Variants = {
-  initial: {
-    scale: 0,
-  },
-  animate: {
-    scale: 1,
-    transition: {
-      type: 'spring',
-    },
-  },
-  exit: {
-    scale: 0,
-  },
-};
-
 export const HeartAnimation = () => {
   return (
-    <motion.div className={styles.heartAnimation} variants={variants} initial="initial" animate="animate" exit="exit">
+    <motion.div
+      className={styles.heartAnimation}
+      variants={heartVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <IconHeart />
     </motion.div>
   );

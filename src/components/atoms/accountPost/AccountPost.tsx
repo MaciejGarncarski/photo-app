@@ -1,9 +1,11 @@
 import { IconMessage2 } from '@tabler/icons-react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { PostData } from '@/utils/apis/transformPost';
+
+import { postItemVaraints } from '@/components/atoms/accountPost/AccountPost.animation';
 
 import styles from './accountPost.module.scss';
 
@@ -13,18 +15,7 @@ type PropsTypes = {
   post: PostData;
 };
 
-const postItemVaraints: Variants = {
-  hidden: {
-    scale: 0.8,
-    rotate: -3,
-  },
-  show: {
-    scale: 1,
-    rotate: 0,
-  },
-};
-
-export const MotionLink = motion(Link);
+const MotionLink = motion(Link);
 
 export const AccountPost = ({ post }: PropsTypes) => {
   const { imagesData, likesCount, commentsCount, postId, isLiked } = post;

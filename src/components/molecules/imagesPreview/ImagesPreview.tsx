@@ -1,32 +1,18 @@
 import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 import { ImagesBase64 } from '@/utils/getFinalImagesBase64';
 
 import { Heading } from '@/components/atoms/heading/Heading';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { containerVariants, itemVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './imagesPreview.module.scss';
 
 type PropsTypes = {
   onRemove: (id: string) => void;
   imagesBase64: ImagesBase64;
-};
-
-export const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-export const itemVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.3, rotate: -4 },
-  show: { opacity: 1, scale: 1, rotate: 0 },
 };
 
 export const ImagesPreview = ({ onRemove, imagesBase64 }: PropsTypes) => {

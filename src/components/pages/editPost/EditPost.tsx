@@ -17,9 +17,9 @@ import { PostDetailsSchema } from '../createPost/CreatePost';
 export const EditPost = ({ postId }: { postId: number }) => {
   const router = useRouter();
   const { data, isLoading } = usePost({ postId });
+  const { mutate } = useEditPost({ postId });
   const saveModal = useModal();
   const cancelModal = useModal();
-  const { mutate } = useEditPost({ postId });
 
   const {
     formState: { errors, isDirty },

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { PostData } from '@/utils/apis/transformPost';
@@ -10,6 +10,7 @@ import { PostFooter } from '@/components/molecules/post/postFooter/PostFooter';
 import { PostHeader } from '@/components/molecules/post/postHeader/PostHeader';
 import { PostSlider } from '@/components/molecules/post/postSlider/PostSlider';
 import { PostComments } from '@/components/organisms/postComments/PostComments';
+import { modalVariants } from '@/components/organisms/postModal/PostModal.animation';
 
 import styles from './postModal.module.scss';
 
@@ -17,18 +18,6 @@ type PropsTypes = {
   post: PostData;
   close: () => void;
   isVisible: boolean;
-};
-
-const modalVariants: Variants = {
-  hidden: {
-    y: 20,
-    opacity: 0,
-  },
-  visible: { y: 0, opacity: 1 },
-  exit: {
-    opacity: 0,
-    scale: 0.8,
-  },
 };
 
 export const PostModal = ({ post, close, isVisible }: PropsTypes) => {

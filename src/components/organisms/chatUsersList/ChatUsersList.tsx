@@ -1,34 +1,24 @@
 import { UseInfiniteQueryResult } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { MotionLink } from '@/components/atoms/accountPost/AccountPost';
 import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
 import { Loader } from '@/components/molecules/loader/Loader';
+import { linkVariants } from '@/components/organisms/chatUsersList/ChatUsersList.animation';
 import { ChatUsersResponse } from '@/components/pages/chat/useChatUsers';
 
 import styles from './chatUsersList.module.scss';
-
-const linkVariants: Variants = {
-  hidden: {
-    y: 50,
-    opacity: 0,
-    scale: 0.8,
-  },
-  show: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-  },
-};
 
 type PropsTypes = {
   chatUsers: UseInfiniteQueryResult<ChatUsersResponse, unknown>;
   isEnabled: boolean;
 };
+
+const MotionLink = motion(Link);
 
 export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   const router = useRouter();

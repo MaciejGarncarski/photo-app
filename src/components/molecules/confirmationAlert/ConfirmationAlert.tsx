@@ -1,8 +1,9 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
+import { alertVariants } from '@/components/molecules/confirmationAlert/ConfirmationAlert.animation';
 import { ModalClose } from '@/components/molecules/modal/ModalClose';
 
 import styles from './confirmationAlert.module.scss';
@@ -12,23 +13,6 @@ type PropsTypes = {
   close: () => void;
   headingText?: string;
   isVisible: boolean;
-};
-
-const alertVariants: Variants = {
-  opened: {
-    scale: 1,
-    opacity: 1,
-    y: 0,
-  },
-  closed: {
-    scale: 0,
-    opacity: 0,
-    y: 100,
-  },
-  exit: {
-    scale: 0.6,
-    opacity: 0,
-  },
 };
 
 export const ConfirmationAlert = ({ headingText, onConfirm, close, isVisible }: PropsTypes) => {

@@ -10,7 +10,7 @@ import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHi
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
 import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './account.module.scss';
 
@@ -44,7 +44,7 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
           <span className={styles.menuButtonText}>settings</span>
         </Button>
       )}
-      <p className={styles.name}>{name}</p>
+      {name && <p className={styles.name}>{name}</p>}
       <p className={styles.bio}>{bio || 'No bio yet.'}</p>
     </motion.main>
   );

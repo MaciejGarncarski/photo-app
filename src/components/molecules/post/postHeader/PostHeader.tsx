@@ -27,8 +27,8 @@ type PropsTypes = {
 export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const { username } = useUser({ userId: post.authorId });
   const { session, isSignedIn } = useAuth();
-  const { open, close, modalOpen } = useModal();
-  const { open: opeCnonfirmation, close: closeConfirmation, modalOpen: confirmationOpen } = useModal();
+  const menuModal = useModal();
+  const confirmationModal = useModal();
   const deletePostMutation = useDeletePost();
 
   const { authorId, postId, createdAt } = post;
@@ -37,9 +37,9 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const isAuthor = session?.user?.id === authorId;
 
   const onSettled = () => {
-    closeConfirmation();
+    confirmationModal.close();
+    menuModal.close();
     unlock();
-    close();
   };
 
   const handleDeletePost = () => {
@@ -70,7 +70,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
           {!isAuthor && <FollowButton userId={authorId} />}
           {isAuthor && (
             <Tooltip variant="right" content="Post options">
-              <button type="button" className={styles.optionsButton} onClick={open}>
+              <button type="button" className={styles.optionsButton} onClick={menuModal.open}>
                 <IconMenu2 />
               </button>
             </Tooltip>
@@ -78,18 +78,18 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
         </div>
       )}
       <PostOptions
-        isVisible={modalOpen && !confirmationOpen}
+        isVisible={menuModal.modalOpen && !confirmationModal.modalOpen}
         key="options"
         post={post}
         close={close}
-        openCnonfirmation={opeCnonfirmation}
+        openCnonfirmation={confirmationModal.open}
       />
       <ConfirmationAlert
-        isVisible={confirmationOpen}
+        isVisible={confirmationModal.modalOpen}
         key="confirmation"
         onConfirm={handleDeletePost}
         headingText="Delete post?"
-        close={closeConfirmation}
+        close={confirmationModal.close}
       />
     </Tag>
   );

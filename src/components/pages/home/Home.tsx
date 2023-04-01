@@ -11,7 +11,7 @@ import { NewPostNotification } from '@/components/atoms/newPostNotification/NewP
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
 import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
 import { HomePost } from '@/components/organisms/homePost/HomePost';
 import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 

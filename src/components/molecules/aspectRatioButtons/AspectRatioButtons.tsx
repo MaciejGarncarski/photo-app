@@ -4,7 +4,7 @@ import { Button } from '@/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { buttonData } from '@/components/molecules/aspectRatioButtons/buttonData';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './aspectRatioButtons.module.scss';
 

@@ -1,4 +1,4 @@
-import { IconDots } from '@tabler/icons-react';
+import { IconDotsVertical } from '@tabler/icons-react';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
@@ -36,7 +36,7 @@ export const Header = () => {
                 </span>
 
                 <span className={styles.icon}>
-                  <IconDots />
+                  <IconDotsVertical />
                 </span>
               </button>
               <Settings isVisible={modalOpen} close={close} />

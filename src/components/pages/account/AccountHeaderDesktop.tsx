@@ -10,7 +10,7 @@ import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHi
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
 import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
+import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './account.module.scss';
 
@@ -47,7 +47,7 @@ export const AccountHeaderDesktop = ({ username, isOwner, modalOpen, open }: Pro
       <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.rightCol}>
         <motion.h2 className={styles.username}>{username}</motion.h2>
         <AccountStats userId={id} />
-        <motion.p className={styles.name}>{name}</motion.p>
+        {name && <motion.p className={styles.name}>{name}</motion.p>}
         <motion.p className={styles.bio}>{bio || 'No bio yet.'}</motion.p>
       </motion.div>
     </main>

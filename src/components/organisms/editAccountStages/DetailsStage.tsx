@@ -13,7 +13,7 @@ import { EditAccountHeading } from '@/components/molecules/editAccountHeading/Ed
 import { useModal } from '@/components/molecules/modal/useModal';
 import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 import { AccountDetails, AccountDetailsSchema } from '@/components/organisms/editAccountStages/accountDetailts';
-import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
+import { stageVariant } from '@/components/organisms/editAccountStages/stage.animation';
 import { useEditDetails } from '@/components/organisms/editAccountStages/useEditDetails';
 
 import styles from './stages.module.scss';
@@ -35,9 +35,9 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
     formState: { isDirty, errors },
   } = useForm<AccountDetails>({
     defaultValues: {
-      username: username ?? '',
-      fullName: name ?? '',
-      bio: bio ?? '',
+      username: username || '',
+      fullName: name || '',
+      bio: bio || '',
     },
     mode: 'all',
     resolver: zodResolver(AccountDetailsSchema),
