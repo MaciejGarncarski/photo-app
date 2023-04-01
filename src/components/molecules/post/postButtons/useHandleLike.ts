@@ -20,7 +20,7 @@ type PropsTypes = {
 type InfinitePostsQuery = InfiniteData<InfinitePosts<PostData>>;
 
 export const useHandleLike = ({ post }: PropsTypes) => {
-  const [isLikeAnimationShown, setIsLikeAnimationShown] = useState<boolean>(false);
+  const [isLikeAnimationShown, setIsLikeAnimationShown] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const postLikeMutation = usePostLike();
   const { isSignedIn } = useAuth();

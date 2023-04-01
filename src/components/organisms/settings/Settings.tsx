@@ -4,16 +4,16 @@ import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';
 
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { ListModal } from '@/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
 
 type PropsTypes = {
   close: () => void;
+  isVisible: boolean;
 };
 
-export const Settings = ({ close }: PropsTypes) => {
+export const Settings = ({ close, isVisible }: PropsTypes) => {
   const { theme, handleTheme } = useTheme();
   const { sessionUserData, signOut, isSignedIn } = useAuth();
   const signOutModal = useModal();
@@ -27,7 +27,7 @@ export const Settings = ({ close }: PropsTypes) => {
 
   return (
     <>
-      <ListModal close={close} headingText="PhotoApp settings">
+      <ListModal isVisible={isVisible} close={close} headingText="PhotoApp settings">
         {isSignedIn && (
           <ListModalItem type="link" href={`/${sessionUserData.username}`} onClick={close} icon={<IconUser />}>
             Your profile
@@ -42,11 +42,12 @@ export const Settings = ({ close }: PropsTypes) => {
           </ListModalItem>
         )}
       </ListModal>
-      <ModalContainer>
-        {signOutModal.modalOpen && (
-          <ConfirmationAlert headingText="Sign out?" onConfirm={signOut} close={signOutModal.close} />
-        )}
-      </ModalContainer>
+      <ConfirmationAlert
+        isVisible={signOutModal.modalOpen}
+        headingText="Sign out?"
+        onConfirm={signOut}
+        close={signOutModal.close}
+      />
     </>
   );
 };

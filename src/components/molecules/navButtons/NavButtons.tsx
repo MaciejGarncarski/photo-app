@@ -7,7 +7,6 @@ import { ReactNode } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 
 import { SignInButton } from '@/components/atoms/buttons/signInButton/SignInButton';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { useListData } from '@/components/molecules/navButtons/useListData';
 
@@ -66,7 +65,7 @@ export const NavButtons = () => {
         </li>
       </ul>
       {!isSignedIn && <SignInButton />}
-      <ModalContainer>{modalOpen && <Settings close={close} />}</ModalContainer>
+      <Settings isVisible={modalOpen} close={close} />
     </>
   );
 };

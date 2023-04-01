@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { MotionLink } from '@/components/atoms/accountPost/AccountPost';
-import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { Loader } from '@/components/molecules/loader/Loader';
 import { ChatUsersResponse } from '@/components/pages/chat/useChatUsers';

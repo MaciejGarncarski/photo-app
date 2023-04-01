@@ -8,7 +8,6 @@ import { useUser } from '@/hooks/useUser';
 import { lock } from '@/utils/bodyLock';
 
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
 import { ListModal } from '@/components/organisms/listModal/ListModal';
@@ -73,28 +72,21 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
       <AccountHeaderMobile {...accountHeaderProps} />
       <AccountHeaderDesktop {...accountHeaderProps} />
 
-      <ModalContainer>
-        {settingsModal.modalOpen && (
-          <ListModal close={settingsModal.close} headingText="Account options">
-            <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} onClick={settingsModal.close}>
-              Edit account
-            </ListModalItem>
-            <ListModalItem type="button" onClick={signOutModal.open} icon={<IconDoorExit />} isLast>
-              Sign out
-            </ListModalItem>
-          </ListModal>
-        )}
-      </ModalContainer>
-      <ModalContainer>
-        {signOutModal.modalOpen && (
-          <ConfirmationAlert headingText="Sign out?" onConfirm={signOut} close={signOutModal.close} />
-        )}
-      </ModalContainer>
-      <ModalContainer>
-        {postModal.modalOpen && data && (
-          <PostModal modalOpen={postModal.modalOpen} post={data} close={postModalClose} />
-        )}
-      </ModalContainer>
+      <ListModal isVisible={settingsModal.modalOpen} close={settingsModal.close} headingText="Account options">
+        <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} onClick={settingsModal.close}>
+          Edit account
+        </ListModalItem>
+        <ListModalItem type="button" onClick={signOutModal.open} icon={<IconDoorExit />} isLast>
+          Sign out
+        </ListModalItem>
+      </ListModal>
+      <ConfirmationAlert
+        isVisible={signOutModal.modalOpen}
+        headingText="Sign out?"
+        onConfirm={signOut}
+        close={signOutModal.close}
+      />
+      {data && <PostModal isVisible={postModal.modalOpen} post={data} close={postModalClose} />}
       <AccountPosts id={id ?? ''} />
     </div>
   );

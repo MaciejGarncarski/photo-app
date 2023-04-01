@@ -5,7 +5,7 @@ import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/apis/transformPost';
 import { getDescriptionData } from '@/utils/getDescriptionData';
 
-import { MotionImage } from '@/components/atoms/avatar/Avatar';
+import { MotionImage } from '@/components/molecules/avatar/Avatar';
 import { Loader } from '@/components/molecules/loader/Loader';
 
 import styles from './postImage.module.scss';
@@ -25,7 +25,7 @@ export const PostImage = ({ image, post }: PropsTypes) => {
   const { priority, width, height, src } = image;
 
   const { username } = useUser({ userId: authorId });
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { shortDescription } = getDescriptionData(description);
 

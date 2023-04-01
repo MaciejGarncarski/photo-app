@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
-import { imageKit } from '@/utils/imagekit';
 import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
+import { imageKit } from '@/utils/imagekit';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 

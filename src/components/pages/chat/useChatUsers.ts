@@ -16,9 +16,9 @@ export type ChatUsersResponse = {
 };
 
 export const useChatUsers = () => {
-  const [inputVal, setInputVal] = useState<string>('');
-  const [searchedUser, setSearchedUser] = useState<string>('');
-  const [isEnabled, setIsEnabled] = useState<boolean>(inputVal === '' || false);
+  const [inputVal, setInputVal] = useState('');
+  const [searchedUser, setSearchedUser] = useState('');
+  const [isEnabled, setIsEnabled] = useState(inputVal === '' || false);
   const { session } = useAuth();
 
   const chatUsers = useInfiniteQuery(

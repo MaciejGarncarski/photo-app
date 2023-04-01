@@ -2,10 +2,9 @@ import { Message } from '@prisma/client';
 import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { useChatMessage } from '@/components/atoms/chatMessage/useChatMessage';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { ListModal } from '@/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
 
@@ -37,15 +36,11 @@ export const ChatMessage = ({ message }: PropsTypes) => {
         <Avatar userId={sender} size="small" />
         <p>{text}</p>
       </div>
-      <ModalContainer>
-        {modalOpen && (
-          <ListModal close={close} headingText="Message options">
-            <ListModalItem isLast icon={<IconTrash />} type="button" onClick={() => mutate({ id })}>
-              Delete
-            </ListModalItem>
-          </ListModal>
-        )}
-      </ModalContainer>
+      <ListModal isVisible={modalOpen} close={close} headingText="Message options">
+        <ListModalItem isLast icon={<IconTrash />} type="button" onClick={() => mutate({ id })}>
+          Delete
+        </ListModalItem>
+      </ListModal>
     </li>
   );
 };

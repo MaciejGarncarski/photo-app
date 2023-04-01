@@ -16,7 +16,7 @@ type PropsTypes = {
 
 export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const { isSignedIn } = useAuth();
-  const [showMore, setShowMore] = useState<boolean>(false);
+  const [showMore, setShowMore] = useState(false);
 
   const { description } = post;
   const { isDescriptionLong, shortDescription } = getDescriptionData(description);

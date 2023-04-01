@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { Navbar } from '@/components/molecules/navbar/Navbar';
 import { NavbarForDesktop } from '@/components/molecules/navbar/NavbarForDesktop';
@@ -40,7 +39,7 @@ export const Header = () => {
                   <IconDots />
                 </span>
               </button>
-              <ModalContainer>{modalOpen && <Settings close={close} />}</ModalContainer>
+              <Settings isVisible={modalOpen} close={close} />
             </>
           )}
         </div>

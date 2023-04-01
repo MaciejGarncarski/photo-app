@@ -9,13 +9,12 @@ import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { ImageCropErrors, useCropImage } from '@/components/molecules/cropImage/useCropImage';
 import { DropZone } from '@/components/molecules/dropZone/DropZone';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 import { FinalImages } from '@/components/pages/createPost/types';
 
 import styles from './cropImage.module.scss';
@@ -31,7 +30,7 @@ export const CropImage = ({ finalImages, setFinalImages }: PropsTypes) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [error, setError] = useState<ImageCropErrors>(null);
-  const [isIdle, setIsIdle] = useState<boolean>(false);
+  const [isIdle, setIsIdle] = useState(false);
 
   const { open, close, modalOpen } = useModal();
   const { isMobile } = useScreenWidth();
@@ -96,10 +95,12 @@ export const CropImage = ({ finalImages, setFinalImages }: PropsTypes) => {
           Save crop
         </Button>
       </div>
-
-      <ModalContainer>
-        {modalOpen && <ConfirmationAlert headingText="Select diffrent image?" close={close} onConfirm={onConfirm} />}
-      </ModalContainer>
+      <ConfirmationAlert
+        isVisible={modalOpen}
+        headingText="Select diffrent image?"
+        close={close}
+        onConfirm={onConfirm}
+      />
     </CreatePostItemContainer>
   );
 };

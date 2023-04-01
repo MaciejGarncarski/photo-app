@@ -10,13 +10,12 @@ import { z } from 'zod';
 import { useIsCropping } from '@/hooks/useIsCropping';
 import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
 
-import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { CreatePostForm } from '@/components/molecules/createPostForm/CreatePostForm';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 
 import styles from './createPost.module.scss';
 
@@ -28,7 +27,7 @@ export const PostDetailsSchema = z.object({
 });
 
 export const CreatePost = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const router = useRouter();
   const { isCropping } = useIsCropping();
@@ -83,9 +82,7 @@ export const CreatePost = () => {
         open={open}
         register={register}
       />
-      <ModalContainer>
-        {modalOpen && <ConfirmationAlert headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />}
-      </ModalContainer>
+      <ConfirmationAlert isVisible={modalOpen} headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />
     </motion.main>
   );
 };

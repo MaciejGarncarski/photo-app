@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
-import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { CropImage } from '@/components/molecules/cropImage/CropImage';
+import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
 import { useUploadAvatar } from '@/components/organisms/editAccountStages/useUploadAvatar';
 import { FinalImages } from '@/components/pages/createPost/types';

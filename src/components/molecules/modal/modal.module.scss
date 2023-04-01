@@ -1,29 +1,5 @@
 @use '@/styles/common.scss';
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  background-color: var(--color-overlay);
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-
-  @include common.mediaquery('desktop') {
-    align-items: center;
-  }
-}
-
-.backdropMobileCenter {
-  align-items: center;
-}
-
 .closeButton {
   background-color: transparent;
   border: none;

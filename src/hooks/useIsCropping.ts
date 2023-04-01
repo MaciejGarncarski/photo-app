@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai';
 
-export const isCroppingAtom = atom<boolean>(false);
+export const isCroppingAtom = atom(false);
 
 export const useIsCropping = () => {
   const [isCropping, setIsCropping] = useAtom(isCroppingAtom);

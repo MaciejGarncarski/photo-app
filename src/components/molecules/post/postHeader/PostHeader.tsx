@@ -8,11 +8,10 @@ import { PostData } from '@/utils/apis/transformPost';
 import { unlock } from '@/utils/bodyLock';
 import { formatDate } from '@/utils/formatDate';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { useDeletePost } from '@/components/molecules/post/postOptions/useDeletePost';
 
@@ -78,19 +77,20 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
           )}
         </div>
       )}
-      <ModalContainer>
-        {modalOpen && !confirmationOpen && (
-          <PostOptions key="options" post={post} close={close} openCnonfirmation={opeCnonfirmation} />
-        )}
-        {confirmationOpen && (
-          <ConfirmationAlert
-            key="confirmation"
-            onConfirm={handleDeletePost}
-            headingText="Delete post?"
-            close={closeConfirmation}
-          />
-        )}
-      </ModalContainer>
+      <PostOptions
+        isVisible={modalOpen && !confirmationOpen}
+        key="options"
+        post={post}
+        close={close}
+        openCnonfirmation={opeCnonfirmation}
+      />
+      <ConfirmationAlert
+        isVisible={confirmationOpen}
+        key="confirmation"
+        onConfirm={handleDeletePost}
+        headingText="Delete post?"
+        close={closeConfirmation}
+      />
     </Tag>
   );
 };

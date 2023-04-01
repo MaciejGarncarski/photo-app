@@ -7,13 +7,12 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 import { formatDate } from '@/utils/formatDate';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
 import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
 
@@ -65,8 +64,7 @@ export const Comment = ({ commentData }: PropsTypes) => {
           </button>
         )}
       </div>
-
-      <ModalContainer>{modalOpen && <ConfirmationAlert close={close} onConfirm={handleDelete} />}</ModalContainer>
+      <ConfirmationAlert isVisible={modalOpen} close={close} onConfirm={handleDelete} />
     </motion.article>
   );
 };

@@ -1,9 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { PostData } from '@/utils/apis/transformPost';
 
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { usePostButtonsData } from '@/components/molecules/post/postButtons/usePostButtonsData';
 import { PostModal } from '@/components/organisms/postModal/PostModal';
 import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
@@ -37,15 +36,13 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
           </li>
         );
       })}
-      <ModalContainer>
-        {shareModal.modalOpen && (
-          <ShareModal close={shareModal.close} textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`} />
-        )}
-      </ModalContainer>
 
-      <AnimatePresence>
-        {postModal.modalOpen && <PostModal modalOpen={postModal.modalOpen} post={post} close={postModal.close} />}
-      </AnimatePresence>
+      <ShareModal
+        isVisible={shareModal.modalOpen}
+        close={shareModal.close}
+        textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`}
+      />
+      <PostModal isVisible={postModal.modalOpen} post={post} close={postModal.close} />
     </ul>
   );
 };

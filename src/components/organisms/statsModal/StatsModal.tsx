@@ -4,7 +4,7 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { useFollowers } from '@/hooks/useFollowers';
 
-import { Backdrop } from '@/components/molecules/modal/Backdrop';
+import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
 import { ModalClose } from '@/components/molecules/modal/ModalClose';
 
 import styles from './statsModal.module.scss';
@@ -36,7 +36,7 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
   });
 
   return (
-    <Backdrop close={close}>
+    <ModalBackdrop close={close}>
       <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100, opacity: 0 }} className={styles.container}>
         <h3 className={styles.heading}>{type.toUpperCase()}</h3>
         <ReactFocusLock>
@@ -63,6 +63,6 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
           )}
         </ReactFocusLock>
       </motion.div>
-    </Backdrop>
+    </ModalBackdrop>
   );
 };

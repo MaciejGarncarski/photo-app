@@ -11,7 +11,7 @@ type ArgumentsTypes = {
 };
 
 export const useDropZone = ({ setError, setImgSrc }: ArgumentsTypes) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(false);
   const { setIsCropping } = useIsCropping();
   const inputRef = useRef<HTMLInputElement>(null);
 

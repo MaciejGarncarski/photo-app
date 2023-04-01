@@ -4,11 +4,11 @@ import { useAuth } from '@/hooks/useAuth';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useUser } from '@/hooks/useUser';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
 import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 

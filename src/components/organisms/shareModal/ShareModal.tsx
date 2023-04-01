@@ -7,10 +7,11 @@ import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
 type PropsTypes = {
   close: () => void;
   textToCopy: string;
+  isVisible: boolean;
 };
 
-export const ShareModal = ({ close, textToCopy }: PropsTypes) => {
-  const [isCopied, setIsCopied] = useState<boolean>(false);
+export const ShareModal = ({ close, textToCopy, isVisible }: PropsTypes) => {
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = async () => {
     if (!navigator.clipboard) {
@@ -22,7 +23,7 @@ export const ShareModal = ({ close, textToCopy }: PropsTypes) => {
   };
 
   return (
-    <ListModal close={close} headingText="Share post">
+    <ListModal isVisible={isVisible} close={close} headingText="Share post">
       <ListModalItem
         type="button"
         icon={isCopied ? <IconCheck /> : <IconCopy />}

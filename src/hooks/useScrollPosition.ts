@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { throttle } from 'throttle-debounce';
 
 export const useScrollPosition = () => {
-  const [isGoingUp, setIsGoingUp] = useState<boolean>(true);
+  const [isGoingUp, setIsGoingUp] = useState(true);
   const [scrollPos, setScrollPos] = useState<number>(0);
 
   const lastScroll = useRef<number>(0);

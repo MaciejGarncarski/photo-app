@@ -12,7 +12,7 @@ export const useCommentLike = ({ commentId }: Mutation) => {
 
   return useMutation(
     async () => {
-      await axios.post<unknown, null, Mutation>(`/api/post/comment`, {
+      await axios.post(`/api/post/comment`, {
         commentId,
       });
     },

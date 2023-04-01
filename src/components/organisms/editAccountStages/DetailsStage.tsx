@@ -8,11 +8,10 @@ import { useUser } from '@/hooks/useUser';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { Input } from '@/components/atoms/input/Input';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
-import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { EditAccountHeading } from '@/components/molecules/editAccountHeading/EditAccountHeading';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 import { AccountDetails, AccountDetailsSchema } from '@/components/organisms/editAccountStages/accountDetailts';
 import { stageVariant } from '@/components/organisms/editAccountStages/SelectOptionStage';
 import { useEditDetails } from '@/components/organisms/editAccountStages/useEditDetails';
@@ -86,11 +85,12 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
           <Button type="submit" variant="primary" onClick={onClick} disabled={isError || !isDirty}>
             Save changes
           </Button>
-          <ModalContainer>
-            {modalOpen && (
-              <ConfirmationAlert headingText="Save changes?" close={closeConfirmation} onConfirm={onSubmit} />
-            )}
-          </ModalContainer>
+          <ConfirmationAlert
+            isVisible={modalOpen}
+            headingText="Save changes?"
+            close={closeConfirmation}
+            onConfirm={onSubmit}
+          />
         </div>
       </motion.form>
     </>

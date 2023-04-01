@@ -7,13 +7,13 @@ import { useEffect, useRef } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Button } from '@/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/components/atoms/heading/Heading';
-import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { Loader } from '@/components/molecules/loader/Loader';
+import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 import { useChatRoom } from '@/components/pages/chatRoom/useChatRoom';
 
 import styles from './chatRoom.module.scss';

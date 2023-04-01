@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { useListData } from '@/components/molecules/accountStats/useListData';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 
 import styles from './accountStats.module.scss';
 
@@ -28,10 +27,10 @@ export const AccountStats = ({ userId }: PropsTypes) => {
           );
         })}
       </motion.ul>
-      <ModalContainer>
+      <AnimatePresence>
         {followingModal.modalOpen && <StatsModal type="following" modal={followingModal} userId={userId} />}
         {followersModal.modalOpen && <StatsModal type="followers" modal={followersModal} userId={userId} />}
-      </ModalContainer>
+      </AnimatePresence>
     </>
   );
 };

@@ -6,7 +6,6 @@ import { Button } from '@/components/atoms/buttons/button/Button';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { TextArea } from '@/components/atoms/textArea/TextArea';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
 import { useEditPost } from '@/components/pages/editPost/useEditPost';
 
@@ -59,14 +58,18 @@ export const EditPost = ({ postId }: { postId: number }) => {
           </Button>
         </div>
       </form>
-      <ModalContainer>
-        {cancelModal.modalOpen && (
-          <ConfirmationAlert headingText="Cancel changes?" onConfirm={router.back} close={cancelModal.close} />
-        )}
-        {saveModal.modalOpen && (
-          <ConfirmationAlert headingText="Save changes?" onConfirm={onSubmit} close={saveModal.close} />
-        )}
-      </ModalContainer>
+      <ConfirmationAlert
+        isVisible={cancelModal.modalOpen}
+        headingText="Cancel changes?"
+        onConfirm={router.back}
+        close={cancelModal.close}
+      />
+      <ConfirmationAlert
+        isVisible={saveModal.modalOpen}
+        headingText="Save changes?"
+        onConfirm={onSubmit}
+        close={saveModal.close}
+      />
     </section>
   );
 };

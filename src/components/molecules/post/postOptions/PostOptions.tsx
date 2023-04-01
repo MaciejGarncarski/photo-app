@@ -13,9 +13,10 @@ type PropsTypes = {
   close: () => void;
   post: PostData;
   openCnonfirmation: () => void;
+  isVisible: boolean;
 };
 
-export const PostOptions = ({ close, post, openCnonfirmation }: PropsTypes) => {
+export const PostOptions = ({ close, post, openCnonfirmation, isVisible }: PropsTypes) => {
   const { author, postId } = post;
   const { session } = useAuth();
   const { id, role } = useUser({ userId: session?.user?.id ?? '' });
@@ -23,7 +24,7 @@ export const PostOptions = ({ close, post, openCnonfirmation }: PropsTypes) => {
   const isAbleToModify = author.id === id || role === 'ADMIN';
 
   return (
-    <ListModal close={close} headingText="Post options">
+    <ListModal isVisible={isVisible} close={close} headingText="Post options">
       {isAbleToModify && (
         <>
           <ListModalItem type="link" href={`/post/${postId}/edit`} icon={<IconEdit />} onClick={unlock}>

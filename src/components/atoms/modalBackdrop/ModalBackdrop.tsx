@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import styles from './modal.module.scss';
+import { backdropVariants } from '@/components/atoms/modalBackdrop/ModalBackdrop.animation';
+
+import styles from './modalBackdrop.module.scss';
 
 type PropsTypes = {
   close: () => void;
@@ -11,19 +13,7 @@ type PropsTypes = {
   children: ReactNode;
 };
 
-const backdropVariants: Variants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-export const Backdrop = ({ close, mobileCenter, children }: PropsTypes) => {
+export const ModalBackdrop = ({ close, mobileCenter, children }: PropsTypes) => {
   const backdropClassName = clsx(mobileCenter && styles.backdropMobileCenter, styles.backdrop);
 
   const handleEscapeKey = (keyEv: KeyboardEvent) => {
@@ -42,9 +32,9 @@ export const Backdrop = ({ close, mobileCenter, children }: PropsTypes) => {
   return createPortal(
     <motion.div
       onClick={handleOverlayClick}
+      variants={backdropVariants}
       className={backdropClassName}
       onKeyDown={handleEscapeKey}
-      variants={backdropVariants}
       initial="hidden"
       animate="visible"
       exit="exit"

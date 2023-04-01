@@ -1,7 +1,9 @@
 import clsx from 'clsx';
-import { AnimatePresence, Variants } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { ReactNode, useState } from 'react';
+
+import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip.animation';
 
 import styles from './tooltip.module.scss';
 
@@ -11,24 +13,8 @@ type PropsTypes = {
   children: ReactNode;
 };
 
-export const tooltipVariant: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    transition: {
-      duration: 0.1,
-    },
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
 export const Tooltip = ({ children, content, variant }: PropsTypes) => {
-  const [active, setActive] = useState<boolean>(false);
-
+  const [active, setActive] = useState(false);
   const show = () => setActive(true);
   const close = () => setActive(false);
 

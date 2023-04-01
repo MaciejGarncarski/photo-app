@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import { unlock } from '@/utils/bodyLock';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 
 import styles from './statsModal.module.scss';

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Backdrop } from '@/components/molecules/modal/Backdrop';
+import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
 
 describe('Backdrop test', () => {
   it('Should close on escape click', () => {
@@ -8,9 +8,9 @@ describe('Backdrop test', () => {
     const close = jest.fn();
 
     render(
-      <Backdrop close={close}>
+      <ModalBackdrop close={close}>
         <p>backdrop</p>
-      </Backdrop>,
+      </ModalBackdrop>,
     );
 
     const backdrop = screen.getByText(/backdrop/i);

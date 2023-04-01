@@ -6,10 +6,10 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { useAuth } from '@/hooks/useAuth';
 import { useOtherUsers } from '@/hooks/useOtherUsers';
 
-import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Heading } from '@/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
+import { Avatar } from '@/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview';
 import { HomePost } from '@/components/organisms/homePost/HomePost';
@@ -17,8 +17,7 @@ import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
 
 import styles from './home.module.scss';
 
-export const newPostsAtom = atom<boolean>(false);
-
+export const newPostsAtom = atom(false);
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
   const { isSignedIn } = useAuth();

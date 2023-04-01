@@ -5,11 +5,10 @@ import { useUser } from '@/hooks/useUser';
 import { unlock } from '@/utils/bodyLock';
 
 import { Button } from '@/components/atoms/buttons/button/Button';
-import { TextWithLoader } from '@/components/atoms/textWithLoader/TextWithLoader';
 import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
 import { EditAccountHeading } from '@/components/molecules/editAccountHeading/EditAccountHeading';
-import { ModalContainer } from '@/components/molecules/modal/ModalContainer';
 import { useModal } from '@/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
 import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './stages.module.scss';
@@ -77,9 +76,12 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
           Edit account details
         </Button>
       </div>
-      <ModalContainer>
-        {modalOpen && <ConfirmationAlert headingText="Remove your avatar?" close={close} onConfirm={removeAvatar} />}
-      </ModalContainer>
+      <ConfirmationAlert
+        isVisible={modalOpen}
+        headingText="Remove your avatar?"
+        close={close}
+        onConfirm={removeAvatar}
+      />
     </motion.section>
   );
 };
