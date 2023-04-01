@@ -1,6 +1,4 @@
 import { IconMenu2 } from '@tabler/icons-react';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
@@ -8,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
 import { PostData } from '@/utils/apis/transformPost';
 import { unlock } from '@/utils/bodyLock';
+import { formatDate } from '@/utils/formatDate';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
@@ -26,8 +25,6 @@ type PropsTypes = {
   post: PostData;
 };
 
-dayjs.extend(relativeTime);
-
 export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const { username } = useUser({ userId: post.authorId });
   const { session, isSignedIn } = useAuth();
@@ -36,7 +33,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   const deletePostMutation = useDeletePost();
 
   const { authorId, postId, createdAt } = post;
-  const fromNow = dayjs(createdAt).fromNow();
+  const fromNow = formatDate(createdAt);
 
   const isAuthor = session?.user?.id === authorId;
 
@@ -55,7 +52,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
   };
 
   if (!username) {
-    return <Tag></Tag>;
+    return null;
   }
 
   return (

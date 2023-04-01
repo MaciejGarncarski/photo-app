@@ -1,12 +1,11 @@
 import { IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useUser } from '@/hooks/useUser';
+import { formatDate } from '@/utils/formatDate';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
@@ -23,14 +22,13 @@ import styles from './comment.module.scss';
 type PropsTypes = {
   commentData: PostCommentsWithIsLiked;
 };
-dayjs.extend(relativeTime);
 
 export const Comment = ({ commentData }: PropsTypes) => {
   const { sessionUserData } = useAuth();
   const { open, close, modalOpen } = useModal();
   const { username } = useUser({ userId: commentData.user_id });
   const { isLiked, id, created_at, comment_text, user_id, likesCount } = commentData;
-  const timeSinceCreated = dayjs(created_at).fromNow();
+  const timeSinceCreated = formatDate(created_at);
 
   const commentLike = useCommentLike({ commentId: id });
   const commentDelete = useDeleteComment();

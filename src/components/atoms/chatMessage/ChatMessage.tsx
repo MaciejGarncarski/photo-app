@@ -1,10 +1,9 @@
 import { Message } from '@prisma/client';
 import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useAuth } from '@/hooks/useAuth';
+import { formatDate } from '@/utils/formatDate';
 
 import { Avatar } from '@/components/atoms/avatar/Avatar';
 import { useDeleteChatMessage } from '@/components/atoms/chatMessage/useDeleteChatMessage';
@@ -20,14 +19,12 @@ type PropsTypes = {
   message: Message;
 };
 
-dayjs.extend(relativeTime);
-
 export const ChatMessage = ({ message }: PropsTypes) => {
   const { modalOpen, open, close } = useModal();
   const { session } = useAuth();
   const { sender, text, created_at, id, receiver } = message;
   const isReceiver = sender !== session?.user?.id;
-  const formattedDate = dayjs(created_at).format('DD.MM.YY | HH:mm');
+  const formattedDate = formatDate(created_at);
 
   const { mutate } = useDeleteChatMessage({ receiver, sender });
 
