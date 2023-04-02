@@ -51,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
-      return res.status(httpCodes.success).send(response);
+      return res.status(httpCodes.success).send({ ...response });
     }
 
     if (type === 'username') {
@@ -66,7 +66,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
-      return res.status(httpCodes.success).send(response);
+      return res.status(httpCodes.success).send({ ...response });
     }
   } catch (error) {
     res.status(httpCodes.forbidden).send(responseMessages.forbidden);

@@ -3,7 +3,9 @@ import { z } from 'zod';
 
 import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 
-import { prisma } from '../../../../prisma/prismadb';
+import { PostComment } from '@/src/components/organisms/postModal/useInfiniteComments';
+
+import { prisma } from '@/prisma/prismadb';
 
 const COMMENTS_PER_SCROLL = 10;
 
@@ -55,21 +57,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     const commentsWithLikes = await Promise.all(
-      comments.map(async (comment) => {
+      comments.map(async ({ comment_text, created_at, id, post_id, user_id }) => {
         const isLiked = await prisma.commentLike.findFirst({
           where: {
-            comment_id: comment.id,
+            comment_id: id,
           },
         });
         const likesCount = await prisma.commentLike.aggregate({
           where: {
-            comment_id: comment.id,
+            comment_id: id,
           },
           _count: {
             comment_id: true,
           },
         });
-        return { ...comment, isLiked: Boolean(isLiked), likesCount: likesCount._count.comment_id };
+
+        const comment: PostComment = {
+          commentText: comment_text,
+          createdAt: created_at,
+          id,
+          postId: post_id,
+          isLiked: Boolean(isLiked),
+          likesCount: likesCount._count.comment_id,
+          userId: user_id,
+        };
+
+        return comment;
       }),
     );
 

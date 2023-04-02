@@ -42,7 +42,6 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
         dragElastic={0.3}
-        key={width}
       >
         <AnimatePresence>
           <motion.div className={styles.imagesContainer} animate={{ x: -1 * currentIndex * width }}>

@@ -30,7 +30,7 @@ const otherUsersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const transformedUsers = await Promise.all(
       users.map(async (user) => {
         const { response } = await getUserResponse({ userData: user, sessionUserId: session?.user?.id });
-        return { response };
+        return { ...response };
       }),
     );
 

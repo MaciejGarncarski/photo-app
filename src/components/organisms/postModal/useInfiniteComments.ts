@@ -1,14 +1,18 @@
-import { PostComment } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export type PostCommentsWithIsLiked = PostComment & {
+export type PostComment = {
+  id: number;
+  userId: string;
+  postId: number;
+  createdAt: Date;
+  commentText: string;
   isLiked: boolean;
   likesCount: number;
 };
 
 type InfiniteComments = {
-  comments: Array<PostCommentsWithIsLiked>;
+  comments: Array<PostComment>;
   commentsCount: number;
   cursor: number | null;
 };

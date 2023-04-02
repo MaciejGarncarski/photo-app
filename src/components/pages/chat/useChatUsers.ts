@@ -1,13 +1,14 @@
-import { User } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 
 import { useAuth } from '@/src/hooks/useAuth';
 
+import { UserApiResponse } from '@/src/pages/api/account/[user]';
+
 export type ChatUsersResponse = {
   users: Array<{
-    user: User;
+    user: UserApiResponse;
     chatRoomId: number;
   }>;
   usersCount: number;

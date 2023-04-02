@@ -14,27 +14,27 @@ import { useCommentLike } from '@/src/components/molecules/comment/useCommentLik
 import { useDeleteComment } from '@/src/components/molecules/comment/useDeleteComment';
 import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
 import { useModal } from '@/src/components/molecules/modal/useModal';
-import { PostCommentsWithIsLiked } from '@/src/components/organisms/postModal/useInfiniteComments';
+import { PostComment } from '@/src/components/organisms/postModal/useInfiniteComments';
 
 import styles from './comment.module.scss';
 
 type PropsTypes = {
-  commentData: PostCommentsWithIsLiked;
+  commentData: PostComment;
 };
 
 export const Comment = ({ commentData }: PropsTypes) => {
   const { sessionUserData } = useAuth();
   const { open, close, modalOpen } = useModal();
-  const { username } = useUser({ userId: commentData.user_id });
-  const { isLiked, id, created_at, comment_text, user_id, likesCount } = commentData;
-  const timeSinceCreated = formatDate(created_at);
+  const { username } = useUser({ userId: commentData.userId });
+  const { isLiked, id, commentText, createdAt, userId, likesCount } = commentData;
+  const timeSinceCreated = formatDate(createdAt);
 
   const commentLike = useCommentLike({ commentId: id });
   const commentDelete = useDeleteComment();
   const handleLike = () => commentLike.mutate();
   const handleDelete = () => commentDelete.mutate({ commentId: id });
 
-  const isAbleToDelete = sessionUserData?.id === user_id || sessionUserData?.role === 'ADMIN';
+  const isAbleToDelete = sessionUserData?.id === userId || sessionUserData?.role === 'ADMIN';
 
   const userAccountHref = `/${username}`;
 
@@ -42,16 +42,16 @@ export const Comment = ({ commentData }: PropsTypes) => {
     <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <VisuallyHidden>{`@${username}`}</VisuallyHidden>
-        <Avatar userId={user_id} size="small" />
+        <Avatar userId={userId} size="small" />
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>
-        <p className={styles.content}>{comment_text}</p>
+        <p className={styles.content}>{commentText}</p>
       </div>
 
       <div className={styles.info}>
         <p className={styles.createdAt}>
-          <time dateTime={created_at.toString()}>{timeSinceCreated}</time>
+          <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
         </p>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>
           {isLiked ? <IconHeartWrapper isActive /> : <IconHeartWrapper />}

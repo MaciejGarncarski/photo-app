@@ -77,7 +77,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       cursor: nextCursor,
     };
 
-    res.status(httpCodes.success).send(response);
+    res.status(httpCodes.success).send({ ...response });
   } catch (e) {
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }

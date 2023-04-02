@@ -4,9 +4,8 @@ import { z } from 'zod';
 
 import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 
+import { prisma } from '@/prisma/prismadb';
 import { authOptions } from '@/src/pages/api/auth/[...nextauth]';
-
-import { prisma } from '../../../../prisma/prismadb';
 
 const PostImageSchema = z.object({
   fileId: z.string(),
