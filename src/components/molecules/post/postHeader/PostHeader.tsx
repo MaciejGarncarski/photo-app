@@ -81,7 +81,7 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
         isVisible={menuModal.modalOpen && !confirmationModal.modalOpen}
         key="options"
         post={post}
-        close={close}
+        close={menuModal.close}
         openCnonfirmation={confirmationModal.open}
       />
       <ConfirmationAlert

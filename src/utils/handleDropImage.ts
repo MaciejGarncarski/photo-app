@@ -29,24 +29,20 @@ export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) 
   reader.addEventListener('load', async () => {
     const image = new Image();
 
-    try {
-      await new Promise<void>((resolve, reject) => {
-        image.onload = () => {
-          const { height, width } = image;
-          if (width < IMAGE_MIN_SIZE || height < IMAGE_MIN_SIZE) {
-            setError('DIMENSIONS');
-            reject(new Error('DIMENSIONS'));
-          }
-        };
-        resolve();
-      });
-      image.src = URL.createObjectURL(file);
-      setError(null);
-      setImgSrc(reader.result?.toString() || null);
-    } catch (error) {
-      setImgSrc(null);
-      setError('INVALID_TYPE');
-    }
+    await new Promise<void>((resolve, reject) => {
+      image.onload = () => {
+        const { height, width } = image;
+        if (width < IMAGE_MIN_SIZE || height < IMAGE_MIN_SIZE) {
+          setError('DIMENSIONS');
+          setImgSrc(null);
+          reject();
+        }
+      };
+      resolve();
+    });
+    image.src = URL.createObjectURL(file);
+    setError(null);
+    setImgSrc(reader.result?.toString() || null);
   });
 
   reader.readAsDataURL(file);
