@@ -1,5 +1,7 @@
+import { useUser } from '@/src/hooks/useUser';
 import { PostData } from '@/src/utils/apis/transformPost';
 
+import { PostPlaceholder } from '@/src/components/atoms/postPlaceholder/PostPlaceholder';
 import { PostFooter } from '@/src/components/molecules/post/postFooter/PostFooter';
 import { PostHeader } from '@/src/components/molecules/post/postHeader/PostHeader';
 import { PostSlider } from '@/src/components/molecules/post/postSlider/PostSlider';
@@ -12,6 +14,12 @@ type PropsTypes = {
 };
 
 export const HomePost = ({ post, priority }: PropsTypes) => {
+  const { isLoading } = useUser({ userId: post.authorId });
+
+  if (isLoading) {
+    return <PostPlaceholder />;
+  }
+
   return (
     <li>
       <article className={styles.homePost}>

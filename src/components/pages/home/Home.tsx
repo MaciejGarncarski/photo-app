@@ -58,6 +58,8 @@ export const Home = () => {
           <Heading tag="h2" size="medium">
             New users
           </Heading>
+
+          {otherUsers.isLoading && <Loader color="blue" size="normal" />}
           {otherUsers.data && (
             <ul className={styles.asideList}>
               {otherUsers.data.map(({ id, username, name }) => {
