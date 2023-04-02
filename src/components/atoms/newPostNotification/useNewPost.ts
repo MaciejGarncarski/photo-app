@@ -2,10 +2,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { socket } from '@/utils/socket';
+import { socket } from '@/src/utils/socket';
 
-import { newPostsAtom } from '@/components/pages/home/Home';
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+import { newPostsAtom } from '@/src/components/pages/home/Home';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
 
 export const useNewPost = () => {
   const [hasNewPosts, setHasNewPosts] = useAtom(newPostsAtom);

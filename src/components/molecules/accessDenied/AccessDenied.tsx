@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Heading } from '@/components/atoms/heading/Heading';
+import { Heading } from '@/src/components/atoms/heading/Heading';
 
 import styles from './accessDenied.module.scss';
 

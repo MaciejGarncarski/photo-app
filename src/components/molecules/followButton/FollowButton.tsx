@@ -1,9 +1,9 @@
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { useFollowMutation } from '@/components/molecules/followButton/useFollowMutation';
-import { Loader } from '@/components/molecules/loader/Loader';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { useFollowMutation } from '@/src/components/molecules/followButton/useFollowMutation';
+import { Loader } from '@/src/components/molecules/loader/Loader';
 
 type PropsTypes = {
   userId: string;

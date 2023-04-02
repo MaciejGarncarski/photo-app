@@ -1,11 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
-import { FinalImages } from '@/components/pages/createPost/types';
-import { useUploadImage } from '@/components/pages/createPost/useUploadImage';
-import { useEditAccount } from '@/components/pages/editAccount/useEditAccount';
+import { FinalImages } from '@/src/components/pages/createPost/types';
+import { useUploadImage } from '@/src/components/pages/createPost/useUploadImage';
+import { useEditAccount } from '@/src/components/pages/editAccount/useEditAccount';
 
 type UseUploadAvatarArguments = {
   finalImages: FinalImages;

@@ -1,4 +1,4 @@
-import { DAY, getCountFromDate, MONTH, WEEK } from '@/utils/getCountFromDate';
+import { DAY, getCountFromDate, MONTH, WEEK } from '@/src/utils/getCountFromDate';
 
 const format = (value: number, unit: Intl.RelativeTimeFormatUnit) => {
   return new Intl.RelativeTimeFormat('en-GB').format(value, unit);

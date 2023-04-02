@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './modal.module.scss';
 

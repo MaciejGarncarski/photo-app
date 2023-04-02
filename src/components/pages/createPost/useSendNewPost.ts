@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { useAuth } from '@/hooks/useAuth';
-import { CreatePostData } from '@/utils/apis/createPost';
-import { socket } from '@/utils/socket';
+import { useAuth } from '@/src/hooks/useAuth';
+import { CreatePostData } from '@/src/utils/apis/createPost';
+import { socket } from '@/src/utils/socket';
 
 export type MutationValues = {
   description: string;

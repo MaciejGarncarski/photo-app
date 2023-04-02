@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
+import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
+import { getUserResponse } from '@/src/utils/apis/getUserResponse';
 
 import { prisma } from '../../../prisma/prismadb';
 
@@ -132,6 +133,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             },
           });
 
+          const { response } = await getUserResponse({ userData: to_user, sessionUserId: userId });
+
           if (!chatRoom) {
             const { id } = await prisma.chatRoom.create({
               data: {
@@ -141,13 +144,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             });
 
             return {
-              user: to_user,
+              user: response,
               chatRoomId: id,
             };
           }
 
           return {
-            user: to_user,
+            user: response,
             chatRoomId: chatRoom.id,
           };
         }),

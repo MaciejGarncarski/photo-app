@@ -3,17 +3,17 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useEffect } from 'react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
-import { lock } from '@/utils/bodyLock';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
+import { lock } from '@/src/utils/bodyLock';
 
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { AccountPosts } from '@/components/organisms/accountPosts/AccountPosts';
-import { ListModal } from '@/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
-import { PostModal } from '@/components/organisms/postModal/PostModal';
-import { usePost } from '@/components/pages/account/usePost';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPosts';
+import { ListModal } from '@/src/components/organisms/listModal/ListModal';
+import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
+import { PostModal } from '@/src/components/organisms/postModal/PostModal';
+import { usePost } from '@/src/components/pages/account/usePost';
 
 import styles from './account.module.scss';
 

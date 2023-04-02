@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { useListData } from '@/components/molecules/accountStats/useListData';
+import { useListData } from '@/src/components/molecules/accountStats/useListData';
 
 import styles from './accountStats.module.scss';
 

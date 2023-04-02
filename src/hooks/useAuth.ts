@@ -1,7 +1,7 @@
 import { getProviders, signIn, signOut, useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/src/hooks/useUser';
 
 export const useAuth = () => {
   const { data: session, status } = useSession();

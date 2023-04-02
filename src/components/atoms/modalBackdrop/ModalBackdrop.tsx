@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import { backdropVariants } from '@/components/atoms/modalBackdrop/ModalBackdrop.animation';
+import { backdropVariants } from '@/src/components/atoms/modalBackdrop/ModalBackdrop.animation';
 
 import styles from './modalBackdrop.module.scss';
 

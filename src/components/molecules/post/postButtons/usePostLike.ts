@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { z } from 'zod';
 
-import { PostLikeSchema } from '@/pages/api/post/like';
+import { PostLikeSchema } from '@/src/pages/api/post/like';
 
 type PostLike = z.infer<typeof PostLikeSchema>;
 

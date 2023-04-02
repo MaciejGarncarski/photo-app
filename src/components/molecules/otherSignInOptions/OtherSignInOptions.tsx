@@ -1,9 +1,9 @@
 import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
 import { ReactElement, useMemo } from 'react';
 
-import { useSignIn } from '@/hooks/useSignIn';
+import { useSignIn } from '@/src/hooks/useSignIn';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
 
 import styles from './otherSignInOptions.module.scss';
 

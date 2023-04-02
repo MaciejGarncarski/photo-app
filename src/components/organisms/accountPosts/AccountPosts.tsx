@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { AccountPost } from '@/components/atoms/accountPost/AccountPost';
-import { Loader } from '@/components/molecules/loader/Loader';
-import { postContainerVariants } from '@/components/organisms/accountPosts/AccountPosts.animation';
-import { useAccountPosts } from '@/components/organisms/accountPosts/useAccountPosts';
+import { AccountPost } from '@/src/components/atoms/accountPost/AccountPost';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { postContainerVariants } from '@/src/components/organisms/accountPosts/AccountPosts.animation';
+import { useAccountPosts } from '@/src/components/organisms/accountPosts/useAccountPosts';
 
 import styles from './accountPosts.module.scss';
 
@@ -34,7 +34,11 @@ export const AccountPosts = ({ id }: PropsTypes) => {
       <motion.div variants={postContainerVariants} initial="hidden" animate="show" className={styles.posts}>
         {data.pages.map((page) => {
           return page.posts.map((post) => {
-            return <AccountPost key={post.postId} post={post} />;
+            if (!post.imagesData[0]) {
+              return <Loader size="normal" color="blue" key={post.postId} />;
+            }
+
+            return <AccountPost key={post.postId} image={post.imagesData[0]} post={post} />;
           });
         })}
       </motion.div>

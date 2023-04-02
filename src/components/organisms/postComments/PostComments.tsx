@@ -1,7 +1,7 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { Comment } from '@/components/molecules/comment/Comment';
-import { useInfiniteComments } from '@/components/organisms/postModal/useInfiniteComments';
+import { Comment } from '@/src/components/molecules/comment/Comment';
+import { useInfiniteComments } from '@/src/components/organisms/postModal/useInfiniteComments';
 
 import styles from './postComments.module.scss';
 

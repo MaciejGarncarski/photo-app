@@ -2,12 +2,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/hooks/useAuth';
-import { PostData } from '@/utils/apis/transformPost';
-import { InfinitePostsQuery, updatePostQuery } from '@/utils/updatePostQuery';
+import { useAuth } from '@/src/hooks/useAuth';
+import { PostData } from '@/src/utils/apis/transformPost';
+import { InfinitePostsQuery, updatePostQuery } from '@/src/utils/updatePostQuery';
 
-import { usePostLike } from '@/components/molecules/post/postButtons/usePostLike';
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+import { usePostLike } from '@/src/components/molecules/post/postButtons/usePostLike';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
 
 const TIMEOUT = 1000;
 

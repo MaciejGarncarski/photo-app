@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
-import { Heading } from '@/components/atoms/heading/Heading';
-import { buttonData } from '@/components/molecules/aspectRatioButtons/buttonData';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { buttonData } from '@/src/components/molecules/aspectRatioButtons/buttonData';
+import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './aspectRatioButtons.module.scss';
 

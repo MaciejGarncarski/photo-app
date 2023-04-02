@@ -1,9 +1,10 @@
-import { User } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
+import { UserApiResponse } from '@/src/pages/api/account/[user]';
+
 type StatsResponse = {
-  users: Array<{ user: User; chatRoomId: number }>;
+  users: Array<{ user: UserApiResponse; chatRoomId: number }>;
   usersCount: number;
   canLoadMore: boolean;
   nextCursor: number | null;

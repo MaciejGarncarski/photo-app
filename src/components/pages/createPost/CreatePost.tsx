@@ -7,15 +7,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useIsCropping } from '@/hooks/useIsCropping';
-import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
+import { useIsCropping } from '@/src/hooks/useIsCropping';
+import { getFinalImagesBase64 } from '@/src/utils/getFinalImagesBase64';
 
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { CreatePostForm } from '@/components/molecules/createPostForm/CreatePostForm';
-import { CropImage } from '@/components/molecules/cropImage/CropImage';
-import { ImagesPreview } from '@/components/molecules/imagesPreview/ImagesPreview';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { CreatePostForm } from '@/src/components/molecules/createPostForm/CreatePostForm';
+import { CropImage } from '@/src/components/molecules/cropImage/CropImage';
+import { ImagesPreview } from '@/src/components/molecules/imagesPreview/ImagesPreview';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
 
 import styles from './createPost.module.scss';
 

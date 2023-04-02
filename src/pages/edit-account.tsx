@@ -1,7 +1,7 @@
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
-import { Loader } from '@/components/molecules/loader/Loader';
-import { EditAccount } from '@/components/pages/editAccount/EditAccount';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { EditAccount } from '@/src/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {
   const { isLoading, session } = useAuth();

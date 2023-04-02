@@ -1,16 +1,7 @@
-import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-export type AccountFromApi = {
-  isFollowing: boolean;
-  user: User | null;
-  count: {
-    posts: number | null;
-    followers: number | null;
-    following: number | null;
-  };
-};
+import { UserApiResponse } from '@/src/pages/api/account/[user]';
 
 type PropsTypes = {
   username?: string;
@@ -21,13 +12,12 @@ export const fetchAccount = async ({ userId, username }: PropsTypes) => {
   const url = '/api/account';
 
   if (userId) {
-    const { data } = await axios.get<AccountFromApi>(`${url}/${userId}`);
-
+    const { data } = await axios.get<UserApiResponse>(`${url}/${userId}`);
     return data;
   }
 
   if (username) {
-    const { data } = await axios.get<AccountFromApi>(`${url}/${username}?type=username`);
+    const { data } = await axios.get<UserApiResponse>(`${url}/${username}?type=username`);
     return data;
   }
 };
@@ -49,15 +39,11 @@ export const useUser = ({ userId, username }: PropsTypes) => {
     refetchOnWindowFocus: false,
   });
 
-  const user = query.data?.user;
+  const user = query.data;
 
   return {
     isLoading: query.isLoading,
     isError: query.isError,
-    isFollowing: Boolean(query.data?.isFollowing),
     ...user,
-    followersCount: query.data?.count.followers || 0,
-    friendsCount: query.data?.count.following || 0,
-    postsCount: query.data?.count.posts || 0,
   };
 };

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { Account } from '@/components/pages/account/Account';
+import { Account } from '@/src/components/pages/account/Account';
 
 import { prisma } from '../../prisma/prismadb';
 

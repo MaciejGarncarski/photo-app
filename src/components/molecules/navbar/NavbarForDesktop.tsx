@@ -1,4 +1,4 @@
-import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 
 import styles from './navbar.module.scss';
 

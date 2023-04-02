@@ -2,13 +2,13 @@ import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { ChangeEvent } from 'react';
 
-import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 
-import { CropError } from '@/components/atoms/cropError/CropError';
-import { Heading } from '@/components/atoms/heading/Heading';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
-import { useDropZone } from '@/components/molecules/dropZone/useDropZone';
+import { CropError } from '@/src/components/atoms/cropError/CropError';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { ImageCropErrors } from '@/src/components/molecules/cropImage/useCropImage';
+import { useDropZone } from '@/src/components/molecules/dropZone/useDropZone';
 
 import styles from './dropZone.module.scss';
 

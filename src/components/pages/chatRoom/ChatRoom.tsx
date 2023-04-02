@@ -4,17 +4,17 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { ChatMessage } from '@/components/atoms/chatMessage/ChatMessage';
-import { Heading } from '@/components/atoms/heading/Heading';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { Loader } from '@/components/molecules/loader/Loader';
-import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
-import { useChatRoom } from '@/components/pages/chatRoom/useChatRoom';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { ChatMessage } from '@/src/components/atoms/chatMessage/ChatMessage';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+import { useChatRoom } from '@/src/components/pages/chatRoom/useChatRoom';
 
 import styles from './chatRoom.module.scss';
 

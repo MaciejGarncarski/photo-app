@@ -1,5 +1,5 @@
-import { errorMessages } from '@/components/atoms/cropError/cropError.data';
-import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
+import { errorMessages } from '@/src/components/atoms/cropError/cropError.data';
+import { ImageCropErrors } from '@/src/components/molecules/cropImage/useCropImage';
 
 import styles from './cropError.module.scss';
 

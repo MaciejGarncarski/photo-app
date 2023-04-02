@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 
-import { useTheme } from '@/hooks/useTheme';
+import { useTheme } from '@/src/hooks/useTheme';
 
 import styles from './layout.module.scss';
 

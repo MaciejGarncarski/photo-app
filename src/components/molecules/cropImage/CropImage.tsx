@@ -3,19 +3,19 @@ import { IconHandFinger, IconMouse } from '@tabler/icons-react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
-import { useIsCropping } from '@/hooks/useIsCropping';
-import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useIsCropping } from '@/src/hooks/useIsCropping';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { CreatePostItemContainer } from '@/components/atoms/createPostItemContainer/CreatePostItemContainer';
-import { Heading } from '@/components/atoms/heading/Heading';
-import { AspectRatioButtons } from '@/components/molecules/aspectRatioButtons/AspectRatioButtons';
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { ImageCropErrors, useCropImage } from '@/components/molecules/cropImage/useCropImage';
-import { DropZone } from '@/components/molecules/dropZone/DropZone';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
-import { FinalImages } from '@/components/pages/createPost/types';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { AspectRatioButtons } from '@/src/components/molecules/aspectRatioButtons/AspectRatioButtons';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { ImageCropErrors, useCropImage } from '@/src/components/molecules/cropImage/useCropImage';
+import { DropZone } from '@/src/components/molecules/dropZone/DropZone';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+import { FinalImages } from '@/src/components/pages/createPost/types';
 
 import styles from './cropImage.module.scss';
 

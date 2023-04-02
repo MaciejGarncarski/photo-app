@@ -2,11 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 
-import { SignInFormValues, SignInSchema, useSignIn } from '@/hooks/useSignIn';
+import { SignInFormValues, SignInSchema, useSignIn } from '@/src/hooks/useSignIn';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { Input } from '@/components/atoms/input/Input';
-import { animation } from '@/components/pages/signIn/signIn.animation';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Input } from '@/src/components/atoms/input/Input';
+import { animation } from '@/src/components/pages/signIn/signIn.animation';
 
 import styles from './signInForm.module.scss';
 

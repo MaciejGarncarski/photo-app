@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
-import { alertVariants } from '@/components/molecules/confirmationAlert/ConfirmationAlert.animation';
-import { ModalClose } from '@/components/molecules/modal/ModalClose';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
+import { alertVariants } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert.animation';
+import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
 
 import styles from './confirmationAlert.module.scss';
 

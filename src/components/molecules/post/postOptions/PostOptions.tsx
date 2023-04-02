@@ -1,13 +1,13 @@
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
-import { PostData } from '@/utils/apis/transformPost';
-import { unlock } from '@/utils/bodyLock';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
+import { PostData } from '@/src/utils/apis/transformPost';
+import { unlock } from '@/src/utils/bodyLock';
 
-import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
-import { ListModal } from '@/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
+import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
+import { ListModal } from '@/src/components/organisms/listModal/ListModal';
+import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
 type PropsTypes = {
   close: () => void;
@@ -21,7 +21,7 @@ export const PostOptions = ({ close, post, openCnonfirmation, isVisible }: Props
   const { session } = useAuth();
   const { id, role } = useUser({ userId: session?.user?.id ?? '' });
 
-  const isAbleToModify = author.id === id || role === 'ADMIN';
+  const isAbleToModify = author?.id === id || role === 'ADMIN';
 
   return (
     <ListModal isVisible={isVisible} close={close} headingText="Post options">

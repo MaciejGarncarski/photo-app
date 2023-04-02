@@ -1,6 +1,7 @@
-import { Message } from '@prisma/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
+
+import { Message } from '@/src/components/atoms/chatMessage/ChatMessage';
 
 type PropsTypes = {
   userId: string;

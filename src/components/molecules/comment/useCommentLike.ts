@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
-import { CommentPostRequestSchema } from '@/pages/api/post/comment';
+import { CommentPostRequestSchema } from '@/src/pages/api/post/comment';
 
 type Mutation = z.infer<typeof CommentPostRequestSchema>;
 

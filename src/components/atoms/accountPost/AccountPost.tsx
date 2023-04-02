@@ -3,28 +3,34 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { postItemVaraints } from '@/components/atoms/accountPost/AccountPost.animation';
+import { postItemVaraints } from '@/src/components/atoms/accountPost/AccountPost.animation';
+import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
 
 import styles from './accountPost.module.scss';
 
-import { IconHeartWrapper } from '../icons/IconHeartWrapper';
+export type PostImage = {
+  id: number;
+  fileId: string;
+  name: string;
+  url: string;
+  thumbnailUrl: string;
+  width: number;
+  height: number;
+  size: number;
+};
 
 type PropsTypes = {
   post: PostData;
+  image: PostImage;
 };
 
 const MotionLink = motion(Link);
 
-export const AccountPost = ({ post }: PropsTypes) => {
-  const { imagesData, likesCount, commentsCount, postId, isLiked } = post;
-
-  if (!imagesData[0]) {
-    return null;
-  }
-
-  const { url, width, height } = imagesData[0];
+export const AccountPost = ({ post, image }: PropsTypes) => {
+  const { likesCount, commentsCount, postId, isLiked } = post;
+  const { url, width, height } = image;
 
   return (
     <MotionLink shallow variants={postItemVaraints} href={`/post/${postId}`} className={styles.container}>

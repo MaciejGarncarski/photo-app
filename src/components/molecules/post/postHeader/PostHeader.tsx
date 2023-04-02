@@ -2,18 +2,18 @@ import { IconMenu2 } from '@tabler/icons-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
-import { PostData } from '@/utils/apis/transformPost';
-import { unlock } from '@/utils/bodyLock';
-import { formatDate } from '@/utils/formatDate';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
+import { PostData } from '@/src/utils/apis/transformPost';
+import { unlock } from '@/src/utils/bodyLock';
+import { formatDate } from '@/src/utils/formatDate';
 
-import { Tooltip } from '@/components/atoms/tooltip/Tooltip';
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { useDeletePost } from '@/components/molecules/post/postOptions/useDeletePost';
+import { Tooltip } from '@/src/components/atoms/tooltip/Tooltip';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { useDeletePost } from '@/src/components/molecules/post/postOptions/useDeletePost';
 
 import styles from './postHeader.module.scss';
 

@@ -1,7 +1,7 @@
 import { IconLoader2 } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './loader.module.scss';
 

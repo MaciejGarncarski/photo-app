@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { PostData } from '@/utils/apis/transformPost';
-import { getDescriptionData } from '@/utils/getDescriptionData';
+import { useAuth } from '@/src/hooks/useAuth';
+import { PostData } from '@/src/utils/apis/transformPost';
+import { getDescriptionData } from '@/src/utils/getDescriptionData';
 
-import { CommentForm } from '@/components/molecules/post/commentForm/CommentForm';
-import { PostButtons } from '@/components/molecules/post/postButtons/PostButtons';
+import { CommentForm } from '@/src/components/molecules/post/commentForm/CommentForm';
+import { PostButtons } from '@/src/components/molecules/post/postButtons/PostButtons';
 
 import styles from './postFooter.module.scss';
 
@@ -17,8 +17,8 @@ type PropsTypes = {
 export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const { isSignedIn } = useAuth();
   const [showMore, setShowMore] = useState(false);
+  const { description, author } = post;
 
-  const { description } = post;
   const { isDescriptionLong, shortDescription } = getDescriptionData(description);
 
   const toggleShowMore = () => setShowMore((prev) => !prev);
@@ -27,7 +27,7 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
     <footer className={styles.footer}>
       <PostButtons post={post} parentModalOpen={parentModalOpen} />
       <div className={styles.descriptionContainer}>
-        <p className={styles.author}>{post.author.username}</p>
+        <p className={styles.author}>{author?.username}</p>
         {isDescriptionLong ? (
           <>
             <p className={styles.description}>{showMore ? description : shortDescription}</p>

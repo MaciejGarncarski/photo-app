@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 
-import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
-import { ModalClose } from '@/components/molecules/modal/ModalClose';
+import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
+import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
 
 import styles from './listModal.module.scss';
 

@@ -2,11 +2,11 @@ import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { ImagesBase64 } from '@/utils/getFinalImagesBase64';
+import { ImagesBase64 } from '@/src/utils/getFinalImagesBase64';
 
-import { Heading } from '@/components/atoms/heading/Heading';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { containerVariants, itemVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { containerVariants, itemVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './imagesPreview.module.scss';
 

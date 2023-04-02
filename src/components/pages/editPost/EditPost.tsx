@@ -2,12 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { Heading } from '@/components/atoms/heading/Heading';
-import { TextArea } from '@/components/atoms/textArea/TextArea';
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { useEditPost } from '@/components/pages/editPost/useEditPost';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { TextArea } from '@/src/components/atoms/textArea/TextArea';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { useEditPost } from '@/src/components/pages/editPost/useEditPost';
 
 import styles from './editPost.module.scss';
 

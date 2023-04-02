@@ -1,4 +1,4 @@
-import { Heading } from '@/components/atoms/heading/Heading';
+import { Heading } from '@/src/components/atoms/heading/Heading';
 
 import styles from './editAccountHeading.module.scss';
 

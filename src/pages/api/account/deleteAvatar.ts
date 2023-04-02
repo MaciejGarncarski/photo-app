@@ -2,10 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { imageKit } from '@/utils/imagekit';
+import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
+import { imageKit } from '@/src/utils/imagekit';
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { authOptions } from '@/src/pages/api/auth/[...nextauth]';
 
 import { prisma } from '../../../../prisma/prismadb';
 

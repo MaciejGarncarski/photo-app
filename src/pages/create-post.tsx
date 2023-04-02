@@ -1,8 +1,8 @@
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
-import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
-import { Loader } from '@/components/molecules/loader/Loader';
-import { CreatePost } from '@/components/pages/createPost/CreatePost';
+import { AccessDenied } from '@/src/components/molecules/accessDenied/AccessDenied';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { CreatePost } from '@/src/components/pages/createPost/CreatePost';
 
 const CreatePostPage = () => {
   const { isLoading, isAuthenticated } = useAuth();

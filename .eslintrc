@@ -63,18 +63,17 @@
           ],
           // Lib and hooks
           [
-            "^@/lib",
-            "^@/hooks",
-            "^@/utils"
+            "^@/src/hooks",
+            "^@/src/utils"
           ],
           // static data
           [
-            "^@/data"
+            "^@/src/data"
           ],
           // components
           [
-            "^@/components",
-            "^@/container"
+            "^@/src/components",
+            "^@/src/container"
           ],
           // zustand store
           [
@@ -100,7 +99,7 @@
             "^\\.\\./\\.\\./\\.\\.(?!/?$)"
           ],
           [
-            "^@/types"
+            "^@/src/types"
           ],
           // other that didnt fit in
           [

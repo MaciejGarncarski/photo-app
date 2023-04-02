@@ -3,18 +3,18 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/src/hooks/useUser';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { Input } from '@/components/atoms/input/Input';
-import { TextArea } from '@/components/atoms/textArea/TextArea';
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { EditAccountHeading } from '@/components/molecules/editAccountHeading/EditAccountHeading';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
-import { AccountDetails, AccountDetailsSchema } from '@/components/organisms/editAccountStages/accountDetailts';
-import { stageVariant } from '@/components/organisms/editAccountStages/stage.animation';
-import { useEditDetails } from '@/components/organisms/editAccountStages/useEditDetails';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Input } from '@/src/components/atoms/input/Input';
+import { TextArea } from '@/src/components/atoms/textArea/TextArea';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+import { AccountDetails, AccountDetailsSchema } from '@/src/components/organisms/editAccountStages/accountDetailts';
+import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
+import { useEditDetails } from '@/src/components/organisms/editAccountStages/useEditDetails';
 
 import styles from './stages.module.scss';
 

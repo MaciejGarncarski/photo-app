@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { useUser } from '@/hooks/useUser';
-import { PostData } from '@/utils/apis/transformPost';
-import { getDescriptionData } from '@/utils/getDescriptionData';
+import { useUser } from '@/src/hooks/useUser';
+import { PostData } from '@/src/utils/apis/transformPost';
+import { getDescriptionData } from '@/src/utils/getDescriptionData';
 
-import { MotionImage } from '@/components/molecules/avatar/Avatar';
-import { Loader } from '@/components/molecules/loader/Loader';
+import { MotionImage } from '@/src/components/molecules/avatar/Avatar';
+import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import styles from './postImage.module.scss';
 
@@ -33,7 +33,7 @@ export const PostImage = ({ image, post }: PropsTypes) => {
     <>
       {isLoading && (
         <div className={styles.loader}>
-          <Loader color="blue" size="normal" />;
+          <Loader color="blue" size="normal" />
         </div>
       )}
       <MotionImage

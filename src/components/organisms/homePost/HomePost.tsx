@@ -1,8 +1,8 @@
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { PostFooter } from '@/components/molecules/post/postFooter/PostFooter';
-import { PostHeader } from '@/components/molecules/post/postHeader/PostHeader';
-import { PostSlider } from '@/components/molecules/post/postSlider/PostSlider';
+import { PostFooter } from '@/src/components/molecules/post/postFooter/PostFooter';
+import { PostHeader } from '@/src/components/molecules/post/postHeader/PostHeader';
+import { PostSlider } from '@/src/components/molecules/post/postSlider/PostSlider';
 
 import styles from './homePost.module.scss';
 

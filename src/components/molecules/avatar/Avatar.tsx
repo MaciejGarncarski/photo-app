@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/src/hooks/useUser';
 
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './avatar.module.scss';
 

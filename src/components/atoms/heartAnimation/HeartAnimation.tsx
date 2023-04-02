@@ -1,7 +1,7 @@
 import { IconHeart } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 
-import { heartVariants } from '@/components/atoms/heartAnimation/HeartAnimation.animation';
+import { heartVariants } from '@/src/components/atoms/heartAnimation/HeartAnimation.animation';
 
 import styles from './heartAnimation.module.scss';
 

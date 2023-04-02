@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 
-import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 
-import { navbarVariants } from '@/components/molecules/navbar/Navbar.animation';
-import { NavButtons } from '@/components/molecules/navButtons/NavButtons';
+import { navbarVariants } from '@/src/components/molecules/navbar/Navbar.animation';
+import { NavButtons } from '@/src/components/molecules/navButtons/NavButtons';
 
 import styles from './navbar.module.scss';
 

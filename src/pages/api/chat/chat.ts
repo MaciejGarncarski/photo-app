@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
+import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 
-import { InfiniteMessages } from '@/components/pages/chatRoom/useChatMessages';
+import { Message } from '@/src/components/atoms/chatMessage/ChatMessage';
+import { InfiniteMessages } from '@/src/components/pages/chatRoom/useChatMessages';
 
-import { prisma } from '../../../../prisma/prismadb';
+import { prisma } from '@/prisma/prismadb';
 
 const MESSAGES_PER_PAGE = 6;
 
@@ -74,10 +75,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const maxPages = postsCount / MESSAGES_PER_PAGE;
     const totalPages = maxPages % 1 !== 0 ? Math.round(maxPages) + 1 : maxPages;
 
+    const transformedMessages = messages.map((message) => {
+      const transformed: Message = {
+        ...message,
+        createdAt: message.created_at,
+      };
+
+      return transformed;
+    });
+
     const result: InfiniteMessages = {
       currentPage,
       totalPages,
-      messages: messages,
+      messages: transformedMessages,
       messagesCount: _count.id,
     };
 

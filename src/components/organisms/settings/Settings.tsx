@@ -1,12 +1,12 @@
 import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useTheme } from '@/hooks/useTheme';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useTheme } from '@/src/hooks/useTheme';
 
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { ListModal } from '@/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { ListModal } from '@/src/components/organisms/listModal/ListModal';
+import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
 type PropsTypes = {
   close: () => void;

@@ -1,8 +1,8 @@
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
-import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
-import { Loader } from '@/components/molecules/loader/Loader';
-import { Chat } from '@/components/pages/chat/Chat';
+import { AccessDenied } from '@/src/components/molecules/accessDenied/AccessDenied';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { Chat } from '@/src/components/pages/chat/Chat';
 
 const ChatPage = () => {
   const { isSignedIn, isLoading } = useAuth();

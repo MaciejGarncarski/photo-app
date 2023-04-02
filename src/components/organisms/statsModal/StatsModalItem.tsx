@@ -1,15 +1,20 @@
-import { User } from '@prisma/client';
 import Link from 'next/link';
 
-import { useAuth } from '@/hooks/useAuth';
-import { unlock } from '@/utils/bodyLock';
+import { useAuth } from '@/src/hooks/useAuth';
+import { unlock } from '@/src/utils/bodyLock';
 
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { FollowButton } from '@/components/molecules/followButton/FollowButton';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
+
+import { UserApiResponse } from '@/src/pages/api/account/[user]';
 
 import styles from './statsModal.module.scss';
 
-export const StatsModalItem = ({ user }: { user: User }) => {
+type Props = {
+  user: UserApiResponse;
+};
+
+export const StatsModalItem = ({ user }: Props) => {
   const { session } = useAuth();
   const { id, username } = user;
 

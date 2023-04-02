@@ -1,7 +1,7 @@
-import { Heading } from '@/components/atoms/heading/Heading';
-import { ChatUsersList } from '@/components/organisms/chatUsersList/ChatUsersList';
-import { SearchUserForm } from '@/components/organisms/searchUserForm/SearchUserForm';
-import { useChatUsers } from '@/components/pages/chat/useChatUsers';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { ChatUsersList } from '@/src/components/organisms/chatUsersList/ChatUsersList';
+import { SearchUserForm } from '@/src/components/organisms/searchUserForm/SearchUserForm';
+import { useChatUsers } from '@/src/components/pages/chat/useChatUsers';
 
 import styles from './chat.module.scss';
 

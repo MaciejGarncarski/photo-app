@@ -1,4 +1,4 @@
-import { POSTS_PER_SCROLL } from '@/pages/api/post/infinitePosts';
+import { POSTS_PER_SCROLL } from '@/src/pages/api/post/infinitePosts';
 
 type InfinitePostsCount = {
   count: number;

@@ -1,8 +1,8 @@
 import { IconCheck, IconCopy } from '@tabler/icons-react';
 import { useState } from 'react';
 
-import { ListModal } from '@/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/components/organisms/listModal/ListModalItem';
+import { ListModal } from '@/src/components/organisms/listModal/ListModal';
+import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
 type PropsTypes = {
   close: () => void;

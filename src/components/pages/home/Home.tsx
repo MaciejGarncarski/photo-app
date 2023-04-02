@@ -3,17 +3,18 @@ import { atom } from 'jotai';
 import Link from 'next/link';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useOtherUsers } from '@/hooks/useOtherUsers';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useOtherUsers } from '@/src/hooks/useOtherUsers';
 
-import { Heading } from '@/components/atoms/heading/Heading';
-import { NewPostNotification } from '@/components/atoms/newPostNotification/NewPostNotification';
-import { PostPlaceholder } from '@/components/atoms/postPlaceholder/PostPlaceholder';
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
-import { HomePost } from '@/components/organisms/homePost/HomePost';
-import { useInfinitePosts } from '@/components/pages/home/useInfinitePosts';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { NewPostNotification } from '@/src/components/atoms/newPostNotification/NewPostNotification';
+import { PostPlaceholder } from '@/src/components/atoms/postPlaceholder/PostPlaceholder';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
+import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { HomePost } from '@/src/components/organisms/homePost/HomePost';
+import { useInfinitePosts } from '@/src/components/pages/home/useInfinitePosts';
 
 import styles from './home.module.scss';
 
@@ -37,6 +38,10 @@ export const Home = () => {
         <NewPostNotification />
         {data?.pages.map((page) => {
           return page?.posts.map((post, idx) => {
+            if (!post) {
+              return <Loader color="blue" size="normal" key={idx} />;
+            }
+
             return <HomePost priority={idx < 4} key={post.postId} post={post} />;
           });
         })}
@@ -55,25 +60,24 @@ export const Home = () => {
           </Heading>
           {otherUsers.data && (
             <ul className={styles.asideList}>
-              {otherUsers?.data &&
-                otherUsers.data.map(({ id, username, name }) => {
-                  return (
-                    <li key={id} className={styles.asideListItem}>
-                      <Link href={`/${username}`} className={styles.link}>
-                        <Avatar userId={id} size="small" />
-                        <div className={styles.names}>
-                          <p className={styles.fullName}>{name}</p>
-                          <p className={styles.username}>@{username}</p>
-                        </div>
-                      </Link>
-                      {isSignedIn && (
-                        <div className={styles.asideFollowButton}>
-                          <FollowButton userId={id} />
-                        </div>
-                      )}
-                    </li>
-                  );
-                })}
+              {otherUsers.data.map(({ id, username, name }) => {
+                return (
+                  <li key={id} className={styles.asideListItem}>
+                    <Link href={`/${username}`} className={styles.link}>
+                      <Avatar userId={id} size="small" />
+                      <div className={styles.names}>
+                        <p className={styles.fullName}>{name}</p>
+                        <p className={styles.username}>@{username}</p>
+                      </div>
+                    </Link>
+                    {isSignedIn && (
+                      <div className={styles.asideFollowButton}>
+                        <FollowButton userId={id} />
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           )}
         </section>

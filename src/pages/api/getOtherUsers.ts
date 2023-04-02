@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
+import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
+import { getUserResponse } from '@/src/utils/apis/getUserResponse';
 
 import { authOptions } from './auth/[...nextauth]';
 import { prisma } from '../../../prisma/prismadb';
@@ -26,7 +27,14 @@ const otherUsersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    return res.status(httpCodes.success).send(users);
+    const transformedUsers = await Promise.all(
+      users.map(async (user) => {
+        const { response } = await getUserResponse({ userData: user, sessionUserId: session?.user?.id });
+        return { response };
+      }),
+    );
+
+    return res.status(httpCodes.success).send(transformedUsers);
   } catch (error) {
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }

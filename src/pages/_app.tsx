@@ -7,11 +7,11 @@ import { SessionProvider } from 'next-auth/react';
 import { DefaultSeo } from 'next-seo';
 import { Toaster } from 'react-hot-toast';
 
-import { useIsLoading } from '@/hooks/useIsLoading';
-import { seoConfig } from '@/utils/next-seo.config';
+import { useIsLoading } from '@/src/hooks/useIsLoading';
+import { seoConfig } from '@/src/utils/next-seo.config';
 
-import { Layout } from '@/components/layout/Layout';
-import { Loader } from '@/components/molecules/loader/Loader';
+import { Layout } from '@/src/components/layout/Layout';
+import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import '@/styles/globals.scss';
 

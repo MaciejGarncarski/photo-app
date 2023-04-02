@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
+import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
 describe('Backdrop test', () => {
   it('Should close on escape click', () => {

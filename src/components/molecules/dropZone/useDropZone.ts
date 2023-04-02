@@ -1,9 +1,9 @@
 import { DragEvent, useRef, useState } from 'react';
 
-import { useIsCropping } from '@/hooks/useIsCropping';
-import { handleDropImage } from '@/utils/handleDropImage';
+import { useIsCropping } from '@/src/hooks/useIsCropping';
+import { handleDropImage } from '@/src/utils/handleDropImage';
 
-import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
+import { ImageCropErrors } from '@/src/components/molecules/cropImage/useCropImage';
 
 type ArgumentsTypes = {
   setError: (error: ImageCropErrors) => void;

@@ -1,11 +1,11 @@
 import { IconMessage2, IconShare } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { useHandleLike } from '@/components/molecules/post/postButtons/useHandleLike';
+import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { useHandleLike } from '@/src/components/molecules/post/postButtons/useHandleLike';
 
 type ButtonData = Array<{
   alt: string;

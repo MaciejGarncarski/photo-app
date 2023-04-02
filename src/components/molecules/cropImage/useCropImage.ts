@@ -2,11 +2,11 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 import { v4 } from 'uuid';
 
-import { useIsCropping } from '@/hooks/useIsCropping';
-import { convertToBlob } from '@/utils/convertToBlob';
-import { handleDropImage } from '@/utils/handleDropImage';
+import { useIsCropping } from '@/src/hooks/useIsCropping';
+import { convertToBlob } from '@/src/utils/convertToBlob';
+import { handleDropImage } from '@/src/utils/handleDropImage';
 
-import { FinalImages } from '@/components/pages/createPost/types';
+import { FinalImages } from '@/src/components/pages/createPost/types';
 
 export type ImageCropErrors =
   | null

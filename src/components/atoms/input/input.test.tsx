@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '@/utils/tests/utils';
+import { render } from '@/src/utils/tests/utils';
 
-import { Input } from '@/components/atoms/input/Input';
+import { Input } from '@/src/components/atoms/input/Input';
 
 describe('Input', () => {
   describe('integration', () => {

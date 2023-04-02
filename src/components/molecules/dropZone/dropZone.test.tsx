@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { NoImageDetectedError, TooManyImagesError } from '@/components/atoms/cropError/cropError.data';
-import { CropImage } from '@/components/molecules/cropImage/CropImage';
-import { DropZone } from '@/components/molecules/dropZone/DropZone';
+import { NoImageDetectedError, TooManyImagesError } from '@/src/components/atoms/cropError/cropError.data';
+import { CropImage } from '@/src/components/molecules/cropImage/CropImage';
+import { DropZone } from '@/src/components/molecules/dropZone/DropZone';
 
 const inactiveText = /add image here/i;
 const activeText = /drop here/i;

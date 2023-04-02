@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { z } from 'zod';
 
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
 
-import { CommentPutRequestSchema } from '@/pages/api/post/comment';
+import { CommentPutRequestSchema } from '@/src/pages/api/post/comment';
 
 type PutCommentRequest = z.infer<typeof CommentPutRequestSchema>;
 

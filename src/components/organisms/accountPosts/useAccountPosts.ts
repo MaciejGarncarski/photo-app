@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
 type FetchPost = {
   pageParam?: number;

@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { getFinalImagesBase64 } from '@/utils/getFinalImagesBase64';
+import { getFinalImagesBase64 } from '@/src/utils/getFinalImagesBase64';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { CropImage } from '@/components/molecules/cropImage/CropImage';
-import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
-import { stageVariant } from '@/components/organisms/editAccountStages/stage.animation';
-import { useUploadAvatar } from '@/components/organisms/editAccountStages/useUploadAvatar';
-import { FinalImages } from '@/components/pages/createPost/types';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { CropImage } from '@/src/components/molecules/cropImage/CropImage';
+import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
+import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/useUploadAvatar';
+import { FinalImages } from '@/src/components/pages/createPost/types';
 
 import styles from './stages.module.scss';
 

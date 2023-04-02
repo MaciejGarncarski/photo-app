@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
-import { DeleteAvatarData } from '@/pages/api/account/deleteAvatar';
+import { DeleteAvatarData } from '@/src/pages/api/account/deleteAvatar';
 
 export const useDeleteAvatar = () => {
   const { session } = useAuth();

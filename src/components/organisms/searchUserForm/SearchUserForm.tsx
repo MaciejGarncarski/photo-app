@@ -1,9 +1,9 @@
 import { IconSearch } from '@tabler/icons-react';
 import { FormEvent } from 'react';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { IconXWrapper } from '@/components/atoms/icons/IconXWrapper';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import styles from './searchUserForm.module.scss';
 

@@ -1,6 +1,6 @@
-import { IMAGE_MAX_FILE_SIZE } from '@/utils/handleDropImage';
+import { IMAGE_MAX_FILE_SIZE } from '@/src/utils/handleDropImage';
 
-import { ImageCropErrors } from '@/components/molecules/cropImage/useCropImage';
+import { ImageCropErrors } from '@/src/components/molecules/cropImage/useCropImage';
 
 export const DimensionError = 'Image dimensions are too small 🥺';
 export const FileSizeError = `Maximum file size is ${IMAGE_MAX_FILE_SIZE / 1000000}MB 😲`;

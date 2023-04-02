@@ -3,7 +3,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { v4 } from 'uuid';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
 import { FinalImages, PostDetails } from './types';
 import { useSendNewPost } from './useSendNewPost';

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { EditAccountData } from '@/pages/api/account/edit';
+import { EditAccountData } from '@/src/pages/api/account/edit';
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();

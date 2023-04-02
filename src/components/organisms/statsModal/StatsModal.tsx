@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useFollowers } from '@/hooks/useFollowers';
+import { useFollowers } from '@/src/hooks/useFollowers';
 
-import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
-import { ModalClose } from '@/components/molecules/modal/ModalClose';
+import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
+import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
 
 import styles from './statsModal.module.scss';
 

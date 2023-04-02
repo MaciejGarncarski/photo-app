@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useScreenWidth } from '@/hooks/useScreenWidth';
-import { useScrollPosition } from '@/hooks/useScrollPosition';
-import { socket } from '@/utils/socket';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
+import { useScrollPosition } from '@/src/hooks/useScrollPosition';
+import { socket } from '@/src/utils/socket';
 
-import { useChatMessages } from '@/components/pages/chatRoom/useChatMessages';
-import { useChatSubscription } from '@/components/pages/chatRoom/useChatSubscription';
+import { useChatMessages } from '@/src/components/pages/chatRoom/useChatMessages';
+import { useChatSubscription } from '@/src/components/pages/chatRoom/useChatSubscription';
 
 type PropsTypes = {
   chatRoomId: number;

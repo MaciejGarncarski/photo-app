@@ -1,12 +1,35 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { getMoreUserData } from '@/utils/apis/getMoreUserData';
+import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
+import { getUserResponse } from '@/src/utils/apis/getUserResponse';
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { prisma } from '@/prisma/prismadb';
+import { authOptions } from '@/src/pages/api/auth/[...nextauth]';
 
-import { prisma } from '../../../../prisma/prismadb';
+export type User = {
+  username: string | null;
+  name: string | null;
+  id: string;
+  email: string | null;
+  image: string | null;
+  bio: string | null;
+  customImage: string | null;
+  role: string;
+  createdAt: Date;
+};
+
+export type UserCount = {
+  followersCount: number;
+  friendsCount: number;
+  postsCount: number;
+};
+
+type IsFollowing = {
+  isFollowing: boolean;
+};
+
+export type UserApiResponse = User & UserCount & IsFollowing;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { type, user } = req.query;
@@ -23,9 +46,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: user,
         },
       });
+      if (!userData) {
+        return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
+      }
 
-      const { count, isFollowing } = await getMoreUserData(user, session?.user?.id);
-      return res.status(httpCodes.success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
+      const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
+      return res.status(httpCodes.success).send(response);
     }
 
     if (type === 'username') {
@@ -35,8 +61,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      const { count, isFollowing } = await getMoreUserData(userData?.id ?? '', session?.user?.id);
-      return res.status(httpCodes.success).send({ user: userData, count, isFollowing: Boolean(isFollowing) });
+      if (!userData) {
+        return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
+      }
+
+      const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
+      return res.status(httpCodes.success).send(response);
     }
   } catch (error) {
     res.status(httpCodes.forbidden).send(responseMessages.forbidden);

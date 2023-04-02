@@ -1,11 +1,15 @@
-import { Post, PostImage, User } from '@prisma/client';
+import { Post, PostImage } from '@prisma/client';
 import { Session } from 'next-auth';
+
+import { getUserResponse } from '@/src/utils/apis/getUserResponse';
+
+import { User } from '@/src/pages/api/account/[user]';
 
 import { prisma } from '../../../prisma/prismadb';
 
 export type PostData = {
-  author: User;
   authorId: string;
+  author: User | null;
   likesCount: number;
   commentsCount: number;
   createdAt: Date;
@@ -16,7 +20,6 @@ export type PostData = {
 };
 
 type PostToTransform = Post & {
-  author: User;
   _count: {
     posts_likes: number;
     posts_comments: number;
@@ -45,8 +48,30 @@ export const transformPost = async (post: PostToTransform, session?: Session | n
     }),
   );
 
+  const authorData = await prisma.user.findFirst({
+    where: {
+      id: post.author_id,
+    },
+  });
+
+  if (!authorData) {
+    return {
+      author: null,
+      authorId: post.author_id,
+      likesCount: post._count.posts_likes,
+      commentsCount: post._count.posts_comments,
+      createdAt: post.created_at,
+      description: post.description,
+      imagesData: postImages,
+      postId: post.id,
+      isLiked: session ? Boolean(isLiked) : false,
+    };
+  }
+
+  const { response } = await getUserResponse({ userData: authorData, sessionUserId: session?.user?.id });
+
   return {
-    author: post.author,
+    author: response,
     authorId: post.author_id,
     likesCount: post._count.posts_likes,
     commentsCount: post._count.posts_comments,

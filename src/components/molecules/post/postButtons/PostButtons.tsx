@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { usePostButtonsData } from '@/components/molecules/post/postButtons/usePostButtonsData';
-import { PostModal } from '@/components/organisms/postModal/PostModal';
-import { ShareModal } from '@/components/organisms/shareModal/ShareModal';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { usePostButtonsData } from '@/src/components/molecules/post/postButtons/usePostButtonsData';
+import { PostModal } from '@/src/components/organisms/postModal/PostModal';
+import { ShareModal } from '@/src/components/organisms/shareModal/ShareModal';
 
 import styles from './postButtons.module.scss';
 

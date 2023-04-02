@@ -1,9 +1,9 @@
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { InfinitePosts } from '@/pages/api/post/infinitePosts';
+import { InfinitePosts } from '@/src/pages/api/post/infinitePosts';
 
 export const HOME_POSTS_QUERY_KEY: QueryKey = ['homepage infinite posts'];
 

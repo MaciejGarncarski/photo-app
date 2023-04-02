@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/useInfinitePosts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
 
 type DeletePostMutation = {
   postId: number;

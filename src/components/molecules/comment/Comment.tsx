@@ -3,18 +3,18 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
-import { formatDate } from '@/utils/formatDate';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
+import { formatDate } from '@/src/utils/formatDate';
 
-import { IconHeartWrapper } from '@/components/atoms/icons/IconHeartWrapper';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { useCommentLike } from '@/components/molecules/comment/useCommentLike';
-import { useDeleteComment } from '@/components/molecules/comment/useDeleteComment';
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { PostCommentsWithIsLiked } from '@/components/organisms/postModal/useInfiniteComments';
+import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { useCommentLike } from '@/src/components/molecules/comment/useCommentLike';
+import { useDeleteComment } from '@/src/components/molecules/comment/useDeleteComment';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { PostCommentsWithIsLiked } from '@/src/components/organisms/postModal/useInfiniteComments';
 
 import styles from './comment.module.scss';
 

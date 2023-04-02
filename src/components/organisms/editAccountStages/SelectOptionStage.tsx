@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useUser } from '@/hooks/useUser';
-import { unlock } from '@/utils/bodyLock';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
+import { unlock } from '@/src/utils/bodyLock';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { ConfirmationAlert } from '@/components/molecules/confirmationAlert/ConfirmationAlert';
-import { EditAccountHeading } from '@/components/molecules/editAccountHeading/EditAccountHeading';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/components/molecules/textWithLoader/TextWithLoader';
-import { stageVariant } from '@/components/organisms/editAccountStages/stage.animation';
-import { useDeleteAvatar } from '@/components/pages/editAccount/useDeleteAvatar';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
+import { useDeleteAvatar } from '@/src/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './stages.module.scss';
 

@@ -1,8 +1,8 @@
 import { IconArrowUp } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { notificationVariant } from '@/components/atoms/newPostNotification/NewPostNotification.animation';
-import { useNewPost } from '@/components/atoms/newPostNotification/useNewPost';
+import { notificationVariant } from '@/src/components/atoms/newPostNotification/NewPostNotification.animation';
+import { useNewPost } from '@/src/components/atoms/newPostNotification/useNewPost';
 
 import styles from './newPostNotification.module.scss';
 

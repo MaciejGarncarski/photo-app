@@ -1,6 +1,6 @@
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/src/hooks/useUser';
 
-import { useModal } from '@/components/molecules/modal/useModal';
+import { useModal } from '@/src/components/molecules/modal/useModal';
 
 type PropsTypes = {
   userId: string;
@@ -18,17 +18,17 @@ export const useListData = ({ userId }: PropsTypes) => {
   const listData: ListData = [
     {
       title: 'posts',
-      count: postsCount,
+      count: postsCount || 0,
       onClick: () => window.scrollBy({ top: 200, behavior: 'smooth' }),
     },
     {
       title: 'followers',
-      count: followersCount,
+      count: followersCount || 0,
       onClick: followersModal.open,
     },
     {
       title: 'friends',
-      count: friendsCount,
+      count: friendsCount || 0,
       onClick: followingModal.open,
     },
   ];

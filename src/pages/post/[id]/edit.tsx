@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/src/hooks/useAuth';
 
-import { AccessDenied } from '@/components/molecules/accessDenied/AccessDenied';
-import { Loader } from '@/components/molecules/loader/Loader';
-import { usePost } from '@/components/pages/account/usePost';
-import { EditPost } from '@/components/pages/editPost/EditPost';
+import { AccessDenied } from '@/src/components/molecules/accessDenied/AccessDenied';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+import { usePost } from '@/src/components/pages/account/usePost';
+import { EditPost } from '@/src/components/pages/editPost/EditPost';
 
 const EditPostPage = () => {
   const router = useRouter();

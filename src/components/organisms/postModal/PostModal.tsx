@@ -1,16 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { Heading } from '@/components/atoms/heading/Heading';
-import { ModalBackdrop } from '@/components/atoms/modalBackdrop/ModalBackdrop';
-import { ModalClose } from '@/components/molecules/modal/ModalClose';
-import { PostFooter } from '@/components/molecules/post/postFooter/PostFooter';
-import { PostHeader } from '@/components/molecules/post/postHeader/PostHeader';
-import { PostSlider } from '@/components/molecules/post/postSlider/PostSlider';
-import { PostComments } from '@/components/organisms/postComments/PostComments';
-import { modalVariants } from '@/components/organisms/postModal/PostModal.animation';
+import { Heading } from '@/src/components/atoms/heading/Heading';
+import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
+import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
+import { PostFooter } from '@/src/components/molecules/post/postFooter/PostFooter';
+import { PostHeader } from '@/src/components/molecules/post/postHeader/PostHeader';
+import { PostSlider } from '@/src/components/molecules/post/postSlider/PostSlider';
+import { PostComments } from '@/src/components/organisms/postComments/PostComments';
+import { modalVariants } from '@/src/components/organisms/postModal/PostModal.animation';
 
 import styles from './postModal.module.scss';
 

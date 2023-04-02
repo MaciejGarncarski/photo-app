@@ -4,15 +4,15 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { PostData } from '@/utils/apis/transformPost';
+import { PostData } from '@/src/utils/apis/transformPost';
 
-import { HeartAnimation } from '@/components/atoms/heartAnimation/HeartAnimation';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { useHandleLike } from '@/components/molecules/post/postButtons/useHandleLike';
-import { PostImage } from '@/components/molecules/post/postImage/PostImage';
-import { PostSliderProgress } from '@/components/molecules/post/postSlider/PostSliderProgress';
-import { useSlider } from '@/components/molecules/post/postSlider/useSlider';
-import { useUpdateWidth } from '@/components/molecules/post/postSlider/useUpdateWidth';
+import { HeartAnimation } from '@/src/components/atoms/heartAnimation/HeartAnimation';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { useHandleLike } from '@/src/components/molecules/post/postButtons/useHandleLike';
+import { PostImage } from '@/src/components/molecules/post/postImage/PostImage';
+import { PostSliderProgress } from '@/src/components/molecules/post/postSlider/PostSliderProgress';
+import { useSlider } from '@/src/components/molecules/post/postSlider/useSlider';
+import { useUpdateWidth } from '@/src/components/molecules/post/postSlider/useUpdateWidth';
 
 import styles from './postSlider.module.scss';
 

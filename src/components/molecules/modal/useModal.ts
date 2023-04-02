@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { lock, unlock } from '@/utils/bodyLock';
+import { lock, unlock } from '@/src/utils/bodyLock';
 
 export const useModal = (initialState = false) => {
   const [modalOpen, setModalOpen] = useState(initialState);

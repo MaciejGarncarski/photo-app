@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { ReactNode, useState } from 'react';
 
-import { tooltipVariant } from '@/components/atoms/tooltip/Tooltip.animation';
+import { tooltipVariant } from '@/src/components/atoms/tooltip/Tooltip.animation';
 
 import styles from './tooltip.module.scss';
 

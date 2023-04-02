@@ -5,7 +5,7 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { serverEnv } from '@/utils/env';
+import { serverEnv } from '@/src/utils/env';
 
 import { prisma } from '../../../../prisma/prismadb';
 

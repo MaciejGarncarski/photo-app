@@ -1,16 +1,16 @@
 import { motion } from 'framer-motion';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useScreenWidth } from '@/hooks/useScreenWidth';
-import { useUser } from '@/hooks/useUser';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
+import { useUser } from '@/src/hooks/useUser';
 
-import { Button } from '@/components/atoms/buttons/button/Button';
-import { IconSettingsWrapper } from '@/components/atoms/icons/IconSettingsWrapper';
-import { VisuallyHidden } from '@/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { AccountStats } from '@/components/molecules/accountStats/AccountStats';
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { FollowButton } from '@/components/molecules/followButton/FollowButton';
-import { containerVariants } from '@/components/molecules/imagesPreview/ImagesPreview.animation';
+import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { IconSettingsWrapper } from '@/src/components/atoms/icons/IconSettingsWrapper';
+import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { AccountStats } from '@/src/components/molecules/accountStats/AccountStats';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
+import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './account.module.scss';
 

@@ -1,14 +1,14 @@
 import { IconDotsVertical } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useScreenWidth } from '@/hooks/useScreenWidth';
+import { useAuth } from '@/src/hooks/useAuth';
+import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 
-import { Avatar } from '@/components/molecules/avatar/Avatar';
-import { useModal } from '@/components/molecules/modal/useModal';
-import { Navbar } from '@/components/molecules/navbar/Navbar';
-import { NavbarForDesktop } from '@/components/molecules/navbar/NavbarForDesktop';
-import { Settings } from '@/components/organisms/settings/Settings';
+import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { useModal } from '@/src/components/molecules/modal/useModal';
+import { Navbar } from '@/src/components/molecules/navbar/Navbar';
+import { NavbarForDesktop } from '@/src/components/molecules/navbar/NavbarForDesktop';
+import { Settings } from '@/src/components/organisms/settings/Settings';
 
 import styles from './header.module.scss';
 

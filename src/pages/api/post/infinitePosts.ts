@@ -2,12 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/utils/apis/apiResponses';
-import { transformPost } from '@/utils/apis/transformPost';
+import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
+import { transformPost } from '@/src/utils/apis/transformPost';
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-
-import { prisma } from '../../../../prisma/prismadb';
+import { prisma } from '@/prisma/prismadb';
+import { authOptions } from '@/src/pages/api/auth/[...nextauth]';
 
 export const POSTS_PER_SCROLL = 8;
 
