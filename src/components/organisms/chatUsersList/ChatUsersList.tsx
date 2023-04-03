@@ -37,7 +37,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   if (!data) {
     return (
       <div className={styles.loader}>
-        <Loader color="blue" size="normal" />;
+        <Loader color="blue" size="normal" />
       </div>
     );
   }

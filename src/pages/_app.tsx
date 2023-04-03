@@ -14,7 +14,7 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { Layout } from '@/src/components/layout/Layout';
 
-import '@/styles/globals.scss';
+import '../styles/globals.scss';
 
 const customFont = Open_Sans({
   weight: ['400', '500', '700'],

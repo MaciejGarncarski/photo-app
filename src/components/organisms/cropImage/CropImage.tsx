@@ -12,7 +12,7 @@ import { Heading } from '@/src/components/atoms/heading/Heading';
 
 import { AspectRatioButtons } from '@/src/components/molecules/aspectRatioButtons/AspectRatioButtons';
 
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
+import { useConfirmation } from '@/src/components/organisms/cropImage/useConfirmation';
 import { useCropImage } from '@/src/components/organisms/cropImage/useCropImage';
 import { DropZone } from '@/src/components/organisms/dropZone/DropZone';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
@@ -23,20 +23,17 @@ export const CropImage = () => {
   const [aspectRatio, setAspectRatio] = useState(1);
   const { isMobile } = useScreenWidth();
   const { isCropping } = useIsCropping();
+  const { DiffrentImageConfirmation, openModal } = useConfirmation();
 
   const {
     saveCrop,
     zoom,
     setZoom,
-    onConfirm,
     isIdle,
     error,
     setError,
     imgSrc,
     setImgSrc,
-    isModalOpen,
-    openModal,
-    closeModal,
     setCropArea,
     cropArea,
     onChange,
@@ -80,12 +77,7 @@ export const CropImage = () => {
           Save crop
         </Button>
       </div>
-      <ConfirmationAlert
-        isVisible={isModalOpen}
-        headingText="Select diffrent image?"
-        closeModal={closeModal}
-        onConfirm={onConfirm}
-      />
+      <DiffrentImageConfirmation />
     </CreatePostItemContainer>
   );
 };

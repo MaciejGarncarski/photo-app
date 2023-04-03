@@ -6,5 +6,7 @@ const finalImagesAtom = atom<FinalImages>([]);
 
 export const useFinalImages = () => {
   const [finalImages, setFinalImages] = useAtom(finalImagesAtom);
-  return { finalImages, setFinalImages };
+  const resetFinalImages = () => setFinalImages([]);
+
+  return { finalImages, setFinalImages, resetFinalImages };
 };
