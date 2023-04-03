@@ -10,7 +10,7 @@ type PropsTypes = {
 };
 
 export const AccountStats = ({ userId }: PropsTypes) => {
-  const { followersModal, followingModal, listData } = useListData({ userId });
+  const { followersModal, friendsModal, listData } = useListData({ userId });
 
   return (
     <>
@@ -27,8 +27,10 @@ export const AccountStats = ({ userId }: PropsTypes) => {
         })}
       </motion.ul>
       <AnimatePresence>
-        {followingModal.isModalOpen && <StatsModal type="following" modal={followingModal} userId={userId} />}
-        {followersModal.isModalOpen && <StatsModal type="followers" modal={followersModal} userId={userId} />}
+        {friendsModal.isModalOpen && <StatsModal type="friends" closeModal={friendsModal.closeModal} userId={userId} />}
+        {followersModal.isModalOpen && (
+          <StatsModal type="followers" closeModal={followersModal.closeModal} userId={userId} />
+        )}
       </AnimatePresence>
     </>
   );

@@ -7,7 +7,7 @@ import styles from './postSlider.module.scss';
 
 type PropsTypes = {
   currentIndex: number;
-  images: Array<PostImage | null>;
+  images: Array<PostImage>;
 };
 
 export const PostSliderProgress = ({ currentIndex, images }: PropsTypes) => {

@@ -11,18 +11,15 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 import styles from './postImage.module.scss';
 
 type PropsTypes = {
-  image: {
-    width: number;
-    height: number;
-    priority: boolean;
-    src: string;
-  };
+  width: number;
+  height: number;
+  priority: boolean;
+  src: string;
   post: PostData;
 };
 
-export const PostImage = ({ image, post }: PropsTypes) => {
+export const PostImage = ({ height, priority, src, width, post }: PropsTypes) => {
   const { description, authorId } = post;
-  const { priority, width, height, src } = image;
 
   const { username } = useUser({ userId: authorId });
   const [isLoading, setIsLoading] = useState(true);

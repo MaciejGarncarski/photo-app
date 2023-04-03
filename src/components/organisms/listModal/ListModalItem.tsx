@@ -41,7 +41,7 @@ export const ListModalItem = ({
   isLoading,
   loadingText,
 }: ModalListItemProps) => {
-  const listClassName = clsx(isLast && styles.listItemLast, styles.listItem);
+  const listClassName = clsx({ [styles.listItemLast]: isLast }, styles.listItem);
 
   if (isLoading) {
     return (

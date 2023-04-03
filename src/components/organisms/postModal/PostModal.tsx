@@ -23,6 +23,8 @@ type PropsTypes = {
 };
 
 export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
+  const { authorId, postId, createdAt } = post;
+
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
@@ -37,7 +39,7 @@ export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
               role="dialog"
               className={styles.container}
             >
-              <PostHeader tag="div" post={post} />
+              <PostHeader tag="div" authorId={authorId} createdAt={createdAt} postId={postId} />
               <div className={styles.sliderContainer}>
                 <PostSlider post={post} priority={true} />
               </div>

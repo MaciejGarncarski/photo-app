@@ -11,8 +11,8 @@ type ListData = Array<{ title: Titles; count: number; onClick: () => void }>;
 
 export const useListData = ({ userId }: PropsTypes) => {
   const { followersCount, friendsCount, postsCount } = useUser({ userId });
-  const followingModal = useModal();
   const followersModal = useModal();
+  const friendsModal = useModal();
 
   const listData: ListData = [
     {
@@ -28,9 +28,9 @@ export const useListData = ({ userId }: PropsTypes) => {
     {
       title: 'friends',
       count: friendsCount || 0,
-      onClick: followingModal.openModal,
+      onClick: friendsModal.openModal,
     },
   ];
 
-  return { followersModal, followingModal, listData };
+  return { followersModal, friendsModal, listData };
 };

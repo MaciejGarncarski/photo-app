@@ -15,6 +15,7 @@ type PropsTypes = {
 };
 
 export const HomePost = ({ post, priority }: PropsTypes) => {
+  const { authorId, postId, createdAt } = post;
   const { isLoading } = useUser({ userId: post.authorId });
 
   if (isLoading) {
@@ -24,7 +25,7 @@ export const HomePost = ({ post, priority }: PropsTypes) => {
   return (
     <li>
       <article className={styles.homePost}>
-        <PostHeader post={post} />
+        <PostHeader authorId={authorId} createdAt={createdAt} postId={postId} />
         <PostSlider post={post} priority={priority} />
         <PostFooter post={post} />
       </article>

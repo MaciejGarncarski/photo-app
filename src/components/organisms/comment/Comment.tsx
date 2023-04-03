@@ -16,7 +16,7 @@ import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { useCommentLike } from '@/src/components/organisms/comment/useCommentLike';
 import { useDeleteComment } from '@/src/components/organisms/comment/useDeleteComment';
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { PostComment } from '@/src/components/organisms/postModal/useInfiniteComments';
+import { PostComment } from '@/src/components/organisms/postComments/useInfiniteComments';
 
 import styles from './comment.module.scss';
 

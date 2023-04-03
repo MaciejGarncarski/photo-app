@@ -14,9 +14,8 @@ type Props = {
   user: UserApiResponse;
 };
 
-export const StatsModalItem = ({ user }: Props) => {
+export const StatsModalItem = ({ user: { id, username } }: Props) => {
   const { session } = useAuth();
-  const { id, username } = user;
 
   return (
     <li key={id} className={styles.listItem}>
@@ -24,7 +23,7 @@ export const StatsModalItem = ({ user }: Props) => {
         <Avatar userId={id} size="small" />
         <span className={styles.username}>@{username}</span>
       </Link>
-      {user.id !== session?.user?.id && <FollowButton userId={id} />}
+      {id !== session?.user?.id && <FollowButton userId={id} />}
     </li>
   );
 };

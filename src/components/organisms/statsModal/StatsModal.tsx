@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
-
-import { useFollowers } from '@/src/hooks/useFollowers';
 
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
 import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
+
+import { useStatsModal } from '@/src/components/organisms/statsModal/useStatsModal';
 
 import styles from './statsModal.module.scss';
 
@@ -14,27 +13,12 @@ import { StatsModalItem } from '../statsModalItem/StatsModalItem';
 
 type PropsTypes = {
   userId: string;
-  type: 'following' | 'followers';
-  modal: {
-    closeModal: () => void;
-    openModal: () => void;
-    isModalOpen: boolean;
-  };
+  type: 'friends' | 'followers';
+  closeModal: () => void;
 };
 
-export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
-  const { closeModal } = modal;
-  const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({ userId, type });
-
-  const isEmpty = data?.pages[0].users.length === 0;
-
-  const [sentryRef] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: Boolean(hasNextPage),
-    onLoadMore: fetchNextPage,
-    disabled: true,
-    rootMargin: '0px 0px 400px 0px',
-  });
+export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
+  const { isLoading, data, isEmpty, sentryRef, hasNextPage } = useStatsModal({ userId, type });
 
   return (
     <ModalBackdrop closeModal={closeModal}>

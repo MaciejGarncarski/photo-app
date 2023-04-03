@@ -1,13 +1,7 @@
 import { IconMenu2 } from '@tabler/icons-react';
 import Link from 'next/link';
-import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
-import { PostData } from '@/src/utils/apis/transformPost';
-import { unlock } from '@/src/utils/bodyLock';
-import { formatDate } from '@/src/utils/formatDate';
 
 import { Tooltip } from '@/src/components/atoms/tooltip/Tooltip';
 
@@ -15,7 +9,7 @@ import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { useDeletePost } from '@/src/components/organisms/post/postOptions/useDeletePost';
+import { usePostHeader } from '@/src/components/organisms/post/postHeader/usePostHeader';
 
 import styles from './postHeader.module.scss';
 
@@ -23,34 +17,18 @@ import { PostOptions } from '../postOptions/PostOptions';
 
 type PropsTypes = {
   tag?: 'header' | 'div';
-  post: PostData;
+  authorId: string;
+  createdAt: Date;
+  postId: number;
 };
 
-export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
-  const { username } = useUser({ userId: post.authorId });
-  const { session, isSignedIn } = useAuth();
-  const menuModal = useModal();
-  const confirmationModal = useModal();
-  const deletePostMutation = useDeletePost();
-
-  const { authorId, postId, createdAt } = post;
-  const fromNow = formatDate(createdAt);
-
-  const isAuthor = session?.user?.id === authorId;
-
-  const onSettled = () => {
-    confirmationModal.closeModal();
-    menuModal.closeModal();
-    unlock();
-  };
-
-  const handleDeletePost = () => {
-    toast.promise(deletePostMutation.mutateAsync({ postId }, { onSettled }), {
-      error: 'Error!',
-      loading: 'Deleting post...',
-      success: 'Deleted!',
-    });
-  };
+export const PostHeader = ({ tag: Tag = 'header', authorId, createdAt, postId }: PropsTypes) => {
+  const { isSignedIn } = useAuth();
+  const { dateFromNow, handleDeletePost, isAuthor, username, confirmationModal, menuModal } = usePostHeader({
+    authorId,
+    createdAt,
+    postId,
+  });
 
   if (!username) {
     return null;
@@ -63,10 +41,11 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
         <div>
           <h2 className={styles.username}>{username}</h2>
           <p>
-            <time dateTime={createdAt.toString()}>{fromNow}</time>
+            <time dateTime={createdAt.toString()}>{dateFromNow}</time>
           </p>
         </div>
       </Link>
+
       {isSignedIn && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton userId={authorId} />}
@@ -79,13 +58,16 @@ export const PostHeader = ({ tag: Tag = 'header', post }: PropsTypes) => {
           )}
         </div>
       )}
+
       <PostOptions
         isVisible={menuModal.isModalOpen && !confirmationModal.isModalOpen}
         key="options"
-        post={post}
+        postId={postId}
+        authorId={authorId}
         closeModal={menuModal.closeModal}
         openCnonfirmation={confirmationModal.openModal}
       />
+
       <ConfirmationAlert
         isVisible={confirmationModal.isModalOpen}
         key="confirmation"

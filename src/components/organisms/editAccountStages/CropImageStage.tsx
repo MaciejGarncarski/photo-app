@@ -25,10 +25,6 @@ export const CropImageStage = ({ stagePersonalInfo, stageSelectImage }: PropsTyp
     stagePersonalInfo,
   });
 
-  const selectDiffrentImg = () => {
-    resetFinalImages();
-  };
-
   if (editAccountLoading || uploadImageLoading) {
     return <TextWithLoader text="Uploading new avatar.." />;
   }
@@ -62,7 +58,7 @@ export const CropImageStage = ({ stagePersonalInfo, stageSelectImage }: PropsTyp
       )}
       <div className={styles.buttons}>
         {isNewAvatarReady && (
-          <Button type="button" variant="secondary" onClick={selectDiffrentImg}>
+          <Button type="button" variant="secondary" onClick={resetFinalImages}>
             select diffrent image
           </Button>
         )}

@@ -24,15 +24,15 @@ type PropsTypes = {
 
 export const PostSlider = ({ post, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const { imagesData } = post;
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
   const { imageRef, width } = useUpdateWidth();
+  const postImages = post.imagesData.filter((img): img is PostImageType => !!img);
 
-  const postImages = imagesData.filter((img): img is PostImageType => !!img);
-  const { handleDragEnd, nextImage, prevImage } = useSlider({ currentIndex, postImages, setCurrentIndex });
-  const isSingleImage = postImages.length === 1;
-  const isNotFirstIndex = currentIndex !== 0;
-  const isNotLastIndex = currentIndex !== postImages.length - 1;
+  const { handleDragEnd, nextImage, prevImage, isNotFirstIndex, isNotLastIndex, isSingleImage } = useSlider({
+    currentIndex,
+    postImages,
+    setCurrentIndex,
+  });
 
   return (
     <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
@@ -49,7 +49,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
             {postImages.map(({ height, width, fileId, url }, idx) => {
               return (
                 <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage image={{ src: url, height, width, priority: priority && idx > 1 }} post={post} />
+                  <PostImage height={height} priority={priority && idx > 1} src={url} width={width} post={post} />
                 </motion.figure>
               );
             })}

@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
 import { useAuth } from '@/src/hooks/useAuth';
 import { PostData } from '@/src/utils/apis/transformPost';
-import { getDescriptionData } from '@/src/utils/getDescriptionData';
 
 import { CommentForm } from '@/src/components/organisms/post/commentForm/CommentForm';
 import { PostButtons } from '@/src/components/organisms/post/postButtons/PostButtons';
+import { usePostFooter } from '@/src/components/organisms/post/postFooter/usePostFooter';
 
 import styles from './postFooter.module.scss';
 
@@ -16,12 +14,8 @@ type PropsTypes = {
 
 export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const { isSignedIn } = useAuth();
-  const [showMore, setShowMore] = useState(false);
   const { description, author } = post;
-
-  const { isDescriptionLong, shortDescription } = getDescriptionData(description);
-
-  const toggleShowMore = () => setShowMore((prev) => !prev);
+  const { isDescriptionLong, shortDescription, showMore, toggleShowMore } = usePostFooter({ description });
 
   return (
     <footer className={styles.footer}>
@@ -40,7 +34,7 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
           <p className={styles.description}>{description}</p>
         )}
       </div>
-      {isSignedIn && <CommentForm post={post} />}
+      {isSignedIn && <CommentForm postId={post.postId} />}
     </footer>
   );
 };

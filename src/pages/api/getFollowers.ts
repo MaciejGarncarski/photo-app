@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 import { getUserResponse } from '@/src/utils/apis/getUserResponse';
 
-import { prisma } from '../../../prisma/prismadb';
+import { prisma } from '@/prisma/prismadb';
 
 const USERS_PER_SCROLL = 6;
 
@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { userId, skip, type } = response.data;
 
-  if (type !== 'followers' && type !== 'following') {
+  if (type !== 'followers' && type !== 'friends') {
     return res.status(httpCodes.badRequest).send(responseMessages.badPayload);
   }
 
@@ -94,7 +94,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(httpCodes.success).send({ users: usersWithChatRooms, usersCount, canLoadMore, nextCursor });
     }
 
-    if (type === 'following') {
+    if (type === 'friends') {
       const condition = {
         from: userId,
       };

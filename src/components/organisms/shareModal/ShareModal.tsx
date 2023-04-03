@@ -1,8 +1,8 @@
 import { IconCheck, IconCopy } from '@tabler/icons-react';
-import { useState } from 'react';
 
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
+import { useShareModal } from '@/src/components/organisms/shareModal/useShareModal';
 
 type PropsTypes = {
   closeModal: () => void;
@@ -11,16 +11,7 @@ type PropsTypes = {
 };
 
 export const ShareModal = ({ closeModal, textToCopy, isVisible }: PropsTypes) => {
-  const [isCopied, setIsCopied] = useState(false);
-
-  const handleCopy = async () => {
-    if (!navigator.clipboard) {
-      return;
-    }
-
-    await navigator.clipboard.writeText(textToCopy);
-    setIsCopied(true);
-  };
+  const { isCopied, handleCopy } = useShareModal({ textToCopy });
 
   return (
     <ListModal isVisible={isVisible} closeModal={closeModal} headingText="Share post">

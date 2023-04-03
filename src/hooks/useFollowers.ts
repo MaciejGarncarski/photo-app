@@ -13,7 +13,7 @@ type StatsResponse = {
 
 type PropsTypes = {
   userId: string;
-  type: 'following' | 'followers';
+  type: 'friends' | 'followers';
 };
 
 export const useFollowers = ({ userId, type }: PropsTypes) => {

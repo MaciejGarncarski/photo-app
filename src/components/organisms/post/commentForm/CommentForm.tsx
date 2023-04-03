@@ -1,42 +1,17 @@
 import clsx from 'clsx';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-import { PostData } from '@/src/utils/apis/transformPost';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 
-import { useAddComment } from '@/src/components/organisms/post/commentForm/useAddComment';
+import { useCommentForm } from '@/src/components/organisms/post/commentForm/useCommentForm';
 
 import styles from './commentForm.module.scss';
 
-const commentFormSchema = z.object({
-  comment: z.string().max(50),
-});
-
-type CommentFormValues = z.infer<typeof commentFormSchema>;
-
 type PropsTypes = {
-  post: PostData;
+  postId: number;
 };
 
-export const CommentForm = ({ post }: PropsTypes) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { isDirty, errors },
-  } = useForm<CommentFormValues>({
-    defaultValues: {
-      comment: '',
-    },
-  });
-
-  const { mutate, isLoading } = useAddComment({ postId: post.postId });
-
-  const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
-    mutate({ commentText: comment, postId: post.postId }, { onSuccess: () => reset() });
-  };
+export const CommentForm = ({ postId }: PropsTypes) => {
+  const { errors, handleSubmit, isDirty, isLoading, onSubmit, register } = useCommentForm({ postId });
 
   if (isLoading) {
     return <p>Uploading...</p>;

@@ -1,7 +1,9 @@
-import { Post, PostImage } from '@prisma/client';
+import { Post } from '@prisma/client';
 import { Session } from 'next-auth';
 
 import { getUserResponse } from '@/src/utils/apis/getUserResponse';
+
+import { PostImage } from '@/src/components/atoms/accountPost/AccountPost';
 
 import { User } from '@/src/pages/api/account/[user]';
 

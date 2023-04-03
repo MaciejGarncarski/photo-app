@@ -4,13 +4,17 @@ import { PostImage } from '@/src/components/atoms/accountPost/AccountPost';
 
 type ArgsTypes = {
   currentIndex: number;
-  postImages: Array<PostImage | null>;
+  postImages: Array<PostImage>;
   setCurrentIndex: (newValue: (value: number) => number) => void;
 };
 
 const CHANGE_IMG_OFFSET = 40;
 
 export const useSlider = ({ currentIndex, postImages, setCurrentIndex }: ArgsTypes) => {
+  const isSingleImage = postImages.length === 1;
+  const isNotFirstIndex = currentIndex !== 0;
+  const isNotLastIndex = currentIndex !== postImages.length - 1;
+
   const prevImage = () => {
     if (currentIndex === 0) {
       return;
@@ -34,5 +38,5 @@ export const useSlider = ({ currentIndex, postImages, setCurrentIndex }: ArgsTyp
       prevImage();
     }
   };
-  return { prevImage, nextImage, handleDragEnd };
+  return { prevImage, nextImage, handleDragEnd, isNotFirstIndex, isNotLastIndex, isSingleImage };
 };
