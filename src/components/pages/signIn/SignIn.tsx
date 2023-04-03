@@ -1,6 +1,8 @@
 import { Heading } from '@/src/components/atoms/heading/Heading';
+
 import { OtherSignInOptions } from '@/src/components/molecules/otherSignInOptions/OtherSignInOptions';
-import { SignInForm } from '@/src/components/organisms/signInForm/SignInForm';
+import { SignInForm } from '@/src/components/molecules/signInForm/SignInForm';
+
 import { animation } from '@/src/components/pages/signIn/signIn.animation';
 
 import styles from './signIn.module.scss';

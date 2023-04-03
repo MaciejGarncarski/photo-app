@@ -1,19 +1,19 @@
 import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { useModal } from '@/src/hooks/useModal';
 import { useTheme } from '@/src/hooks/useTheme';
 
-import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/src/components/molecules/modal/useModal';
+import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
 type PropsTypes = {
-  close: () => void;
+  closeModal: () => void;
   isVisible: boolean;
 };
 
-export const Settings = ({ close, isVisible }: PropsTypes) => {
+export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
   const { theme, handleTheme } = useTheme();
   const { sessionUserData, signOut, isSignedIn } = useAuth();
   const signOutModal = useModal();
@@ -27,9 +27,9 @@ export const Settings = ({ close, isVisible }: PropsTypes) => {
 
   return (
     <>
-      <ListModal isVisible={isVisible} close={close} headingText="PhotoApp settings">
+      <ListModal isVisible={isVisible} closeModal={closeModal} headingText="PhotoApp settings">
         {isSignedIn && (
-          <ListModalItem type="link" href={`/${sessionUserData.username}`} onClick={close} icon={<IconUser />}>
+          <ListModalItem type="link" href={`/${sessionUserData.username}`} onClick={closeModal} icon={<IconUser />}>
             Your profile
           </ListModalItem>
         )}
@@ -37,16 +37,16 @@ export const Settings = ({ close, isVisible }: PropsTypes) => {
           Change theme to {theme === 'dark' ? 'light' : 'dark'}
         </ListModalItem>
         {isSignedIn && (
-          <ListModalItem type="button" onClick={signOutModal.open} isLast icon={<IconDoorExit />}>
+          <ListModalItem type="button" onClick={signOutModal.openModal} isLast icon={<IconDoorExit />}>
             Sign Out
           </ListModalItem>
         )}
       </ListModal>
       <ConfirmationAlert
-        isVisible={signOutModal.modalOpen}
+        isVisible={signOutModal.isModalOpen}
         headingText="Sign out?"
         onConfirm={signOut}
-        close={signOutModal.close}
+        closeModal={signOutModal.closeModal}
       />
     </>
   );

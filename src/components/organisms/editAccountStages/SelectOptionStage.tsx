@@ -1,15 +1,18 @@
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { useModal } from '@/src/hooks/useModal';
 import { useUser } from '@/src/hooks/useUser';
 import { unlock } from '@/src/utils/bodyLock';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+
 import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
-import { useModal } from '@/src/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+
+import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
+import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
+
 import { useDeleteAvatar } from '@/src/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './stages.module.scss';
@@ -26,7 +29,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
   } = useAuth();
 
   const { customImage } = useUser({ userId });
-  const { open, close, modalOpen } = useModal();
+  const { openModal, closeModal, isModalOpen } = useModal();
   const { mutate, isLoading } = useDeleteAvatar();
 
   if (!userId) {
@@ -38,7 +41,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
       { userId },
       {
         onSettled: () => {
-          close();
+          closeModal();
           unlock();
         },
       },
@@ -63,7 +66,7 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
           {customImage ? 'Update avatar' : 'Upload avatar'}
         </Button>
         {customImage && (
-          <Button type="button" variant="secondary" onClick={open}>
+          <Button type="button" variant="secondary" onClick={openModal}>
             remove avatar
           </Button>
         )}
@@ -72,9 +75,9 @@ export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTy
         </Button>
       </div>
       <ConfirmationAlert
-        isVisible={modalOpen}
+        isVisible={isModalOpen}
         headingText="Remove your avatar?"
-        close={close}
+        closeModal={closeModal}
         onConfirm={removeAvatar}
       />
     </motion.section>

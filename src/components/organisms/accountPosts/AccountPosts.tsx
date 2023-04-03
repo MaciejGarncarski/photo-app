@@ -2,7 +2,9 @@ import { motion } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { AccountPost } from '@/src/components/atoms/accountPost/AccountPost';
+
 import { Loader } from '@/src/components/molecules/loader/Loader';
+
 import { postContainerVariants } from '@/src/components/organisms/accountPosts/AccountPosts.animation';
 import { useAccountPosts } from '@/src/components/organisms/accountPosts/useAccountPosts';
 

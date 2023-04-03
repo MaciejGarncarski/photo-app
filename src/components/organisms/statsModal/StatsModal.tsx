@@ -5,24 +5,25 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { useFollowers } from '@/src/hooks/useFollowers';
 
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
-import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
+
+import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
 
 import styles from './statsModal.module.scss';
 
-import { StatsModalItem } from './StatsModalItem';
+import { StatsModalItem } from '../statsModalItem/StatsModalItem';
 
 type PropsTypes = {
   userId: string;
   type: 'following' | 'followers';
   modal: {
-    close: () => void;
-    open: () => void;
-    modalOpen: boolean;
+    closeModal: () => void;
+    openModal: () => void;
+    isModalOpen: boolean;
   };
 };
 
 export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
-  const { close } = modal;
+  const { closeModal } = modal;
   const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({ userId, type });
 
   const isEmpty = data?.pages[0].users.length === 0;
@@ -36,11 +37,11 @@ export const StatsModal = ({ modal, type, userId }: PropsTypes) => {
   });
 
   return (
-    <ModalBackdrop close={close}>
+    <ModalBackdrop closeModal={closeModal}>
       <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100, opacity: 0 }} className={styles.container}>
         <h3 className={styles.heading}>{type.toUpperCase()}</h3>
         <ReactFocusLock>
-          <ModalClose onClose={close} />
+          <ModalCloseButton onClose={closeModal} />
           {isEmpty && (
             <ul className={styles.list}>
               <li className={styles.listItem}>No data.</li>

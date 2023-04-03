@@ -7,21 +7,23 @@ import { useUser } from '@/src/hooks/useUser';
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { IconSettingsWrapper } from '@/src/components/atoms/icons/IconSettingsWrapper';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-import { AccountStats } from '@/src/components/molecules/accountStats/AccountStats';
+
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
+
+import { AccountStats } from '@/src/components/organisms/accountStats/AccountStats';
 
 import styles from './account.module.scss';
 
 type PropsTypes = {
   username: string;
   isOwner: boolean;
-  modalOpen: boolean;
-  open: () => void;
+  isModalOpen: boolean;
+  openModal: () => void;
 };
 
-export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: PropsTypes) => {
+export const AccountHeaderMobile = ({ username, isOwner, isModalOpen, openModal }: PropsTypes) => {
   const { session } = useAuth();
   const userData = useUser({ username });
   const { id, bio, name } = userData;
@@ -38,9 +40,9 @@ export const AccountHeaderMobile = ({ username, isOwner, modalOpen, open }: Prop
       <AccountStats userId={id} />
       {!isOwner && session && <FollowButton userId={id ?? ''} />}
       {isOwner && (
-        <Button type="button" variant="primary" onClick={open}>
+        <Button type="button" variant="primary" onClick={openModal}>
           <IconSettingsWrapper size="sm" />
-          <VisuallyHidden>{modalOpen ? 'Close menu' : 'Open menu'}</VisuallyHidden>
+          <VisuallyHidden>{isModalOpen ? 'Close menu' : 'Open menu'}</VisuallyHidden>
           <span className={styles.menuButtonText}>settings</span>
         </Button>
       )}

@@ -1,30 +1,27 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { getFinalImagesBase64 } from '@/src/utils/getFinalImagesBase64';
+import { useFinalImages } from '@/src/hooks/useFinalImages';
+import { getPreviewImages } from '@/src/utils/getPreviewImages';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { CropImage } from '@/src/components/molecules/cropImage/CropImage';
-import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+
+import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
 import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/useUploadAvatar';
-import { FinalImages } from '@/src/components/pages/createPost/types';
+import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
 import styles from './stages.module.scss';
 
 type PropsTypes = {
-  finalImages: FinalImages;
-  setFinalImages: (finalImg: FinalImages) => void;
   stageSelectImage: () => void;
   stagePersonalInfo: () => void;
 };
 
-export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo, stageSelectImage }: PropsTypes) => {
-  const { imagesBase64 } = getFinalImagesBase64(finalImages);
-
+export const CropImageStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
+  const { finalImages, setFinalImages } = useFinalImages();
+  const { previewImages } = getPreviewImages(finalImages);
   const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({
-    finalImages,
-    setFinalImages,
     stagePersonalInfo,
   });
 
@@ -36,7 +33,8 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
     return <TextWithLoader text="Uploading new avatar.." />;
   }
 
-  const isNewAvatarReady = Boolean(imagesBase64[0]?.src);
+  const previewImage = previewImages[0];
+  const isNewAvatarReady = previewImage?.src;
 
   return (
     <motion.div
@@ -49,10 +47,10 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
       {isNewAvatarReady ? (
         <figure className={styles.preview}>
           <figcaption className={styles.previewFigcaption}>new avatar preview</figcaption>
-          {imagesBase64[0]?.src && (
+          {isNewAvatarReady && (
             <Image
               alt="avatar preview"
-              src={imagesBase64[0]?.src}
+              src={previewImage?.src}
               width={300}
               height={300}
               className={styles.previewImg}
@@ -60,7 +58,7 @@ export const CropImageStage = ({ finalImages, setFinalImages, stagePersonalInfo,
           )}
         </figure>
       ) : (
-        <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
+        <CropImage />
       )}
       <div className={styles.buttons}>
         {isNewAvatarReady && (

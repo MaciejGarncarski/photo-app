@@ -5,10 +5,12 @@ import { PostData } from '@/src/utils/apis/transformPost';
 
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
-import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
-import { PostFooter } from '@/src/components/molecules/post/postFooter/PostFooter';
-import { PostHeader } from '@/src/components/molecules/post/postHeader/PostHeader';
-import { PostSlider } from '@/src/components/molecules/post/postSlider/PostSlider';
+
+import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
+
+import { PostFooter } from '@/src/components/organisms/post/postFooter/PostFooter';
+import { PostHeader } from '@/src/components/organisms/post/postHeader/PostHeader';
+import { PostSlider } from '@/src/components/organisms/post/postSlider/PostSlider';
 import { PostComments } from '@/src/components/organisms/postComments/PostComments';
 import { modalVariants } from '@/src/components/organisms/postModal/PostModal.animation';
 
@@ -16,17 +18,17 @@ import styles from './postModal.module.scss';
 
 type PropsTypes = {
   post: PostData;
-  close: () => void;
+  closeModal: () => void;
   isVisible: boolean;
 };
 
-export const PostModal = ({ post, close, isVisible }: PropsTypes) => {
+export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
-        <ModalBackdrop close={close}>
+        <ModalBackdrop closeModal={closeModal}>
           <ReactFocusLock>
-            <ModalClose onClose={close} outside />
+            <ModalCloseButton onClose={closeModal} outside />
             <motion.div
               variants={modalVariants}
               initial="hidden"

@@ -11,9 +11,12 @@ import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/src/components/atoms/chatMessage/ChatMessage';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { Loader } from '@/src/components/molecules/loader/Loader';
-import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+
+import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
+
 import { useChatRoom } from '@/src/components/pages/chatRoom/useChatRoom';
 
 import styles from './chatRoom.module.scss';

@@ -34,38 +34,3 @@
   min-height: 2.5rem;
   border-radius: var(--radius-small);
 }
-
-.listItem {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 2rem;
-  transition: transform var(--transition);
-  margin: 0.25rem 1rem;
-}
-
-.itemLink {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  gap: 1rem;
-  flex-grow: 1;
-  border-radius: var(--radius-medium);
-
-  &:hover,
-  &:focus {
-    background-color: var(--bg-secondary);
-  }
-}
-
-.username {
-  font-weight: 700;
-  font-size: 1.25rem;
-  max-width: 8rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @include common.mediaquery('desktop') {
-    max-width: 12rem;
-  }
-}

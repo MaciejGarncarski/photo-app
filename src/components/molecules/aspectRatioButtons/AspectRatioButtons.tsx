@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/src/components/atoms/heading/Heading';
+
 import { buttonData } from '@/src/components/molecules/aspectRatioButtons/buttonData';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 

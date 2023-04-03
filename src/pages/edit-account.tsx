@@ -1,6 +1,7 @@
 import { useAuth } from '@/src/hooks/useAuth';
 
 import { Loader } from '@/src/components/molecules/loader/Loader';
+
 import { EditAccount } from '@/src/components/pages/editAccount/EditAccount';
 
 const EditAccountPage = () => {

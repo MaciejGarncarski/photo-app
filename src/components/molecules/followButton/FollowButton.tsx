@@ -2,6 +2,7 @@ import { useAuth } from '@/src/hooks/useAuth';
 import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
+
 import { useFollowMutation } from '@/src/components/molecules/followButton/useFollowMutation';
 import { Loader } from '@/src/components/molecules/loader/Loader';
 

@@ -3,18 +3,23 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useModal } from '@/src/hooks/useModal';
 import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Input } from '@/src/components/atoms/input/Input';
 import { TextArea } from '@/src/components/atoms/textArea/TextArea';
-import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
+
 import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
-import { useModal } from '@/src/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
-import { AccountDetails, AccountDetailsSchema } from '@/src/components/organisms/editAccountStages/accountDetailts';
+
+import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
+import {
+  AccountDetails,
+  AccountDetailsSchema,
+} from '@/src/components/organisms/editAccountStages/accountDetailtsValidation';
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
 import { useEditDetails } from '@/src/components/organisms/editAccountStages/useEditDetails';
+import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
 import styles from './stages.module.scss';
 
@@ -26,7 +31,7 @@ type PropsTypes = {
 export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   const { username, name, bio, isLoading } = useUser({ userId });
   const formRef = useRef<HTMLFormElement>(null);
-  const { close, modalOpen, open } = useModal();
+  const { closeModal, isModalOpen, openModal } = useModal();
 
   const {
     register,
@@ -43,12 +48,12 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
     resolver: zodResolver(AccountDetailsSchema),
   });
 
-  const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, open, reset, userId });
+  const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, openModal, reset, userId });
 
   const isError = Boolean(errors.bio || errors.fullName || errors.username);
 
   const closeConfirmation = () => {
-    close();
+    closeModal();
   };
 
   if (isLoading) {
@@ -86,9 +91,9 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
             Save changes
           </Button>
           <ConfirmationAlert
-            isVisible={modalOpen}
+            isVisible={isModalOpen}
             headingText="Save changes?"
-            close={closeConfirmation}
+            closeModal={closeConfirmation}
             onConfirm={onSubmit}
           />
         </div>

@@ -2,21 +2,22 @@ import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { ImagesBase64 } from '@/src/utils/getFinalImagesBase64';
+import { PreviewImages } from '@/src/utils/getPreviewImages';
 
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+
 import { containerVariants, itemVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 
 import styles from './imagesPreview.module.scss';
 
 type PropsTypes = {
-  onRemove: (id: string) => void;
-  imagesBase64: ImagesBase64;
+  onRemove: (id: number) => void;
+  previewImages: PreviewImages;
 };
 
-export const ImagesPreview = ({ onRemove, imagesBase64 }: PropsTypes) => {
-  const emptyImagesLength = 3 - imagesBase64.length;
+export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
+  const emptyImagesLength = 3 - previewImages.length;
   const arrayOfEmptyImages = Array.from({ length: emptyImagesLength }, (_, el) => el);
 
   return (
@@ -25,33 +26,27 @@ export const ImagesPreview = ({ onRemove, imagesBase64 }: PropsTypes) => {
         Images in post
       </Heading>
       <motion.div className={styles.previewContainer} variants={containerVariants} initial="hidden" animate="show">
-        {imagesBase64.map((finalImage) => {
-          if (!finalImage?.src) {
+        {previewImages.map((image) => {
+          if (!image?.src) {
             return null;
           }
 
           return (
-            <motion.div key={finalImage.id} className={styles.previewButton} variants={itemVariants}>
+            <motion.div key={image.id} className={styles.previewButton} variants={itemVariants}>
               <motion.button
                 whileFocus={{ scale: 1.1 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 type="button"
-                onClick={() => onRemove(finalImage.id)}
+                onClick={() => onRemove(image.id)}
                 className={styles.deleteIcon}
               >
                 <IconTrash />
                 <VisuallyHidden>remove image</VisuallyHidden>
               </motion.button>
 
-              {imagesBase64 && (
-                <Image
-                  className={styles.imgPreview}
-                  src={finalImage.src}
-                  alt="image preview"
-                  width={200}
-                  height={200}
-                />
+              {previewImages && (
+                <Image className={styles.imgPreview} src={image.src} alt="image preview" width={200} height={200} />
               )}
             </motion.div>
           );

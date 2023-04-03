@@ -4,6 +4,7 @@ import { useAuth } from '@/src/hooks/useAuth';
 
 import { AccessDenied } from '@/src/components/molecules/accessDenied/AccessDenied';
 import { Loader } from '@/src/components/molecules/loader/Loader';
+
 import { usePost } from '@/src/components/pages/account/usePost';
 import { EditPost } from '@/src/components/pages/editPost/EditPost';
 

@@ -7,19 +7,21 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useFinalImages } from '@/src/hooks/useFinalImages';
 import { useIsCropping } from '@/src/hooks/useIsCropping';
-import { getFinalImagesBase64 } from '@/src/utils/getFinalImagesBase64';
+import { useModal } from '@/src/hooks/useModal';
+import { getPreviewImages } from '@/src/utils/getPreviewImages';
 
-import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
 import { CreatePostForm } from '@/src/components/molecules/createPostForm/CreatePostForm';
-import { CropImage } from '@/src/components/molecules/cropImage/CropImage';
 import { ImagesPreview } from '@/src/components/molecules/imagesPreview/ImagesPreview';
-import { useModal } from '@/src/components/molecules/modal/useModal';
-import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
+
+import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
+import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
+import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
 import styles from './createPost.module.scss';
 
-import { FinalImages, PostDetails } from './types';
+import { PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';
 
 export const PostDetailsSchema = z.object({
@@ -27,14 +29,14 @@ export const PostDetailsSchema = z.object({
 });
 
 export const CreatePost = () => {
+  const { finalImages, setFinalImages } = useFinalImages();
   const [isLoading, setIsLoading] = useState(false);
-  const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const router = useRouter();
   const { isCropping } = useIsCropping();
 
-  const { open, close, modalOpen } = useModal();
-  const { onSubmit } = useOnSubmit({ finalImages, setIsLoading });
-  const { imagesBase64 } = getFinalImagesBase64(finalImages);
+  const { openModal, closeModal, isModalOpen } = useModal();
+  const { onSubmit } = useOnSubmit({ setIsLoading });
+  const { previewImages } = getPreviewImages(finalImages);
 
   const {
     register,
@@ -47,7 +49,7 @@ export const CreatePost = () => {
     },
   });
 
-  const onRemove = (id: string) => {
+  const onRemove = (id: number) => {
     const filteredState = finalImages.filter((finalImg) => {
       return finalImg?.id !== id;
     });
@@ -55,7 +57,7 @@ export const CreatePost = () => {
   };
 
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
-  const canShowPreviews = imagesBase64 && !isCropping;
+  const canShowPreviews = previewImages && !isCropping;
 
   if (isLoading) {
     return <TextWithLoader text="Uploading your post" />;
@@ -71,18 +73,23 @@ export const CreatePost = () => {
       <NextSeo title="Create new post" />
       {finalImages.length <= 3 && (
         <div className={styles.addPhoto}>
-          <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
+          <CropImage />
         </div>
       )}
-      {canShowPreviews && <ImagesPreview imagesBase64={imagesBase64} onRemove={onRemove} />}
+      {canShowPreviews && <ImagesPreview previewImages={previewImages} onRemove={onRemove} />}
       <CreatePostForm
         disabled={isSubmitDisabled}
         errors={errors}
         onSubmit={handleSubmit(onSubmit)}
-        open={open}
+        openModal={openModal}
         register={register}
       />
-      <ConfirmationAlert isVisible={modalOpen} headingText="Cancel?" close={close} onConfirm={() => router.push('/')} />
+      <ConfirmationAlert
+        isVisible={isModalOpen}
+        headingText="Cancel?"
+        closeModal={closeModal}
+        onConfirm={() => router.push('/')}
+      />
     </motion.main>
   );
 };

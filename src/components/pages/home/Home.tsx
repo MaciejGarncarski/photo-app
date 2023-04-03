@@ -9,11 +9,14 @@ import { useOtherUsers } from '@/src/hooks/useOtherUsers';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/src/components/atoms/newPostNotification/NewPostNotification';
 import { PostPlaceholder } from '@/src/components/atoms/postPlaceholder/PostPlaceholder';
+
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 import { Loader } from '@/src/components/molecules/loader/Loader';
+
 import { HomePost } from '@/src/components/organisms/homePost/HomePost';
+
 import { useInfinitePosts } from '@/src/components/pages/home/useInfinitePosts';
 
 import styles from './home.module.scss';

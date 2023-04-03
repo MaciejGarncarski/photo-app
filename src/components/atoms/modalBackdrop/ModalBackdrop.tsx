@@ -8,24 +8,24 @@ import { backdropVariants } from '@/src/components/atoms/modalBackdrop/ModalBack
 import styles from './modalBackdrop.module.scss';
 
 type PropsTypes = {
-  close: () => void;
+  closeModal: () => void;
   mobileCenter?: boolean;
   children: ReactNode;
 };
 
-export const ModalBackdrop = ({ close, mobileCenter, children }: PropsTypes) => {
+export const ModalBackdrop = ({ closeModal, mobileCenter, children }: PropsTypes) => {
   const backdropClassName = clsx(mobileCenter && styles.backdropMobileCenter, styles.backdrop);
 
   const handleEscapeKey = (keyEv: KeyboardEvent) => {
     if (keyEv.key !== 'Escape') {
       return;
     }
-    close();
+    closeModal();
   };
 
   const handleOverlayClick = (mouseEv: MouseEvent) => {
     if (mouseEv.target === mouseEv.currentTarget) {
-      close();
+      closeModal();
     }
   };
 

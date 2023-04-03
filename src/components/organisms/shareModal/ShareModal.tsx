@@ -5,12 +5,12 @@ import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
 type PropsTypes = {
-  close: () => void;
+  closeModal: () => void;
   textToCopy: string;
   isVisible: boolean;
 };
 
-export const ShareModal = ({ close, textToCopy, isVisible }: PropsTypes) => {
+export const ShareModal = ({ closeModal, textToCopy, isVisible }: PropsTypes) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -23,7 +23,7 @@ export const ShareModal = ({ close, textToCopy, isVisible }: PropsTypes) => {
   };
 
   return (
-    <ListModal isVisible={isVisible} close={close} headingText="Share post">
+    <ListModal isVisible={isVisible} closeModal={closeModal} headingText="Share post">
       <ListModalItem
         type="button"
         icon={isCopied ? <IconCheck /> : <IconCopy />}

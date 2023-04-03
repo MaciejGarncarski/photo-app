@@ -10,8 +10,9 @@ import { Toaster } from 'react-hot-toast';
 import { useIsLoading } from '@/src/hooks/useIsLoading';
 import { seoConfig } from '@/src/utils/next-seo.config';
 
-import { Layout } from '@/src/components/layout/Layout';
 import { Loader } from '@/src/components/molecules/loader/Loader';
+
+import { Layout } from '@/src/components/layout/Layout';
 
 import '@/styles/globals.scss';
 

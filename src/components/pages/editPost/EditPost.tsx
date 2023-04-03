@@ -2,11 +2,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { useModal } from '@/src/hooks/useModal';
+
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { TextArea } from '@/src/components/atoms/textArea/TextArea';
-import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/src/components/molecules/modal/useModal';
+
+import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
+
 import { useEditPost } from '@/src/components/pages/editPost/useEditPost';
 
 import styles from './editPost.module.scss';
@@ -50,25 +53,25 @@ export const EditPost = ({ postId }: { postId: number }) => {
       <form className={styles.form}>
         <TextArea label="Description" {...register('description')} error={errors.description?.message} />
         <div className={styles.buttons}>
-          <Button type="button" variant="secondary" onClick={cancelModal.open}>
+          <Button type="button" variant="secondary" onClick={cancelModal.openModal}>
             Cancel
           </Button>
-          <Button type="button" variant="primary" disabled={!isDirty} onClick={saveModal.open}>
+          <Button type="button" variant="primary" disabled={!isDirty} onClick={saveModal.openModal}>
             Save
           </Button>
         </div>
       </form>
       <ConfirmationAlert
-        isVisible={cancelModal.modalOpen}
+        isVisible={cancelModal.isModalOpen}
         headingText="Cancel changes?"
         onConfirm={router.back}
-        close={cancelModal.close}
+        closeModal={cancelModal.closeModal}
       />
       <ConfirmationAlert
-        isVisible={saveModal.modalOpen}
+        isVisible={saveModal.isModalOpen}
         headingText="Save changes?"
         onConfirm={onSubmit}
-        close={saveModal.close}
+        closeModal={saveModal.closeModal}
       />
     </section>
   );

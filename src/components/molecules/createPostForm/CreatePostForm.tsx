@@ -5,7 +5,9 @@ import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { TextArea } from '@/src/components/atoms/textArea/TextArea';
+
 import { getButtonList } from '@/src/components/molecules/createPostForm/buttonList';
+
 import { PostDetails } from '@/src/components/pages/createPost/types';
 
 import styles from './createPostForm.module.scss';
@@ -14,12 +16,12 @@ type PropsTypes = {
   onSubmit: () => void;
   errors: FieldErrors<PostDetails>;
   disabled: boolean;
-  open: () => void;
+  openModal: () => void;
   register: UseFormRegister<PostDetails>;
 };
 
-export const CreatePostForm = ({ disabled, errors, onSubmit, open, register }: PropsTypes) => {
-  const buttonList = getButtonList(open, disabled);
+export const CreatePostForm = ({ disabled, errors, onSubmit, openModal, register }: PropsTypes) => {
+  const buttonList = getButtonList(openModal, disabled);
 
   return (
     <motion.form onSubmit={onSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

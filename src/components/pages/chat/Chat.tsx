@@ -1,6 +1,9 @@
 import { Heading } from '@/src/components/atoms/heading/Heading';
+
+import { SearchUserForm } from '@/src/components/molecules/searchUserForm/SearchUserForm';
+
 import { ChatUsersList } from '@/src/components/organisms/chatUsersList/ChatUsersList';
-import { SearchUserForm } from '@/src/components/organisms/searchUserForm/SearchUserForm';
+
 import { useChatUsers } from '@/src/components/pages/chat/useChatUsers';
 
 import styles from './chat.module.scss';

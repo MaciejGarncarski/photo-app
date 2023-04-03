@@ -2,18 +2,17 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { useFinalImages } from '@/src/hooks/useFinalImages';
 
-import { FinalImages } from '@/src/components/pages/createPost/types';
 import { useUploadImage } from '@/src/components/pages/createPost/useUploadImage';
 import { useEditAccount } from '@/src/components/pages/editAccount/useEditAccount';
 
 type UseUploadAvatarArguments = {
-  finalImages: FinalImages;
   stagePersonalInfo: () => void;
-  setFinalImages: (final: FinalImages) => void;
 };
 
-export const useUploadAvatar = ({ finalImages, setFinalImages, stagePersonalInfo }: UseUploadAvatarArguments) => {
+export const useUploadAvatar = ({ stagePersonalInfo }: UseUploadAvatarArguments) => {
+  const { finalImages, setFinalImages } = useFinalImages();
   const { session } = useAuth();
   const queryClient = useQueryClient();
   const uploadImage = useUploadImage();

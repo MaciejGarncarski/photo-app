@@ -4,17 +4,18 @@ import { toast } from 'react-hot-toast';
 import { v4 } from 'uuid';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { useFinalImages } from '@/src/hooks/useFinalImages';
 
-import { FinalImages, PostDetails } from './types';
+import { PostDetails } from './types';
 import { useSendNewPost } from './useSendNewPost';
 import { useUploadImage } from './useUploadImage';
 
 type PropsTypes = {
-  finalImages: FinalImages;
   setIsLoading: (isLoading: boolean) => void;
 };
 
-export const useOnSubmit = ({ finalImages, setIsLoading }: PropsTypes) => {
+export const useOnSubmit = ({ setIsLoading }: PropsTypes) => {
+  const { finalImages } = useFinalImages();
   const router = useRouter();
   const { session } = useAuth();
   const uploadImage = useUploadImage();

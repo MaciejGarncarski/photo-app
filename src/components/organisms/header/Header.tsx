@@ -2,12 +2,13 @@ import { IconDotsVertical } from '@tabler/icons-react';
 import Link from 'next/link';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { useModal } from '@/src/hooks/useModal';
 import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-import { useModal } from '@/src/components/molecules/modal/useModal';
-import { Navbar } from '@/src/components/molecules/navbar/Navbar';
-import { NavbarForDesktop } from '@/src/components/molecules/navbar/NavbarForDesktop';
+
+import { Navbar } from '@/src/components/organisms/navbar/Navbar';
+import { NavbarForDesktop } from '@/src/components/organisms/navbar/NavbarForDesktop';
 import { Settings } from '@/src/components/organisms/settings/Settings';
 
 import styles from './header.module.scss';
@@ -15,7 +16,7 @@ import styles from './header.module.scss';
 export const Header = () => {
   const { isMobile } = useScreenWidth();
   const { sessionUserData, isSignedIn } = useAuth();
-  const { close, modalOpen, open } = useModal();
+  const { closeModal, isModalOpen, openModal } = useModal();
 
   return (
     <header className={styles.header}>
@@ -28,7 +29,7 @@ export const Header = () => {
         <div className={styles.options}>
           {isSignedIn && (
             <>
-              <button type="button" className={styles.button} onClick={modalOpen ? close : open}>
+              <button type="button" className={styles.button} onClick={isModalOpen ? closeModal : openModal}>
                 <Avatar userId={sessionUserData.id} size="small" />
                 <span className={styles.userInfo}>
                   <span className={styles.name}>{sessionUserData.name}</span>
@@ -39,7 +40,7 @@ export const Header = () => {
                   <IconDotsVertical />
                 </span>
               </button>
-              <Settings isVisible={modalOpen} close={close} />
+              <Settings isVisible={isModalOpen} closeModal={closeModal} />
             </>
           )}
         </div>

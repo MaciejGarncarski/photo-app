@@ -1,4 +1,4 @@
-import { ImageCropErrors } from '@/src/components/molecules/cropImage/useCropImage';
+import { ImageCropErrors } from '@/src/components/organisms/cropImage/useCropState';
 
 export const IMAGE_MIN_SIZE = 150;
 export const IMAGE_MAX_FILE_SIZE = 12_500_000;

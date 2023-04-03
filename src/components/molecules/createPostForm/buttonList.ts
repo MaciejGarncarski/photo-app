@@ -6,11 +6,11 @@ type Button = {
   text: string;
 };
 
-export const getButtonList = (open: () => void, submitDisabled: boolean) => {
+export const getButtonList = (openModal: () => void, submitDisabled: boolean) => {
   const buttonList: Array<Button> = [
     {
       variant: 'secondary',
-      onClick: open,
+      onClick: openModal,
       text: 'Cancel',
       type: 'button',
     },

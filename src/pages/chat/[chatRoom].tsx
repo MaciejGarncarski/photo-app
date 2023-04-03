@@ -2,9 +2,9 @@ import { ChatRoom as ChatRoomType } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { TextWithLoader } from '@/src/components/molecules/textWithLoader/TextWithLoader';
-import { ChatRoom } from '@/src/components/pages/chatRoom/ChatRoom';
+import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
+import { ChatRoom } from '@/src/components/pages/chatRoom/ChatRoom';
 import { authOptions } from '@/src/pages/api/auth/[...nextauth]';
 
 import { prisma } from '../../../prisma/prismadb';

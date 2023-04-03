@@ -2,17 +2,18 @@ import { useRouter } from 'next/router';
 import { MouseEvent } from 'react';
 import { UseFormGetValues } from 'react-hook-form';
 
-import { AccountDetails } from '@/src/components/organisms/editAccountStages/accountDetailts';
+import { AccountDetails } from '@/src/components/organisms/editAccountStages/accountDetailtsValidation';
+
 import { useEditAccount } from '@/src/components/pages/editAccount/useEditAccount';
 
 type UseEditDetailsArguments = {
   reset: () => void;
-  open: () => void;
+  openModal: () => void;
   getValues: UseFormGetValues<AccountDetails>;
   userId: string;
 };
 
-export const useEditDetails = ({ reset, open, getValues, userId }: UseEditDetailsArguments) => {
+export const useEditDetails = ({ reset, openModal, getValues, userId }: UseEditDetailsArguments) => {
   const router = useRouter();
   const editAccount = useEditAccount();
 
@@ -23,7 +24,7 @@ export const useEditDetails = ({ reset, open, getValues, userId }: UseEditDetail
 
   const onClick = (clickEv: MouseEvent) => {
     clickEv.preventDefault();
-    open();
+    openModal();
   };
 
   const onSubmit = async () => {

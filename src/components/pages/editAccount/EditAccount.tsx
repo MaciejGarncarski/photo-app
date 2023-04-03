@@ -7,8 +7,6 @@ import { SelectOptionStage } from '@/src/components/organisms/editAccountStages/
 
 import styles from './editAccount.module.scss';
 
-import { FinalImages } from '../createPost/types';
-
 type PropsTypes = {
   userId: string;
 };
@@ -33,7 +31,6 @@ export type Stages = 'selectImage' | 'cropImage' | 'personalInfo';
 
 export const EditAccount = ({ userId }: PropsTypes) => {
   const [stage, setStage] = useState<Stages>('selectImage');
-  const [finalImages, setFinalImages] = useState<FinalImages>([]);
 
   const stageSelectImage = () => setStage('selectImage');
   const stageCropImage = () => setStage('cropImage');
@@ -54,8 +51,6 @@ export const EditAccount = ({ userId }: PropsTypes) => {
         {stage === 'cropImage' && (
           <LazyCropImageStage
             key="cropImageStage"
-            finalImages={finalImages}
-            setFinalImages={setFinalImages}
             stagePersonalInfo={stagePersonalInfo}
             stageSelectImage={stageSelectImage}
           />

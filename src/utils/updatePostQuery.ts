@@ -4,7 +4,6 @@ import { PostData } from '@/src/utils/apis/transformPost';
 import { updateInfinitePostsLike } from '@/src/utils/apis/updateInfinitePostsLike';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
-
 import { InfinitePosts } from '@/src/pages/api/post/infinitePosts';
 
 export type InfinitePostsQuery = InfiniteData<InfinitePosts<PostData>>;

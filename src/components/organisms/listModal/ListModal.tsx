@@ -3,26 +3,27 @@ import { ReactNode } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
-import { ModalClose } from '@/src/components/molecules/modal/ModalClose';
+
+import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
 
 import styles from './listModal.module.scss';
 
 type PropsTypes = {
-  close: () => void;
+  closeModal: () => void;
   headingText: string;
   children: ReactNode;
   isVisible: boolean;
 };
 
-export const ListModal = ({ close, headingText, children, isVisible }: PropsTypes) => {
+export const ListModal = ({ closeModal, headingText, children, isVisible }: PropsTypes) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
-        <ModalBackdrop close={close}>
+        <ModalBackdrop closeModal={closeModal}>
           <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }} className={styles.container}>
             <h3 className={styles.heading}>{headingText}</h3>
             <ReactFocusLock>
-              <ModalClose onClose={close} />
+              <ModalCloseButton onClose={closeModal} />
               <ul className={styles.list}>{children}</ul>
             </ReactFocusLock>
           </motion.div>

@@ -3,18 +3,18 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
 describe('Backdrop test', () => {
-  it('Should close on escape click', () => {
+  it('Should closeModal on escape click', () => {
     render(<div id="modal"></div>);
-    const close = jest.fn();
+    const closeModal = jest.fn();
 
     render(
-      <ModalBackdrop close={close}>
+      <ModalBackdrop closeModal={closeModal}>
         <p>backdrop</p>
       </ModalBackdrop>,
     );
 
     const backdrop = screen.getByText(/backdrop/i);
     fireEvent.keyDown(backdrop, { key: 'Escape' });
-    expect(close).toHaveBeenCalledTimes(1);
+    expect(closeModal).toHaveBeenCalledTimes(1);
   });
 });

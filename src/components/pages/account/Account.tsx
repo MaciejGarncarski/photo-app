@@ -4,15 +4,16 @@ import { NextSeo } from 'next-seo';
 import { useEffect } from 'react';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { useModal } from '@/src/hooks/useModal';
 import { useUser } from '@/src/hooks/useUser';
 import { lock } from '@/src/utils/bodyLock';
 
-import { ConfirmationAlert } from '@/src/components/molecules/confirmationAlert/ConfirmationAlert';
-import { useModal } from '@/src/components/molecules/modal/useModal';
 import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPosts';
+import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 import { PostModal } from '@/src/components/organisms/postModal/PostModal';
+
 import { usePost } from '@/src/components/pages/account/usePost';
 
 import styles from './account.module.scss';
@@ -51,14 +52,14 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
   }, [isModalOpen]);
 
   const postModalClose = () => {
-    postModal.close();
+    postModal.closeModal();
     router.push(`/${username}`);
   };
 
   const accountHeaderProps = {
     username,
-    modalOpen: settingsModal.modalOpen,
-    open: settingsModal.open,
+    isModalOpen: settingsModal.isModalOpen,
+    openModal: settingsModal.openModal,
     isOwner,
   };
 
@@ -72,21 +73,25 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
       <AccountHeaderMobile {...accountHeaderProps} />
       <AccountHeaderDesktop {...accountHeaderProps} />
 
-      <ListModal isVisible={settingsModal.modalOpen} close={settingsModal.close} headingText="Account options">
-        <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} onClick={settingsModal.close}>
+      <ListModal
+        isVisible={settingsModal.isModalOpen}
+        closeModal={settingsModal.closeModal}
+        headingText="Account options"
+      >
+        <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} onClick={settingsModal.closeModal}>
           Edit account
         </ListModalItem>
-        <ListModalItem type="button" onClick={signOutModal.open} icon={<IconDoorExit />} isLast>
+        <ListModalItem type="button" onClick={signOutModal.openModal} icon={<IconDoorExit />} isLast>
           Sign out
         </ListModalItem>
       </ListModal>
       <ConfirmationAlert
-        isVisible={signOutModal.modalOpen}
+        isVisible={signOutModal.isModalOpen}
         headingText="Sign out?"
         onConfirm={signOut}
-        close={signOutModal.close}
+        closeModal={signOutModal.closeModal}
       />
-      {data && <PostModal isVisible={postModal.modalOpen} post={data} close={postModalClose} />}
+      {data && <PostModal isVisible={postModal.isModalOpen} post={data} closeModal={postModalClose} />}
       <AccountPosts id={id ?? ''} />
     </div>
   );

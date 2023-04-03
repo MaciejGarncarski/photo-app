@@ -8,7 +8,9 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 import { Loader } from '@/src/components/molecules/loader/Loader';
+
 import { linkVariants } from '@/src/components/organisms/chatUsersList/ChatUsersList.animation';
+
 import { ChatUsersResponse } from '@/src/components/pages/chat/useChatUsers';
 
 import styles from './chatUsersList.module.scss';
