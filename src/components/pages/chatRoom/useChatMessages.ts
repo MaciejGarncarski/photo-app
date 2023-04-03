@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { Message } from '@/src/components/atoms/chatMessage/ChatMessage';
 
@@ -19,8 +20,8 @@ export const useChatMessages = ({ userId, friendId }: PropsTypes) => {
   return useInfiniteQuery(
     ['chat', userId, friendId],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<InfiniteMessages>(
-        `/api/chat/chat?userId=${userId}&friendId=${friendId}&page=${pageParam}`,
+      const { data } = await apiClient.get<InfiniteMessages>(
+        `chat/chat?userId=${userId}&friendId=${friendId}&page=${pageParam}`,
       );
       return data;
     },

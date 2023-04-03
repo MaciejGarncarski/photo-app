@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { useRouter } from 'next/router';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 type Mutation = {
   description: string;
@@ -11,7 +12,7 @@ export const useEditPost = ({ postId }: { postId: number }) => {
 
   return useMutation(
     async ({ description }: Mutation) => {
-      return axios.post('/api/post/edit', {
+      return apiClient.post('post/edit', {
         postId,
         description,
       });

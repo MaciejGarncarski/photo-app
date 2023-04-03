@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useState } from 'react';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { UserApiResponse } from '@/src/pages/api/account/[user]';
 
@@ -25,8 +25,8 @@ export const useChatUsers = () => {
   const chatUsers = useInfiniteQuery(
     ['chat users', session?.user?.id, searchedUser],
     async ({ pageParam = 0 }) => {
-      const { data: responseData } = await axios.get<ChatUsersResponse>(
-        `/api/chat/getChatUsers?userId=${session?.user?.id}&currentPage=${pageParam}&searchedUser=${searchedUser}`,
+      const { data: responseData } = await apiClient.get<ChatUsersResponse>(
+        `chat/getChatUsers?userId=${session?.user?.id}&currentPage=${pageParam}&searchedUser=${searchedUser}`,
       );
 
       return responseData;

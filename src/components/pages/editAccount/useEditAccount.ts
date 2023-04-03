@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { EditAccountData } from '@/src/pages/api/account/edit';
 
@@ -8,7 +9,7 @@ export const useEditAccount = () => {
 
   return useMutation(
     async ({ userId, username, fullName, newAvatarUrl, bio }: EditAccountData) => {
-      return await axios.post<unknown, unknown, EditAccountData>('/api/account/edit', {
+      return await apiClient.post<unknown, unknown, EditAccountData>('/account/edit', {
         userId,
         newAvatarUrl,
         bio,

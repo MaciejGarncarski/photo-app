@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { UserApiResponse } from '@/src/pages/api/account/[user]';
 
@@ -9,15 +10,13 @@ type PropsTypes = {
 };
 
 export const fetchAccount = async ({ userId, username }: PropsTypes) => {
-  const url = '/api/account';
-
   if (userId) {
-    const { data } = await axios.get<UserApiResponse>(`${url}/${userId}`);
+    const { data } = await apiClient.get<UserApiResponse>(`account/${userId}`);
     return data;
   }
 
   if (username) {
-    const { data } = await axios.get<UserApiResponse>(`${url}/${username}?type=username`);
+    const { data } = await apiClient.get<UserApiResponse>(`account/${username}?type=username`);
     return data;
   }
 };

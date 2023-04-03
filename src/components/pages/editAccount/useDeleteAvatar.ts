@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { DeleteAvatarData } from '@/src/pages/api/account/deleteAvatar';
 
@@ -11,7 +11,7 @@ export const useDeleteAvatar = () => {
 
   return useMutation(
     async ({ userId }: DeleteAvatarData) => {
-      return await axios.delete(`/api/account/deleteAvatar?userId=${userId}`);
+      return await apiClient.delete(`account/deleteAvatar?userId=${userId}`);
     },
     {
       onSuccess: () => {

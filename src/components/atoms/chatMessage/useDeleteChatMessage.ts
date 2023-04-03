@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 type Mutation = {
   id: string;
@@ -15,7 +16,7 @@ export const useDeleteChatMessage = ({ sender, receiver }: Arguments) => {
 
   return useMutation(
     async ({ id }: Mutation) => {
-      return axios.delete(`/api/chat/${id}`);
+      return apiClient.delete(`chat/${id}`);
     },
     {
       onSuccess: () => {

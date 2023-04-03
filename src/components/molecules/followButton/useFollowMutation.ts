@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 import { useUser } from '@/src/hooks/useUser';
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 type FollowMutation = {
   userId: string;
@@ -15,10 +15,10 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
   return useMutation(
     async () => {
       if (isFollowing) {
-        await axios.delete(`/api/followers?followingUserId=${userId}`);
+        await apiClient.delete(`followers?followingUserId=${userId}`);
       }
       if (!isFollowing) {
-        await axios.put('/api/followers', {
+        await apiClient.put('followers', {
           followingUserId: userId,
         });
       }

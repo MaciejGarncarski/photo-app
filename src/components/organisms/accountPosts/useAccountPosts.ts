@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
+import { apiClient } from '@/src/utils/apis/apiClient';
 import { PostData } from '@/src/utils/apis/transformPost';
 
 type FetchPost = {
@@ -20,8 +20,8 @@ type InfiniteAccountPosts = {
 };
 
 const fetchPosts = async ({ pageParam = 0, userId }: FetchPost) => {
-  const { data } = await axios.get<InfiniteAccountPosts>(
-    `/api/account/infinitePosts?userId=${userId}&currentPage=${pageParam}`,
+  const { data } = await apiClient.get<InfiniteAccountPosts>(
+    `account/infinitePosts?userId=${userId}&currentPage=${pageParam}`,
   );
   return data;
 };

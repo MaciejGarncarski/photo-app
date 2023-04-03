@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
+import { apiClient } from '@/src/utils/apis/apiClient';
 import { clientEnv } from '@/src/utils/env';
 
 export type UploadImages = {
@@ -9,10 +10,12 @@ export type UploadImages = {
   isPost?: boolean;
 };
 
+const UPLOAD_URL = 'https://upload.imagekit.io/api/v1/files/upload';
+
 const uploadImage = async ({ imageBlob, folder, isPost }: UploadImages) => {
   const { data } = await axios.get('/api/imageKitAuth');
 
-  const { data: uploadedData } = await axios.postForm('https://upload.imagekit.io/api/v1/files/upload', {
+  const { data: uploadedData } = await axios.postForm(UPLOAD_URL, {
     signature: data.signature,
     expire: data.expire,
     token: data.token,
@@ -33,7 +36,7 @@ const uploadImage = async ({ imageBlob, folder, isPost }: UploadImages) => {
 
   const { fileId, name, url, thumbnailUrl, width, height, size } = uploadedData;
 
-  const { data: postImageId } = await axios.post<number>('/api/post/postImage', {
+  const { data: postImageId } = await apiClient.post<number>('post/postImage', {
     fileId,
     name,
     url,

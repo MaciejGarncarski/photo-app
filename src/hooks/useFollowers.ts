@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { UserApiResponse } from '@/src/pages/api/account/[user]';
 
@@ -19,8 +20,8 @@ export const useFollowers = ({ userId, type }: PropsTypes) => {
   return useInfiniteQuery(
     [type, userId],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<StatsResponse>(
-        `/api/getFollowers?userId=${userId}&type=${type}&skip=${pageParam ?? 0}`,
+      const { data } = await apiClient.get<StatsResponse>(
+        `getFollowers?userId=${userId}&type=${type}&skip=${pageParam ?? 0}`,
       );
       return data;
     },

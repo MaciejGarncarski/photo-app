@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { z } from 'zod';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
 
@@ -13,7 +14,7 @@ export const useAddComment = ({ postId }: { postId: number }) => {
 
   return useMutation(
     async ({ commentText, postId }: PutCommentRequest) => {
-      await axios.put<unknown, null, PutCommentRequest>('/api/post/comment', {
+      await apiClient.put<unknown, null, PutCommentRequest>('post/comment', {
         commentText,
         postId,
       });

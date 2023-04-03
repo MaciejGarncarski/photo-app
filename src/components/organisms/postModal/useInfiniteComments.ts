@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 export type PostComment = {
   id: number;
@@ -25,8 +26,8 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
   return useInfiniteQuery(
     ['infinite comments', postId],
     async ({ pageParam = 0 }) => {
-      const { data } = await axios.get<InfiniteComments>(
-        `/api/post/infiniteComments?skip=${pageParam}&postId=${postId}`,
+      const { data } = await apiClient.get<InfiniteComments>(
+        `post/infiniteComments?skip=${pageParam}&postId=${postId}`,
       );
       return data;
     },

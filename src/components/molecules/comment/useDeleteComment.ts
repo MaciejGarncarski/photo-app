@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 type Mutation = {
   commentId: number;
@@ -11,7 +12,7 @@ export const useDeleteComment = () => {
 
   return useMutation(
     async ({ commentId }: Mutation) => {
-      await axios.delete(`/api/post/comment?commentId=${commentId}`);
+      await apiClient.delete(`post/comment?commentId=${commentId}`);
     },
     {
       onError: () => toast.error('Error, try again later.'),

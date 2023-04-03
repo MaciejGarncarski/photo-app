@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { apiClient } from '@/src/utils/apis/apiClient';
 import { CreatePostData } from '@/src/utils/apis/createPost';
 import { socket } from '@/src/utils/socket';
 
@@ -11,7 +11,7 @@ export type MutationValues = {
 };
 
 const uplaodPost = async ({ description, imageUrls, authorId }: CreatePostData) => {
-  return await axios.post<unknown, null, CreatePostData>('/api/post', {
+  return await apiClient.post<unknown, null, CreatePostData>('post', {
     description,
     imageUrls,
     authorId,

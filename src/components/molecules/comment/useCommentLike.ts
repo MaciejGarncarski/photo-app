@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { CommentPostRequestSchema } from '@/src/pages/api/post/comment';
 
@@ -12,7 +13,7 @@ export const useCommentLike = ({ commentId }: Mutation) => {
 
   return useMutation(
     async () => {
-      await axios.post(`/api/post/comment`, {
+      await apiClient.post(`/post/comment`, {
         commentId,
       });
     },

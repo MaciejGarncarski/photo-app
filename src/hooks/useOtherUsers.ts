@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { UserApiResponse } from '@/src/pages/api/account/[user]';
 
@@ -7,7 +8,7 @@ export const useOtherUsers = () => {
   return useQuery({
     queryKey: ['other-users'],
     queryFn: async () => {
-      const { data } = await axios.get<Array<UserApiResponse>>('/api/getOtherUsers');
+      const { data } = await apiClient.get<Array<UserApiResponse>>('getOtherUsers');
       return data;
     },
     refetchOnWindowFocus: false,
