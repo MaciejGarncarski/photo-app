@@ -11,13 +11,15 @@ import { containerVariants, itemVariants } from '@/src/components/molecules/imag
 
 import styles from './imagesPreview.module.scss';
 
+const MAX_IMAGES_LENGTH = 3;
+
 type PropsTypes = {
   onRemove: (id: number) => void;
   previewImages: PreviewImages;
 };
 
 export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
-  const emptyImagesLength = 3 - previewImages.length;
+  const emptyImagesLength = MAX_IMAGES_LENGTH - previewImages.length;
   const arrayOfEmptyImages = Array.from({ length: emptyImagesLength }, (_, el) => el);
 
   return (
@@ -44,10 +46,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
                 <IconTrash />
                 <VisuallyHidden>remove image</VisuallyHidden>
               </motion.button>
-
-              {previewImages && (
-                <Image className={styles.imgPreview} src={image.src} alt="image preview" width={200} height={200} />
-              )}
+              <Image className={styles.imgPreview} src={image.src} alt="image preview" width={200} height={200} />
             </motion.div>
           );
         })}

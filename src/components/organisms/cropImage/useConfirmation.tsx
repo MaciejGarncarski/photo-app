@@ -1,15 +1,17 @@
-import { useFinalImages } from '@/src/hooks/useFinalImages';
 import { useModal } from '@/src/hooks/useModal';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 
-export const useConfirmation = () => {
+type Arguments = {
+  resetState: () => void;
+};
+
+export const useConfirmation = ({ resetState }: Arguments) => {
   const { openModal, closeModal, isModalOpen } = useModal();
-  const { resetFinalImages } = useFinalImages();
 
   const onConfirm = () => {
     closeModal();
-    resetFinalImages();
+    resetState();
   };
 
   const DiffrentImageConfirmation = () => {

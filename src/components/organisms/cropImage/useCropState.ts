@@ -39,13 +39,13 @@ export const useCropState = () => {
   };
 
   return {
-    onChange,
     error,
     setError,
     setImgSrc,
     imgSrc,
-    resetState,
-    setCropArea,
     cropArea,
+    setCropArea,
+    onChange,
+    resetState,
   };
 };

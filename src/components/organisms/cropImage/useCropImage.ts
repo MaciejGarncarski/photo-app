@@ -1,16 +1,17 @@
-import { useCallback, useState } from 'react';
-import { Area } from 'react-easy-crop';
+import { useState } from 'react';
 
 import { useFinalImages } from '@/src/hooks/useFinalImages';
 import { convertToBlob } from '@/src/utils/convertToBlob';
 
+import { useCrop } from '@/src/components/organisms/cropImage/useCrop';
 import { useCropState } from '@/src/components/organisms/cropImage/useCropState';
 
 export const useCropImage = () => {
-  const { finalImages, setFinalImages } = useFinalImages();
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   const [isIdle, setIsIdle] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState(1);
   const [zoom, setZoom] = useState(1);
+  const { finalImages, setFinalImages } = useFinalImages();
+  const { croppedAreaPixels, onCropComplete } = useCrop();
   const { error, imgSrc, resetState, onChange, setCropArea, setError, setImgSrc, cropArea } = useCropState();
 
   const saveCrop = async () => {
@@ -31,12 +32,9 @@ export const useCropImage = () => {
     }
   };
 
-  const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
-
   return {
     saveCrop,
+    resetState,
     onCropComplete,
     zoom,
     error,
@@ -44,9 +42,11 @@ export const useCropImage = () => {
     isIdle,
     setZoom,
     onChange,
+    cropArea,
     setCropArea,
     imgSrc,
     setImgSrc,
-    cropArea,
+    aspectRatio,
+    setAspectRatio,
   };
 };

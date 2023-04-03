@@ -12,7 +12,7 @@ type UseUploadAvatarArguments = {
 };
 
 export const useUploadAvatar = ({ stagePersonalInfo }: UseUploadAvatarArguments) => {
-  const { finalImages, setFinalImages } = useFinalImages();
+  const { finalImages, resetFinalImages } = useFinalImages();
   const { session } = useAuth();
   const queryClient = useQueryClient();
   const uploadImage = useUploadImage();
@@ -42,7 +42,7 @@ export const useUploadAvatar = ({ stagePersonalInfo }: UseUploadAvatarArguments)
           stagePersonalInfo();
         },
         onSettled: () => {
-          setFinalImages([undefined]);
+          resetFinalImages();
         },
       },
     );

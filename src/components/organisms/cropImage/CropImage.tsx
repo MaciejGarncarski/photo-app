@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { IconHandFinger, IconMouse } from '@tabler/icons-react';
-import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
 import { useIsCropping } from '@/src/hooks/useIsCropping';
@@ -20,12 +19,11 @@ import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWi
 import styles from './cropImage.module.scss';
 
 export const CropImage = () => {
-  const [aspectRatio, setAspectRatio] = useState(1);
   const { isMobile } = useScreenWidth();
   const { isCropping } = useIsCropping();
-  const { DiffrentImageConfirmation, openModal } = useConfirmation();
-
   const {
+    aspectRatio,
+    setAspectRatio,
     saveCrop,
     zoom,
     setZoom,
@@ -38,7 +36,10 @@ export const CropImage = () => {
     cropArea,
     onChange,
     onCropComplete,
+    resetState,
   } = useCropImage();
+
+  const { DiffrentImageConfirmation, openModal } = useConfirmation({ resetState });
 
   if (!imgSrc || error) {
     return <DropZone onChange={onChange} error={error} setImgSrc={setImgSrc} setError={setError} />;

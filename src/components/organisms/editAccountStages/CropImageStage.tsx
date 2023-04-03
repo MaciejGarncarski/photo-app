@@ -19,14 +19,14 @@ type PropsTypes = {
 };
 
 export const CropImageStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
-  const { finalImages, setFinalImages } = useFinalImages();
+  const { finalImages, resetFinalImages } = useFinalImages();
   const { previewImages } = getPreviewImages(finalImages);
   const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({
     stagePersonalInfo,
   });
 
   const selectDiffrentImg = () => {
-    setFinalImages([]);
+    resetFinalImages();
   };
 
   if (editAccountLoading || uploadImageLoading) {
