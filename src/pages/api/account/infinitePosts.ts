@@ -76,8 +76,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const totalPages = roundedMaxPages;
 
     const postWithData = await Promise.all(
-      posts.map(async (post) => {
-        return await transformPost(post, session);
+      posts.map((post) => {
+        return transformPost(post, session);
       }),
     );
 
