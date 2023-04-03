@@ -1,4 +1,4 @@
-import { DAY, getCountFromDate, MONTH, WEEK } from '@/src/utils/getCountFromDate';
+import { DAY, getCountFromDate, HOUR, MONTH, WEEK } from '@/src/utils/getCountFromDate';
 
 const format = (value: number, unit: Intl.RelativeTimeFormatUnit) => {
   return new Intl.RelativeTimeFormat('en-GB').format(value, unit);
@@ -6,7 +6,11 @@ const format = (value: number, unit: Intl.RelativeTimeFormatUnit) => {
 
 export const formatDate = (dateString: Date) => {
   const date = new Date(dateString);
-  const { daysCount, hoursCount, monthsCount, weeksCount } = getCountFromDate(date);
+  const { daysCount, hoursCount, minutesCount, monthsCount, weeksCount } = getCountFromDate(date);
+
+  if (minutesCount < HOUR) {
+    return format(minutesCount * -1, 'minutes');
+  }
 
   if (hoursCount <= DAY) {
     return format(hoursCount * -1, 'hours');
