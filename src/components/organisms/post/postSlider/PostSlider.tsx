@@ -49,7 +49,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
             {postImages.map(({ height, width, fileId, url }, idx) => {
               return (
                 <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage height={height} priority={priority && idx > 1} src={url} width={width} post={post} />
+                  <PostImage height={height} priority={priority && idx === 1} src={url} width={width} post={post} />
                 </motion.figure>
               );
             })}

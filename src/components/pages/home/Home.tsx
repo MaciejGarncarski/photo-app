@@ -45,7 +45,7 @@ export const Home = () => {
               return <Loader color="blue" size="normal" key={idx} />;
             }
 
-            return <HomePost priority={idx < 4} key={post.postId} post={post} />;
+            return <HomePost priority={idx < 3} key={post.postId} post={post} />;
           });
         })}
         {(isLoading || hasNextPage) && (
