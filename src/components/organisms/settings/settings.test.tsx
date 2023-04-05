@@ -23,7 +23,6 @@ jest.mock('next-auth/react', () => {
 describe('Settings component', () => {
   describe('user integration', () => {
     it('should change theme', () => {
-      render(<div id="modal" />);
       render(<Settings isVisible={true} closeModal={jest.fn()} />);
       const changeThemeBtn = screen.getByRole('button', { name: /Change theme to dark/i });
       fireEvent.click(changeThemeBtn);

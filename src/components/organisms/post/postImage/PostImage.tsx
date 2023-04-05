@@ -21,7 +21,7 @@ type PropsTypes = {
 export const PostImage = ({ height, priority, src, width, post }: PropsTypes) => {
   const { description, authorId } = post;
 
-  const { username } = useUser({ userId: authorId });
+  const { data } = useUser({ userId: authorId });
   const [isLoading, setIsLoading] = useState(true);
 
   const { shortDescription } = getDescriptionData(description);
@@ -40,7 +40,7 @@ export const PostImage = ({ height, priority, src, width, post }: PropsTypes) =>
         width={width}
         height={height}
         onLoad={() => setIsLoading(false)}
-        alt={`${username} - ${shortDescription}`}
+        alt={`${data?.username} - ${shortDescription}`}
       />
     </>
   );

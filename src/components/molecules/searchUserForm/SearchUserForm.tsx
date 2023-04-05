@@ -1,5 +1,5 @@
 import { IconSearch } from '@tabler/icons-react';
-import { FormEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
@@ -8,24 +8,13 @@ import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/Visual
 import styles from './searchUserForm.module.scss';
 
 type PropsTypes = {
-  inputVal: string;
-  setInputVal: (value: string) => void;
-  setSearchedUser: (value: string) => void;
-  setIsEnabled: (val: boolean) => void;
+  resetState: () => void;
+  onSubmit: (submitEv: FormEvent<HTMLFormElement>) => void;
+  onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
+  inputValue: string;
 };
 
-export const SearchUserForm = ({ inputVal, setInputVal, setIsEnabled, setSearchedUser }: PropsTypes) => {
-  const resetState = () => {
-    setSearchedUser('');
-    setInputVal('');
-  };
-
-  const onSubmit = (submitEv: FormEvent<HTMLFormElement>) => {
-    submitEv.preventDefault();
-    setSearchedUser(inputVal);
-    setIsEnabled(true);
-  };
-
+export const SearchUserForm = ({ onChange, onSubmit, resetState, inputValue }: PropsTypes) => {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <input
@@ -33,14 +22,14 @@ export const SearchUserForm = ({ inputVal, setInputVal, setIsEnabled, setSearche
         className={styles.input}
         placeholder="Search"
         size={3}
-        value={inputVal}
-        onChange={(ev) => setInputVal(ev.target.value)}
+        value={inputValue}
+        onChange={onChange}
       />
-      <Button type="submit" variant="primary" disabled={inputVal === ''}>
+      <Button type="submit" variant="primary" disabled={inputValue === ''}>
         <IconSearch />
         <VisuallyHidden>Search user</VisuallyHidden>
       </Button>
-      <Button type="reset" variant="primary" onClick={resetState} disabled={inputVal === ''}>
+      <Button type="reset" variant="primary" onClick={resetState} disabled={inputValue === ''}>
         <IconXWrapper />
         <VisuallyHidden>Reset input</VisuallyHidden>
       </Button>

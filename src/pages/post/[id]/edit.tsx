@@ -12,13 +12,13 @@ const EditPostPage = () => {
   const router = useRouter();
   const postId = parseInt(router.query.id as string);
   const { data, isLoading: isDataLoading } = usePost({ postId });
-  const { isLoading, isAuthenticated, sessionUserData } = useAuth();
+  const { isLoading, isAuthenticated, data: sessionUserData } = useAuth();
 
   if (isDataLoading || isLoading) {
     return <Loader color="blue" size="normal" />;
   }
 
-  if (!isAuthenticated || data?.authorId !== sessionUserData.id) {
+  if (!isAuthenticated || data?.authorId !== sessionUserData?.id) {
     return <AccessDenied />;
   }
 

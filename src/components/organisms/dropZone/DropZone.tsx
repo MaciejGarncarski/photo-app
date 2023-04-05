@@ -2,7 +2,7 @@ import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { ChangeEvent } from 'react';
 
-import { useScreenWidth } from '@/src/hooks/useScreenWidth';
+import { useIsMobile } from '@/src/hooks/useIsMobile';
 
 import { CropError } from '@/src/components/atoms/cropError/CropError';
 import { Heading } from '@/src/components/atoms/heading/Heading';
@@ -22,7 +22,7 @@ type PropsTypes = {
 
 export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) => {
   const { active, onDrop, inactive, inputRef, isActive } = useDropZone({ setError, setImgSrc });
-  const { isMobile } = useScreenWidth();
+  const { isMobile } = useIsMobile();
 
   return (
     <>

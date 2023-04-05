@@ -1,6 +1,4 @@
-import { ReactNode, useEffect } from 'react';
-
-import { useTheme } from '@/src/hooks/useTheme';
+import { ReactNode } from 'react';
 
 import styles from './layout.module.scss';
 
@@ -11,17 +9,6 @@ type PropsTypes = {
 };
 
 export const Layout = ({ children }: PropsTypes) => {
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-    if (theme === 'light') {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
-
   return (
     <div className={styles.layout}>
       <Header />

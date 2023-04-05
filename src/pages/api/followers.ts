@@ -53,7 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         where: data,
       });
 
-      if (isAlreadyFollower) {
+      if (isAlreadyFollower !== null) {
         return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
       }
 
@@ -64,6 +64,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           id: true,
         },
       });
+
       res.status(httpCodes.success).send({ messsage: responseMessages.success });
     } catch (error) {
       return res.status(httpCodes.badRequest).send({

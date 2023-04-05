@@ -11,13 +11,15 @@ type PropsTypes = {
 };
 
 export const FollowButton = ({ userId }: PropsTypes) => {
-  const { isFollowing } = useUser({ userId });
+  const { data } = useUser({ userId });
   const { isLoading, mutate } = useFollowMutation({ userId });
   const { isSignedIn } = useAuth();
 
-  if (!isSignedIn) {
+  if (!isSignedIn || !data) {
     return null;
   }
+
+  const { isFollowing } = data;
 
   return (
     <Button type="button" variant={isFollowing ? 'secondary' : 'primary'} onClick={() => mutate(undefined)}>

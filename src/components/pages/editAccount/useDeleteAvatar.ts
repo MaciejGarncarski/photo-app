@@ -15,7 +15,7 @@ export const useDeleteAvatar = () => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['account', session?.user?.id]);
+        queryClient.invalidateQueries(['user', session?.user?.id]);
       },
     },
   );

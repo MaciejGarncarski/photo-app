@@ -1,6 +1,6 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useFollowers } from '@/src/hooks/useFollowers';
+import { useFollowers } from '@/src/components/organisms/statsModal/useFollowers';
 
 type Arguments = {
   userId: string;

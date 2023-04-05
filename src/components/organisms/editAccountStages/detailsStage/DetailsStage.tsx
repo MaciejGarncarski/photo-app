@@ -1,10 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
-
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Input } from '@/src/components/atoms/input/Input';
@@ -13,12 +7,8 @@ import { TextArea } from '@/src/components/atoms/textArea/TextArea';
 import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import {
-  AccountDetails,
-  AccountDetailsSchema,
-} from '@/src/components/organisms/editAccountStages/accountDetailtsValidation';
+import { useDetailsStage } from '@/src/components/organisms/editAccountStages/detailsStage/useDetailsStage';
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
-import { useEditDetails } from '@/src/components/organisms/editAccountStages/useEditDetails';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
 import styles from './stages.module.scss';
@@ -29,32 +19,20 @@ type PropsTypes = {
 };
 
 export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
-  const { username, name, bio, isLoading } = useUser({ userId });
-  const formRef = useRef<HTMLFormElement>(null);
-  const { closeModal, isModalOpen, openModal } = useModal();
-
   const {
+    closeModal,
+    editAccountLoading,
+    errors,
+    formRef,
+    isDirty,
+    isError,
+    isLoading,
+    isModalOpen,
+    onClick,
+    onReset,
+    onSubmit,
     register,
-    reset,
-    getValues,
-    formState: { isDirty, errors },
-  } = useForm<AccountDetails>({
-    defaultValues: {
-      username: username || '',
-      fullName: name || '',
-      bio: bio || '',
-    },
-    mode: 'all',
-    resolver: zodResolver(AccountDetailsSchema),
-  });
-
-  const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, openModal, reset, userId });
-
-  const isError = Boolean(errors.bio || errors.fullName || errors.username);
-
-  const closeConfirmation = () => {
-    closeModal();
-  };
+  } = useDetailsStage({ userId });
 
   if (isLoading) {
     return null;
@@ -91,9 +69,9 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
             Save changes
           </Button>
           <ConfirmationAlert
-            isVisible={isModalOpen}
             headingText="Save changes?"
-            closeModal={closeConfirmation}
+            isVisible={isModalOpen}
+            closeModal={closeModal}
             onConfirm={onSubmit}
           />
         </div>

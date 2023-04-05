@@ -32,42 +32,25 @@ type IsFollowing = {
 export type UserApiResponse = User & UserCount & IsFollowing;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { type, user } = req.query;
+  const { userId } = req.query;
   const session = await getServerSession(req, res, authOptions);
 
-  if (typeof user !== 'string') {
+  if (typeof userId !== 'string') {
     return res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }
 
   try {
-    if (type !== 'username') {
-      const userData = await prisma.user.findFirst({
-        where: {
-          id: user,
-        },
-      });
-      if (!userData) {
-        return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
-      }
-
-      const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
-      return res.status(httpCodes.success).send({ ...response });
+    const userData = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+    if (!userData) {
+      return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
     }
 
-    if (type === 'username') {
-      const userData = await prisma.user.findFirst({
-        where: {
-          username: user,
-        },
-      });
-
-      if (!userData) {
-        return res.status(httpCodes.forbidden).send(responseMessages.forbidden);
-      }
-
-      const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
-      return res.status(httpCodes.success).send({ ...response });
-    }
+    const { response } = await getUserResponse({ userData, sessionUserId: session?.user?.id });
+    return res.status(httpCodes.success).send({ ...response });
   } catch (error) {
     res.status(httpCodes.forbidden).send(responseMessages.forbidden);
   }

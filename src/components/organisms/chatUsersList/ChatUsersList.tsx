@@ -43,6 +43,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   }
 
   const { usersCount } = data.pages[0];
+
   if (usersCount === 0) {
     return <p>no users found</p>;
   }

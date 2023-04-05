@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
-import { SelectOptionStage } from '@/src/components/organisms/editAccountStages/SelectOptionStage';
+import { SelectOptionStage } from '@/src/components/organisms/editAccountStages/optionsStage/SelectOptionStage';
 
 import styles from './editAccount.module.scss';
 
@@ -11,10 +11,10 @@ type PropsTypes = {
   userId: string;
 };
 
-const LazyCropImageStage = dynamic(
+const NewAvatarStageLazy = dynamic(
   async () => {
-    return import('@/src/components/organisms/editAccountStages/CropImageStage').then(
-      ({ CropImageStage }) => CropImageStage,
+    return import('@/src/components/organisms/editAccountStages/newAvatarStage/NewAvatarStage').then(
+      ({ NewAvatarStage }) => NewAvatarStage,
     );
   },
   { ssr: false },
@@ -22,7 +22,9 @@ const LazyCropImageStage = dynamic(
 
 const LazyDetailsStage = dynamic(
   async () => {
-    return import('@/src/components/organisms/editAccountStages/DetailsStage').then(({ DetailsStage }) => DetailsStage);
+    return import('@/src/components/organisms/editAccountStages/detailsStage/DetailsStage').then(
+      ({ DetailsStage }) => DetailsStage,
+    );
   },
   { ssr: false },
 );
@@ -49,7 +51,7 @@ export const EditAccount = ({ userId }: PropsTypes) => {
           />
         )}
         {stage === 'cropImage' && (
-          <LazyCropImageStage
+          <NewAvatarStageLazy
             key="cropImageStage"
             stagePersonalInfo={stagePersonalInfo}
             stageSelectImage={stageSelectImage}

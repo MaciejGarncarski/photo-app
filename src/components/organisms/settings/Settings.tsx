@@ -1,4 +1,5 @@
 import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
+import { signOut } from 'next-auth/react';
 
 import { useAuth } from '@/src/hooks/useAuth';
 import { useModal } from '@/src/hooks/useModal';
@@ -14,12 +15,12 @@ type PropsTypes = {
 };
 
 export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
-  const { theme, handleTheme } = useTheme();
-  const { sessionUserData, signOut, isSignedIn } = useAuth();
+  const { isDark, changeTheme } = useTheme();
+  const { data, isSignedIn } = useAuth();
   const signOutModal = useModal();
 
   const ThemeButton = () => {
-    if (theme === 'dark') {
+    if (isDark) {
       return <IconMoon />;
     }
     return <IconSun />;
@@ -28,13 +29,13 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
   return (
     <>
       <ListModal isVisible={isVisible} closeModal={closeModal} headingText="PhotoApp settings">
-        {isSignedIn && (
-          <ListModalItem type="link" href={`/${sessionUserData.username}`} onClick={closeModal} icon={<IconUser />}>
+        {data && (
+          <ListModalItem type="link" href={`/${data.username}`} onClick={closeModal} icon={<IconUser />}>
             Your profile
           </ListModalItem>
         )}
-        <ListModalItem type="button" onClick={handleTheme} isLast={!isSignedIn} icon={<ThemeButton />}>
-          Change theme to {theme === 'dark' ? 'light' : 'dark'}
+        <ListModalItem type="button" onClick={changeTheme} isLast={!isSignedIn} icon={<ThemeButton />}>
+          Change theme to {isDark ? 'light' : 'dark'}
         </ListModalItem>
         {isSignedIn && (
           <ListModalItem type="button" onClick={signOutModal.openModal} isLast icon={<IconDoorExit />}>

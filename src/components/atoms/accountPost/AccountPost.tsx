@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { PostData } from '@/src/utils/apis/transformPost';
-
 import { postItemVaraints } from '@/src/components/atoms/accountPost/AccountPost.animation';
 import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
 
@@ -22,19 +20,21 @@ export type PostImage = {
 };
 
 type PropsTypes = {
-  post: PostData;
-  image: PostImage;
+  imageUrl: string;
+  width: number;
+  height: number;
+  isLiked: boolean;
+  postId: number;
+  commentsCount: number;
+  likesCount: number;
 };
 
 const MotionLink = motion(Link);
 
-export const AccountPost = ({ post, image }: PropsTypes) => {
-  const { likesCount, commentsCount, postId, isLiked } = post;
-  const { url, width, height } = image;
-
+export const AccountPost = ({ likesCount, commentsCount, postId, isLiked, imageUrl, width, height }: PropsTypes) => {
   return (
     <MotionLink shallow variants={postItemVaraints} href={`/post/${postId}`} className={styles.container}>
-      <Image className={styles.image} src={url} alt="" width={width} height={height} priority />
+      <Image className={styles.image} src={imageUrl} alt="" width={width} height={height} priority />
       <ul className={styles.overlay}>
         <li className={styles.count}>
           <IconHeartWrapper isActive={isLiked} /> {likesCount}

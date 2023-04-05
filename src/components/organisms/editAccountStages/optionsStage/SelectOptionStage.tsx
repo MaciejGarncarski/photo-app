@@ -1,19 +1,13 @@
 import { motion } from 'framer-motion';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
-import { unlock } from '@/src/utils/bodyLock';
-
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 
 import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
+import { useOptionsStage } from '@/src/components/organisms/editAccountStages/optionsStage/useOptionsStage';
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
-
-import { useDeleteAvatar } from '@/src/components/pages/editAccount/useDeleteAvatar';
 
 import styles from './stages.module.scss';
 
@@ -24,29 +18,7 @@ type PropsTypes = {
 };
 
 export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTypes) => {
-  const {
-    sessionUserData: { id: userId },
-  } = useAuth();
-
-  const { customImage } = useUser({ userId });
-  const { openModal, closeModal, isModalOpen } = useModal();
-  const { mutate, isLoading } = useDeleteAvatar();
-
-  if (!userId) {
-    return null;
-  }
-
-  const removeAvatar = () => {
-    mutate(
-      { userId },
-      {
-        onSettled: () => {
-          closeModal();
-          unlock();
-        },
-      },
-    );
-  };
+  const { isLoading, customImage, isModalOpen, openModal, removeAvatar, closeModal } = useOptionsStage();
 
   if (isLoading) {
     return <TextWithLoader text="Removing your avatar.." />;

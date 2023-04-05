@@ -1,4 +1,4 @@
-import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
@@ -38,11 +38,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             }
           `}</style>
           <Layout>
-            <Hydrate state={pageProps.dehydratedState}>
-              <div id="modal"></div>
-              {isLoading ? <Loader color="blue" size="normal" /> : <Component {...pageProps} />}
-              <Toaster />
-            </Hydrate>
+            {isLoading ? <Loader color="blue" size="normal" /> : <Component {...pageProps} />}
+            <Toaster />
           </Layout>
         </MotionConfig>
       </QueryClientProvider>

@@ -15,7 +15,7 @@ type Arguments = {
 };
 
 export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
-  const { username } = useUser({ userId: authorId });
+  const { data } = useUser({ userId: authorId });
   const { session } = useAuth();
   const menuModal = useModal();
   const confirmationModal = useModal();
@@ -39,5 +39,5 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
     });
   };
 
-  return { username, handleDeletePost, isAuthor, dateFromNow, confirmationModal, menuModal };
+  return { username: data?.username, handleDeletePost, isAuthor, dateFromNow, confirmationModal, menuModal };
 };

@@ -2,8 +2,8 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { useScreenWidth } from '@/src/hooks/useScreenWidth';
-import { useScrollPosition } from '@/src/hooks/useScrollPosition';
+import { useIsGoingUp } from '@/src/hooks/useIsGoingUp';
+import { useIsMobile } from '@/src/hooks/useIsMobile';
 import { socket } from '@/src/utils/socket';
 
 import { useChatMessages } from '@/src/components/pages/chatRoom/useChatMessages';
@@ -18,8 +18,8 @@ export const useChatRoom = ({ chatRoomId, friendId }: PropsTypes) => {
   const [inputVal, setInputVal] = useState('');
 
   const { session } = useAuth();
-  const { isMobile } = useScreenWidth();
-  const { isGoingUp } = useScrollPosition();
+  const { isMobile } = useIsMobile();
+  const { isGoingUp } = useIsGoingUp();
 
   useChatSubscription(socket, chatRoomId);
 

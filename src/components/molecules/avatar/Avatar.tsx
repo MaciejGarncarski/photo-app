@@ -12,7 +12,7 @@ import styles from './avatar.module.scss';
 type Sizes = 'small' | 'medium' | 'big';
 
 type PropsTypes = {
-  userId?: string;
+  userId: string;
   size: Sizes;
 };
 
@@ -21,7 +21,21 @@ const AVATAR_SIZE = 140;
 export const MotionImage = motion(Image);
 
 export const Avatar = ({ userId, size }: PropsTypes) => {
-  const { customImage, image, username } = useUser({ userId });
+  const { data } = useUser({ userId });
+
+  if (!data) {
+    return (
+      <figure className={clsx(styles[size], styles.avatar)}>
+        <div className={styles.noImage}>
+          <IconUser />
+          <VisuallyHidden>Loading avatar</VisuallyHidden>
+        </div>
+      </figure>
+    );
+  }
+
+  const { image, customImage, username } = data;
+
   const hasNoImage = Boolean(!image && !customImage);
   const hasDefaultImage = image && !Boolean(customImage);
   const hasCustomImage = customImage;

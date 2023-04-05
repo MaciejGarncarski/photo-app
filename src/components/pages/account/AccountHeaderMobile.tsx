@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
@@ -17,28 +16,28 @@ import { AccountStats } from '@/src/components/organisms/accountStats/AccountSta
 import styles from './account.module.scss';
 
 type PropsTypes = {
-  username: string;
+  userId: string;
   isOwner: boolean;
   isModalOpen: boolean;
   openModal: () => void;
 };
 
-export const AccountHeaderMobile = ({ username, isOwner, isModalOpen, openModal }: PropsTypes) => {
+export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }: PropsTypes) => {
   const { session } = useAuth();
-  const userData = useUser({ username });
-  const { id, bio, name } = userData;
-  const { isMobile } = useScreenWidth();
+  const { data, isLoading } = useUser({ userId });
 
-  if (!isMobile || !id) {
+  if (isLoading || !data) {
     return null;
   }
+
+  const { bio, name, username } = data;
 
   return (
     <motion.main variants={containerVariants} initial="hidden" animate="show" className={styles.accountMobile}>
       <motion.h2 className={styles.username}>{username}</motion.h2>
-      <Avatar userId={id} size="big" />
-      <AccountStats userId={id} />
-      {!isOwner && session && <FollowButton userId={id ?? ''} />}
+      <Avatar userId={userId} size="big" />
+      <AccountStats userId={userId} />
+      {!isOwner && session && <FollowButton userId={userId} />}
       {isOwner && (
         <Button type="button" variant="primary" onClick={openModal}>
           <IconSettingsWrapper size="sm" />

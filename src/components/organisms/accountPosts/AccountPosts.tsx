@@ -11,11 +11,11 @@ import { useAccountPosts } from '@/src/components/organisms/accountPosts/useAcco
 import styles from './accountPosts.module.scss';
 
 type PropsTypes = {
-  id: string;
+  userId: string;
 };
 
-export const AccountPosts = ({ id }: PropsTypes) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useAccountPosts({ userId: id });
+export const AccountPosts = ({ userId }: PropsTypes) => {
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useAccountPosts({ userId });
 
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
@@ -36,11 +36,27 @@ export const AccountPosts = ({ id }: PropsTypes) => {
       <motion.div variants={postContainerVariants} initial="hidden" animate="show" className={styles.posts}>
         {data.pages.map((page) => {
           return page.posts.map((post) => {
-            if (!post.imagesData[0]) {
+            const firstImageFromSlider = post.imagesData[0];
+
+            if (!firstImageFromSlider) {
               return <Loader size="normal" color="blue" key={post.postId} />;
             }
 
-            return <AccountPost key={post.postId} image={post.imagesData[0]} post={post} />;
+            const { isLiked, commentsCount, likesCount, postId } = post;
+            const { url, width, height } = firstImageFromSlider;
+
+            return (
+              <AccountPost
+                imageUrl={url}
+                height={height}
+                width={width}
+                key={post.postId}
+                isLiked={isLiked}
+                postId={postId}
+                commentsCount={commentsCount}
+                likesCount={likesCount}
+              />
+            );
           });
         })}
       </motion.div>

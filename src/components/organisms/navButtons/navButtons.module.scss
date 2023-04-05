@@ -6,8 +6,13 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
+  padding: 0.1rem 0.75rem;
+  background-color: var(--bg-secondary);
+  border-radius: 4rem;
 
   @include common.mediaquery('desktop') {
+    border-radius: 0;
+    background-color: transparent;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -30,7 +35,6 @@
   align-items: center;
   border-radius: var(--radius-big);
   gap: 0.75rem;
-
   padding: 0.5rem;
   font-size: 1.25rem;
   transition: all var(--transition);
@@ -56,11 +60,15 @@
 }
 
 .active {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   font-weight: 700;
 
   svg {
     stroke-width: 2.5;
+  }
+
+  @include common.mediaquery('desktop') {
+    background-color: var(--bg-secondary);
   }
 }
 

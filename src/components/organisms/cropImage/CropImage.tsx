@@ -3,7 +3,7 @@ import { IconHandFinger, IconMouse } from '@tabler/icons-react';
 import Cropper from 'react-easy-crop';
 
 import { useIsCropping } from '@/src/hooks/useIsCropping';
-import { useScreenWidth } from '@/src/hooks/useScreenWidth';
+import { useIsMobile } from '@/src/hooks/useIsMobile';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
@@ -19,7 +19,7 @@ import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWi
 import styles from './cropImage.module.scss';
 
 export const CropImage = () => {
-  const { isMobile } = useScreenWidth();
+  const { isMobile } = useIsMobile();
   const { isCropping } = useIsCropping();
   const {
     aspectRatio,

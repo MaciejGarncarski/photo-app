@@ -1,4 +1,4 @@
-import { UserApiResponse } from '@/src/pages/api/account/[user]';
+import { UserApiResponse } from '@/src/pages/api/account/userId/[userId]';
 
 export const mockedUser: UserApiResponse = {
   id: 'clb9cuwar0000hgo7wembhg3c',

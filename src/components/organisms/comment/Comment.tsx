@@ -3,18 +3,14 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { useAuth } from '@/src/hooks/useAuth';
 import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
-import { formatDate } from '@/src/utils/formatDate';
 
 import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 
-import { useCommentLike } from '@/src/components/organisms/comment/useCommentLike';
-import { useDeleteComment } from '@/src/components/organisms/comment/useDeleteComment';
+import { useComment } from '@/src/components/organisms/comment/useComment';
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { PostComment } from '@/src/components/organisms/postComments/useInfiniteComments';
 
@@ -25,20 +21,20 @@ type PropsTypes = {
 };
 
 export const Comment = ({ commentData }: PropsTypes) => {
-  const { sessionUserData } = useAuth();
+  const { userId, createdAt } = commentData;
   const { openModal, closeModal, isModalOpen } = useModal();
-  const { username } = useUser({ userId: commentData.userId });
-  const { isLiked, id, commentText, createdAt, userId, likesCount } = commentData;
-  const timeSinceCreated = formatDate(createdAt);
 
-  const commentLike = useCommentLike({ commentId: id });
-  const commentDelete = useDeleteComment();
-  const handleLike = () => commentLike.mutate();
-  const handleDelete = () => commentDelete.mutate({ commentId: id });
-
-  const isAbleToDelete = sessionUserData?.id === userId || sessionUserData?.role === 'ADMIN';
-
-  const userAccountHref = `/${username}`;
+  const {
+    commentText,
+    handleDelete,
+    handleLike,
+    isAbleToDelete,
+    isLiked,
+    likesCount,
+    timeSinceCreated,
+    userAccountHref,
+    username,
+  } = useComment({ commentData });
 
   return (
     <motion.article className={styles.comment}>

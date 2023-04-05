@@ -1,7 +1,7 @@
 import { User as PrismaUser } from '@prisma/client';
 
 import { prisma } from '@/prisma/prismadb';
-import { User, UserApiResponse, UserCount } from '@/src/pages/api/account/[user]';
+import { User, UserApiResponse, UserCount } from '@/src/pages/api/account/userId/[userId]';
 
 type Arguments = {
   userData: PrismaUser;
@@ -11,37 +11,28 @@ type Arguments = {
 export const getUserResponse = async ({ userData, sessionUserId }: Arguments) => {
   const { email, bio, created_at, customImage, id, image, name, username, role } = userData;
 
-  const countedPosts = await prisma.post.aggregate({
-    _count: {
-      id: true,
-    },
+  const countedPosts = await prisma.post.count({
     where: {
       author_id: id,
     },
   });
 
-  const countedFollowers = await prisma.follower.aggregate({
-    _count: {
-      id: true,
-    },
+  const countedFollowers = await prisma.follower.count({
     where: {
       to: id,
     },
   });
 
-  const countedFollowing = await prisma.follower.aggregate({
-    _count: {
-      id: true,
-    },
+  const countedFollowing = await prisma.follower.count({
     where: {
       from: id,
     },
   });
 
   const count: UserCount = {
-    postsCount: countedPosts._count.id,
-    followersCount: countedFollowers._count.id,
-    friendsCount: countedFollowing._count.id,
+    postsCount: countedPosts,
+    followersCount: countedFollowers,
+    friendsCount: countedFollowing,
   };
 
   const isFollowing = await prisma.follower.findFirst({

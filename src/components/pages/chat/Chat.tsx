@@ -9,7 +9,7 @@ import { useChatUsers } from '@/src/components/pages/chat/useChatUsers';
 import styles from './chat.module.scss';
 
 export const Chat = () => {
-  const { chatUsers, inputVal, setInputVal, isEnabled, setIsEnabled, setSearchedUser } = useChatUsers();
+  const { chatUsers, isEnabled, onChange, onSubmit, resetState, inputValue } = useChatUsers();
 
   return (
     <section className={styles.container}>
@@ -18,12 +18,7 @@ export const Chat = () => {
           Select other user.
         </Heading>
       </div>
-      <SearchUserForm
-        inputVal={inputVal}
-        setInputVal={setInputVal}
-        setIsEnabled={setIsEnabled}
-        setSearchedUser={setSearchedUser}
-      />
+      <SearchUserForm resetState={resetState} onChange={onChange} onSubmit={onSubmit} inputValue={inputValue} />
       <ChatUsersList chatUsers={chatUsers} isEnabled={isEnabled} />
     </section>
   );

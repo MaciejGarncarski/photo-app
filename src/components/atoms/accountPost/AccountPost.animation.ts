@@ -2,11 +2,11 @@ import { Variants } from 'framer-motion';
 
 export const postItemVaraints: Variants = {
   hidden: {
-    scale: 0.8,
-    rotate: -3,
+    scale: 0.95,
+    opacity: 0,
   },
   show: {
     scale: 1,
-    rotate: 0,
+    opacity: 1,
   },
 };

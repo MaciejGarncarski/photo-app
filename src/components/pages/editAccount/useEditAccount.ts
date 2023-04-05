@@ -18,8 +18,8 @@ export const useEditAccount = () => {
       });
     },
     {
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(['account']);
+      onSuccess: () => {
+        queryClient.invalidateQueries(['user']);
       },
     },
   );

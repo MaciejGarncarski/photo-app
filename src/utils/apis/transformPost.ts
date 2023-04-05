@@ -5,7 +5,7 @@ import { getUserResponse } from '@/src/utils/apis/getUserResponse';
 
 import { PostImage } from '@/src/components/atoms/accountPost/AccountPost';
 
-import { User } from '@/src/pages/api/account/[user]';
+import { User } from '@/src/pages/api/account/userId/[userId]';
 
 import { prisma } from '../../../prisma/prismadb';
 

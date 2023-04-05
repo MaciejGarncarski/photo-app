@@ -7,8 +7,8 @@ type Arguments = {
 
 export const usePostOptions = ({ authorId }: Arguments) => {
   const { session } = useAuth();
-  const { id, role } = useUser({ userId: session?.user?.id ?? '' });
-  const isAbleToModify = authorId === id || role === 'ADMIN';
+  const { data } = useUser({ userId: session?.user?.id ?? '' });
+  const isAbleToModify = authorId === data?.id || data?.role === 'ADMIN';
 
   return { isAbleToModify };
 };

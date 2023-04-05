@@ -22,12 +22,12 @@ import { getNavListData } from '@/src/components/organisms/navButtons/useNavButt
 import styles from './navButtons.module.scss';
 
 export const NavButtons = () => {
-  const { sessionUserData, status, isSignedIn } = useAuth();
+  const { data, isLoading, isSignedIn } = useAuth();
   const router = useRouter();
   const { openModal, closeModal, isModalOpen } = useModal();
-  const { navButtonsList } = getNavListData(sessionUserData.username);
+  const { navButtonsList } = getNavListData(data?.username);
 
-  if (status === 'loading') {
+  if (isLoading) {
     return null;
   }
 
@@ -35,7 +35,7 @@ export const NavButtons = () => {
     <>
       <ul className={styles.list}>
         {navButtonsList.map(({ icon: Icon, href, title, shouldShowWhileGuest }) => {
-          if (!shouldShowWhileGuest && status === 'unauthenticated') {
+          if (!shouldShowWhileGuest && !isSignedIn) {
             return null;
           }
 

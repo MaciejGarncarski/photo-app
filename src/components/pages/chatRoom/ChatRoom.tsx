@@ -33,7 +33,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
   const { userOne_id, userTwo_id } = chatRoomData;
   const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
 
-  const { name, username } = useUser({ userId: friendId });
+  const { data: friendData } = useUser({ userId: friendId });
   const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage } = useChatRoom({
     chatRoomId: chatRoomData.id,
     friendId,
@@ -56,10 +56,10 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
           <IconArrowLeft />
           <span className={styles.goBack}>Go back</span>
         </Button>
-        <Link href={`/${username}`} className={styles.userHeader}>
+        <Link href={`/${friendData?.username}`} className={styles.userHeader}>
           <Avatar userId={friendId} size="small" />
           <Heading tag="h2" size="medium">
-            {name && `${name},`} @{username}
+            {friendData?.name && `${friendData?.name},`} @{friendData?.username}
           </Heading>
         </Link>
       </header>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { useScreenWidth } from '@/src/hooks/useScreenWidth';
+import { useIsMobile } from '@/src/hooks/useIsMobile';
 
 import { navbarVariants } from '@/src/components/organisms/navbar/Navbar.animation';
 import { NavButtons } from '@/src/components/organisms/navButtons/NavButtons';
@@ -8,7 +8,7 @@ import { NavButtons } from '@/src/components/organisms/navButtons/NavButtons';
 import styles from './navbar.module.scss';
 
 export const Navbar = () => {
-  const { isMobile } = useScreenWidth();
+  const { isMobile } = useIsMobile();
 
   if (!isMobile) {
     return null;

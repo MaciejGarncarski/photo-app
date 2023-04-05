@@ -7,8 +7,8 @@ import { getPreviewImages } from '@/src/utils/getPreviewImages';
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 
 import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
+import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/newAvatarStage/useUploadAvatar';
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
-import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/useUploadAvatar';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
 import styles from './stages.module.scss';
@@ -18,7 +18,7 @@ type PropsTypes = {
   stagePersonalInfo: () => void;
 };
 
-export const CropImageStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
+export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
   const { finalImages, resetFinalImages } = useFinalImages();
   const { previewImages } = getPreviewImages(finalImages);
   const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({

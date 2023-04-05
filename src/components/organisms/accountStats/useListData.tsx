@@ -10,24 +10,24 @@ type Titles = 'posts' | 'followers' | 'friends';
 type ListData = Array<{ title: Titles; count: number; onClick: () => void }>;
 
 export const useListData = ({ userId }: PropsTypes) => {
-  const { followersCount, friendsCount, postsCount } = useUser({ userId });
+  const { data } = useUser({ userId });
   const followersModal = useModal();
   const friendsModal = useModal();
 
   const listData: ListData = [
     {
       title: 'posts',
-      count: postsCount || 0,
+      count: data?.postsCount || 0,
       onClick: () => window.scrollBy({ top: 200, behavior: 'smooth' }),
     },
     {
       title: 'followers',
-      count: followersCount || 0,
+      count: data?.followersCount || 0,
       onClick: followersModal.openModal,
     },
     {
       title: 'friends',
-      count: friendsCount || 0,
+      count: data?.friendsCount || 0,
       onClick: friendsModal.openModal,
     },
   ];

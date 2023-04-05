@@ -6,7 +6,7 @@ import { unlock } from '@/src/utils/bodyLock';
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
 
-import { UserApiResponse } from '@/src/pages/api/account/[user]';
+import { UserApiResponse } from '@/src/pages/api/account/userId/[userId]';
 
 import styles from './statsModalItem.module.scss';
 

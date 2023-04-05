@@ -4,7 +4,6 @@ import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdro
 
 describe('Backdrop test', () => {
   it('Should closeModal on escape click', () => {
-    render(<div id="modal"></div>);
     const closeModal = jest.fn();
 
     render(

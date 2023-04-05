@@ -41,6 +41,6 @@ export const ModalBackdrop = ({ closeModal, mobileCenter, children }: PropsTypes
     >
       {children}
     </motion.div>,
-    document.querySelector('#modal') as HTMLDivElement,
+    document.body,
   );
 };

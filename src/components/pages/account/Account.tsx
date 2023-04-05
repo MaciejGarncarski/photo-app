@@ -1,12 +1,11 @@
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/react';
 import { NextSeo } from 'next-seo';
-import { useEffect } from 'react';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
-import { lock } from '@/src/utils/bodyLock';
+import { useIsMobile } from '@/src/hooks/useIsMobile';
+
+import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPosts';
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
@@ -14,6 +13,7 @@ import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 import { PostModal } from '@/src/components/organisms/postModal/PostModal';
 
+import { useAccount } from '@/src/components/pages/account/useAccount';
 import { usePost } from '@/src/components/pages/account/usePost';
 
 import styles from './account.module.scss';
@@ -21,57 +21,38 @@ import styles from './account.module.scss';
 import { AccountHeaderDesktop } from './AccountHeaderDesktop';
 import { AccountHeaderMobile } from './AccountHeaderMobile';
 
-export type AccountID = {
-  id: string;
-};
-
 type PropsTypes = {
-  username: string;
   isModalOpen?: boolean;
   postId?: number;
 };
 
-export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
+export const Account = ({ isModalOpen = false, postId }: PropsTypes) => {
+  const { isMobile } = useIsMobile();
   const router = useRouter();
-  const { signOut, sessionUserData } = useAuth();
-  const userData = useUser({ username });
   const { data, isError } = usePost({ postId: Number(postId) });
+  console.log(data?.author);
+  const username = postId ? data?.author?.username || '' : (router.query.username as string);
 
-  const postModal = useModal(isModalOpen);
-  const settingsModal = useModal();
-  const signOutModal = useModal();
-
-  const { id } = userData;
-
-  const isOwner = sessionUserData.id === id;
-
-  useEffect(() => {
-    if (isModalOpen) {
-      lock();
-    }
-  }, [isModalOpen]);
-
-  const postModalClose = () => {
-    postModal.closeModal();
-    router.push(`/${username}`);
-  };
+  const { isOwner, postModalClose, settingsModal, signOutModal, postModal, userData } = useAccount({
+    username,
+    isModalOpen,
+  });
 
   const accountHeaderProps = {
-    username,
+    userId: userData?.id || '',
     isModalOpen: settingsModal.isModalOpen,
     openModal: settingsModal.openModal,
     isOwner,
   };
 
-  if (isError) {
-    return <p>user error</p>;
+  if (isError || !userData) {
+    return <Loader color="blue" size="normal" />;
   }
 
   return (
     <div className={styles.container}>
-      <NextSeo title={`@${username}`} />
-      <AccountHeaderMobile {...accountHeaderProps} />
-      <AccountHeaderDesktop {...accountHeaderProps} />
+      <NextSeo title={`@${userData?.username}`} />
+      {isMobile ? <AccountHeaderMobile {...accountHeaderProps} /> : <AccountHeaderDesktop {...accountHeaderProps} />}
 
       <ListModal
         isVisible={settingsModal.isModalOpen}
@@ -92,7 +73,7 @@ export const Account = ({ username, isModalOpen, postId }: PropsTypes) => {
         closeModal={signOutModal.closeModal}
       />
       {data && <PostModal isVisible={postModal.isModalOpen} post={data} closeModal={postModalClose} />}
-      <AccountPosts id={id ?? ''} />
+      <AccountPosts userId={userData?.id || ''} />
     </div>
   );
 };

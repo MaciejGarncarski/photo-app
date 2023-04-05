@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { useScreenWidth } from '@/src/hooks/useScreenWidth';
 import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
@@ -17,27 +16,27 @@ import { AccountStats } from '@/src/components/organisms/accountStats/AccountSta
 import styles from './account.module.scss';
 
 type PropsTypes = {
-  username: string;
+  userId: string;
   isOwner: boolean;
   isModalOpen: boolean;
   openModal: () => void;
 };
 
-export const AccountHeaderDesktop = ({ username, isOwner, isModalOpen, openModal }: PropsTypes) => {
-  const { isMobile } = useScreenWidth();
+export const AccountHeaderDesktop = ({ userId, isOwner, isModalOpen, openModal }: PropsTypes) => {
   const { session } = useAuth();
-  const userData = useUser({ username });
-  const { id, bio, name } = userData;
+  const { data, isLoading } = useUser({ userId });
 
-  if (isMobile || !id) {
+  if (isLoading || !data) {
     return null;
   }
+
+  const { bio, name, username } = data;
 
   return (
     <main className={styles.accountDesktop}>
       <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.leftCol}>
-        <Avatar userId={id} size="big" />
-        {!isOwner && session && <FollowButton userId={id ?? ''} />}
+        <Avatar userId={userId} size="big" />
+        {!isOwner && session && <FollowButton userId={userId} />}
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
             <IconSettingsWrapper size="sm" />
@@ -48,7 +47,7 @@ export const AccountHeaderDesktop = ({ username, isOwner, isModalOpen, openModal
       </motion.div>
       <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.rightCol}>
         <motion.h2 className={styles.username}>{username}</motion.h2>
-        <AccountStats userId={id} />
+        <AccountStats userId={userId} />
         {name && <motion.p className={styles.name}>{name}</motion.p>}
         <motion.p className={styles.bio}>{bio || 'No bio yet.'}</motion.p>
       </motion.div>

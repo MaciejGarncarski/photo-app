@@ -38,7 +38,7 @@ export const useUploadAvatar = ({ stagePersonalInfo }: UseUploadAvatarArguments)
       { newAvatarUrl: imageUrl, userId },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries(['account', userId]);
+          await queryClient.invalidateQueries(['user', userId]);
           stagePersonalInfo();
         },
         onSettled: () => {
