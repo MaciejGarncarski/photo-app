@@ -11,7 +11,7 @@ import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/ne
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
-import styles from './stages.module.scss';
+import styles from '../stages.module.scss';
 
 type PropsTypes = {
   stageSelectImage: () => void;
