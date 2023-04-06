@@ -30,7 +30,6 @@ export const Account = ({ isModalOpen = false, postId }: PropsTypes) => {
   const { isMobile } = useIsMobile();
   const router = useRouter();
   const { data, isError } = usePost({ postId: Number(postId) });
-  console.log(data?.author);
   const username = postId ? data?.author?.username || '' : (router.query.username as string);
 
   const { isOwner, postModalClose, settingsModal, signOutModal, postModal, userData } = useAccount({

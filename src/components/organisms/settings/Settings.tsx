@@ -3,11 +3,11 @@ import { signOut } from 'next-auth/react';
 
 import { useAuth } from '@/src/hooks/useAuth';
 import { useModal } from '@/src/hooks/useModal';
-import { useTheme } from '@/src/hooks/useTheme';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
+import { useTheme } from '@/src/components/organisms/settings/useTheme';
 
 type PropsTypes = {
   closeModal: () => void;

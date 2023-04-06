@@ -1,16 +1,12 @@
 import { Router } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { useFinalImages } from '@/src/hooks/useFinalImages';
-
 export const useIsLoading = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { resetFinalImages } = useFinalImages();
 
   useEffect(() => {
     const start = () => {
       setIsLoading(true);
-      resetFinalImages();
     };
     const end = () => {
       setIsLoading(false);
@@ -23,7 +19,7 @@ export const useIsLoading = () => {
       Router.events.off('routeChangeComplete', end);
       Router.events.off('routeChangeError', end);
     };
-  }, [resetFinalImages]);
+  }, []);
 
   return { isLoading };
 };

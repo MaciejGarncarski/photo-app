@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
@@ -14,7 +13,7 @@ export type SignInFormValues = z.infer<typeof SignInSchema>;
 export const useSignIn = () => {
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<SignInFormValues> = async ({ email, password }) => {
+  const signInCredentials = async ({ email, password }: SignInFormValues) => {
     const request = await signIn('credentials', { redirect: false, email, password });
 
     if (request?.error || !request) {
@@ -38,5 +37,5 @@ export const useSignIn = () => {
     });
   };
 
-  return { signInDemo, signInGoogle, onSubmit };
+  return { signInDemo, signInGoogle, signInCredentials };
 };

@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 const themeAtom = atomWithStorage('isDark', false);
 
@@ -13,11 +13,12 @@ export const useTheme = () => {
 
   useEffect(() => {
     document.documentElement.className = isDark ? 'dark' : '';
-
-    return () => {
-      document.documentElement.className = '';
-    };
   }, [isDark]);
 
-  return { isDark, changeTheme };
+  return useMemo(() => {
+    return {
+      isDark,
+      changeTheme,
+    };
+  }, [changeTheme, isDark]);
 };

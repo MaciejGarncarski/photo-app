@@ -1,21 +1,19 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { v4 } from 'uuid';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { useFinalImages } from '@/src/hooks/useFinalImages';
 
-import { PostDetails } from './types';
+import { FinalImages, PostDetails } from './types';
 import { useSendNewPost } from './useSendNewPost';
 import { useUploadImage } from './useUploadImage';
 
-type PropsTypes = {
-  setIsLoading: (isLoading: boolean) => void;
-};
+type Arguments = { finalImages: FinalImages };
 
-export const useOnSubmit = ({ setIsLoading }: PropsTypes) => {
-  const { finalImages } = useFinalImages();
+export const useOnSubmit = ({ finalImages }: Arguments) => {
+  const [isUploadingPost, setIsUploadingPost] = useState(false);
   const router = useRouter();
   const { session } = useAuth();
   const uploadImage = useUploadImage();
@@ -29,7 +27,7 @@ export const useOnSubmit = ({ setIsLoading }: PropsTypes) => {
     const uuid = v4();
     const folder = `${session?.user?.id}/posts/${uuid}`;
 
-    setIsLoading(true);
+    setIsUploadingPost(true);
 
     const images = await Promise.all(
       finalImages.map(async (image) => {
@@ -58,5 +56,5 @@ export const useOnSubmit = ({ setIsLoading }: PropsTypes) => {
       },
     );
   };
-  return { onSubmit };
+  return { onSubmit, isUploadingPost };
 };

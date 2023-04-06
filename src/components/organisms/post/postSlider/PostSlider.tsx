@@ -36,7 +36,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
 
   return (
     <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
-      <AnimatePresence>{isLikeAnimationShown && <HeartAnimation />}</AnimatePresence>
+      <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
         className={styles.imagesContainer}
         drag={isSingleImage ? undefined : 'x'}

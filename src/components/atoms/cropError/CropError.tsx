@@ -1,11 +1,11 @@
 import { errorMessages } from '@/src/components/atoms/cropError/cropError.data';
 
-import { ImageCropErrors } from '@/src/components/organisms/cropImage/useCropState';
+import { DropZoneErrors } from '@/src/components/pages/createPost/types';
 
 import styles from './cropError.module.scss';
 
 type PropsTypes = {
-  errorType: ImageCropErrors;
+  errorType: DropZoneErrors;
 };
 
 export const CropError = ({ errorType }: PropsTypes) => {

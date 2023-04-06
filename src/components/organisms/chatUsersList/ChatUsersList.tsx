@@ -73,7 +73,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
         })}
         {(hasNextPage || isLoading) && (
           <div ref={infiniteRef}>
-            <Loader color="blue" size="normal" />;
+            <Loader color="blue" size="normal" />
           </div>
         )}
       </motion.ul>

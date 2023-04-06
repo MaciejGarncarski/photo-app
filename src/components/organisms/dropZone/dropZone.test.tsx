@@ -10,13 +10,13 @@ const activeText = /drop here/i;
 
 describe('DropZone test', () => {
   it('renders correctly', () => {
-    render(<DropZone error={null} onChange={jest.fn()} setError={jest.fn()} setImgSrc={jest.fn()} />);
+    render(<DropZone setImgSrc={jest.fn()} />);
     expect(screen.getByText(inactiveText)).toBeInTheDocument();
   });
 
   describe('user interaction', () => {
     it('changes text when drag over', () => {
-      render(<DropZone error={null} onChange={jest.fn()} setError={jest.fn()} setImgSrc={jest.fn()} />);
+      render(<DropZone setImgSrc={jest.fn()} />);
       const dropZone = screen.getByTestId(/dropZoneContainer/i);
 
       fireEvent.dragOver(dropZone);
@@ -24,14 +24,14 @@ describe('DropZone test', () => {
       expect(dropZone).toHaveTextContent(activeText);
     });
     it('changes text when inactive', () => {
-      render(<DropZone error={null} onChange={jest.fn()} setError={jest.fn()} setImgSrc={jest.fn()} />);
+      render(<DropZone setImgSrc={jest.fn()} />);
       const dropZone = screen.getByTestId(/dropZoneContainer/i);
       fireEvent.dragLeave(dropZone);
       expect(dropZone).toHaveTextContent(inactiveText);
     });
     describe('file drop', () => {
       it('should show error if user somehow dropped no files', () => {
-        render(<CropImage />);
+        render(<CropImage finalImages={[]} setFinalImages={jest.fn()} />);
         const dropZone = screen.getByTestId(/dropZoneContainer/i);
 
         fireEvent.drop(dropZone, {
@@ -45,7 +45,7 @@ describe('DropZone test', () => {
       });
 
       it('should show error if user dropped more than 1 file', () => {
-        render(<CropImage />);
+        render(<CropImage finalImages={[]} setFinalImages={jest.fn()} />);
         const dropZone = screen.getByTestId(/dropZoneContainer/i);
         const file = new File(['filefile'], 'file1.png');
 

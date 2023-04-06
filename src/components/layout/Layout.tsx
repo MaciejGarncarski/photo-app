@@ -12,7 +12,7 @@ export const Layout = ({ children }: PropsTypes) => {
   return (
     <div className={styles.layout}>
       <Header />
-      <div>{children}</div>
+      <main>{children}</main>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { useOtherUsers } from '@/src/hooks/useOtherUsers';
 
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { NewPostNotification } from '@/src/components/atoms/newPostNotification/NewPostNotification';
@@ -18,6 +17,7 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 import { HomePost } from '@/src/components/organisms/homePost/HomePost';
 
 import { useInfinitePosts } from '@/src/components/pages/home/useInfinitePosts';
+import { useOtherUsers } from '@/src/components/pages/home/useOtherUsers';
 
 import styles from './home.module.scss';
 

@@ -1,84 +1,70 @@
-/* eslint-disable @next/next/no-img-element */
-import { IconHandFinger, IconMouse } from '@tabler/icons-react';
+import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
-import { useIsCropping } from '@/src/hooks/useIsCropping';
-import { useIsMobile } from '@/src/hooks/useIsMobile';
+import { useModal } from '@/src/hooks/useModal';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 
 import { AspectRatioButtons } from '@/src/components/molecules/aspectRatioButtons/AspectRatioButtons';
+import { Loader } from '@/src/components/molecules/loader/Loader';
 
-import { useConfirmation } from '@/src/components/organisms/cropImage/useConfirmation';
 import { useCropImage } from '@/src/components/organisms/cropImage/useCropImage';
+import { useSaveCrop } from '@/src/components/organisms/cropImage/useSaveCrop';
 import { DropZone } from '@/src/components/organisms/dropZone/DropZone';
-import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
+
+import { FinalImages } from '@/src/components/pages/createPost/types';
 
 import styles from './cropImage.module.scss';
 
-export const CropImage = () => {
-  const { isMobile } = useIsMobile();
-  const { isCropping } = useIsCropping();
-  const {
-    aspectRatio,
-    setAspectRatio,
-    saveCrop,
-    zoom,
-    setZoom,
-    isIdle,
-    error,
-    setError,
-    imgSrc,
-    setImgSrc,
-    setCropArea,
-    cropArea,
-    onChange,
-    onCropComplete,
-    resetState,
-  } = useCropImage();
+type Props = {
+  setFinalImages: (final: FinalImages) => void;
+  finalImages: FinalImages;
+};
 
-  const { DiffrentImageConfirmation, openModal } = useConfirmation({ resetState });
+export const CropImage = ({ setFinalImages, finalImages }: Props) => {
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const { aspect, setAspect, setZoom, zoom, crop, setCrop, cropAreaPixels, onCropComplete } = useCropImage();
+  const { openModal } = useModal();
+  const resetImgSrc = () => setImgSrc(null);
+  const { isCropping, saveCrop } = useSaveCrop({ cropAreaPixels, finalImages, imgSrc, resetImgSrc, setFinalImages });
 
-  if (!imgSrc || error) {
-    return <DropZone onChange={onChange} error={error} setImgSrc={setImgSrc} setError={setError} />;
+  if (isCropping) {
+    return <Loader size="normal" color="blue" />;
   }
 
-  if (isIdle) {
-    return <TextWithLoader text="Your image is being cropped, be patient." />;
+  if (!imgSrc) {
+    return <DropZone setImgSrc={setImgSrc} />;
   }
 
   return (
-    <CreatePostItemContainer>
-      <Heading tag="h2" size="medium">
+    <section>
+      <Heading size="medium" tag="h2">
         Crop your image
       </Heading>
+
       <div className={styles.cropContainer}>
         <Cropper
           image={imgSrc}
-          aspect={aspectRatio}
           zoom={zoom}
+          aspect={aspect}
+          crop={crop}
           onZoomChange={setZoom}
-          crop={cropArea}
-          onCropChange={setCropArea}
+          onCropChange={setCrop}
           onCropComplete={onCropComplete}
         />
       </div>
-      <p className={styles.info}>
-        {isMobile ? <IconHandFinger /> : <IconMouse />}
-        <span>{isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture</span>
-      </p>
-      {isCropping && <AspectRatioButtons aspect={aspectRatio} setAspect={setAspectRatio} />}
+
+      <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
+
       <div className={styles.buttons}>
-        <Button type="button" onClick={openModal} variant="secondary">
+        <Button type="button" variant="secondary" onClick={openModal}>
           Select diffrent image
         </Button>
-        <Button type="button" onClick={saveCrop} variant="primary">
+        <Button type="button" variant="primary" onClick={saveCrop}>
           Save crop
         </Button>
       </div>
-      <DiffrentImageConfirmation />
-    </CreatePostItemContainer>
+    </section>
   );
 };

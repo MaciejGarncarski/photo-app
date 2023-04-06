@@ -12,7 +12,7 @@ import { animation } from '@/src/components/pages/signIn/signIn.animation';
 import styles from './signInForm.module.scss';
 
 export const SignInForm = () => {
-  const { onSubmit } = useSignIn();
+  const { signInCredentials } = useSignIn();
 
   const {
     handleSubmit,
@@ -28,7 +28,7 @@ export const SignInForm = () => {
   });
 
   return (
-    <motion.form {...animation} className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <motion.form {...animation} className={styles.form} onSubmit={handleSubmit(signInCredentials)}>
       <Input labelText="email" type="email" error={errors.email?.message} {...register('email')} />
       <Input labelText="password" type="password" error={errors.password?.message} {...register('password')} />
       <div className={styles.continueButton}>

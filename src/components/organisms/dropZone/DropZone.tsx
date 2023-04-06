@@ -1,6 +1,5 @@
 import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
-import { ChangeEvent } from 'react';
 
 import { useIsMobile } from '@/src/hooks/useIsMobile';
 
@@ -8,24 +7,31 @@ import { CropError } from '@/src/components/atoms/cropError/CropError';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
-import { ImageCropErrors } from '@/src/components/organisms/cropImage/useCropState';
+import { Loader } from '@/src/components/molecules/loader/Loader';
+
+import { useDropError } from '@/src/components/organisms/dropZone/useDropError';
 import { useDropZone } from '@/src/components/organisms/dropZone/useDropZone';
 
 import styles from './dropZone.module.scss';
 
 type PropsTypes = {
-  onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
   setImgSrc: (src: string | null) => void;
-  error: ImageCropErrors;
-  setError: (error: ImageCropErrors) => void;
 };
 
-export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) => {
-  const { active, onDrop, inactive, inputRef, isActive } = useDropZone({ setError, setImgSrc });
+export const DropZone = ({ setImgSrc }: PropsTypes) => {
+  const { error, changeError } = useDropError();
   const { isMobile } = useIsMobile();
+  const { active, onDrop, inactive, inputRef, isActive, onChange, isUploadingImage } = useDropZone({
+    changeError,
+    setImgSrc,
+  });
+
+  if (isUploadingImage) {
+    return <Loader color="blue" size="normal" />;
+  }
 
   return (
-    <>
+    <div>
       <Heading tag="h2" size="medium">
         Upload image
       </Heading>
@@ -73,6 +79,6 @@ export const DropZone = ({ onChange, setImgSrc, setError, error }: PropsTypes) =
           Select from {isMobile ? 'device' : 'computer'}
         </label>
       </div>
-    </>
+    </div>
   );
 };

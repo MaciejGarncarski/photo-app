@@ -11,6 +11,6 @@ export const containerVariants: Variants = {
 };
 
 export const itemVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.3, rotate: -4 },
-  show: { opacity: 1, scale: 1, rotate: 0 },
+  hidden: { opacity: 0, scale: 0.6 },
+  show: { opacity: 1, scale: 1 },
 };

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useState } from 'react';
 
-import { useFinalImages } from '@/src/hooks/useFinalImages';
 import { getPreviewImages } from '@/src/utils/getPreviewImages';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
@@ -11,6 +11,8 @@ import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/ne
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
+import { FinalImages } from '@/src/components/pages/createPost/types';
+
 import styles from '../stages.module.scss';
 
 type PropsTypes = {
@@ -19,11 +21,14 @@ type PropsTypes = {
 };
 
 export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
-  const { finalImages, resetFinalImages } = useFinalImages();
-  const { previewImages } = getPreviewImages(finalImages);
+  const [finalImages, setFinalImages] = useState<FinalImages>([]);
+  const resetFinalImages = () => setFinalImages([]);
   const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({
     stagePersonalInfo,
+    finalImages,
+    resetFinalImages,
   });
+  const { previewImages } = getPreviewImages(finalImages);
 
   if (editAccountLoading || uploadImageLoading) {
     return <TextWithLoader text="Uploading new avatar.." />;
@@ -40,21 +45,12 @@ export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTyp
       initial="initial"
       className={styles.stageContainer}
     >
-      {isNewAvatarReady ? (
+      {!isNewAvatarReady && <CropImage finalImages={finalImages} setFinalImages={setFinalImages} />}
+      {isNewAvatarReady && (
         <figure className={styles.preview}>
           <figcaption className={styles.previewFigcaption}>new avatar preview</figcaption>
-          {isNewAvatarReady && (
-            <Image
-              alt="avatar preview"
-              src={previewImage?.src}
-              width={300}
-              height={300}
-              className={styles.previewImg}
-            />
-          )}
+          <Image alt="avatar preview" src={previewImage?.src} width={300} height={300} className={styles.previewImg} />
         </figure>
-      ) : (
-        <CropImage />
       )}
       <div className={styles.buttons}>
         {isNewAvatarReady && (

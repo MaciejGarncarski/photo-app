@@ -15,10 +15,14 @@ const MAX_IMAGES_LENGTH = 3;
 
 type PropsTypes = {
   onRemove: (id: number) => void;
-  previewImages: PreviewImages;
+  previewImages?: PreviewImages;
 };
 
 export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
+  if (!previewImages) {
+    return null;
+  }
+
   const emptyImagesLength = MAX_IMAGES_LENGTH - previewImages.length;
   const arrayOfEmptyImages = Array.from({ length: emptyImagesLength }, (_, el) => el);
 

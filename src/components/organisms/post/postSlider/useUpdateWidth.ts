@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { debounce } from 'throttle-debounce';
+
+import { useDebounce } from '@/src/hooks/useDebounce';
 
 export const useUpdateWidth = () => {
   const imageRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
+  const debouncedWidth = useDebounce(width, 200);
 
   useLayoutEffect(() => {
     if (!imageRef.current) {
@@ -12,30 +14,24 @@ export const useUpdateWidth = () => {
     setWidth(imageRef.current.clientWidth);
   }, []);
 
-  const debouncedResize = useMemo(
-    () =>
-      debounce(500, () => {
-        if (!imageRef.current) {
-          return;
-        }
-        setWidth(imageRef.current.clientWidth);
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
-
   useEffect(() => {
-    window.addEventListener('resize', debouncedResize);
+    const handleResize = () => {
+      if (!imageRef.current) {
+        return;
+      }
+      setWidth(imageRef.current.clientWidth);
+    };
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', debouncedResize);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [debouncedResize]);
+  }, []);
 
   return useMemo(() => {
     return {
-      width,
+      width: debouncedWidth,
       imageRef,
     };
-  }, [width]);
+  }, [debouncedWidth]);
 };

@@ -1,52 +1,24 @@
-import { useState } from 'react';
-
-import { useFinalImages } from '@/src/hooks/useFinalImages';
-import { convertToBlob } from '@/src/utils/convertToBlob';
-
-import { useCrop } from '@/src/components/organisms/cropImage/useCrop';
-import { useCropState } from '@/src/components/organisms/cropImage/useCropState';
+import { useCallback, useState } from 'react';
+import { Area } from 'react-easy-crop';
 
 export const useCropImage = () => {
-  const [isIdle, setIsIdle] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState(1);
+  const [aspect, setAspect] = useState(1);
   const [zoom, setZoom] = useState(1);
-  const { finalImages, setFinalImages } = useFinalImages();
-  const { croppedAreaPixels, onCropComplete } = useCrop();
-  const { error, imgSrc, resetState, onChange, setCropArea, setError, setImgSrc, cropArea } = useCropState();
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [cropAreaPixels, setCropAreaPixels] = useState<Area>({ x: 0, y: 0, height: 0, width: 0 });
 
-  const saveCrop = async () => {
-    setIsIdle(true);
-    if (croppedAreaPixels && imgSrc) {
-      const blob = await convertToBlob(imgSrc, croppedAreaPixels);
-      const imageId = Math.random();
-
-      setFinalImages([
-        ...finalImages,
-        {
-          file: blob,
-          id: imageId,
-        },
-      ]);
-      setIsIdle(false);
-      resetState();
-    }
-  };
+  const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
+    setCropAreaPixels(croppedAreaPixels);
+  }, []);
 
   return {
-    saveCrop,
-    resetState,
-    onCropComplete,
+    aspect,
+    setAspect,
     zoom,
-    error,
-    setError,
-    isIdle,
     setZoom,
-    onChange,
-    cropArea,
-    setCropArea,
-    imgSrc,
-    setImgSrc,
-    aspectRatio,
-    setAspectRatio,
+    crop,
+    setCrop,
+    cropAreaPixels,
+    onCropComplete,
   };
 };

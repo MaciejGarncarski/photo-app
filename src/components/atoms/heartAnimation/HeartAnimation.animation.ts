@@ -12,5 +12,6 @@ export const heartVariants: Variants = {
   },
   exit: {
     scale: 0,
+    opacity: 0,
   },
 };

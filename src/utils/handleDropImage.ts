@@ -1,29 +1,28 @@
-import { ImageCropErrors } from '@/src/components/organisms/cropImage/useCropState';
+import { ChangeError } from '@/src/components/organisms/dropZone/useDropError';
 
 export const IMAGE_MIN_SIZE = 150;
-export const IMAGE_MAX_FILE_SIZE = 12_500_000;
+export const IMAGE_MAX_FILE_SIZE = 5_500_000;
 const SUPPORTED_FILE_TYPES = ['jpeg', 'jpg', 'png', 'webp'];
 
 type HandleDropImage = {
   file: File;
-  setError: (err: ImageCropErrors) => void;
+  changeError: ChangeError;
   setImgSrc: (err: string | null) => void;
 };
 
-export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
+export const handleDropImage = ({ file, changeError, setImgSrc }: HandleDropImage) => {
   const reader = new FileReader();
+  const { resetError, errorInvalidType, errorFileSize, errorDimensions } = changeError;
 
-  setError(null);
+  resetError();
   const fileType = file.type.split('/');
 
   if (file.size > IMAGE_MAX_FILE_SIZE) {
-    setError('FILE_SIZE');
-    return;
+    return errorFileSize();
   }
 
   if (!SUPPORTED_FILE_TYPES.includes(fileType[1])) {
-    setError('INVALID_TYPE');
-    return;
+    return errorInvalidType();
   }
 
   reader.addEventListener('load', async () => {
@@ -33,15 +32,15 @@ export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) 
       image.onload = () => {
         const { height, width } = image;
         if (width < IMAGE_MIN_SIZE || height < IMAGE_MIN_SIZE) {
-          setError('DIMENSIONS');
           setImgSrc(null);
+          errorDimensions();
           reject();
         }
       };
       resolve();
     });
     image.src = URL.createObjectURL(file);
-    setError(null);
+    resetError();
     setImgSrc(reader.result?.toString() || null);
   });
 
