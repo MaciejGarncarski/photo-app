@@ -10,8 +10,8 @@ export const useDeleteAvatar = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ userId }: DeleteAvatarData) => {
-      return await apiClient.delete(`account/deleteAvatar?userId=${userId}`);
+    ({ userId }: DeleteAvatarData) => {
+      return apiClient.delete(`account/deleteAvatar?userId=${userId}`);
     },
     {
       onSuccess: () => {

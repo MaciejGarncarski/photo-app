@@ -50,7 +50,7 @@ const uploadImage = async ({ imageBlob, folder, isPost }: UploadImages) => {
 };
 
 export const useUploadImage = () => {
-  return useMutation(async ({ folder, imageBlob, isPost }: UploadImages) => {
-    return await uploadImage({ imageBlob, folder, isPost });
+  return useMutation(({ folder, imageBlob, isPost }: UploadImages) => {
+    return uploadImage({ imageBlob, folder, isPost });
   });
 };

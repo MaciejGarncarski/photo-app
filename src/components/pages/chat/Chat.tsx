@@ -5,6 +5,7 @@ import { SearchUserForm } from '@/src/components/molecules/searchUserForm/Search
 import { ChatUsersList } from '@/src/components/organisms/chatUsersList/ChatUsersList';
 
 import { useChatUsers } from '@/src/components/pages/chat/useChatUsers';
+import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
 import styles from './chat.module.scss';
 
@@ -12,14 +13,16 @@ export const Chat = () => {
   const { chatUsers, isEnabled, onChange, onSubmit, resetState, inputValue } = useChatUsers();
 
   return (
-    <section className={styles.container}>
-      <div className={styles.heading}>
-        <Heading tag="h2" size="big">
-          Select other user.
-        </Heading>
-      </div>
-      <SearchUserForm resetState={resetState} onChange={onChange} onSubmit={onSubmit} inputValue={inputValue} />
-      <ChatUsersList chatUsers={chatUsers} isEnabled={isEnabled} />
-    </section>
+    <ProtectedPage shouldBeSignedIn>
+      <section className={styles.container}>
+        <div className={styles.heading}>
+          <Heading tag="h2" size="big">
+            Select other user.
+          </Heading>
+        </div>
+        <SearchUserForm resetState={resetState} onChange={onChange} onSubmit={onSubmit} inputValue={inputValue} />
+        <ChatUsersList chatUsers={chatUsers} isEnabled={isEnabled} />
+      </section>
+    </ProtectedPage>
   );
 };

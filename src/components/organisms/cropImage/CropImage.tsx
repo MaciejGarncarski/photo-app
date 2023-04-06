@@ -1,6 +1,8 @@
+import { IconHandFinger, IconMouse } from '@tabler/icons-react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
+import { useIsMobile } from '@/src/hooks/useIsMobile';
 import { useModal } from '@/src/hooks/useModal';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
@@ -24,10 +26,11 @@ type Props = {
 
 export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const { aspect, setAspect, setZoom, zoom, crop, setCrop, cropAreaPixels, onCropComplete } = useCropImage();
   const { openModal } = useModal();
+  const { aspect, setAspect, setZoom, zoom, crop, setCrop, cropAreaPixels, onCropComplete } = useCropImage();
   const resetImgSrc = () => setImgSrc(null);
   const { isCropping, saveCrop } = useSaveCrop({ cropAreaPixels, finalImages, imgSrc, resetImgSrc, setFinalImages });
+  const { isMobile } = useIsMobile();
 
   if (isCropping) {
     return <Loader size="normal" color="blue" />;
@@ -54,7 +57,10 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           onCropComplete={onCropComplete}
         />
       </div>
-
+      <p className={styles.info}>
+        {isMobile ? <IconHandFinger /> : <IconMouse />}
+        <span>{isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture</span>
+      </p>
       <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
 
       <div className={styles.buttons}>

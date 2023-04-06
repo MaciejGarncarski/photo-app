@@ -67,8 +67,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const nextCursor = canLoadMore ? skipNumber + 1 : null;
 
     const postWithData = await Promise.all(
-      posts.map(async (post) => {
-        return await transformPost(post, session);
+      posts.map((post) => {
+        return transformPost(post, session);
       }),
     );
 

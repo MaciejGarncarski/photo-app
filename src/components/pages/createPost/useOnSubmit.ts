@@ -36,7 +36,7 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
         }
 
         try {
-          return await uploadImage.mutateAsync({ imageBlob: image.file, folder, isPost: true });
+          return uploadImage.mutateAsync({ imageBlob: image.file, folder, isPost: true });
         } catch (error) {
           toast.error('Could not add post.');
         }

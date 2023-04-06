@@ -10,8 +10,8 @@ export type MutationValues = {
   imageUrls: Array<number>;
 };
 
-const uplaodPost = async ({ description, imageUrls, authorId }: CreatePostData) => {
-  return await apiClient.post<unknown, null, CreatePostData>('post', {
+const uplaodPost = ({ description, imageUrls, authorId }: CreatePostData) => {
+  return apiClient.post<unknown, null, CreatePostData>('post', {
     description,
     imageUrls,
     authorId,
@@ -27,7 +27,7 @@ export const useSendNewPost = () => {
         return;
       }
 
-      return await uplaodPost({ authorId: session.user.id, description, imageUrls });
+      return uplaodPost({ authorId: session.user.id, description, imageUrls });
     },
     {
       onSuccess: () => {

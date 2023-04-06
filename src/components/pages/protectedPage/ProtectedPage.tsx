@@ -1,0 +1,32 @@
+import { useRouter } from 'next/router';
+import { ReactElement } from 'react';
+
+import { useAuth } from '@/src/hooks/useAuth';
+
+import { Loader } from '@/src/components/molecules/loader/Loader';
+
+type Props = {
+  children: ReactElement;
+  shouldBeSignedIn: boolean;
+};
+
+export const ProtectedPage = ({ children, shouldBeSignedIn = true }: Props) => {
+  const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <Loader color="blue" size="normal" />;
+  }
+
+  if (isAuthenticated && !shouldBeSignedIn) {
+    router.push('/access-denied');
+    return null;
+  }
+
+  if (!isAuthenticated && shouldBeSignedIn) {
+    router.push('/access-denied');
+    return null;
+  }
+
+  return children;
+};

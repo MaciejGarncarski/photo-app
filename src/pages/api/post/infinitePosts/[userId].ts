@@ -66,8 +66,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { postsCount, nextCursor } = getInfinitePostsCount({ count: _count.id, skipNumber });
 
     const transformedPosts = await Promise.all(
-      posts.map(async (post) => {
-        return await transformPost(post);
+      posts.map((post) => {
+        return transformPost(post);
       }),
     );
 

@@ -15,6 +15,7 @@ import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
 import { useFinalImages } from '@/src/components/pages/createPost/useFinalImages';
+import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
 import styles from './createPost.module.scss';
 
@@ -49,27 +50,29 @@ export const CreatePost = () => {
   }
 
   return (
-    <div className={styles.createPost}>
-      <NextSeo title="Create new post" />
-      {finalImages.length <= 3 && (
-        <div className={styles.addPhoto}>
-          <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
-        </div>
-      )}
-      <ImagesPreview previewImages={previewImages} onRemove={onRemove} />
-      <CreatePostForm
-        disabled={isSubmitDisabled}
-        errors={errors}
-        onSubmit={handleSubmit(onSubmit)}
-        openModal={openModal}
-        register={register}
-      />
-      <ConfirmationAlert
-        isVisible={isModalOpen}
-        headingText="Cancel?"
-        closeModal={closeModal}
-        onConfirm={() => router.push('/')}
-      />
-    </div>
+    <ProtectedPage shouldBeSignedIn>
+      <div className={styles.createPost}>
+        <NextSeo title="Create new post" />
+        {finalImages.length <= 3 && (
+          <div className={styles.addPhoto}>
+            <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
+          </div>
+        )}
+        <ImagesPreview previewImages={previewImages} onRemove={onRemove} />
+        <CreatePostForm
+          disabled={isSubmitDisabled}
+          errors={errors}
+          onSubmit={handleSubmit(onSubmit)}
+          openModal={openModal}
+          register={register}
+        />
+        <ConfirmationAlert
+          isVisible={isModalOpen}
+          headingText="Cancel?"
+          closeModal={closeModal}
+          onConfirm={() => router.push('/')}
+        />
+      </div>
+    </ProtectedPage>
   );
 };

@@ -8,8 +8,8 @@ export const useEditAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ userId, username, fullName, newAvatarUrl, bio }: EditAccountData) => {
-      return await apiClient.post<unknown, unknown, EditAccountData>('/account/edit', {
+    ({ userId, username, fullName, newAvatarUrl, bio }: EditAccountData) => {
+      return apiClient.post<unknown, unknown, EditAccountData>('/account/edit', {
         userId,
         newAvatarUrl,
         bio,

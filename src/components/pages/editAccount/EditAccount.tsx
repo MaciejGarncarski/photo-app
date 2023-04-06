@@ -3,13 +3,13 @@ import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
+import { useAuth } from '@/src/hooks/useAuth';
+
 import { SelectOptionStage } from '@/src/components/organisms/editAccountStages/optionsStage/SelectOptionStage';
 
-import styles from './editAccount.module.scss';
+import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
-type PropsTypes = {
-  userId: string;
-};
+import styles from './editAccount.module.scss';
 
 const NewAvatarStageLazy = dynamic(
   async () => {
@@ -31,37 +31,42 @@ const LazyDetailsStage = dynamic(
 
 export type Stages = 'selectImage' | 'cropImage' | 'personalInfo';
 
-export const EditAccount = ({ userId }: PropsTypes) => {
+export const EditAccount = () => {
   const [stage, setStage] = useState<Stages>('selectImage');
+  const { session } = useAuth();
 
   const stageSelectImage = () => setStage('selectImage');
   const stageCropImage = () => setStage('cropImage');
   const stagePersonalInfo = () => setStage('personalInfo');
 
-  return (
-    <main id="main" className={styles.container}>
-      <NextSeo title="Edit account" />
-      <AnimatePresence mode="wait">
-        {stage === 'selectImage' && (
-          <SelectOptionStage
-            key="selectOptionStage"
-            stageCropImage={stageCropImage}
-            stagePersonalInfo={stagePersonalInfo}
-            stageSelectImage={stageSelectImage}
-          />
-        )}
-        {stage === 'cropImage' && (
-          <NewAvatarStageLazy
-            key="cropImageStage"
-            stagePersonalInfo={stagePersonalInfo}
-            stageSelectImage={stageSelectImage}
-          />
-        )}
+  const userId = session?.user?.id || '';
 
-        {stage === 'personalInfo' && (
-          <LazyDetailsStage key="detailsStage" stageSelectImage={stageSelectImage} userId={userId} />
-        )}
-      </AnimatePresence>
-    </main>
+  return (
+    <ProtectedPage shouldBeSignedIn>
+      <main id="main" className={styles.container}>
+        <NextSeo title="Edit account" />
+        <AnimatePresence mode="wait">
+          {stage === 'selectImage' && (
+            <SelectOptionStage
+              key="selectOptionStage"
+              stageCropImage={stageCropImage}
+              stagePersonalInfo={stagePersonalInfo}
+              stageSelectImage={stageSelectImage}
+            />
+          )}
+          {stage === 'cropImage' && (
+            <NewAvatarStageLazy
+              key="cropImageStage"
+              stagePersonalInfo={stagePersonalInfo}
+              stageSelectImage={stageSelectImage}
+            />
+          )}
+
+          {stage === 'personalInfo' && (
+            <LazyDetailsStage key="detailsStage" stageSelectImage={stageSelectImage} userId={userId} />
+          )}
+        </AnimatePresence>
+      </main>
+    </ProtectedPage>
   );
 };
