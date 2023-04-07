@@ -42,7 +42,7 @@ export const Home = () => {
         {data?.pages.map((page) => {
           return page?.posts.map((post, idx) => {
             if (!post) {
-              return <Loader color="blue" size="normal" key={idx} />;
+              return <PostPlaceholder key={idx} />;
             }
 
             return <HomePost priority={idx < 3} key={post.postId} post={post} />;

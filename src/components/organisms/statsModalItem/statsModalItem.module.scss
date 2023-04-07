@@ -12,7 +12,7 @@
 .itemLink {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.4rem 1rem;
   gap: 1rem;
   flex-grow: 1;
   border-radius: var(--radius-medium);
@@ -31,6 +31,6 @@
   text-overflow: ellipsis;
 
   @include common.mediaquery('desktop') {
-    max-width: 12rem;
+    max-width: 13rem;
   }
 }

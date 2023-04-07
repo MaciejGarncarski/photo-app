@@ -11,30 +11,25 @@ import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPos
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
-import { PostModal } from '@/src/components/organisms/postModal/PostModal';
 
 import { useAccount } from '@/src/components/pages/account/useAccount';
-import { usePost } from '@/src/components/pages/account/usePost';
 
 import styles from './account.module.scss';
 
 import { AccountHeaderDesktop } from './AccountHeaderDesktop';
 import { AccountHeaderMobile } from './AccountHeaderMobile';
 
-type PropsTypes = {
-  isModalOpen?: boolean;
-  postId?: number;
+type Props = {
+  username?: string;
 };
 
-export const Account = ({ isModalOpen = false, postId }: PropsTypes) => {
+export const Account = ({ username: usernameFromProps }: Props) => {
   const { isMobile } = useIsMobile();
   const router = useRouter();
-  const { data, isError } = usePost({ postId: Number(postId) });
-  const username = postId ? data?.author?.username || '' : (router.query.username as string);
+  const username = usernameFromProps || (router.query.username as string);
 
-  const { isOwner, postModalClose, settingsModal, signOutModal, postModal, userData } = useAccount({
+  const { isOwner, settingsModal, signOutModal, userData } = useAccount({
     username,
-    isModalOpen,
   });
 
   const accountHeaderProps = {
@@ -44,7 +39,7 @@ export const Account = ({ isModalOpen = false, postId }: PropsTypes) => {
     isOwner,
   };
 
-  if (isError || !userData) {
+  if (!userData) {
     return <Loader color="blue" size="normal" />;
   }
 
@@ -52,7 +47,6 @@ export const Account = ({ isModalOpen = false, postId }: PropsTypes) => {
     <div className={styles.container}>
       <NextSeo title={`@${userData?.username}`} />
       {isMobile ? <AccountHeaderMobile {...accountHeaderProps} /> : <AccountHeaderDesktop {...accountHeaderProps} />}
-
       <ListModal
         isVisible={settingsModal.isModalOpen}
         closeModal={settingsModal.closeModal}
@@ -71,7 +65,6 @@ export const Account = ({ isModalOpen = false, postId }: PropsTypes) => {
         onConfirm={signOut}
         closeModal={signOutModal.closeModal}
       />
-      {data && <PostModal isVisible={postModal.isModalOpen} post={data} closeModal={postModalClose} />}
       <AccountPosts userId={userData?.id || ''} />
     </div>
   );

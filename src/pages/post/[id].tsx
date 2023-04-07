@@ -1,12 +1,7 @@
-import { useRouter } from 'next/router';
-
-import { Account } from '@/src/components/pages/account/Account';
+import { PostById } from '@/src/components/pages/postById/PostById';
 
 const PostPage = () => {
-  const router = useRouter();
-  const queryId = parseInt(router.query.id as string);
-
-  return <Account isModalOpen postId={queryId} />;
+  return <PostById />;
 };
 
 export default PostPage;

@@ -41,7 +41,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   }
 
   return (
-    <section>
+    <section className={styles.addPhoto}>
       <Heading size="medium" tag="h2">
         Crop your image
       </Heading>

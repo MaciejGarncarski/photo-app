@@ -1,7 +1,7 @@
 import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
-import { ReactElement, useMemo } from 'react';
+import { ReactElement } from 'react';
 
-import { useSignIn } from '@/src/hooks/useSignIn';
+import { signInDemo, signInGoogle } from '@/src/utils/signIn';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 
@@ -10,23 +10,18 @@ import styles from './otherSignInOptions.module.scss';
 type ButtonsData = Array<{ onClick: () => void; text: string; icon: ReactElement }>;
 
 export const OtherSignInOptions = () => {
-  const { signInDemo, signInGoogle } = useSignIn();
-
-  const buttonsData: ButtonsData = useMemo(
-    () => [
-      {
-        onClick: signInDemo,
-        text: 'Demo account',
-        icon: <IconTestPipe />,
-      },
-      {
-        onClick: signInGoogle,
-        text: 'Google',
-        icon: <IconBrandGoogle />,
-      },
-    ],
-    [signInDemo, signInGoogle],
-  );
+  const buttonsData: ButtonsData = [
+    {
+      onClick: signInDemo,
+      text: 'Demo account',
+      icon: <IconTestPipe />,
+    },
+    {
+      onClick: signInGoogle,
+      text: 'Google',
+      icon: <IconBrandGoogle />,
+    },
+  ];
 
   return (
     <div className={styles.otherOptions}>

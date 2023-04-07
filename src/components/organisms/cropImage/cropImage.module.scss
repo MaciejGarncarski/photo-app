@@ -20,7 +20,7 @@
 .info {
   text-align: left;
   font-size: 1.25rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@
 .buttons {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 2rem;
   gap: 1rem;
 
   @include common.mediaquery('desktop') {

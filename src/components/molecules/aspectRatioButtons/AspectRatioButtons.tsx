@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { CreatePostItemContainer } from '@/src/components/atoms/createPostItemContainer/CreatePostItemContainer';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 
 import { buttonData } from '@/src/components/molecules/aspectRatioButtons/buttonData';
@@ -16,8 +15,8 @@ type PropsTypes = {
 
 export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
   return (
-    <CreatePostItemContainer>
-      <Heading tag="h2" size="medium">
+    <section className={styles.container}>
+      <Heading tag="h3" size="medium">
         Crop type
       </Heading>
       <motion.div className={styles.aspectRatioButtons} variants={containerVariants} initial="hidden" animate="show">
@@ -34,6 +33,6 @@ export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
           );
         })}
       </motion.div>
-    </CreatePostItemContainer>
+    </section>
   );
 };

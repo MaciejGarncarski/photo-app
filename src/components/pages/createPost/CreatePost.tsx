@@ -53,11 +53,7 @@ export const CreatePost = () => {
     <ProtectedPage shouldBeSignedIn>
       <div className={styles.createPost}>
         <NextSeo title="Create new post" />
-        {finalImages.length <= 3 && (
-          <div className={styles.addPhoto}>
-            <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
-          </div>
-        )}
+        {finalImages.length <= 3 && <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />}
         <ImagesPreview previewImages={previewImages} onRemove={onRemove} />
         <CreatePostForm
           disabled={isSubmitDisabled}
