@@ -2,9 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
-import { transformPost } from '@/src/utils/apis/transformPost';
-
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 import { authOptions } from '@/src/pages/api/auth/[...nextauth]';
 
 import { prisma } from '../../../../prisma/prismadb';
@@ -49,6 +47,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       include: {
         author: true,
+        posts_likes: {
+          where: {
+            user_id: session?.user?.id,
+          },
+        },
         _count: {
           select: {
             posts_likes: true,
@@ -75,15 +78,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const roundedMaxPages = Math.round(maxPages);
     const totalPages = roundedMaxPages;
 
-    const postWithData = await Promise.all(
-      posts.map((post) => {
-        return transformPost(post, session);
-      }),
-    );
-
-    res
-      .status(httpCodes.success)
-      .send({ posts: postWithData, postsCount, currentPage: Number(currentPage), totalPages });
+    res.status(httpCodes.success).send({ posts, postsCount, currentPage: Number(currentPage), totalPages });
   } catch (error) {
     res.status(httpCodes.badRequest).send(responseMessages.badRequest);
   }

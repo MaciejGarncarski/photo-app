@@ -6,10 +6,9 @@ import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdro
 import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
 
 import { useStatsModal } from '@/src/components/organisms/statsModal/useStatsModal';
+import { StatsModalItem } from '@/src/components/organisms/statsModalItem/StatsModalItem';
 
-import styles from './statsModal.module.scss';
-
-import { StatsModalItem } from '../statsModalItem/StatsModalItem';
+import styles from './StatsModal.module.scss';
 
 type PropsTypes = {
   userId: string;

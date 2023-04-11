@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v4 } from 'uuid';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 import { serverEnv } from '@/src/utils/env';
+
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 
 const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;

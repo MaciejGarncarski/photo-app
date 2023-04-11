@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 import { getUserResponse } from '@/src/utils/apis/getUserResponse';
 
 import { prisma } from '@/prisma/prismadb';
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 
 const USERS_PER_SCROLL = 6;
 

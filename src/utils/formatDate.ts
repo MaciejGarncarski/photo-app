@@ -1,28 +1,48 @@
 import { DAY, getCountFromDate, HOUR, MONTH, WEEK } from '@/src/utils/getCountFromDate';
 
-const format = (value: number, unit: Intl.RelativeTimeFormatUnit) => {
-  return new Intl.RelativeTimeFormat('en-GB').format(value, unit);
-};
+type FormatData = Array<{
+  condition: boolean;
+  value: number;
+  name: Intl.RelativeTimeFormatUnit;
+}>;
 
-export const formatDate = (dateString: Date) => {
+const formatter = new Intl.RelativeTimeFormat('en-GB');
+
+export const formatDate = (dateString: Date | string) => {
   const date = new Date(dateString);
   const { daysCount, hoursCount, minutesCount, monthsCount, weeksCount } = getCountFromDate(date);
 
-  if (minutesCount < HOUR) {
-    return format(minutesCount * -1, 'minutes');
+  const formatData = [
+    {
+      condition: minutesCount < HOUR,
+      value: minutesCount,
+      name: 'minutes',
+    },
+    {
+      condition: hoursCount <= DAY,
+      value: hoursCount,
+      name: 'hours',
+    },
+    {
+      condition: daysCount >= WEEK && daysCount < MONTH,
+      value: weeksCount,
+      name: 'weeks',
+    },
+    {
+      condition: daysCount >= MONTH,
+      value: monthsCount,
+      name: 'months',
+    },
+  ] satisfies FormatData;
+
+  if (minutesCount === 0) {
+    return 'a few seconds ago';
   }
 
-  if (hoursCount <= DAY) {
-    return format(hoursCount * -1, 'hours');
+  const foundItem = formatData.find(({ condition }) => condition);
+  if (foundItem) {
+    return formatter.format(foundItem.value * -1, foundItem.name);
   }
 
-  if (daysCount >= WEEK && daysCount < MONTH) {
-    return format(weeksCount * -1, 'weeks');
-  }
-
-  if (daysCount >= MONTH) {
-    return format(monthsCount * -1, 'months');
-  }
-
-  return format(daysCount * -1, 'days');
+  return formatter.format(daysCount * 1, 'days');
 };

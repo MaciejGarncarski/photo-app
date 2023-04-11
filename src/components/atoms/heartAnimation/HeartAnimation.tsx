@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { heartVariants } from '@/src/components/atoms/heartAnimation/HeartAnimation.animation';
 
-import styles from './heartAnimation.module.scss';
+import styles from './HeartAnimation.module.scss';
 
 type Props = {
   isVisible: boolean;

@@ -9,7 +9,7 @@ import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/Visual
 
 import { containerVariants, itemVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 
-import styles from './imagesPreview.module.scss';
+import styles from './ImagesPreview.module.scss';
 
 const MAX_IMAGES_LENGTH = 3;
 

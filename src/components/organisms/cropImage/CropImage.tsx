@@ -17,7 +17,7 @@ import { DropZone } from '@/src/components/organisms/dropZone/DropZone';
 
 import { FinalImages } from '@/src/components/pages/createPost/types';
 
-import styles from './cropImage.module.scss';
+import styles from './CropImage.module.scss';
 
 type Props = {
   setFinalImages: (final: FinalImages) => void;

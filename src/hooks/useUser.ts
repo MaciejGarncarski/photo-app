@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 
-import { fetchAccount } from '@/src/utils/fetchers/fetchers';
+import { getUser } from '@/src/services/user.service';
 
 type PropsTypes = {
   userId: string;
@@ -10,11 +9,9 @@ type PropsTypes = {
 export const useUser = ({ userId }: PropsTypes) => {
   return useQuery({
     queryKey: ['user', userId],
-    queryFn: () => fetchAccount(userId),
-    onError: () => {
-      toast.error('Cannot fetch user');
-    },
+    queryFn: () => getUser({ userId }),
     enabled: Boolean(userId),
+    retry: 1,
     refetchOnWindowFocus: false,
   });
 };

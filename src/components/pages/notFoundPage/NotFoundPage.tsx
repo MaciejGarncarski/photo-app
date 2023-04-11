@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Heading } from '@/src/components/atoms/heading/Heading';
 
-import styles from './notFoundPage.module.scss';
+import styles from './NotFoundPage.module.scss';
 
 export const NotFoundPage = () => {
   return (

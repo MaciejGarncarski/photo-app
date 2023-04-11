@@ -9,7 +9,7 @@ import { getButtonList } from '@/src/components/molecules/createPostForm/buttonL
 
 import { PostDetails } from '@/src/components/pages/createPost/types';
 
-import styles from './createPostForm.module.scss';
+import styles from './CreatePostForm.module.scss';
 
 type PropsTypes = {
   onSubmit: () => void;

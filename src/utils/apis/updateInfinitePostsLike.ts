@@ -1,12 +1,11 @@
 import { InfiniteData } from '@tanstack/react-query';
 
-import { PostData } from '@/src/utils/apis/transformPost';
-
+import { Post } from '@/src/consts/schemas';
 import { InfinitePosts } from '@/src/pages/api/post/infinitePosts';
 
-type InfinitePost = InfiniteData<InfinitePosts<PostData>>;
+type InfinitePost = InfiniteData<InfinitePosts<Post>>;
 
-export const updateInfinitePostsLike = (oldData?: InfinitePost, newData?: PostData) => {
+export const updateInfinitePostsLike = (oldData?: InfinitePost, newData?: Post) => {
   if (!newData || !oldData) {
     return;
   }
@@ -34,7 +33,7 @@ export const updateInfinitePostsLike = (oldData?: InfinitePost, newData?: PostDa
     const newCursor = oldData.pages[idx].cursor;
     const newPostsCount = oldData.pages[idx].postsCount;
 
-    const newPageData: InfinitePosts<PostData> = {
+    const newPageData: InfinitePosts<Post> = {
       cursor: newCursor,
       postsCount: newPostsCount,
       posts: newPosts,

@@ -1,7 +1,7 @@
 import { User as PrismaUser } from '@prisma/client';
 
 import { prisma } from '@/prisma/prismadb';
-import { User, UserApiResponse, UserCount } from '@/src/pages/api/account/userId/[userId]';
+import { User, UserApiResponse } from '@/src/consts/schemas';
 
 type Arguments = {
   userData: PrismaUser;
@@ -9,7 +9,7 @@ type Arguments = {
 };
 
 export const getUserResponse = async ({ userData, sessionUserId }: Arguments) => {
-  const { email, bio, created_at, customImage, id, image, name, username, role } = userData;
+  const { bio, created_at, customImage, id, image, name, username } = userData;
 
   const countedPosts = await prisma.post.count({
     where: {
@@ -29,7 +29,7 @@ export const getUserResponse = async ({ userData, sessionUserId }: Arguments) =>
     },
   });
 
-  const count: UserCount = {
+  const count = {
     postsCount: countedPosts,
     followersCount: countedFollowers,
     friendsCount: countedFollowing,
@@ -43,15 +43,13 @@ export const getUserResponse = async ({ userData, sessionUserId }: Arguments) =>
   });
 
   const transformedUserData: User = {
-    email,
-    role,
     id,
-    username,
+    username: username || '',
     customImage,
     image,
     name,
     bio,
-    createdAt: created_at,
+    createdAt: created_at.toString(),
   };
 
   const response: UserApiResponse = {

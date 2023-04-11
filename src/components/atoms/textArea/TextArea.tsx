@@ -1,6 +1,6 @@
 import { forwardRef, useId } from 'react';
 
-import styles from './textArea.module.scss';
+import styles from './TextArea.module.scss';
 
 type PropsTypes = {
   label: string;

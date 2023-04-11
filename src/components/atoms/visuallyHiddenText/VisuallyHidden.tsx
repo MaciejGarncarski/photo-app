@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import styles from './visuallyHidden.module.scss';
+import styles from './VisuallyHidden.module.scss';
 
 type PropsTypes = {
   children: ReactNode;

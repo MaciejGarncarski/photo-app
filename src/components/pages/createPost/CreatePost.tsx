@@ -17,7 +17,7 @@ import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWi
 import { useFinalImages } from '@/src/components/pages/createPost/useFinalImages';
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
-import styles from './createPost.module.scss';
+import styles from './CreatePost.module.scss';
 
 import { PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';

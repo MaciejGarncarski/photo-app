@@ -1,17 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
-
-import { UserApiResponse } from '@/src/pages/api/account/userId/[userId]';
+import { getUserByUsername } from '@/src/services/user.service';
 
 type Arguments = {
   username: string;
-};
-
-const fetchUserId = async (username: string) => {
-  const { data } = await apiClient.get<UserApiResponse>(`account/username/${username}`);
-  return data;
 };
 
 export const useUserByUsername = ({ username }: Arguments) => {
@@ -20,6 +13,6 @@ export const useUserByUsername = ({ username }: Arguments) => {
     onError: () => {
       toast.error('Cannot fetch user');
     },
-    queryFn: () => fetchUserId(username),
+    queryFn: () => getUserByUsername({ username }),
   });
 };

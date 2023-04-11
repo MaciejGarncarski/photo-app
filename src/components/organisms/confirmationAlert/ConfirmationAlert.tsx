@@ -8,7 +8,7 @@ import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/Mo
 
 import { alertVariants } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert.animation';
 
-import styles from './confirmationAlert.module.scss';
+import styles from './ConfirmationAlert.module.scss';
 
 type PropsTypes = {
   onConfirm: () => void;

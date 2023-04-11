@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { PostData } from '@/src/utils/apis/transformPost';
-
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
@@ -14,10 +12,12 @@ import { PostSlider } from '@/src/components/organisms/post/postSlider/PostSlide
 import { PostComments } from '@/src/components/organisms/postComments/PostComments';
 import { modalVariants } from '@/src/components/organisms/postModal/PostModal.animation';
 
-import styles from './postModal.module.scss';
+import { Post } from '@/src/consts/schemas';
+
+import styles from './PostModal.module.scss';
 
 type PropsTypes = {
-  post: PostData;
+  post: Post;
   closeModal: () => void;
   isVisible: boolean;
 };

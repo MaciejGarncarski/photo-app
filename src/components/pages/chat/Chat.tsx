@@ -7,7 +7,7 @@ import { ChatUsersList } from '@/src/components/organisms/chatUsersList/ChatUser
 import { useChatUsers } from '@/src/components/pages/chat/useChatUsers';
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
-import styles from './chat.module.scss';
+import styles from './Chat.module.scss';
 
 export const Chat = () => {
   const { chatUsers, isEnabled, onChange, onSubmit, resetState, inputValue } = useChatUsers();

@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { UserApiResponse } from '@/src/pages/api/account/userId/[userId]';
+import { UserApiResponse } from '@/src/consts/schemas';
 
 type StatsResponse = {
   users: Array<{ user: UserApiResponse; chatRoomId: number }>;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Heading } from '@/src/components/atoms/heading/Heading';
 
-import styles from './accessDenied.module.scss';
+import styles from './AccessDenied.module.scss';
 
 export const AccessDenied = () => {
   return (

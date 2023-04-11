@@ -1,8 +1,8 @@
-import { errorMessages } from '@/src/components/atoms/cropError/cropError.data';
+import { errorMessages } from '@/src/components/atoms/cropError/CropError.data';
 
 import { DropZoneErrors } from '@/src/components/pages/createPost/types';
 
-import styles from './cropError.module.scss';
+import styles from './CropError.module.scss';
 
 type PropsTypes = {
   errorType: DropZoneErrors;

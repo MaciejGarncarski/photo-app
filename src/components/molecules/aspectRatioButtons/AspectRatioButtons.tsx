@@ -6,7 +6,7 @@ import { Heading } from '@/src/components/atoms/heading/Heading';
 import { buttonData } from '@/src/components/molecules/aspectRatioButtons/buttonData';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 
-import styles from './aspectRatioButtons.module.scss';
+import styles from './AspectRatioButtons.module.scss';
 
 type PropsTypes = {
   setAspect: (aspect: number) => void;

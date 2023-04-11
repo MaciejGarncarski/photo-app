@@ -1,4 +1,4 @@
-import styles from './postLikesCount.module.scss';
+import styles from './PostLikesCount.module.scss';
 
 type PropsTypes = {
   likesCount: number;

@@ -1,6 +1,6 @@
 import { IconSettings } from '@tabler/icons-react';
 
-import styles from './icons.module.scss';
+import styles from './Icons.module.scss';
 
 type PropsTypes = {
   size?: 'sm' | 'lg' | 'xl';

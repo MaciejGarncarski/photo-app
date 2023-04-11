@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
-import styles from './modalCloseButton.module.scss';
+import styles from './ModalCloseButton.module.scss';
 
 type PropsTypes = {
   onClose: () => void;

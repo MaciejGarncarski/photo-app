@@ -14,7 +14,7 @@ import { ListModalItem } from '@/src/components/organisms/listModal/ListModalIte
 
 import { useAccount } from '@/src/components/pages/account/useAccount';
 
-import styles from './account.module.scss';
+import styles from './Account.module.scss';
 
 import { AccountHeaderDesktop } from './AccountHeaderDesktop';
 import { AccountHeaderMobile } from './AccountHeaderMobile';

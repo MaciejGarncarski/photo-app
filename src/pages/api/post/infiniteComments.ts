@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
-
 import { PostComment } from '@/src/components/organisms/postComments/useInfiniteComments';
 
 import { prisma } from '@/prisma/prismadb';
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 
 const COMMENTS_PER_SCROLL = 10;
 

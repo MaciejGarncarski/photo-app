@@ -11,14 +11,14 @@ import { FollowButton } from '@/src/components/molecules/followButton/FollowButt
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { usePostHeader } from '@/src/components/organisms/post/postHeader/usePostHeader';
 
-import styles from './postHeader.module.scss';
+import styles from './PostHeader.module.scss';
 
 import { PostOptions } from '../postOptions/PostOptions';
 
 type PropsTypes = {
   tag?: 'header' | 'div';
   authorId: string;
-  createdAt: Date;
+  createdAt: string;
   postId: number;
 };
 

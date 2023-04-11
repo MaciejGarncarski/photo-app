@@ -9,7 +9,7 @@ import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
-import styles from './chatMessage.module.scss';
+import styles from './ChatMessage.module.scss';
 
 export type Message = {
   id: string;

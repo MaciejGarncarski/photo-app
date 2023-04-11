@@ -10,7 +10,7 @@ import { useDeletePost } from '@/src/components/organisms/post/postOptions/useDe
 
 type Arguments = {
   authorId: string;
-  createdAt: Date;
+  createdAt: string;
   postId: number;
 };
 

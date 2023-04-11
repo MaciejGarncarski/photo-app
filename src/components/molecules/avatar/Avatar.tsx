@@ -7,7 +7,7 @@ import { useUser } from '@/src/hooks/useUser';
 
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
-import styles from './avatar.module.scss';
+import styles from './Avatar.module.scss';
 
 type Sizes = 'small' | 'medium' | 'big';
 

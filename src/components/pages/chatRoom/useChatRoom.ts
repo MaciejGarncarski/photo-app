@@ -7,24 +7,23 @@ import { useIsMobile } from '@/src/hooks/useIsMobile';
 import { socket } from '@/src/utils/socket';
 
 import { useChatMessages } from '@/src/components/pages/chatRoom/useChatMessages';
+import { useChatRoomData } from '@/src/components/pages/chatRoom/useChatRoomData';
 import { useChatSubscription } from '@/src/components/pages/chatRoom/useChatSubscription';
 
-type PropsTypes = {
-  chatRoomId: number;
-  friendId: string;
-};
-
-export const useChatRoom = ({ chatRoomId, friendId }: PropsTypes) => {
+export const useChatRoom = () => {
   const [inputVal, setInputVal] = useState('');
 
   const { session } = useAuth();
   const { isMobile } = useIsMobile();
   const { isGoingUp } = useIsGoingUp();
+  const { data: chatRoomData } = useChatRoomData();
 
-  useChatSubscription(socket, chatRoomId);
+  useChatSubscription(socket, chatRoomData?.id || 0);
+
+  const friendId = chatRoomData?.userOne_id === session?.user?.id ? chatRoomData?.userTwo_id : chatRoomData?.userOne_id;
 
   const { isLoading, fetchNextPage, hasNextPage, isError, data } = useChatMessages({
-    friendId,
+    friendId: friendId || '',
     userId: session?.user?.id ?? '',
   });
 

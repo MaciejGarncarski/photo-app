@@ -6,7 +6,7 @@ import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdro
 
 import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
 
-import styles from './listModal.module.scss';
+import styles from './ListModal.module.scss';
 
 type PropsTypes = {
   closeModal: () => void;

@@ -11,7 +11,7 @@ import { Navbar } from '@/src/components/organisms/navbar/Navbar';
 import { NavbarForDesktop } from '@/src/components/organisms/navbar/NavbarForDesktop';
 import { Settings } from '@/src/components/organisms/settings/Settings';
 
-import styles from './header.module.scss';
+import styles from './Header.module.scss';
 
 export const Header = () => {
   const { isMobile } = useIsMobile();

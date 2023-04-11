@@ -10,9 +10,9 @@ import { usePostOptions } from '@/src/components/organisms/post/postOptions/useP
 
 type PropsTypes = {
   closeModal: () => void;
+  openCnonfirmation: () => void;
   authorId: string;
   postId: number;
-  openCnonfirmation: () => void;
   isVisible: boolean;
 };
 

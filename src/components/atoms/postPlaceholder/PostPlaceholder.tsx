@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import styles from './postPlaceholder.module.scss';
+import styles from './PostPlaceholder.module.scss';
 
 export const PostPlaceholder = () => {
   return (

@@ -5,7 +5,7 @@ import { ReactNode, useState } from 'react';
 
 import { tooltipVariant } from '@/src/components/atoms/tooltip/Tooltip.animation';
 
-import styles from './tooltip.module.scss';
+import styles from './Tooltip.module.scss';
 
 type PropsTypes = {
   content: string;

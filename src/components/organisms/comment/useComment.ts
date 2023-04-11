@@ -22,7 +22,7 @@ export const useComment = ({ commentData }: Arguments) => {
   const handleLike = () => commentLike.mutate();
   const handleDelete = () => commentDelete.mutate({ commentId: id });
 
-  const isAbleToDelete = sessionUserData?.id === userId || sessionUserData?.role === 'ADMIN';
+  const isAbleToDelete = sessionUserData?.id === userId;
   const userAccountHref = `/${data?.username}`;
 
   return {

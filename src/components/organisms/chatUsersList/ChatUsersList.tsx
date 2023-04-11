@@ -13,7 +13,7 @@ import { linkVariants } from '@/src/components/organisms/chatUsersList/ChatUsers
 
 import { ChatUsersResponse } from '@/src/components/pages/chat/useChatUsers';
 
-import styles from './chatUsersList.module.scss';
+import styles from './ChatUsersList.module.scss';
 
 type PropsTypes = {
   chatUsers: UseInfiniteQueryResult<ChatUsersResponse, unknown>;

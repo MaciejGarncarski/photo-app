@@ -2,20 +2,21 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import { useUser } from '@/src/hooks/useUser';
-import { PostData } from '@/src/utils/apis/transformPost';
 import { getDescriptionData } from '@/src/utils/getDescriptionData';
 
 import { MotionImage } from '@/src/components/molecules/avatar/Avatar';
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
-import styles from './postImage.module.scss';
+import { Post } from '@/src/consts/schemas';
+
+import styles from './PostImage.module.scss';
 
 type PropsTypes = {
   width: number;
   height: number;
   priority: boolean;
   src: string;
-  post: PostData;
+  post: Post;
 };
 
 export const PostImage = ({ height, priority, src, width, post }: PropsTypes) => {

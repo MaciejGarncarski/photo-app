@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
-import styles from './loader.module.scss';
+import styles from './Loader.module.scss';
 
 type PropsTypes = {
   size: 'small' | 'normal';

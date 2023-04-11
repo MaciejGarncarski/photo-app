@@ -4,7 +4,7 @@ import { Button } from '@/src/components/atoms/buttons/button/Button';
 
 import { useCommentForm } from '@/src/components/organisms/post/commentForm/useCommentForm';
 
-import styles from './commentForm.module.scss';
+import styles from './CommentForm.module.scss';
 
 type PropsTypes = {
   postId: number;

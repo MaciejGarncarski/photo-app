@@ -15,7 +15,7 @@ import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/
 import { useEditPost } from '@/src/components/pages/editPost/useEditPost';
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
-import styles from './editPost.module.scss';
+import styles from './EditPost.module.scss';
 
 import { usePost } from '../account/usePost';
 import { PostDetailsSchema } from '../createPost/CreatePost';

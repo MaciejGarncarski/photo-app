@@ -14,7 +14,7 @@ import { useComment } from '@/src/components/organisms/comment/useComment';
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { PostComment } from '@/src/components/organisms/postComments/useInfiniteComments';
 
-import styles from './comment.module.scss';
+import styles from './Comment.module.scss';
 
 type PropsTypes = {
   commentData: PostComment;

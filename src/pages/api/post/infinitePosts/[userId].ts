@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 import { PostData, transformPost } from '@/src/utils/apis/transformPost';
 import { getInfinitePostsCount } from '@/src/utils/getInfinitePostsCount';
 
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 import { InfinitePosts } from '@/src/pages/api/post/infinitePosts';
 
 import { prisma } from '../../../../../prisma/prismadb';

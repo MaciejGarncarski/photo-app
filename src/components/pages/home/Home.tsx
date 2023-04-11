@@ -19,7 +19,7 @@ import { HomePost } from '@/src/components/organisms/homePost/HomePost';
 import { useInfinitePosts } from '@/src/components/pages/home/useInfinitePosts';
 import { useOtherUsers } from '@/src/components/pages/home/useOtherUsers';
 
-import styles from './home.module.scss';
+import styles from './Home.module.scss';
 
 export const newPostsAtom = atom(false);
 export const Home = () => {

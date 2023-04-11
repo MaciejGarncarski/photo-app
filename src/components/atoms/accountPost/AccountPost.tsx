@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { postItemVaraints } from '@/src/components/atoms/accountPost/AccountPost.animation';
 import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
 
-import styles from './accountPost.module.scss';
+import styles from './AccountPost.module.scss';
 
 export type PostImage = {
   id: number;

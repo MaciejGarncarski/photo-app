@@ -9,11 +9,12 @@ import { InfinitePostsQuery, updatePostQuery } from '@/src/utils/updatePostQuery
 import { usePostLike } from '@/src/components/organisms/post/postButtons/usePostLike';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
+import { Post } from '@/src/consts/schemas';
 
 const TIMEOUT = 1000;
 
 type PropsTypes = {
-  post: PostData;
+  post: Post;
 };
 
 export const useHandleLike = ({ post }: PropsTypes) => {

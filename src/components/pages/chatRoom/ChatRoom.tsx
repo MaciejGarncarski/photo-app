@@ -1,10 +1,8 @@
-import { ChatRoom as ChatRoomType } from '@prisma/client';
 import { IconArrowLeft, IconSend } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
-import { useAuth } from '@/src/hooks/useAuth';
 import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
@@ -20,25 +18,14 @@ import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWi
 import { useChatRoom } from '@/src/components/pages/chatRoom/useChatRoom';
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
-import styles from './chatRoom.module.scss';
+import styles from './ChatRoom.module.scss';
 
-type PropsTypes = {
-  chatRoomData: ChatRoomType;
-};
-
-export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
+export const ChatRoom = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { session } = useAuth();
 
-  const { userOne_id, userTwo_id } = chatRoomData;
-  const friendId = userOne_id === session?.user?.id ? userTwo_id : userOne_id;
-
-  const { data: friendData } = useUser({ userId: friendId });
-  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage } = useChatRoom({
-    chatRoomId: chatRoomData.id,
-    friendId,
-  });
+  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage, friendId } = useChatRoom();
+  const { data: friendData } = useUser({ userId: friendId || '' });
 
   useEffect(() => {
     if (bottomRef.current && !isLoading) {
@@ -59,7 +46,7 @@ export const ChatRoom = ({ chatRoomData }: PropsTypes) => {
             <span className={styles.goBack}>Go back</span>
           </Button>
           <Link href={`/${friendData?.username}`} className={styles.userHeader}>
-            <Avatar userId={friendId} size="small" />
+            <Avatar userId={friendId || ''} size="small" />
             <Heading tag="h2" size="medium">
               {friendData?.name && `${friendData?.name},`} @{friendData?.username}
             </Heading>

@@ -1,14 +1,15 @@
 import { useAuth } from '@/src/hooks/useAuth';
-import { PostData } from '@/src/utils/apis/transformPost';
 
 import { CommentForm } from '@/src/components/organisms/post/commentForm/CommentForm';
 import { PostButtons } from '@/src/components/organisms/post/postButtons/PostButtons';
 import { usePostFooter } from '@/src/components/organisms/post/postFooter/usePostFooter';
 
-import styles from './postFooter.module.scss';
+import { Post } from '@/src/consts/schemas';
+
+import styles from './PostFooter.module.scss';
 
 type PropsTypes = {
-  post: PostData;
+  post: Post;
   parentModalOpen?: boolean;
 };
 

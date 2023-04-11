@@ -13,7 +13,7 @@ import { containerVariants } from '@/src/components/molecules/imagesPreview/Imag
 
 import { AccountStats } from '@/src/components/organisms/accountStats/AccountStats';
 
-import styles from './account.module.scss';
+import styles from './Account.module.scss';
 
 type PropsTypes = {
   userId: string;

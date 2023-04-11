@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { backdropVariants } from '@/src/components/atoms/modalBackdrop/ModalBackdrop.animation';
 
-import styles from './modalBackdrop.module.scss';
+import styles from './ModalBackdrop.module.scss';
 
 type PropsTypes = {
   closeModal: () => void;

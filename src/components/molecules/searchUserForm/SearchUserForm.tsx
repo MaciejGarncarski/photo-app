@@ -5,7 +5,7 @@ import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
-import styles from './searchUserForm.module.scss';
+import styles from './SearchUserForm.module.scss';
 
 type PropsTypes = {
   resetState: () => void;

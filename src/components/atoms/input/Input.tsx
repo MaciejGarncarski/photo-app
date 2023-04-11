@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ChangeEvent, forwardRef } from 'react';
 
-import styles from './input.module.scss';
+import styles from './Input.module.scss';
 
 type PropsTypes = {
   type?: 'text' | 'number' | 'tel' | 'email' | 'password';

@@ -12,7 +12,7 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 import { useDropError } from '@/src/components/organisms/dropZone/useDropError';
 import { useDropZone } from '@/src/components/organisms/dropZone/useDropZone';
 
-import styles from './dropZone.module.scss';
+import styles from './DropZone.module.scss';
 
 type PropsTypes = {
   setImgSrc: (src: string | null) => void;

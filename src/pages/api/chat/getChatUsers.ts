@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 import { getUserResponse } from '@/src/utils/apis/getUserResponse';
+
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 
 import { prisma } from '../../../../prisma/prismadb';
 

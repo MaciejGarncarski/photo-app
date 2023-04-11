@@ -13,7 +13,7 @@ import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWi
 
 import { FinalImages } from '@/src/components/pages/createPost/types';
 
-import styles from '../stages.module.scss';
+import styles from '../Stages.module.scss';
 
 type PropsTypes = {
   stageSelectImage: () => void;

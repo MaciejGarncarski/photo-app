@@ -4,13 +4,14 @@ import { PostData } from '@/src/utils/apis/transformPost';
 import { updateInfinitePostsLike } from '@/src/utils/apis/updateInfinitePostsLike';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
+import { Post } from '@/src/consts/schemas';
 import { InfinitePosts } from '@/src/pages/api/post/infinitePosts';
 
-export type InfinitePostsQuery = InfiniteData<InfinitePosts<PostData>>;
+export type InfinitePostsQuery = InfiniteData<InfinitePosts<Post>>;
 
 type Types = {
   queryClient: QueryClient;
-  post: PostData;
+  post: Post;
 };
 
 export const updatePostQuery = ({ queryClient, post }: Types) => {

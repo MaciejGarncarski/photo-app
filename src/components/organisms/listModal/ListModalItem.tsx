@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-import styles from './listModal.module.scss';
+import styles from './ListModal.module.scss';
 
 type PropsTypes = {
   icon: ReactNode;

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { notificationVariant } from '@/src/components/atoms/newPostNotification/NewPostNotification.animation';
 import { useNewPost } from '@/src/components/atoms/newPostNotification/useNewPost';
 
-import styles from './newPostNotification.module.scss';
+import styles from './NewPostNotification.module.scss';
 
 export const NewPostNotification = () => {
   const { hasNewPosts, handleRefetchPosts } = useNewPost();

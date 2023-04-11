@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 
 import { prisma } from '../../../../prisma/prismadb';
 

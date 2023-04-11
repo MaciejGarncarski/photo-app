@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
 
-import { PostData } from '@/src/utils/apis/transformPost';
-
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import { usePostButtonsData } from '@/src/components/organisms/post/postButtons/usePostButtonsData';
 import { PostModal } from '@/src/components/organisms/postModal/PostModal';
 import { ShareModal } from '@/src/components/organisms/shareModal/ShareModal';
 
-import styles from './postButtons.module.scss';
+import { Post } from '@/src/consts/schemas';
+
+import styles from './PostButtons.module.scss';
 
 type PropsTypes = {
-  post: PostData;
+  post: Post;
   parentModalOpen?: boolean;
 };
 

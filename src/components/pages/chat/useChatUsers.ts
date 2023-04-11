@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuth } from '@/src/hooks/useAuth';
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { UserApiResponse } from '@/src/pages/api/account/userId/[userId]';
+import { UserApiResponse } from '@/src/consts/schemas';
 
 export type ChatUsersResponse = {
   users: Array<{

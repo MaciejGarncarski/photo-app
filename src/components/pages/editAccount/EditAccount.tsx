@@ -9,7 +9,7 @@ import { SelectOptionStage } from '@/src/components/organisms/editAccountStages/
 
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
-import styles from './editAccount.module.scss';
+import styles from './EditAccount.module.scss';
 
 const NewAvatarStageLazy = dynamic(
   async () => {

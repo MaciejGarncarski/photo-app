@@ -4,8 +4,6 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { PostData } from '@/src/utils/apis/transformPost';
-
 import { HeartAnimation } from '@/src/components/atoms/heartAnimation/HeartAnimation';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
@@ -15,10 +13,12 @@ import { PostSliderProgress } from '@/src/components/organisms/post/postSlider/P
 import { useSlider } from '@/src/components/organisms/post/postSlider/useSlider';
 import { useUpdateWidth } from '@/src/components/organisms/post/postSlider/useUpdateWidth';
 
-import styles from './postSlider.module.scss';
+import { Post } from '@/src/consts/schemas';
+
+import styles from './PostSlider.module.scss';
 
 type PropsTypes = {
-  post: PostData;
+  post: Post;
   priority: boolean;
 };
 

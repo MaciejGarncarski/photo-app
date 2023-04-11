@@ -5,7 +5,7 @@ import { signInDemo, signInGoogle } from '@/src/utils/signIn';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 
-import styles from './otherSignInOptions.module.scss';
+import styles from './OtherSignInOptions.module.scss';
 
 type ButtonsData = Array<{ onClick: () => void; text: string; icon: ReactElement }>;
 

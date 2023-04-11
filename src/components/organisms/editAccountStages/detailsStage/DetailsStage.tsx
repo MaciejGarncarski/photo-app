@@ -11,7 +11,7 @@ import { useDetailsStage } from '@/src/components/organisms/editAccountStages/de
 import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
 import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
 
-import styles from '../stages.module.scss';
+import styles from '../Stages.module.scss';
 
 type PropsTypes = {
   userId: string;

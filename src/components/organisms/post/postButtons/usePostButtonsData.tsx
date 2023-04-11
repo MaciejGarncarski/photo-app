@@ -2,21 +2,23 @@ import { IconMessage2, IconShare } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
 import { useModal } from '@/src/hooks/useModal';
-import { PostData } from '@/src/utils/apis/transformPost';
+import { formatCount } from '@/src/utils/formatCount';
 
 import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
 
 import { useHandleLike } from '@/src/components/organisms/post/postButtons/useHandleLike';
 
+import { Post } from '@/src/consts/schemas';
+
 type ButtonData = Array<{
   alt: string;
   icon: ReactElement;
   onClick: () => void;
-  count?: number;
+  count?: string;
 }>;
 
 type Arguments = {
-  post: PostData;
+  post: Post;
   parentModalOpen?: boolean;
 };
 
@@ -31,12 +33,17 @@ export const usePostButtonsData = ({ post, parentModalOpen }: Arguments) => {
   const { isLiked, likesCount, commentsCount } = post;
 
   const buttonData: ButtonData = [
-    { alt: 'like', icon: <IconHeartWrapper isActive={Boolean(isLiked)} />, onClick: handleLike, count: likesCount },
+    {
+      alt: 'like',
+      icon: <IconHeartWrapper isActive={Boolean(isLiked)} />,
+      onClick: handleLike,
+      count: formatCount(likesCount),
+    },
     {
       alt: 'comment',
       icon: <IconMessage2 />,
       onClick: parentModalOpen ? () => null : postModalOpen,
-      count: commentsCount,
+      count: formatCount(commentsCount),
     },
     { alt: 'share', icon: <IconShare />, onClick: shareModal.openModal },
   ];

@@ -8,9 +8,9 @@ import { signInCredentials, SignInFormValues, SignInSchema } from '@/src/utils/s
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Input } from '@/src/components/atoms/input/Input';
 
-import { animation } from '@/src/components/pages/signIn/signIn.animation';
+import { animation } from '@/src/components/pages/signIn/SignIn.animation';
 
-import styles from './signInForm.module.scss';
+import styles from './SignInForm.module.scss';
 
 export const SignInForm = () => {
   const router = useRouter();

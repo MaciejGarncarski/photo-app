@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { NoImageDetectedError, TooManyImagesError } from '@/src/components/atoms/cropError/cropError.data';
+import { NoImageDetectedError, TooManyImagesError } from '@/src/components/atoms/cropError/CropError.data';
 
 import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
 import { DropZone } from '@/src/components/organisms/dropZone/DropZone';

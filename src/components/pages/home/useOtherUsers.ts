@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { UserApiResponse } from '@/src/pages/api/account/userId/[userId]';
+import { UserApiResponse } from '@/src/consts/schemas';
 
 export const useOtherUsers = () => {
   return useQuery({

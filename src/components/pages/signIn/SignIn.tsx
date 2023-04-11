@@ -4,9 +4,9 @@ import { OtherSignInOptions } from '@/src/components/molecules/otherSignInOption
 import { SignInForm } from '@/src/components/molecules/signInForm/SignInForm';
 
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
-import { animation } from '@/src/components/pages/signIn/signIn.animation';
+import { animation } from '@/src/components/pages/signIn/SignIn.animation';
 
-import styles from './signIn.module.scss';
+import styles from './SignIn.module.scss';
 
 export const SignIn = () => {
   return (

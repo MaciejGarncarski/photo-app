@@ -8,7 +8,7 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 import { postContainerVariants } from '@/src/components/organisms/accountPosts/AccountPosts.animation';
 import { useAccountPosts } from '@/src/components/organisms/accountPosts/useAccountPosts';
 
-import styles from './accountPosts.module.scss';
+import styles from './AccountPosts.module.scss';
 
 type PropsTypes = {
   userId: string;
@@ -36,6 +36,10 @@ export const AccountPosts = ({ userId }: PropsTypes) => {
       <motion.div variants={postContainerVariants} initial="hidden" animate="show" className={styles.posts}>
         {data.pages.map((page) => {
           return page.posts.map((post) => {
+            if (!post.imagesData) {
+              return null;
+            }
+
             const firstImageFromSlider = post.imagesData[0];
 
             if (!firstImageFromSlider) {
@@ -62,7 +66,7 @@ export const AccountPosts = ({ userId }: PropsTypes) => {
       </motion.div>
       {hasNextPage && hasPosts && (
         <div ref={infiniteRef} className={styles.loading}>
-          <Loader color="blue" size="normal" />;
+          <Loader color="blue" size="normal" />
         </div>
       )}
     </>

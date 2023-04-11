@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useListData } from '@/src/components/organisms/accountStats/useListData';
 import { StatsModal } from '@/src/components/organisms/statsModal/StatsModal';
 
-import styles from './accountStats.module.scss';
+import styles from './AccountStats.module.scss';
 
 type PropsTypes = {
   userId: string;

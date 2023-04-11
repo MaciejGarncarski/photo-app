@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { httpCodes, responseMessages } from '@/src/utils/apis/apiResponses';
 import { getUserResponse } from '@/src/utils/apis/getUserResponse';
+
+import { httpCodes, responseMessages } from '@/src/consts/apiResponses';
 
 import { authOptions } from './auth/[...nextauth]';
 import { prisma } from '../../../prisma/prismadb';

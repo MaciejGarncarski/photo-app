@@ -6,7 +6,7 @@ import { useUser } from '@/src/hooks/useUser';
 export const useAuth = () => {
   const { data: session, status } = useSession();
   const isSignedIn = Boolean(session?.user?.id) && status === 'authenticated';
-  const { data } = useUser({ userId: session?.user?.id || '' });
+  const { data } = useUser({ userId: session?.user?.id || ',' });
 
   return useMemo(() => {
     return {

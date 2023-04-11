@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
-import { PostData } from '@/src/utils/apis/transformPost';
+import { getPost } from '@/src/services/posts.service';
 
 export const usePost = ({ postId }: { postId: number }) => {
-  return useQuery(
-    ['post', postId],
-    async () => {
-      const { data } = await apiClient.get<PostData>(`post/${postId}`);
-      return data;
-    },
-    { enabled: Boolean(postId) },
-  );
+  return useQuery({
+    queryKey: ['post', postId],
+    queryFn: () => getPost({ postId }),
+    enabled: Boolean(postId),
+  });
 };

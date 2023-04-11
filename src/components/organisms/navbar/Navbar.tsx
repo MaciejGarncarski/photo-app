@@ -5,7 +5,7 @@ import { useIsMobile } from '@/src/hooks/useIsMobile';
 import { navbarVariants } from '@/src/components/organisms/navbar/Navbar.animation';
 import { NavButtons } from '@/src/components/organisms/navButtons/NavButtons';
 
-import styles from './navbar.module.scss';
+import styles from './Navbar.module.scss';
 
 export const Navbar = () => {
   const { isMobile } = useIsMobile();

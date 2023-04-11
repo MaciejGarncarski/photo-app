@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
-import styles from './heading.module.scss';
+import styles from './Heading.module.scss';
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type Sizes = 'small' | 'medium' | 'big';
