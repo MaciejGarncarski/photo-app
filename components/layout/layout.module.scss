@@ -1,7 +1,0 @@
-@use '/styles/common.scss';
-
-.layout {
-  @include common.mediaquery('desktop') {
-    margin-left: calc(5vw + var(--header-width));
-  }
-}

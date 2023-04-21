@@ -1,0 +1,48 @@
+@use '/src/styles/common';
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tip {
+  display: none;
+  position: absolute;
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-small);
+  z-index: 1;
+  border: var(--border-gray);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  line-height: 1;
+  padding: 0.6rem 0.75rem;
+  --tooltip-arrow-size: 1rem;
+
+  @include common.mediaquery('desktop') {
+    display: block;
+  }
+}
+
+.top {
+  top: -2rem;
+  bottom: unset;
+}
+
+.bottom {
+  bottom: -3rem;
+}
+
+.right {
+  top: 50%;
+  left: 2rem;
+  right: unset;
+  transform: translateX(0) translateY(-50%);
+}
+
+.left {
+  top: 50%;
+  right: 0;
+  left: unset;
+  transform: translateX(0) translateY(-50%);
+}

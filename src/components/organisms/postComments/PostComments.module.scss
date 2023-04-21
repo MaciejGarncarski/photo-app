@@ -1,0 +1,14 @@
+@use '/src/styles/common';
+
+.commentsList {
+  padding: 0;
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include common.mediaquery('desktop') {
+    overflow-y: auto;
+    max-height: 20rem;
+  }
+}

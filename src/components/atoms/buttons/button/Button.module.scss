@@ -1,0 +1,60 @@
+@use '/src/styles/common';
+
+.button {
+  border-radius: var(--radius-small);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: capitalize;
+  transition: all var(--transition);
+  transition-property: transform, box-shadow;
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      box-shadow: var(--shadow-focus);
+      transform: scale(1.05);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @include common.mediaquery('desktop') {
+    border-radius: var(--radius-medium);
+    padding: 0.5rem 0.9rem;
+  }
+}
+
+.secondary {
+  @extend .button;
+  background-color: var(--bg-primary);
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+
+  &:not(:disabled) {
+    &:focus,
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
+    }
+  }
+
+  &:disabled {
+    background-color: transparent;
+    opacity: 0.6;
+  }
+}

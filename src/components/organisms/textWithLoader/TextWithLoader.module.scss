@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+
+  > h2 {
+    text-align: center;
+  }
+}
+
+.text {
+  font-size: 2rem;
+}

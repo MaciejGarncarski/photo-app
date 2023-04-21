@@ -1,0 +1,51 @@
+@use '/src/styles/common';
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+  background-color: var(--bg-secondary);
+  border: none;
+  padding: 0.25rem;
+  border-radius: 100%;
+  transition: all var(--transition-fast);
+  transition-property: background-color, box-shadow, color;
+
+  &:hover,
+  &:focus {
+    box-shadow: var(--shadow-focus);
+    color: var(--color-white);
+    background-color: var(--color-primary);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @include common.mobile-landscape {
+    top: 0.5rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    right: 1rem;
+  }
+}
+
+.closeButtonExternal {
+  right: 1rem;
+  top: 1rem;
+  padding: 0.4rem;
+  border-radius: var(--radius-medium);
+  background-color: var(--bg-primary);
+
+  @include common.mediaquery('tablet') {
+    top: 1.5rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    top: 2rem;
+    right: 2rem;
+  }
+}

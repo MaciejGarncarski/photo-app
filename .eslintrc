@@ -56,39 +56,32 @@
       "warn",
       {
         "groups": [
-          // ext library & side effect imports
           [
             "^@?\\w",
             "^\\u0000"
           ],
-          // Lib and hooks
           [
-            "^@/lib",
-            "^@/hooks",
-            "^@/utils"
+            "^@/src/hooks",
+            "^@/src/utils"
           ],
-          // static data
           [
-            "^@/data"
+            "^@/src/components/atoms"
           ],
-          // components
           [
-            "^@/components",
-            "^@/container"
+            "^@/src/components/molecules"
           ],
-          // zustand store
+          [
+            "^@/src/components/organisms"
+          ],
           [
             "^@/store"
           ],
-          // Other imports
           [
             "^@/"
           ],
-          // relative paths up until 3 level
           [
             "^.+\\.s?css$"
           ],
-          // {s}css files
           [
             "^\\./?$",
             "^\\.(?!/?$)",
@@ -100,16 +93,14 @@
             "^\\.\\./\\.\\./\\.\\.(?!/?$)"
           ],
           [
-            "^@/types"
+            "^@/src/types"
           ],
-          // other that didnt fit in
           [
             "^"
           ]
         ]
       }
     ]
-    //#endregion  //*======== Import Sort ===========
   },
   "globals": {
     "React": true,

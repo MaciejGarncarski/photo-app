@@ -4,6 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
+.yarn/*
+.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # testing
 /coverage
@@ -38,7 +45,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-
+# pwa
 public/sw.js
 public/sw.js.map
 public/workbox-*.js

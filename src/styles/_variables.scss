@@ -1,0 +1,62 @@
+@use '/src/styles/common';
+
+%variables {
+  --color-primary: rgb(71, 136, 214);
+  --color-secondary: rgb(149, 182, 241);
+  --color-error: rgb(207, 60, 30);
+  --color-disabled: rgb(63, 114, 175, 0.9);
+  --color-gray: rgb(225, 225, 225);
+  --color-overlay: rgb(20, 20, 20, 0.6);
+  --color-white: rgb(255, 255, 255);
+  --color-gray-transparent: rgb(30, 30, 30, 0.5);
+  --color-icon-gray: rgb(20, 20, 20);
+
+  --text-black: rgb(0, 0, 0);
+  --text-gray: rgb(61, 61, 61);
+
+  --filter-blur: blur(13px) saturate(1.2);
+  --border-gray: 1px solid rgb(197, 197, 197);
+
+  --bg-primary: rgb(255, 255, 255);
+  --bg-blur: rgb(255, 255, 255, 0.9);
+  --bg-error: rgba(204, 73, 73, 0.25);
+  --bg-secondary: rgb(235, 235, 235);
+  --bg-focus: rgb(235, 235, 235);
+
+  --transition: 0.4s ease;
+  --transition-fast: 0.2s ease;
+
+  --gradient: linear-gradient(90deg, var(--color-gray) 0px, #ededed 20%, var(--color-gray) 40%);
+  --placeholder-animation: skeleton-loading 1.5s infinite linear;
+  --placeholder-bg-size: 500%;
+
+  --shadow-focus: 0 0 0 0.3rem var(--bg-primary), 0 0 0 0.5rem var(--color-primary);
+
+  --radius-big: 0.95rem;
+  --radius-medium: 0.5rem;
+  --radius-small: 0.35rem;
+
+  --header-width: 18rem;
+  --post-width: 20rem;
+
+  @include common.mediaquery('tablet') {
+    --post-width: calc(18rem + 15vw);
+  }
+
+  @include common.mediaquery('desktop') {
+    --post-width: calc(18rem + 15vw);
+  }
+}
+
+%variablesDarkTheme {
+  --color-overlay: rgba(70, 70, 70, 0.75);
+  --text-black: rgb(230, 230, 230);
+  --color-gray: rgb(124, 124, 124);
+  --gradient: linear-gradient(90deg, var(--color-gray) 0px, #929292 10%, var(--color-gray) 20%);
+  --text-gray: rgb(200, 200, 200);
+  --border-gray: 1px solid rgb(90, 90, 90);
+  --bg-primary: rgb(32, 37, 51);
+  --bg-blur: rgb(32, 37, 51, 0.9);
+  --bg-secondary: rgba(255, 255, 255, 0.2);
+  --bg-focus: rgb(80, 80, 80);
+}

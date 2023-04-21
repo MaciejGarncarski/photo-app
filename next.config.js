@@ -13,6 +13,10 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', 'ik.imagekit.io'],
   },
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 };
 
 /** @type {import('next-pwa').pwaConfig} */

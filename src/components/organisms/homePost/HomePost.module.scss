@@ -1,0 +1,10 @@
+@use '/src/styles/common';
+
+.homePost {
+  width: var(--post-width);
+
+  @include common.mediaquery('tablet') {
+    border: var(--border-gray);
+    border-radius: var(--radius-medium);
+  }
+}
