@@ -1,10 +1,11 @@
 import { useAuth } from '@/src/hooks/useAuth';
+import { useUser } from '@/src/hooks/useUser';
 
 import { CommentForm } from '@/src/components/organisms/post/commentForm/CommentForm';
 import { PostButtons } from '@/src/components/organisms/post/postButtons/PostButtons';
 import { usePostFooter } from '@/src/components/organisms/post/postFooter/usePostFooter';
 
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 import styles from './PostFooter.module.scss';
 
@@ -15,14 +16,15 @@ type PropsTypes = {
 
 export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const { isSignedIn } = useAuth();
-  const { description, author } = post;
+  const { description, authorId, id } = post;
+  const { data } = useUser({ userId: authorId });
   const { isDescriptionLong, shortDescription, showMore, toggleShowMore } = usePostFooter({ description });
 
   return (
     <footer className={styles.footer}>
       <PostButtons post={post} parentModalOpen={parentModalOpen} />
       <div className={styles.descriptionContainer}>
-        <p className={styles.author}>{author?.username}</p>
+        <p className={styles.author}>{data?.username}</p>
         {isDescriptionLong ? (
           <>
             <p className={styles.description}>{showMore ? description : shortDescription}</p>
@@ -35,7 +37,7 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
           <p className={styles.description}>{description}</p>
         )}
       </div>
-      {isSignedIn && <CommentForm postId={post.postId} />}
+      {isSignedIn && <CommentForm postId={id} />}
     </footer>
   );
 };

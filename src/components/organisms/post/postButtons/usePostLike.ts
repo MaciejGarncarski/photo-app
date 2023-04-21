@@ -1,16 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
-import { z } from 'zod';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { PostLikeSchema } from '@/src/pages/api/post/like';
-
-type PostLike = z.infer<typeof PostLikeSchema>;
+type Mutation = {
+  isLiked: boolean;
+  postId: number;
+};
 
 export const usePostLike = () => {
-  return useMutation(async ({ postId }: PostLike) => {
-    await apiClient.post<null, null, PostLike>(`post/like`, {
-      postId: postId,
-    });
+  return useMutation({
+    mutationFn: ({ isLiked, postId }: Mutation) => {
+      if (isLiked) {
+        return apiClient.delete(`post/like/${postId}`);
+      }
+      return apiClient.post(`post/like/${postId}`);
+    },
   });
 };

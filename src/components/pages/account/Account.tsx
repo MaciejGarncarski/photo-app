@@ -1,9 +1,10 @@
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { signOut } from 'next-auth/react';
 import { NextSeo } from 'next-seo';
 
 import { useIsMobile } from '@/src/hooks/useIsMobile';
+import { signOut } from '@/src/utils/signOut';
 
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
@@ -26,6 +27,7 @@ type Props = {
 export const Account = ({ username: usernameFromProps }: Props) => {
   const { isMobile } = useIsMobile();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const username = usernameFromProps || (router.query.username as string);
 
   const { isOwner, settingsModal, signOutModal, userData } = useAccount({
@@ -62,7 +64,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
       <ConfirmationAlert
         isVisible={signOutModal.isModalOpen}
         headingText="Sign out?"
-        onConfirm={signOut}
+        onConfirm={() => signOut(queryClient)}
         closeModal={signOutModal.closeModal}
       />
       <AccountPosts userId={userData?.id || ''} />

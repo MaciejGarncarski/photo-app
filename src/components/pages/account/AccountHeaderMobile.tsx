@@ -23,7 +23,7 @@ type PropsTypes = {
 };
 
 export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }: PropsTypes) => {
-  const { session } = useAuth();
+  const { isSignedIn } = useAuth();
   const { data, isLoading } = useUser({ userId });
 
   if (isLoading || !data) {
@@ -37,7 +37,7 @@ export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }:
       <motion.h2 className={styles.username}>{username}</motion.h2>
       <Avatar userId={userId} size="big" />
       <AccountStats userId={userId} />
-      {!isOwner && session && <FollowButton userId={userId} />}
+      {!isOwner && isSignedIn && <FollowButton userId={userId} />}
       {isOwner && (
         <Button type="button" variant="primary" onClick={openModal}>
           <IconSettingsWrapper size="sm" />

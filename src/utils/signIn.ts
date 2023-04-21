@@ -1,6 +1,9 @@
-import { signIn } from 'next-auth/react';
-import { toast } from 'react-hot-toast';
+import { QueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import Router from 'next/router';
 import { z } from 'zod';
+
+import { clientEnv } from '@/src/utils/env';
 
 export const SignInSchema = z.object({
   email: z.string().email({ message: 'Invalid email.' }),
@@ -9,30 +12,30 @@ export const SignInSchema = z.object({
 
 export type SignInFormValues = z.infer<typeof SignInSchema>;
 
-type SignInCredentials = SignInFormValues & {
-  onSuccess: () => void;
-};
+type SignInCredentials = {
+  queryClient: QueryClient;
+} & SignInFormValues;
 
-export const signInCredentials = async ({ email, password, onSuccess }: SignInCredentials) => {
-  const request = await signIn('credentials', { redirect: false, email, password });
+export const signInCredentials = async ({ email, password, queryClient }: SignInCredentials) => {
+  const { data } = await axios.post(
+    `${clientEnv.NEXT_PUBLIC_API_ROOT}api/auth/login`,
+    {
+      email,
+      password,
+    },
+    {
+      withCredentials: true,
+    },
+  );
 
-  if (request?.error || !request) {
-    return toast.error('Invalid email or password.');
+  queryClient.invalidateQueries(['session']);
+
+  if (data.redirect) {
+    Router.push(data.redirect);
   }
-
-  if (request.ok) {
-    onSuccess();
-  }
 };
 
-export const signInGoogle = async () => {
-  await signIn('google', { redirect: true });
-};
-
-export const signInDemo = async () => {
-  await signIn('credentials', {
-    redirect: true,
-    email: 'test@test.pl',
-    password: '12345',
-  });
+export const signInGoogle = () => {
+  //TODO change to link href
+  window.location.href = `${clientEnv.NEXT_PUBLIC_API_ROOT}auth/google`;
 };

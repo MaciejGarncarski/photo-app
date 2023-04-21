@@ -11,7 +11,7 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { linkVariants } from '@/src/components/organisms/chatUsersList/ChatUsersList.animation';
 
-import { ChatUsersResponse } from '@/src/components/pages/chat/useChatUsers';
+import { ChatUsersResponse } from '@/src/schemas/chat';
 
 import styles from './ChatUsersList.module.scss';
 
@@ -52,19 +52,19 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
     <nav className={styles.nav}>
       <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
         {data.pages.map((page) => {
-          return page.users.map(({ user, chatRoomId }) => {
-            const isActive = chatRoomId === Number(router.query.chatRoom as string);
+          return page.users.map(({ id, name, username }) => {
+            const isActive = id === (router.query.receiverId as string);
             return (
-              <li key={user.id}>
+              <li key={id}>
                 <MotionLink
                   variants={linkVariants}
-                  href={`/chat/${chatRoomId}`}
+                  href={`/chat/${id}`}
                   className={clsx(isActive && styles.linkActive, styles.link)}
                 >
-                  <Avatar userId={user.id} size="medium" />
+                  <Avatar userId={id} size="medium" />
                   <span className={styles.name}>
-                    <span className={styles.fullName}>{user.name}</span>
-                    <span className={styles.username}>@{user.username}</span>
+                    <span className={styles.fullName}>{name}</span>
+                    <span className={styles.username}>@{username}</span>
                   </span>
                 </MotionLink>
               </li>

@@ -8,17 +8,6 @@ import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper'
 
 import styles from './AccountPost.module.scss';
 
-export type PostImage = {
-  id: number;
-  fileId: string;
-  name: string;
-  url: string;
-  thumbnailUrl: string;
-  width: number;
-  height: number;
-  size: number;
-};
-
 type PropsTypes = {
   imageUrl: string;
   width: number;

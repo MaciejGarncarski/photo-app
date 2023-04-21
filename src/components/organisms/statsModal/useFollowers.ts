@@ -2,33 +2,33 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { UserApiResponse } from '@/src/consts/schemas';
+import { FollowersResponse } from '@/src/schemas/followerStats';
 
-type StatsResponse = {
-  users: Array<{ user: UserApiResponse; chatRoomId: number }>;
-  usersCount: number;
-  canLoadMore: boolean;
-  nextCursor: number | null;
-};
-
-type PropsTypes = {
+type UseFollowers = {
   userId: string;
-  type: 'friends' | 'followers';
+  type: 'followers' | 'friends';
 };
 
-export const useFollowers = ({ userId, type }: PropsTypes) => {
+export const useFollowers = ({ userId, type }: UseFollowers) => {
   return useInfiniteQuery(
     [type, userId],
     async ({ pageParam = 0 }) => {
-      const { data } = await apiClient.get<StatsResponse>(
-        `getFollowers?userId=${userId}&type=${type}&skip=${pageParam ?? 0}`,
+      if (type === 'friends') {
+        const { data } = await apiClient.get<FollowersResponse>(
+          `follower-stats/friend?userId=${userId}&skip=${pageParam ?? 0}`,
+        );
+        return data;
+      }
+
+      const { data } = await apiClient.get<FollowersResponse>(
+        `follower-stats/follower?userId=${userId}&skip=${pageParam ?? 0}`,
       );
       return data;
     },
     {
       refetchOnWindowFocus: false,
-      getNextPageParam: (prevPosts) => {
-        return prevPosts?.nextCursor ?? undefined;
+      getNextPageParam: (prev) => {
+        return prev.currentPage === prev.totalPages ? undefined : prev.currentPage + 1;
       },
     },
   );

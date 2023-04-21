@@ -1,11 +1,11 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/useAuth';
+import { clientEnv } from '@/src/utils/env';
 
 import { FinalImages } from '@/src/components/pages/createPost/types';
-import { useUploadImage } from '@/src/components/pages/createPost/useUploadImage';
-import { useEditAccount } from '@/src/components/pages/editAccount/useEditAccount';
 
 type UseUploadAvatarArguments = {
   stagePersonalInfo: () => void;
@@ -13,11 +13,27 @@ type UseUploadAvatarArguments = {
   resetFinalImages: () => void;
 };
 
+type Mutation = {
+  avatarFile: Blob;
+};
+
 export const useUploadAvatar = ({ stagePersonalInfo, finalImages, resetFinalImages }: UseUploadAvatarArguments) => {
-  const { session } = useAuth();
+  const { sessionUser } = useAuth();
   const queryClient = useQueryClient();
-  const uploadImage = useUploadImage();
-  const editAccount = useEditAccount();
+
+  const uploadNewAvatar = useMutation({
+    mutationFn: ({ avatarFile }: Mutation) => {
+      const formData = new FormData();
+      formData.append('image', avatarFile);
+
+      return axios.postForm(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/session-user/update-avatar`, formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  });
 
   const isFinalImageEmpty = finalImages.filter((image) => !!image).length === 0;
   const onSaveImage = async () => {
@@ -27,19 +43,12 @@ export const useUploadAvatar = ({ stagePersonalInfo, finalImages, resetFinalImag
     if (!finalImages[0]?.file) {
       return toast.error('Image not detected');
     }
-    if (!session?.user?.id) {
-      return;
-    }
-    const userId = session.user.id;
 
-    const folder = `${userId}/avatar/custom/`;
-    const imageUrl = await uploadImage.mutateAsync({ imageBlob: finalImages[0].file, folder });
-
-    editAccount.mutate(
-      { newAvatarUrl: imageUrl, userId },
+    uploadNewAvatar.mutate(
+      { avatarFile: finalImages[0].file },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries(['user', userId]);
+          await queryClient.invalidateQueries(['user', sessionUser?.id]);
           stagePersonalInfo();
         },
         onSettled: () => {
@@ -51,8 +60,7 @@ export const useUploadAvatar = ({ stagePersonalInfo, finalImages, resetFinalImag
 
   return {
     onSaveImage,
-    uploadImageLoading: uploadImage.isLoading,
-    editAccountLoading: editAccount.isLoading,
+    isLoading: uploadNewAvatar.isLoading,
     isFinalImageEmpty,
   };
 };

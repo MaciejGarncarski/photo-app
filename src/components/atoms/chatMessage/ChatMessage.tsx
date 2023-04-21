@@ -9,25 +9,18 @@ import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
 import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
 
+import { ChatMessage as TChatMessage } from '@/src/schemas/chat';
+
 import styles from './ChatMessage.module.scss';
 
-export type Message = {
-  id: string;
-  text: string;
-  sender: string;
-  receiver: string;
-  createdAt: Date;
-};
-
 type PropsTypes = {
-  message: Message;
+  message: TChatMessage;
 };
 
 export const ChatMessage = ({ message }: PropsTypes) => {
-  const { sender, receiver, text, createdAt, id } = message;
+  const { senderId, receiverId, text, createdAt, id } = message;
   const { closeModal, formattedDate, isReceiver, isModalOpen, mutate, openModal } = useChatMessage({
-    sender,
-    receiver,
+    receiverId,
     createdAt,
   });
 
@@ -42,11 +35,11 @@ export const ChatMessage = ({ message }: PropsTypes) => {
         <time dateTime={createdAt.toString()}>{formattedDate}</time>
       </p>
       <div className={clsx(isReceiver && styles.contentReceiver, styles.content)}>
-        <Avatar userId={sender} size="small" />
+        <Avatar userId={senderId} size="small" />
         <p>{text}</p>
       </div>
       <ListModal isVisible={isModalOpen} closeModal={closeModal} headingText="Message options">
-        <ListModalItem isLast icon={<IconTrash />} type="button" onClick={() => mutate({ id })}>
+        <ListModalItem isLast icon={<IconTrash />} type="button" onClick={() => mutate({ messageId: id })}>
           Delete
         </ListModalItem>
       </ListModal>

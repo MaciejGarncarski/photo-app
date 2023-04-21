@@ -1,21 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { z } from 'zod';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { CommentPostRequestSchema } from '@/src/pages/api/post/comment';
+type Mutation = { commentId: number; isLiked: boolean };
 
-type Mutation = z.infer<typeof CommentPostRequestSchema>;
-
-export const useCommentLike = ({ commentId }: Mutation) => {
+export const useCommentLike = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async () => {
-      await apiClient.post(`/post/comment`, {
-        commentId,
-      });
+    ({ commentId, isLiked }: Mutation) => {
+      if (isLiked) {
+        return apiClient.delete(`post-comment/${commentId}/like`);
+      }
+
+      return apiClient.put(`post-comment/${commentId}/like`);
     },
     {
       onError: () => toast.error('Error, try again later.'),

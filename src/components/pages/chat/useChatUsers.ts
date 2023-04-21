@@ -4,23 +4,13 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuth } from '@/src/hooks/useAuth';
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { UserApiResponse } from '@/src/consts/schemas';
-
-export type ChatUsersResponse = {
-  users: Array<{
-    user: UserApiResponse;
-    chatRoomId: number;
-  }>;
-  usersCount: number;
-  totalPages: number;
-  currentPage: number;
-};
+import { ChatUsersResponse } from '@/src/schemas/chat';
 
 export const useChatUsers = () => {
   const [inputValue, setInputValue] = useState('');
   const [searchedUser, setSearchedUser] = useState('');
   const [isEnabled, setIsEnabled] = useState(inputValue === '' || false);
-  const { session } = useAuth();
+  const { sessionUser } = useAuth();
 
   const resetState = () => {
     setSearchedUser('');
@@ -38,12 +28,9 @@ export const useChatUsers = () => {
   };
 
   const chatUsers = useInfiniteQuery(
-    ['chat users', session?.user?.id, searchedUser],
+    ['chat users', sessionUser?.id, searchedUser],
     async ({ pageParam = 0 }) => {
-      const { data: responseData } = await apiClient.get<ChatUsersResponse>(
-        `chat/getChatUsers?userId=${session?.user?.id}&currentPage=${pageParam}&searchedUser=${searchedUser}`,
-      );
-
+      const { data: responseData } = await apiClient.get<ChatUsersResponse>(`chat/chatUsers?skip=${pageParam}`);
       return responseData;
     },
     {

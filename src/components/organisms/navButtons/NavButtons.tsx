@@ -21,10 +21,10 @@ const Settings = dynamic(() => import('@/src/components/organisms/settings/Setti
 });
 
 export const NavButtons = () => {
-  const { data, isLoading, isSignedIn } = useAuth();
+  const { sessionUser, isLoading, isSignedIn } = useAuth();
   const router = useRouter();
   const { openModal, closeModal, isModalOpen } = useModal();
-  const { navButtonsList } = getNavListData(data?.username);
+  const { navButtonsList } = getNavListData(sessionUser?.username);
 
   if (isLoading) {
     return null;

@@ -11,11 +11,11 @@ type Arguments = {
 
 export const useAccount = ({ username }: Arguments) => {
   const router = useRouter();
-  const { data: sessionUserData } = useAuth();
+  const { sessionUser } = useAuth();
   const { data: userData, isError } = useUserByUsername({ username });
   const settingsModal = useModal();
   const signOutModal = useModal();
-  const isOwner = sessionUserData?.id === userData?.id;
+  const isOwner = sessionUser?.id === userData?.id;
 
   useEffect(() => {
     if (isError) {

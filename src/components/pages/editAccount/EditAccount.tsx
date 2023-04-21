@@ -33,13 +33,13 @@ export type Stages = 'selectImage' | 'cropImage' | 'personalInfo';
 
 export const EditAccount = () => {
   const [stage, setStage] = useState<Stages>('selectImage');
-  const { session } = useAuth();
+  const { sessionUser } = useAuth();
 
   const stageSelectImage = () => setStage('selectImage');
   const stageCropImage = () => setStage('cropImage');
   const stagePersonalInfo = () => setStage('personalInfo');
 
-  const userId = session?.user?.id || '';
+  const userId = sessionUser?.id || '';
 
   return (
     <ProtectedPage shouldBeSignedIn>

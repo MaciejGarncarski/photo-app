@@ -45,7 +45,7 @@ export const Home = () => {
               return <PostPlaceholder key={idx} />;
             }
 
-            return <HomePost priority={idx < 3} key={post.postId} post={post} />;
+            return <HomePost priority={idx < 3} key={post.id} post={post} />;
           });
         })}
         {(isLoading || hasNextPage) && (

@@ -54,3 +54,41 @@
     padding: 0.8rem;
   }
 }
+
+.link {
+  border-radius: var(--radius-small);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  border: none;
+  padding: 0.8rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-transform: capitalize;
+  transition: all var(--transition);
+  transition-property: transform, box-shadow;
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      box-shadow: var(--shadow-focus);
+      transform: scale(1.05);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @include common.mediaquery('desktop') {
+    border-radius: var(--radius-medium);
+  }
+}

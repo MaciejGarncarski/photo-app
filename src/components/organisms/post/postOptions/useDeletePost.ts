@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { clientEnv } from '@/src/utils/env';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
 
@@ -14,7 +15,7 @@ export const useDeletePost = () => {
 
   return useMutation(
     async ({ postId }: DeletePostMutation) => {
-      await apiClient.delete(`post?postId=${postId}`);
+      await axios.delete(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/post/${postId}`, { withCredentials: true });
     },
     {
       onError: () => toast.error('Error, try again later.'),

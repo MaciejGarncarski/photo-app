@@ -16,14 +16,14 @@ type Arguments = {
 
 export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
   const { data } = useUser({ userId: authorId });
-  const { session } = useAuth();
+  const { sessionUser } = useAuth();
   const menuModal = useModal();
   const confirmationModal = useModal();
   const deletePostMutation = useDeletePost();
 
   const dateFromNow = formatDate(createdAt);
 
-  const isAuthor = session?.user?.id === authorId;
+  const isAuthor = sessionUser?.id === authorId;
 
   const onSettled = () => {
     confirmationModal.closeModal();

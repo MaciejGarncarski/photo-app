@@ -17,7 +17,7 @@ type PropsTypes = {
 };
 
 export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
-  const { isLoading, data, isEmpty, sentryRef, hasNextPage } = useStatsModal({ userId, type });
+  const { isLoading, data, isEmpty, sentryRef } = useStatsModal({ userId, type });
 
   return (
     <ModalBackdrop closeModal={closeModal}>
@@ -30,7 +30,7 @@ export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
               <li className={styles.listItem}>No data.</li>
             </ul>
           )}
-          {isLoading || hasNextPage ? (
+          {isLoading ? (
             <ul className={styles.list} ref={sentryRef}>
               {Array.from({ length: 3 }, (_, item) => item).map((el) => {
                 return <li className={styles.placeholder} key={el}></li>;
@@ -39,7 +39,7 @@ export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
           ) : (
             <ul className={styles.list}>
               {data?.pages.map((page) => {
-                return page.users.map(({ user }) => {
+                return page.users.map((user) => {
                   return <StatsModalItem user={user} key={user.id} />;
                 });
               })}

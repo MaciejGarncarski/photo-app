@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { signInCredentials, SignInFormValues, SignInSchema } from '@/src/utils/signIn';
@@ -13,7 +13,7 @@ import { animation } from '@/src/components/pages/signIn/SignIn.animation';
 import styles from './SignInForm.module.scss';
 
 export const SignInForm = () => {
-  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const {
     handleSubmit,
@@ -28,8 +28,8 @@ export const SignInForm = () => {
     },
   });
 
-  const onSubmit = handleSubmit(({ email, password }) => {
-    signInCredentials({ email, password, onSuccess: () => router.push('/') });
+  const onSubmit = handleSubmit(async ({ email, password }) => {
+    await signInCredentials({ email, password, queryClient });
   });
 
   return (

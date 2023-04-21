@@ -1,4 +1,3 @@
-import { PostImage as PostImageType } from '@prisma/client';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,7 +12,7 @@ import { PostSliderProgress } from '@/src/components/organisms/post/postSlider/P
 import { useSlider } from '@/src/components/organisms/post/postSlider/useSlider';
 import { useUpdateWidth } from '@/src/components/organisms/post/postSlider/useUpdateWidth';
 
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 import styles from './PostSlider.module.scss';
 
@@ -26,7 +25,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
   const { imageRef, width } = useUpdateWidth();
-  const postImages = post.imagesData.filter((img): img is PostImageType => !!img);
+  const postImages = post.images;
 
   const { handleDragEnd, nextImage, prevImage, isNotFirstIndex, isNotLastIndex, isSingleImage } = useSlider({
     currentIndex,

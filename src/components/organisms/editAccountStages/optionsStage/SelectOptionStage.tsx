@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 
+import { useAuth } from '@/src/hooks/useAuth';
+
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 
 import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
@@ -18,7 +20,10 @@ type PropsTypes = {
 };
 
 export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTypes) => {
-  const { isLoading, customImage, isModalOpen, openModal, removeAvatar, closeModal } = useOptionsStage();
+  const { sessionUser } = useAuth();
+  const customImage = sessionUser?.customImage;
+
+  const { isLoading, isModalOpen, openModal, removeAvatar, closeModal } = useOptionsStage();
 
   if (isLoading) {
     return <TextWithLoader text="Removing your avatar.." />;

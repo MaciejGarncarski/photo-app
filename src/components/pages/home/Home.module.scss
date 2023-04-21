@@ -13,7 +13,6 @@
 .posts {
   display: grid;
   justify-content: center;
-  align-items: center;
   gap: 4rem;
   margin-top: 2rem;
   margin-bottom: 4rem;
@@ -23,7 +22,7 @@
   @include common.mediaquery('desktop') {
     grid-auto-columns: auto;
     margin: 0 auto;
-    margin-top: 3rem;
+    margin-top: 4rem;
     margin-bottom: 4rem;
     gap: 6rem;
   }

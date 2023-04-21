@@ -5,16 +5,15 @@ import { formatDate } from '@/src/utils/formatDate';
 import { useDeleteChatMessage } from '@/src/components/atoms/chatMessage/useDeleteChatMessage';
 
 type PropsTypes = {
-  sender: string;
-  receiver: string;
+  receiverId: string;
   createdAt: Date;
 };
 
-export const useChatMessage = ({ sender, receiver, createdAt }: PropsTypes) => {
-  const { mutate } = useDeleteChatMessage({ receiver, sender });
+export const useChatMessage = ({ receiverId, createdAt }: PropsTypes) => {
+  const { mutate } = useDeleteChatMessage({ receiverId });
   const { isModalOpen, openModal, closeModal } = useModal();
-  const { session } = useAuth();
-  const isReceiver = receiver === session?.user?.id;
+  const { sessionUser } = useAuth();
+  const isReceiver = receiverId === sessionUser?.id;
   const formattedDate = formatDate(createdAt);
 
   return { isModalOpen, openModal, closeModal, isReceiver, formattedDate, mutate };

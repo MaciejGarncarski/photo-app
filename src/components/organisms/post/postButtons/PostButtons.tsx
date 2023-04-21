@@ -6,7 +6,7 @@ import { usePostButtonsData } from '@/src/components/organisms/post/postButtons/
 import { PostModal } from '@/src/components/organisms/postModal/PostModal';
 import { ShareModal } from '@/src/components/organisms/shareModal/ShareModal';
 
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 import styles from './PostButtons.module.scss';
 
@@ -16,7 +16,7 @@ type PropsTypes = {
 };
 
 export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
-  const { postId } = post;
+  const { id } = post;
   const { buttonData, postModal, shareModal } = usePostButtonsData({ post, parentModalOpen });
 
   return (
@@ -41,7 +41,7 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
       <ShareModal
         isVisible={shareModal.isModalOpen}
         closeModal={shareModal.closeModal}
-        textToCopy={`https://photo-app-orpin.vercel.app/post/${postId}`}
+        textToCopy={`https://photo-app-orpin.vercel.app/post/${id}`}
       />
       <PostModal isVisible={postModal.isModalOpen} post={post} closeModal={postModal.closeModal} />
     </ul>

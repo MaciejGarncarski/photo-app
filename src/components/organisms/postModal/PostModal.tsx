@@ -12,7 +12,7 @@ import { PostSlider } from '@/src/components/organisms/post/postSlider/PostSlide
 import { PostComments } from '@/src/components/organisms/postComments/PostComments';
 import { modalVariants } from '@/src/components/organisms/postModal/PostModal.animation';
 
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 import styles from './PostModal.module.scss';
 
@@ -23,7 +23,7 @@ type PropsTypes = {
 };
 
 export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
-  const { authorId, postId, createdAt } = post;
+  const { authorId, id, createdAt } = post;
 
   return (
     <AnimatePresence mode="wait">
@@ -39,7 +39,7 @@ export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
               role="dialog"
               className={styles.container}
             >
-              <PostHeader tag="div" authorId={authorId} createdAt={createdAt} postId={postId} />
+              <PostHeader tag="div" authorId={authorId} createdAt={createdAt.toString()} postId={id} />
               <div className={styles.sliderContainer}>
                 <PostSlider post={post} priority={true} />
               </div>
@@ -48,7 +48,7 @@ export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
                 <Heading tag="h2" size="medium">
                   Comments
                 </Heading>
-                <PostComments postId={post.postId} />
+                <PostComments postId={id} />
               </section>
             </motion.div>
           </ReactFocusLock>

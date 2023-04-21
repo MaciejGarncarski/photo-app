@@ -6,16 +6,16 @@ import { unlock } from '@/src/utils/bodyLock';
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
 
-import { UserApiResponse } from '@/src/consts/schemas';
+import { User } from '@/src/schemas/user.schema';
 
 import styles from './StatsModalItem.module.scss';
 
 type Props = {
-  user: UserApiResponse;
+  user: User;
 };
 
 export const StatsModalItem = ({ user: { id, username } }: Props) => {
-  const { session } = useAuth();
+  const { sessionUser } = useAuth();
 
   return (
     <li key={id} className={styles.listItem}>
@@ -23,7 +23,7 @@ export const StatsModalItem = ({ user: { id, username } }: Props) => {
         <Avatar userId={id} size="small" />
         <span className={styles.username}>@{username}</span>
       </Link>
-      {id !== session?.user?.id && <FollowButton userId={id} />}
+      {id !== sessionUser?.id && <FollowButton userId={id} />}
     </li>
   );
 };

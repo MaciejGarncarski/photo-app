@@ -13,18 +13,16 @@ import { useChatSubscription } from '@/src/components/pages/chatRoom/useChatSubs
 export const useChatRoom = () => {
   const [inputVal, setInputVal] = useState('');
 
-  const { session } = useAuth();
+  const { sessionUser } = useAuth();
   const { isMobile } = useIsMobile();
   const { isGoingUp } = useIsGoingUp();
   const { data: chatRoomData } = useChatRoomData();
 
   useChatSubscription(socket, chatRoomData?.id || 0);
-
-  const friendId = chatRoomData?.userOne_id === session?.user?.id ? chatRoomData?.userTwo_id : chatRoomData?.userOne_id;
+  const friendId = chatRoomData?.receiver_id || '';
 
   const { isLoading, fetchNextPage, hasNextPage, isError, data } = useChatMessages({
-    friendId: friendId || '',
-    userId: session?.user?.id ?? '',
+    friendId,
   });
 
   const fetchNext = () => {
@@ -41,8 +39,8 @@ export const useChatRoom = () => {
   });
 
   const message = {
-    receiver: friendId,
-    sender: session?.user?.id,
+    receiverId: friendId,
+    senderId: sessionUser?.id || '',
     message: inputVal,
   };
 

@@ -3,24 +3,23 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/src/utils/apis/apiClient';
 
 type Mutation = {
-  id: string;
+  messageId: string;
 };
 
 type Arguments = {
-  sender: string;
-  receiver: string;
+  receiverId: string;
 };
 
-export const useDeleteChatMessage = ({ sender, receiver }: Arguments) => {
+export const useDeleteChatMessage = ({ receiverId }: Arguments) => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async ({ id }: Mutation) => {
-      return apiClient.delete(`chat/${id}`);
+    async ({ messageId }: Mutation) => {
+      return apiClient.delete(`chat/${messageId}`);
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['chat', sender, receiver]);
+        queryClient.invalidateQueries(['chatMessages', receiverId]);
       },
     },
   );

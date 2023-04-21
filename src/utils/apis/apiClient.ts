@@ -1,3 +1,5 @@
 import axios from 'axios';
 
-export const apiClient = axios.create({ baseURL: '/api/' });
+import { clientEnv } from '@/src/utils/env';
+
+export const apiClient = axios.create({ baseURL: `${clientEnv.NEXT_PUBLIC_API_ROOT}api/`, withCredentials: true });

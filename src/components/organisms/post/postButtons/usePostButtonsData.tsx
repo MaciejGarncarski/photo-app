@@ -8,7 +8,7 @@ import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper'
 
 import { useHandleLike } from '@/src/components/organisms/post/postButtons/useHandleLike';
 
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 type ButtonData = Array<{
   alt: string;

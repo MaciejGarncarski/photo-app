@@ -23,7 +23,7 @@ type PropsTypes = {
 };
 
 export const AccountHeaderDesktop = ({ userId, isOwner, isModalOpen, openModal }: PropsTypes) => {
-  const { session } = useAuth();
+  const { isSignedIn } = useAuth();
   const { data, isLoading } = useUser({ userId });
 
   if (isLoading || !data) {
@@ -36,7 +36,7 @@ export const AccountHeaderDesktop = ({ userId, isOwner, isModalOpen, openModal }
     <main className={styles.accountDesktop}>
       <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.leftCol}>
         <Avatar userId={userId} size="big" />
-        {!isOwner && session && <FollowButton userId={userId} />}
+        {!isOwner && isSignedIn && <FollowButton userId={userId} />}
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
             <IconSettingsWrapper size="sm" />

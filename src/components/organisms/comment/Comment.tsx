@@ -12,16 +12,17 @@ import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 
 import { useComment } from '@/src/components/organisms/comment/useComment';
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { PostComment } from '@/src/components/organisms/postComments/useInfiniteComments';
+
+import { Comment as TComment } from '@/src/schemas/post-comment';
 
 import styles from './Comment.module.scss';
 
 type PropsTypes = {
-  commentData: PostComment;
+  commentData: TComment;
 };
 
 export const Comment = ({ commentData }: PropsTypes) => {
-  const { userId, createdAt } = commentData;
+  const { authorId, createdAt } = commentData;
   const { openModal, closeModal, isModalOpen } = useModal();
 
   const {
@@ -40,7 +41,7 @@ export const Comment = ({ commentData }: PropsTypes) => {
     <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <VisuallyHidden>{`@${username}`}</VisuallyHidden>
-        <Avatar userId={userId} size="small" />
+        <Avatar userId={authorId} size="small" />
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>

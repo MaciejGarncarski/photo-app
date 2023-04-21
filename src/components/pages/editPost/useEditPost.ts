@@ -12,7 +12,7 @@ export const useEditPost = ({ postId }: { postId: number }) => {
 
   return useMutation(
     async ({ description }: Mutation) => {
-      return apiClient.post('post/edit', {
+      return apiClient.post('post/edit-post', {
         postId,
         description,
       });

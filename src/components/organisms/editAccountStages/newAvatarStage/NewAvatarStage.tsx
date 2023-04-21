@@ -23,14 +23,14 @@ type PropsTypes = {
 export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const resetFinalImages = () => setFinalImages([]);
-  const { onSaveImage, uploadImageLoading, editAccountLoading, isFinalImageEmpty } = useUploadAvatar({
+  const { onSaveImage, isLoading, isFinalImageEmpty } = useUploadAvatar({
     stagePersonalInfo,
     finalImages,
     resetFinalImages,
   });
   const { previewImages } = getPreviewImages(finalImages);
 
-  if (editAccountLoading || uploadImageLoading) {
+  if (isLoading) {
     return <TextWithLoader text="Uploading new avatar.." />;
   }
 
@@ -61,12 +61,7 @@ export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTyp
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
           go back
         </Button>
-        <Button
-          type="button"
-          variant="primary"
-          disabled={editAccountLoading || uploadImageLoading || isFinalImageEmpty}
-          onClick={onSaveImage}
-        >
+        <Button type="button" variant="primary" disabled={isLoading || isFinalImageEmpty} onClick={onSaveImage}>
           Save new image
         </Button>
       </div>

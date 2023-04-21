@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { useModal } from '@/src/hooks/useModal';
+import { useUser } from '@/src/hooks/useUser';
 
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
@@ -13,21 +14,22 @@ export const PostById = () => {
   const router = useRouter();
   const postId = parseInt(router.query.id as string);
   const postModal = useModal(true);
-  const { data, isLoading } = usePost({ postId });
+  const { data, isSuccess } = usePost({ postId });
+  const { data: authorData } = useUser({ userId: data?.authorId || '' });
 
   const postModalClose = () => {
     postModal.closeModal();
-    router.replace(`/${data?.author?.username}`);
+    router.replace(`/${authorData?.username}`);
   };
 
-  if (isLoading || !data?.author?.username) {
+  if (!isSuccess || !authorData?.username) {
     return <Loader color="blue" size="normal" />;
   }
 
   return (
     <>
       <PostModal isVisible={postModal.isModalOpen} post={data} closeModal={postModalClose} />
-      <Account username={data.author.username} />
+      <Account username={authorData.username} />
     </>
   );
 };

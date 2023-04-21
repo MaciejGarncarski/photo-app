@@ -12,7 +12,7 @@ export const useDeleteComment = () => {
 
   return useMutation(
     async ({ commentId }: Mutation) => {
-      await apiClient.delete(`post/comment?commentId=${commentId}`);
+      await apiClient.delete(`post-comment/${commentId}`);
     },
     {
       onError: () => toast.error('Error, try again later.'),

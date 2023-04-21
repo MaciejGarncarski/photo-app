@@ -1,21 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useAuth } from '@/src/hooks/useAuth';
 import { apiClient } from '@/src/utils/apis/apiClient';
-
-import { DeleteAvatarData } from '@/src/pages/api/account/deleteAvatar';
+import { clientEnv } from '@/src/utils/env';
 
 export const useDeleteAvatar = () => {
-  const { session } = useAuth();
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({ userId }: DeleteAvatarData) => {
-      return apiClient.delete(`account/deleteAvatar?userId=${userId}`);
+    () => {
+      return apiClient.delete(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/session-user/delete-avatar`, {
+        withCredentials: true,
+      });
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['user', session?.user?.id]);
+        queryClient.invalidateQueries(['user']);
       },
     },
   );

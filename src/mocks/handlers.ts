@@ -2,7 +2,7 @@ import { DefaultBodyType, PathParams, rest } from 'msw';
 
 import { mockedUser } from '@/src/utils/tests/mockedData';
 
-import { UserApiResponse } from '@/src/consts/schemas';
+import { UserApiResponse } from '@/src/schemas/user.schema';
 
 export const handlers = [
   rest.get<DefaultBodyType, PathParams<string>, UserApiResponse>(

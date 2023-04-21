@@ -7,7 +7,7 @@ import { getDescriptionData } from '@/src/utils/getDescriptionData';
 import { MotionImage } from '@/src/components/molecules/avatar/Avatar';
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 import styles from './PostImage.module.scss';
 

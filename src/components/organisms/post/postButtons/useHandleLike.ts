@@ -3,13 +3,12 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { PostData } from '@/src/utils/apis/transformPost';
 import { InfinitePostsQuery, updatePostQuery } from '@/src/utils/updatePostQuery';
 
 import { usePostLike } from '@/src/components/organisms/post/postButtons/usePostLike';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
-import { Post } from '@/src/consts/schemas';
+import { Post } from '@/src/schemas/post.schema';
 
 const TIMEOUT = 1000;
 
@@ -21,7 +20,7 @@ export const useHandleLike = ({ post }: PropsTypes) => {
   const [isLikeAnimationShown, setIsLikeAnimationShown] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { isSignedIn } = useAuth();
-  const { isLiked, postId } = post;
+  const { isLiked, id: postId } = post;
   const postLikeMutation = usePostLike();
   const queryClient = useQueryClient();
 
@@ -31,13 +30,13 @@ export const useHandleLike = ({ post }: PropsTypes) => {
     }
 
     const oldPostsList = queryClient.getQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY);
-    const oldPost = queryClient.getQueryData<PostData>(['post', postId]);
+    const oldPost = queryClient.getQueryData<Post>(['post', postId]);
 
     postLikeMutation.mutate(
-      { postId: postId.toString() },
+      { postId, isLiked },
       {
         onError: () => {
-          queryClient.setQueryData<PostData>(['post', postId], oldPost);
+          queryClient.setQueryData<Post>(['post', postId], oldPost);
           queryClient.setQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY, oldPostsList);
         },
       },

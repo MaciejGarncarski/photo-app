@@ -10,7 +10,7 @@ export const useUser = ({ userId }: PropsTypes) => {
   return useQuery({
     queryKey: ['user', userId],
     queryFn: () => getUser({ userId }),
-    enabled: Boolean(userId),
+    enabled: userId !== '',
     retry: 1,
     refetchOnWindowFocus: false,
   });

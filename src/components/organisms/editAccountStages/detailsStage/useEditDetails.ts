@@ -13,7 +13,7 @@ type UseEditDetailsArguments = {
   userId: string;
 };
 
-export const useEditDetails = ({ reset, openModal, getValues, userId }: UseEditDetailsArguments) => {
+export const useEditDetails = ({ reset, openModal, getValues }: UseEditDetailsArguments) => {
   const router = useRouter();
   const editAccount = useEditAccount();
 
@@ -31,7 +31,7 @@ export const useEditDetails = ({ reset, openModal, getValues, userId }: UseEditD
     const { bio, fullName, username } = getValues();
 
     editAccount.mutate(
-      { bio, fullName, userId, username },
+      { bio, name: fullName, username: username },
       {
         onSuccess: () => {
           router.push(`/${username}`);

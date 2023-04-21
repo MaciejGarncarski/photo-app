@@ -12,18 +12,18 @@ type Props = {
 
 export const ProtectedPage = ({ children, shouldBeSignedIn = true }: Props) => {
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isSignedIn, isLoading } = useAuth();
 
   if (isLoading) {
     return <Loader color="blue" size="normal" />;
   }
 
-  if (isAuthenticated && !shouldBeSignedIn) {
+  if (isSignedIn && !shouldBeSignedIn) {
     router.push('/access-denied');
     return null;
   }
 
-  if (!isAuthenticated && shouldBeSignedIn) {
+  if (!isSignedIn && shouldBeSignedIn) {
     router.push('/access-denied');
     return null;
   }

@@ -1,4 +1,4 @@
-import { UserApiResponse } from '@/src/consts/schemas';
+import { UserApiResponse } from '@/src/schemas/user.schema';
 
 export const mockedUser: UserApiResponse = {
   id: 'clb9cuwar0000hgo7wembhg3c',

@@ -1,8 +1,9 @@
 import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
-import { signOut } from 'next-auth/react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { useAuth } from '@/src/hooks/useAuth';
 import { useModal } from '@/src/hooks/useModal';
+import { signOut } from '@/src/utils/signOut';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
@@ -15,9 +16,16 @@ type PropsTypes = {
 };
 
 export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
+  const queryClient = useQueryClient();
   const { isDark, changeTheme } = useTheme();
-  const { data, isSignedIn } = useAuth();
+  const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
+
+  const handleSignOut = () => {
+    signOut(queryClient);
+    closeModal();
+    signOutModal.closeModal();
+  };
 
   const ThemeButton = () => {
     if (isDark) {
@@ -29,8 +37,8 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
   return (
     <>
       <ListModal isVisible={isVisible} closeModal={closeModal} headingText="PhotoApp settings">
-        {data && (
-          <ListModalItem type="link" href={`/${data.username}`} onClick={closeModal} icon={<IconUser />}>
+        {sessionUser && (
+          <ListModalItem type="link" href={`/${sessionUser.username}`} onClick={closeModal} icon={<IconUser />}>
             Your profile
           </ListModalItem>
         )}
@@ -46,7 +54,7 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
       <ConfirmationAlert
         isVisible={signOutModal.isModalOpen}
         headingText="Sign out?"
-        onConfirm={signOut}
+        onConfirm={handleSignOut}
         closeModal={signOutModal.closeModal}
       />
     </>

@@ -1,21 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { clientEnv } from '@/src/utils/env';
 
-import { EditAccountData } from '@/src/pages/api/account/edit';
+import { EditAccountInput } from '@/src/consts/schemas';
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({ userId, username, fullName, newAvatarUrl, bio }: EditAccountData) => {
-      return apiClient.post<unknown, unknown, EditAccountData>('/account/edit', {
-        userId,
-        newAvatarUrl,
-        bio,
-        username,
-        fullName,
-      });
+    (data: EditAccountInput) => {
+      return axios.post<unknown, unknown, EditAccountInput>(
+        `${clientEnv.NEXT_PUBLIC_API_ROOT}api/session-user/edit-account`,
+        data,
+        { withCredentials: true },
+      );
     },
     {
       onSuccess: () => {

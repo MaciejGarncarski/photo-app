@@ -1,6 +1,5 @@
+import { PostImage } from '@prisma/client';
 import { PanInfo } from 'framer-motion';
-
-import { PostImage } from '@/src/components/atoms/accountPost/AccountPost';
 
 type ArgsTypes = {
   currentIndex: number;

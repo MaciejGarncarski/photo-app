@@ -4,25 +4,26 @@ import { formatDate } from '@/src/utils/formatDate';
 
 import { useCommentLike } from '@/src/components/organisms/comment/useCommentLike';
 import { useDeleteComment } from '@/src/components/organisms/comment/useDeleteComment';
-import { PostComment } from '@/src/components/organisms/postComments/useInfiniteComments';
+
+import { Comment } from '@/src/schemas/post-comment';
 
 type Arguments = {
-  commentData: PostComment;
+  commentData: Comment;
 };
 
 export const useComment = ({ commentData }: Arguments) => {
-  const { session } = useAuth();
-  const { isLiked, id, commentText, createdAt, userId, likesCount } = commentData;
-  const { data: sessionUserData } = useUser({ userId: session?.user?.id || '' });
-  const { data } = useUser({ userId });
+  const { sessionUser } = useAuth();
+  const { isLiked, commentId, commentText, createdAt, authorId, likesCount } = commentData;
+  const { data: sessionUserData } = useUser({ userId: sessionUser?.id || '' });
+  const { data } = useUser({ userId: authorId });
   const timeSinceCreated = formatDate(createdAt);
 
-  const commentLike = useCommentLike({ commentId: id });
+  const commentLike = useCommentLike();
   const commentDelete = useDeleteComment();
-  const handleLike = () => commentLike.mutate();
-  const handleDelete = () => commentDelete.mutate({ commentId: id });
+  const handleLike = () => commentLike.mutate({ commentId, isLiked });
+  const handleDelete = () => commentDelete.mutate({ commentId });
 
-  const isAbleToDelete = sessionUserData?.id === userId;
+  const isAbleToDelete = sessionUserData?.id === authorId;
   const userAccountHref = `/${data?.username}`;
 
   return {

@@ -34,7 +34,7 @@ export const PostComments = ({ postId }: PropsTypes) => {
         <>
           {data.pages.map((page) => {
             return page.comments.map((comment) => {
-              return <Comment key={comment.id} commentData={comment} />;
+              return <Comment key={comment.commentId} commentData={comment} />;
             });
           })}
         </>

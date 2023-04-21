@@ -9,14 +9,14 @@ export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
     socket.emit('join chat room', { chatRoomId });
 
     socket.on('new message', (data) => {
-      const { receiver, sender } = data;
-      queryClient.invalidateQueries(['chat', sender, receiver], {
+      const { receiverId } = data;
+      queryClient.invalidateQueries(['chatMessages', receiverId], {
         refetchPage: (lastPage, index) => {
           return index === 0;
         },
       });
 
-      queryClient.invalidateQueries(['chat', receiver, sender], {
+      queryClient.invalidateQueries(['chatMessages', receiverId], {
         refetchPage: (lastPage, index) => {
           return index === 0;
         },

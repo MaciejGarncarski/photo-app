@@ -2,16 +2,18 @@ import { ChatRoom } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
+import { useAuth } from '@/src/hooks/useAuth';
 import { apiClient } from '@/src/utils/apis/apiClient';
 
 export const useChatRoomData = () => {
   const router = useRouter();
-  const chatRoomId = parseInt(router.query.chatRoom as string);
+  const { sessionUser } = useAuth();
+  const receiverId = router.query.receiverId as string;
 
   return useQuery({
-    queryKey: ['chatRoomData', chatRoomId],
+    queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],
     queryFn: async () => {
-      const { data } = await apiClient.get<ChatRoom>(`/chatRoom/${chatRoomId}`);
+      const { data } = await apiClient.get<ChatRoom>(`chat/${receiverId}/check`);
       return data;
     },
   });
