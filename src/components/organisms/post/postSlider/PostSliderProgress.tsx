@@ -1,7 +1,8 @@
-import { PostImage } from '@prisma/client';
 import { motion } from 'framer-motion';
 
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+
+import { PostImage } from '@/src/services/userPosts.service';
 
 import styles from './PostSlider.module.scss';
 

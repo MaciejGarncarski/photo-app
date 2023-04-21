@@ -1,4 +1,15 @@
-import { PostImage } from '@prisma/client';
+export type PostImage = {
+  id: number;
+  fileId: string;
+  name: string;
+  url: string;
+  thumbnailUrl: string;
+  width: number;
+  height: number;
+  size: number;
+  postId: number | null;
+};
+
 import { z } from 'zod';
 
 const postSchema = z.object({

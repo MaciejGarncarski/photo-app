@@ -1,5 +1,6 @@
-import { PostImage } from '@prisma/client';
 import { PanInfo } from 'framer-motion';
+
+import { PostImage } from '@/src/services/userPosts.service';
 
 type ArgsTypes = {
   currentIndex: number;

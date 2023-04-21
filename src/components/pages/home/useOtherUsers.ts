@@ -1,6 +1,19 @@
-import { User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+
+export type User = {
+  id: string;
+  email: string | null;
+  emailVerified: Date | null;
+  name: string | null;
+  password: string | null;
+  username: string | null;
+  bio: string | null;
+  image: string | null;
+  customImage: string | null;
+  role: 'ADMIN' | 'USER';
+  created_at: Date;
+};
 
 import { clientEnv } from '@/src/utils/env';
 

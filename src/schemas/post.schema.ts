@@ -1,5 +1,6 @@
-import { PostImage } from '@prisma/client';
 import { z } from 'zod';
+
+import { PostImage } from '@/src/services/userPosts.service';
 
 export const postSchema = z.object({
   commentsCount: z.number(),
