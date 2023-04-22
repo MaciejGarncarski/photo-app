@@ -5,6 +5,6 @@
 
   @include common.mediaquery('tablet') {
     border: var(--border-gray);
-    border-radius: var(--radius-medium);
+    border-radius: var(--radius-big);
   }
 }

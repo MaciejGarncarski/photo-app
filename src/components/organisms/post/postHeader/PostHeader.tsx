@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { useAuth } from '@/src/hooks/useAuth';
 
+import { PostHeaderPlaceholder } from '@/src/components/atoms/postHeaderPlaceholder/PostHeaderPlaceholder';
 import { Tooltip } from '@/src/components/atoms/tooltip/Tooltip';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
@@ -23,15 +24,15 @@ type PropsTypes = {
 };
 
 export const PostHeader = ({ tag: Tag = 'header', authorId, createdAt, postId }: PropsTypes) => {
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, isLoading } = useAuth();
   const { dateFromNow, handleDeletePost, isAuthor, username, confirmationModal, menuModal } = usePostHeader({
     authorId,
     createdAt,
     postId,
   });
 
-  if (!username) {
-    return null;
+  if (!username || isLoading) {
+    return <PostHeaderPlaceholder />;
   }
 
   return (

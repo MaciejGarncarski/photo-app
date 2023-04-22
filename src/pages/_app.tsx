@@ -6,10 +6,7 @@ import { Open_Sans } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { Toaster } from 'react-hot-toast';
 
-import { useIsLoading } from '@/src/hooks/useIsLoading';
 import { seoConfig } from '@/src/utils/next-seo.config';
-
-import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { Layout } from '@/src/components/layout/Layout';
 
@@ -23,8 +20,6 @@ const customFont = Open_Sans({
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const { isLoading } = useIsLoading();
-
   return (
     <QueryClientProvider client={queryClient}>
       <DefaultSeo {...seoConfig} />
@@ -36,7 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           }
         `}</style>
         <Layout>
-          {isLoading ? <Loader color="blue" size="normal" /> : <Component {...pageProps} />}
+          <Component {...pageProps} />
           <Toaster />
         </Layout>
       </MotionConfig>
