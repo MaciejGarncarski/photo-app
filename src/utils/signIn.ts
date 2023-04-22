@@ -1,7 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { z } from 'zod';
-
-import { apiClient } from '@/src/utils/apis/apiClient';
 
 export const SignInSchema = z.object({
   email: z.string().email({ message: 'Invalid email.' }),
@@ -15,7 +14,7 @@ type SignInCredentials = {
 } & SignInFormValues;
 
 export const signInCredentials = async ({ email, password, queryClient }: SignInCredentials) => {
-  await apiClient.post('auth/login', {
+  await axios.post('/api/auth/credentials', {
     email,
     password,
   });
