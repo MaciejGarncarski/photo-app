@@ -16,7 +16,7 @@ const credentialsHandler = async (req: NextApiRequest, res: NextApiResponse) => 
     return res.status(400).send('invalid cookie');
   }
 
-  return res.setHeader('Set-Cookie', sessionCookie[0]).redirect('/');
+  return res.setHeader('Set-Cookie', sessionCookie[0]).send('ok');
 };
 
 export default credentialsHandler;

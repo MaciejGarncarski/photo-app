@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import Router from 'next/router';
 import { z } from 'zod';
 
 export const SignInSchema = z.object({
@@ -14,10 +15,14 @@ type SignInCredentials = {
 } & SignInFormValues;
 
 export const signInCredentials = async ({ email, password, queryClient }: SignInCredentials) => {
-  await axios.post('/api/auth/credentials', {
+  const { data } = await axios.post('/api/auth/credentials', {
     email,
     password,
   });
+
+  if (data === 'ok') {
+    Router.push('/');
+  }
 
   queryClient.invalidateQueries(['session']);
 };
