@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { FollowersResponse } from '@/src/schemas/followerStats';
+import { FollowersResponse } from '@/src/schemas/follower-stats';
 
 type UseFollowers = {
   userId: string;
