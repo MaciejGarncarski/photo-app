@@ -1,5 +1,7 @@
 import { NextSeoProps } from 'next-seo';
 
+import { clientEnv } from '@/src/utils/env';
+
 const description =
   'PhotoApp is social media application created in the modern tech stack. In this app, you can chat with friends, create posts, comment on them and follow other users. It was my first attempt to create a backend in Next.js, so I learned a lot of things while creating this app.';
 
@@ -10,6 +12,18 @@ export const seoConfig: NextSeoProps = {
   defaultTitle: APP_NAME,
   description,
   additionalLinkTags: [
+    {
+      rel: 'preconnect',
+      href: clientEnv.NEXT_PUBLIC_API_ROOT,
+    },
+    {
+      rel: 'dns-prefetch',
+      href: 'https://lh3.googleusercontent.com',
+    },
+    {
+      rel: 'dns-prefetch',
+      href: 'https://ik.imagekit.io',
+    },
     {
       rel: 'icon',
       href: '/icons/favicon.ico',
