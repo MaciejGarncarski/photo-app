@@ -1,7 +1,13 @@
 
-# Table of contents
+# PhotoApp
 
-- [Table of contents](#table-of-contents)
+<center>
+
+![logo](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/logo.png)
+
+</center>
+
+- [PhotoApp](#photoapp)
   - [Overview](#overview)
   - [Live](#live)
   - [Installation \& running](#installation--running)
@@ -24,12 +30,11 @@
 ## Overview
 
 PhotoApp is social media application created in the modern tech stack.
-In this app, you can create posts, comment on them, follow and chat with other users. It was my first attempt to create a backend in Next.js, so I learned a
-lot of things while creating PhotoApp.
+In this app, you can create posts, comment them and chat with other users. It was my first attempt to create such a complicated app. It was tough expirence, but in the end I learned a lot of things.
 
 ## Live
 
-<https://photo-app-orpin.vercel.app/>
+<https://photoapp.maciej-garncarski.pl/>
 
 ## Installation & running
 
@@ -44,19 +49,8 @@ yarn install
 ```
 # .env 
 
-DATABASE_URL=
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-IMG_KIT_PRIVATE=
-
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=
-
-NEXT_PUBLIC_IMG_KIT_PUBLIC=
-NEXT_PUBLIC_IMG_KIT_ENDPOINT=
-NEXT_PUBLIC_WS_URL=
+NEXT_PUBLIC_API_ROOT=
 ```
-
 
 ### Start dev server
 
@@ -77,17 +71,18 @@ yarn dev
 ### Frontend
 
 - TypeScript
-- Next.js
 - SASS with css-modules
-- React Query
+- [Next.js](https://nextjs.org/)
+- [Tanstack Query React](https://tanstack.com/query/latest/docs/react/overview)
+- [Tabler icons](https://tabler-icons.io/)
 
 ### Backend
 
-- Next API routes
-- Next-auth
-- Prisma
+[Backend repo](https://github.com/MaciejGarncarski/photo-app-backend)
+
+- [Fastify](https://www.fastify.io/)
+- [Planetscale database](https://planetscale.com/)
 - Websockets server
-- Planetscale
 
 ### Testing
 

@@ -20,10 +20,10 @@
 }
 
 .small {
-  --avatar-size: 2.5rem;
+  --avatar-size: 2.75rem;
 
   @include common.mediaquery('desktop') {
-    --avatar-size: 2.75rem;
+    --avatar-size: 3rem;
   }
 }
 

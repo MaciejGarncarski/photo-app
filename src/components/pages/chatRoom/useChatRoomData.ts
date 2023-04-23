@@ -19,5 +19,6 @@ export const useChatRoomData = () => {
   return useQuery({
     queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],
     queryFn: () => getChatRoomData({ receiverId }),
+    enabled: Boolean(sessionUser?.id && receiverId),
   });
 };

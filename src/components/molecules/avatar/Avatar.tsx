@@ -9,19 +9,25 @@ import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/Visual
 
 import styles from './Avatar.module.scss';
 
-type Sizes = 'small' | 'medium' | 'big';
+type Size = 'small' | 'medium' | 'big';
 
 type PropsTypes = {
   userId: string;
-  size: Sizes;
+  size: Size;
 };
-
-const AVATAR_SIZE = 140;
 
 export const MotionImage = motion(Image);
 
+const avatarSizes: Record<Size, number> = {
+  big: 170,
+  medium: 90,
+  small: 38,
+};
+
 export const Avatar = ({ userId, size }: PropsTypes) => {
   const { data } = useUser({ userId });
+
+  const avatarSize = avatarSizes[size];
 
   if (!data) {
     return (
@@ -48,14 +54,14 @@ export const Avatar = ({ userId, size }: PropsTypes) => {
           <VisuallyHidden>{username || ''}</VisuallyHidden>
         </div>
       )}
-      {hasDefaultImage && <MotionImage src={image} alt={username ?? ''} width={AVATAR_SIZE} height={AVATAR_SIZE} />}
+      {hasDefaultImage && <MotionImage src={image} alt={username ?? ''} width={avatarSize} height={avatarSize} />}
       {hasCustomImage && (
         <MotionImage
           src={customImage}
           alt={username ?? ''}
           data-testid="customImage"
-          width={AVATAR_SIZE}
-          height={AVATAR_SIZE}
+          width={avatarSize}
+          height={avatarSize}
         />
       )}
     </figure>

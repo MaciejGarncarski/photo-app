@@ -47,7 +47,7 @@ export const ChatRoom = () => {
           </Button>
           <Link href={`/${friendData?.username}`} className={styles.userHeader}>
             <Avatar userId={friendId || ''} size="small" />
-            <Heading tag="h2" size="medium">
+            <Heading tag="h2" size="small">
               {friendData?.name && `${friendData?.name},`} @{friendData?.username}
             </Heading>
           </Link>
