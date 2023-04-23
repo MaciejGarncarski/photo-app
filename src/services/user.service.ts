@@ -1,15 +1,14 @@
-import axios from 'axios';
+import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { clientEnv } from '@/src/utils/env';
-
-import { userApiResponseSchema } from '@/src/schemas/user.schema';
+import { EditAccountInput } from '@/src/consts/schemas';
+import { User, userApiResponseSchema } from '@/src/schemas/user.schema';
 
 type GetUser = {
   userId: string;
 };
 
 export const getUser = async ({ userId }: GetUser) => {
-  const { data } = await axios.get(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/users/${userId}`, { withCredentials: true });
+  const { data } = await apiClient.get(`users/${userId}`);
   const response = userApiResponseSchema.safeParse(data);
 
   if (!response.success) {
@@ -24,9 +23,7 @@ type GetUserByUsername = {
 };
 
 export const getUserByUsername = async ({ username }: GetUserByUsername) => {
-  const { data } = await axios.get(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/users/username/${username}`, {
-    withCredentials: true,
-  });
+  const { data } = await apiClient.get(`users/username/${username}`);
   const response = userApiResponseSchema.safeParse(data);
 
   if (!response.success) {
@@ -34,4 +31,46 @@ export const getUserByUsername = async ({ username }: GetUserByUsername) => {
   }
 
   return response.data;
+};
+
+type UploadAvatar = {
+  avatarFile: Blob;
+};
+
+export const uploadAvatar = ({ avatarFile }: UploadAvatar) => {
+  const formData = new FormData();
+  formData.append('image', avatarFile);
+
+  return apiClient.postForm(`session-user/update-avatar`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+export const deleteAvatar = () => {
+  return apiClient.delete('session-user/delete-avatar');
+};
+
+export const editAccount = (data: EditAccountInput) => {
+  return apiClient.post<unknown, unknown, EditAccountInput>(`session-user/edit-account`, data);
+};
+
+export const getSessionUser = async () => {
+  const { data } = await apiClient.get<User>('auth/me');
+  return data;
+};
+
+type FollowOtherUser = {
+  userId: string;
+  isFollowing: boolean;
+};
+
+export const followOtherUser = ({ userId, isFollowing }: FollowOtherUser) => {
+  const apiUrl = `users/follow/${userId}`;
+
+  if (isFollowing) {
+    return apiClient.delete(apiUrl);
+  }
+  return apiClient.put(apiUrl);
 };

@@ -1,17 +1,25 @@
-import axios from 'axios';
+import { apiClient } from '@/src/utils/apis/apiClient';
 
-import { clientEnv } from '@/src/utils/env';
-
-import { Post } from '@/src/schemas/post.schema';
+import { Post, PostsResponse } from '@/src/schemas/post.schema';
 
 type GetPost = {
   postId: number;
 };
 
 export const getPost = async ({ postId }: GetPost) => {
-  const { data } = await axios.get<Post>(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/post/${postId}`, {
-    withCredentials: true,
-  });
-
+  const { data } = await apiClient.get<Post>(`post/${postId}`);
   return data;
+};
+
+export const getInfinitePosts = async ({ pageParam = 0 }) => {
+  const { data } = await apiClient.get<PostsResponse>(`post/homepage-posts?skip=${pageParam}`);
+  return data;
+};
+
+type DeletePost = {
+  postId: number;
+};
+
+export const deletePost = ({ postId }: DeletePost) => {
+  return apiClient.delete(`post/${postId}`);
 };

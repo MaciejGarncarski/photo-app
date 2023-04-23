@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { apiClient } from '@/src/utils/apis/apiClient';
+
+import { getChatRoomData } from '@/src/services/chat.service';
 
 export type ChatRoom = {
   id: number;
@@ -17,9 +18,6 @@ export const useChatRoomData = () => {
 
   return useQuery({
     queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],
-    queryFn: async () => {
-      const { data } = await apiClient.get<ChatRoom>(`chat/${receiverId}/check`);
-      return data;
-    },
+    queryFn: () => getChatRoomData({ receiverId }),
   });
 };

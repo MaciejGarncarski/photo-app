@@ -1,8 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { clientEnv } from '@/src/utils/env';
+import { apiClient } from '@/src/utils/apis/apiClient';
 import { socket } from '@/src/utils/socket';
 
 import { CreatePostInput } from '@/src/schemas/post.schema';
@@ -23,8 +22,7 @@ const uplaodPost = ({ description, images }: CreatePostInput) => {
     }
   });
 
-  return axios.post(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/post/create-post`, formData, {
-    withCredentials: true,
+  return apiClient.post(`post/create-post`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

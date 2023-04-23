@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { clientEnv } from '@/src/utils/env';
 
 import { FinalImages } from '@/src/components/pages/createPost/types';
+import { uploadAvatar } from '@/src/services/user.service';
 
 type UseUploadAvatarArguments = {
   stagePersonalInfo: () => void;
@@ -13,26 +12,12 @@ type UseUploadAvatarArguments = {
   resetFinalImages: () => void;
 };
 
-type Mutation = {
-  avatarFile: Blob;
-};
-
 export const useUploadAvatar = ({ stagePersonalInfo, finalImages, resetFinalImages }: UseUploadAvatarArguments) => {
   const { sessionUser } = useAuth();
   const queryClient = useQueryClient();
 
   const uploadNewAvatar = useMutation({
-    mutationFn: ({ avatarFile }: Mutation) => {
-      const formData = new FormData();
-      formData.append('image', avatarFile);
-
-      return axios.postForm(`${clientEnv.NEXT_PUBLIC_API_ROOT}api/session-user/update-avatar`, formData, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-    },
+    mutationFn: uploadAvatar,
   });
 
   const isFinalImageEmpty = finalImages.filter((image) => !!image).length === 0;
