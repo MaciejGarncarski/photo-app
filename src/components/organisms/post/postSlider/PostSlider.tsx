@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
+import { useIsMobile } from '@/src/hooks/useIsMobile';
+
 import { HeartAnimation } from '@/src/components/atoms/heartAnimation/HeartAnimation';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
@@ -26,6 +28,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
   const { imageRef, width } = useUpdateWidth();
   const postImages = post.images;
+  const { isMobile } = useIsMobile();
 
   const { handleDragEnd, nextImage, prevImage, isNotFirstIndex, isNotLastIndex, isSingleImage } = useSlider({
     currentIndex,
@@ -45,10 +48,16 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
       >
         <AnimatePresence>
           <motion.div className={styles.imagesContainer} animate={{ x: -1 * currentIndex * width }}>
-            {postImages.map(({ height, width, fileId, url }, idx) => {
+            {postImages.map(({ fileId, url }, idx) => {
               return (
                 <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage height={height} priority={priority || idx === 1} src={url} width={width} post={post} />
+                  <PostImage
+                    priority={priority || idx === 1}
+                    src={url}
+                    width={isMobile ? 240 : 500}
+                    height={isMobile ? 240 : 500}
+                    post={post}
+                  />
                 </motion.figure>
               );
             })}
