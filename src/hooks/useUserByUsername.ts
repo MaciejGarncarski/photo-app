@@ -14,5 +14,6 @@ export const useUserByUsername = ({ username }: Arguments) => {
       toast.error('Cannot fetch user');
     },
     queryFn: () => getUserByUsername({ username }),
+    enabled: Boolean(username),
   });
 };

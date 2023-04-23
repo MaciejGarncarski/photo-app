@@ -1,6 +1,7 @@
 import { apiClient } from '@/src/utils/apis/apiClient';
 
 import { EditAccountInput } from '@/src/consts/schemas';
+import { FollowersResponse } from '@/src/schemas/follower-stats';
 import { User, userApiResponseSchema } from '@/src/schemas/user.schema';
 
 type GetUser = {
@@ -73,4 +74,17 @@ export const followOtherUser = ({ userId, isFollowing }: FollowOtherUser) => {
     return apiClient.delete(apiUrl);
   }
   return apiClient.put(apiUrl);
+};
+
+type GetFollowers = {
+  pageParam: number;
+  type: 'followers' | 'friends';
+  userId: string;
+};
+
+export const getFollowers = async ({ pageParam = 0, type, userId }: GetFollowers) => {
+  const { data } = await apiClient.get<FollowersResponse>(
+    `follower-stats/${type}?userId=${userId}&skip=${pageParam ?? 0}`,
+  );
+  return data;
 };
