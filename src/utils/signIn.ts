@@ -21,9 +21,9 @@ export const signInCredentials = async ({ email, password, queryClient }: SignIn
     password,
   });
 
+  await queryClient.invalidateQueries(['session']);
+
   if (data === 'ok') {
     Router.push('/');
   }
-
-  queryClient.invalidateQueries(['session']);
 };

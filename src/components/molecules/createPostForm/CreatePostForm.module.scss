@@ -1,4 +1,10 @@
+@use '/src/styles/common.scss';
+
 .actionButtons {
   display: flex;
   justify-content: space-between;
+
+  @include common.mediaquery('desktop') {
+    margin-top: 1rem;
+  }
 }

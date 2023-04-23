@@ -26,10 +26,6 @@ export const NavButtons = () => {
   const { openModal, closeModal, isModalOpen } = useModal();
   const { navButtonsList } = getNavListData(sessionUser?.username);
 
-  if (isLoading) {
-    return null;
-  }
-
   return (
     <>
       <ul className={styles.list}>
@@ -58,7 +54,7 @@ export const NavButtons = () => {
           </button>
         </li>
       </ul>
-      {!isSignedIn && <SignInButton />}
+      {!isSignedIn && !isLoading && <SignInButton />}
       <Settings isVisible={isModalOpen} closeModal={closeModal} />
     </>
   );

@@ -2,13 +2,13 @@
 
 .createPost {
   display: grid;
-  width: clamp(19rem, 70%, 60rem);
+  width: clamp(19rem, 70%, 52rem);
   margin: 2rem auto;
   margin-bottom: 4rem;
   gap: 2rem;
 
   @include common.mediaquery('desktop') {
-    margin-left: 12rem;
+    margin-left: 17rem;
     gap: 4rem;
   }
 }
