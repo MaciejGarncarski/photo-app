@@ -1,11 +1,8 @@
+<p align="center">
+  <img width="192" height="192" src="https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/logo.png">
+</p>
 
 # PhotoApp
-
-<center>
-
-![logo](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/logo.png)
-
-</center>
 
 - [PhotoApp](#photoapp)
   - [Overview](#overview)
