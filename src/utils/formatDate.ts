@@ -44,5 +44,5 @@ export const formatDate = (dateString: Date | string) => {
     return formatter.format(foundItem.value * -1, foundItem.name);
   }
 
-  return formatter.format(daysCount * 1, 'days');
+  return formatter.format(daysCount * -1, 'days');
 };
