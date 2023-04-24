@@ -2,7 +2,7 @@ import { Variants } from 'framer-motion';
 
 export const modalVariants: Variants = {
   hidden: {
-    y: 20,
+    y: -100,
     opacity: 0,
   },
   visible: { y: 0, opacity: 1 },

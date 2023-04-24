@@ -20,7 +20,7 @@ export const ListModal = ({ closeModal, headingText, children, isVisible }: Prop
     <AnimatePresence mode="wait">
       {isVisible && (
         <ModalBackdrop closeModal={closeModal}>
-          <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }} className={styles.container}>
+          <motion.div initial={{ y: -100 }} animate={{ y: 0 }} exit={{ y: 150 }} className={styles.container}>
             <h3 className={styles.heading}>{headingText}</h3>
             <ReactFocusLock>
               <ModalCloseButton onClose={closeModal} />

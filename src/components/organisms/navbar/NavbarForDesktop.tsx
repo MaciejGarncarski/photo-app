@@ -7,7 +7,7 @@ import styles from './Navbar.module.scss';
 export const NavbarForDesktop = () => {
   const { isMobile } = useIsMobile();
 
-  if (isMobile) {
+  if (isMobile === 'loading' || isMobile) {
     return null;
   }
 

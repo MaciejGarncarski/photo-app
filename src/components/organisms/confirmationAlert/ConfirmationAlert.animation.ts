@@ -9,7 +9,7 @@ export const alertVariants: Variants = {
   closed: {
     scale: 0,
     opacity: 0,
-    y: 100,
+    y: -100,
   },
   exit: {
     scale: 0.6,

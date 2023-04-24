@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import Router from 'next/router';
+import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
 import { apiClient } from '@/src/utils/apis/apiClient';
@@ -16,14 +17,18 @@ type SignInCredentials = {
 } & SignInFormValues;
 
 export const signInCredentials = async ({ email, password, queryClient }: SignInCredentials) => {
-  const { data } = await apiClient.post('auth/login', {
-    email,
-    password,
+  const requestPromise = new Promise(async (resolve) => {
+    const { data } = await apiClient.post('auth/login', {
+      email,
+      password,
+    });
+
+    if (data === 'ok') {
+      Router.push('/');
+    }
+    await queryClient.invalidateQueries(['session']);
+    resolve('pk');
   });
 
-  await queryClient.invalidateQueries(['session']);
-
-  if (data === 'ok') {
-    Router.push('/');
-  }
+  toast.promise(requestPromise, { error: 'Cannot signin.', loading: 'Loading...', success: 'Success!' });
 };

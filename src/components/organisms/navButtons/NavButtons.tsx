@@ -54,7 +54,7 @@ export const NavButtons = () => {
           </button>
         </li>
       </ul>
-      {!isSignedIn && !isLoading && <SignInButton />}
+      {(!isSignedIn || isLoading) && <SignInButton />}
       <Settings isVisible={isModalOpen} closeModal={closeModal} />
     </>
   );
