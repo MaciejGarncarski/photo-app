@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
@@ -12,14 +13,15 @@ import { useChatSubscription } from '@/src/components/pages/chatRoom/useChatSubs
 
 export const useChatRoom = () => {
   const [inputVal, setInputVal] = useState('');
-
+  const router = useRouter();
   const { sessionUser } = useAuth();
   const { isMobile } = useIsMobile();
   const { isGoingUp } = useIsGoingUp();
   const { data: chatRoomData } = useChatRoomData();
 
   useChatSubscription(socket, chatRoomData?.id || 0);
-  const friendId = chatRoomData?.receiver_id || '';
+
+  const friendId = router.query.receiverId as string;
 
   const { isLoading, fetchNextPage, hasNextPage, isError, data } = useChatMessages({
     friendId,

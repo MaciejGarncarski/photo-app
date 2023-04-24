@@ -25,7 +25,7 @@ export const ChatRoom = () => {
   const router = useRouter();
 
   const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage, friendId } = useChatRoom();
-  const { data: friendData } = useUser({ userId: friendId || '' });
+  const { data: friendData, isLoading: isUserLoading } = useUser({ userId: friendId || '' });
 
   useEffect(() => {
     if (bottomRef.current && !isLoading) {
@@ -33,7 +33,7 @@ export const ChatRoom = () => {
     }
   }, [isLoading]);
 
-  if (isLoading || !data) {
+  if (isLoading || isUserLoading || !data) {
     return <TextWithLoader text="Connecting to chat" />;
   }
 

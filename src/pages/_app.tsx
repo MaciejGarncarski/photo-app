@@ -24,7 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <QueryClientProvider client={queryClient}>
       <DefaultSeo {...seoConfig} />
       <ReactQueryDevtools />
-      <MotionConfig transition={{ duration: 0.3 }}>
+      <MotionConfig transition={{ duration: 0.25 }}>
         <style jsx global>{`
           html {
             font-family: ${customFont.style.fontFamily};

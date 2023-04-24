@@ -1,25 +1,17 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
-
-import { ChatMessagesResponse } from '@/src/schemas/chat';
+import { getChatMessages } from '@/src/services/chat.service';
 
 type PropsTypes = {
-  friendId: string;
+  friendId?: string;
 };
 
 export const useChatMessages = ({ friendId }: PropsTypes) => {
-  return useInfiniteQuery(
-    ['chatMessages', friendId],
-    async ({ pageParam = 0 }) => {
-      const { data } = await apiClient.get<ChatMessagesResponse>(`chat/${friendId}/chatMessages?skip=${pageParam}`);
-      return data;
+  return useInfiniteQuery(['chatMessages', friendId], ({ pageParam }) => getChatMessages({ pageParam, friendId }), {
+    refetchOnWindowFocus: false,
+    getNextPageParam: (prevMessages) => {
+      return prevMessages?.currentPage === prevMessages.totalPages ? undefined : prevMessages.currentPage + 1;
     },
-    {
-      refetchOnWindowFocus: false,
-      getNextPageParam: (prevMessages) => {
-        return prevMessages?.currentPage === prevMessages.totalPages ? undefined : prevMessages.currentPage + 1;
-      },
-    },
-  );
+    enabled: Boolean(friendId),
+  });
 };
