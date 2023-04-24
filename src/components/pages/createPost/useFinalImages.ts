@@ -8,7 +8,7 @@ export const useFinalImages = () => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const { previewImages } = getPreviewImages(finalImages);
 
-  const onRemove = (id: number) => {
+  const onRemove = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
       return finalImg?.id !== id;
     });

@@ -20,7 +20,7 @@ export const useSaveCrop = ({ setFinalImages, finalImages, imgSrc, cropAreaPixel
     setIsCropping(true);
     if (cropAreaPixels && imgSrc) {
       const blob = await convertToBlob(imgSrc, cropAreaPixels);
-      const imageId = Math.random();
+      const imageId = crypto.randomUUID();
 
       if (!blob) {
         return;

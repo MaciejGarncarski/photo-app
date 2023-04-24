@@ -5,7 +5,7 @@ import { PostDetailsSchema } from './CreatePost';
 export type PostDetails = z.infer<typeof PostDetailsSchema>;
 
 type FinalImage = {
-  id: number;
+  id: string;
   file: Blob | null;
 };
 

@@ -14,7 +14,7 @@ import styles from './ImagesPreview.module.scss';
 const MAX_IMAGES_LENGTH = 3;
 
 type PropsTypes = {
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void;
   previewImages: PreviewImages;
 };
 

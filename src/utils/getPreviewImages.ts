@@ -2,7 +2,7 @@ import { FinalImages } from '../components/pages/createPost/types';
 
 export type PreviewImages = Array<
   | {
-      id: number;
+      id: string;
       src: string;
     }
   | undefined
