@@ -1,5 +1,11 @@
 @use '/src/styles/common.scss';
 
+%gradient {
+  background-size: var(--placeholder-bg-size);
+  background-image: var(--gradient);
+  animation: var(--placeholder-animation);
+}
+
 .placeholder {
   display: flex;
   align-items: center;
@@ -12,36 +18,32 @@
   }
 }
 
-%placeholder-common {
-  background-image: var(--gradient);
-  background-size: var(--placeholder-bg-size);
-  animation: skeleton-loading 1.5s infinite linear;
-}
-
 .avatar {
+  @extend %gradient;
+
   border-radius: 100%;
-  --avatar-size-placeholder: 2.5rem;
+  --avatar-size-placeholder: 2.75rem;
   width: var(--avatar-size-placeholder);
   height: var(--avatar-size-placeholder);
-  @extend %placeholder-common;
 
   @include common.mediaquery('desktop') {
-    --avatar-size-placeholder: 2.75rem;
+    --avatar-size-placeholder: 3rem;
   }
 }
 
 .name {
+  @extend %gradient;
+
   height: 2.25rem;
   width: 7rem;
-  border-radius: var(--radius-medium);
-
-  @extend %placeholder-common;
+  border-radius: var(--radius-small);
 }
 
 .button {
-  width: 6rem;
+  @extend %gradient;
+
+  width: 4rem;
   height: 2.25rem;
-  border-radius: var(--radius-medium);
-  @extend %placeholder-common;
+  border-radius: var(--radius-small);
   margin-left: auto;
 }
