@@ -9,8 +9,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   box-shadow: var(--shadow-focus);
+  margin-top: 1rem;
 
   @include common.mediaquery('desktop') {
     min-height: 25rem;
@@ -34,7 +35,7 @@
 .buttons {
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   gap: 1rem;
 
   @include common.mediaquery('desktop') {

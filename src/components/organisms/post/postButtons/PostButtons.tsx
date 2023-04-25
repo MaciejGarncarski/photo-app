@@ -41,7 +41,7 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
       <ShareModal
         isVisible={shareModal.isModalOpen}
         closeModal={shareModal.closeModal}
-        textToCopy={`https://photo-app-orpin.vercel.app/post/${id}`}
+        textToCopy={`https://photoapp.maciej-garncarski.pl/post/${id}`}
       />
       <PostModal isVisible={postModal.isModalOpen} post={post} closeModal={postModal.closeModal} />
     </ul>

@@ -6,6 +6,8 @@ import { NextSeo } from 'next-seo';
 import { useIsMobile } from '@/src/hooks/useIsMobile';
 import { signOut } from '@/src/utils/signOut';
 
+import { Heading } from '@/src/components/atoms/heading/Heading';
+
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPosts';
@@ -30,7 +32,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   const queryClient = useQueryClient();
   const username = usernameFromProps || (router.query.username as string);
 
-  const { isOwner, settingsModal, signOutModal, userData } = useAccount({
+  const { isOwner, settingsModal, signOutModal, userData, isError } = useAccount({
     username,
   });
 
@@ -43,6 +45,14 @@ export const Account = ({ username: usernameFromProps }: Props) => {
 
   if (!userData) {
     return <Loader color="blue" size="normal" />;
+  }
+
+  if (isError) {
+    return (
+      <Heading tag="h2" size="big">
+        Not found.
+      </Heading>
+    );
   }
 
   return (

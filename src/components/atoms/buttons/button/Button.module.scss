@@ -17,10 +17,12 @@
   transition-property: transform, box-shadow;
 
   &:not(:disabled) {
-    &:hover,
+    &:hover {
+      transform: scale(1.05);
+    }
+
     &:focus {
       box-shadow: var(--shadow-focus);
-      transform: scale(1.05);
     }
   }
 

@@ -23,5 +23,5 @@ export const useAccount = ({ username }: Arguments) => {
     }
   }, [isError, router]);
 
-  return { isOwner, signOutModal, settingsModal, userData };
+  return { isOwner, signOutModal, settingsModal, userData, isError };
 };

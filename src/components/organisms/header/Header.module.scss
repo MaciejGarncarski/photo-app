@@ -47,6 +47,11 @@
   &:focus {
     background-color: var(--bg-secondary);
   }
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
 }
 
 .userInfo {

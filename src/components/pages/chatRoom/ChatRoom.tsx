@@ -2,6 +2,7 @@ import { IconArrowLeft, IconSend } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
+import { toast } from 'react-hot-toast';
 
 import { useUser } from '@/src/hooks/useUser';
 
@@ -24,14 +25,21 @@ export const ChatRoom = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage, friendId } = useChatRoom();
-  const { data: friendData, isLoading: isUserLoading } = useUser({ userId: friendId || '' });
+  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage, friendId, isError } = useChatRoom();
+  const { data: friendData, isLoading: isUserLoading, isError: userError } = useUser({ userId: friendId || '' });
 
   useEffect(() => {
     if (bottomRef.current && !isLoading) {
       bottomRef.current.scrollIntoView();
     }
   }, [isLoading]);
+
+  useEffect(() => {
+    if (isError || userError) {
+      router.push('/chat/');
+      toast.error('Cannot connect to chat');
+    }
+  }, [isError, router, userError]);
 
   if (isLoading || isUserLoading || !data) {
     return <TextWithLoader text="Connecting to chat" />;

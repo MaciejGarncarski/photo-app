@@ -17,13 +17,19 @@ export const useChatRoom = () => {
   const { sessionUser } = useAuth();
   const { isMobile } = useIsMobile();
   const { isGoingUp } = useIsGoingUp();
-  const { data: chatRoomData } = useChatRoomData();
+  const { data: chatRoomData, isError: chatRoomError } = useChatRoomData();
 
   useChatSubscription(socket, chatRoomData?.id || 0);
 
   const friendId = router.query.receiverId as string;
 
-  const { isLoading, fetchNextPage, hasNextPage, isError, data } = useChatMessages({
+  const {
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isError: chatMessagesError,
+    data,
+  } = useChatMessages({
     friendId,
   });
 
@@ -36,7 +42,7 @@ export const useChatRoom = () => {
     loading: isLoading,
     hasNextPage: Boolean(hasNextPage),
     onLoadMore: fetchNext,
-    disabled: !hasNextPage || isError,
+    disabled: !hasNextPage || chatMessagesError,
     rootMargin: '0px 0px 50% 0px',
   });
 
@@ -66,6 +72,7 @@ export const useChatRoom = () => {
     isMobile,
     isGoingUp,
     friendId,
+    isError: chatRoomError || chatMessagesError,
     inputVal,
   };
 };

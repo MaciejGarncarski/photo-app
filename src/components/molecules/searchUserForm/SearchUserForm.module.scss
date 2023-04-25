@@ -8,12 +8,12 @@
   gap: 1rem;
   border-radius: var(--radius-medium);
   border: var(--border-gray);
-  padding: 0 0.5rem;
+  padding-right: 0.5rem;
   background-color: var(--bg-secondary);
 
   @include common.mediaquery('desktop') {
     width: 35rem;
-    border-radius: var(--radius-big);
+    font-size: 1.25rem;
   }
 }
 
