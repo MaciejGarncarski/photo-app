@@ -1,4 +1,4 @@
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { apiClient } from '@/src/utils/apiClient';
 
 import { Post, PostsResponse } from '@/src/schemas/post.schema';
 

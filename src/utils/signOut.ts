@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 import Router from 'next/router';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { apiClient } from '@/src/utils/apiClient';
 
 export const signOut = async (queryClient: QueryClient) => {
   const { data } = await apiClient.delete('auth/me');

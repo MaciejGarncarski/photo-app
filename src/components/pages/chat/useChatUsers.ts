@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { apiClient } from '@/src/utils/apiClient';
 
 import { ChatUsersResponse } from '@/src/schemas/chat';
 

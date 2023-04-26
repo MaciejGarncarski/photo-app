@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { apiClient } from '@/src/utils/apiClient';
 
 type Mutation = {
   isLiked: boolean;

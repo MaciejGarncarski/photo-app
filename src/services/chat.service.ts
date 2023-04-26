@@ -1,4 +1,4 @@
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { apiClient } from '@/src/utils/apiClient';
 
 import { ChatRoom } from '@/src/components/pages/chatRoom/useChatRoomData';
 import { ChatMessagesResponse } from '@/src/schemas/chat';

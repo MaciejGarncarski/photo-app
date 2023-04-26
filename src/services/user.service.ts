@@ -1,4 +1,4 @@
-import { apiClient } from '@/src/utils/apis/apiClient';
+import { apiClient } from '@/src/utils/apiClient';
 
 import { EditAccountInput } from '@/src/consts/schemas';
 import { FollowersResponse } from '@/src/schemas/follower-stats';
