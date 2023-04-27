@@ -55,6 +55,26 @@ export const seoConfig: NextSeoProps = {
   ],
   additionalMetaTags: [
     {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: 'https://photoapp.maciej-garncarski.pl/',
+    },
+    {
+      property: 'og:image',
+      content: 'https://photoapp.maciej-garncarski.pl/icons/android-chrome-512x512.png',
+    },
+    {
+      property: 'og:title',
+      content: 'PhotoApp',
+    },
+    {
+      property: 'og:description',
+      content: description,
+    },
+    {
       name: 'application-name',
       content: 'PhotoApp',
     },
