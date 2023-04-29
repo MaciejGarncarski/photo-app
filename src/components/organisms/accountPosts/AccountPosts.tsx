@@ -26,7 +26,7 @@ export const AccountPosts = ({ userId }: PropsTypes) => {
   });
 
   if (!data || isLoading) {
-    return <Loader color="blue" size="normal" />;
+    return <Loader marginTop color="blue" size="normal" />;
   }
 
   const hasPosts = data.pages[0].postsCount !== 0;

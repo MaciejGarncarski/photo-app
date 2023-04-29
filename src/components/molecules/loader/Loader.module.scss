@@ -47,3 +47,11 @@
 .blue {
   color: var(--color-primary);
 }
+
+.marginTop {
+  margin-top: 4rem;
+
+  @include common.mediaquery('desktop') {
+    margin-top: 8rem;
+  }
+}

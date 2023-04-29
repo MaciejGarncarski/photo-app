@@ -22,6 +22,7 @@ import { useOtherUsers } from '@/src/components/pages/home/useOtherUsers';
 import styles from './Home.module.scss';
 
 export const newPostsAtom = atom(false);
+
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
   const { isSignedIn } = useAuth();

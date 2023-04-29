@@ -44,7 +44,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   };
 
   if (!userData) {
-    return <Loader color="blue" size="normal" />;
+    return <Loader marginTop color="blue" size="normal" />;
   }
 
   if (isError) {

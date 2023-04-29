@@ -1,10 +1,6 @@
 import { IconArrowLeft, IconSend } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
-import { toast } from 'react-hot-toast';
-
-import { useUser } from '@/src/hooks/useUser';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/src/components/atoms/chatMessage/ChatMessage';
@@ -22,34 +18,31 @@ import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPag
 import styles from './ChatRoom.module.scss';
 
 export const ChatRoom = () => {
-  const bottomRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const { data, isLoading, infiniteRef, inputVal, onChange, onSubmit, hasNextPage, friendId, isError } = useChatRoom();
-  const { data: friendData, isLoading: isUserLoading, isError: userError } = useUser({ userId: friendId || '' });
-
-  useEffect(() => {
-    if (bottomRef.current && !isLoading) {
-      bottomRef.current.scrollIntoView();
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
-    if (isError || userError) {
-      router.push('/chat/');
-      toast.error('Cannot connect to chat');
-    }
-  }, [isError, router, userError]);
+  const {
+    isLoading,
+    isUserLoading,
+    data,
+    friendId,
+    friendData,
+    hasNextPage,
+    inputVal,
+    onSubmit,
+    onChange,
+    infiniteRef,
+  } = useChatRoom();
 
   if (isLoading || isUserLoading || !data) {
     return <TextWithLoader text="Connecting to chat" />;
   }
+  const goBack = () => router.push('/chat');
 
   return (
     <ProtectedPage shouldBeSignedIn>
       <section className={styles.chat}>
         <header className={styles.header}>
-          <Button variant="primary" type="button" onClick={() => router.push('/chat')}>
+          <Button variant="primary" type="button" onClick={goBack}>
             <IconArrowLeft />
             <span className={styles.goBack}>Go back</span>
           </Button>
@@ -79,7 +72,6 @@ export const ChatRoom = () => {
             </li>
           )}
         </ul>
-        <div ref={bottomRef} />
         <div className={styles.formContainer}>
           <form className={styles.form} onSubmit={onSubmit}>
             <input

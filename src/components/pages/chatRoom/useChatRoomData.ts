@@ -20,5 +20,6 @@ export const useChatRoomData = () => {
     queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],
     queryFn: () => getChatRoomData({ receiverId }),
     enabled: Boolean(sessionUser?.id && receiverId),
+    refetchOnWindowFocus: false,
   });
 };
