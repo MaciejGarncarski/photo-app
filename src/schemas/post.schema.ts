@@ -2,12 +2,16 @@ import { z } from 'zod';
 
 import { PostImage } from '@/src/services/userPosts.service';
 
+export const postDescriptionSchema = z.string().min(1).max(100);
+
+export type PostDescription = z.infer<typeof postDescriptionSchema>;
+
 export const postSchema = z.object({
   commentsCount: z.number(),
   likesCount: z.number(),
   images: z.array(z.custom<PostImage>()),
   createdAt: z.date(),
-  description: z.string(),
+  description: postDescriptionSchema,
   id: z.number(),
   isLiked: z.boolean(),
   authorId: z.string(),

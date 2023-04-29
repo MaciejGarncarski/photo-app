@@ -12,13 +12,13 @@ import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
 
+import { PostDetailsSchema } from '@/src/components/pages/createPost/CreatePost';
 import { useEditPost } from '@/src/components/pages/editPost/useEditPost';
 import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
 import styles from './EditPost.module.scss';
 
 import { usePost } from '../account/usePost';
-import { PostDetailsSchema } from '../createPost/CreatePost';
 
 export const EditPost = () => {
   const router = useRouter();
@@ -42,7 +42,7 @@ export const EditPost = () => {
 
   const onSubmit = () => {
     const { description } = getValues();
-    mutate({ description });
+    mutate({ description }, { onSettled: saveModal.closeModal });
   };
 
   if (!data || isLoading) {
@@ -61,7 +61,12 @@ export const EditPost = () => {
             <Button type="button" variant="secondary" onClick={cancelModal.openModal}>
               Cancel
             </Button>
-            <Button type="button" variant="primary" disabled={!isDirty} onClick={saveModal.openModal}>
+            <Button
+              type="button"
+              variant="primary"
+              disabled={!isDirty || Boolean(errors.description)}
+              onClick={saveModal.openModal}
+            >
               Save
             </Button>
           </div>

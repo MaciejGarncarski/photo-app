@@ -19,11 +19,10 @@ import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPag
 
 import styles from './CreatePost.module.scss';
 
-import { PostDetails } from './types';
 import { useOnSubmit } from './useOnSubmit';
 
 export const PostDetailsSchema = z.object({
-  description: z.string().max(200, { message: 'Maximum characters exceeded.' }),
+  description: z.string().min(1).max(100, { message: 'Maximum characters exceeded.' }),
 });
 
 export const CreatePost = () => {
@@ -36,7 +35,7 @@ export const CreatePost = () => {
     register,
     handleSubmit,
     formState: { dirtyFields, errors },
-  } = useForm<PostDetails>({
+  } = useForm({
     resolver: zodResolver(PostDetailsSchema),
     defaultValues: {
       description: '',

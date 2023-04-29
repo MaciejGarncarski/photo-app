@@ -7,8 +7,12 @@
   flex-direction: column;
   gap: 2rem;
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
+    max-height: 17rem;
     overflow-y: auto;
+  }
+
+  @include common.mediaquery('desktop') {
     max-height: 20rem;
   }
 }
