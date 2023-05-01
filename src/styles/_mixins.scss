@@ -18,3 +18,41 @@
     @content;
   }
 }
+
+@mixin button-state {
+  &:not(:disabled) {
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:focus {
+      box-shadow: var(--shadow-focus);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+@mixin button-secondary-state {
+  &:not(:disabled) {
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
+    }
+  }
+
+  &:disabled {
+    background-color: transparent;
+    opacity: 0.6;
+  }
+}

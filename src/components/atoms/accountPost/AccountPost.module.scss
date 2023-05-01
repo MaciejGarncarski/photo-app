@@ -24,7 +24,7 @@
   }
 
   @include common.mediaquery('desktop') {
-    --shadow-size: 5px;
+    --shadow-size: 4px;
   }
 }
 

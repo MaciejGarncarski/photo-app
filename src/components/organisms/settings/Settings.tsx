@@ -37,7 +37,7 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
   return (
     <>
       <ListModal isVisible={isVisible} closeModal={closeModal} headingText="PhotoApp settings">
-        {sessionUser && (
+        {isSignedIn && sessionUser?.username && (
           <ListModalItem type="link" href={`/${sessionUser.username}`} onClick={closeModal} icon={<IconUser />}>
             Your profile
           </ListModalItem>

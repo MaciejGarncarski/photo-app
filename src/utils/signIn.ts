@@ -18,16 +18,18 @@ type SignInCredentials = {
 
 export const signInCredentials = async ({ email, password, queryClient }: SignInCredentials) => {
   const requestPromise = new Promise(async (resolve) => {
-    const { data } = await apiClient.post('auth/login', {
+    const { status } = await apiClient.post('auth/login', {
       email,
       password,
     });
 
-    if (data === 'ok') {
+    if (status === 200) {
       Router.push('/');
     }
+
     await queryClient.invalidateQueries(['session']);
-    resolve('pk');
+
+    resolve('success');
   });
 
   toast.promise(requestPromise, { error: 'Cannot signin.', loading: 'Loading...', success: 'Success!' });

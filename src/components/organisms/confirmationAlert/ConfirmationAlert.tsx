@@ -1,7 +1,9 @@
+import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Heading } from '@/src/components/atoms/heading/Heading';
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
 import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
@@ -30,7 +32,12 @@ export const ConfirmationAlert = ({ headingText, onConfirm, closeModal, isVisibl
             animate="opened"
             exit="exit"
           >
-            <h3 className={styles.heading}>{headingText || 'Are you sure?'}</h3>
+            <div className={styles.heading}>
+              <IconAlertTriangleFilled />
+              <Heading tag="h3" size="medium">
+                {headingText || 'Are you sure?'}
+              </Heading>
+            </div>
             <ReactFocusLock>
               <ModalCloseButton onClose={closeModal} />
               <div className={styles.buttonsRow}>

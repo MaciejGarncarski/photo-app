@@ -2,9 +2,9 @@
 
 .container {
   background-color: var(--bg-primary);
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   position: relative;
-  padding: 2rem 3rem;
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -21,25 +21,23 @@
   }
 }
 
-.headingContainer {
-  position: relative;
-}
-
 .heading {
-  text-align: center;
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 
-  @include common.mediaquery('desktop') {
-    font-size: 2.5rem;
+  > svg {
+    --size: 2.5rem;
+    width: var(--size);
+    height: var(--size);
+    color: var(--color-secondary);
   }
 }
 
 .buttonsRow {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
   justify-content: center;
-
-  @include common.mediaquery('desktop') {
-    font-size: 1.25rem;
-  }
+  align-items: center;
 }
