@@ -8,7 +8,6 @@
   gap: 2rem;
 
   @include common.mediaquery('desktop') {
-    margin-left: 17rem;
     gap: 4rem;
   }
 }

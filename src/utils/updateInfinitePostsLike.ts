@@ -25,7 +25,6 @@ export const updateInfinitePostsLike = (oldInfiniteData?: InfinitePost, postData
       ...oldInfiniteData.pages[0],
       posts: newPosts,
     } satisfies PostsResponse;
-
     return newPageData;
   });
 

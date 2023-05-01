@@ -5,10 +5,6 @@
   margin-inline: auto;
   margin-top: 1rem;
   padding-bottom: 4rem;
-
-  @include common.mediaquery('desktop') {
-    margin-left: calc(10vw + 2rem);
-  }
 }
 
 .accountMobile {

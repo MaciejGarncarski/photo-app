@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { MotionConfig } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { Open_Sans } from 'next/font/google';
+import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import { Toaster } from 'react-hot-toast';
 
@@ -20,6 +21,9 @@ const customFont = Open_Sans({
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+  const pageKey = router.asPath;
+
   return (
     <QueryClientProvider client={queryClient}>
       <DefaultSeo {...seoConfig} />
@@ -31,7 +35,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           }
         `}</style>
         <Layout>
-          <Component {...pageProps} />
+          <AnimatePresence mode="wait" initial={false}>
+            <Component key={pageKey} {...pageProps} />
+          </AnimatePresence>
           <Toaster />
         </Layout>
       </MotionConfig>

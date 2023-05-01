@@ -14,7 +14,6 @@ import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/
 
 import { PostDetailsSchema } from '@/src/components/pages/createPost/CreatePost';
 import { useEditPost } from '@/src/components/pages/editPost/useEditPost';
-import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
 
 import styles from './EditPost.module.scss';
 
@@ -50,40 +49,38 @@ export const EditPost = () => {
   }
 
   return (
-    <ProtectedPage shouldBeSignedIn>
-      <section className={styles.editPost}>
-        <Heading tag="h2" size="medium">
-          Edit post
-        </Heading>
-        <form className={styles.form}>
-          <TextArea label="Description" {...register('description')} error={errors.description?.message} />
-          <div className={styles.buttons}>
-            <Button type="button" variant="secondary" onClick={cancelModal.openModal}>
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              variant="primary"
-              disabled={!isDirty || Boolean(errors.description)}
-              onClick={saveModal.openModal}
-            >
-              Save
-            </Button>
-          </div>
-        </form>
-        <ConfirmationAlert
-          isVisible={cancelModal.isModalOpen}
-          headingText="Cancel changes?"
-          onConfirm={router.back}
-          closeModal={cancelModal.closeModal}
-        />
-        <ConfirmationAlert
-          isVisible={saveModal.isModalOpen}
-          headingText="Save changes?"
-          onConfirm={onSubmit}
-          closeModal={saveModal.closeModal}
-        />
-      </section>
-    </ProtectedPage>
+    <section className={styles.editPost}>
+      <Heading tag="h2" size="medium">
+        Edit post
+      </Heading>
+      <form className={styles.form}>
+        <TextArea label="Description" {...register('description')} error={errors.description?.message} />
+        <div className={styles.buttons}>
+          <Button type="button" variant="secondary" onClick={cancelModal.openModal}>
+            Cancel
+          </Button>
+          <Button
+            type="button"
+            variant="primary"
+            disabled={!isDirty || Boolean(errors.description)}
+            onClick={saveModal.openModal}
+          >
+            Save
+          </Button>
+        </div>
+      </form>
+      <ConfirmationAlert
+        isVisible={cancelModal.isModalOpen}
+        headingText="Cancel changes?"
+        onConfirm={router.back}
+        closeModal={cancelModal.closeModal}
+      />
+      <ConfirmationAlert
+        isVisible={saveModal.isModalOpen}
+        headingText="Save changes?"
+        onConfirm={onSubmit}
+        closeModal={saveModal.closeModal}
+      />
+    </section>
   );
 };

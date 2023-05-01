@@ -34,43 +34,34 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
     rootMargin: '0px 0px 300px 0px',
   });
 
-  if (!data) {
-    return (
-      <div className={styles.loader}>
-        <Loader color="blue" size="normal" />
-      </div>
-    );
-  }
-
-  const { usersCount } = data.pages[0];
-
-  if (usersCount === 0) {
+  if (data?.pages[0].usersCount === 0) {
     return <p>no users found</p>;
   }
 
   return (
     <nav className={styles.nav}>
       <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
-        {data.pages.map((page) => {
-          return page.users.map(({ id, name, username }) => {
-            const isActive = id === (router.query.receiverId as string);
-            return (
-              <li key={id}>
-                <MotionLink
-                  variants={linkVariants}
-                  href={`/chat/${id}`}
-                  className={clsx(isActive && styles.linkActive, styles.link)}
-                >
-                  <Avatar userId={id} size="medium" />
-                  <span className={styles.name}>
-                    <span className={styles.fullName}>{name}</span>
-                    <span className={styles.username}>@{username}</span>
-                  </span>
-                </MotionLink>
-              </li>
-            );
-          });
-        })}
+        {data?.pages &&
+          data.pages.map((page) => {
+            return page.users.map(({ id, name, username }) => {
+              const isActive = id === (router.query.receiverId as string);
+              return (
+                <li key={id}>
+                  <MotionLink
+                    variants={linkVariants}
+                    href={`/chat/${id}`}
+                    className={clsx(isActive && styles.linkActive, styles.link)}
+                  >
+                    <Avatar userId={id} size="medium" />
+                    <span className={styles.name}>
+                      <span className={styles.fullName}>{name}</span>
+                      <span className={styles.username}>@{username}</span>
+                    </span>
+                  </MotionLink>
+                </li>
+              );
+            });
+          })}
         {(hasNextPage || isLoading) && (
           <div ref={infiniteRef}>
             <Loader color="blue" size="normal" />

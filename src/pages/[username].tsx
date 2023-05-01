@@ -1,7 +1,12 @@
 import { Account } from '@/src/components/pages/account/Account';
+import { AnimatedPage } from '@/src/components/pages/animatedPage/AnimatedPage';
 
 const UserAccount = () => {
-  return <Account />;
+  return (
+    <AnimatedPage>
+      <Account />
+    </AnimatedPage>
+  );
 };
 
 export default UserAccount;

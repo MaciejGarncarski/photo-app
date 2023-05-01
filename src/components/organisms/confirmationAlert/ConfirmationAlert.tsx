@@ -6,8 +6,6 @@ import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Heading } from '@/src/components/atoms/heading/Heading';
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
-import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
-
 import { alertVariants } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert.animation';
 
 import styles from './ConfirmationAlert.module.scss';
@@ -39,7 +37,6 @@ export const ConfirmationAlert = ({ headingText, onConfirm, closeModal, isVisibl
               </Heading>
             </div>
             <ReactFocusLock>
-              <ModalCloseButton onClose={closeModal} />
               <div className={styles.buttonsRow}>
                 <Button type="button" onClick={closeModal} variant="secondary">
                   cancel

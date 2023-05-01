@@ -10,8 +10,6 @@
 
   @include common.mediaquery('desktop') {
     gap: 4rem;
-    margin: 0;
-    margin-left: 20vw;
     margin-top: 2rem;
   }
 }
