@@ -2,10 +2,10 @@ import { Variants } from 'framer-motion';
 
 export const heartVariants: Variants = {
   initial: {
-    scale: 0,
+    scale: 0.3,
   },
   animate: {
-    scale: 1,
+    scale: 1.2,
     transition: {
       type: 'spring',
     },

@@ -5,6 +5,10 @@
   margin-inline: auto;
   margin-top: 1rem;
   padding-bottom: 4rem;
+
+  @include common.mediaquery('tablet') {
+    padding: 0 2rem;
+  }
 }
 
 .accountMobile {

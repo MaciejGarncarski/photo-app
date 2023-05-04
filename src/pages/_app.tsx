@@ -3,11 +3,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import { Open_Sans } from 'next/font/google';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
+import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import { seoConfig } from '@/src/utils/next-seo.config';
+
+import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { Layout } from '@/src/components/layout/Layout';
 
@@ -21,8 +24,26 @@ const customFont = Open_Sans({
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const pageKey = router.asPath;
+
+  useEffect(() => {
+    const start = () => {
+      setLoading(true);
+    };
+    const end = () => {
+      setLoading(false);
+    };
+    Router.events.on('routeChangeStart', start);
+    Router.events.on('routeChangeComplete', end);
+    Router.events.on('routeChangeError', end);
+    return () => {
+      Router.events.off('routeChangeStart', start);
+      Router.events.off('routeChangeComplete', end);
+      Router.events.off('routeChangeError', end);
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -36,7 +57,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         `}</style>
         <Layout>
           <AnimatePresence mode="wait" initial={false}>
-            <Component key={pageKey} {...pageProps} />
+            {loading ? <Loader color="blue" size="normal" marginTop /> : <Component key={pageKey} {...pageProps} />}
           </AnimatePresence>
           <Toaster />
         </Layout>

@@ -4,11 +4,11 @@ import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPag
 
 const ChatRoomPage = () => {
   return (
-    <ProtectedPage shouldBeSignedIn>
-      <AnimatedPage>
+    <AnimatedPage>
+      <ProtectedPage shouldBeSignedIn>
         <ChatRoom />
-      </AnimatedPage>
-    </ProtectedPage>
+      </ProtectedPage>
+    </AnimatedPage>
   );
 };
 

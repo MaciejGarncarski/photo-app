@@ -24,11 +24,11 @@ type PropsTypes = {
 };
 
 export const PostSlider = ({ post, priority }: PropsTypes) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
   const { imageRef, width } = useUpdateWidth();
-  const postImages = post.images;
   const { isMobile } = useIsMobile();
+  const postImages = post.images;
 
   const { handleDragEnd, nextImage, prevImage, isNotFirstIndex, isNotLastIndex, isSingleImage } = useSlider({
     currentIndex,
