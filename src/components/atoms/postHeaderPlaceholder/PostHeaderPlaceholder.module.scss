@@ -11,11 +11,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  padding-bottom: 0;
 
   @include common.mediaquery('desktop') {
     padding: 0.75rem 1rem;
-    padding-bottom: 0;
     gap: 0.75rem;
   }
 }
