@@ -40,6 +40,7 @@ export const useChatRoom = () => {
     isUserLoading,
     data,
     friendId,
+    isError: messagesError,
     friendData,
     inputVal,
     hasNextPage,

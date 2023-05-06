@@ -35,6 +35,7 @@ export const ChatRoom = () => {
   if (isLoading || isUserLoading || !data) {
     return <TextWithLoader text="Connecting to chat" />;
   }
+
   const goBack = () => router.push('/chat');
 
   return (

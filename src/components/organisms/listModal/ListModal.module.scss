@@ -55,7 +55,7 @@
 
 .listItemLast {
   @include common.mediaquery('desktop') {
-    border-radius: 0 0 var(--radius-medium) var(--radius-medium);
+    border-radius: 0 0 var(--radius-small) var(--radius-small);
   }
 }
 

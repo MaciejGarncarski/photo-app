@@ -6,8 +6,7 @@ import { NextSeo } from 'next-seo';
 import { useIsMobile } from '@/src/hooks/useIsMobile';
 import { signOut } from '@/src/utils/signOut';
 
-import { Heading } from '@/src/components/atoms/heading/Heading';
-
+import { FetchError } from '@/src/components/molecules/fetchError/FetchError';
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
 import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPosts';
@@ -48,11 +47,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   }
 
   if (isError) {
-    return (
-      <Heading tag="h2" size="big">
-        Not found.
-      </Heading>
-    );
+    return <FetchError message="Cannot display this profile." />;
   }
 
   return (

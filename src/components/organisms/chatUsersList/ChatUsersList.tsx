@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { FetchError } from '@/src/components/molecules/fetchError/FetchError';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
@@ -33,6 +34,10 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
     disabled: isError || !hasNextPage,
     rootMargin: '0px 0px 300px 0px',
   });
+
+  if (isError) {
+    return <FetchError message="Cannot fetch users." />;
+  }
 
   if (data?.pages[0].usersCount === 0) {
     return <p>no users found</p>;

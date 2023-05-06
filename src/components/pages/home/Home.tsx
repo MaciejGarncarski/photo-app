@@ -10,6 +10,7 @@ import { NewPostNotification } from '@/src/components/atoms/newPostNotification/
 import { PostPlaceholder } from '@/src/components/atoms/postPlaceholder/PostPlaceholder';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { FetchError } from '@/src/components/molecules/fetchError/FetchError';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
 import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
 import { Loader } from '@/src/components/molecules/loader/Loader';
@@ -35,6 +36,10 @@ export const Home = () => {
     disabled: isError,
     rootMargin: '0px 0px 100px 0px',
   });
+
+  if (isError) {
+    return <FetchError message="Cannot fetch data." />;
+  }
 
   return (
     <div className={styles.home}>
