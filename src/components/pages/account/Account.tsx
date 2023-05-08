@@ -42,12 +42,12 @@ export const Account = ({ username: usernameFromProps }: Props) => {
     isOwner,
   };
 
-  if (!userData) {
-    return <Loader marginTop color="blue" size="normal" />;
-  }
-
   if (isError) {
     return <FetchError message="Cannot display this profile." />;
+  }
+
+  if (!userData) {
+    return <Loader marginTop color="blue" size="normal" />;
   }
 
   return (

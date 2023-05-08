@@ -11,6 +11,7 @@ export const useUser = ({ userId }: PropsTypes) => {
     queryKey: ['user', userId],
     queryFn: () => getUser({ userId }),
     enabled: userId !== '',
+    retry: 1,
     refetchOnWindowFocus: false,
   });
 };
