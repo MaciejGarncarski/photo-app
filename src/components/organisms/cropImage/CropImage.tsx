@@ -20,6 +20,7 @@ import { FinalImages } from '@/src/components/pages/createPost/types';
 import styles from './CropImage.module.scss';
 
 import { ConfirmationAlert } from '../confirmationAlert/ConfirmationAlert';
+import { unlock } from '../../../utils/bodyLock';
 
 type Props = {
   setFinalImages: (final: FinalImages) => void;
@@ -42,6 +43,11 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   if (!imgSrc) {
     return <DropZone setImgSrc={setImgSrc} />;
   }
+
+  const onConfirm = () => {
+    unlock();
+    resetImgSrc();
+  };
 
   return (
     <>
@@ -80,7 +86,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           isVisible={isModalOpen}
           headingText="Select diffrent image?"
           closeModal={closeModal}
-          onConfirm={resetImgSrc}
+          onConfirm={onConfirm}
         />
       )}
     </>
