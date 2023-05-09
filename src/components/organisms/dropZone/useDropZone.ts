@@ -2,28 +2,27 @@ import { ChangeEvent, DragEvent, useRef, useState } from 'react';
 
 import { handleDropImage } from '@/src/utils/handleDropImage';
 
-import { ChangeError } from '@/src/components/organisms/dropZone/useDropError';
+import { DropZoneErrors } from '../../pages/createPost/types';
 
-type ArgumentsTypes = {
-  changeError: ChangeError;
+type Arguments = {
+  setError: (error: DropZoneErrors) => void;
   setImgSrc: (image: string | null) => void;
 };
 
-export const useDropZone = ({ changeError, setImgSrc }: ArgumentsTypes) => {
+export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
   const [isActive, setIsActive] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { errorNoImage } = changeError;
 
   const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
     if (!changeEv.target.files) {
-      errorNoImage();
+      setError('NO_IMAGE_DETECTED');
       return;
     }
 
     if (changeEv.target.files.length > 0) {
       setIsUploadingImage(true);
-      handleDropImage({ file: changeEv.target.files[0], changeError, setImgSrc });
+      handleDropImage({ file: changeEv.target.files[0], setError, setImgSrc });
       setIsUploadingImage(false);
     }
   };
@@ -47,15 +46,15 @@ export const useDropZone = ({ changeError, setImgSrc }: ArgumentsTypes) => {
     const firstFile = files[0];
 
     if (!files || !firstFile) {
-      return changeError.errorNoImage();
+      return setError('NO_IMAGE_DETECTED');
     }
 
     if (files.length > 1) {
-      return changeError.errorTooManyImage();
+      return setError('TOO_MANY_IMAGES');
     }
 
     setIsUploadingImage(true);
-    handleDropImage({ file: firstFile, changeError, setImgSrc });
+    handleDropImage({ file: firstFile, setError, setImgSrc });
   };
 
   return { active, inactive, onDrop, isActive, inputRef, isUploadingImage, onChange };

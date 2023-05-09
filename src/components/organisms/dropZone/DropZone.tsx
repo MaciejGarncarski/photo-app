@@ -1,5 +1,6 @@
 import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
+import { useState } from 'react';
 
 import { useIsMobile } from '@/src/hooks/useIsMobile';
 
@@ -9,20 +10,22 @@ import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/Visual
 
 import { Loader } from '@/src/components/molecules/loader/Loader';
 
-import { useDropError } from '@/src/components/organisms/dropZone/useDropError';
 import { useDropZone } from '@/src/components/organisms/dropZone/useDropZone';
 
 import styles from './DropZone.module.scss';
+
+import { DropZoneErrors } from '../../pages/createPost/types';
 
 type PropsTypes = {
   setImgSrc: (src: string | null) => void;
 };
 
 export const DropZone = ({ setImgSrc }: PropsTypes) => {
-  const { error, changeError } = useDropError();
+  const [error, setError] = useState<DropZoneErrors>(null);
+
   const { isMobile } = useIsMobile();
   const { active, onDrop, inactive, inputRef, isActive, onChange, isUploadingImage } = useDropZone({
-    changeError,
+    setError,
     setImgSrc,
   });
 

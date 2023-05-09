@@ -19,6 +19,8 @@ import { FinalImages } from '@/src/components/pages/createPost/types';
 
 import styles from './CropImage.module.scss';
 
+import { ConfirmationAlert } from '../confirmationAlert/ConfirmationAlert';
+
 type Props = {
   setFinalImages: (final: FinalImages) => void;
   finalImages: FinalImages;
@@ -26,11 +28,12 @@ type Props = {
 
 export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const { openModal } = useModal();
   const { aspect, setAspect, setZoom, zoom, crop, setCrop, cropAreaPixels, onCropComplete } = useCropImage();
+  const { openModal, isModalOpen, closeModal } = useModal();
+  const { isMobile } = useIsMobile();
+
   const resetImgSrc = () => setImgSrc(null);
   const { isCropping, saveCrop } = useSaveCrop({ cropAreaPixels, finalImages, imgSrc, resetImgSrc, setFinalImages });
-  const { isMobile } = useIsMobile();
 
   if (isCropping) {
     return <Loader size="normal" color="blue" />;
@@ -41,36 +44,45 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   }
 
   return (
-    <section className={styles.addPhoto}>
-      <Heading size="medium" tag="h2">
-        Crop your image
-      </Heading>
+    <>
+      <section className={styles.addPhoto}>
+        <Heading size="medium" tag="h2">
+          Crop your image
+        </Heading>
 
-      <div className={styles.cropContainer}>
-        <Cropper
-          image={imgSrc}
-          zoom={zoom}
-          aspect={aspect}
-          crop={crop}
-          onZoomChange={setZoom}
-          onCropChange={setCrop}
-          onCropComplete={onCropComplete}
+        <div className={styles.cropContainer}>
+          <Cropper
+            image={imgSrc}
+            zoom={zoom}
+            aspect={aspect}
+            crop={crop}
+            onZoomChange={setZoom}
+            onCropChange={setCrop}
+            onCropComplete={onCropComplete}
+          />
+        </div>
+        <p className={styles.info}>
+          {isMobile ? <IconHandFinger /> : <IconMouse />}
+          <span>{isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture</span>
+        </p>
+        <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
+        <div className={styles.buttons}>
+          <Button type="button" variant="primary" onClick={saveCrop}>
+            Save crop
+          </Button>
+          <Button type="button" variant="secondary" disabled={!imgSrc} onClick={openModal}>
+            Select diffrent image
+          </Button>
+        </div>
+      </section>
+      {isModalOpen && (
+        <ConfirmationAlert
+          isVisible={isModalOpen}
+          headingText="Select diffrent image?"
+          closeModal={closeModal}
+          onConfirm={resetImgSrc}
         />
-      </div>
-      <p className={styles.info}>
-        {isMobile ? <IconHandFinger /> : <IconMouse />}
-        <span>{isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture</span>
-      </p>
-      <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
-
-      <div className={styles.buttons}>
-        <Button type="button" variant="secondary" onClick={openModal}>
-          Select diffrent image
-        </Button>
-        <Button type="button" variant="primary" onClick={saveCrop}>
-          Save crop
-        </Button>
-      </div>
-    </section>
+      )}
+    </>
   );
 };
