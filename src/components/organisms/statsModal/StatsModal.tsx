@@ -21,7 +21,7 @@ export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
 
   return (
     <ModalBackdrop closeModal={closeModal}>
-      <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100, opacity: 0 }} className={styles.container}>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.container}>
         <h3 className={styles.heading}>{type.toUpperCase()}</h3>
         <ReactFocusLock>
           <ModalCloseButton onClose={closeModal} />
