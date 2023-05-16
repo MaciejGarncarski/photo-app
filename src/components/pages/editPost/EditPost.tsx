@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { useModal } from '@/src/hooks/useModal';
+import { unlock } from '@/src/utils/bodyLock';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Heading } from '@/src/components/atoms/heading/Heading';
@@ -39,14 +40,19 @@ export const EditPost = () => {
     },
   });
 
+  if (!data || isLoading) {
+    return <Loader color="blue" size="normal" />;
+  }
+
   const onSubmit = () => {
     const { description } = getValues();
     mutate({ description }, { onSettled: saveModal.closeModal });
   };
 
-  if (!data || isLoading) {
-    return <Loader color="blue" size="normal" />;
-  }
+  const cancelChanges = () => {
+    router.back();
+    unlock();
+  };
 
   return (
     <section className={styles.editPost}>
@@ -72,7 +78,7 @@ export const EditPost = () => {
       <ConfirmationAlert
         isVisible={cancelModal.isModalOpen}
         headingText="Cancel changes?"
-        onConfirm={router.back}
+        onConfirm={cancelChanges}
         closeModal={cancelModal.closeModal}
       />
       <ConfirmationAlert
