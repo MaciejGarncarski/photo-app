@@ -67,7 +67,7 @@ export const ChatRoom = () => {
         })}
         {(isLoading || hasNextPage) && (
           <li ref={infiniteRef} className={styles.loading}>
-            <Loader color="blue" size="normal" />;
+            <Loader color="blue" size="normal" />
           </li>
         )}
       </ul>

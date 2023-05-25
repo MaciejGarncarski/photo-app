@@ -9,9 +9,11 @@
   padding: 0.3rem 0.75rem;
   background-color: var(--bg-secondary);
   border-radius: 4rem;
+  border: 1px solid var(--color-gray);
 
   @include common.mediaquery('desktop') {
     border-radius: 0;
+    border: initial;
     background-color: transparent;
     flex-direction: column;
     justify-content: center;

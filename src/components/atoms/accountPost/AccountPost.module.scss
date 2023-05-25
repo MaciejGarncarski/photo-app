@@ -12,7 +12,7 @@
   transition: box-shadow var(--transition);
 
   --shadow-size: 3px;
-  box-shadow: 0 0 0 var(--shadow-size) var(--bg-primary), 0 0 0 calc(var(--shadow-size) * 2) var(--bg-secondary);
+  box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--bg-secondary);
 
   &:focus {
     outline: none;
@@ -20,11 +20,11 @@
 
   &:focus,
   &:hover {
-    box-shadow: var(--shadow-focus);
+    box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--color-secondary);
   }
 
   @include common.mediaquery('desktop') {
-    --shadow-size: 4px;
+    --shadow-size: 3px;
   }
 }
 
