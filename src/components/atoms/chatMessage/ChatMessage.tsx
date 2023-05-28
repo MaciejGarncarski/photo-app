@@ -1,6 +1,8 @@
 import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 
+import { unlock } from '@/src/utils/bodyLock';
+
 import { useChatMessage } from '@/src/components/atoms/chatMessage/useChatMessage';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
@@ -24,6 +26,11 @@ export const ChatMessage = ({ message }: PropsTypes) => {
     createdAt,
   });
 
+  const handleDelete = () => {
+    mutate({ messageId: id });
+    unlock();
+  };
+
   return (
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
       {!isReceiver && (
@@ -39,7 +46,7 @@ export const ChatMessage = ({ message }: PropsTypes) => {
         <p>{text}</p>
       </div>
       <ListModal isVisible={isModalOpen} closeModal={closeModal} headingText="Message options">
-        <ListModalItem isLast icon={<IconTrash />} type="button" onClick={() => mutate({ messageId: id })}>
+        <ListModalItem isLast icon={<IconTrash />} type="button" onClick={handleDelete}>
           Delete
         </ListModalItem>
       </ListModal>
