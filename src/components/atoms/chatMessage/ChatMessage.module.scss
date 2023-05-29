@@ -33,7 +33,7 @@
 .content {
   background-color: var(--color-secondary);
   border-radius: var(--radius-big);
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -41,6 +41,7 @@
 
   @include common.mediaquery('desktop') {
     max-width: 20rem;
+    padding: 0.5rem 1rem;
   }
 
   & > button {

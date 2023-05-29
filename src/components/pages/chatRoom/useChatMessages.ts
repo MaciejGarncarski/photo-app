@@ -23,7 +23,6 @@ export const useChatMessages = () => {
   });
 
   const fetchNext = () => {
-    window.scrollBy({ top: 120, behavior: 'smooth' });
     fetchNextPage();
   };
 

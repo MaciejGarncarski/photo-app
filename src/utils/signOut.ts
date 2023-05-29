@@ -5,6 +5,6 @@ import { apiClient } from '@/src/utils/apiClient';
 
 export const signOut = async (queryClient: QueryClient) => {
   await apiClient.delete('auth/me');
+  await Router.push('/');
   await queryClient.invalidateQueries(['session']);
-  Router.push('/');
 };
