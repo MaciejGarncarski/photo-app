@@ -34,8 +34,8 @@ export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }:
 
   return (
     <motion.main variants={containerVariants} initial="hidden" animate="show" className={styles.accountMobile}>
-      <motion.h2 className={styles.username}>{username}</motion.h2>
       <Avatar userId={userId} size="big" />
+      <motion.h2 className={styles.username}>{username}</motion.h2>
       <AccountStats userId={userId} />
       {!isOwner && isSignedIn && <FollowButton userId={userId} />}
       {isOwner && (

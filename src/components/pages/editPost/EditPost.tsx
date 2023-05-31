@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useModal } from '@/src/hooks/useModal';
@@ -31,6 +32,7 @@ export const EditPost = () => {
   const {
     formState: { errors, isDirty },
     register,
+    setValue,
     getValues,
   } = useForm({
     mode: 'all',
@@ -40,7 +42,13 @@ export const EditPost = () => {
     },
   });
 
-  if (!data || isLoading) {
+  useEffect(() => {
+    if (data?.description) {
+      setValue('description', data.description);
+    }
+  }, [data?.description, setValue]);
+
+  if (!data?.description || isLoading) {
     return <Loader color="blue" size="normal" />;
   }
 
