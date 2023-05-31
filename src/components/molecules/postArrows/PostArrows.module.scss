@@ -1,37 +1,37 @@
 @use '/src/styles/common.scss';
 
 .button {
-    --button-width: 2.5rem;
-    width: var(--button-width);
-    height: var(--button-width);
-    position: absolute;
-    margin: auto 0;
-    border: none;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    bottom: 0;
-    left: 1rem;
-    z-index: 2;
-    box-shadow: var(--shadow-primary);
-    transition: box-shadow var(--transition-fast);
+  --button-width: 2.5rem;
+  width: var(--button-width);
+  height: var(--button-width);
+  position: absolute;
+  margin: auto 0;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 1rem;
+  z-index: 2;
+  box-shadow: var(--shadow-primary);
+  transition: box-shadow var(--transition-fast);
 
-    &:hover,
-    &:focus {
-        outline: none;
-        box-shadow: var(--shadow-focus);
-    }
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
 
-    >svg {
-        stroke-width: 3;
-    }
+  > svg {
+    stroke-width: 3;
+  }
 }
 
 .buttonRight {
-    left: unset;
-    right: 1rem;
+  left: unset;
+  right: 1rem;
 }

@@ -27,7 +27,7 @@
   justify-content: center;
   gap: 0.5rem;
 
-  >svg {
+  > svg {
     --size: 3rem;
     width: var(--size);
     height: var(--size);
@@ -37,7 +37,7 @@
   @include common.mediaquery('desktop') {
     gap: 1rem;
 
-    >svg {
+    > svg {
       --size: 3rem;
     }
   }
