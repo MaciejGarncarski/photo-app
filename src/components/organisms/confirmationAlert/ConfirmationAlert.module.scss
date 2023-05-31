@@ -25,17 +25,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
-  > svg {
-    --size: 2.5rem;
+  >svg {
+    --size: 3rem;
     width: var(--size);
     height: var(--size);
-    color: var(--color-secondary);
+    color: var(--color-primary);
   }
 
   @include common.mediaquery('desktop') {
-    > svg {
+    gap: 1rem;
+
+    >svg {
       --size: 3rem;
     }
   }

@@ -1,4 +1,3 @@
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
@@ -6,11 +5,11 @@ import { useState } from 'react';
 import { useIsMobile } from '@/src/hooks/useIsMobile';
 
 import { HeartAnimation } from '@/src/components/atoms/heartAnimation/HeartAnimation';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+
+import { PostArrows } from '@/src/components/molecules/postArrows/PostArrows';
 
 import { useHandleLike } from '@/src/components/organisms/post/postButtons/useHandleLike';
 import { PostImage } from '@/src/components/organisms/post/postImage/PostImage';
-import { PostSliderProgress } from '@/src/components/organisms/post/postSlider/PostSliderProgress';
 import { useSlider } from '@/src/components/organisms/post/postSlider/useSlider';
 import { useUpdateWidth } from '@/src/components/organisms/post/postSlider/useUpdateWidth';
 
@@ -28,59 +27,57 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
   const { imageRef, width } = useUpdateWidth();
   const { isMobile } = useIsMobile();
-  const postImages = post.images;
+  const { images: postImages } = post;
 
-  const { handleDragEnd, nextImage, prevImage, isNotFirstIndex, isNotLastIndex, isSingleImage } = useSlider({
+  const isSingleImage = postImages.length === 1;
+
+  const handlePrevImage = () => {
+    setCurrentIndex((prevImage) => prevImage - 1);
+  };
+
+  const handleNextImage = () => {
+    setCurrentIndex((prevImage) => prevImage + 1);
+  };
+
+  const { handleDragEnd, nextImage, prevImage } = useSlider({
     currentIndex,
     postImages,
-    setCurrentIndex,
+    handleNextImage,
+    handlePrevImage,
   });
 
   return (
     <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
-        className={styles.imagesContainer}
+        className={clsx(styles.imagesContainer, isSingleImage && styles.singleImageContainer)}
         drag={isSingleImage ? undefined : 'x'}
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
         dragElastic={0.3}
       >
-        <AnimatePresence>
-          <motion.div className={styles.imagesContainer} animate={{ x: -1 * currentIndex * width }}>
-            {postImages.map(({ fileId, url }, idx) => {
+        <AnimatePresence mode="wait">
+          <motion.div
+            animate={{ x: -1 * currentIndex * width }}
+            exit={{ x: currentIndex * width }}
+            className={styles.imagesContainer}
+            initial={{ x: 0 }}
+          >
+            {postImages.map((image, mapIndex) => {
               return (
-                <motion.figure ref={currentIndex === idx ? imageRef : undefined} className={styles.figure} key={fileId}>
-                  <PostImage
-                    priority={priority || idx === 1}
-                    src={url}
-                    width={isMobile ? 240 : 500}
-                    height={isMobile ? 240 : 500}
-                    post={post}
-                  />
+                <motion.figure
+                  ref={currentIndex === mapIndex ? imageRef : undefined}
+                  className={styles.figure}
+                  key={image.fileId}
+                >
+                  <PostImage height={1200} width={1200} priority={priority} src={image.url} post={post} />
                 </motion.figure>
               );
             })}
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      {!isSingleImage && (
-        <>
-          {isNotFirstIndex && (
-            <button type="button" className={styles.button} onClick={prevImage}>
-              <IconArrowLeft />
-              <VisuallyHidden>Previous image</VisuallyHidden>
-            </button>
-          )}
-          <PostSliderProgress currentIndex={currentIndex} images={postImages} />
-          {isNotLastIndex && (
-            <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
-              <IconArrowRight />
-              <VisuallyHidden>Next image</VisuallyHidden>
-            </button>
-          )}
-        </>
-      )}
+      <PostArrows currentIndex={currentIndex} nextImage={nextImage} postImages={postImages} prevImage={prevImage} />
     </motion.div>
   );
 };

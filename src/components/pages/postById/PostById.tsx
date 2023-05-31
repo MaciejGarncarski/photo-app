@@ -41,7 +41,7 @@ export const PostById = () => {
   }
 
   if (!isSuccess || !authorData?.username) {
-    return <Loader color="blue" size="normal" />;
+    return <Loader marginTop color="blue" size="normal" />;
   }
 
   return (

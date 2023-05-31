@@ -18,6 +18,8 @@ export const Header = () => {
   const { sessionUser, isLoading } = useAuth();
   const { closeModal, isModalOpen, openModal } = useModal();
 
+  const showUserOptions = !isMobile && sessionUser?.id && !isLoading;
+
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.anchor}>
@@ -25,7 +27,7 @@ export const Header = () => {
       </Link>
       <NavbarForDesktop />
       <Navbar />
-      {!isMobile && sessionUser?.id && !isLoading && (
+      {showUserOptions && (
         <div className={styles.options}>
           <button type="button" className={styles.button} onClick={isModalOpen ? closeModal : openModal}>
             <Avatar userId={sessionUser.id} size="small" />

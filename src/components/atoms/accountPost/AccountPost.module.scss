@@ -11,7 +11,7 @@
   align-items: center;
   transition: box-shadow var(--transition);
 
-  --shadow-size: 3px;
+  --shadow-size: 2px;
   box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--bg-secondary);
 
   &:focus {
@@ -76,9 +76,10 @@
 }
 
 .container {
+
   &:focus,
   &:hover {
-    & > .overlay {
+    &>.overlay {
       opacity: 1;
     }
   }

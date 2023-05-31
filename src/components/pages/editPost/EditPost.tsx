@@ -77,7 +77,7 @@ export const EditPost = () => {
       </form>
       <ConfirmationAlert
         isVisible={cancelModal.isModalOpen}
-        headingText="Cancel changes?"
+        headingText="Abort editing?"
         onConfirm={cancelChanges}
         closeModal={cancelModal.closeModal}
       />
