@@ -45,7 +45,12 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
 
   return (
     <nav className={styles.nav}>
-      <motion.ul variants={containerVariants} initial="hidden" animate="show" className={styles.list}>
+      <motion.ul
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className={styles.list}
+      >
         {data?.pages &&
           data.pages.map((page) => {
             return page.users.map(({ id, name, username }) => {

@@ -13,7 +13,11 @@ export const OtherSignInOptions = () => {
   const queryClient = useQueryClient();
 
   const handleSignInDemo = () => {
-    signInCredentials({ email: 'test@test.pl', password: '12345', queryClient });
+    signInCredentials({
+      email: 'test@test.pl',
+      password: '12345',
+      queryClient,
+    });
   };
 
   return (
@@ -30,7 +34,10 @@ export const OtherSignInOptions = () => {
         </div>
 
         <div className={styles.button}>
-          <Link href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`} className={styles.link}>
+          <Link
+            href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`}
+            className={styles.link}
+          >
             <IconBrandGoogle />
             Google
           </Link>

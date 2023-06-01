@@ -17,11 +17,19 @@ type PropsTypes = {
 };
 
 export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
-  const { isLoading, data, isEmpty, sentryRef } = useStatsModal({ userId, type });
+  const { isLoading, data, isEmpty, sentryRef } = useStatsModal({
+    userId,
+    type,
+  });
 
   return (
     <ModalBackdrop closeModal={closeModal}>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.container}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.container}
+      >
         <h3 className={styles.heading}>{type.toUpperCase()}</h3>
         <ReactFocusLock>
           <ModalCloseButton onClose={closeModal} />

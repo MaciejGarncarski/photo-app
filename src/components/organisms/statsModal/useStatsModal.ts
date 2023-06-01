@@ -8,7 +8,10 @@ type Arguments = {
 };
 
 export const useStatsModal = ({ userId, type }: Arguments) => {
-  const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({ userId, type });
+  const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({
+    userId,
+    type,
+  });
   const isEmpty = data?.pages[0].users.length === 0;
 
   const [sentryRef] = useInfiniteScroll({

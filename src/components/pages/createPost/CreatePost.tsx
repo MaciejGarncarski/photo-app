@@ -21,13 +21,17 @@ import styles from './CreatePost.module.scss';
 import { useOnSubmit } from './useOnSubmit';
 
 export const PostDetailsSchema = z.object({
-  description: z.string().min(1).max(100, { message: 'Maximum characters exceeded.' }),
+  description: z
+    .string()
+    .min(1)
+    .max(100, { message: 'Maximum characters exceeded.' }),
 });
 
 export const CreatePost = () => {
   const router = useRouter();
   const { openModal, closeModal, isModalOpen } = useModal();
-  const { finalImages, previewImages, setFinalImages, onRemove } = useFinalImages();
+  const { finalImages, previewImages, setFinalImages, onRemove } =
+    useFinalImages();
   const { onSubmit, isUploadingPost } = useOnSubmit({ finalImages });
 
   const {
@@ -50,7 +54,9 @@ export const CreatePost = () => {
   return (
     <div className={styles.createPost}>
       <NextSeo title="Create new post" />
-      {finalImages.length <= 3 && <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />}
+      {finalImages.length <= 3 && (
+        <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
+      )}
       <ImagesPreview previewImages={previewImages} onRemove={onRemove} />
       <CreatePostForm
         disabled={isSubmitDisabled}

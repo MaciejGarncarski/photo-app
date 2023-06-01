@@ -61,7 +61,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             {loading ? (
               <Loader color="blue" size="normal" marginTop />
             ) : (
-              <motion.div key={pageKey} variants={opacityVariants} initial="hidden" animate="visible">
+              <motion.div
+                key={pageKey}
+                variants={opacityVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 <Component {...pageProps} />
               </motion.div>
             )}

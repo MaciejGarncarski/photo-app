@@ -39,5 +39,12 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
     });
   };
 
-  return { username: data?.username, handleDeletePost, isAuthor, dateFromNow, confirmationModal, menuModal };
+  return {
+    username: data?.username,
+    handleDeletePost,
+    isAuthor,
+    dateFromNow,
+    confirmationModal,
+    menuModal,
+  };
 };

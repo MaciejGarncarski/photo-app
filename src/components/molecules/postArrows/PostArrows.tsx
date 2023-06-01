@@ -15,7 +15,12 @@ type Props = {
   nextImage: () => void;
 };
 
-export const PostArrows = ({ prevImage, nextImage, postImages, currentIndex }: Props) => {
+export const PostArrows = ({
+  prevImage,
+  nextImage,
+  postImages,
+  currentIndex,
+}: Props) => {
   const isNotFirstIndex = currentIndex !== 0;
   const isNotLastIndex = currentIndex !== postImages.length - 1;
   const isSingleImage = postImages.length === 1;
@@ -32,7 +37,11 @@ export const PostArrows = ({ prevImage, nextImage, postImages, currentIndex }: P
           )}
           <PostSliderProgress currentIndex={currentIndex} images={postImages} />
           {isNotLastIndex && (
-            <button type="button" className={clsx(styles.buttonRight, styles.button)} onClick={nextImage}>
+            <button
+              type="button"
+              className={clsx(styles.buttonRight, styles.button)}
+              onClick={nextImage}
+            >
               <IconArrowRight />
               <VisuallyHidden>Next image</VisuallyHidden>
             </button>

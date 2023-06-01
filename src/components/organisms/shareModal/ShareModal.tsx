@@ -10,11 +10,19 @@ type PropsTypes = {
   isVisible: boolean;
 };
 
-export const ShareModal = ({ closeModal, textToCopy, isVisible }: PropsTypes) => {
+export const ShareModal = ({
+  closeModal,
+  textToCopy,
+  isVisible,
+}: PropsTypes) => {
   const { isCopied, handleCopy } = useShareModal({ textToCopy });
 
   return (
-    <ListModal isVisible={isVisible} closeModal={closeModal} headingText="Share post">
+    <ListModal
+      isVisible={isVisible}
+      closeModal={closeModal}
+      headingText="Share post"
+    >
       <ListModalItem
         type="button"
         icon={isCopied ? <IconCheck /> : <IconCopy />}

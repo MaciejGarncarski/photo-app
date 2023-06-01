@@ -15,7 +15,12 @@ export const Navbar = () => {
   }
 
   return (
-    <motion.nav variants={navbarVariants} initial="hidden" animate="visible" className={styles.nav}>
+    <motion.nav
+      variants={navbarVariants}
+      initial="hidden"
+      animate="visible"
+      className={styles.nav}
+    >
       <NavButtons />
     </motion.nav>
   );

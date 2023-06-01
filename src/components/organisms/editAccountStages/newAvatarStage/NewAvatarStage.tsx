@@ -20,7 +20,10 @@ type PropsTypes = {
   stagePersonalInfo: () => void;
 };
 
-export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTypes) => {
+export const NewAvatarStage = ({
+  stagePersonalInfo,
+  stageSelectImage,
+}: PropsTypes) => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const resetFinalImages = () => setFinalImages([]);
   const { onSaveImage, isLoading, isFinalImageEmpty } = useUploadAvatar({
@@ -45,11 +48,21 @@ export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTyp
       initial="initial"
       className={styles.stageContainer}
     >
-      {!isNewAvatarReady && <CropImage finalImages={finalImages} setFinalImages={setFinalImages} />}
+      {!isNewAvatarReady && (
+        <CropImage finalImages={finalImages} setFinalImages={setFinalImages} />
+      )}
       {isNewAvatarReady && (
         <figure className={styles.preview}>
-          <figcaption className={styles.previewFigcaption}>new avatar preview</figcaption>
-          <Image alt="avatar preview" src={previewImage?.src} width={300} height={300} className={styles.previewImg} />
+          <figcaption className={styles.previewFigcaption}>
+            new avatar preview
+          </figcaption>
+          <Image
+            alt="avatar preview"
+            src={previewImage?.src}
+            width={300}
+            height={300}
+            className={styles.previewImg}
+          />
         </figure>
       )}
       <div className={styles.buttons}>
@@ -61,7 +74,12 @@ export const NewAvatarStage = ({ stagePersonalInfo, stageSelectImage }: PropsTyp
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
           go back
         </Button>
-        <Button type="button" variant="primary" disabled={isLoading || isFinalImageEmpty} onClick={onSaveImage}>
+        <Button
+          type="button"
+          variant="primary"
+          disabled={isLoading || isFinalImageEmpty}
+          onClick={onSaveImage}
+        >
           Save new image
         </Button>
       </div>

@@ -11,7 +11,8 @@ type PropsTypes = {
 };
 
 export const CommentForm = ({ postId }: PropsTypes) => {
-  const { errors, handleSubmit, isDirty, isLoading, onSubmit, register } = useCommentForm({ postId });
+  const { errors, handleSubmit, isDirty, isLoading, onSubmit, register } =
+    useCommentForm({ postId });
 
   if (isLoading) {
     return <p>Uploading...</p>;
@@ -20,7 +21,10 @@ export const CommentForm = ({ postId }: PropsTypes) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>
       <textarea
-        className={clsx(errors.comment && styles.commentInputError, styles.commentInput)}
+        className={clsx(
+          errors.comment && styles.commentInputError,
+          styles.commentInput,
+        )}
         {...register('comment')}
       />
       <Button type="submit" disabled={!isDirty} variant="primary">

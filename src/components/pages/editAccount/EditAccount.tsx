@@ -11,18 +11,18 @@ import styles from './EditAccount.module.scss';
 
 const NewAvatarStageLazy = dynamic(
   async () => {
-    return import('@/src/components/organisms/editAccountStages/newAvatarStage/NewAvatarStage').then(
-      ({ NewAvatarStage }) => NewAvatarStage,
-    );
+    return import(
+      '@/src/components/organisms/editAccountStages/newAvatarStage/NewAvatarStage'
+    ).then(({ NewAvatarStage }) => NewAvatarStage);
   },
   { ssr: false },
 );
 
 const LazyDetailsStage = dynamic(
   async () => {
-    return import('@/src/components/organisms/editAccountStages/detailsStage/DetailsStage').then(
-      ({ DetailsStage }) => DetailsStage,
-    );
+    return import(
+      '@/src/components/organisms/editAccountStages/detailsStage/DetailsStage'
+    ).then(({ DetailsStage }) => DetailsStage);
   },
   { ssr: false },
 );
@@ -60,7 +60,11 @@ export const EditAccount = () => {
         )}
 
         {stage === 'personalInfo' && (
-          <LazyDetailsStage key="detailsStage" stageSelectImage={stageSelectImage} userId={userId} />
+          <LazyDetailsStage
+            key="detailsStage"
+            stageSelectImage={stageSelectImage}
+            userId={userId}
+          />
         )}
       </AnimatePresence>
     </main>

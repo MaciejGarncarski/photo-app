@@ -14,7 +14,12 @@ type PropsTypes = {
   inputValue: string;
 };
 
-export const SearchUserForm = ({ onChange, onSubmit, resetState, inputValue }: PropsTypes) => {
+export const SearchUserForm = ({
+  onChange,
+  onSubmit,
+  resetState,
+  inputValue,
+}: PropsTypes) => {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <input
@@ -29,7 +34,12 @@ export const SearchUserForm = ({ onChange, onSubmit, resetState, inputValue }: P
         <IconSearch />
         <VisuallyHidden>Search user</VisuallyHidden>
       </Button>
-      <Button type="reset" variant="primary" onClick={resetState} disabled={inputValue === ''}>
+      <Button
+        type="reset"
+        variant="primary"
+        onClick={resetState}
+        disabled={inputValue === ''}
+      >
         <IconXWrapper />
         <VisuallyHidden>Reset input</VisuallyHidden>
       </Button>

@@ -8,7 +8,9 @@ describe('Settings component', () => {
   describe('user integration', () => {
     it('should change theme', () => {
       render(<Settings isVisible={true} closeModal={jest.fn()} />);
-      const changeThemeBtn = screen.getByRole('button', { name: /Change theme to dark/i });
+      const changeThemeBtn = screen.getByRole('button', {
+        name: /Change theme to dark/i,
+      });
       fireEvent.click(changeThemeBtn);
       expect(changeThemeBtn).toHaveAccessibleName(/Change theme to light/i);
     });

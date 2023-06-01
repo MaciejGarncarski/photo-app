@@ -24,11 +24,24 @@ type PropsTypes = {
 
 const MotionLink = motion(Link);
 
-export const AccountPost = ({ likesCount, commentsCount, postId, isLiked, imageUrl, width, height }: PropsTypes) => {
+export const AccountPost = ({
+  likesCount,
+  commentsCount,
+  postId,
+  isLiked,
+  imageUrl,
+  width,
+  height,
+}: PropsTypes) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <MotionLink shallow variants={postItemVaraints} href={`/post/${postId}`} className={styles.container}>
+    <MotionLink
+      shallow
+      variants={postItemVaraints}
+      href={`/post/${postId}`}
+      className={styles.container}
+    >
       {!isLoaded && <Loader color="blue" size="normal" />}
       <Image
         className={clsx({ [styles.imageLoading]: !isLoaded }, styles.image)}

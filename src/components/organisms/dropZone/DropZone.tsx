@@ -24,7 +24,15 @@ export const DropZone = ({ setImgSrc }: PropsTypes) => {
   const [error, setError] = useState<DropZoneErrors>(null);
 
   const { isMobile } = useIsMobile();
-  const { active, onDrop, inactive, inputRef, isActive, onChange, isUploadingImage } = useDropZone({
+  const {
+    active,
+    onDrop,
+    inactive,
+    inputRef,
+    isActive,
+    onChange,
+    isUploadingImage,
+  } = useDropZone({
     setError,
     setImgSrc,
   });
@@ -39,7 +47,11 @@ export const DropZone = ({ setImgSrc }: PropsTypes) => {
         Upload image
       </Heading>
       <div
-        className={clsx(isActive && styles.dropZoneActive, error && styles.dropZoneError, styles.dropZone)}
+        className={clsx(
+          isActive && styles.dropZoneActive,
+          error && styles.dropZoneError,
+          styles.dropZone,
+        )}
         onDragOver={active}
         onDragEnter={active}
         onDrop={onDrop}
@@ -78,7 +90,13 @@ export const DropZone = ({ setImgSrc }: PropsTypes) => {
             </>
           )}
         </div>
-        <label htmlFor="dropZoneInput" className={clsx(isActive && styles.buttonInputDisabled, styles.buttonInput)}>
+        <label
+          htmlFor="dropZoneInput"
+          className={clsx(
+            isActive && styles.buttonInputDisabled,
+            styles.buttonInput,
+          )}
+        >
           Select from {isMobile ? 'device' : 'computer'}
         </label>
       </div>

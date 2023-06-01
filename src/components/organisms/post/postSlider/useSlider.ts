@@ -11,7 +11,12 @@ type ArgsTypes = {
 
 const CHANGE_IMG_OFFSET = 40;
 
-export const useSlider = ({ currentIndex, postImages, handlePrevImage, handleNextImage }: ArgsTypes) => {
+export const useSlider = ({
+  currentIndex,
+  postImages,
+  handlePrevImage,
+  handleNextImage,
+}: ArgsTypes) => {
   const prevImage = () => {
     if (currentIndex === 0) {
       return;
@@ -26,7 +31,10 @@ export const useSlider = ({ currentIndex, postImages, handlePrevImage, handleNex
     handleNextImage();
   };
 
-  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
+  const handleDragEnd = (
+    _: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ): void => {
     const { offset } = info;
     if (offset.x < CHANGE_IMG_OFFSET * -1) {
       nextImage();

@@ -46,7 +46,11 @@ export const PostById = () => {
 
   return (
     <>
-      <PostModal isVisible={postModal.isModalOpen} post={data} closeModal={postModalClose} />
+      <PostModal
+        isVisible={postModal.isModalOpen}
+        post={data}
+        closeModal={postModalClose}
+      />
       <Account username={authorData.username} />
     </>
   );

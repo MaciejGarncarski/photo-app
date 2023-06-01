@@ -25,7 +25,8 @@ import styles from './Home.module.scss';
 export const newPostsAtom = atom(false);
 
 export const Home = () => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfinitePosts();
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } =
+    useInfinitePosts();
   const { isSignedIn } = useAuth();
   const otherUsers = useOtherUsers();
 
@@ -43,7 +44,12 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
-      <motion.ul className={styles.posts} variants={containerVariants} animate="show" initial="hidden">
+      <motion.ul
+        className={styles.posts}
+        variants={containerVariants}
+        animate="show"
+        initial="hidden"
+      >
         <NewPostNotification />
         {data?.pages.map((page) => {
           return page?.posts.map((post, idx) => {

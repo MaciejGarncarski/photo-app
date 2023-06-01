@@ -3,7 +3,11 @@ import { useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 
-import { signInCredentials, SignInFormValues, SignInSchema } from '@/src/utils/signIn';
+import {
+  signInCredentials,
+  SignInFormValues,
+  SignInSchema,
+} from '@/src/utils/signIn';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Input } from '@/src/components/atoms/input/Input';
@@ -34,8 +38,18 @@ export const SignInForm = () => {
 
   return (
     <motion.form {...animation} className={styles.form} onSubmit={onSubmit}>
-      <Input labelText="email" type="email" error={errors.email?.message} {...register('email')} />
-      <Input labelText="password" type="password" error={errors.password?.message} {...register('password')} />
+      <Input
+        labelText="email"
+        type="email"
+        error={errors.email?.message}
+        {...register('email')}
+      />
+      <Input
+        labelText="password"
+        type="password"
+        error={errors.password?.message}
+        {...register('password')}
+      />
       <div className={styles.continueButton}>
         <Button type="submit" variant="primary">
           continue

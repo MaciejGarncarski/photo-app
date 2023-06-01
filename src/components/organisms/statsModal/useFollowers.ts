@@ -8,10 +8,16 @@ type UseFollowers = {
 };
 
 export const useFollowers = ({ userId, type }: UseFollowers) => {
-  return useInfiniteQuery([type, userId], ({ pageParam }) => getFollowers({ pageParam, type, userId }), {
-    refetchOnWindowFocus: false,
-    getNextPageParam: (prev) => {
-      return prev.currentPage === prev.totalPages ? undefined : prev.currentPage + 1;
+  return useInfiniteQuery(
+    [type, userId],
+    ({ pageParam }) => getFollowers({ pageParam, type, userId }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: (prev) => {
+        return prev.currentPage === prev.totalPages
+          ? undefined
+          : prev.currentPage + 1;
+      },
     },
-  });
+  );
 };

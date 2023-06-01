@@ -17,7 +17,10 @@ export const ModalCloseButton = ({ onClose, outside }: PropsTypes) => {
 
   return (
     <button
-      className={clsx(outside && styles.closeButtonExternal, styles.closeButton)}
+      className={clsx(
+        outside && styles.closeButtonExternal,
+        styles.closeButton,
+      )}
       type="button"
       onClick={handleClose}
     >

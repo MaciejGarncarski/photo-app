@@ -11,17 +11,25 @@ const createWrapper = () => {
     },
   });
   return ({ children }: { children: ReactElement }) => {
-    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+    return (
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    );
   };
 };
 
 const renderWithClient = (ui: ReactNode) => {
   const queryClient = new QueryClient();
-  const { rerender, ...result } = render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
+  const { rerender, ...result } = render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+  );
   return {
     ...result,
     rerender: (rerenderUi: React.ReactElement) =>
-      rerender(<QueryClientProvider client={queryClient}>{rerenderUi}</QueryClientProvider>),
+      rerender(
+        <QueryClientProvider client={queryClient}>
+          {rerenderUi}
+        </QueryClientProvider>,
+      ),
   };
 };
 

@@ -14,15 +14,23 @@ type UseAccountPost = {
 };
 
 const fetchPosts = async ({ pageParam = 0, userId }: FetchPost) => {
-  const { data } = await apiClient.get<UserPosts>(`users/posts/${userId}?skip=${pageParam}`);
+  const { data } = await apiClient.get<UserPosts>(
+    `users/posts/${userId}?skip=${pageParam}`,
+  );
   return data;
 };
 
 export const useAccountPosts = ({ userId }: UseAccountPost) => {
-  return useInfiniteQuery(['account posts', userId], ({ pageParam }) => fetchPosts({ userId, pageParam }), {
-    refetchOnWindowFocus: false,
-    getNextPageParam: (prevPosts) => {
-      return prevPosts.currentPage === prevPosts.totalPages ? undefined : prevPosts.currentPage + 1;
+  return useInfiniteQuery(
+    ['account posts', userId],
+    ({ pageParam }) => fetchPosts({ userId, pageParam }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: (prevPosts) => {
+        return prevPosts.currentPage === prevPosts.totalPages
+          ? undefined
+          : prevPosts.currentPage + 1;
+      },
     },
-  });
+  );
 };

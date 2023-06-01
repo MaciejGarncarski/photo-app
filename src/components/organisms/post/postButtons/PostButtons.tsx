@@ -17,7 +17,10 @@ type PropsTypes = {
 
 export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
   const { id } = post;
-  const { buttonData, postModal, shareModal } = usePostButtonsData({ post, parentModalOpen });
+  const { buttonData, postModal, shareModal } = usePostButtonsData({
+    post,
+    parentModalOpen,
+  });
 
   return (
     <ul className={styles.list}>
@@ -28,7 +31,10 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
               className={styles.button}
               type="button"
               onClick={onClick}
-              whileTap={{ scale: 0.8, transition: { type: 'tween', duration: 0.1 } }}
+              whileTap={{
+                scale: 0.8,
+                transition: { type: 'tween', duration: 0.1 },
+              }}
             >
               {icon}
               <VisuallyHidden>{alt}</VisuallyHidden>
@@ -43,7 +49,11 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
         closeModal={shareModal.closeModal}
         textToCopy={`https://photoapp.maciej-garncarski.pl/post/${id}`}
       />
-      <PostModal isVisible={postModal.isModalOpen} post={post} closeModal={postModal.closeModal} />
+      <PostModal
+        isVisible={postModal.isModalOpen}
+        post={post}
+        closeModal={postModal.closeModal}
+      />
     </ul>
   );
 };

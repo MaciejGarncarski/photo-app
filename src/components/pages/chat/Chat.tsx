@@ -11,7 +11,8 @@ import { useChatUsers } from '@/src/components/pages/chat/useChatUsers';
 import styles from './Chat.module.scss';
 
 export const Chat = () => {
-  const { chatUsers, isEnabled, onChange, onSubmit, resetState, inputValue } = useChatUsers();
+  const { chatUsers, isEnabled, onChange, onSubmit, resetState, inputValue } =
+    useChatUsers();
   const { isMobile } = useIsMobile();
 
   return (
@@ -21,7 +22,12 @@ export const Chat = () => {
           Select other user.
         </Heading>
       </div>
-      <SearchUserForm resetState={resetState} onChange={onChange} onSubmit={onSubmit} inputValue={inputValue} />
+      <SearchUserForm
+        resetState={resetState}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        inputValue={inputValue}
+      />
       <ChatUsersList chatUsers={chatUsers} isEnabled={isEnabled} />
     </section>
   );

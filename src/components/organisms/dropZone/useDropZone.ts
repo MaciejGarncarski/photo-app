@@ -57,5 +57,13 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
     handleDropImage({ file: firstFile, setError, setImgSrc });
   };
 
-  return { active, inactive, onDrop, isActive, inputRef, isUploadingImage, onChange };
+  return {
+    active,
+    inactive,
+    onDrop,
+    isActive,
+    inputRef,
+    isUploadingImage,
+    onChange,
+  };
 };

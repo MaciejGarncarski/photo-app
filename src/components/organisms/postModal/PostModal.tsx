@@ -39,7 +39,12 @@ export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
               role="dialog"
               className={styles.container}
             >
-              <PostHeader tag="div" authorId={authorId} createdAt={createdAt.toString()} postId={id} />
+              <PostHeader
+                tag="div"
+                authorId={authorId}
+                createdAt={createdAt.toString()}
+                postId={id}
+              />
               <div className={styles.sliderContainer}>
                 <PostSlider post={post} priority={true} />
               </div>

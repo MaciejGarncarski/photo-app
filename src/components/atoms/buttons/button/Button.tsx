@@ -14,9 +14,20 @@ type PropsTypes = {
   children: ReactNode;
 };
 
-export const Button = ({ type = 'button', disabled, children, variant, onClick }: PropsTypes) => {
+export const Button = ({
+  type = 'button',
+  disabled,
+  children,
+  variant,
+  onClick,
+}: PropsTypes) => {
   return (
-    <button onClick={onClick} type={type} disabled={disabled} className={clsx(styles[variant], styles.button)}>
+    <button
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+      className={clsx(styles[variant], styles.button)}
+    >
       {children}
     </button>
   );

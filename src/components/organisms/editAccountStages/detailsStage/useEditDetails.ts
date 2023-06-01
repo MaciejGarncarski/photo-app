@@ -13,7 +13,11 @@ type UseEditDetailsArguments = {
   userId: string;
 };
 
-export const useEditDetails = ({ reset, openModal, getValues }: UseEditDetailsArguments) => {
+export const useEditDetails = ({
+  reset,
+  openModal,
+  getValues,
+}: UseEditDetailsArguments) => {
   const router = useRouter();
   const editAccount = useEditAccount();
 
@@ -40,5 +44,10 @@ export const useEditDetails = ({ reset, openModal, getValues }: UseEditDetailsAr
     );
   };
 
-  return { onClick, onReset, onSubmit, editAccountLoading: editAccount.isLoading };
+  return {
+    onClick,
+    onReset,
+    onSubmit,
+    editAccountLoading: editAccount.isLoading,
+  };
 };

@@ -22,7 +22,12 @@ type PropsTypes = {
   openModal: () => void;
 };
 
-export const AccountHeaderDesktop = ({ userId, isOwner, isModalOpen, openModal }: PropsTypes) => {
+export const AccountHeaderDesktop = ({
+  userId,
+  isOwner,
+  isModalOpen,
+  openModal,
+}: PropsTypes) => {
   const { isSignedIn } = useAuth();
   const { data, isLoading } = useUser({ userId });
 
@@ -34,18 +39,30 @@ export const AccountHeaderDesktop = ({ userId, isOwner, isModalOpen, openModal }
 
   return (
     <main className={styles.accountDesktop}>
-      <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.leftCol}>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className={styles.leftCol}
+      >
         <Avatar userId={userId} size="big" />
         {!isOwner && isSignedIn && <FollowButton userId={userId} />}
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
             <IconSettingsWrapper size="sm" />
             <span className={styles.menuButtonText}>settings</span>
-            <VisuallyHidden>{isModalOpen ? 'Close menu' : 'Open menu'}</VisuallyHidden>
+            <VisuallyHidden>
+              {isModalOpen ? 'Close menu' : 'Open menu'}
+            </VisuallyHidden>
           </Button>
         )}
       </motion.div>
-      <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.rightCol}>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className={styles.rightCol}
+      >
         <motion.h2 className={styles.username}>{username}</motion.h2>
         <AccountStats userId={userId} />
         {name && <motion.p className={styles.name}>{name}</motion.p>}

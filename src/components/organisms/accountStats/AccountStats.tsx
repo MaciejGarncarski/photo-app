@@ -27,9 +27,19 @@ export const AccountStats = ({ userId }: PropsTypes) => {
         })}
       </motion.ul>
       <AnimatePresence>
-        {friendsModal.isModalOpen && <StatsModal type="friends" closeModal={friendsModal.closeModal} userId={userId} />}
+        {friendsModal.isModalOpen && (
+          <StatsModal
+            type="friends"
+            closeModal={friendsModal.closeModal}
+            userId={userId}
+          />
+        )}
         {followersModal.isModalOpen && (
-          <StatsModal type="followers" closeModal={followersModal.closeModal} userId={userId} />
+          <StatsModal
+            type="followers"
+            closeModal={followersModal.closeModal}
+            userId={userId}
+          />
         )}
       </AnimatePresence>
     </>

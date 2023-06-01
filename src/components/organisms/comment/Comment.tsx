@@ -57,13 +57,21 @@ export const Comment = ({ commentData }: PropsTypes) => {
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
         {isAbleToDelete && (
-          <button type="button" onClick={openModal} className={clsx(styles.buttonLast, styles.likeBtn)}>
+          <button
+            type="button"
+            onClick={openModal}
+            className={clsx(styles.buttonLast, styles.likeBtn)}
+          >
             <IconTrash />
             delete
           </button>
         )}
       </div>
-      <ConfirmationAlert isVisible={isModalOpen} closeModal={closeModal} onConfirm={handleDelete} />
+      <ConfirmationAlert
+        isVisible={isModalOpen}
+        closeModal={closeModal}
+        onConfirm={handleDelete}
+      />
     </motion.article>
   );
 };

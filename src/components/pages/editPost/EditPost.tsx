@@ -68,9 +68,17 @@ export const EditPost = () => {
         Edit post
       </Heading>
       <form className={styles.form}>
-        <TextArea label="Description" {...register('description')} error={errors.description?.message} />
+        <TextArea
+          label="Description"
+          {...register('description')}
+          error={errors.description?.message}
+        />
         <div className={styles.buttons}>
-          <Button type="button" variant="secondary" onClick={cancelModal.openModal}>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={cancelModal.openModal}
+          >
             Cancel
           </Button>
           <Button

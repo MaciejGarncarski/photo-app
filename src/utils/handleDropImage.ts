@@ -10,7 +10,11 @@ type HandleDropImage = {
   setImgSrc: (err: string | null) => void;
 };
 
-export const handleDropImage = ({ file, setError, setImgSrc }: HandleDropImage) => {
+export const handleDropImage = ({
+  file,
+  setError,
+  setImgSrc,
+}: HandleDropImage) => {
   const reader = new FileReader();
 
   const fileType = file.type.split('/');

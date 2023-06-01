@@ -12,7 +12,9 @@ export const getPost = async ({ postId }: GetPost) => {
 };
 
 export const getInfinitePosts = async ({ pageParam = 0 }) => {
-  const { data } = await apiClient.get<PostsResponse>(`post/homepage-posts?skip=${pageParam}`);
+  const { data } = await apiClient.get<PostsResponse>(
+    `post/homepage-posts?skip=${pageParam}`,
+  );
   return data;
 };
 

@@ -4,7 +4,10 @@ import { useMemo } from 'react';
 import { getSessionUser } from '@/src/services/user.service';
 
 export const useAuth = () => {
-  const { data: sessionUser, isLoading } = useQuery(['session'], getSessionUser);
+  const { data: sessionUser, isLoading } = useQuery(
+    ['session'],
+    getSessionUser,
+  );
 
   const isSignedIn = Boolean(sessionUser?.id) && !isLoading;
 

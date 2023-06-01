@@ -17,7 +17,11 @@ export const HomePost = ({ post, priority }: PropsTypes) => {
   return (
     <li>
       <article className={styles.homePost}>
-        <PostHeader authorId={authorId} createdAt={createdAt.toString()} postId={id} />
+        <PostHeader
+          authorId={authorId}
+          createdAt={createdAt.toString()}
+          postId={id}
+        />
         <PostSlider post={post} priority={priority} />
         <PostFooter post={post} />
       </article>

@@ -80,7 +80,11 @@ export const ChatRoom = () => {
             value={inputVal}
             onChange={onChange}
           />
-          <button type="submit" className={styles.button} disabled={inputVal.trim() === ''}>
+          <button
+            type="submit"
+            className={styles.button}
+            disabled={inputVal.trim() === ''}
+          >
             <IconSend />
             <VisuallyHidden>Send message</VisuallyHidden>
           </button>

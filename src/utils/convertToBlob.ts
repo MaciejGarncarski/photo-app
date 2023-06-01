@@ -15,8 +15,10 @@ const rotateSize = (width: number, height: number, rotation: number) => {
   const rotRad = getRadianAngle(rotation);
 
   return {
-    width: Math.abs(Math.cos(rotRad) * width) + Math.abs(Math.sin(rotRad) * height),
-    height: Math.abs(Math.sin(rotRad) * width) + Math.abs(Math.cos(rotRad) * height),
+    width:
+      Math.abs(Math.cos(rotRad) * width) + Math.abs(Math.sin(rotRad) * height),
+    height:
+      Math.abs(Math.sin(rotRad) * width) + Math.abs(Math.cos(rotRad) * height),
   };
 };
 
@@ -36,7 +38,11 @@ export const convertToBlob = async (
 
   const rotRad = getRadianAngle(rotation);
 
-  const { width: bBoxWidth, height: bBoxHeight } = rotateSize(image.width, image.height, rotation);
+  const { width: bBoxWidth, height: bBoxHeight } = rotateSize(
+    image.width,
+    image.height,
+    rotation,
+  );
 
   canvas.width = bBoxWidth;
   canvas.height = bBoxHeight;
@@ -48,7 +54,12 @@ export const convertToBlob = async (
 
   ctx.drawImage(image, 0, 0);
 
-  const data = ctx.getImageData(pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height);
+  const data = ctx.getImageData(
+    pixelCrop.x,
+    pixelCrop.y,
+    pixelCrop.width,
+    pixelCrop.height,
+  );
 
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;

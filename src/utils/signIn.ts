@@ -16,7 +16,11 @@ type SignInCredentials = {
   queryClient: QueryClient;
 } & SignInFormValues;
 
-export const signInCredentials = async ({ email, password, queryClient }: SignInCredentials) => {
+export const signInCredentials = async ({
+  email,
+  password,
+  queryClient,
+}: SignInCredentials) => {
   const requestPromise = new Promise(async (resolve) => {
     const { status } = await apiClient.post('auth/login', {
       email,
@@ -32,5 +36,9 @@ export const signInCredentials = async ({ email, password, queryClient }: SignIn
     resolve('success');
   });
 
-  toast.promise(requestPromise, { error: 'Cannot signin.', loading: 'Loading...', success: 'Success!' });
+  toast.promise(requestPromise, {
+    error: 'Cannot signin.',
+    loading: 'Loading...',
+    success: 'Success!',
+  });
 };

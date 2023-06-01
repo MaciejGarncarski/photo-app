@@ -19,11 +19,15 @@ type PropsTypes = {
   stagePersonalInfo: () => void;
 };
 
-export const SelectOptionStage = ({ stageCropImage, stagePersonalInfo }: PropsTypes) => {
+export const SelectOptionStage = ({
+  stageCropImage,
+  stagePersonalInfo,
+}: PropsTypes) => {
   const { sessionUser } = useAuth();
   const customImage = sessionUser?.customImage;
 
-  const { isLoading, isModalOpen, openModal, removeAvatar, closeModal } = useOptionsStage();
+  const { isLoading, isModalOpen, openModal, removeAvatar, closeModal } =
+    useOptionsStage();
 
   if (isLoading) {
     return <TextWithLoader text="Removing your avatar.." />;

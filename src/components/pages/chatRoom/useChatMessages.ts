@@ -18,9 +18,10 @@ export const useChatMessages = () => {
 
   const friendId = router.query.receiverId as string;
 
-  const { isLoading, fetchNextPage, hasNextPage, isError, data } = useInfiniteMessages({
-    friendId,
-  });
+  const { isLoading, fetchNextPage, hasNextPage, isError, data } =
+    useInfiniteMessages({
+      friendId,
+    });
 
   const fetchNext = () => {
     fetchNextPage();

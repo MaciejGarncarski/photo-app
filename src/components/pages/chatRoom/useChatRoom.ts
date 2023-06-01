@@ -23,7 +23,11 @@ export const useChatRoom = () => {
     isError: messagesError,
   } = useChatMessages();
 
-  const { data: friendData, isLoading: isUserLoading, isError: userError } = useUser({ userId: friendId || '' });
+  const {
+    data: friendData,
+    isLoading: isUserLoading,
+    isError: userError,
+  } = useUser({ userId: friendId || '' });
   const { data: chatRoomData, isError: chatRoomError } = useChatRoomData();
 
   useChatSubscription(socket, chatRoomData?.id || 0);

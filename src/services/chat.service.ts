@@ -25,7 +25,12 @@ type GetChatMessages = {
   friendId?: string;
 };
 
-export const getChatMessages = async ({ pageParam = 0, friendId }: GetChatMessages) => {
-  const { data } = await apiClient.get<ChatMessagesResponse>(`chat/${friendId}/chatMessages?skip=${pageParam}`);
+export const getChatMessages = async ({
+  pageParam = 0,
+  friendId,
+}: GetChatMessages) => {
+  const { data } = await apiClient.get<ChatMessagesResponse>(
+    `chat/${friendId}/chatMessages?skip=${pageParam}`,
+  );
   return data;
 };

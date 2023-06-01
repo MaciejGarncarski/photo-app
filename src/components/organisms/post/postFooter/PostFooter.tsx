@@ -18,7 +18,8 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
   const { isSignedIn } = useAuth();
   const { description, authorId, id } = post;
   const { data } = useUser({ userId: authorId });
-  const { isDescriptionLong, shortDescription, showMore, toggleShowMore } = usePostFooter({ description });
+  const { isDescriptionLong, shortDescription, showMore, toggleShowMore } =
+    usePostFooter({ description });
 
   return (
     <footer className={styles.footer}>
@@ -27,9 +28,15 @@ export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
         <p className={styles.author}>{data?.username}</p>
         {isDescriptionLong ? (
           <>
-            <p className={styles.description}>{showMore ? description : shortDescription}</p>
+            <p className={styles.description}>
+              {showMore ? description : shortDescription}
+            </p>
             &nbsp;
-            <button className={styles.showMore} type="button" onClick={toggleShowMore}>
+            <button
+              className={styles.showMore}
+              type="button"
+              onClick={toggleShowMore}
+            >
               show {showMore ? 'less' : 'more'}
             </button>
           </>

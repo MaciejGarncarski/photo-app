@@ -12,14 +12,18 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
   return useInfiniteQuery(
     ['infinite comments', postId],
     async ({ pageParam = 0 }) => {
-      const { data } = await apiClient.get<CommentResponse>(`post-comment/${postId}?skip=${pageParam}`);
+      const { data } = await apiClient.get<CommentResponse>(
+        `post-comment/${postId}?skip=${pageParam}`,
+      );
       return data;
     },
 
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (prevComments) => {
-        return prevComments.currentPage === prevComments.totalPages ? undefined : prevComments.currentPage + 1;
+        return prevComments.currentPage === prevComments.totalPages
+          ? undefined
+          : prevComments.currentPage + 1;
       },
     },
   );

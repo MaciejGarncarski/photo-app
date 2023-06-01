@@ -4,7 +4,10 @@ import { Post, PostsResponse } from '@/src/schemas/post.schema';
 
 type InfinitePost = InfiniteData<PostsResponse>;
 
-export const updateInfinitePostsLike = (oldInfiniteData?: InfinitePost, postData?: Post) => {
+export const updateInfinitePostsLike = (
+  oldInfiniteData?: InfinitePost,
+  postData?: Post,
+) => {
   if (!postData || !oldInfiniteData) {
     return;
   }

@@ -14,7 +14,12 @@ type PropsTypes = {
 export const Loader = ({ size, color, marginTop }: PropsTypes) => {
   return (
     <span
-      className={clsx(marginTop && styles.marginTop, styles[color], styles[size], styles.loading)}
+      className={clsx(
+        marginTop && styles.marginTop,
+        styles[color],
+        styles[size],
+        styles.loading,
+      )}
       aria-busy="true"
       aria-live="polite"
     >

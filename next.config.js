@@ -8,7 +8,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    fontLoaders: [{ loader: '@next/font/google', options: { subsets: ['latin'] } }],
+    fontLoaders: [
+      { loader: '@next/font/google', options: { subsets: ['latin'] } },
+    ],
   },
   images: {
     domains: ['lh3.googleusercontent.com', 'ik.imagekit.io'],

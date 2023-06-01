@@ -35,7 +35,12 @@ export const useDetailsStage = ({ userId }: Arguments) => {
     resolver: zodResolver(AccountDetailsSchema),
   });
 
-  const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({ getValues, openModal, reset, userId });
+  const { onReset, onClick, onSubmit, editAccountLoading } = useEditDetails({
+    getValues,
+    openModal,
+    reset,
+    userId,
+  });
 
   const isError = Boolean(errors.bio || errors.fullName || errors.username);
 

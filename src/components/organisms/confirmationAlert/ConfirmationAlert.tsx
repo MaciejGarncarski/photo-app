@@ -17,7 +17,12 @@ type PropsTypes = {
   isVisible: boolean;
 };
 
-export const ConfirmationAlert = ({ headingText, onConfirm, closeModal, isVisible }: PropsTypes) => {
+export const ConfirmationAlert = ({
+  headingText,
+  onConfirm,
+  closeModal,
+  isVisible,
+}: PropsTypes) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (

@@ -24,7 +24,11 @@ export const FollowButton = ({ userId }: PropsTypes) => {
   const handleFollow = () => mutate({ isFollowing, userId });
 
   return (
-    <Button type="button" variant={isFollowing ? 'secondary' : 'primary'} onClick={handleFollow}>
+    <Button
+      type="button"
+      variant={isFollowing ? 'secondary' : 'primary'}
+      onClick={handleFollow}
+    >
       {isLoading ? (
         <Loader size="small" color={isFollowing ? 'blue' : 'white'} />
       ) : (

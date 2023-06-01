@@ -41,7 +41,10 @@ export const ListModalItem = ({
   isLoading,
   loadingText,
 }: ModalListItemProps) => {
-  const listClassName = clsx({ [styles.listItemLast]: isLast }, styles.listItem);
+  const listClassName = clsx(
+    { [styles.listItemLast]: isLast },
+    styles.listItem,
+  );
 
   if (isLoading) {
     return (
@@ -54,7 +57,12 @@ export const ListModalItem = ({
   return (
     <li className={listClassName}>
       {type === 'button' && (
-        <button type="button" onClick={onClick} disabled={disabled} className={styles.item}>
+        <button
+          type="button"
+          onClick={onClick}
+          disabled={disabled}
+          className={styles.item}
+        >
           {icon}
           {children}
         </button>

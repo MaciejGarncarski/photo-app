@@ -31,9 +31,10 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   const queryClient = useQueryClient();
   const username = usernameFromProps || (router.query.username as string);
 
-  const { isOwner, settingsModal, signOutModal, userData, isError } = useAccount({
-    username,
-  });
+  const { isOwner, settingsModal, signOutModal, userData, isError } =
+    useAccount({
+      username,
+    });
 
   const accountHeaderProps = {
     userId: userData?.id || '',
@@ -53,16 +54,30 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   return (
     <div className={styles.container}>
       <NextSeo title={`@${userData?.username}`} />
-      {isMobile ? <AccountHeaderMobile {...accountHeaderProps} /> : <AccountHeaderDesktop {...accountHeaderProps} />}
+      {isMobile ? (
+        <AccountHeaderMobile {...accountHeaderProps} />
+      ) : (
+        <AccountHeaderDesktop {...accountHeaderProps} />
+      )}
       <ListModal
         isVisible={settingsModal.isModalOpen}
         closeModal={settingsModal.closeModal}
         headingText="Account options"
       >
-        <ListModalItem type="link" href="/edit-account" icon={<IconEdit />} onClick={settingsModal.closeModal}>
+        <ListModalItem
+          type="link"
+          href="/edit-account"
+          icon={<IconEdit />}
+          onClick={settingsModal.closeModal}
+        >
           Edit account
         </ListModalItem>
-        <ListModalItem type="button" onClick={signOutModal.openModal} icon={<IconDoorExit />} isLast>
+        <ListModalItem
+          type="button"
+          onClick={signOutModal.openModal}
+          icon={<IconDoorExit />}
+          isLast
+        >
           Sign out
         </ListModalItem>
       </ListModal>

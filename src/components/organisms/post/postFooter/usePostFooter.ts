@@ -9,7 +9,8 @@ type Arguments = {
 export const usePostFooter = ({ description }: Arguments) => {
   const [showMore, setShowMore] = useState(false);
 
-  const { isDescriptionLong, shortDescription } = getDescriptionData(description);
+  const { isDescriptionLong, shortDescription } =
+    getDescriptionData(description);
 
   const toggleShowMore = () => setShowMore((prev) => !prev);
 

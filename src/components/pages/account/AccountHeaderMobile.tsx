@@ -22,7 +22,12 @@ type PropsTypes = {
   openModal: () => void;
 };
 
-export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }: PropsTypes) => {
+export const AccountHeaderMobile = ({
+  userId,
+  isOwner,
+  isModalOpen,
+  openModal,
+}: PropsTypes) => {
   const { isSignedIn } = useAuth();
   const { data, isLoading } = useUser({ userId });
 
@@ -33,7 +38,12 @@ export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }:
   const { bio, name, username } = data;
 
   return (
-    <motion.main variants={containerVariants} initial="hidden" animate="show" className={styles.accountMobile}>
+    <motion.main
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className={styles.accountMobile}
+    >
       <Avatar userId={userId} size="big" />
       <motion.h2 className={styles.username}>{username}</motion.h2>
       <AccountStats userId={userId} />
@@ -41,7 +51,9 @@ export const AccountHeaderMobile = ({ userId, isOwner, isModalOpen, openModal }:
       {isOwner && (
         <Button type="button" variant="primary" onClick={openModal}>
           <IconSettingsWrapper size="sm" />
-          <VisuallyHidden>{isModalOpen ? 'Close menu' : 'Open menu'}</VisuallyHidden>
+          <VisuallyHidden>
+            {isModalOpen ? 'Close menu' : 'Open menu'}
+          </VisuallyHidden>
           <span className={styles.menuButtonText}>settings</span>
         </Button>
       )}

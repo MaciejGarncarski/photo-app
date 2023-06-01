@@ -22,24 +22,36 @@ export const NavButtons = () => {
   return (
     <>
       <ul className={styles.list}>
-        {navButtonsList.map(({ icon: Icon, href, title, shouldShowWhileGuest }) => {
-          if (!shouldShowWhileGuest && !isSignedIn) {
-            return null;
-          }
+        {navButtonsList.map(
+          ({ icon: Icon, href, title, shouldShowWhileGuest }) => {
+            if (!shouldShowWhileGuest && !isSignedIn) {
+              return null;
+            }
 
-          return (
-            <li key={title} className={styles.listItem}>
-              <Link href={href} className={clsx(router.asPath === href && styles.active, styles.listItemContent)}>
-                <span>
-                  <Icon />
-                </span>
-                <span className={styles.title}>{title}</span>
-              </Link>
-            </li>
-          );
-        })}
+            return (
+              <li key={title} className={styles.listItem}>
+                <Link
+                  href={href}
+                  className={clsx(
+                    router.asPath === href && styles.active,
+                    styles.listItemContent,
+                  )}
+                >
+                  <span>
+                    <Icon />
+                  </span>
+                  <span className={styles.title}>{title}</span>
+                </Link>
+              </li>
+            );
+          },
+        )}
         <li className={styles.listItem}>
-          <button type="button" className={styles.listItemContent} onClick={openModal}>
+          <button
+            type="button"
+            className={styles.listItemContent}
+            onClick={openModal}
+          >
             <span>
               <IconSettings />
             </span>

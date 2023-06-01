@@ -7,11 +7,17 @@ type PropsTypes = {
 };
 
 export const useInfiniteMessages = ({ friendId }: PropsTypes) => {
-  return useInfiniteQuery(['chatMessages', friendId], ({ pageParam }) => getChatMessages({ pageParam, friendId }), {
-    refetchOnWindowFocus: false,
-    getNextPageParam: (prevMessages) => {
-      return prevMessages?.currentPage === prevMessages.totalPages ? undefined : prevMessages.currentPage + 1;
+  return useInfiniteQuery(
+    ['chatMessages', friendId],
+    ({ pageParam }) => getChatMessages({ pageParam, friendId }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: (prevMessages) => {
+        return prevMessages?.currentPage === prevMessages.totalPages
+          ? undefined
+          : prevMessages.currentPage + 1;
+      },
+      enabled: Boolean(friendId),
     },
-    enabled: Boolean(friendId),
-  });
+  );
 };

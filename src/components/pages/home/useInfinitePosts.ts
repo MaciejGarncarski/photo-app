@@ -8,7 +8,9 @@ export const useInfinitePosts = () => {
   const query = useInfiniteQuery(HOME_POSTS_QUERY_KEY, getInfinitePosts, {
     refetchOnWindowFocus: false,
     getNextPageParam: (prevPosts) => {
-      return prevPosts.currentPage === prevPosts.totalPages ? undefined : prevPosts.currentPage + 1;
+      return prevPosts.currentPage === prevPosts.totalPages
+        ? undefined
+        : prevPosts.currentPage + 1;
     },
   });
 

@@ -64,7 +64,8 @@ export const seoConfig: NextSeoProps = {
     },
     {
       property: 'og:image',
-      content: 'https://photoapp.maciej-garncarski.pl/icons/android-chrome-512x512.png',
+      content:
+        'https://photoapp.maciej-garncarski.pl/icons/android-chrome-512x512.png',
     },
     {
       property: 'og:title',

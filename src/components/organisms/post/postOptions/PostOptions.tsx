@@ -16,22 +16,46 @@ type PropsTypes = {
   isVisible: boolean;
 };
 
-export const PostOptions = ({ closeModal, authorId, postId, openCnonfirmation, isVisible }: PropsTypes) => {
+export const PostOptions = ({
+  closeModal,
+  authorId,
+  postId,
+  openCnonfirmation,
+  isVisible,
+}: PropsTypes) => {
   const { isAbleToModify } = usePostOptions({ authorId });
 
   return (
-    <ListModal isVisible={isVisible} closeModal={closeModal} headingText="Post options">
+    <ListModal
+      isVisible={isVisible}
+      closeModal={closeModal}
+      headingText="Post options"
+    >
       {isAbleToModify && (
         <>
-          <ListModalItem type="link" href={`/post/${postId}/edit`} icon={<IconEdit />} onClick={unlock}>
+          <ListModalItem
+            type="link"
+            href={`/post/${postId}/edit`}
+            icon={<IconEdit />}
+            onClick={unlock}
+          >
             Edit
           </ListModalItem>
-          <ListModalItem type="button" onClick={openCnonfirmation} icon={<IconTrash />}>
+          <ListModalItem
+            type="button"
+            onClick={openCnonfirmation}
+            icon={<IconTrash />}
+          >
             Delete post
           </ListModalItem>
         </>
       )}
-      <ListModalItem isLast type="button" onClick={closeModal} icon={<IconXWrapper />}>
+      <ListModalItem
+        isLast
+        type="button"
+        onClick={closeModal}
+        icon={<IconXWrapper />}
+      >
         Close
       </ListModalItem>
     </ListModal>

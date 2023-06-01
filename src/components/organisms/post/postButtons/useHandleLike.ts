@@ -3,7 +3,10 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { InfinitePostsQuery, updatePostQuery } from '@/src/utils/updatePostQuery';
+import {
+  InfinitePostsQuery,
+  updatePostQuery,
+} from '@/src/utils/updatePostQuery';
 
 import { usePostLike } from '@/src/components/organisms/post/postButtons/usePostLike';
 
@@ -29,7 +32,8 @@ export const useHandleLike = ({ post }: PropsTypes) => {
       return toast.error('Sign in first.');
     }
 
-    const oldPostsList = queryClient.getQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY);
+    const oldPostsList =
+      queryClient.getQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY);
     const oldPost = queryClient.getQueryData<Post>(['post', postId]);
 
     postLikeMutation.mutate(
@@ -37,7 +41,10 @@ export const useHandleLike = ({ post }: PropsTypes) => {
       {
         onError: () => {
           queryClient.setQueryData<Post>(['post', postId], oldPost);
-          queryClient.setQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY, oldPostsList);
+          queryClient.setQueryData<InfinitePostsQuery>(
+            HOME_POSTS_QUERY_KEY,
+            oldPostsList,
+          );
         },
       },
     );

@@ -12,7 +12,11 @@ type UseUploadAvatarArguments = {
   resetFinalImages: () => void;
 };
 
-export const useUploadAvatar = ({ stagePersonalInfo, finalImages, resetFinalImages }: UseUploadAvatarArguments) => {
+export const useUploadAvatar = ({
+  stagePersonalInfo,
+  finalImages,
+  resetFinalImages,
+}: UseUploadAvatarArguments) => {
   const { sessionUser } = useAuth();
   const queryClient = useQueryClient();
 

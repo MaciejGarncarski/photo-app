@@ -10,9 +10,10 @@ type PropsTypes = {
 };
 
 export const PostComments = ({ postId }: PropsTypes) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useInfiniteComments({
-    postId: postId,
-  });
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } =
+    useInfiniteComments({
+      postId: postId,
+    });
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,

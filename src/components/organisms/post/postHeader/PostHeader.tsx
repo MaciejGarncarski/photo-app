@@ -23,9 +23,21 @@ type PropsTypes = {
   postId: number;
 };
 
-export const PostHeader = ({ tag: Tag = 'header', authorId, createdAt, postId }: PropsTypes) => {
+export const PostHeader = ({
+  tag: Tag = 'header',
+  authorId,
+  createdAt,
+  postId,
+}: PropsTypes) => {
   const { isSignedIn, isLoading } = useAuth();
-  const { dateFromNow, handleDeletePost, isAuthor, username, confirmationModal, menuModal } = usePostHeader({
+  const {
+    dateFromNow,
+    handleDeletePost,
+    isAuthor,
+    username,
+    confirmationModal,
+    menuModal,
+  } = usePostHeader({
     authorId,
     createdAt,
     postId,
@@ -52,7 +64,11 @@ export const PostHeader = ({ tag: Tag = 'header', authorId, createdAt, postId }:
           {!isAuthor && <FollowButton userId={authorId} />}
           {isAuthor && (
             <Tooltip variant="right" content="Post options">
-              <button type="button" className={styles.optionsButton} onClick={menuModal.openModal}>
+              <button
+                type="button"
+                className={styles.optionsButton}
+                onClick={menuModal.openModal}
+              >
                 <IconMenu2 />
               </button>
             </Tooltip>

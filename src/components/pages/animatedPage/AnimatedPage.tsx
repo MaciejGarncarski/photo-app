@@ -7,7 +7,12 @@ type PageTransitionProps = { children: ReactNode };
 
 export const AnimatedPage = ({ children }: PageTransitionProps) => {
   return (
-    <motion.div variants={opacityVariants} initial="hidden" exit="exit" animate="visible">
+    <motion.div
+      variants={opacityVariants}
+      initial="hidden"
+      exit="exit"
+      animate="visible"
+    >
       {children}
     </motion.div>
   );

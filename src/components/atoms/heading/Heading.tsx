@@ -18,7 +18,12 @@ type MotionTag = {
   className: string;
 };
 
-export const Heading = ({ children, size, tag: Tag = 'h2', ...rest }: PropsTypes) => {
+export const Heading = ({
+  children,
+  size,
+  tag: Tag = 'h2',
+  ...rest
+}: PropsTypes) => {
   const MotionTag = motion<MotionTag>(Tag);
 
   return (

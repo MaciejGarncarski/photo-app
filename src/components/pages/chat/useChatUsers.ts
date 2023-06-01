@@ -39,7 +39,9 @@ export const useChatUsers = () => {
       enabled: isEnabled,
       refetchOnWindowFocus: false,
       getNextPageParam: (prevMessages) => {
-        return prevMessages?.currentPage === prevMessages.totalPages ? undefined : prevMessages.currentPage + 1;
+        return prevMessages?.currentPage === prevMessages.totalPages
+          ? undefined
+          : prevMessages.currentPage + 1;
       },
       onSettled: () => {
         setIsEnabled(false);

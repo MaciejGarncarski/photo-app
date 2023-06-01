@@ -25,7 +25,8 @@ export const updatePostQuery = ({ queryClient, post }: Types) => {
     };
   });
 
-  queryClient.setQueryData<InfinitePostsQuery>(HOME_POSTS_QUERY_KEY, (oldData) =>
-    updateInfinitePostsLike(oldData, post),
+  queryClient.setQueryData<InfinitePostsQuery>(
+    HOME_POSTS_QUERY_KEY,
+    (oldData) => updateInfinitePostsLike(oldData, post),
   );
 };

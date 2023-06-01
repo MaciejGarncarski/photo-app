@@ -13,7 +13,13 @@ type Arguments = {
   cropAreaPixels: Area;
 };
 
-export const useSaveCrop = ({ setFinalImages, finalImages, imgSrc, cropAreaPixels, resetImgSrc }: Arguments) => {
+export const useSaveCrop = ({
+  setFinalImages,
+  finalImages,
+  imgSrc,
+  cropAreaPixels,
+  resetImgSrc,
+}: Arguments) => {
   const [isCropping, setIsCropping] = useState(false);
 
   const saveCrop = useCallback(async () => {

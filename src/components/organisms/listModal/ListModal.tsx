@@ -15,7 +15,12 @@ type PropsTypes = {
   isVisible: boolean;
 };
 
-export const ListModal = ({ closeModal, headingText, children, isVisible }: PropsTypes) => {
+export const ListModal = ({
+  closeModal,
+  headingText,
+  children,
+  isVisible,
+}: PropsTypes) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (

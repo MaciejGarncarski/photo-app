@@ -36,17 +36,36 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
 
   return (
     <>
-      <ListModal isVisible={isVisible} closeModal={closeModal} headingText="PhotoApp settings">
+      <ListModal
+        isVisible={isVisible}
+        closeModal={closeModal}
+        headingText="PhotoApp settings"
+      >
         {isSignedIn && sessionUser?.username && (
-          <ListModalItem type="link" href={`/${sessionUser.username}`} onClick={closeModal} icon={<IconUser />}>
+          <ListModalItem
+            type="link"
+            href={`/${sessionUser.username}`}
+            onClick={closeModal}
+            icon={<IconUser />}
+          >
             Your profile
           </ListModalItem>
         )}
-        <ListModalItem type="button" onClick={changeTheme} isLast={!isSignedIn} icon={<ThemeButton />}>
+        <ListModalItem
+          type="button"
+          onClick={changeTheme}
+          isLast={!isSignedIn}
+          icon={<ThemeButton />}
+        >
           Change theme to {isDark ? 'light' : 'dark'}
         </ListModalItem>
         {isSignedIn && (
-          <ListModalItem type="button" onClick={signOutModal.openModal} isLast icon={<IconDoorExit />}>
+          <ListModalItem
+            type="button"
+            onClick={signOutModal.openModal}
+            isLast
+            icon={<IconDoorExit />}
+          >
             Sign Out
           </ListModalItem>
         )}

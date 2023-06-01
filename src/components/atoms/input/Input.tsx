@@ -13,8 +13,14 @@ type PropsTypes = {
 };
 
 export const Input = forwardRef<HTMLInputElement, PropsTypes>(
-  ({ type = 'text', labelText, error, optional, onChange, value, ...props }, ref) => {
-    const containerClassName = clsx(error && styles.containerError, styles.container);
+  (
+    { type = 'text', labelText, error, optional, onChange, value, ...props },
+    ref,
+  ) => {
+    const containerClassName = clsx(
+      error && styles.containerError,
+      styles.container,
+    );
 
     const inputClassName = clsx(
       {

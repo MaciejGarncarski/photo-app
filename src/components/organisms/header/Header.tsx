@@ -29,7 +29,11 @@ export const Header = () => {
       <Navbar />
       {showUserOptions && (
         <div className={styles.options}>
-          <button type="button" className={styles.button} onClick={isModalOpen ? closeModal : openModal}>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={isModalOpen ? closeModal : openModal}
+          >
             <Avatar userId={sessionUser.id} size="small" />
             <span className={styles.userInfo}>
               <span className={styles.name}>{sessionUser.name}</span>

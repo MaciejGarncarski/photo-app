@@ -19,7 +19,13 @@ type PropsTypes = {
   post: Post;
 };
 
-export const PostImage = ({ height, priority, src, width, post }: PropsTypes) => {
+export const PostImage = ({
+  height,
+  priority,
+  src,
+  width,
+  post,
+}: PropsTypes) => {
   const { description, authorId } = post;
 
   const { data } = useUser({ userId: authorId });

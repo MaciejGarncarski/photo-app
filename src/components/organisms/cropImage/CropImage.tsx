@@ -29,12 +29,27 @@ type Props = {
 
 export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const { aspect, setAspect, setZoom, zoom, crop, setCrop, cropAreaPixels, onCropComplete } = useCropImage();
+  const {
+    aspect,
+    setAspect,
+    setZoom,
+    zoom,
+    crop,
+    setCrop,
+    cropAreaPixels,
+    onCropComplete,
+  } = useCropImage();
   const { openModal, isModalOpen, closeModal } = useModal();
   const { isMobile } = useIsMobile();
 
   const resetImgSrc = () => setImgSrc(null);
-  const { isCropping, saveCrop } = useSaveCrop({ cropAreaPixels, finalImages, imgSrc, resetImgSrc, setFinalImages });
+  const { isCropping, saveCrop } = useSaveCrop({
+    cropAreaPixels,
+    finalImages,
+    imgSrc,
+    resetImgSrc,
+    setFinalImages,
+  });
 
   if (isCropping) {
     return <Loader size="normal" color="blue" />;
@@ -69,14 +84,21 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
         </div>
         <p className={styles.info}>
           {isMobile ? <IconHandFinger /> : <IconMouse />}
-          <span>{isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture</span>
+          <span>
+            {isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture
+          </span>
         </p>
         <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
         <div className={styles.buttons}>
           <Button type="button" variant="primary" onClick={saveCrop}>
             Save crop
           </Button>
-          <Button type="button" variant="secondary" disabled={!imgSrc} onClick={openModal}>
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={!imgSrc}
+            onClick={openModal}
+          >
             Select diffrent image
           </Button>
         </div>

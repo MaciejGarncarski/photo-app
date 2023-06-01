@@ -16,5 +16,12 @@ export const useChatMessage = ({ receiverId, createdAt }: PropsTypes) => {
   const isReceiver = receiverId === sessionUser?.id;
   const formattedDate = formatDate(createdAt);
 
-  return { isModalOpen, openModal, closeModal, isReceiver, formattedDate, mutate };
+  return {
+    isModalOpen,
+    openModal,
+    closeModal,
+    isReceiver,
+    formattedDate,
+    mutate,
+  };
 };

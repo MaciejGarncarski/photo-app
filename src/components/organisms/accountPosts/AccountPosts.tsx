@@ -15,7 +15,8 @@ type PropsTypes = {
 };
 
 export const AccountPosts = ({ userId }: PropsTypes) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useAccountPosts({ userId });
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } =
+    useAccountPosts({ userId });
 
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
@@ -33,34 +34,41 @@ export const AccountPosts = ({ userId }: PropsTypes) => {
 
   return (
     <>
-      <motion.div variants={postContainerVariants} initial="hidden" animate="show" className={styles.posts}>
+      <motion.div
+        variants={postContainerVariants}
+        initial="hidden"
+        animate="show"
+        className={styles.posts}
+      >
         {data.pages.map((page) => {
-          return page.posts.map(({ id, isLiked, images, commentsCount, likesCount }) => {
-            if (!images) {
-              return null;
-            }
+          return page.posts.map(
+            ({ id, isLiked, images, commentsCount, likesCount }) => {
+              if (!images) {
+                return null;
+              }
 
-            const firstImageFromSlider = images[0];
+              const firstImageFromSlider = images[0];
 
-            if (!firstImageFromSlider) {
-              return <Loader size="normal" color="blue" key={id} />;
-            }
+              if (!firstImageFromSlider) {
+                return <Loader size="normal" color="blue" key={id} />;
+              }
 
-            const { url, width, height } = firstImageFromSlider;
+              const { url, width, height } = firstImageFromSlider;
 
-            return (
-              <AccountPost
-                imageUrl={url}
-                height={height}
-                width={width}
-                key={id}
-                isLiked={isLiked}
-                postId={id}
-                commentsCount={commentsCount}
-                likesCount={likesCount}
-              />
-            );
-          });
+              return (
+                <AccountPost
+                  imageUrl={url}
+                  height={height}
+                  width={width}
+                  key={id}
+                  isLiked={isLiked}
+                  postId={id}
+                  commentsCount={commentsCount}
+                  likesCount={likesCount}
+                />
+              );
+            },
+          );
         })}
       </motion.div>
       {hasNextPage && hasPosts && (

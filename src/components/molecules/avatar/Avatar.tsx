@@ -54,7 +54,14 @@ export const Avatar = ({ userId, size }: PropsTypes) => {
           <VisuallyHidden>{username || ''}</VisuallyHidden>
         </div>
       )}
-      {hasDefaultImage && <MotionImage src={image} alt={username ?? ''} width={avatarSize} height={avatarSize} />}
+      {hasDefaultImage && (
+        <MotionImage
+          src={image}
+          alt={username ?? ''}
+          width={avatarSize}
+          height={avatarSize}
+        />
+      )}
       {hasCustomImage && (
         <MotionImage
           src={customImage}

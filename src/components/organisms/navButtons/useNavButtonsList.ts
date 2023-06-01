@@ -1,4 +1,10 @@
-import { IconHome, IconMessageCircle2, IconSquareRoundedPlus, IconUser, TablerIconsProps } from '@tabler/icons-react';
+import {
+  IconHome,
+  IconMessageCircle2,
+  IconSquareRoundedPlus,
+  IconUser,
+  TablerIconsProps,
+} from '@tabler/icons-react';
 
 type ListData = {
   icon: (props: TablerIconsProps) => JSX.Element;

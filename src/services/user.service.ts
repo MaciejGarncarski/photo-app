@@ -54,7 +54,10 @@ export const deleteAvatar = () => {
 };
 
 export const editAccount = (data: EditAccountInput) => {
-  return apiClient.post<unknown, unknown, EditAccountInput>(`session-user/edit-account`, data);
+  return apiClient.post<unknown, unknown, EditAccountInput>(
+    `session-user/edit-account`,
+    data,
+  );
 };
 
 export const getSessionUser = async () => {
@@ -82,7 +85,11 @@ type GetFollowers = {
   userId: string;
 };
 
-export const getFollowers = async ({ pageParam = 0, type, userId }: GetFollowers) => {
+export const getFollowers = async ({
+  pageParam = 0,
+  type,
+  userId,
+}: GetFollowers) => {
   const { data } = await apiClient.get<FollowersResponse>(
     `follower-stats/${type}?userId=${userId}&skip=${pageParam ?? 0}`,
   );

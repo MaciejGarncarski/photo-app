@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { useIsMobile } from '@/src/hooks/useIsMobile';
-
 import { HeartAnimation } from '@/src/components/atoms/heartAnimation/HeartAnimation';
 
 import { PostArrows } from '@/src/components/molecules/postArrows/PostArrows';
@@ -24,9 +22,10 @@ type PropsTypes = {
 
 export const PostSlider = ({ post, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({ post });
+  const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
+    post,
+  });
   const { imageRef, width } = useUpdateWidth();
-  const { isMobile } = useIsMobile();
   const { images: postImages } = post;
 
   const isSingleImage = postImages.length === 1;
@@ -47,10 +46,16 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
   });
 
   return (
-    <motion.div onDoubleClick={handleLikeWithAnimation} className={styles.slider}>
+    <motion.div
+      onDoubleClick={handleLikeWithAnimation}
+      className={styles.slider}
+    >
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
-        className={clsx(styles.imagesContainer, isSingleImage && styles.singleImageContainer)}
+        className={clsx(
+          styles.imagesContainer,
+          isSingleImage && styles.singleImageContainer,
+        )}
         drag={isSingleImage ? undefined : 'x'}
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
@@ -70,14 +75,25 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
                   className={styles.figure}
                   key={image.fileId}
                 >
-                  <PostImage height={1200} width={1200} priority={priority} src={image.url} post={post} />
+                  <PostImage
+                    height={1200}
+                    width={1200}
+                    priority={priority}
+                    src={image.url}
+                    post={post}
+                  />
                 </motion.figure>
               );
             })}
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      <PostArrows currentIndex={currentIndex} nextImage={nextImage} postImages={postImages} prevImage={prevImage} />
+      <PostArrows
+        currentIndex={currentIndex}
+        nextImage={nextImage}
+        postImages={postImages}
+        prevImage={prevImage}
+      />
     </motion.div>
   );
 };

@@ -19,7 +19,13 @@ export const Tooltip = ({ children, content, variant }: PropsTypes) => {
   const closeModal = () => setActive(false);
 
   return (
-    <span className={styles.tooltip} onBlur={closeModal} onFocus={show} onMouseEnter={show} onMouseLeave={closeModal}>
+    <span
+      className={styles.tooltip}
+      onBlur={closeModal}
+      onFocus={show}
+      onMouseEnter={show}
+      onMouseLeave={closeModal}
+    >
       {children}
       <AnimatePresence>
         {active && (

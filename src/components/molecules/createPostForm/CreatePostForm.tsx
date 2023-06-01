@@ -19,18 +19,38 @@ type PropsTypes = {
   register: UseFormRegister<PostDetails>;
 };
 
-export const CreatePostForm = ({ disabled, errors, onSubmit, openModal, register }: PropsTypes) => {
+export const CreatePostForm = ({
+  disabled,
+  errors,
+  onSubmit,
+  openModal,
+  register,
+}: PropsTypes) => {
   const buttonList = getButtonList(openModal, disabled);
 
   return (
-    <motion.form onSubmit={onSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.form
+      onSubmit={onSubmit}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <Heading tag="h2" size="medium">
         Info about post
       </Heading>
-      <TextArea label="description" {...register('description')} error={errors.description?.message} />
+      <TextArea
+        label="description"
+        {...register('description')}
+        error={errors.description?.message}
+      />
       <div className={styles.actionButtons}>
         {buttonList.map(({ text, disabled, onClick, type, variant }) => (
-          <Button key={text} disabled={disabled} onClick={onClick} type={type} variant={variant}>
+          <Button
+            key={text}
+            disabled={disabled}
+            onClick={onClick}
+            type={type}
+            variant={variant}
+          >
             {text}
           </Button>
         ))}

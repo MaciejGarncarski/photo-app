@@ -21,7 +21,14 @@ type PropsTypes = {
 
 export const ChatMessage = ({ message }: PropsTypes) => {
   const { senderId, receiverId, text, createdAt, id } = message;
-  const { closeModal, formattedDate, isReceiver, isModalOpen, mutate, openModal } = useChatMessage({
+  const {
+    closeModal,
+    formattedDate,
+    isReceiver,
+    isModalOpen,
+    mutate,
+    openModal,
+  } = useChatMessage({
     receiverId,
     createdAt,
   });
@@ -41,12 +48,23 @@ export const ChatMessage = ({ message }: PropsTypes) => {
       <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>
         <time dateTime={createdAt.toString()}>{formattedDate}</time>
       </p>
-      <div className={clsx(isReceiver && styles.contentReceiver, styles.content)}>
+      <div
+        className={clsx(isReceiver && styles.contentReceiver, styles.content)}
+      >
         <Avatar userId={senderId} size="small" />
         <p>{text}</p>
       </div>
-      <ListModal isVisible={isModalOpen} closeModal={closeModal} headingText="Message options">
-        <ListModalItem isLast icon={<IconTrash />} type="button" onClick={handleDelete}>
+      <ListModal
+        isVisible={isModalOpen}
+        closeModal={closeModal}
+        headingText="Message options"
+      >
+        <ListModalItem
+          isLast
+          icon={<IconTrash />}
+          type="button"
+          onClick={handleDelete}
+        >
           Delete
         </ListModalItem>
       </ListModal>
