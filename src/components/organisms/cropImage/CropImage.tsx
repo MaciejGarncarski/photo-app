@@ -20,7 +20,6 @@ import { FinalImages } from '@/src/components/pages/createPost/types';
 import styles from './CropImage.module.scss';
 
 import { ConfirmationAlert } from '../confirmationAlert/ConfirmationAlert';
-import { unlock } from '../../../utils/bodyLock';
 
 type Props = {
   setFinalImages: (final: FinalImages) => void;
@@ -60,7 +59,6 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   }
 
   const onConfirm = () => {
-    unlock();
     resetImgSrc();
   };
 

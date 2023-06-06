@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useModal } from '@/src/hooks/useModal';
-import { unlock } from '@/src/utils/bodyLock';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { Heading } from '@/src/components/atoms/heading/Heading';
@@ -59,7 +58,6 @@ export const EditPost = () => {
 
   const cancelChanges = () => {
     router.back();
-    unlock();
   };
 
   return (

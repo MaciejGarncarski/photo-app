@@ -1,8 +1,6 @@
 import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { unlock } from '@/src/utils/bodyLock';
-
 import { useChatMessage } from '@/src/components/atoms/chatMessage/useChatMessage';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
@@ -35,7 +33,6 @@ export const ChatMessage = ({ message }: PropsTypes) => {
 
   const handleDelete = () => {
     mutate({ messageId: id });
-    unlock();
   };
 
   return (

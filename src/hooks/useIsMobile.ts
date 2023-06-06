@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { MOBILE_DEVICE_MAX_WIDTH } from '@/src/utils/bodyLock';
+export const MOBILE_DEVICE_MAX_WIDTH = 1279;
 
 export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState<boolean | 'loading'>('loading');

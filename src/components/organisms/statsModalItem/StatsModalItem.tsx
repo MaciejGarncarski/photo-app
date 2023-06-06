@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import { useAuth } from '@/src/hooks/useAuth';
-import { unlock } from '@/src/utils/bodyLock';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
 import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
@@ -19,7 +18,7 @@ export const StatsModalItem = ({ user: { id, username } }: Props) => {
 
   return (
     <li key={id} className={styles.listItem}>
-      <Link href={`/${username}`} className={styles.itemLink} onClick={unlock}>
+      <Link href={`/${username}`} className={styles.itemLink}>
         <Avatar userId={id} size="small" />
         <span className={styles.username}>@{username}</span>
       </Link>

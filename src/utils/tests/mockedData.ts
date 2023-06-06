@@ -13,7 +13,7 @@ export type MockedUser = {
 };
 
 export const mockedUser = {
-  id: 'clb9cuwar0000hgo7wembhg3c',
+  id: 'mockedUser',
   name: 'Maciej Garncarski',
   username: 'maciek',
   bio: 'Lorem\r\n\r\n\r\n\r\n\r\n\r\nIpsum',

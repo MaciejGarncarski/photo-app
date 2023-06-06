@@ -8,6 +8,8 @@ import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/Mo
 
 import styles from './ListModal.module.scss';
 
+import { listModalVariants } from './ListModal.animation';
+
 type PropsTypes = {
   closeModal: () => void;
   headingText: string;
@@ -26,9 +28,10 @@ export const ListModal = ({
       {isVisible && (
         <ModalBackdrop closeModal={closeModal}>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial="closed"
+            animate="opened"
+            exit="exit"
+            variants={listModalVariants}
             className={styles.container}
           >
             <h3 className={styles.heading}>{headingText}</h3>

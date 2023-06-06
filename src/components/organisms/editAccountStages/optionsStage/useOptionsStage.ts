@@ -1,5 +1,4 @@
 import { useModal } from '@/src/hooks/useModal';
-import { unlock } from '@/src/utils/bodyLock';
 
 import { useDeleteAvatar } from '@/src/components/pages/editAccount/useDeleteAvatar';
 
@@ -11,7 +10,6 @@ export const useOptionsStage = () => {
     mutate(undefined, {
       onSettled: () => {
         closeModal();
-        unlock();
       },
     });
   };

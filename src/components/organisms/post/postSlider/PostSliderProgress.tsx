@@ -23,12 +23,9 @@ export const PostSliderProgress = ({ currentIndex, images }: PropsTypes) => {
           <motion.li
             key={image.id}
             className={styles.progressDot}
-            initial={{ opacity: 0.5 }}
             animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.45 }}
           >
-            <VisuallyHidden>
-              image {currentIndex} of {images.length}
-            </VisuallyHidden>
+            <VisuallyHidden>image {idx}</VisuallyHidden>
           </motion.li>
         );
       })}

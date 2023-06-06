@@ -1,6 +1,6 @@
 import { Variants } from 'framer-motion';
 
-export const alertVariants: Variants = {
+export const listModalVariants: Variants = {
   opened: {
     opacity: 1,
     y: 0,

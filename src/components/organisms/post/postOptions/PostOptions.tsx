@@ -1,7 +1,5 @@
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
-import { unlock } from '@/src/utils/bodyLock';
-
 import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
 
 import { ListModal } from '@/src/components/organisms/listModal/ListModal';
@@ -37,7 +35,6 @@ export const PostOptions = ({
             type="link"
             href={`/post/${postId}/edit`}
             icon={<IconEdit />}
-            onClick={unlock}
           >
             Edit
           </ListModalItem>
@@ -46,7 +43,7 @@ export const PostOptions = ({
             onClick={openCnonfirmation}
             icon={<IconTrash />}
           >
-            Delete post
+            Delete
           </ListModalItem>
         </>
       )}
