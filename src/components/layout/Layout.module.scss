@@ -2,6 +2,8 @@
 
 .layout {
   @include common.mediaquery('desktop') {
-    margin-left: calc(5vw + var(--header-width));
+    min-height: 100dvh;
+    margin-left: var(--header-width);
+    margin-right: calc(var(--header-width) - 6rem);
   }
 }

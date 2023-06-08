@@ -35,7 +35,7 @@ export const CreatePostForm = ({
       animate={{ opacity: 1 }}
     >
       <Heading tag="h2" size="medium">
-        Info about post
+        3. Info about post
       </Heading>
       <TextArea
         label="description"

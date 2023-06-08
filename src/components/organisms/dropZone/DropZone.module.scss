@@ -2,6 +2,7 @@
 
 .dropZone {
   box-shadow: var(--shadow-secondary);
+  border: var(--border-gray);
   border-radius: var(--radius-small);
   background-color: var(--bg-secondary);
   width: 100%;
@@ -13,7 +14,6 @@
   transition: var(--transition);
   gap: 1rem;
   padding: 2rem 0;
-  margin-top: 1rem;
 
   & > * {
     pointer-events: none;

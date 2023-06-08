@@ -21,7 +21,7 @@
   }
 }
 
-.heading {
+.headingContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,6 +41,10 @@
       --size: 3rem;
     }
   }
+}
+
+.heading {
+  font-size: 2rem;
 }
 
 .buttonsRow {

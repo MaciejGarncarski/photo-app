@@ -24,7 +24,6 @@
   }
 
   @include common.mediaquery('tablet') {
-    padding: 0;
     width: auto;
     overflow-y: unset;
     margin: auto;
@@ -32,6 +31,8 @@
     height: 60vh;
     grid-template-columns: 42vw 20rem;
     grid-template-rows: auto auto 1fr;
+    padding: 1rem;
+    column-gap: 1rem;
     border-radius: var(--radius-medium);
   }
 
@@ -52,9 +53,6 @@
 }
 
 .commentsContainer {
-  margin-top: 1rem;
-  padding: 0.5rem;
-
   @include common.mobile-landscape {
     grid-column: 2 / 3;
     margin-top: 0;

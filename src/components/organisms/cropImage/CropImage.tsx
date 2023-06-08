@@ -66,7 +66,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
     <>
       <section className={styles.addPhoto}>
         <Heading size="medium" tag="h2">
-          Crop your image
+          Crop image
         </Heading>
 
         <div className={styles.cropContainer}>
@@ -78,6 +78,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
             onZoomChange={setZoom}
             onCropChange={setCrop}
             onCropComplete={onCropComplete}
+            classes={{ mediaClassName: styles.cropImage }}
           />
         </div>
         <p className={styles.info}>
@@ -87,19 +88,24 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           </span>
         </p>
         <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
-        <div className={styles.buttons}>
-          <Button type="button" variant="primary" onClick={saveCrop}>
-            Save crop
-          </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            disabled={!imgSrc}
-            onClick={openModal}
-          >
-            Select diffrent image
-          </Button>
-        </div>
+        <section className={styles.saveOrAnotherImage}>
+          <Heading size="small" tag="h3">
+            Save or select another image
+          </Heading>
+          <div className={styles.buttons}>
+            <Button type="button" variant="primary" onClick={saveCrop}>
+              Save crop
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              disabled={!imgSrc}
+              onClick={openModal}
+            >
+              Select diffrent image
+            </Button>
+          </div>
+        </section>
       </section>
       {isModalOpen && (
         <ConfirmationAlert

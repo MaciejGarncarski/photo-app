@@ -42,4 +42,5 @@ export const handleDropImage = ({
   });
 
   reader.readAsDataURL(file);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };

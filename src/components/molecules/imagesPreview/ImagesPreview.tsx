@@ -31,7 +31,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
   return (
     <div>
       <Heading tag="h2" size="medium">
-        Images in post
+        2. Images in post
       </Heading>
       <motion.div
         className={styles.previewContainer}

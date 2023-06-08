@@ -5,7 +5,7 @@ export const heartVariants: Variants = {
     scale: 0.3,
   },
   animate: {
-    scale: 1.2,
+    scale: 1,
     transition: {
       type: 'spring',
     },

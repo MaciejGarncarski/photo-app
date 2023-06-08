@@ -16,8 +16,8 @@ type PropsTypes = {
 export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
   return (
     <section className={styles.container}>
-      <Heading tag="h3" size="medium">
-        Crop type
+      <Heading tag="h3" size="small">
+        Choose desired aspect ratio
       </Heading>
       <motion.div
         className={styles.aspectRatioButtons}

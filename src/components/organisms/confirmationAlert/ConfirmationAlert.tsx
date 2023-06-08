@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Heading } from '@/src/components/atoms/heading/Heading';
 import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
 
 import { alertVariants } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert.animation';
@@ -35,11 +34,11 @@ export const ConfirmationAlert = ({
             animate="opened"
             exit="exit"
           >
-            <div className={styles.heading}>
+            <div className={styles.headingContainer}>
               <IconAlertTriangleFilled />
-              <Heading tag="h3" size="medium">
+              <h3 className={styles.heading}>
                 {headingText || 'Are you sure?'}
-              </Heading>
+              </h3>
             </div>
             <ReactFocusLock>
               <div className={styles.buttonsRow}>

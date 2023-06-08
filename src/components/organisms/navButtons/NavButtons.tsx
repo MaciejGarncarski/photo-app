@@ -48,6 +48,7 @@ export const NavButtons = () => {
         )}
         <li className={styles.listItem}>
           <button
+            data-cy="settings button"
             type="button"
             className={styles.listItemContent}
             onClick={openModal}

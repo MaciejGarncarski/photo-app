@@ -25,9 +25,9 @@
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  border-radius: var(--radius-big);
+  border-radius: var(--radius-medium);
   background-color: var(--bg-primary);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   width: 100%;
   transition: background-color var(--transition);
 
@@ -43,7 +43,7 @@
 
   @include common.mediaquery('desktop') {
     width: auto;
-    gap: 1rem;
+    gap: 2rem;
   }
 }
 

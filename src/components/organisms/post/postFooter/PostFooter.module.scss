@@ -1,14 +1,9 @@
 @use '/src/styles/common';
 
 .footer {
-  padding: 0.75rem 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  @include common.mediaquery('desktop') {
-    padding: 1rem;
-  }
 }
 
 .description {

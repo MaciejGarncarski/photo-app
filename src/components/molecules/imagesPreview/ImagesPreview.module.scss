@@ -5,7 +5,6 @@
   place-content: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-top: 1rem;
 
   @include common.mediaquery('desktop') {
     gap: 3rem;
@@ -39,7 +38,6 @@
   background-color: var(--bg-secondary);
   color: var(--text-black);
   border-radius: var(--radius-small);
-  border: 0;
   box-shadow: var(--shadow-secondary);
   display: flex;
   flex-direction: column;
@@ -47,6 +45,7 @@
   justify-content: center;
   align-items: center;
   min-height: 5rem;
+  border: var(--border-gray);
 
   > svg {
     width: 2rem;

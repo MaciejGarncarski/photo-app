@@ -9,10 +9,8 @@
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-
-  @include common.mediaquery('tablet') {
-    border-radius: 0;
-  }
+  margin-bottom: var(--post-margin);
+  border: var(--border-gray);
 }
 
 .imagesContainer {

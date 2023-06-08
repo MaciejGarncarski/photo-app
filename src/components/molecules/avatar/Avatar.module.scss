@@ -4,8 +4,8 @@
   --avatar-size: 2rem;
   width: var(--avatar-size);
   height: var(--avatar-size);
-  border-radius: 100%;
-  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-medium);
+  border: var(--border-gray);
   display: flex;
   justify-content: center;
   align-items: center;

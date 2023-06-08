@@ -4,7 +4,5 @@
   display: flex;
   justify-content: space-between;
 
-  @include common.mediaquery('desktop') {
-    margin-top: 1rem;
-  }
+  margin-top: 1.5rem;
 }

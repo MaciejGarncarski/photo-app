@@ -6,13 +6,18 @@
   font-weight: 700;
   --heading-size: 1.5rem;
   font-size: var(--heading-size);
+  margin-bottom: 0.75em;
+
+  @include common.mediaquery('desktop') {
+    margin-bottom: 1em;
+  }
 }
 
 .small {
-  --heading-size: 1rem;
+  --heading-size: 1.25rem;
 
   @include common.mediaquery('desktop') {
-    --heading-size: 1.25rem;
+    --heading-size: 1.5rem;
   }
 }
 

@@ -3,25 +3,29 @@
 .form {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  gap: 1rem;
-  border-radius: var(--radius-medium);
-  border: var(--border-gray);
-  padding-right: 0.5rem;
-  background-color: var(--bg-secondary);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 
   @include common.mediaquery('desktop') {
-    width: 35rem;
+    gap: 1rem;
     font-size: 1.25rem;
+    margin-bottom: 2rem;
   }
 }
 
 .input {
-  padding: 1rem 0.5rem;
-  border: none;
+  padding: 0.75rem 0.75rem;
+  border: var(--border-gray);
+  border-radius: var(--radius-small);
   background-color: transparent;
   flex-grow: 1;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
 
   &::placeholder {
     color: var(--text-black);

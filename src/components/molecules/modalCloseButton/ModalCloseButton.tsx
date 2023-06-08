@@ -17,6 +17,7 @@ export const ModalCloseButton = ({ onClose, outside }: PropsTypes) => {
 
   return (
     <button
+      data-cy="modal close"
       className={clsx(
         outside && styles.closeButtonExternal,
         styles.closeButton,

@@ -40,6 +40,7 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
         isVisible={isVisible}
         closeModal={closeModal}
         headingText="PhotoApp settings"
+        data-cy="settings modal"
       >
         {isSignedIn && sessionUser?.username && (
           <ListModalItem

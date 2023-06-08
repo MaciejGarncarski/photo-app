@@ -15,7 +15,7 @@ export const ProtectedPage = ({ children, shouldBeSignedIn = true }: Props) => {
   const { isSignedIn, isLoading } = useAuth();
 
   if (isLoading) {
-    return <Loader color="blue" size="normal" />;
+    return <Loader color="blue" size="normal" marginTop />;
   }
 
   if (isSignedIn && !shouldBeSignedIn) {

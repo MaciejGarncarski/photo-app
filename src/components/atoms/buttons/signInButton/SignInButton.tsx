@@ -5,7 +5,7 @@ import styles from './SignInButton.module.scss';
 
 export const SignInButton = () => {
   return (
-    <Link href="/auth/signin" className={styles.button}>
+    <Link data-cy="signin button" href="/auth/signin" className={styles.button}>
       <IconLogin />
       Sign in
     </Link>

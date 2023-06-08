@@ -44,7 +44,7 @@ export const DropZone = ({ setImgSrc }: PropsTypes) => {
   return (
     <div>
       <Heading tag="h2" size="medium">
-        Upload image
+        1. Upload image
       </Heading>
       <div
         className={clsx(

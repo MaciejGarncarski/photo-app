@@ -11,10 +11,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(
   ({ label, error, ...otherProps }, ref) => {
     const id = useId();
     return (
-      <div>
-        <label className={styles.label} htmlFor={id}>
-          {label}
-        </label>
+      <div className={styles.textAreaContainer}>
         <textarea
           id={id}
           ref={ref}
@@ -23,6 +20,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(
           rows={10}
           {...otherProps}
         />
+        <label className={styles.label} htmlFor={id}>
+          {label}
+        </label>
         {error && <p className={styles.error}>{error}</p>}
       </div>
     );

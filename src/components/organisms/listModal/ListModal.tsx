@@ -22,6 +22,7 @@ export const ListModal = ({
   headingText,
   children,
   isVisible,
+  ...rest
 }: PropsTypes) => {
   return (
     <AnimatePresence mode="wait">
@@ -33,6 +34,7 @@ export const ListModal = ({
             exit="exit"
             variants={listModalVariants}
             className={styles.container}
+            {...rest}
           >
             <h3 className={styles.heading}>{headingText}</h3>
             <ReactFocusLock>
