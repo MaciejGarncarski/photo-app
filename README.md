@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="192" height="192" src="https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/logo.png">
+  <img width="192" height="192" src="https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/logo.png">
 </p>
 
 # PhotoApp
@@ -106,10 +106,10 @@ yarn dev
 ![chat](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)
 
 ### Chat room
-![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat-room.png)
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chatRoom.png)
 
 ### Create post
-![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/create-post.png)
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/createPost.png)
 
 ### Profile
 ![profile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/profile.png)

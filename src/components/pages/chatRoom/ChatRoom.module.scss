@@ -6,11 +6,12 @@
   position: relative;
   max-height: 100vh;
   padding-bottom: 3rem;
-
   --width: 100%;
+  margin: auto;
+  width: var(--width);
 
   @include common.mediaquery('desktop') {
-    --width: calc(100% - 5vw - var(--header-width));
+    --width: 55vw;
     padding-bottom: 0;
   }
 }
@@ -18,18 +19,18 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 1.5rem;
   padding: 1rem;
   background-color: var(--bg-primary);
   width: var(--width);
   position: fixed;
   top: 0;
-  border-bottom: var(--border-gray);
   z-index: 1;
 
   @include common.mediaquery('desktop') {
     padding: 1rem 3rem;
+    gap: 3rem;
   }
 }
 
@@ -41,8 +42,8 @@
   }
 }
 
-.heading {
-  font-size: 1rem;
+.headerHeading {
+  font-size: 1.5rem;
   max-width: 10rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -57,6 +58,11 @@
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+
+
+  @include common.mediaquery('desktop') {
+    gap: 1rem;
+  }
 }
 
 .messages {
@@ -81,14 +87,14 @@
 
 .loading {
   margin-top: 10rem;
-  padding-bottom: 12rem;
+  margin-bottom: 5rem;
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  > svg {
+  >svg {
     width: 5rem;
     height: 5rem;
   }
@@ -107,6 +113,7 @@
   @include common.mediaquery('desktop') {
     width: var(--width);
     padding: 1rem 2rem;
+    justify-content: center;
     bottom: 0;
   }
 }
@@ -115,15 +122,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: var(--radius-big);
-  padding: 0 0.5rem;
+  border-radius: var(--radius-small);
+  padding-right: 0.5rem;
   background-color: var(--bg-secondary);
   border: 1px solid var(--color-gray);
   width: 100%;
 
   @include common.mediaquery('desktop') {
-    padding: 0 1.5rem;
+    padding-right: 1.5rem;
     gap: 2rem;
+    width: 70%;
+    justify-content: center;
   }
 }
 

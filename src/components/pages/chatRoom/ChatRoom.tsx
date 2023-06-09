@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { Button } from '@/src/components/atoms/buttons/button/Button';
 import { ChatMessage } from '@/src/components/atoms/chatMessage/ChatMessage';
-import { Heading } from '@/src/components/atoms/heading/Heading';
 import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
 
 import { Avatar } from '@/src/components/molecules/avatar/Avatar';
@@ -47,9 +46,9 @@ export const ChatRoom = () => {
         </Button>
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
           <Avatar userId={friendId || ''} size="small" />
-          <Heading tag="h2" size="small">
+          <p className={styles.headerHeading}>
             {friendData?.name && `${friendData?.name},`} @{friendData?.username}
-          </Heading>
+          </p>
         </Link>
       </header>
 
