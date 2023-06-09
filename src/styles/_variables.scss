@@ -26,17 +26,15 @@
   --transition: 0.25s ease;
   --transition-fast: 0.125s ease;
 
-  --gradient: linear-gradient(
-    90deg,
-    var(--color-gray) 0px,
-    #ededed 20%,
-    var(--color-gray) 40%
-  );
+  --gradient: linear-gradient(90deg,
+      var(--color-gray) 0px,
+      #ededed 20%,
+      var(--color-gray) 40%);
   --placeholder-animation: skeleton-loading 1.5s infinite linear;
   --placeholder-bg-size: 500%;
 
   --shadow-focus: 0 0 0 0.3rem var(--bg-primary),
-    0 0 0 0.5rem var(--color-primary);
+    0 0 0 0.45rem var(--color-primary);
 
   --radius-big: 1rem;
   --radius-medium: 0.5rem;
@@ -58,15 +56,13 @@
 }
 
 %variablesDarkTheme {
-  --color-overlay: rgba(60, 60, 60, 0.8);
+  --color-overlay: rgba(80, 80, 80, 0.85);
   --text-black: rgb(230, 230, 230);
   --color-gray: rgb(124, 124, 124);
-  --gradient: linear-gradient(
-    90deg,
-    var(--color-gray) 0px,
-    #929292 10%,
-    var(--color-gray) 20%
-  );
+  --gradient: linear-gradient(90deg,
+      var(--color-gray) 0px,
+      #929292 10%,
+      var(--color-gray) 20%);
   --text-gray: rgb(200, 200, 200);
   --bg-primary: rgb(32, 37, 51);
   --bg-blur: rgb(32, 37, 51, 0.9);

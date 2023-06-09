@@ -28,6 +28,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
     isError,
     isLoading,
     isModalOpen,
+    getValues,
     onClick,
     onReset,
     onSubmit,
@@ -56,12 +57,14 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
         <Input
           type="text"
           labelText="Username"
+          isEmpty={getValues('username') === ''}
           error={errors.username?.message}
           {...register('username')}
         />
         <Input
           type="text"
           labelText="Full name"
+          isEmpty={getValues('fullName') === ''}
           error={errors.fullName?.message}
           {...register('fullName')}
         />

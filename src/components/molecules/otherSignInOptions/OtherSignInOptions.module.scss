@@ -47,7 +47,7 @@
 }
 
 .button {
-  > button {
+  >button {
     display: flex;
     gap: 1rem;
     width: 100%;
@@ -72,8 +72,4 @@
   transition-property: transform, box-shadow;
 
   @include common.button-state;
-
-  @include common.mediaquery('desktop') {
-    border-radius: var(--radius-medium);
-  }
 }

@@ -22,10 +22,6 @@
   &:hover {
     box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--color-secondary);
   }
-
-  @include common.mediaquery('desktop') {
-    --shadow-size: 3px;
-  }
 }
 
 .image {
@@ -76,9 +72,10 @@
 }
 
 .container {
+
   &:focus,
   &:hover {
-    & > .overlay {
+    &>.overlay {
       opacity: 1;
     }
   }

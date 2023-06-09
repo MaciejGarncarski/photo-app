@@ -17,6 +17,8 @@ import { Layout } from '@/src/components/layout/Layout';
 
 import '../styles/globals.scss';
 
+import { useIsMobile } from '../hooks/useIsMobile';
+
 const customFont = Open_Sans({
   weight: ['400', '500', '700'],
   variable: '--font-customFont',
@@ -27,6 +29,7 @@ const queryClient = new QueryClient();
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { isMobile } = useIsMobile();
   const pageKey = router.asPath;
 
   useEffect(() => {
@@ -71,7 +74,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
               </motion.div>
             )}
           </AnimatePresence>
-          <Toaster />
+          <Toaster
+            position={isMobile ? 'top-center' : 'top-right'}
+            containerClassName="toaster"
+          />
         </Layout>
       </MotionConfig>
     </QueryClientProvider>

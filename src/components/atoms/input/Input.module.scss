@@ -5,7 +5,6 @@
   flex-direction: column;
   position: relative;
   gap: 0.5rem;
-  border: 2px solid var(--color-primary);
 }
 
 .containerError {
@@ -15,41 +14,46 @@
 .label {
   color: var(--text-secondary);
   text-transform: capitalize;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0.75rem, 1rem);
+  transition: transform var(--transition);
+  display: inline-block;
+  background-color: var(--bg-primary);
+  padding: 0 0.25rem;
 }
 
 .input {
-  background-color: transparent;
-  border: none;
-  padding: 0.85rem;
+  background-color: var(--bg-primary);
+  padding: 1rem;
+  border-radius: var(--radius-small);
   border: var(--border-gray);
-  border-radius: var(--radius-medium);
-  transition: all var(--transition);
-  transition-property: background-color, box-shadow, border-color;
-
-  &:hover {
-    background-color: var(--bg-secondary);
-  }
 
   &:focus {
     outline: none;
-    border-color: transparent;
-    box-shadow: var(--shadow-focus);
+    border-color: var(--color-primary);
+
+    &+.label {
+      transform: translate(0.5rem, -0.75rem);
+    }
   }
 }
 
 .inputError {
-  background-color: var(--bg-error);
   border-color: var(--color-error);
+
+  &+.label {
+    color: var(--color-error);
+  }
+}
+
+.notEmpty+.label {
+  transform: translate(0.5rem, -0.75rem);
 }
 
 .error {
   color: var(--color-error);
-  font-weight: 700;
-}
-
-.textarea {
-  border: none;
-  padding: 1.5rem;
-  max-width: calc(100% - 1px);
-  resize: vertical;
+  padding-left: 0.5rem;
+  margin-top: 0.5rem;
 }

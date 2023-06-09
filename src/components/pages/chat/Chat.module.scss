@@ -8,7 +8,8 @@
   padding-bottom: 3rem;
   z-index: 1;
   height: 100%;
-  width: clamp(19rem, 70%, 45rem);
+  margin-inline: auto;
+  width: clamp(25rem, 70%, 45rem);
 
   @include common.mediaquery('desktop') {
     gap: 3rem;

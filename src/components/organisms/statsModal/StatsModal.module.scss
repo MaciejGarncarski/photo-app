@@ -26,6 +26,11 @@
   overflow-y: auto;
 }
 
+.noData {
+  padding: 1rem;
+  text-align: center;
+}
+
 .placeholder {
   margin: 0.5rem 1.5rem;
   background-size: var(--placeholder-bg-size);

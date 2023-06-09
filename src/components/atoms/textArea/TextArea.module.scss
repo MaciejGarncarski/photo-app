@@ -15,13 +15,13 @@
   padding: 1rem;
   border-radius: var(--radius-small);
   border: var(--border-gray);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
 
   &:focus {
     outline: none;
     border-color: var(--color-primary);
 
-    & + .label {
+    &+.label {
       transform: translate(0.5rem, -0.75rem);
       background-color: var(--bg-primary);
     }

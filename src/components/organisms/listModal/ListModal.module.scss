@@ -26,7 +26,7 @@
   background-color: var(--bg-primary);
   text-align: center;
   padding: 1rem 2rem;
-  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+  border-radius: var(--radius-small) var(--radius-small) 0 0;
 
   @include common.mobile-landscape {
     padding: 0.75rem 2rem;
@@ -37,7 +37,7 @@
   font-weight: 700;
   overflow: hidden;
 
-  & > button,
+  &>button,
   a {
     transition: all var(--transition-fast);
     transition-property: background-color, transform;

@@ -7,6 +7,7 @@
   padding-bottom: 4rem;
 
   @include common.mediaquery('tablet') {
+    max-width: 60rem;
     padding: 0 2rem;
   }
 }
@@ -25,16 +26,16 @@
 
 .accountDesktop {
   display: flex;
-  gap: 8rem;
-  justify-content: flex-start;
-  align-items: flex-start;
+  gap: 6rem;
+  justify-content: center;
+  align-items: center;
   margin-top: 5rem;
 }
 
 .leftCol {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
 }

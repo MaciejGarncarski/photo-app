@@ -10,6 +10,7 @@
 .commentInput {
   height: 2.5rem;
   min-height: 2.5rem;
+  max-height: 7rem;
   resize: vertical;
   flex-grow: 1;
   border-radius: var(--radius-small);

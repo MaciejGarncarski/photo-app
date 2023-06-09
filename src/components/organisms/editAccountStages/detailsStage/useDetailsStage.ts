@@ -50,6 +50,7 @@ export const useDetailsStage = ({ userId }: Arguments) => {
     isDirty,
     register,
     closeModal,
+    getValues,
     onClick,
     onSubmit,
     editAccountLoading,

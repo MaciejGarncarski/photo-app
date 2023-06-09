@@ -3,6 +3,9 @@
 .container {
   width: clamp(18rem, 35vw, 70rem);
   margin: 2rem auto;
+}
+
+.formContainer {
   padding-bottom: 6rem;
   display: flex;
   flex-direction: column;
@@ -10,19 +13,17 @@
 
   @include common.mediaquery('desktop') {
     gap: 4rem;
-    margin-top: 2rem;
   }
 }
 
 .info {
   background-color: var(--bg-secondary);
   padding: 1rem 1.5rem;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   line-height: 2;
 
   @include common.mediaquery('desktop') {
-    border-radius: var(--radius-big);
-    padding: 1.5rem 2.5rem;
+    padding: 1rem 1.5rem;
   }
 }
 
