@@ -13,7 +13,7 @@
     "format": "prettier -w .",
     "test": "jest",
     "format:check": "prettier -c .",
-    "lint-strict-fix": "eslint --fix . && yarn format",
+    "lint-strict-fix": "yarn format && eslint --fix .",
     "vercel-build": "next build",
     "postinstall": "husky install"
   },

@@ -5,4 +5,4 @@ export const settings = {
   signOutButton: /sign out/i,
   themeButton: /change theme/i,
   confirmButton: /confirm/i,
-};
+} as const;

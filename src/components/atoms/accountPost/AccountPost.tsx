@@ -41,6 +41,7 @@ export const AccountPost = ({
       variants={postItemVaraints}
       href={`/post/${postId}`}
       className={styles.container}
+      data-cy="account post link"
     >
       {!isLoaded && <Loader color="blue" size="normal" />}
       <Image

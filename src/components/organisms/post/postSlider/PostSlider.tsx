@@ -49,6 +49,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
     <motion.div
       onDoubleClick={handleLikeWithAnimation}
       className={styles.slider}
+      data-cy="post slider"
     >
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div

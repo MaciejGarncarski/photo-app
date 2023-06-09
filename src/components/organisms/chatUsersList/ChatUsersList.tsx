@@ -56,7 +56,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
             return page.users.map(({ id, name, username }) => {
               const isActive = id === (router.query.receiverId as string);
               return (
-                <li key={id}>
+                <li key={id} data-cy="chat user">
                   <MotionLink
                     variants={linkVariants}
                     href={`/chat/${id}`}

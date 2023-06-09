@@ -21,9 +21,13 @@ export const SearchUserForm = ({
   inputValue,
 }: PropsTypes) => {
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form
+      data-cy="search user form"
+      className={styles.form}
+      onSubmit={onSubmit}
+    >
       <input
-        id="search-user-input"
+        data-cy="search user input"
         className={styles.input}
         placeholder="Search"
         size={3}
