@@ -19,7 +19,6 @@
     justify-content: center;
     align-items: flex-start;
     padding: 0;
-    gap: 2rem;
   }
 }
 
@@ -29,6 +28,7 @@
   align-items: center;
 
   @include common.mediaquery('desktop') {
+    width: 100%;
     display: block;
   }
 }
@@ -50,7 +50,7 @@
   }
 
   @include common.mediaquery('desktop') {
-    padding: 0.75rem 0.6rem;
+    padding: 1rem 0.75rem;
     border-radius: var(--radius-medium);
 
     &:hover {
@@ -70,11 +70,7 @@
   font-weight: 700;
 
   svg {
-    stroke-width: 1.75;
-  }
-
-  @include common.mediaquery('desktop') {
-    background-color: var(--bg-secondary);
+    stroke-width: 2;
   }
 }
 

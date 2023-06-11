@@ -8,7 +8,7 @@
   position: relative;
   word-break: break-all;
 
-  &>button {
+  & > button {
     order: 2;
   }
 }
@@ -44,11 +44,11 @@
     padding: 0.5rem 1rem;
   }
 
-  &>button {
+  & > button {
     order: 2;
   }
 
-  &>figure {
+  & > figure {
     order: 2;
   }
 
@@ -61,21 +61,21 @@
   margin-left: 0;
   color: inherit;
 
-  &>.content {
+  & > .content {
     background-color: var(--bg-secondary);
   }
 
-  &>button {
+  & > button {
     order: 0;
   }
 }
 
 .contentReceiver {
-  &>button {
+  & > button {
     order: 0;
   }
 
-  &>figure {
+  & > figure {
     order: 0;
   }
 }

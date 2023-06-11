@@ -9,7 +9,7 @@
   color: var(--color-primary);
   --loader-size: 5rem;
 
-  >svg {
+  > svg {
     width: var(--loader-size);
     height: var(--loader-size);
     animation: rotate 1s infinite linear forwards;
@@ -18,7 +18,6 @@
   @include common.mediaquery('desktop') {
     --loader-size: 7rem;
   }
-
 }
 
 @keyframes rotate {

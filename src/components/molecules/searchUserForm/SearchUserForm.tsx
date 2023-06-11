@@ -30,7 +30,6 @@ export const SearchUserForm = ({
         data-cy="search user input"
         className={styles.input}
         placeholder="Search"
-        size={3}
         value={inputValue}
         onChange={onChange}
       />

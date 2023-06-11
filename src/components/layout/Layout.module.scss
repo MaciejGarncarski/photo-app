@@ -4,6 +4,6 @@
   @include common.mediaquery('desktop') {
     min-height: 100dvh;
     margin-left: var(--header-width);
-    margin-right: calc(var(--header-width) - 10vw);
+    margin-right: calc(var(--header-width) - 6.5vw);
   }
 }

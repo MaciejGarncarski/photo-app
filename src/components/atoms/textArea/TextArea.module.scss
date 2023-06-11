@@ -23,7 +23,6 @@
   }
 }
 
-
 .label {
   color: var(--text-secondary);
   text-transform: capitalize;
@@ -38,7 +37,7 @@
   opacity: 0.7;
 }
 
-.textArea:focus+.label,
+.textArea:focus + .label,
 .notEmpty {
   transform: translate(0.5rem, -0.75rem);
   background-color: var(--bg-primary);
