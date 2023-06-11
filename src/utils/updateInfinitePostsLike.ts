@@ -2,7 +2,7 @@ import { InfiniteData } from '@tanstack/react-query';
 
 import { Post, PostsResponse } from '@/src/schemas/post.schema';
 
-type InfinitePost = InfiniteData<PostsResponse>;
+export type InfinitePost = InfiniteData<PostsResponse>;
 
 export const updateInfinitePostsLike = (
   oldInfiniteData?: InfinitePost,

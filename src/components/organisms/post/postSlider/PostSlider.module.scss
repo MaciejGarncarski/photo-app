@@ -17,11 +17,10 @@
   position: relative;
   display: flex;
   height: 100%;
-  cursor: grab;
 }
 
-.singleImageContainer {
-  cursor: crosshair;
+.grab {
+  cursor: grab;
 }
 
 .figure {

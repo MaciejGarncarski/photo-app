@@ -3,16 +3,16 @@
 .container {
   position: relative;
   z-index: 1;
-  width: 23rem;
+  width: calc(20rem + 1rem);
   background-color: var(--bg-primary);
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
   overflow-y: scroll;
-  border-radius: var(--radius-small) var(--radius-small) 0 0;
-  height: 31rem;
-  padding: 0.5rem 0.5rem;
+  border-radius: var(--radius-medium);
+  height: 32rem;
+  padding: 0.5rem;
 
   @include common.mobile-landscape {
     width: auto;
@@ -91,7 +91,7 @@
   figure {
     height: 100%;
     object-fit: contain;
-    --img-width: 23rem;
+    --img-width: 20rem;
     width: var(--img-width);
 
     @include common.mobile-landscape {

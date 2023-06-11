@@ -47,7 +47,8 @@ export const ChatRoom = () => {
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
           <Avatar userId={friendId || ''} size="small" />
           <p className={styles.headerHeading}>
-            <span>{friendData?.name && `${friendData?.name},`}</span>
+            {friendData?.name && <span>{friendData?.name}</span>}
+            &nbsp;
             <span data-cy="chatroom username">@{friendData?.username}</span>
           </p>
         </Link>

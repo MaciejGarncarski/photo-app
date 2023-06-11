@@ -34,7 +34,7 @@ export const NewAvatarStage = ({
   const { previewImages } = getPreviewImages(finalImages);
 
   if (isLoading) {
-    return <TextWithLoader text="Uploading new avatar.." />;
+    return <TextWithLoader text="Uploading new avatar" />;
   }
 
   const previewImage = previewImages[0];

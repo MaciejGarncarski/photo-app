@@ -7,12 +7,18 @@
   justify-content: center;
   align-items: center;
   color: var(--color-primary);
+  --loader-size: 5rem;
 
-  > svg {
-    width: 5rem;
-    height: 5rem;
+  >svg {
+    width: var(--loader-size);
+    height: var(--loader-size);
     animation: rotate 1s infinite linear forwards;
   }
+
+  @include common.mediaquery('desktop') {
+    --loader-size: 7rem;
+  }
+
 }
 
 @keyframes rotate {
@@ -34,10 +40,7 @@
 }
 
 .small {
-  > svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+  --loader-size: 1.5erem;
 }
 
 .white {
@@ -52,6 +55,6 @@
   margin-top: 4rem;
 
   @include common.mediaquery('desktop') {
-    margin-top: 8rem;
+    margin-top: 10rem;
   }
 }

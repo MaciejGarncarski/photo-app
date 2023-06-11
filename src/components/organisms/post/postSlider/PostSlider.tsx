@@ -53,10 +53,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
     >
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
-        className={clsx(
-          styles.imagesContainer,
-          isSingleImage && styles.singleImageContainer,
-        )}
+        className={clsx(!isSingleImage && styles.grab, styles.imagesContainer)}
         drag={isSingleImage ? undefined : 'x'}
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}

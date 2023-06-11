@@ -20,13 +20,9 @@
   &:focus {
     outline: none;
     border-color: var(--color-primary);
-
-    & + .label {
-      transform: translate(0.5rem, -0.75rem);
-      background-color: var(--bg-primary);
-    }
   }
 }
+
 
 .label {
   color: var(--text-secondary);
@@ -35,10 +31,18 @@
   left: 0;
   top: 0;
   transition: all var(--transition);
-  transition-property: background-color, transform;
+  transition-property: background-color, transform, opacity;
   transform: translate(0.5rem, 1rem);
   display: inline-block;
   padding: 0 0.5rem;
+  opacity: 0.7;
+}
+
+.textArea:focus+.label,
+.notEmpty {
+  transform: translate(0.5rem, -0.75rem);
+  background-color: var(--bg-primary);
+  opacity: 1;
 }
 
 .error {

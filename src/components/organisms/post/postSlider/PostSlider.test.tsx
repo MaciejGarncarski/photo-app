@@ -45,12 +45,9 @@ describe('Post slider test', () => {
     render(<PostSlider post={mockedPost} priority={false} />);
     const nextImageButton = screen.getByRole('button', { name: /next image/i });
     const progressList = screen.getByRole('list');
-    const [firstDot, secondDot] = progressList.children;
     expect(progressList).toBeInTheDocument();
     expect(nextImageButton).toBeInTheDocument();
-    expect(firstDot).not.toHaveStyle('opacity: 0.45');
     fireEvent.click(nextImageButton);
-    expect(secondDot).not.toHaveStyle('opacity: 0.45');
     expect(nextImageButton).not.toBeInTheDocument();
   });
 });

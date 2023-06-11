@@ -37,6 +37,7 @@ export const CreatePost = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { dirtyFields, errors },
   } = useForm({
     resolver: zodResolver(PostDetailsSchema),
@@ -59,6 +60,7 @@ export const CreatePost = () => {
       )}
       <ImagesPreview previewImages={previewImages} onRemove={onRemove} />
       <CreatePostForm
+        isEmpty={getValues('description') === ''}
         disabled={isSubmitDisabled}
         errors={errors}
         onSubmit={handleSubmit(onSubmit)}

@@ -68,6 +68,7 @@ export const EditPost = () => {
       <form className={styles.form}>
         <TextArea
           label="Description"
+          isEmpty={getValues('description') === ''}
           {...register('description')}
           error={errors.description?.message}
         />

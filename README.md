@@ -83,6 +83,7 @@ yarn dev
 
 ### Testing
 
+- Cypress
 - Jest
 - React Testing Library
 - MSW

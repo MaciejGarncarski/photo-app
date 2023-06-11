@@ -1,14 +1,16 @@
+import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
 import styles from './TextArea.module.scss';
 
 type PropsTypes = {
   label: string;
+  isEmpty: boolean;
   error?: string;
 };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(
-  ({ label, error, ...otherProps }, ref) => {
+  ({ label, error, isEmpty, ...otherProps }, ref) => {
     const id = useId();
     return (
       <div className={styles.textAreaContainer}>
@@ -20,7 +22,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(
           rows={10}
           {...otherProps}
         />
-        <label className={styles.label} htmlFor={id}>
+        <label
+          className={clsx(!isEmpty && styles.notEmpty, styles.label)}
+          htmlFor={id}
+        >
           {label}
         </label>
         {error && <p className={styles.error}>{error}</p>}

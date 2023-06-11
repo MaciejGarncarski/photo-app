@@ -69,6 +69,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
           {...register('fullName')}
         />
         <TextArea
+          isEmpty={getValues('bio') === ''}
           error={errors.bio?.message}
           label="bio"
           {...register('bio')}

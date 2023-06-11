@@ -25,28 +25,28 @@ export const PostArrows = ({
   const isNotLastIndex = currentIndex !== postImages.length - 1;
   const isSingleImage = postImages.length === 1;
 
+  if (isSingleImage) {
+    return null;
+  }
+
   return (
     <>
-      {!isSingleImage && (
-        <>
-          {isNotFirstIndex && (
-            <button type="button" className={styles.button} onClick={prevImage}>
-              <IconArrowLeft />
-              <VisuallyHidden>Previous image</VisuallyHidden>
-            </button>
-          )}
-          <PostSliderProgress currentIndex={currentIndex} images={postImages} />
-          {isNotLastIndex && (
-            <button
-              type="button"
-              className={clsx(styles.buttonRight, styles.button)}
-              onClick={nextImage}
-            >
-              <IconArrowRight />
-              <VisuallyHidden>Next image</VisuallyHidden>
-            </button>
-          )}
-        </>
+      {isNotFirstIndex && (
+        <button type="button" className={styles.button} onClick={prevImage}>
+          <IconArrowLeft />
+          <VisuallyHidden>Previous image</VisuallyHidden>
+        </button>
+      )}
+      <PostSliderProgress currentIndex={currentIndex} images={postImages} />
+      {isNotLastIndex && (
+        <button
+          type="button"
+          className={clsx(styles.buttonRight, styles.button)}
+          onClick={nextImage}
+        >
+          <IconArrowRight />
+          <VisuallyHidden>Next image</VisuallyHidden>
+        </button>
       )}
     </>
   );

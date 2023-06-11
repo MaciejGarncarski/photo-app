@@ -13,15 +13,21 @@
 
 .label {
   color: var(--text-secondary);
-  text-transform: capitalize;
   position: absolute;
   left: 0;
   top: 0;
   transform: translate(0.75rem, 1rem);
-  transition: transform var(--transition);
+  transition: all var(--transition);
+  transition-property: background-color, transform, opacity;
   display: inline-block;
   background-color: var(--bg-primary);
   padding: 0 0.25rem;
+  opacity: 0.7;
+}
+
+%label-active {
+  opacity: 1;
+  transform: translate(0.5rem, -0.75rem);
 }
 
 .input {
@@ -34,8 +40,8 @@
     outline: none;
     border-color: var(--color-primary);
 
-    & + .label {
-      transform: translate(0.5rem, -0.75rem);
+    &+.label {
+      @extend %label-active;
     }
   }
 }
@@ -43,13 +49,13 @@
 .inputError {
   border-color: var(--color-error);
 
-  & + .label {
+  &+.label {
     color: var(--color-error);
   }
 }
 
-.notEmpty + .label {
-  transform: translate(0.5rem, -0.75rem);
+.notEmpty+.label {
+  @extend %label-active;
 }
 
 .error {
