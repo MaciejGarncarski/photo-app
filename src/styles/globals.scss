@@ -26,6 +26,7 @@ body {
   color: var(--text-black);
   background-color: var(--bg-primary);
   font-family: var(--font-customFont);
+  transition: background-color var(--transition);
 }
 
 img,

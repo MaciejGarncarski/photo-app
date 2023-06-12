@@ -73,7 +73,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
             });
           })}
         {(hasNextPage || isLoading) && (
-          <div ref={infiniteRef}>
+          <div ref={infiniteRef} className={styles.loading}>
             <Loader color="blue" size="normal" />
           </div>
         )}
