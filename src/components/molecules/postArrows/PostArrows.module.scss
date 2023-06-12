@@ -21,14 +21,13 @@
   box-shadow: var(--shadow-primary);
   transition: box-shadow var(--transition-fast);
 
-
   &:hover,
   &:focus {
     outline: none;
     box-shadow: var(--shadow-focus);
   }
 
-  >svg {
+  > svg {
     stroke-width: 3;
   }
 

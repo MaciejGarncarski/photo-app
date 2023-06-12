@@ -37,7 +37,7 @@
   opacity: 0.8;
 }
 
-.textArea:focus+.label,
+.textArea:focus + .label,
 .notEmpty {
   transform: translate(0.5rem, -0.75rem);
   background-color: var(--bg-primary);

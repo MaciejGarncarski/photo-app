@@ -38,7 +38,7 @@
   font-weight: 700;
   overflow: hidden;
 
-  &>button,
+  & > button,
   a {
     transition: all var(--transition-fast);
     transition-property: background-color, transform;

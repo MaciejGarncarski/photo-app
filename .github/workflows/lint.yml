@@ -28,7 +28,7 @@ jobs:
         run: yarn install
 
       - name: 🔬 Lint
-        run: yarn lint-strict-fix
+        run: yarn lint-format
 
   typecheck:
     name: ʦ TypeScript

@@ -3,19 +3,23 @@
   "description": "Fullstack Next,js social app. In photo-app you can sign up via google and upload your favourite photos.",
   "version": "0.2.0",
   "private": true,
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": "yarn lint",
+    "*.{js,jsx,ts,tsx,md,mdx}": "yarn format --cache"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "prepare": "yarn husky install",
-    "lint": "next lint",
     "tsc": "tsc --noEmit",
-    "format": "prettier -w .",
     "test": "jest",
     "format:check": "prettier -c .",
-    "lint-strict-fix": "yarn format && eslint --fix .",
     "vercel-build": "next build",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "lint": "eslint --fix --max-warnings=0 \"src/**/*.{js,ts,jsx,tsx}\"",
+    "format": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
+    "lint-format": "yarn format && yarn lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
