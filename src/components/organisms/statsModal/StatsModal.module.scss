@@ -4,7 +4,7 @@
   background-color: var(--bg-primary);
   padding: 1rem 0;
   width: clamp(25rem, 35vw, 32rem);
-  border-radius: var(--radius-big) var(--radius-big) 0 0;
+  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
   position: relative;
 
   @include common.mediaquery('desktop') {

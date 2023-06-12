@@ -4,17 +4,18 @@
   gap: 1.5rem;
   background-color: var(--bg-primary);
   overflow-y: auto;
-  padding: 1rem 1rem;
   padding-bottom: 3rem;
   z-index: 1;
   height: 100%;
   margin-inline: auto;
-  width: clamp(25rem, 70%, 45rem);
+  padding: 1rem;
+  width: 100%;
 
   @include common.mediaquery('desktop') {
     gap: 3rem;
     padding-top: 2rem;
     margin: 0 auto;
+    width: clamp(23rem, 70%, 45rem);
   }
 }
 

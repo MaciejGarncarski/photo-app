@@ -36,7 +36,7 @@
 .listItemContent {
   display: flex;
   align-items: center;
-  border-radius: var(--radius-big);
+  border-radius: var(--radius-medium);
   gap: 0.5rem;
   padding: 0.25rem;
   font-size: 1.25rem;
@@ -51,7 +51,7 @@
 
   @include common.mediaquery('desktop') {
     padding: 1rem 0.75rem;
-    border-radius: var(--radius-medium);
+    width: 100%;
 
     &:hover {
       background-color: var(--bg-secondary);

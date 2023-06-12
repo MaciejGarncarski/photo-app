@@ -34,10 +34,10 @@
   transform: translate(0.5rem, 1rem);
   display: inline-block;
   padding: 0 0.5rem;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
-.textArea:focus + .label,
+.textArea:focus+.label,
 .notEmpty {
   transform: translate(0.5rem, -0.75rem);
   background-color: var(--bg-primary);
