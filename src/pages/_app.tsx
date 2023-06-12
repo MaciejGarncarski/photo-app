@@ -17,7 +17,6 @@ import { Layout } from '@/src/components/layout/Layout';
 
 import '../styles/globals.scss';
 
-import { useTheme } from '../components/organisms/settings/useTheme';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 const customFont = Open_Sans({
@@ -28,7 +27,6 @@ const customFont = Open_Sans({
 const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  useTheme();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { isMobile } = useIsMobile();
