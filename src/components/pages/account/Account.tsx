@@ -31,9 +31,6 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   const queryClient = useQueryClient();
   const username = usernameFromProps || (router.query.username as string);
 
-  const formattedUsername =
-    username.length > 20 ? username.slice(0, 10) + '...' : username;
-
   const { isOwner, settingsModal, signOutModal, userData, isError } =
     useAccount({
       username,
@@ -53,6 +50,9 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   if (!userData) {
     return <Loader marginTop color="blue" size="normal" />;
   }
+
+  const formattedUsername =
+    username.length > 20 ? username.slice(0, 10) + '...' : username;
 
   return (
     <div className={styles.container}>
