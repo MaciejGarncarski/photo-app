@@ -10,7 +10,7 @@
   bottom: 0;
   top: 0;
   overflow-y: scroll;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   height: 32rem;
   padding: 0.5rem;
 
@@ -20,7 +20,6 @@
     height: 16rem;
     grid-template-columns: 42vw 17rem;
     grid-template-rows: auto auto 1fr;
-    border-radius: var(--radius-small);
   }
 
   @include common.mediaquery('tablet') {

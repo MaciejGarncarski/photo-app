@@ -31,6 +31,9 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   const queryClient = useQueryClient();
   const username = usernameFromProps || (router.query.username as string);
 
+  const formattedUsername =
+    username.length > 20 ? username.slice(0, 10) + '...' : username;
+
   const { isOwner, settingsModal, signOutModal, userData, isError } =
     useAccount({
       username,
@@ -53,7 +56,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
 
   return (
     <div className={styles.container}>
-      <NextSeo title={`@${userData?.username}`} />
+      <NextSeo title={`@${formattedUsername}`} />
       {isMobile ? (
         <AccountHeaderMobile {...accountHeaderProps} />
       ) : (
