@@ -11,12 +11,12 @@ export const useTheme = () => {
     document.documentElement.className = isDark ? 'dark' : '';
   }, [isDark]);
 
-  const changeTheme = () => {
-    setIsDark(!isDark);
+  const toggleTheme = () => {
+    setIsDark((isThemeDark) => !isThemeDark);
   };
 
   return {
     isDark,
-    changeTheme,
+    toggleTheme,
   };
 };

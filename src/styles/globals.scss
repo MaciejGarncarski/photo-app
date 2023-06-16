@@ -5,7 +5,7 @@
   @extend %variables;
 }
 
-:root[class='dark'] {
+.dark {
   color-scheme: dark;
   @extend %variablesDarkTheme;
 }
@@ -21,7 +21,6 @@
   margin: 0;
 }
 
-html,
 body {
   color: var(--text-black);
   background-color: var(--bg-primary);

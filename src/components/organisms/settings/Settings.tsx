@@ -17,7 +17,7 @@ type PropsTypes = {
 
 export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
   const queryClient = useQueryClient();
-  const { isDark, changeTheme } = useTheme();
+  const { isDark, toggleTheme } = useTheme();
   const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
 
@@ -54,7 +54,7 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
         )}
         <ListModalItem
           type="button"
-          onClick={changeTheme}
+          onClick={toggleTheme}
           isLast={!isSignedIn}
           icon={<ThemeButton />}
         >
