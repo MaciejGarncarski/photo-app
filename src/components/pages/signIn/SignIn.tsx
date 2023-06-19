@@ -1,5 +1,3 @@
-import { APP_NAME } from '@/src/utils/next-seo.config';
-
 import { Heading } from '@/src/components/atoms/heading/Heading';
 
 import { OtherSignInOptions } from '@/src/components/molecules/otherSignInOptions/OtherSignInOptions';
@@ -13,7 +11,7 @@ export const SignIn = () => {
   return (
     <section className={styles.container}>
       <Heading tag="h2" size="big" {...animation}>
-        Sign in to {APP_NAME}
+        Sign in or sign up
       </Heading>
       <div className={styles.formContainer}>
         <SignInForm />
