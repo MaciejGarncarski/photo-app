@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 
 import { socket } from '@/src/utils/socket';
 
-import { newPostsAtom } from '@/src/components/pages/home/Home';
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
+import { newPostsAtom } from '@/src/components/pages/home/home';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
 
 export const useNewPost = () => {
   const [hasNewPosts, setHasNewPosts] = useAtom(newPostsAtom);

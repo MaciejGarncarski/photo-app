@@ -2,17 +2,15 @@ import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { PreviewImages } from '@/src/utils/getPreviewImages';
-
-import { Heading } from '@/src/components/atoms/heading/Heading';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { PreviewImages } from '@/src/utils/get-preview-images';
 
 import {
   containerVariants,
   itemVariants,
-} from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
+} from '@/src/components/images-preview/images-preview.animation';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import styles from './ImagesPreview.module.scss';
+import styles from './images-preview.module.scss';
 
 const MAX_IMAGES_LENGTH = 3;
 
@@ -59,7 +57,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
                 className={styles.deleteIcon}
               >
                 <IconTrash />
-                <VisuallyHidden>remove image</VisuallyHidden>
+                <span className="visually-hidden">remove image</span>
               </motion.button>
               <Image
                 className={styles.imgPreview}

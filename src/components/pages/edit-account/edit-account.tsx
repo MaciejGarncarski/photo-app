@@ -1,31 +1,14 @@
 import { AnimatePresence } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 
-import { SelectOptionStage } from '@/src/components/organisms/editAccountStages/optionsStage/SelectOptionStage';
+import { DetailsStage } from '@/src/components/edit-account-stages/details-stage/details-stage';
+import { SelectOptionStage } from '@/src/components/edit-account-stages/options-stage/options-stage';
+import { UpdateAvatarStage } from '@/src/components/edit-account-stages/update-avatar-stage/update-avatar-stage';
 
-import styles from './EditAccount.module.scss';
-
-const NewAvatarStageLazy = dynamic(
-  async () => {
-    return import(
-      '@/src/components/organisms/editAccountStages/newAvatarStage/NewAvatarStage'
-    ).then(({ NewAvatarStage }) => NewAvatarStage);
-  },
-  { ssr: false },
-);
-
-const LazyDetailsStage = dynamic(
-  async () => {
-    return import(
-      '@/src/components/organisms/editAccountStages/detailsStage/DetailsStage'
-    ).then(({ DetailsStage }) => DetailsStage);
-  },
-  { ssr: false },
-);
+import styles from './edit-account.module.scss';
 
 export type Stages = 'selectImage' | 'cropImage' | 'personalInfo';
 
@@ -52,7 +35,7 @@ export const EditAccount = () => {
           />
         )}
         {stage === 'cropImage' && (
-          <NewAvatarStageLazy
+          <UpdateAvatarStage
             key="cropImageStage"
             stagePersonalInfo={stagePersonalInfo}
             stageSelectImage={stageSelectImage}
@@ -60,7 +43,7 @@ export const EditAccount = () => {
         )}
 
         {stage === 'personalInfo' && (
-          <LazyDetailsStage
+          <DetailsStage
             key="detailsStage"
             stageSelectImage={stageSelectImage}
             userId={userId}

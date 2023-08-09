@@ -1,5 +1,5 @@
-import { ChatRoom } from '@/src/components/pages/chatRoom/ChatRoom';
-import { ProtectedPage } from '@/src/components/pages/protected-page/ProtectedPage';
+import { ChatRoom } from '@/src/components/pages/chat-room/chat-room';
+import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 
 const ChatRoomPage = () => {
   return (

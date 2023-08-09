@@ -11,7 +11,7 @@ type ArgsTypes = {
 
 const CHANGE_IMG_OFFSET = 40;
 
-export const useSlider = ({
+export const useCarousel = ({
   currentIndex,
   postImages,
   handlePrevImage,

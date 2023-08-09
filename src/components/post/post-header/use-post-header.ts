@@ -1,11 +1,11 @@
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
-import { formatDate } from '@/src/utils/formatDate';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useModal } from '@/src/hooks/use-modal';
+import { useUser } from '@/src/hooks/use-user';
+import { formatDate } from '@/src/utils/format-date';
 
-import { useDeletePost } from '@/src/components/organisms/post/postOptions/useDeletePost';
+import { useDeletePost } from '@/src/components/post/post-options/use-delete-post';
 
 type Arguments = {
   authorId: string;

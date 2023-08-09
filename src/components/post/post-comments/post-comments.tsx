@@ -1,9 +1,9 @@
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { Comment } from '@/src/components/organisms/comment/Comment';
-import { useInfiniteComments } from '@/src/components/organisms/postComments/useInfiniteComments';
+import { Comment } from '@/src/components/comment/comment';
+import { useInfiniteComments } from '@/src/components/post/post-comments/use-post-comments';
 
-import styles from './PostComments.module.scss';
+import styles from './post-comments.module.scss';
 
 type PropsTypes = {
   postId: number;

@@ -2,24 +2,20 @@ import { IconHandFinger, IconMouse } from '@tabler/icons-react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
-import { useIsMobile } from '@/src/hooks/useIsMobile';
-import { useModal } from '@/src/hooks/useModal';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Heading } from '@/src/components/atoms/heading/Heading';
+import { AspectRatioButtons } from '@/src/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons';
+import { Button } from '@/src/components/buttons/button/button';
+import { useCropImage } from '@/src/components/crop-image/use-crop-image';
+import { useSaveCrop } from '@/src/components/crop-image/use-save-crop';
+import { DropZone } from '@/src/components/drop-zone/drop-zone';
+import { Loader } from '@/src/components/loader/loader';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { FinalImages } from '@/src/components/pages/create-post/types';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { AspectRatioButtons } from '@/src/components/molecules/aspectRatioButtons/AspectRatioButtons';
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { useCropImage } from '@/src/components/organisms/cropImage/useCropImage';
-import { useSaveCrop } from '@/src/components/organisms/cropImage/useSaveCrop';
-import { DropZone } from '@/src/components/organisms/dropZone/DropZone';
-
-import { FinalImages } from '@/src/components/pages/createPost/types';
-
-import styles from './CropImage.module.scss';
-
-import { ConfirmationAlert } from '../confirmationAlert/ConfirmationAlert';
+import styles from './crop-image.module.scss';
 
 type Props = {
   setFinalImages: (final: FinalImages) => void;

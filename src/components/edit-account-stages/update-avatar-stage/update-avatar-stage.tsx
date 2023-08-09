@@ -2,25 +2,22 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { getPreviewImages } from '@/src/utils/getPreviewImages';
+import { getPreviewImages } from '@/src/utils/get-preview-images';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Button } from '@/src/components/buttons/button/button';
+import { CropImage } from '@/src/components/crop-image/crop-image';
+import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
+import { useUploadAvatar } from '@/src/components/edit-account-stages/update-avatar-stage/use-upload-avatar';
+import { FinalImages } from '@/src/components/pages/create-post/types';
 
-import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
-import { useUploadAvatar } from '@/src/components/organisms/editAccountStages/newAvatarStage/useUploadAvatar';
-import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
-import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
-
-import { FinalImages } from '@/src/components/pages/createPost/types';
-
-import styles from '../Stages.module.scss';
+import styles from '../stages.module.scss';
 
 type PropsTypes = {
   stageSelectImage: () => void;
   stagePersonalInfo: () => void;
 };
 
-export const NewAvatarStage = ({
+export const UpdateAvatarStage = ({
   stagePersonalInfo,
   stageSelectImage,
 }: PropsTypes) => {
@@ -34,10 +31,11 @@ export const NewAvatarStage = ({
   const { previewImages } = getPreviewImages(finalImages);
 
   if (isLoading) {
-    return <TextWithLoader text="Uploading new avatar" />;
+    return null;
+    // return <TextWithLoader text="Uploading new avatar" />;
   }
 
-  const previewImage = previewImages[0];
+  const [previewImage] = previewImages;
   const isNewAvatarReady = previewImage?.src;
 
   return (

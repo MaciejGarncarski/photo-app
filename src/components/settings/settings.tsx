@@ -1,14 +1,14 @@
 import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useTheme } from 'next-themes';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { signOut } from '@/src/utils/signOut';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useModal } from '@/src/hooks/use-modal';
+import { signOut } from '@/src/utils/sign-out';
 
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { ListModal } from '@/src/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
-import { useTheme } from '@/src/components/organisms/settings/useTheme';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ListModal } from '@/src/components/modals/list-modal/list-modal';
+import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
 
 type PropsTypes = {
   closeModal: () => void;
@@ -17,7 +17,8 @@ type PropsTypes = {
 
 export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
   const queryClient = useQueryClient();
-  const { isDark, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
   const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
 
@@ -54,7 +55,7 @@ export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
         )}
         <ListModalItem
           type="button"
-          onClick={toggleTheme}
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           isLast={!isSignedIn}
           icon={<ThemeButton />}
         >

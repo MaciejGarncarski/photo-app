@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 
-import { useIsMobile } from '@/src/hooks/useIsMobile';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
 
-import { navbarVariants } from '@/src/components/organisms/navbar/Navbar.animation';
-import { NavButtons } from '@/src/components/organisms/navButtons/NavButtons';
+import { navbarVariants } from '@/src/components/navbar/navbar.animation';
+import { NavButtons } from '@/src/components/navbar/navbar-buttons/navbar-buttons';
 
-import styles from './Navbar.module.scss';
+import styles from './navbar.module.scss';
 
 export const Navbar = () => {
   const { isMobile } = useIsMobile();

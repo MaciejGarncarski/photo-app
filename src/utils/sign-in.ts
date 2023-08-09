@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
-import { apiClient } from '@/src/utils/apiClient';
+import { apiClient } from '@/src/utils/api-client';
 
 export const SignInSchema = z.object({
   email: z.string().email({ message: 'Invalid email.' }),

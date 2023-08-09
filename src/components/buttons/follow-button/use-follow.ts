@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { useUser } from '@/src/hooks/useUser';
+import { useUser } from '@/src/hooks/use-user';
 
 import { followOtherUser } from '@/src/services/user.service';
 

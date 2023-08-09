@@ -1,11 +1,9 @@
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch, IconX } from '@tabler/icons-react';
 import { ChangeEvent, FormEvent } from 'react';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Button } from '@/src/components/buttons/button/button';
 
-import styles from './SearchUserForm.module.scss';
+import styles from './search-user-form.module.scss';
 
 type PropsTypes = {
   resetState: () => void;
@@ -35,7 +33,7 @@ export const SearchUserForm = ({
       />
       <Button type="submit" variant="primary" disabled={inputValue === ''}>
         <IconSearch />
-        <VisuallyHidden>Search user</VisuallyHidden>
+        <span className="visually-hidden">Search user</span>
       </Button>
       <Button
         type="reset"
@@ -43,8 +41,8 @@ export const SearchUserForm = ({
         onClick={resetState}
         disabled={inputValue === ''}
       >
-        <IconXWrapper />
-        <VisuallyHidden>Reset input</VisuallyHidden>
+        <IconX />
+        <span className="visually-hidden">reset</span>
       </Button>
     </form>
   );

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { MouseEventHandler, ReactNode } from 'react';
 
-import styles from './Button.module.scss';
+import styles from './button.module.scss';
 
 type ButtonTypes = 'button' | 'submit' | 'reset';
 type Variants = 'secondary' | 'primary';

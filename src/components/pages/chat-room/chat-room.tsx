@@ -2,18 +2,13 @@ import { IconArrowLeft, IconSend } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { ChatMessage } from '@/src/components/atoms/chatMessage/ChatMessage';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { Avatar } from '@/src/components/avatar/avatar';
+import { Button } from '@/src/components/buttons/button/button';
+import { ChatMessage } from '@/src/components/chat-message/chat-message';
+import { Loader } from '@/src/components/loader/loader';
+import { useChatRoom } from '@/src/components/pages/chat-room/use-chat-room';
 
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
-
-import { useChatRoom } from '@/src/components/pages/chatRoom/useChatRoom';
-
-import styles from './ChatRoom.module.scss';
+import styles from './chat-room.module.scss';
 
 export const ChatRoom = () => {
   const router = useRouter();
@@ -32,7 +27,8 @@ export const ChatRoom = () => {
   } = useChatRoom();
 
   if (isLoading || isUserLoading || !data) {
-    return <TextWithLoader text="Connecting to chat" />;
+    return null;
+    // todo
   }
 
   const goBack = () => router.push('/chat');
@@ -87,7 +83,7 @@ export const ChatRoom = () => {
             disabled={inputVal.trim() === ''}
           >
             <IconSend />
-            <VisuallyHidden>Send message</VisuallyHidden>
+            <span className="visually-hidden">send</span>
           </button>
         </form>
       </div>

@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { clientEnv } from '@/src/utils/env';
 import { signInCredentials } from '@/src/utils/sign-in';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Button } from '@/src/components/buttons/button/button';
 
-import styles from './OtherSignInOptions.module.scss';
+import styles from './other-sign-in-options.module.scss';
 
 export const OtherSignInOptions = () => {
   const queryClient = useQueryClient();

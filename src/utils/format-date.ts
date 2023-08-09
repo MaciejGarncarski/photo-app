@@ -4,7 +4,7 @@ import {
   HOUR,
   MONTH,
   WEEK,
-} from '@/src/utils/getCountFromDate';
+} from '@/src/utils/get-count-from-date';
 
 type FormatData = Array<{
   condition: boolean;

@@ -1,6 +1,6 @@
-import { useModal } from '@/src/hooks/useModal';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { useDeleteAvatar } from '@/src/components/pages/edit-account/useDeleteAvatar';
+import { useDeleteAvatar } from '@/src/components/pages/edit-account/use-delete-avatar';
 
 export const useOptionsStage = () => {
   const { openModal, closeModal, isModalOpen } = useModal();

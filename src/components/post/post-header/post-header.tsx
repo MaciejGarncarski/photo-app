@@ -1,20 +1,15 @@
-import { IconMenu2 } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 
-import { PostHeaderPlaceholder } from '@/src/components/atoms/postHeaderPlaceholder/PostHeaderPlaceholder';
-import { Tooltip } from '@/src/components/atoms/tooltip/Tooltip';
+import { Avatar } from '@/src/components/avatar/avatar';
+import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { usePostHeader } from '@/src/components/post/post-header/use-post-header';
+import { PostHeaderPlaceholder } from '@/src/components/post/post-header-placeholder/post-header-placeholder';
+import { PostOptions } from '@/src/components/post/post-options/post-options';
 
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
-
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { usePostHeader } from '@/src/components/organisms/post/postHeader/usePostHeader';
-
-import styles from './PostHeader.module.scss';
-
-import { PostOptions } from '../post-options/post-options';
+import styles from './post-header.module.scss';
 
 type PropsTypes = {
   tag?: 'header' | 'div';
@@ -62,17 +57,6 @@ export const PostHeader = ({
       {isSignedIn && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton userId={authorId} />}
-          {isAuthor && (
-            <Tooltip variant="right" content="Post options">
-              <button
-                type="button"
-                className={styles.optionsButton}
-                onClick={menuModal.openModal}
-              >
-                <IconMenu2 />
-              </button>
-            </Tooltip>
-          )}
         </div>
       )}
 

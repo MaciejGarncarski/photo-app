@@ -1,6 +1,6 @@
-import { apiClient } from '@/src/utils/apiClient';
+import { apiClient } from '@/src/utils/api-client';
 
-import { EditAccountInput } from '@/src/consts/schemas';
+import { EditAccountInput } from '@/src/schemas/edit.schema';
 import { FollowersResponse } from '@/src/schemas/follower-stats';
 import { User, userApiResponseSchema } from '@/src/schemas/user.schema';
 

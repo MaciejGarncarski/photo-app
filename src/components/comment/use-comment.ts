@@ -1,10 +1,9 @@
-import { useAuth } from '@/src/hooks/useAuth';
-import { useUser } from '@/src/hooks/useUser';
-import { formatDate } from '@/src/utils/formatDate';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useUser } from '@/src/hooks/use-user';
+import { formatDate } from '@/src/utils/format-date';
 
-import { useCommentLike } from '@/src/components/organisms/comment/useCommentLike';
-import { useDeleteComment } from '@/src/components/organisms/comment/useDeleteComment';
-
+import { useDeleteComment } from '@/src/components/comment/use-delete-comment';
+import { useCommentLike } from '@/src/components/comment/use-like';
 import { Comment } from '@/src/schemas/post-comment';
 
 type Arguments = {

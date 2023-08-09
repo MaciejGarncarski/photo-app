@@ -1,10 +1,9 @@
-import { PostFooter } from '@/src/components/organisms/post/postFooter/PostFooter';
-import { PostHeader } from '@/src/components/organisms/post/postHeader/PostHeader';
-import { PostSlider } from '@/src/components/organisms/post/postSlider/PostSlider';
-
+import { PostFooter } from '@/src/components/post/post-footer/post-footer';
+import { PostHeader } from '@/src/components/post/post-header/post-header';
+import { PostImagesCarousel } from '@/src/components/post/post-images-carousel/post-images-carousel';
 import { Post } from '@/src/schemas/post.schema';
 
-import styles from './HomePost.module.scss';
+import styles from './home-post.module.scss';
 
 type PropsTypes = {
   post: Post;
@@ -22,7 +21,7 @@ export const HomePost = ({ post, priority }: PropsTypes) => {
           createdAt={createdAt.toString()}
           postId={id}
         />
-        <PostSlider post={post} priority={priority} />
+        <PostImagesCarousel post={post} priority={priority} />
         <PostFooter post={post} />
       </article>
     </li>

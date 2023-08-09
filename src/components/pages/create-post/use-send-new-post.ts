@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { apiClient } from '@/src/utils/apiClient';
+import { useAuth } from '@/src/hooks/use-auth';
+import { apiClient } from '@/src/utils/api-client';
 import { socket } from '@/src/utils/socket';
 
 import { CreatePostInput } from '@/src/schemas/post.schema';

@@ -5,7 +5,7 @@ import ReactFocusLock from 'react-focus-lock';
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
 
-import styles from './ListModal.module.scss';
+import styles from './list-modal.module.scss';
 
 import { listModalVariants } from './list-modal.animation';
 

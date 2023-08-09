@@ -2,25 +2,22 @@ import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { HeartAnimation } from '@/src/components/atoms/heartAnimation/HeartAnimation';
-
-import { PostArrows } from '@/src/components/molecules/postArrows/PostArrows';
-
-import { useHandleLike } from '@/src/components/organisms/post/postButtons/useHandleLike';
-import { PostImage } from '@/src/components/organisms/post/postImage/PostImage';
-import { useSlider } from '@/src/components/organisms/post/postSlider/useSlider';
-import { useUpdateWidth } from '@/src/components/organisms/post/postSlider/useUpdateWidth';
-
+import { HeartAnimation } from '@/src/components/heart-animation/heart-animation';
+import { PostArrows } from '@/src/components/post/post-arrows/post-arrows';
+import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
+import { PostImage } from '@/src/components/post/post-image/post-image';
+import { useCarousel } from '@/src/components/post/post-images-carousel/use-carousel';
+import { useUpdateWidth } from '@/src/components/post/post-images-carousel/use-update-width';
 import { Post } from '@/src/schemas/post.schema';
 
-import styles from './PostSlider.module.scss';
+import styles from './post-images-carousel.module.scss';
 
 type PropsTypes = {
   post: Post;
   priority: boolean;
 };
 
-export const PostSlider = ({ post, priority }: PropsTypes) => {
+export const PostImagesCarousel = ({ post, priority }: PropsTypes) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
     post,
@@ -38,7 +35,7 @@ export const PostSlider = ({ post, priority }: PropsTypes) => {
     setCurrentIndex((prevImage) => prevImage + 1);
   };
 
-  const { handleDragEnd, nextImage, prevImage } = useSlider({
+  const { handleDragEnd, nextImage, prevImage } = useCarousel({
     currentIndex,
     postImages,
     handleNextImage,

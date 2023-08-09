@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-
 import { PostImage } from '@/src/services/userPosts.service';
 
-import styles from './PostSlider.module.scss';
+import styles from './post-images-carousel.module.scss';
 
 type PropsTypes = {
   currentIndex: number;
@@ -24,9 +22,7 @@ export const PostSliderProgress = ({ currentIndex, images }: PropsTypes) => {
             key={image.id}
             className={styles.progressDot}
             animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.45 }}
-          >
-            <VisuallyHidden>image {idx}</VisuallyHidden>
-          </motion.li>
+          ></motion.li>
         );
       })}
     </ul>

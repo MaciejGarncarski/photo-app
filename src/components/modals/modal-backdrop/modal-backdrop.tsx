@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import { backdropVariants } from '@/src/components/atoms/modalBackdrop/ModalBackdrop.animation';
+import { backdropVariants } from '@/src/components/modals/modal-backdrop/modal-backdrop.animation';
 
-import styles from './ModalBackdrop.module.scss';
+import styles from './modal-backdrop.module.scss';
 
 type PropsTypes = {
   closeModal: () => void;

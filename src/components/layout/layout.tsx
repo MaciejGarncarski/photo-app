@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { Header } from '@/src/components/organisms/header/Header';
+import { Header } from '@/src/components/header/header';
 
-import styles from './Layout.module.scss';
+import styles from './layout.module.scss';
 
 type PropsTypes = {
   children: ReactNode;

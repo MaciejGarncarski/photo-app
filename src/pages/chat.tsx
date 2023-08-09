@@ -1,5 +1,5 @@
-import { Chat } from '@/src/components/pages/chat/Chat';
-import { ProtectedPage } from '@/src/components/pages/protected-page/ProtectedPage';
+import { Chat } from '@/src/components/pages/chat/chat';
+import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 
 const ChatPage = () => {
   return (

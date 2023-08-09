@@ -9,12 +9,11 @@ import {
   SignInSchema,
 } from '@/src/utils/sign-in';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Input } from '@/src/components/atoms/input/Input';
+import { Button } from '@/src/components/buttons/button/button';
+import { Input } from '@/src/components/input/input';
+import { animation } from '@/src/components/pages/sign-in/sign-in.animation';
 
-import { animation } from '@/src/components/pages/signIn/SignIn.animation';
-
-import styles from './SignInForm.module.scss';
+import styles from './sign-in-form.module.scss';
 
 export const SignInForm = () => {
   const queryClient = useQueryClient();

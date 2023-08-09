@@ -1,13 +1,12 @@
 import Link from 'next/link';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
-
+import { Avatar } from '@/src/components/avatar/avatar';
+import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
 import { User } from '@/src/schemas/user.schema';
 
-import styles from './StatsModalItem.module.scss';
+import styles from './stats-modal-item.module.scss';
 
 type Props = {
   user: User;

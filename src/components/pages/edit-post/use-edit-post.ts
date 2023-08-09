@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
-import { apiClient } from '@/src/utils/apiClient';
+import { apiClient } from '@/src/utils/api-client';
 
 type Mutation = {
   description: string;

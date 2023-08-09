@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 
-import { convertToBlob } from '@/src/utils/convertToBlob';
+import { convertToBlob } from '@/src/utils/convert-to-blob';
 
-import { FinalImages } from '@/src/components/pages/createPost/types';
+import { FinalImages } from '@/src/components/pages/create-post/types';
 
 type Arguments = {
   resetImgSrc: () => void;

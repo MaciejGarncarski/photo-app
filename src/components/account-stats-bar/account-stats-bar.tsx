@@ -1,16 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { useListData } from '@/src/components/organisms/accountStats/useListData';
-import { StatsModal } from '@/src/components/organisms/statsModal/StatsModal';
+import { useUserStats } from '@/src/components/account-stats-bar/use-user-stats';
+import { StatsModal } from '@/src/components/modals/stats-modal/stats-modal';
 
-import styles from './AccountStats.module.scss';
+import styles from './account-stats-bar.module.scss';
 
 type PropsTypes = {
   userId: string;
 };
 
 export const AccountStats = ({ userId }: PropsTypes) => {
-  const { followersModal, friendsModal, listData } = useListData({ userId });
+  const { followersModal, friendsModal, listData } = useUserStats({ userId });
 
   return (
     <>

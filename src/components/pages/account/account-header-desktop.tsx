@@ -1,19 +1,16 @@
+import { IconSettings } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useUser } from '@/src/hooks/useUser';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useUser } from '@/src/hooks/use-user';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { IconSettingsWrapper } from '@/src/components/atoms/icons/IconSettingsWrapper';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { AccountStats } from '@/src/components/account-stats-bar/account-stats-bar';
+import { Avatar } from '@/src/components/avatar/avatar';
+import { Button } from '@/src/components/buttons/button/button';
+import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
+import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-import { FollowButton } from '@/src/components/molecules/followButton/FollowButton';
-import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
-
-import { AccountStats } from '@/src/components/organisms/accountStats/AccountStats';
-
-import styles from './Account.module.scss';
+import styles from './account.module.scss';
 
 type PropsTypes = {
   userId: string;
@@ -49,11 +46,11 @@ export const AccountHeaderDesktop = ({
         {!isOwner && isSignedIn && <FollowButton userId={userId} />}
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
-            <IconSettingsWrapper size="sm" />
+            <IconSettings />
             <span className={styles.menuButtonText}>settings</span>
-            <VisuallyHidden>
+            <span className="visually-hidden">
               {isModalOpen ? 'Close menu' : 'Open menu'}
-            </VisuallyHidden>
+            </span>
           </Button>
         )}
       </motion.div>

@@ -2,14 +2,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
+import { useModal } from '@/src/hooks/use-modal';
+import { useUser } from '@/src/hooks/use-user';
 
 import {
   AccountDetails,
   AccountDetailsSchema,
-} from '@/src/components/organisms/editAccountStages/accountDetailtsValidation';
-import { useEditDetails } from '@/src/components/organisms/editAccountStages/detailsStage/useEditDetails';
+} from '@/src/components/edit-account-stages/account-details-validation';
+import { useEditDetails } from '@/src/components/edit-account-stages/details-stage/use-edit-details';
 
 type Arguments = {
   userId: string;

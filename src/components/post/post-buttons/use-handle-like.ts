@@ -2,15 +2,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 import {
   InfinitePostsQuery,
   updatePostQuery,
-} from '@/src/utils/updatePostQuery';
+} from '@/src/utils/update-posts-query';
 
-import { usePostLike } from '@/src/components/organisms/post/postButtons/usePostLike';
-
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
+import { usePostLike } from '@/src/components/post/post-buttons/use-post-like';
 import { Post } from '@/src/schemas/post.schema';
 
 const TIMEOUT = 1000;
@@ -23,9 +22,9 @@ export const useHandleLike = ({ post }: PropsTypes) => {
   const [isLikeAnimationShown, setIsLikeAnimationShown] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { isSignedIn } = useAuth();
-  const { isLiked, id: postId } = post;
   const postLikeMutation = usePostLike();
   const queryClient = useQueryClient();
+  const { isLiked, id: postId } = post;
 
   const handleLike = () => {
     if (!isSignedIn) {

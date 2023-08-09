@@ -1,17 +1,14 @@
 import { motion } from 'framer-motion';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Button } from '@/src/components/buttons/button/button';
+import { EditAccountHeading } from '@/src/components/edit-account-heading/edit-account-heading';
+import { useOptionsStage } from '@/src/components/edit-account-stages/options-stage/use-options-stage';
+import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 
-import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
-
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { useOptionsStage } from '@/src/components/organisms/editAccountStages/optionsStage/useOptionsStage';
-import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
-import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
-
-import styles from '../Stages.module.scss';
+import styles from '../stages.module.scss';
 
 type PropsTypes = {
   stageSelectImage: () => void;
@@ -30,7 +27,9 @@ export const SelectOptionStage = ({
     useOptionsStage();
 
   if (isLoading) {
-    return <TextWithLoader text="Removing your avatar.." />;
+    return null;
+    // todo
+    // return <TextWithLoader text="Removing your avatar.." />;
   }
 
   return (

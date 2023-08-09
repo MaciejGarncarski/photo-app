@@ -1,8 +1,8 @@
 import { InfiniteData, QueryClient } from '@tanstack/react-query';
 
-import { updateInfinitePostsLike } from '@/src/utils/updateInfinitePostsLike';
+import { updateInfinitePostsLike } from '@/src/utils/update-infinite-posts-like';
 
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
 import { Post, PostsResponse } from '@/src/schemas/post.schema';
 
 export type InfinitePostsQuery = InfiniteData<PostsResponse>;

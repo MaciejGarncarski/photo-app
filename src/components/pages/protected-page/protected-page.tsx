@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 
-import { Loader } from '@/src/components/molecules/loader/Loader';
+import { Loader } from '@/src/components/loader/loader';
 
 type Props = {
   children: ReactElement;

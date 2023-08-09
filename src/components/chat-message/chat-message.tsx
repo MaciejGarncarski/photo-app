@@ -1,14 +1,10 @@
 import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { useChatMessage } from '@/src/components/atoms/chatMessage/useChatMessage';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-
-import { ListModal } from '@/src/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
-
+import { Avatar } from '@/src/components/avatar/avatar';
+import { useChatMessage } from '@/src/components/chat-message/use-message';
+import { ListModal } from '@/src/components/modals/list-modal/list-modal';
+import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
 import { ChatMessage as TChatMessage } from '@/src/schemas/chat';
 
 import styles from './ChatMessage.module.scss';
@@ -39,7 +35,8 @@ export const ChatMessage = ({ message }: PropsTypes) => {
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
       {!isReceiver && (
         <button type="button" onClick={openModal} className={styles.options}>
-          <IconDotsVertical /> <VisuallyHidden>Options</VisuallyHidden>
+          <IconDotsVertical />
+          <span className="visually-hidden">options</span>
         </button>
       )}
       <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>

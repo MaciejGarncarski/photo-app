@@ -1,14 +1,12 @@
 import { motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
+import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
+import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
+import { StatsModalItem } from '@/src/components/modals/stats-modal/stats-modal-item/stats-modal-item';
+import { useStatsModal } from '@/src/components/modals/stats-modal/use-stats-modal';
 
-import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
-
-import { useStatsModal } from '@/src/components/organisms/statsModal/useStatsModal';
-import { StatsModalItem } from '@/src/components/organisms/statsModalItem/StatsModalItem';
-
-import styles from './StatsModal.module.scss';
+import styles from './stats-modal.module.scss';
 
 type PropsTypes = {
   userId: string;

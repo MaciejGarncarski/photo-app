@@ -1,9 +1,9 @@
 import { IconHeart } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { heartVariants } from '@/src/components/atoms/heartAnimation/HeartAnimation.animation';
+import { heartVariants } from '@/src/components/heart-animation/heart-animation.animation';
 
-import styles from './HeartAnimation.module.scss';
+import styles from './heart-animation.module.scss';
 
 type Props = {
   isVisible: boolean;

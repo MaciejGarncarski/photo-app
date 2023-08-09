@@ -3,22 +3,18 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useModal } from '@/src/hooks/useModal';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Heading } from '@/src/components/atoms/heading/Heading';
-import { TextArea } from '@/src/components/atoms/textArea/TextArea';
+import { Button } from '@/src/components/buttons/button/button';
+import { Loader } from '@/src/components/loader/loader';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { usePost } from '@/src/components/pages/account/use-post';
+import { PostDetailsSchema } from '@/src/components/pages/create-post/create-post';
+import { useEditPost } from '@/src/components/pages/edit-post/use-edit-post';
+import { TextArea } from '@/src/components/textarea/text-area';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-
-import { PostDetailsSchema } from '@/src/components/pages/createPost/CreatePost';
-import { useEditPost } from '@/src/components/pages/editPost/useEditPost';
-
-import styles from './EditPost.module.scss';
-
-import { usePost } from '../account/use-post';
+import styles from './edit-post.module.scss';
 
 export const EditPost = () => {
   const router = useRouter();

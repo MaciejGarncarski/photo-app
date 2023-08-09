@@ -2,12 +2,11 @@ import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
+import { Button } from '@/src/components/buttons/button/button';
+import { alertVariants } from '@/src/components/modals/confirmation-alert/confirmation-alert.animation';
+import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
 
-import { alertVariants } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert.animation';
-
-import styles from './ConfirmationAlert.module.scss';
+import styles from './confirmation-alert.module.scss';
 
 type PropsTypes = {
   onConfirm: () => void;

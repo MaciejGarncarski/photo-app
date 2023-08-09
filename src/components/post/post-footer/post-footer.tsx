@@ -1,13 +1,12 @@
-import { useAuth } from '@/src/hooks/useAuth';
-import { useUser } from '@/src/hooks/useUser';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useUser } from '@/src/hooks/use-user';
 
-import { CommentForm } from '@/src/components/organisms/post/commentForm/CommentForm';
-import { PostButtons } from '@/src/components/organisms/post/postButtons/PostButtons';
-import { usePostFooter } from '@/src/components/organisms/post/postFooter/usePostFooter';
-
+import { CommentForm } from '@/src/components/forms/comment-form/comment-form';
+import { PostButtons } from '@/src/components/post/post-buttons/post-buttons';
+import { usePostFooter } from '@/src/components/post/post-footer/use-post-footer';
 import { Post } from '@/src/schemas/post.schema';
 
-import styles from './PostFooter.module.scss';
+import styles from './post-footer.module.scss';
 
 type PropsTypes = {
   post: Post;

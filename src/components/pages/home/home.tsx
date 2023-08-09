@@ -2,17 +2,14 @@ import { motion } from 'framer-motion';
 import { atom } from 'jotai';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { NewPostNotification } from '@/src/components/atoms/newPostNotification/NewPostNotification';
-import { PostPlaceholder } from '@/src/components/atoms/postPlaceholder/PostPlaceholder';
+import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
+import { HomePost } from '@/src/components/home-post/home-post';
+import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
+import { NewPostNotification } from '@/src/components/new-post-notification/new-post-notification';
+import { useInfinitePosts } from '@/src/components/pages/home/use-posts';
+import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
 
-import { FetchError } from '@/src/components/molecules/fetchError/FetchError';
-import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
-
-import { HomePost } from '@/src/components/organisms/homePost/HomePost';
-
-import { useInfinitePosts } from '@/src/components/pages/home/useInfinitePosts';
-
-import styles from './Home.module.scss';
+import styles from './home.module.scss';
 
 export const newPostsAtom = atom(false);
 
@@ -29,7 +26,7 @@ export const Home = () => {
   });
 
   if (isError) {
-    return <FetchError message="Cannot fetch data." />;
+    return <FetchErrorMessage message="Cannot fetch data." />;
   }
 
   return (

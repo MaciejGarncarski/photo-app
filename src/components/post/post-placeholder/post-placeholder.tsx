@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { PostHeaderPlaceholder } from '@/src/components/atoms/postHeaderPlaceholder/PostHeaderPlaceholder';
+import { PostHeaderPlaceholder } from '@/src/components/post/post-header-placeholder/post-header-placeholder';
 
-import styles from './PostPlaceholder.module.scss';
+import styles from './post-placeholder.module.scss';
 
 export const PostPlaceholder = () => {
   return (

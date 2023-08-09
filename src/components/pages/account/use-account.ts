@@ -1,6 +1,6 @@
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { useUserByUsername } from '@/src/hooks/useUserByUsername';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useModal } from '@/src/hooks/use-modal';
+import { useUserByUsername } from '@/src/hooks/use-user-by-username';
 
 type Arguments = {
   username: string;

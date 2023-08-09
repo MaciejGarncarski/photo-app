@@ -1,5 +1,5 @@
-import { EditAccount } from '@/src/components/pages/editAccount/EditAccount';
-import { ProtectedPage } from '@/src/components/pages/protected-page/ProtectedPage';
+import { EditAccount } from '@/src/components/pages/edit-account/edit-account';
+import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 
 const EditAccountPage = () => {
   return (

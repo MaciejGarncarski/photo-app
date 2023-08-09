@@ -1,8 +1,8 @@
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
-import { formatDate } from '@/src/utils/formatDate';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useModal } from '@/src/hooks/use-modal';
+import { formatDate } from '@/src/utils/format-date';
 
-import { useDeleteChatMessage } from '@/src/components/atoms/chatMessage/useDeleteChatMessage';
+import { useDeleteChatMessage } from '@/src/components/chat-message/use-delete-message';
 
 type PropsTypes = {
   receiverId: string;

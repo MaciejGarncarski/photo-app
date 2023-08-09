@@ -1,4 +1,4 @@
-import { FinalImages } from '../components/pages/createPost/types';
+import { FinalImages } from '@/src/components/pages/create-post/types';
 
 export type PreviewImages = Array<
   | {

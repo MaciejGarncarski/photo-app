@@ -1,8 +1,8 @@
 import { IconCheck, IconCopy } from '@tabler/icons-react';
 
-import { ListModal } from '@/src/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
-import { useShareModal } from '@/src/components/organisms/shareModal/useShareModal';
+import { ListModal } from '@/src/components/modals/list-modal/list-modal';
+import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { useShareModal } from '@/src/components/modals/share-modal/use-share-modal';
 
 type PropsTypes = {
   closeModal: () => void;

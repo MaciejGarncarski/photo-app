@@ -1,15 +1,14 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { useUser } from '@/src/hooks/useUser';
-import { getDescriptionData } from '@/src/utils/getDescriptionData';
+import { useUser } from '@/src/hooks/use-user';
+import { getDescriptionData } from '@/src/utils/get-description-data';
 
-import { MotionImage } from '@/src/components/molecules/avatar/Avatar';
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
+import { MotionImage } from '@/src/components/avatar/avatar';
+import { Loader } from '@/src/components/loader/loader';
 import { Post } from '@/src/schemas/post.schema';
 
-import styles from './PostImage.module.scss';
+import styles from './post-image.module.scss';
 
 type PropsTypes = {
   width: number;

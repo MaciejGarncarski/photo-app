@@ -1,17 +1,16 @@
 import { IconDotsVertical } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useIsMobile } from '@/src/hooks/useIsMobile';
-import { useModal } from '@/src/hooks/useModal';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
+import { Avatar } from '@/src/components/avatar/avatar';
+import { Navbar } from '@/src/components/navbar/navbar';
+import { NavbarForDesktop } from '@/src/components/navbar/navbar-desktop';
+import { Settings } from '@/src/components/settings/settings';
 
-import { Navbar } from '@/src/components/organisms/navbar/Navbar';
-import { NavbarForDesktop } from '@/src/components/organisms/navbar/NavbarForDesktop';
-import { Settings } from '@/src/components/organisms/settings/Settings';
-
-import styles from './Header.module.scss';
+import styles from './header.module.scss';
 
 export const Header = () => {
   const { isMobile } = useIsMobile();

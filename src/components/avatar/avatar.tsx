@@ -3,11 +3,9 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { useUser } from '@/src/hooks/useUser';
+import { useUser } from '@/src/hooks/use-user';
 
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-
-import styles from './Avatar.module.scss';
+import styles from './avatar.module.scss';
 
 type Size = 'small' | 'medium' | 'big';
 
@@ -34,7 +32,7 @@ export const Avatar = ({ userId, size }: PropsTypes) => {
       <figure className={clsx(styles[size], styles.avatar)}>
         <div className={styles.noImage}>
           <IconUser />
-          <VisuallyHidden>Loading avatar</VisuallyHidden>
+          <span className="visually-hidden">Loading avatar</span>
         </div>
       </figure>
     );
@@ -51,7 +49,7 @@ export const Avatar = ({ userId, size }: PropsTypes) => {
       {hasNoImage && (
         <div className={styles.noImage}>
           <IconUser />
-          <VisuallyHidden>{username || ''}</VisuallyHidden>
+          <span className="visually-hidden">{username}</span>
         </div>
       )}
       {hasDefaultImage && (

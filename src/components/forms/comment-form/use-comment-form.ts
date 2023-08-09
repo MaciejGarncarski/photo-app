@@ -2,8 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
-import { useAddComment } from '@/src/components/organisms/post/commentForm/useAddComment';
-
+import { useAddComment } from '@/src/components/forms/comment-form/use-add-comment';
 import { commentTextSchema } from '@/src/schemas/post-comment';
 
 const commentFormSchema = z.object({

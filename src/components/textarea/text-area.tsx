@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
-import styles from './TextArea.module.scss';
+import styles from './text-area.module.scss';
 
 type PropsTypes = {
   label: string;

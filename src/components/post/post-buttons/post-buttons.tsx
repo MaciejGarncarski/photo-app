@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion';
 
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-
-import { usePostButtonsData } from '@/src/components/organisms/post/postButtons/usePostButtonsData';
-import { PostModal } from '@/src/components/organisms/postModal/PostModal';
-import { ShareModal } from '@/src/components/organisms/shareModal/ShareModal';
-
+import { ShareModal } from '@/src/components/modals/share-modal/share-modal';
+import { usePostButtonsData } from '@/src/components/post/post-buttons/use-post-buttons';
+import { PostModal } from '@/src/components/post/post-modal/post-modal';
 import { Post } from '@/src/schemas/post.schema';
 
-import styles from './PostButtons.module.scss';
+import styles from './post-buttons.module.scss';
 
 type PropsTypes = {
   post: Post;
@@ -16,7 +13,6 @@ type PropsTypes = {
 };
 
 export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
-  const { id } = post;
   const { buttonData, postModal, shareModal } = usePostButtonsData({
     post,
     parentModalOpen,
@@ -37,7 +33,7 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
               }}
             >
               {icon}
-              <VisuallyHidden>{alt}</VisuallyHidden>
+              <span className="visually-hidden">{alt}</span>
               <span className={styles.buttonCount}>{count}</span>
             </motion.button>
           </li>
@@ -47,7 +43,7 @@ export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
       <ShareModal
         isVisible={shareModal.isModalOpen}
         closeModal={shareModal.closeModal}
-        textToCopy={`https://photoapp.maciej-garncarski.pl/post/${id}`}
+        textToCopy={`https://photoapp.maciej-garncarski.pl/post/${post.id}`}
       />
       <PostModal
         isVisible={postModal.isModalOpen}

@@ -2,19 +2,15 @@ import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { useIsMobile } from '@/src/hooks/useIsMobile';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
 
-import { CropError } from '@/src/components/atoms/cropError/CropError';
-import { Heading } from '@/src/components/atoms/heading/Heading';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
+import { CropError } from '@/src/components/crop-error/crop-error';
+import { useDropZone } from '@/src/components/drop-zone/use-drop-zone';
+import { Loader } from '@/src/components/loader/loader';
+import { DropZoneErrors } from '@/src/components/pages/create-post/types';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { useDropZone } from '@/src/components/organisms/dropZone/useDropZone';
-
-import styles from './DropZone.module.scss';
-
-import { DropZoneErrors } from '../../pages/createPost/types';
+import styles from './drop-zone.module.scss';
 
 type PropsTypes = {
   setImgSrc: (src: string | null) => void;
@@ -58,7 +54,7 @@ export const DropZone = ({ setImgSrc }: PropsTypes) => {
         onDragLeave={inactive}
         data-testid="dropZoneContainer"
       >
-        <VisuallyHidden>
+        <span className="visually-hidden">
           <input
             type="file"
             id="dropZoneInput"
@@ -67,7 +63,7 @@ export const DropZone = ({ setImgSrc }: PropsTypes) => {
             ref={inputRef}
             onChange={onChange}
           />
-        </VisuallyHidden>
+        </span>
 
         <div className={styles.dropZoneState}>
           {isActive && (

@@ -3,20 +3,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
-import { useIsMobile } from '@/src/hooks/useIsMobile';
-import { signOut } from '@/src/utils/signOut';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { signOut } from '@/src/utils/sign-out';
 
-import { FetchError } from '@/src/components/molecules/fetchError/FetchError';
-import { Loader } from '@/src/components/molecules/loader/Loader';
+import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
+import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
+import { Loader } from '@/src/components/loader/loader';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ListModal } from '@/src/components/modals/list-modal/list-modal';
+import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { useAccount } from '@/src/components/pages/account/use-account';
 
-import { AccountPosts } from '@/src/components/organisms/accountPosts/AccountPosts';
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { ListModal } from '@/src/components/organisms/listModal/ListModal';
-import { ListModalItem } from '@/src/components/organisms/listModal/ListModalItem';
-
-import { useAccount } from '@/src/components/pages/account/useAccount';
-
-import styles from './Account.module.scss';
+import styles from './account.module.scss';
 
 import { AccountHeaderDesktop } from './account-header-desktop';
 import { AccountHeaderMobile } from './account-header-mobile';
@@ -44,7 +42,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
   };
 
   if (isError) {
-    return <FetchError message="Cannot display this profile." />;
+    return <FetchErrorMessage message="Cannot display this profile." />;
   }
 
   if (!userData) {
@@ -90,7 +88,7 @@ export const Account = ({ username: usernameFromProps }: Props) => {
         onConfirm={() => signOut(queryClient)}
         closeModal={signOutModal.closeModal}
       />
-      <AccountPosts userId={userData?.id || ''} />
+      <AccountPostsList userId={userData?.id || ''} />
     </div>
   );
 };

@@ -1,9 +1,7 @@
 import { IconLoader2 } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-
-import styles from './Loader.module.scss';
+import styles from './loader.module.scss';
 
 type PropsTypes = {
   size: 'small' | 'normal';
@@ -24,7 +22,7 @@ export const Loader = ({ size, color, marginTop }: PropsTypes) => {
       aria-live="polite"
     >
       <IconLoader2 />
-      <VisuallyHidden>Loading</VisuallyHidden>
+      <span className="visually-hidden">Loading</span>
     </span>
   );
 };

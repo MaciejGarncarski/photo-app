@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Heading } from '@/src/components/atoms/heading/Heading';
+import { buttonData } from '@/src/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons.data';
+import { Button } from '@/src/components/buttons/button/button';
+import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { buttonData } from '@/src/components/molecules/aspectRatioButtons/buttonData';
-import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
-
-import styles from './AspectRatioButtons.module.scss';
+import styles from './aspectRatioButtons.module.scss';
 
 type PropsTypes = {
   setAspect: (aspect: number) => void;

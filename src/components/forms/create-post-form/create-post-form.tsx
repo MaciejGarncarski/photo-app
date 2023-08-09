@@ -1,15 +1,13 @@
 import { motion } from 'framer-motion';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Heading } from '@/src/components/atoms/heading/Heading';
-import { TextArea } from '@/src/components/atoms/textArea/TextArea';
+import { Button } from '@/src/components/buttons/button/button';
+import { getButtonList } from '@/src/components/forms/create-post-form/create-post-form.data';
+import { PostDetails } from '@/src/components/pages/create-post/types';
+import { TextArea } from '@/src/components/textarea/text-area';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { getButtonList } from '@/src/components/molecules/createPostForm/buttonList';
-
-import { PostDetails } from '@/src/components/pages/createPost/types';
-
-import styles from './CreatePostForm.module.scss';
+import styles from './create-post-form.module.scss';
 
 type PropsTypes = {
   onSubmit: () => void;

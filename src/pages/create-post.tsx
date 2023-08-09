@@ -1,5 +1,5 @@
-import { CreatePost } from '@/src/components/pages/createPost/CreatePost';
-import { ProtectedPage } from '@/src/components/pages/protected-page/ProtectedPage';
+import { CreatePost } from '@/src/components/pages/create-post/create-post';
+import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 
 const CreatePostPage = () => {
   return (

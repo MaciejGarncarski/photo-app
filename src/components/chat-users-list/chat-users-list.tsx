@@ -5,16 +5,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { Avatar } from '@/src/components/molecules/avatar/Avatar';
-import { FetchError } from '@/src/components/molecules/fetchError/FetchError';
-import { containerVariants } from '@/src/components/molecules/imagesPreview/ImagesPreview.animation';
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { linkVariants } from '@/src/components/organisms/chatUsersList/ChatUsersList.animation';
-
+import { Avatar } from '@/src/components/avatar/avatar';
+import { linkVariants } from '@/src/components/chat-users-list/chat-users-list.animation';
+import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
+import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
+import { Loader } from '@/src/components/loader/loader';
 import { ChatUsersResponse } from '@/src/schemas/chat';
 
-import styles from './ChatUsersList.module.scss';
+import styles from './chat-users-list.module.scss';
 
 type PropsTypes = {
   chatUsers: UseInfiniteQueryResult<ChatUsersResponse, unknown>;
@@ -36,7 +34,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   });
 
   if (isError) {
-    return <FetchError message="Cannot fetch users." />;
+    return <FetchErrorMessage message="Cannot fetch users." />;
   }
 
   if (data?.pages[0].usersCount === 0) {

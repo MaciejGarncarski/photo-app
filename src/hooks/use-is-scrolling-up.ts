@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useDebounce } from '@/src/hooks/useDebounce';
+import { useDebounce } from '@/src/hooks/use-debounce';
 
 export const useIsGoingUp = () => {
   const [isGoingUp, setIsGoingUp] = useState(true);

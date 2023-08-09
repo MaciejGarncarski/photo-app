@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useIsGoingUp } from '@/src/hooks/useIsGoingUp';
-import { useIsMobile } from '@/src/hooks/useIsMobile';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsGoingUp } from '@/src/hooks/use-is-scrolling-up';
 import { socket } from '@/src/utils/socket';
 
-import { useInfiniteMessages } from '@/src/components/pages/chatRoom/useInfiniteMessages';
+import { useInfiniteMessages } from '@/src/components/pages/chat-room/use-infinite-messages';
 
 export const useChatMessages = () => {
   const [inputVal, setInputVal] = useState('');

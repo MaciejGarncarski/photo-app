@@ -1,10 +1,10 @@
 import { IconArrowUp } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { notificationVariant } from '@/src/components/atoms/newPostNotification/NewPostNotification.animation';
-import { useNewPost } from '@/src/components/atoms/newPostNotification/useNewPost';
+import { notificationVariant } from '@/src/components/new-post-notification/new-post-notification.animation';
+import { useNewPost } from '@/src/components/new-post-notification/use-post-notification';
 
-import styles from './NewPostNotification.module.scss';
+import styles from './new-post-notification.module.scss';
 
 export const NewPostNotification = () => {
   const { hasNewPosts, handleRefetchPosts } = useNewPost();

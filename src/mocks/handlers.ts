@@ -1,6 +1,6 @@
 import { DefaultBodyType, PathParams, rest } from 'msw';
 
-import { MockedUser, mockedUser } from '@/src/utils/tests/mockedData';
+import { MockedUser, mockedUser } from '@/src/utils/tests/mocked-data';
 
 export const handlers = [
   rest.get<DefaultBodyType, PathParams<string>, MockedUser>(

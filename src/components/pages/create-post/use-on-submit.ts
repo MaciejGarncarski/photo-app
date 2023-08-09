@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
+import { useSendNewPost } from '@/src/components/pages/create-post/use-send-new-post';
+
 import { FinalImages, PostDetails } from './types';
-import { useSendNewPost } from './use-send-new-post';
 
 type Arguments = { finalImages: FinalImages };
 

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/useInfinitePosts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
 import { addComment } from '@/src/services/comment.service';
 
 export const useAddComment = ({ postId }: { postId: number }) => {

@@ -1,16 +1,14 @@
-import { IconMessage2 } from '@tabler/icons-react';
+import { IconHeart, IconMessage2 } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { postItemVaraints } from '@/src/components/atoms/accountPost/AccountPost.animation';
-import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
+import { postItemVaraints } from '@/src/components/account-post/account-post.animation';
+import { Loader } from '@/src/components/loader/loader';
 
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import styles from './AccountPost.module.scss';
+import styles from './account-post.module.scss';
 
 type PropsTypes = {
   imageUrl: string;
@@ -55,7 +53,7 @@ export const AccountPost = ({
       />
       <ul className={styles.overlay}>
         <li className={styles.count}>
-          <IconHeartWrapper isActive={isLiked} /> {likesCount}
+          <IconHeart color={isLiked ? 'red' : 'black'} /> {likesCount}
         </li>
         <li className={styles.count}>
           <IconMessage2 /> {commentsCount}

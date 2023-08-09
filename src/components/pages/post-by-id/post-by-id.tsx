@@ -1,19 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useModal } from '@/src/hooks/useModal';
-import { useUser } from '@/src/hooks/useUser';
+import { useModal } from '@/src/hooks/use-modal';
+import { useUser } from '@/src/hooks/use-user';
 
-import { Heading } from '@/src/components/atoms/heading/Heading';
+import { Loader } from '@/src/components/loader/loader';
+import { Account } from '@/src/components/pages/account/account';
+import { usePost } from '@/src/components/pages/account/use-post';
+import { PostModal } from '@/src/components/post/post-modal/post-modal';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { PostModal } from '@/src/components/organisms/postModal/PostModal';
-
-import { Account } from '@/src/components/pages/account/Account';
-import { usePost } from '@/src/components/pages/account/usePost';
-
-import styles from './PostById.module.scss';
+import styles from './post-by-id.module.scss';
 
 export const PostById = () => {
   const router = useRouter();

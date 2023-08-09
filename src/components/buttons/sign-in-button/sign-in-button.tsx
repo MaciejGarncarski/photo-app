@@ -1,7 +1,7 @@
 import { IconLogin } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import styles from './SignInButton.module.scss';
+import styles from './sign-in-button.module.scss';
 
 export const SignInButton = () => {
   return (

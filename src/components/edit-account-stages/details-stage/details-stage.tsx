@@ -1,17 +1,14 @@
 import { motion } from 'framer-motion';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
-import { Input } from '@/src/components/atoms/input/Input';
-import { TextArea } from '@/src/components/atoms/textArea/TextArea';
+import { Button } from '@/src/components/buttons/button/button';
+import { EditAccountHeading } from '@/src/components/edit-account-heading/edit-account-heading';
+import { useDetailsStage } from '@/src/components/edit-account-stages/details-stage/use-details-stage';
+import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
+import { Input } from '@/src/components/input/input';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { TextArea } from '@/src/components/textarea/text-area';
 
-import { EditAccountHeading } from '@/src/components/molecules/editAccountHeading/EditAccountHeading';
-
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { useDetailsStage } from '@/src/components/organisms/editAccountStages/detailsStage/useDetailsStage';
-import { stageVariant } from '@/src/components/organisms/editAccountStages/stage.animation';
-import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
-
-import styles from '../Stages.module.scss';
+import styles from '../stages.module.scss';
 
 type PropsTypes = {
   userId: string;
@@ -40,7 +37,8 @@ export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
   }
 
   if (editAccountLoading) {
-    return <TextWithLoader text="Saving changes" />;
+    return null;
+    // TODO
   }
 
   return (

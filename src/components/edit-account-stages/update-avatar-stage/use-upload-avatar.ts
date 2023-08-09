@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/src/hooks/useAuth';
+import { useAuth } from '@/src/hooks/use-auth';
 
-import { FinalImages } from '@/src/components/pages/createPost/types';
+import { FinalImages } from '@/src/components/pages/create-post/types';
 import { uploadAvatar } from '@/src/services/user.service';
 
 type UseUploadAvatarArguments = {

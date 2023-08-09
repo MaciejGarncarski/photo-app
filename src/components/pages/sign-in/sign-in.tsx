@@ -1,11 +1,9 @@
-import { Heading } from '@/src/components/atoms/heading/Heading';
+import { SignInForm } from '@/src/components/forms/sign-in-form/sign-in-form';
+import { OtherSignInOptions } from '@/src/components/other-sign-in-options/other-sign-in-options';
+import { animation } from '@/src/components/pages/sign-in/sign-in.animation';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import { OtherSignInOptions } from '@/src/components/molecules/otherSignInOptions/OtherSignInOptions';
-import { SignInForm } from '@/src/components/molecules/signInForm/SignInForm';
-
-import { animation } from '@/src/components/pages/signIn/SignIn.animation';
-
-import styles from './SignIn.module.scss';
+import styles from './sign-in.module.scss';
 
 export const SignIn = () => {
   return (

@@ -1,12 +1,10 @@
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 
+import { PostSliderProgress } from '@/src/components/post/post-images-carousel/carousel-progress';
 import { PostImage } from '@/src/services/userPosts.service';
 
-import styles from './PostArrows.module.scss';
-
-import { VisuallyHidden } from '../../atoms/visuallyHiddenText/VisuallyHidden';
-import { PostSliderProgress } from '../../organisms/post/postSlider/PostSliderProgress';
+import styles from './post-arrows.module.scss';
 
 type Props = {
   postImages: Array<PostImage>;
@@ -34,7 +32,7 @@ export const PostArrows = ({
       {isNotFirstIndex && (
         <button type="button" className={styles.button} onClick={prevImage}>
           <IconArrowLeft />
-          <VisuallyHidden>Previous image</VisuallyHidden>
+          <span className="visually-hidden">Previous</span>
         </button>
       )}
       <PostSliderProgress currentIndex={currentIndex} images={postImages} />
@@ -45,7 +43,7 @@ export const PostArrows = ({
           onClick={nextImage}
         >
           <IconArrowRight />
-          <VisuallyHidden>Next image</VisuallyHidden>
+          <span className="visually-hidden">Next</span>
         </button>
       )}
     </>

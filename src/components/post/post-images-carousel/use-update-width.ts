@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
-import { useDebounce } from '@/src/hooks/useDebounce';
+import { useDebounce } from '@/src/hooks/use-debounce';
 
 export const useUpdateWidth = () => {
   const imageRef = useRef<HTMLDivElement>(null);

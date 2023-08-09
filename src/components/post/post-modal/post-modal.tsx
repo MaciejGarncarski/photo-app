@@ -1,20 +1,17 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { Heading } from '@/src/components/atoms/heading/Heading';
-import { ModalBackdrop } from '@/src/components/atoms/modalBackdrop/ModalBackdrop';
-
-import { ModalCloseButton } from '@/src/components/molecules/modalCloseButton/ModalCloseButton';
-
-import { PostFooter } from '@/src/components/organisms/post/postFooter/PostFooter';
-import { PostHeader } from '@/src/components/organisms/post/postHeader/PostHeader';
-import { PostSlider } from '@/src/components/organisms/post/postSlider/PostSlider';
-import { PostComments } from '@/src/components/organisms/postComments/PostComments';
-import { modalVariants } from '@/src/components/organisms/postModal/PostModal.animation';
-
+import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
+import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
+import { PostComments } from '@/src/components/post/post-comments/post-comments';
+import { PostFooter } from '@/src/components/post/post-footer/post-footer';
+import { PostHeader } from '@/src/components/post/post-header/post-header';
+import { PostImagesCarousel } from '@/src/components/post/post-images-carousel/post-images-carousel';
+import { modalVariants } from '@/src/components/post/post-modal/post-modal.animation';
+import { Heading } from '@/src/components/typography/heading/heading';
 import { Post } from '@/src/schemas/post.schema';
 
-import styles from './PostModal.module.scss';
+import styles from './post-modal.module.scss';
 
 type PropsTypes = {
   post: Post;
@@ -46,7 +43,7 @@ export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
                 postId={id}
               />
               <div className={styles.sliderContainer}>
-                <PostSlider post={post} priority={true} />
+                <PostImagesCarousel post={post} priority={true} />
               </div>
               <PostFooter post={post} parentModalOpen={isVisible} />
               <section className={styles.commentsContainer}>

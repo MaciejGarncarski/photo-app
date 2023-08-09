@@ -3,15 +3,14 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '@/src/hooks/useAuth';
-import { useModal } from '@/src/hooks/useModal';
+import { useAuth } from '@/src/hooks/use-auth';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { SignInButton } from '@/src/components/atoms/buttons/signInButton/SignInButton';
+import { SignInButton } from '@/src/components/buttons/sign-in-button/sign-in-button';
+import { getNavListData } from '@/src/components/navbar/navbar-buttons/use-nav-buttons';
+import { Settings } from '@/src/components/settings/settings';
 
-import { getNavListData } from '@/src/components/organisms/navButtons/useNavButtonsList';
-import { Settings } from '@/src/components/organisms/settings/Settings';
-
-import styles from './NavButtons.module.scss';
+import styles from './navbar-buttons.module.scss';
 
 export const NavButtons = () => {
   const { sessionUser, isLoading, isSignedIn } = useAuth();

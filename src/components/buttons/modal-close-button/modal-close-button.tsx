@@ -1,9 +1,7 @@
+import { IconX } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-import { IconXWrapper } from '@/src/components/atoms/icons/IconXWrapper';
-import { VisuallyHidden } from '@/src/components/atoms/visuallyHiddenText/VisuallyHidden';
-
-import styles from './ModalCloseButton.module.scss';
+import styles from './modal-close-button.module.scss';
 
 type PropsTypes = {
   onClose: () => void;
@@ -25,8 +23,8 @@ export const ModalCloseButton = ({ onClose, outside }: PropsTypes) => {
       type="button"
       onClick={handleClose}
     >
-      <IconXWrapper size="sm" />
-      <VisuallyHidden>Close modal</VisuallyHidden>
+      <IconX />
+      <span className="visually-hidden">close modal</span>
     </button>
   );
 };

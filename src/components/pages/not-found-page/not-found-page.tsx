@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { Heading } from '@/src/components/atoms/heading/Heading';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import styles from './NotFoundPage.module.scss';
+import styles from './not-found-page.module.scss';
 
 export const NotFoundPage = () => {
   return (

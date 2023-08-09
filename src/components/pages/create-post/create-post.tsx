@@ -5,18 +5,15 @@ import { NextSeo } from 'next-seo';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useModal } from '@/src/hooks/useModal';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { CreatePostForm } from '@/src/components/molecules/createPostForm/CreatePostForm';
-import { ImagesPreview } from '@/src/components/molecules/imagesPreview/ImagesPreview';
+import { CropImage } from '@/src/components/crop-image/crop-image';
+import { CreatePostForm } from '@/src/components/forms/create-post-form/create-post-form';
+import { ImagesPreview } from '@/src/components/images-preview/images-preview';
+import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { useFinalImages } from '@/src/components/pages/create-post/use-final-images';
 
-import { ConfirmationAlert } from '@/src/components/organisms/confirmationAlert/ConfirmationAlert';
-import { CropImage } from '@/src/components/organisms/cropImage/CropImage';
-import { TextWithLoader } from '@/src/components/organisms/textWithLoader/TextWithLoader';
-
-import { useFinalImages } from '@/src/components/pages/createPost/useFinalImages';
-
-import styles from './CreatePost.module.scss';
+import styles from './create-post.module.scss';
 
 import { useOnSubmit } from './use-on-submit';
 
@@ -49,7 +46,8 @@ export const CreatePost = () => {
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
 
   if (isUploadingPost) {
-    return <TextWithLoader text="Uploading your post" />;
+    return null;
+    //todo
   }
 
   return (

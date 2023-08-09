@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
-import { AccountPost } from '@/src/components/atoms/accountPost/AccountPost';
-
-import { Loader } from '@/src/components/molecules/loader/Loader';
-
-import { postContainerVariants } from '@/src/components/organisms/accountPosts/account-posts-list.animation';
-import { useAccountPosts } from '@/src/components/organisms/accountPosts/useAccountPosts';
+import { AccountPost } from '@/src/components/account-post/account-post';
+import { postContainerVariants } from '@/src/components/account-posts-list/account-posts-list.animation';
+import { useAccountPosts } from '@/src/components/account-posts-list/use-account-posts';
+import { Loader } from '@/src/components/loader/loader';
 
 import styles from './account-posts-list.module.scss';
 

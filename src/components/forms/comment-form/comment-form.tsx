@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 
-import { Button } from '@/src/components/atoms/buttons/button/Button';
+import { Button } from '@/src/components/buttons/button/button';
+import { useCommentForm } from '@/src/components/forms/comment-form/use-comment-form';
 
-import { useCommentForm } from '@/src/components/organisms/post/commentForm/useCommentForm';
-
-import styles from './CommentForm.module.scss';
+import styles from './comment-form.module.scss';
 
 type PropsTypes = {
   postId: number;

@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import { MouseEvent } from 'react';
 import { UseFormGetValues } from 'react-hook-form';
 
-import { AccountDetails } from '@/src/components/organisms/editAccountStages/accountDetailtsValidation';
-
-import { useEditAccount } from '@/src/components/pages/edit-account/useEditAccount';
+import { AccountDetails } from '@/src/components/edit-account-stages/account-details-validation';
+import { useEditAccount } from '@/src/components/pages/edit-account/use-edit-account';
 
 type UseEditDetailsArguments = {
   reset: () => void;

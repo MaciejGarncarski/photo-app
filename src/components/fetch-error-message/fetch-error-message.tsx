@@ -1,12 +1,12 @@
-import { Heading } from '@/src/components/atoms/heading/Heading';
+import { Heading } from '@/src/components/typography/heading/heading';
 
-import styles from './FetchError.module.scss';
+import styles from './fetch-error-message.module.scss';
 
 type PropsTypes = {
   message: string;
 };
 
-export const FetchError = ({ message }: PropsTypes) => {
+export const FetchErrorMessage = ({ message }: PropsTypes) => {
   return (
     <section className={styles.container}>
       <Heading tag="h2" size="big">

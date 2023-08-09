@@ -1,13 +1,10 @@
-import { IconMessage2, IconShare } from '@tabler/icons-react';
+import { IconHeart, IconMessage2, IconShare } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
-import { useModal } from '@/src/hooks/useModal';
-import { formatCount } from '@/src/utils/formatCount';
+import { useModal } from '@/src/hooks/use-modal';
+import { formatCount } from '@/src/utils/format-likes';
 
-import { IconHeartWrapper } from '@/src/components/atoms/icons/IconHeartWrapper';
-
-import { useHandleLike } from '@/src/components/organisms/post/postButtons/useHandleLike';
-
+import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
 import { Post } from '@/src/schemas/post.schema';
 
 type ButtonData = Array<{
@@ -35,7 +32,7 @@ export const usePostButtonsData = ({ post, parentModalOpen }: Arguments) => {
   const buttonData: ButtonData = [
     {
       alt: 'like',
-      icon: <IconHeartWrapper isActive={Boolean(isLiked)} />,
+      icon: <IconHeart color={isLiked ? 'red' : undefined} />,
       onClick: handleLike,
       count: formatCount(likesCount),
     },

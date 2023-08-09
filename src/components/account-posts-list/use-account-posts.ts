@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { apiClient } from '@/src/utils/apiClient';
+import { apiClient } from '@/src/utils/api-client';
 
 import { UserPosts } from '@/src/services/userPosts.service';
 

@@ -1,4 +1,4 @@
-import { DropZoneErrors } from '../components/pages/createPost/types';
+import { DropZoneErrors } from '@/src/components/pages/create-post/types';
 
 export const IMAGE_MIN_SIZE = 150;
 export const IMAGE_MAX_FILE_SIZE = 5_500_000;

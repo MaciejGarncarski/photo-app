@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { getDescriptionData } from '@/src/utils/getDescriptionData';
+import { getDescriptionData } from '@/src/utils/get-description-data';
 
 type Arguments = {
   description: string;
