@@ -23,7 +23,7 @@ export const ChatRoom = () => {
     inputVal,
     onSubmit,
     onChange,
-    infiniteRef,
+    ref,
   } = useChatRoom();
 
   if (isLoading || isUserLoading || !data) {
@@ -62,8 +62,8 @@ export const ChatRoom = () => {
             return <ChatMessage message={message} key={message.id} />;
           });
         })}
-        {(isLoading || hasNextPage) && (
-          <li ref={infiniteRef} className={styles.loading}>
+        {hasNextPage && !isLoading && (
+          <li className={styles.loading} ref={ref}>
             <Loader color="blue" size="normal" />
           </li>
         )}

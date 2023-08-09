@@ -14,7 +14,7 @@ export const useChatRoom = () => {
   const {
     data,
     isLoading,
-    infiniteRef,
+    ref,
     inputVal,
     onChange,
     onSubmit,
@@ -50,6 +50,6 @@ export const useChatRoom = () => {
     hasNextPage,
     onSubmit,
     onChange,
-    infiniteRef,
+    ref,
   };
 };

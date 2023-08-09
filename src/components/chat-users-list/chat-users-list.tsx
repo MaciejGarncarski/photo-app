@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
+
+import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { linkVariants } from '@/src/components/chat-users-list/chat-users-list.animation';
@@ -25,12 +26,10 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
   const router = useRouter();
   const { data, isLoading, fetchNextPage, hasNextPage, isError } = chatUsers;
 
-  const [infiniteRef] = useInfiniteScroll({
-    loading: isLoading && isEnabled,
-    hasNextPage: hasNextPage || false,
-    onLoadMore: fetchNextPage,
-    disabled: isError || !hasNextPage,
-    rootMargin: '0px 0px 300px 0px',
+  const { ref } = useInfiniteScroll({
+    hasNextPage: Boolean(hasNextPage),
+    fetchNextPage,
+    enabled: isEnabled,
   });
 
   if (isError) {
@@ -70,8 +69,8 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
               );
             });
           })}
-        {(hasNextPage || isLoading) && (
-          <div ref={infiniteRef} className={styles.loading}>
+        {hasNextPage && !isLoading && (
+          <div ref={ref} className={styles.loading}>
             <Loader color="blue" size="normal" />
           </div>
         )}

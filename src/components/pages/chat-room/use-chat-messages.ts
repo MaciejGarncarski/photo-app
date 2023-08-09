@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useIsGoingUp } from '@/src/hooks/use-is-scrolling-up';
 import { socket } from '@/src/utils/socket';
@@ -23,16 +23,10 @@ export const useChatMessages = () => {
       friendId,
     });
 
-  const fetchNext = () => {
-    fetchNextPage();
-  };
-
-  const [infiniteRef] = useInfiniteScroll({
-    loading: isLoading,
+  const { ref } = useInfiniteScroll({
     hasNextPage: Boolean(hasNextPage),
-    onLoadMore: fetchNext,
-    disabled: !hasNextPage || isError,
-    rootMargin: '0px 0px 50% 0px',
+    fetchNextPage,
+    enabled: true,
   });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +51,7 @@ export const useChatMessages = () => {
     data,
     isLoading,
     hasNextPage,
-    infiniteRef,
+    ref,
     isMobile,
     isGoingUp,
     friendId,

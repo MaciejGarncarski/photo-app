@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
+
+import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { AccountPost } from '@/src/components/account-post/account-post';
 import { postContainerVariants } from '@/src/components/account-posts-list/account-posts-list.animation';
@@ -13,15 +14,14 @@ type PropsTypes = {
 };
 
 export const AccountPostsList = ({ userId }: PropsTypes) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } =
-    useAccountPosts({ userId });
+  const { data, isLoading, hasNextPage, fetchNextPage } = useAccountPosts({
+    userId,
+  });
 
-  const [infiniteRef] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: hasNextPage || false,
-    onLoadMore: fetchNextPage,
-    disabled: isError || !hasNextPage,
-    rootMargin: '0px 0px 300px 0px',
+  const { ref } = useInfiniteScroll({
+    hasNextPage: Boolean(hasNextPage),
+    fetchNextPage,
+    enabled: true,
   });
 
   if (!data || isLoading) {
@@ -69,8 +69,8 @@ export const AccountPostsList = ({ userId }: PropsTypes) => {
           );
         })}
       </motion.div>
-      {hasNextPage && hasPosts && (
-        <div ref={infiniteRef} className={styles.loading}>
+      {hasNextPage && hasPosts && !isLoading && (
+        <div ref={ref} className={styles.loading}>
           <Loader color="blue" size="normal" />
         </div>
       )}

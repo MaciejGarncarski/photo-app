@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Heading } from '@/src/components/typography/heading/heading';
 
-import styles from './AccessDenied.module.scss';
+import styles from './accessDenied.module.scss';
 
 export const AccessDenied = () => {
   return (

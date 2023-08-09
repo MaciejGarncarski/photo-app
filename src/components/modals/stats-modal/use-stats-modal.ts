@@ -1,4 +1,4 @@
-import useInfiniteScroll from 'react-infinite-scroll-hook';
+import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { useFollowers } from '@/src/components/modals/stats-modal/use-followers';
 
@@ -14,13 +14,11 @@ export const useStatsModal = ({ userId, type }: Arguments) => {
   });
   const isEmpty = data?.pages[0].users.length === 0;
 
-  const [sentryRef] = useInfiniteScroll({
-    loading: isLoading,
+  const { ref } = useInfiniteScroll({
     hasNextPage: Boolean(hasNextPage),
-    onLoadMore: fetchNextPage,
-    disabled: true,
-    rootMargin: '0px 0px 400px 0px',
+    fetchNextPage,
+    enabled: true,
   });
 
-  return { isEmpty, sentryRef, isLoading, data, hasNextPage };
+  return { isEmpty, ref, isLoading, data, hasNextPage };
 };

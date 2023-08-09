@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { atom } from 'jotai';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
+
+import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { HomePost } from '@/src/components/home-post/home-post';
@@ -17,12 +18,10 @@ export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } =
     useInfinitePosts();
 
-  const [sentryRef] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: hasNextPage || false,
-    onLoadMore: fetchNextPage,
-    disabled: isError,
-    rootMargin: '0px 0px 100px 0px',
+  const { ref } = useInfiniteScroll({
+    hasNextPage: Boolean(hasNextPage),
+    fetchNextPage,
+    enabled: true,
   });
 
   if (isError) {
@@ -47,8 +46,8 @@ export const Home = () => {
             return <HomePost priority={idx < 3} key={post.id} post={post} />;
           });
         })}
-        {(isLoading || hasNextPage) && (
-          <li ref={sentryRef}>
+        {!isLoading && hasNextPage && (
+          <li ref={ref}>
             <PostPlaceholder />
             <PostPlaceholder />
           </li>

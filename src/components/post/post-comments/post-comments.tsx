@@ -1,4 +1,4 @@
-import useInfiniteScroll from 'react-infinite-scroll-hook';
+import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { Comment } from '@/src/components/comment/comment';
 import { useInfiniteComments } from '@/src/components/post/post-comments/use-post-comments';
@@ -10,17 +10,14 @@ type PropsTypes = {
 };
 
 export const PostComments = ({ postId }: PropsTypes) => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } =
-    useInfiniteComments({
-      postId: postId,
-    });
+  const { data, hasNextPage, fetchNextPage } = useInfiniteComments({
+    postId: postId,
+  });
 
-  const [sentryRef] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: hasNextPage || false,
-    onLoadMore: fetchNextPage,
-    disabled: isError,
-    rootMargin: '0px 0px 100px 0px',
+  const { ref } = useInfiniteScroll({
+    hasNextPage: Boolean(hasNextPage),
+    fetchNextPage,
+    enabled: true,
   });
 
   if (!data) {
@@ -30,7 +27,7 @@ export const PostComments = ({ postId }: PropsTypes) => {
   const commentsCount = data.pages[0].commentsCount;
 
   return (
-    <div className={styles.commentsList} ref={sentryRef}>
+    <div className={styles.commentsList} ref={ref}>
       {commentsCount > 0 && (
         <>
           {data.pages.map((page) => {

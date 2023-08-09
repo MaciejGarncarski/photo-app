@@ -5,7 +5,7 @@ import { Button } from '@/src/components/buttons/button/button';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Heading } from '@/src/components/typography/heading/heading';
 
-import styles from './aspectRatioButtons.module.scss';
+import styles from './aspect-ratio-buttons.module.scss';
 
 type PropsTypes = {
   setAspect: (aspect: number) => void;
