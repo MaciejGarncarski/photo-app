@@ -1,4 +1,4 @@
-import { PostById } from '@/src/components/pages/postById/PostById';
+import { PostById } from '@/src/components/pages/post-by-id/PostById';
 
 const PostPage = () => {
   return <PostById />;

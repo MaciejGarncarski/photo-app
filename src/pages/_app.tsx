@@ -17,7 +17,7 @@ import { Layout } from '@/src/components/layout/Layout';
 
 import '../styles/globals.scss';
 
-import { useIsMobile } from '../hooks/useIsMobile';
+import { useIsMobile } from '../hooks/use-is-mobile';
 
 const customFont = Open_Sans({
   weight: ['400', '500', '700'],

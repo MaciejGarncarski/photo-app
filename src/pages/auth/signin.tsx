@@ -1,5 +1,5 @@
-import { ProtectedPage } from '@/src/components/pages/protectedPage/ProtectedPage';
-import { SignIn } from '@/src/components/pages/signIn/SignIn';
+import { ProtectedPage } from '@/src/components/pages/protected-page/ProtectedPage';
+import { SignIn } from '@/src/components/pages/sign-in/SignIn';
 
 const AuthPage = () => {
   return (
