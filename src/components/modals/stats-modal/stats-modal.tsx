@@ -8,13 +8,13 @@ import { useStatsModal } from '@/src/components/modals/stats-modal/use-stats-mod
 
 import styles from './stats-modal.module.scss';
 
-type PropsTypes = {
+type Props = {
   userId: string;
   type: 'friends' | 'followers';
   closeModal: () => void;
 };
 
-export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
+export const StatsModal = ({ closeModal, type, userId }: Props) => {
   const { isLoading, data, isEmpty, ref } = useStatsModal({
     userId,
     type,

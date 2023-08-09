@@ -1,5 +1,4 @@
 import { QueryClient } from '@tanstack/react-query';
-import Router from 'next/router';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
@@ -22,14 +21,10 @@ export const signInCredentials = async ({
   queryClient,
 }: SignInCredentials) => {
   const requestPromise = new Promise(async (resolve) => {
-    const { status } = await apiClient.post('auth/login', {
+    await apiClient.post('auth/login', {
       email,
       password,
     });
-
-    if (status === 200) {
-      Router.push('/');
-    }
 
     await queryClient.invalidateQueries(['session']);
 

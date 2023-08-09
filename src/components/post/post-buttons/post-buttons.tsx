@@ -7,12 +7,12 @@ import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-buttons.module.scss';
 
-type PropsTypes = {
+type Props = {
   post: Post;
   parentModalOpen?: boolean;
 };
 
-export const PostButtons = ({ post, parentModalOpen }: PropsTypes) => {
+export const PostButtons = ({ post, parentModalOpen }: Props) => {
   const { buttonData, postModal, shareModal } = usePostButtonsData({
     post,
     parentModalOpen,

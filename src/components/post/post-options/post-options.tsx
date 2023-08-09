@@ -4,7 +4,7 @@ import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
 import { usePostOptions } from '@/src/components/post/post-options/use-post-options';
 
-type PropsTypes = {
+type Props = {
   closeModal: () => void;
   openCnonfirmation: () => void;
   authorId: string;
@@ -18,7 +18,7 @@ export const PostOptions = ({
   postId,
   openCnonfirmation,
   isVisible,
-}: PropsTypes) => {
+}: Props) => {
   const { isAbleToModify } = usePostOptions({ authorId });
 
   return (

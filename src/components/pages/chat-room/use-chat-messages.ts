@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
@@ -11,12 +11,12 @@ import { useInfiniteMessages } from '@/src/components/pages/chat-room/use-infini
 
 export const useChatMessages = () => {
   const [inputVal, setInputVal] = useState('');
-  const router = useRouter();
+  const params = useParams();
   const { sessionUser } = useAuth();
   const { isMobile } = useIsMobile();
   const { isScrollingUp } = useIsScrollingUp();
 
-  const friendId = router.query.receiverId as string;
+  const friendId = params?.receiverId as string;
 
   const { isLoading, fetchNextPage, hasNextPage, isError, data } =
     useInfiniteMessages({

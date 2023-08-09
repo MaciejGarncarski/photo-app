@@ -1,3 +1,5 @@
+'use client';
+
 import { useQueryClient } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -14,11 +16,11 @@ import { Post } from '@/src/schemas/post.schema';
 
 const TIMEOUT = 1000;
 
-type PropsTypes = {
+type Props = {
   post: Post;
 };
 
-export const useHandleLike = ({ post }: PropsTypes) => {
+export const useHandleLike = ({ post }: Props) => {
   const [isLikeAnimationShown, setIsLikeAnimationShown] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { isSignedIn } = useAuth();

@@ -3,13 +3,13 @@ import { forwardRef, useId } from 'react';
 
 import styles from './text-area.module.scss';
 
-type PropsTypes = {
+type Props = {
   label: string;
   isEmpty: boolean;
   error?: string;
 };
 
-export const TextArea = forwardRef<HTMLTextAreaElement, PropsTypes>(
+export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   ({ label, error, isEmpty, ...otherProps }, ref) => {
     const id = useId();
     return (

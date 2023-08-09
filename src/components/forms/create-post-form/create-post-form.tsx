@@ -9,7 +9,7 @@ import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './create-post-form.module.scss';
 
-type PropsTypes = {
+type Props = {
   onSubmit: () => void;
   errors: FieldErrors<PostDetails>;
   disabled: boolean;
@@ -25,7 +25,7 @@ export const CreatePostForm = ({
   openModal,
   isEmpty,
   register,
-}: PropsTypes) => {
+}: Props) => {
   const buttonList = getButtonList(openModal, disabled);
 
   return (

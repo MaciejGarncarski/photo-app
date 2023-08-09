@@ -12,11 +12,11 @@ import { Comment as TComment } from '@/src/schemas/post-comment';
 
 import styles from './comment.module.scss';
 
-type PropsTypes = {
+type Props = {
   commentData: TComment;
 };
 
-export const Comment = ({ commentData }: PropsTypes) => {
+export const Comment = ({ commentData }: Props) => {
   const { authorId, createdAt } = commentData;
   const { openModal, closeModal, isModalOpen } = useModal();
 

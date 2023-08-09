@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { ReactElement } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';

@@ -5,11 +5,11 @@ import { useInfiniteComments } from '@/src/components/post/post-comments/use-pos
 
 import styles from './post-comments.module.scss';
 
-type PropsTypes = {
+type Props = {
   postId: number;
 };
 
-export const PostComments = ({ postId }: PropsTypes) => {
+export const PostComments = ({ postId }: Props) => {
   const { data, hasNextPage, fetchNextPage } = useInfiniteComments({
     postId: postId,
   });

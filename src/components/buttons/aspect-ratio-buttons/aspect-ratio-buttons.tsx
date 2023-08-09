@@ -7,12 +7,12 @@ import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './aspect-ratio-buttons.module.scss';
 
-type PropsTypes = {
+type Props = {
   setAspect: (aspect: number) => void;
   aspect: number;
 };
 
-export const AspectRatioButtons = ({ setAspect, aspect }: PropsTypes) => {
+export const AspectRatioButtons = ({ setAspect, aspect }: Props) => {
   return (
     <section className={styles.container}>
       <Heading tag="h3" size="small">

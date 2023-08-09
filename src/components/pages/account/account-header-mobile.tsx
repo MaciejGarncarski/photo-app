@@ -12,7 +12,7 @@ import { containerVariants } from '@/src/components/images-preview/images-previe
 
 import styles from './account.module.scss';
 
-type PropsTypes = {
+type Props = {
   userId: string;
   isOwner: boolean;
   isModalOpen: boolean;
@@ -24,7 +24,7 @@ export const AccountHeaderMobile = ({
   isOwner,
   isModalOpen,
   openModal,
-}: PropsTypes) => {
+}: Props) => {
   const { isSignedIn } = useAuth();
   const { data, isLoading } = useUser({ userId });
 

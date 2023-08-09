@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
@@ -12,9 +12,9 @@ export type ChatRoom = {
 };
 
 export const useChatRoomData = () => {
-  const router = useRouter();
+  const params = useParams();
   const { sessionUser } = useAuth();
-  const receiverId = router.query.receiverId as string;
+  const receiverId = params?.receiverId as string;
 
   return useQuery({
     queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],

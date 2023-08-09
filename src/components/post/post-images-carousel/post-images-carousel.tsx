@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
@@ -12,12 +14,12 @@ import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-images-carousel.module.scss';
 
-type PropsTypes = {
+type Props = {
   post: Post;
   priority: boolean;
 };
 
-export const PostImagesCarousel = ({ post, priority }: PropsTypes) => {
+export const PostImagesCarousel = ({ post, priority }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
     post,

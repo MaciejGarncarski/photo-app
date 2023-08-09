@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -52,7 +51,6 @@ export const CreatePost = () => {
 
   return (
     <div className={styles.createPost}>
-      <NextSeo title="Create new post" />
       {finalImages.length <= 3 && (
         <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
       )}

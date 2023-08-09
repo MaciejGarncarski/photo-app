@@ -6,7 +6,7 @@ import styles from './button.module.scss';
 type ButtonTypes = 'button' | 'submit' | 'reset';
 type Variants = 'secondary' | 'primary';
 
-type PropsTypes = {
+type Props = {
   type: ButtonTypes;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
@@ -20,7 +20,7 @@ export const Button = ({
   children,
   variant,
   onClick,
-}: PropsTypes) => {
+}: Props) => {
   return (
     <button
       onClick={onClick}

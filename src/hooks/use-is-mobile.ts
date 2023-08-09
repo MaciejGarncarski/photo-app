@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
 export const MOBILE_DEVICE_MAX_WIDTH = 1279;

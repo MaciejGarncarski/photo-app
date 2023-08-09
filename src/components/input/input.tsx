@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 
 import styles from './input.module.scss';
 
-type PropsTypes = {
+type Props = {
   type?: 'text' | 'number' | 'tel' | 'email' | 'password';
   labelText: string;
   error?: string;
@@ -11,7 +11,7 @@ type PropsTypes = {
   isEmpty: boolean;
 };
 
-export const Input = forwardRef<HTMLInputElement, PropsTypes>(
+export const Input = forwardRef<HTMLInputElement, Props>(
   ({ type = 'text', labelText, error, optional, isEmpty, ...props }, ref) => {
     const containerClassName = clsx(
       error && styles.containerError,

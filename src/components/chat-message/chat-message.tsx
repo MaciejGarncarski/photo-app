@@ -9,11 +9,11 @@ import { ChatMessage as TChatMessage } from '@/src/schemas/chat';
 
 import styles from './chat-message.module.scss';
 
-type PropsTypes = {
+type Props = {
   message: TChatMessage;
 };
 
-export const ChatMessage = ({ message }: PropsTypes) => {
+export const ChatMessage = ({ message }: Props) => {
   const { senderId, receiverId, text, createdAt, id } = message;
   const {
     closeModal,

@@ -5,7 +5,7 @@ import { Button } from '@/src/components/buttons/button/button';
 
 import styles from './search-user-form.module.scss';
 
-type PropsTypes = {
+type Props = {
   resetState: () => void;
   onSubmit: (submitEv: FormEvent<HTMLFormElement>) => void;
   onChange: (changeEv: ChangeEvent<HTMLInputElement>) => void;
@@ -17,7 +17,7 @@ export const SearchUserForm = ({
   onSubmit,
   resetState,
   inputValue,
-}: PropsTypes) => {
+}: Props) => {
   return (
     <form
       data-cy="search user form"

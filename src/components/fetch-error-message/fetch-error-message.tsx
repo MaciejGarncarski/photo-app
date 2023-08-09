@@ -2,11 +2,11 @@ import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './fetch-error-message.module.scss';
 
-type PropsTypes = {
+type Props = {
   message: string;
 };
 
-export const FetchErrorMessage = ({ message }: PropsTypes) => {
+export const FetchErrorMessage = ({ message }: Props) => {
   return (
     <section className={styles.container}>
       <Heading tag="h2" size="big">

@@ -10,12 +10,12 @@ import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/co
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
 
-type PropsTypes = {
+type Props = {
   closeModal: () => void;
   isVisible: boolean;
 };
 
-export const Settings = ({ closeModal, isVisible }: PropsTypes) => {
+export const Settings = ({ closeModal, isVisible }: Props) => {
   const queryClient = useQueryClient();
   const { theme, setTheme } = useTheme();
   const isDark = theme === 'dark';

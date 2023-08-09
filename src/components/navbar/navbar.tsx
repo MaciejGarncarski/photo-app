@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';

@@ -1,10 +1,10 @@
-import styles from './PostLikesCount.module.scss';
+import styles from './post-likes-count.module.scss';
 
-type PropsTypes = {
+type Props = {
   likesCount: number;
 };
 
-export const PostLikesCount = ({ likesCount }: PropsTypes) => {
+export const PostLikesCount = ({ likesCount }: Props) => {
   return (
     <div>
       <p className={styles.count}>

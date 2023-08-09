@@ -12,11 +12,11 @@ import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './drop-zone.module.scss';
 
-type PropsTypes = {
+type Props = {
   setImgSrc: (src: string | null) => void;
 };
 
-export const DropZone = ({ setImgSrc }: PropsTypes) => {
+export const DropZone = ({ setImgSrc }: Props) => {
   const [error, setError] = useState<DropZoneErrors>(null);
 
   const { isMobile } = useIsMobile();

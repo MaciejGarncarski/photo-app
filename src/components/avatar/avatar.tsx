@@ -1,3 +1,5 @@
+'use client';
+
 import { IconUser } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
@@ -9,7 +11,7 @@ import styles from './avatar.module.scss';
 
 type Size = 'small' | 'medium' | 'big';
 
-type PropsTypes = {
+type Props = {
   userId: string;
   size: Size;
 };
@@ -22,7 +24,7 @@ const avatarSizes: Record<Size, number> = {
   small: 38,
 };
 
-export const Avatar = ({ userId, size }: PropsTypes) => {
+export const Avatar = ({ userId, size }: Props) => {
   const { data } = useUser({ userId });
 
   const avatarSize = avatarSizes[size];

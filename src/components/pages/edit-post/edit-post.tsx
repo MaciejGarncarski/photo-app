@@ -1,5 +1,7 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -18,7 +20,8 @@ import styles from './edit-post.module.scss';
 
 export const EditPost = () => {
   const router = useRouter();
-  const postId = parseInt(router.query.id as string);
+  const params = useParams();
+  const postId = parseInt(params?.postId as string);
   const { data, isLoading } = usePost({ postId });
   const { mutate } = useEditPost({ postId });
   const saveModal = useModal();

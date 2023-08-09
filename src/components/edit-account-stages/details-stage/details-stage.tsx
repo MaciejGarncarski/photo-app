@@ -10,12 +10,12 @@ import { TextArea } from '@/src/components/textarea/text-area';
 
 import styles from '../stages.module.scss';
 
-type PropsTypes = {
+type Props = {
   userId: string;
   stageSelectImage: () => void;
 };
 
-export const DetailsStage = ({ userId, stageSelectImage }: PropsTypes) => {
+export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
   const {
     closeModal,
     editAccountLoading,

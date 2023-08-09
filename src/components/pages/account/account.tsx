@@ -1,7 +1,8 @@
+'use client';
+
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
+import { useParams } from 'next/navigation';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { signOut } from '@/src/utils/sign-out';
@@ -25,9 +26,10 @@ type Props = {
 
 export const Account = ({ username: usernameFromProps }: Props) => {
   const { isMobile } = useIsMobile();
-  const router = useRouter();
+
+  const params = useParams();
   const queryClient = useQueryClient();
-  const username = usernameFromProps || (router.query.username as string);
+  const username = usernameFromProps || (params?.username as string);
 
   const { isOwner, settingsModal, signOutModal, userData, isError } =
     useAccount({
@@ -49,12 +51,8 @@ export const Account = ({ username: usernameFromProps }: Props) => {
     return <Loader marginTop color="blue" size="normal" />;
   }
 
-  const formattedUsername =
-    username.length > 20 ? username.slice(0, 10) + '...' : username;
-
   return (
     <div className={styles.container}>
-      <NextSeo title={`@${formattedUsername}`} />
       {isMobile ? (
         <AccountHeaderMobile {...accountHeaderProps} />
       ) : (

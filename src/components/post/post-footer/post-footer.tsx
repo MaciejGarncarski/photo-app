@@ -8,12 +8,12 @@ import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-footer.module.scss';
 
-type PropsTypes = {
+type Props = {
   post: Post;
   parentModalOpen?: boolean;
 };
 
-export const PostFooter = ({ post, parentModalOpen }: PropsTypes) => {
+export const PostFooter = ({ post, parentModalOpen }: Props) => {
   const { isSignedIn } = useAuth();
   const { description, authorId, id } = post;
   const { data } = useUser({ userId: authorId });

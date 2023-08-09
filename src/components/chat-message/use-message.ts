@@ -4,12 +4,12 @@ import { formatDate } from '@/src/utils/format-date';
 
 import { useDeleteChatMessage } from '@/src/components/chat-message/use-delete-message';
 
-type PropsTypes = {
+type Props = {
   receiverId: string;
   createdAt: Date;
 };
 
-export const useChatMessage = ({ receiverId, createdAt }: PropsTypes) => {
+export const useChatMessage = ({ receiverId, createdAt }: Props) => {
   const { mutate } = useDeleteChatMessage({ receiverId });
   const { isModalOpen, openModal, closeModal } = useModal();
   const { sessionUser } = useAuth();

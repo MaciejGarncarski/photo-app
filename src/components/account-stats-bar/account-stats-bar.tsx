@@ -5,11 +5,11 @@ import { StatsModal } from '@/src/components/modals/stats-modal/stats-modal';
 
 import styles from './account-stats-bar.module.scss';
 
-type PropsTypes = {
+type Props = {
   userId: string;
 };
 
-export const AccountStats = ({ userId }: PropsTypes) => {
+export const AccountStats = ({ userId }: Props) => {
   const { followersModal, friendsModal, listData } = useUserStats({ userId });
 
   return (

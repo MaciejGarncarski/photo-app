@@ -12,7 +12,7 @@ import { FinalImages } from '@/src/components/pages/create-post/types';
 
 import styles from '../stages.module.scss';
 
-type PropsTypes = {
+type Props = {
   stageSelectImage: () => void;
   stagePersonalInfo: () => void;
 };
@@ -20,7 +20,7 @@ type PropsTypes = {
 export const UpdateAvatarStage = ({
   stagePersonalInfo,
   stageSelectImage,
-}: PropsTypes) => {
+}: Props) => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const resetFinalImages = () => setFinalImages([]);
   const { onSaveImage, isLoading, isFinalImageEmpty } = useUploadAvatar({

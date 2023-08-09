@@ -10,7 +10,7 @@ import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/co
 
 import styles from '../stages.module.scss';
 
-type PropsTypes = {
+type Props = {
   stageSelectImage: () => void;
   stageCropImage: () => void;
   stagePersonalInfo: () => void;
@@ -19,7 +19,7 @@ type PropsTypes = {
 export const SelectOptionStage = ({
   stageCropImage,
   stagePersonalInfo,
-}: PropsTypes) => {
+}: Props) => {
   const { sessionUser } = useAuth();
   const customImage = sessionUser?.customImage;
 

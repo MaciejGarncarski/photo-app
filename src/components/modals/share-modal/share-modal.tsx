@@ -4,17 +4,13 @@ import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
 import { useShareModal } from '@/src/components/modals/share-modal/use-share-modal';
 
-type PropsTypes = {
+type Props = {
   closeModal: () => void;
   textToCopy: string;
   isVisible: boolean;
 };
 
-export const ShareModal = ({
-  closeModal,
-  textToCopy,
-  isVisible,
-}: PropsTypes) => {
+export const ShareModal = ({ closeModal, textToCopy, isVisible }: Props) => {
   const { isCopied, handleCopy } = useShareModal({ textToCopy });
 
   return (

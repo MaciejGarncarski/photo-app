@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import ReactFocusLock from 'react-focus-lock';
@@ -9,7 +11,7 @@ import styles from './list-modal.module.scss';
 
 import { listModalVariants } from './list-modal.animation';
 
-type PropsTypes = {
+type Props = {
   closeModal: () => void;
   headingText: string;
   children: ReactNode;
@@ -22,7 +24,7 @@ export const ListModal = ({
   children,
   isVisible,
   ...rest
-}: PropsTypes) => {
+}: Props) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import { getDescriptionData } from '@/src/utils/get-description-data';

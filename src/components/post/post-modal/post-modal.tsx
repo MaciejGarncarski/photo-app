@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
@@ -13,13 +15,13 @@ import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-modal.module.scss';
 
-type PropsTypes = {
+type Props = {
   post: Post;
   closeModal: () => void;
   isVisible: boolean;
 };
 
-export const PostModal = ({ post, closeModal, isVisible }: PropsTypes) => {
+export const PostModal = ({ post, closeModal, isVisible }: Props) => {
   const { authorId, id, createdAt } = post;
 
   return (

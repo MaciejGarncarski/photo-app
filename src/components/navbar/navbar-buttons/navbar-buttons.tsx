@@ -1,7 +1,9 @@
+'use client';
+
 import { IconSettings } from '@tabler/icons-react';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
@@ -14,7 +16,7 @@ import styles from './navbar-buttons.module.scss';
 
 export const NavButtons = () => {
   const { sessionUser, isLoading, isSignedIn } = useAuth();
-  const router = useRouter();
+  const path = usePathname();
   const { openModal, closeModal, isModalOpen } = useModal();
   const { navButtonsList } = getNavListData(sessionUser?.username);
 
@@ -32,7 +34,9 @@ export const NavButtons = () => {
                 <Link
                   href={href}
                   className={clsx(
-                    router.asPath === href && styles.active,
+                    {
+                      [styles.active]: path === href,
+                    },
                     styles.listItemContent,
                   )}
                 >

@@ -3,12 +3,12 @@ import clsx from 'clsx';
 
 import styles from './modal-close-button.module.scss';
 
-type PropsTypes = {
+type Props = {
   onClose: () => void;
   outside?: boolean;
 };
 
-export const ModalCloseButton = ({ onClose, outside }: PropsTypes) => {
+export const ModalCloseButton = ({ onClose, outside }: Props) => {
   const handleClose = () => {
     onClose();
   };

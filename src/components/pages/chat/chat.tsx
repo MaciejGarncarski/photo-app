@@ -1,3 +1,5 @@
+'use client';
+
 import { ChatUsersList } from '@/src/components/chat-users-list/chat-users-list';
 import { SearchUserForm } from '@/src/components/forms/search-user-form/search-user-form';
 import { useChatUsers } from '@/src/components/pages/chat/use-chat-users';

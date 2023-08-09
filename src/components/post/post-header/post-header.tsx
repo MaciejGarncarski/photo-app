@@ -11,7 +11,7 @@ import { PostOptions } from '@/src/components/post/post-options/post-options';
 
 import styles from './post-header.module.scss';
 
-type PropsTypes = {
+type Props = {
   tag?: 'header' | 'div';
   authorId: string;
   createdAt: string;
@@ -23,7 +23,7 @@ export const PostHeader = ({
   authorId,
   createdAt,
   postId,
-}: PropsTypes) => {
+}: Props) => {
   const { isSignedIn, isLoading } = useAuth();
   const {
     dateFromNow,

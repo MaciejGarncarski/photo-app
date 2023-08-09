@@ -1,3 +1,5 @@
+'use client';
+
 import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
@@ -8,7 +10,7 @@ import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-back
 
 import styles from './confirmation-alert.module.scss';
 
-type PropsTypes = {
+type Props = {
   onConfirm: () => void;
   closeModal: () => void;
   headingText?: string;
@@ -20,7 +22,7 @@ export const ConfirmationAlert = ({
   onConfirm,
   closeModal,
   isVisible,
-}: PropsTypes) => {
+}: Props) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (

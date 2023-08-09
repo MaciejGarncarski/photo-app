@@ -1,6 +1,8 @@
+'use client';
+
 import { IconArrowLeft, IconSend } from '@tabler/icons-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';

@@ -7,7 +7,7 @@ import { backdropVariants } from '@/src/components/modals/modal-backdrop/modal-b
 
 import styles from './modal-backdrop.module.scss';
 
-type PropsTypes = {
+type Props = {
   closeModal: () => void;
   mobileCenter?: boolean;
   children: ReactNode;
@@ -17,7 +17,7 @@ export const ModalBackdrop = ({
   closeModal,
   mobileCenter,
   children,
-}: PropsTypes) => {
+}: Props) => {
   const backdropClassName = clsx(
     mobileCenter && styles.backdropMobileCenter,
     styles.backdrop,

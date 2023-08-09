@@ -3,13 +3,13 @@ import clsx from 'clsx';
 
 import styles from './loader.module.scss';
 
-type PropsTypes = {
+type Props = {
   size: 'small' | 'normal';
   color: 'white' | 'blue';
   marginTop?: boolean;
 };
 
-export const Loader = ({ size, color, marginTop }: PropsTypes) => {
+export const Loader = ({ size, color, marginTop }: Props) => {
   return (
     <span
       className={clsx(

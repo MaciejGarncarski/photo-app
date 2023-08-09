@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getUser } from '@/src/services/user.service';
 
-type PropsTypes = {
+type Props = {
   userId: string;
 };
 
-export const useUser = ({ userId }: PropsTypes) => {
+export const useUser = ({ userId }: Props) => {
   return useQuery({
     queryKey: ['user', userId],
     queryFn: () => getUser({ userId }),

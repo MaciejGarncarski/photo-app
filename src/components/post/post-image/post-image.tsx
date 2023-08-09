@@ -10,7 +10,7 @@ import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-image.module.scss';
 
-type PropsTypes = {
+type Props = {
   width: number;
   height: number;
   priority: boolean;
@@ -18,13 +18,7 @@ type PropsTypes = {
   post: Post;
 };
 
-export const PostImage = ({
-  height,
-  priority,
-  src,
-  width,
-  post,
-}: PropsTypes) => {
+export const PostImage = ({ height, priority, src, width, post }: Props) => {
   const { description, authorId } = post;
 
   const { data } = useUser({ userId: authorId });

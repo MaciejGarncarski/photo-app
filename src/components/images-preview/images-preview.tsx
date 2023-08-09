@@ -14,12 +14,12 @@ import styles from './images-preview.module.scss';
 
 const MAX_IMAGES_LENGTH = 3;
 
-type PropsTypes = {
+type Props = {
   onRemove: (id: string) => void;
   previewImages: PreviewImages;
 };
 
-export const ImagesPreview = ({ onRemove, previewImages }: PropsTypes) => {
+export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
   const emptyImagesLength = MAX_IMAGES_LENGTH - previewImages.length;
   const arrayOfEmptyImages = Array.from(
     { length: emptyImagesLength },

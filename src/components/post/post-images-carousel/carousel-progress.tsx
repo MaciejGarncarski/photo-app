@@ -4,12 +4,12 @@ import { PostImage } from '@/src/services/userPosts.service';
 
 import styles from './post-images-carousel.module.scss';
 
-type PropsTypes = {
+type Props = {
   currentIndex: number;
   images: Array<PostImage>;
 };
 
-export const PostSliderProgress = ({ currentIndex, images }: PropsTypes) => {
+export const PostSliderProgress = ({ currentIndex, images }: Props) => {
   return (
     <ul className={styles.postSliderProgress}>
       {images.map((image, idx) => {

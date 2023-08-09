@@ -5,12 +5,12 @@ import { Post } from '@/src/schemas/post.schema';
 
 import styles from './home-post.module.scss';
 
-type PropsTypes = {
+type Props = {
   post: Post;
   priority: boolean;
 };
 
-export const HomePost = ({ post, priority }: PropsTypes) => {
+export const HomePost = ({ post, priority }: Props) => {
   const { authorId, id, createdAt } = post;
 
   return (

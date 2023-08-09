@@ -1,3 +1,5 @@
+'use client';
+
 import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';

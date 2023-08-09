@@ -1,8 +1,10 @@
+'use client';
+
 import { UseInfiniteQueryResult } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
@@ -15,16 +17,16 @@ import { ChatUsersResponse } from '@/src/schemas/chat';
 
 import styles from './chat-users-list.module.scss';
 
-type PropsTypes = {
+type Props = {
   chatUsers: UseInfiniteQueryResult<ChatUsersResponse, unknown>;
   isEnabled: boolean;
 };
 
 const MotionLink = motion(Link);
 
-export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
-  const router = useRouter();
+export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
   const { data, isLoading, fetchNextPage, hasNextPage, isError } = chatUsers;
+  const params = useParams();
 
   const { ref } = useInfiniteScroll({
     hasNextPage: Boolean(hasNextPage),
@@ -51,7 +53,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: PropsTypes) => {
         {data?.pages &&
           data.pages.map((page) => {
             return page.users.map(({ id, name, username }) => {
-              const isActive = id === (router.query.receiverId as string);
+              const isActive = id === (params?.receiverId as string);
               return (
                 <li key={id} data-cy="chat user">
                   <MotionLink

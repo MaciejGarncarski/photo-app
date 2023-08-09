@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import styles from './list-modal.module.scss';
 
-type PropsTypes = {
+type Props = {
   icon: ReactNode;
   children: ReactNode;
   isLast?: boolean;
@@ -28,7 +28,7 @@ type WithLink = {
 
 type ModalListItemConditionalProps = WithButton | WithLink;
 
-type ModalListItemProps = PropsTypes & ModalListItemConditionalProps;
+type ModalListItemProps = Props & ModalListItemConditionalProps;
 
 export const ListModalItem = ({
   type,

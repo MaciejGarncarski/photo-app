@@ -5,11 +5,11 @@ import { Button } from '@/src/components/buttons/button/button';
 import { useFollowMutation } from '@/src/components/buttons/follow-button/use-follow';
 import { Loader } from '@/src/components/loader/loader';
 
-type PropsTypes = {
+type Props = {
   userId: string;
 };
 
-export const FollowButton = ({ userId }: PropsTypes) => {
+export const FollowButton = ({ userId }: Props) => {
   const { data } = useUser({ userId });
   const { isLoading, mutate } = useFollowMutation({ userId });
   const { isSignedIn } = useAuth();

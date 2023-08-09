@@ -1,5 +1,7 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 
 import { useModal } from '@/src/hooks/use-modal';
 import { useUser } from '@/src/hooks/use-user';
@@ -14,7 +16,8 @@ import styles from './post-by-id.module.scss';
 
 export const PostById = () => {
   const router = useRouter();
-  const postId = parseInt(router.query.id as string);
+  const params = useParams();
+  const postId = parseInt(params?.postId as string);
   const postModal = useModal(true);
   const { data, isSuccess, isError } = usePost({ postId });
   const { data: authorData } = useUser({ userId: data?.authorId || '' });

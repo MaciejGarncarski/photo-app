@@ -3,11 +3,11 @@ import { DropZoneErrors } from '@/src/components/pages/create-post/types';
 
 import styles from './crop-error.module.scss';
 
-type PropsTypes = {
+type Props = {
   errorType: DropZoneErrors;
 };
 
-export const CropError = ({ errorType }: PropsTypes) => {
+export const CropError = ({ errorType }: Props) => {
   if (!errorType) {
     return null;
   }

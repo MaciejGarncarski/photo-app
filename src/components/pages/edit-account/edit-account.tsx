@@ -1,5 +1,6 @@
+'use client';
+
 import { AnimatePresence } from 'framer-motion';
-import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
@@ -24,7 +25,6 @@ export const EditAccount = () => {
 
   return (
     <main id="main" className={styles.container}>
-      <NextSeo title="Edit account" />
       <AnimatePresence mode="wait">
         {stage === 'selectImage' && (
           <SelectOptionStage

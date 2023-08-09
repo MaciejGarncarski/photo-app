@@ -10,7 +10,7 @@ import { Loader } from '@/src/components/loader/loader';
 
 import styles from './account-post.module.scss';
 
-type PropsTypes = {
+type Props = {
   imageUrl: string;
   width: number;
   height: number;
@@ -30,7 +30,7 @@ export const AccountPost = ({
   imageUrl,
   width,
   height,
-}: PropsTypes) => {
+}: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (

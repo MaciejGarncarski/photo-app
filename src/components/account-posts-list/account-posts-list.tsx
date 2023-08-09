@@ -9,11 +9,11 @@ import { Loader } from '@/src/components/loader/loader';
 
 import styles from './account-posts-list.module.scss';
 
-type PropsTypes = {
+type Props = {
   userId: string;
 };
 
-export const AccountPostsList = ({ userId }: PropsTypes) => {
+export const AccountPostsList = ({ userId }: Props) => {
   const { data, isLoading, hasNextPage, fetchNextPage } = useAccountPosts({
     userId,
   });

@@ -5,11 +5,11 @@ import { useCommentForm } from '@/src/components/forms/comment-form/use-comment-
 
 import styles from './comment-form.module.scss';
 
-type PropsTypes = {
+type Props = {
   postId: number;
 };
 
-export const CommentForm = ({ postId }: PropsTypes) => {
+export const CommentForm = ({ postId }: Props) => {
   const { errors, handleSubmit, isDirty, isLoading, onSubmit, register } =
     useCommentForm({ postId });
 
