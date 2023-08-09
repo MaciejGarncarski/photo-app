@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuth } from '@/src/hooks/use-auth';
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
-import { useIsGoingUp } from '@/src/hooks/use-is-scrolling-up';
+import { useIsScrollingUp } from '@/src/hooks/use-is-scrolling-up';
 import { socket } from '@/src/utils/socket';
 
 import { useInfiniteMessages } from '@/src/components/pages/chat-room/use-infinite-messages';
@@ -14,7 +14,7 @@ export const useChatMessages = () => {
   const router = useRouter();
   const { sessionUser } = useAuth();
   const { isMobile } = useIsMobile();
-  const { isGoingUp } = useIsGoingUp();
+  const { isScrollingUp } = useIsScrollingUp();
 
   const friendId = router.query.receiverId as string;
 
@@ -53,7 +53,7 @@ export const useChatMessages = () => {
     hasNextPage,
     ref,
     isMobile,
-    isGoingUp,
+    isScrollingUp,
     friendId,
     isError,
     inputVal,
