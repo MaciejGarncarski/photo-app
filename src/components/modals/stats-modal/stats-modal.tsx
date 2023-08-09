@@ -15,7 +15,7 @@ type PropsTypes = {
 };
 
 export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
-  const { isLoading, data, isEmpty, sentryRef } = useStatsModal({
+  const { isLoading, data, isEmpty, ref } = useStatsModal({
     userId,
     type,
   });
@@ -37,7 +37,7 @@ export const StatsModal = ({ closeModal, type, userId }: PropsTypes) => {
             </ul>
           )}
           {isLoading ? (
-            <ul className={styles.list} ref={sentryRef}>
+            <ul className={styles.list} ref={ref}>
               {Array.from({ length: 3 }, (_, item) => item).map((el) => {
                 return <li className={styles.placeholder} key={el}></li>;
               })}
