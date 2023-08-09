@@ -1,13 +1,14 @@
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import { socket } from '@/src/utils/socket';
 
-import { newPostsAtom } from '@/src/components/pages/home/home';
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
+
+export const newPostsAtom = atom(false);
 
 export const useNewPost = () => {
   const [hasNewPosts, setHasNewPosts] = useAtom(newPostsAtom);

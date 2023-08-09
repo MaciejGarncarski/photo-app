@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { atom } from 'jotai';
 
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
@@ -13,8 +12,6 @@ import { useInfinitePosts } from '@/src/components/pages/home/use-posts';
 import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
 
 import styles from './home.module.scss';
-
-export const newPostsAtom = atom(false);
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } =
