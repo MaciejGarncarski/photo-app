@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useAuth } from '@/src/hooks/use-auth';
 
 import { Avatar } from '@/src/components/avatar/avatar';
+import { Button } from '@/src/components/buttons/button/button';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
 import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 import { usePostHeader } from '@/src/components/post/post-header/use-post-header';
@@ -59,6 +60,10 @@ export const PostHeader = ({
           {!isAuthor && <FollowButton userId={authorId} />}
         </div>
       )}
+
+      <Button type="button" variant="primary" onClick={menuModal.openModal}>
+        Settings
+      </Button>
 
       <PostOptions
         isVisible={menuModal.isModalOpen && !confirmationModal.isModalOpen}

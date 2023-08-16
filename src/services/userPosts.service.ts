@@ -12,17 +12,7 @@ export type PostImage = {
 
 import { z } from 'zod';
 
-const postSchema = z.object({
-  commentsCount: z.number(),
-  likesCount: z.number(),
-  images: z.array(z.custom<PostImage>()),
-  createdAt: z.date(),
-  description: z.string(),
-  id: z.number(),
-  isLiked: z.boolean(),
-});
-
-export type Post = z.infer<typeof postSchema>;
+import { postSchema } from '@/src/schemas/post.schema';
 
 const userSchema = z.object({
   username: z.string(),

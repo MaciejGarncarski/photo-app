@@ -23,10 +23,10 @@ export const SelectOptionStage = ({
   const { sessionUser } = useAuth();
   const customImage = sessionUser?.customImage;
 
-  const { isLoading, isModalOpen, openModal, removeAvatar, closeModal } =
+  const { isPending, isModalOpen, openModal, removeAvatar, closeModal } =
     useOptionsStage();
 
-  if (isLoading) {
+  if (isPending) {
     return null;
     // todo
     // return <TextWithLoader text="Removing your avatar.." />;

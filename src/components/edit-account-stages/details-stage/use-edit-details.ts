@@ -47,6 +47,6 @@ export const useEditDetails = ({
     onClick,
     onReset,
     onSubmit,
-    editAccountLoading: editAccount.isLoading,
+    editAccountLoading: editAccount.isPending,
   };
 };

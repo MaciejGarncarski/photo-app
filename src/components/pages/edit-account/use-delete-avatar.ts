@@ -5,9 +5,10 @@ import { deleteAvatar } from '@/src/services/user.service';
 export const useDeleteAvatar = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(deleteAvatar, {
+  return useMutation({
+    mutationFn: deleteAvatar,
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 };

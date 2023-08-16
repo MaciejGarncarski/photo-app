@@ -37,12 +37,8 @@ export const Home = () => {
       >
         <NewPostNotification />
         {data?.pages.map((page) => {
-          return page?.posts.map((post, idx) => {
-            if (!post) {
-              return <PostPlaceholder key={idx} />;
-            }
-
-            return <HomePost priority={idx < 3} key={post.id} post={post} />;
+          return page?.posts.map(({ id }, idx) => {
+            return <HomePost priority={idx < 3} key={id} postId={id} />;
           });
         })}
         {!isLoading && hasNextPage && (

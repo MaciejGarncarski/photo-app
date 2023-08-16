@@ -1,12 +1,8 @@
-'use client';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
+import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
+import { Providers } from '@/src/app/providers';
 import { Layout } from '@/src/components/layout/layout';
 
 import '../styles/globals.scss';
@@ -20,21 +16,25 @@ const inter = Inter({
   display: 'swap',
 });
 
-const DefaultLayout = ({ children }: Props) => {
-  const [client] = useState(new QueryClient());
+const description =
+  'PhotoApp is social media application created in the modern tech stack. In this app, you can chat with friends, create posts, comment on them and follow other users. It was my first attempt to create a backend in Next.js, so I learned a lot of things while creating this app.';
 
+export const metadata: Metadata = {
+  title: 'Photo App',
+  description,
+  icons: {
+    icon: '/icons/favicon.ico',
+  },
+};
+
+const DefaultLayout = ({ children }: Props) => {
   return (
     <html suppressHydrationWarning lang="en" className={inter.className}>
       <head />
       <body>
-        <ThemeProvider>
-          <QueryClientProvider client={client}>
-            <ReactQueryStreamedHydration>
-              <Layout>{children}</Layout>
-            </ReactQueryStreamedHydration>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ThemeProvider>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );

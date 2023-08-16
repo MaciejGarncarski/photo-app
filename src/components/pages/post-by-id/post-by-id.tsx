@@ -48,10 +48,10 @@ export const PostById = () => {
     <>
       <PostModal
         isVisible={postModal.isModalOpen}
-        post={data}
+        postId={postId}
         closeModal={postModalClose}
       />
-      <Account username={authorData.username} />
+      <Account userData={authorData} />
     </>
   );
 };

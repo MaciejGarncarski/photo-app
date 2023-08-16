@@ -1,24 +1,20 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 
-import {
-  signInCredentials,
-  SignInFormValues,
-  SignInSchema,
-} from '@/src/utils/sign-in';
+import { useSignIn } from '@/src/hooks/use-sign-in';
 
 import { Button } from '@/src/components/buttons/button/button';
 import { Input } from '@/src/components/input/input';
 import { animation } from '@/src/components/pages/sign-in/sign-in.animation';
+import { SignInFormValues, SignInSchema } from '@/src/schemas/sign-in.schema';
 
 import styles from './sign-in-form.module.scss';
 
 export const SignInForm = () => {
-  const queryClient = useQueryClient();
+  const { mutate: signInCredentials } = useSignIn();
 
   const {
     handleSubmit,
@@ -35,7 +31,7 @@ export const SignInForm = () => {
   });
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
-    await signInCredentials({ email, password, queryClient });
+    await signInCredentials({ email, password });
   });
 
   return (

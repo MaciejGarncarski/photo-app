@@ -32,18 +32,16 @@ const uplaodPost = ({ description, images }: CreatePostInput) => {
 export const useSendNewPost = () => {
   const { sessionUser } = useAuth();
 
-  return useMutation(
-    async ({ description, images }: CreatePostInput) => {
+  return useMutation({
+    mutationFn: async ({ description, images }: CreatePostInput) => {
       if (!sessionUser?.id) {
         return;
       }
 
       return uplaodPost({ description, images });
     },
-    {
-      onSuccess: () => {
-        socket.emit('new post');
-      },
+    onSuccess: () => {
+      socket.emit('new post');
     },
-  );
+  });
 };

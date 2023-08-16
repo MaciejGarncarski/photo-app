@@ -21,16 +21,15 @@ const fetchPosts = async ({ pageParam = 0, userId }: FetchPost) => {
 };
 
 export const useAccountPosts = ({ userId }: UseAccountPost) => {
-  return useInfiniteQuery(
-    ['account posts', userId],
-    ({ pageParam }) => fetchPosts({ userId, pageParam }),
-    {
-      refetchOnWindowFocus: false,
-      getNextPageParam: (prevPosts) => {
-        return prevPosts.currentPage === prevPosts.totalPages
-          ? undefined
-          : prevPosts.currentPage + 1;
-      },
+  return useInfiniteQuery({
+    queryKey: ['account posts', userId],
+    queryFn: ({ pageParam }) => fetchPosts({ userId, pageParam }),
+    defaultPageParam: 0,
+    refetchOnWindowFocus: false,
+    getNextPageParam: (prevPosts: UserPosts) => {
+      return prevPosts.currentPage === prevPosts.totalPages
+        ? undefined
+        : prevPosts.currentPage + 1;
     },
-  );
+  });
 };

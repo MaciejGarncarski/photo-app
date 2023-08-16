@@ -27,7 +27,7 @@ export const useCommentForm = ({ postId }: Arguments) => {
     },
   });
 
-  const { mutate, isLoading } = useAddComment({ postId });
+  const { mutate, isPending } = useAddComment({ postId });
 
   const onSubmit: SubmitHandler<CommentFormValues> = ({ comment }) => {
     const result = commentTextSchema.safeParse(comment);
@@ -39,5 +39,5 @@ export const useCommentForm = ({ postId }: Arguments) => {
     mutate({ commentText: result.data, postId }, { onSuccess: () => reset() });
   };
 
-  return { onSubmit, isLoading, register, handleSubmit, isDirty, errors };
+  return { onSubmit, isPending, register, handleSubmit, isDirty, errors };
 };

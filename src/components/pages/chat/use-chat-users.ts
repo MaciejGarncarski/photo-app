@@ -29,27 +29,23 @@ export const useChatUsers = () => {
     setInputValue(changeEv.target.value);
   };
 
-  const chatUsers = useInfiniteQuery(
-    ['chat users', sessionUser?.id, searchedUser],
-    async ({ pageParam = 0 }) => {
+  const chatUsers = useInfiniteQuery({
+    queryKey: ['chat users', sessionUser?.id, searchedUser],
+    queryFn: async ({ pageParam = 0 }) => {
       const { data: responseData } = await apiClient.get<ChatUsersResponse>(
         `chat/chatUsers?skip=${pageParam}&searchedUser=${searchedUser}`,
       );
       return responseData;
     },
-    {
-      enabled: isEnabled,
-      refetchOnWindowFocus: false,
-      getNextPageParam: (prevMessages) => {
-        return prevMessages?.currentPage === prevMessages.totalPages
-          ? undefined
-          : prevMessages.currentPage + 1;
-      },
-      onSettled: () => {
-        setIsEnabled(false);
-      },
+    defaultPageParam: 0,
+    enabled: isEnabled,
+    refetchOnWindowFocus: false,
+    getNextPageParam: (prevMessages: ChatUsersResponse) => {
+      return prevMessages?.currentPage === prevMessages.totalPages
+        ? undefined
+        : prevMessages.currentPage + 1;
     },
-  );
+  });
 
   return {
     chatUsers,

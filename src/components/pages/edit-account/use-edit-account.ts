@@ -5,9 +5,10 @@ import { editAccount } from '@/src/services/user.service';
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(editAccount, {
+  return useMutation({
+    mutationFn: editAccount,
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 };

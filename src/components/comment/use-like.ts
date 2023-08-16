@@ -6,10 +6,11 @@ import { likeComment } from '@/src/services/comment.service';
 export const useCommentLike = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(likeComment, {
+  return useMutation({
+    mutationFn: likeComment,
     onError: () => toast.error('Error, try again later.'),
     onSettled: async () => {
-      await queryClient.invalidateQueries(['infinite comments']);
+      await queryClient.invalidateQueries({ queryKey: ['infinite comments'] });
     },
   });
 };

@@ -13,13 +13,16 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
   const queryClient = useQueryClient();
   const { data } = useUser({ userId });
 
-  return useMutation(followOtherUser, {
+  return useMutation({
+    mutationFn: followOtherUser,
     onError: () => toast.error('Error, try again later.'),
     onSuccess: async () => {
-      await queryClient.invalidateQueries(['user', userId]);
-      await queryClient.invalidateQueries(['user', data?.username]);
-      await queryClient.invalidateQueries(['other-users']);
-      await queryClient.invalidateQueries(['session']);
+      await queryClient.invalidateQueries({ queryKey: ['user', userId] });
+      await queryClient.invalidateQueries({
+        queryKey: ['user', data?.username],
+      });
+      await queryClient.invalidateQueries({ queryKey: ['other-users'] });
+      await queryClient.invalidateQueries({ queryKey: ['session'] });
     },
   });
 };

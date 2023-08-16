@@ -1,6 +1,6 @@
 'use client';
 
-import { UseInfiniteQueryResult } from '@tanstack/react-query';
+import { InfiniteData, UseInfiniteQueryResult } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -18,7 +18,7 @@ import { ChatUsersResponse } from '@/src/schemas/chat';
 import styles from './chat-users-list.module.scss';
 
 type Props = {
-  chatUsers: UseInfiniteQueryResult<ChatUsersResponse, unknown>;
+  chatUsers: UseInfiniteQueryResult<InfiniteData<ChatUsersResponse>>;
   isEnabled: boolean;
 };
 
@@ -34,7 +34,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
     enabled: isEnabled,
   });
 
-  if (isError) {
+  if (isError || !data) {
     return <FetchErrorMessage message="Cannot fetch users." />;
   }
 
@@ -50,27 +50,26 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
         animate="show"
         className={styles.list}
       >
-        {data?.pages &&
-          data.pages.map((page) => {
-            return page.users.map(({ id, name, username }) => {
-              const isActive = id === (params?.receiverId as string);
-              return (
-                <li key={id} data-cy="chat user">
-                  <MotionLink
-                    variants={linkVariants}
-                    href={`/chat/${id}`}
-                    className={clsx(isActive && styles.linkActive, styles.link)}
-                  >
-                    <Avatar userId={id} size="medium" />
-                    <span className={styles.name}>
-                      <span className={styles.fullName}>{name}</span>
-                      <span className={styles.username}>@{username}</span>
-                    </span>
-                  </MotionLink>
-                </li>
-              );
-            });
-          })}
+        {data.pages.map((page) => {
+          return page.users.map(({ id, name, username }) => {
+            const isActive = id === (params?.receiverId as string);
+            return (
+              <li key={id} data-cy="chat user">
+                <MotionLink
+                  variants={linkVariants}
+                  href={`/chat/${id}`}
+                  className={clsx(isActive && styles.linkActive, styles.link)}
+                >
+                  <Avatar userId={id} size="medium" />
+                  <span className={styles.name}>
+                    <span className={styles.fullName}>{name}</span>
+                    <span className={styles.username}>@{username}</span>
+                  </span>
+                </MotionLink>
+              </li>
+            );
+          });
+        })}
         {hasNextPage && !isLoading && (
           <div ref={ref} className={styles.loading}>
             <Loader color="blue" size="normal" />

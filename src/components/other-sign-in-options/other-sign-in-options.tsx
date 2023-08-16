@@ -1,24 +1,22 @@
 'use client';
 
 import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
-import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 
+import { useSignIn } from '@/src/hooks/use-sign-in';
 import { clientEnv } from '@/src/utils/env';
-import { signInCredentials } from '@/src/utils/sign-in';
 
 import { Button } from '@/src/components/buttons/button/button';
 
 import styles from './other-sign-in-options.module.scss';
 
 export const OtherSignInOptions = () => {
-  const queryClient = useQueryClient();
+  const { mutate: signInCredentials } = useSignIn();
 
   const handleSignInDemo = () => {
     signInCredentials({
       email: 'test@test.pl',
       password: '12345',
-      queryClient,
     });
   };
 

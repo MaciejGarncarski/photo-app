@@ -7,6 +7,12 @@ export const postDescriptionSchema = z.string().min(1).max(100);
 export type PostDescription = z.infer<typeof postDescriptionSchema>;
 
 export const postSchema = z.object({
+  createdAt: z.date(),
+  id: z.number(),
+  authorId: z.string(),
+});
+
+export const postDetailsSchema = z.object({
   commentsCount: z.number(),
   likesCount: z.number(),
   images: z.array(z.custom<PostImage>()),
@@ -25,6 +31,7 @@ export const postsResponseSchema = z.object({
 });
 
 export type Post = z.infer<typeof postSchema>;
+export type PostDetails = z.infer<typeof postDetailsSchema>;
 export type PostsResponse = z.infer<typeof postsResponseSchema>;
 
 export type CreatePostInput = {

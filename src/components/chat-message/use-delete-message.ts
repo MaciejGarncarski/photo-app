@@ -9,9 +9,10 @@ type Arguments = {
 export const useDeleteChatMessage = ({ receiverId }: Arguments) => {
   const queryClient = useQueryClient();
 
-  return useMutation(deleteChatMessage, {
+  return useMutation({
+    mutationFn: deleteChatMessage,
     onSuccess: () => {
-      queryClient.invalidateQueries(['chatMessages', receiverId]);
+      queryClient.invalidateQueries({ queryKey: ['chatMessages', receiverId] });
     },
   });
 };

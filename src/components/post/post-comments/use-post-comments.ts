@@ -9,22 +9,20 @@ type UseInfiniteComments = {
 };
 
 export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
-  return useInfiniteQuery(
-    ['infinite comments', postId],
-    async ({ pageParam = 0 }) => {
-      const { data } = await apiClient.get<CommentResponse>(
+  return useInfiniteQuery({
+    queryKey: ['infinite comments', postId],
+    queryFn: async ({ pageParam = 0 }): Promise<CommentResponse> => {
+      const { data } = await apiClient.get(
         `post-comment/${postId}?skip=${pageParam}`,
       );
       return data;
     },
-
-    {
-      refetchOnWindowFocus: false,
-      getNextPageParam: (prevComments) => {
-        return prevComments.currentPage === prevComments.totalPages
-          ? undefined
-          : prevComments.currentPage + 1;
-      },
+    defaultPageParam: 0,
+    refetchOnWindowFocus: false,
+    getNextPageParam: (prevComments: CommentResponse) => {
+      return prevComments.currentPage === prevComments.totalPages
+        ? undefined
+        : prevComments.currentPage + 1;
     },
-  );
+  });
 };

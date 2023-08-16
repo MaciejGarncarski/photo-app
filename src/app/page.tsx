@@ -1,20 +1,25 @@
-import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { Home } from '@/src/components/pages/home/home';
+import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
 
-const description =
-  'PhotoApp is social media application created in the modern tech stack. In this app, you can chat with friends, create posts, comment on them and follow other users. It was my first attempt to create a backend in Next.js, so I learned a lot of things while creating this app.';
-
-export const metadata: Metadata = {
-  title: 'Photo App',
-  description,
-  icons: {
-    icon: '/icons/favicon.ico',
-  },
+const PostsPlaceholder = () => {
+  return (
+    <>
+      <PostPlaceholder />
+      <PostPlaceholder />
+      <PostPlaceholder />
+      <PostPlaceholder />
+    </>
+  );
 };
 
 const HomePage = () => {
-  return <Home />;
+  return (
+    <Suspense fallback={<PostsPlaceholder />}>
+      <Home />;
+    </Suspense>
+  );
 };
 
 export default HomePage;

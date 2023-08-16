@@ -1,17 +1,23 @@
+import { usePost } from '@/src/components/pages/account/use-post';
 import { PostFooter } from '@/src/components/post/post-footer/post-footer';
 import { PostHeader } from '@/src/components/post/post-header/post-header';
 import { PostImagesCarousel } from '@/src/components/post/post-images-carousel/post-images-carousel';
-import { Post } from '@/src/schemas/post.schema';
 
 import styles from './home-post.module.scss';
 
 type Props = {
-  post: Post;
+  postId: number;
   priority: boolean;
 };
 
-export const HomePost = ({ post, priority }: Props) => {
-  const { authorId, id, createdAt } = post;
+export const HomePost = ({ postId, priority }: Props) => {
+  const { data: post, isLoading } = usePost({ postId });
+
+  if (isLoading || !post) {
+    return null;
+  }
+
+  const { authorId, createdAt } = post;
 
   return (
     <li>
@@ -19,10 +25,10 @@ export const HomePost = ({ post, priority }: Props) => {
         <PostHeader
           authorId={authorId}
           createdAt={createdAt.toString()}
-          postId={id}
+          postId={postId}
         />
-        <PostImagesCarousel post={post} priority={priority} />
-        <PostFooter post={post} />
+        <PostImagesCarousel postId={postId} priority={priority} />
+        <PostFooter postId={postId} />
       </article>
     </li>
   );

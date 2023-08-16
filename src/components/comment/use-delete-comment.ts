@@ -6,10 +6,11 @@ import { deleteComment } from '@/src/services/comment.service';
 export const useDeleteComment = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(deleteComment, {
+  return useMutation({
+    mutationFn: deleteComment,
     onError: () => toast.error('Error, try again later.'),
     onSettled: async () => {
-      await queryClient.invalidateQueries(['infinite comments']);
+      await queryClient.invalidateQueries({ queryKey: ['infinite comments'] });
     },
   });
 };

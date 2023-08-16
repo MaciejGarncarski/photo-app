@@ -37,7 +37,9 @@ export const useUploadAvatar = ({
       { avatarFile: finalImages[0].file },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries(['user', sessionUser?.id]);
+          await queryClient.invalidateQueries({
+            queryKey: ['user', sessionUser?.id],
+          });
           stagePersonalInfo();
         },
         onSettled: () => {
@@ -49,7 +51,7 @@ export const useUploadAvatar = ({
 
   return {
     onSaveImage,
-    isLoading: uploadNewAvatar.isLoading,
+    isLoading: uploadNewAvatar.isPending,
     isFinalImageEmpty,
   };
 };

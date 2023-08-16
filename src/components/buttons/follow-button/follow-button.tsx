@@ -11,7 +11,7 @@ type Props = {
 
 export const FollowButton = ({ userId }: Props) => {
   const { data } = useUser({ userId });
-  const { isLoading, mutate } = useFollowMutation({ userId });
+  const { isPending, mutate } = useFollowMutation({ userId });
   const { isSignedIn } = useAuth();
 
   if (!isSignedIn || !data) {
@@ -28,7 +28,7 @@ export const FollowButton = ({ userId }: Props) => {
       variant={isFollowing ? 'secondary' : 'primary'}
       onClick={handleFollow}
     >
-      {isLoading ? (
+      {isPending ? (
         <Loader size="small" color={isFollowing ? 'blue' : 'white'} />
       ) : (
         <span>{isFollowing ? 'unfollow' : 'follow'}</span>

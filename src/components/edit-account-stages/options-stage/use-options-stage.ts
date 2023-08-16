@@ -4,7 +4,7 @@ import { useDeleteAvatar } from '@/src/components/pages/edit-account/use-delete-
 
 export const useOptionsStage = () => {
   const { openModal, closeModal, isModalOpen } = useModal();
-  const { mutate, isLoading } = useDeleteAvatar();
+  const { mutate, isPending } = useDeleteAvatar();
 
   const removeAvatar = () => {
     mutate(undefined, {
@@ -14,5 +14,5 @@ export const useOptionsStage = () => {
     });
   };
 
-  return { openModal, isModalOpen, isLoading, removeAvatar, closeModal };
+  return { openModal, isModalOpen, isPending, removeAvatar, closeModal };
 };

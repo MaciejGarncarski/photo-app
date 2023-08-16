@@ -6,9 +6,10 @@ import { deletePost } from '@/src/services/posts.service';
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(deletePost, {
+  return useMutation({
+    mutationFn: deletePost,
     onSettled: async () => {
-      await queryClient.invalidateQueries(HOME_POSTS_QUERY_KEY);
+      await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
     },
   });
 };

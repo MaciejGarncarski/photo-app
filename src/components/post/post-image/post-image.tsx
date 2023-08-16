@@ -6,6 +6,7 @@ import { getDescriptionData } from '@/src/utils/get-description-data';
 
 import { MotionImage } from '@/src/components/avatar/avatar';
 import { Loader } from '@/src/components/loader/loader';
+import { usePost } from '@/src/components/pages/account/use-post';
 import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-image.module.scss';
@@ -19,12 +20,15 @@ type Props = {
 };
 
 export const PostImage = ({ height, priority, src, width, post }: Props) => {
-  const { description, authorId } = post;
-
-  const { data } = useUser({ userId: authorId });
+  const { data } = useUser({ userId: post.authorId });
+  const { data: postData } = usePost({ postId: post.id });
   const [isLoading, setIsLoading] = useState(true);
 
-  const { shortDescription } = getDescriptionData(description);
+  if (!postData) {
+    return null;
+  }
+
+  const { shortDescription } = getDescriptionData(postData.description);
 
   return (
     <>

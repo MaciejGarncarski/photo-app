@@ -10,10 +10,10 @@ type Props = {
 };
 
 export const CommentForm = ({ postId }: Props) => {
-  const { errors, handleSubmit, isDirty, isLoading, onSubmit, register } =
+  const { errors, handleSubmit, isDirty, isPending, onSubmit, register } =
     useCommentForm({ postId });
 
-  if (isLoading) {
+  if (isPending) {
     return <p>Uploading...</p>;
   }
 

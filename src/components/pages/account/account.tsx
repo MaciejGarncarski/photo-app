@@ -2,18 +2,17 @@
 
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 
+import { useAuth } from '@/src/hooks/use-auth';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useModal } from '@/src/hooks/use-modal';
 import { signOut } from '@/src/utils/sign-out';
 
 import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
-import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
-import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
-import { useAccount } from '@/src/components/pages/account/use-account';
+import { User } from '@/src/schemas/user.schema';
 
 import styles from './account.module.scss';
 
@@ -21,20 +20,18 @@ import { AccountHeaderDesktop } from './account-header-desktop';
 import { AccountHeaderMobile } from './account-header-mobile';
 
 type Props = {
-  username?: string;
+  userData: User;
 };
 
-export const Account = ({ username: usernameFromProps }: Props) => {
+export const Account = ({ userData }: Props) => {
   const { isMobile } = useIsMobile();
 
-  const params = useParams();
   const queryClient = useQueryClient();
-  const username = usernameFromProps || (params?.username as string);
 
-  const { isOwner, settingsModal, signOutModal, userData, isError } =
-    useAccount({
-      username,
-    });
+  const { sessionUser } = useAuth();
+  const settingsModal = useModal();
+  const signOutModal = useModal();
+  const isOwner = sessionUser?.id === userData?.id;
 
   const accountHeaderProps = {
     userId: userData?.id || '',
@@ -42,14 +39,6 @@ export const Account = ({ username: usernameFromProps }: Props) => {
     openModal: settingsModal.openModal,
     isOwner,
   };
-
-  if (isError) {
-    return <FetchErrorMessage message="Cannot display this profile." />;
-  }
-
-  if (!userData) {
-    return <Loader marginTop color="blue" size="normal" />;
-  }
 
   return (
     <div className={styles.container}>

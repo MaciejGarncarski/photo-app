@@ -3,10 +3,8 @@ import { useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 
 const invalidateChat = (queryClient: QueryClient, userId: string) => {
-  queryClient.invalidateQueries(['chatMessages', userId], {
-    refetchPage: (lastPage, index) => {
-      return index === 0;
-    },
+  queryClient.invalidateQueries({
+    queryKey: ['chatMessages', userId],
   });
 };
 

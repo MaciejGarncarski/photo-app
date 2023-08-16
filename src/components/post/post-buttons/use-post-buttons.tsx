@@ -4,8 +4,8 @@ import { ReactElement } from 'react';
 import { useModal } from '@/src/hooks/use-modal';
 import { formatCount } from '@/src/utils/format-likes';
 
+import { usePost } from '@/src/components/pages/account/use-post';
 import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
-import { Post } from '@/src/schemas/post.schema';
 
 type ButtonData = Array<{
   alt: string;
@@ -15,32 +15,35 @@ type ButtonData = Array<{
 }>;
 
 type Arguments = {
-  post: Post;
+  postId: number;
   parentModalOpen?: boolean;
 };
 
-export const usePostButtonsData = ({ post, parentModalOpen }: Arguments) => {
+export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
   const postModal = useModal();
   const shareModal = useModal();
-  const { handleLike } = useHandleLike({ post });
+  const { data: post } = usePost({ postId });
+  const { handleLike } = useHandleLike({
+    postId,
+    isLiked: post?.isLiked || false,
+  });
 
   const postModalOpen = () => {
     postModal.openModal();
   };
-  const { isLiked, likesCount, commentsCount } = post;
 
   const buttonData: ButtonData = [
     {
       alt: 'like',
-      icon: <IconHeart color={isLiked ? 'red' : undefined} />,
+      icon: <IconHeart color={post?.isLiked ? 'red' : undefined} />,
       onClick: handleLike,
-      count: formatCount(likesCount),
+      count: formatCount(post?.likesCount || 0),
     },
     {
       alt: 'comment',
       icon: <IconMessage2 />,
       onClick: parentModalOpen ? () => null : postModalOpen,
-      count: formatCount(commentsCount),
+      count: formatCount(post?.commentsCount || 0),
     },
     { alt: 'share', icon: <IconShare />, onClick: shareModal.openModal },
   ];

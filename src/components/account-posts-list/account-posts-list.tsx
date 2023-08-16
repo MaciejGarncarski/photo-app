@@ -39,34 +39,9 @@ export const AccountPostsList = ({ userId }: Props) => {
         className={styles.posts}
       >
         {data.pages.map((page) => {
-          return page.posts.map(
-            ({ id, isLiked, images, commentsCount, likesCount }) => {
-              if (!images) {
-                return null;
-              }
-
-              const firstImageFromSlider = images[0];
-
-              if (!firstImageFromSlider) {
-                return <Loader size="normal" color="blue" key={id} />;
-              }
-
-              const { url, width, height } = firstImageFromSlider;
-
-              return (
-                <AccountPost
-                  imageUrl={url}
-                  height={height}
-                  width={width}
-                  key={id}
-                  isLiked={isLiked}
-                  postId={id}
-                  commentsCount={commentsCount}
-                  likesCount={likesCount}
-                />
-              );
-            },
-          );
+          return page.posts.map(({ id }) => {
+            return <AccountPost key={id} postId={id} />;
+          });
         })}
       </motion.div>
       {hasNextPage && hasPosts && !isLoading && (

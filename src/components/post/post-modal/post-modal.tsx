@@ -5,24 +5,30 @@ import ReactFocusLock from 'react-focus-lock';
 
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
+import { usePost } from '@/src/components/pages/account/use-post';
 import { PostComments } from '@/src/components/post/post-comments/post-comments';
 import { PostFooter } from '@/src/components/post/post-footer/post-footer';
 import { PostHeader } from '@/src/components/post/post-header/post-header';
 import { PostImagesCarousel } from '@/src/components/post/post-images-carousel/post-images-carousel';
 import { modalVariants } from '@/src/components/post/post-modal/post-modal.animation';
 import { Heading } from '@/src/components/typography/heading/heading';
-import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-modal.module.scss';
 
 type Props = {
-  post: Post;
+  postId: number;
   closeModal: () => void;
   isVisible: boolean;
 };
 
-export const PostModal = ({ post, closeModal, isVisible }: Props) => {
-  const { authorId, id, createdAt } = post;
+export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
+  const { data: post, isLoading } = usePost({ postId });
+
+  if (isLoading || !post) {
+    return null;
+  }
+
+  const { authorId, createdAt } = post;
 
   return (
     <AnimatePresence mode="wait">
@@ -42,17 +48,17 @@ export const PostModal = ({ post, closeModal, isVisible }: Props) => {
                 tag="div"
                 authorId={authorId}
                 createdAt={createdAt.toString()}
-                postId={id}
+                postId={postId}
               />
               <div className={styles.sliderContainer}>
-                <PostImagesCarousel post={post} priority={true} />
+                <PostImagesCarousel postId={postId} priority={true} />
               </div>
-              <PostFooter post={post} parentModalOpen={isVisible} />
+              <PostFooter postId={postId} parentModalOpen={isVisible} />
               <section className={styles.commentsContainer}>
                 <Heading tag="h2" size="medium">
                   Comments
                 </Heading>
-                <PostComments postId={id} />
+                <PostComments postId={postId} />
               </section>
             </motion.div>
           </ReactFocusLock>

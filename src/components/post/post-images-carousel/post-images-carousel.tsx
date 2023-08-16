@@ -2,47 +2,40 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
 
 import { HeartAnimation } from '@/src/components/heart-animation/heart-animation';
+import { usePost } from '@/src/components/pages/account/use-post';
 import { PostArrows } from '@/src/components/post/post-arrows/post-arrows';
 import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
 import { PostImage } from '@/src/components/post/post-image/post-image';
 import { useCarousel } from '@/src/components/post/post-images-carousel/use-carousel';
 import { useUpdateWidth } from '@/src/components/post/post-images-carousel/use-update-width';
-import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-images-carousel.module.scss';
 
 type Props = {
-  post: Post;
+  postId: number;
   priority: boolean;
 };
 
-export const PostImagesCarousel = ({ post, priority }: Props) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const PostImagesCarousel = ({ postId, priority }: Props) => {
+  const { data: post, isLoading } = usePost({ postId });
+
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
-    post,
+    postId,
+    isLiked: post?.isLiked || false,
   });
   const { imageRef, width } = useUpdateWidth();
-  const { images: postImages } = post;
 
-  const isSingleImage = postImages.length === 1;
-
-  const handlePrevImage = () => {
-    setCurrentIndex((prevImage) => prevImage - 1);
-  };
-
-  const handleNextImage = () => {
-    setCurrentIndex((prevImage) => prevImage + 1);
-  };
-
-  const { handleDragEnd, nextImage, prevImage } = useCarousel({
-    currentIndex,
-    postImages,
-    handleNextImage,
-    handlePrevImage,
+  const { handleDragEnd, nextImage, prevImage, currentIndex } = useCarousel({
+    postImages: post?.images || [],
   });
+
+  if (isLoading || !post) {
+    return null;
+  }
+
+  const isSingleImage = true;
 
   return (
     <motion.div
@@ -65,7 +58,7 @@ export const PostImagesCarousel = ({ post, priority }: Props) => {
             className={styles.imagesContainer}
             initial={{ x: 0 }}
           >
-            {postImages.map((image, mapIndex) => {
+            {post.images.map((image, mapIndex) => {
               return (
                 <motion.figure
                   ref={currentIndex === mapIndex ? imageRef : undefined}
@@ -88,7 +81,7 @@ export const PostImagesCarousel = ({ post, priority }: Props) => {
       <PostArrows
         currentIndex={currentIndex}
         nextImage={nextImage}
-        postImages={postImages}
+        postImages={post.images}
         prevImage={prevImage}
       />
     </motion.div>

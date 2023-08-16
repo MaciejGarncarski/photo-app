@@ -7,31 +7,27 @@ import { useState } from 'react';
 
 import { postItemVaraints } from '@/src/components/account-post/account-post.animation';
 import { Loader } from '@/src/components/loader/loader';
+import { usePost } from '@/src/components/pages/account/use-post';
 
 import styles from './account-post.module.scss';
 
 type Props = {
-  imageUrl: string;
-  width: number;
-  height: number;
-  isLiked: boolean;
   postId: number;
-  commentsCount: number;
-  likesCount: number;
 };
 
 const MotionLink = motion(Link);
 
-export const AccountPost = ({
-  likesCount,
-  commentsCount,
-  postId,
-  isLiked,
-  imageUrl,
-  width,
-  height,
-}: Props) => {
+export const AccountPost = ({ postId }: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const { data: postData } = usePost({ postId });
+
+  if (!postData) {
+    return null;
+  }
+
+  const { commentsCount, images, isLiked, likesCount } = postData;
+  const [{ url, width, height }] = images;
 
   return (
     <MotionLink
@@ -44,7 +40,7 @@ export const AccountPost = ({
       {!isLoaded && <Loader color="blue" size="normal" />}
       <Image
         className={clsx({ [styles.imageLoading]: !isLoaded }, styles.image)}
-        src={imageUrl}
+        src={url}
         alt=""
         width={width}
         height={height}
