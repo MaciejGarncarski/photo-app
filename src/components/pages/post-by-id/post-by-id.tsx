@@ -51,7 +51,7 @@ export const PostById = () => {
         postId={postId}
         closeModal={postModalClose}
       />
-      <Account userData={authorData} />
+      <Account userId={authorData.id} />
     </>
   );
 };
