@@ -1,7 +1,7 @@
 import { IconEdit, IconTrash, IconX } from '@tabler/icons-react';
 
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 import { usePostOptions } from '@/src/components/post/post-options/use-post-options';
 
 type Props = {
@@ -45,7 +45,7 @@ export const PostOptions = ({
           </ListModalItem>
         </>
       )}
-      <ListModalItem isLast type="button" onClick={closeModal} icon={<IconX />}>
+      <ListModalItem type="button" onClick={closeModal} icon={<IconX />}>
         Close
       </ListModalItem>
     </ListModal>

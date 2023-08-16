@@ -2,54 +2,42 @@
 
 .container {
   background-color: var(--bg-primary);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-medium);
   position: relative;
-  padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
-  width: 85%;
+  gap: 1rem;
+  width: clamp(20rem, 30vw, 40rem);
+  padding: 1rem 1.5rem;
 
-  @include common.mediaquery('tablet') {
-    width: 60%;
-  }
 
   @include common.mediaquery('desktop') {
-    width: auto;
-    gap: 2.5rem;
-    padding: 2rem 5rem;
+    gap: 1.5rem;
   }
 }
 
 .headingContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 0.5rem;
-
-  > svg {
-    --size: 3rem;
-    width: var(--size);
-    height: var(--size);
-    color: var(--color-primary);
-  }
-
-  @include common.mediaquery('desktop') {
-    gap: 1rem;
-
-    > svg {
-      --size: 3rem;
-    }
-  }
+  width: 100%;
 }
 
+
 .heading {
-  font-size: 2rem;
+  text-align: center;
+  font-size: 1.75rem;
 }
 
 .buttonsRow {
   display: flex;
-  gap: 2rem;
-  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+  justify-content: flex-end;
   align-items: center;
+
+  @include common.mediaquery('desktop') {
+    margin-top: 1.75rem;
+  }
 }

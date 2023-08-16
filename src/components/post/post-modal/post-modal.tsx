@@ -33,7 +33,7 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
-        <ModalBackdrop mobileCenter closeModal={closeModal}>
+        <ModalBackdrop closeModal={closeModal}>
           <ReactFocusLock>
             <ModalCloseButton onClose={closeModal} outside />
             <motion.div

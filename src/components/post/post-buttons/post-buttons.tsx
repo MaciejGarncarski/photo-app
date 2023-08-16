@@ -26,10 +26,6 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
               className={styles.button}
               type="button"
               onClick={onClick}
-              whileTap={{
-                scale: 0.8,
-                transition: { type: 'tween', duration: 0.1 },
-              }}
             >
               {icon}
               <span className="visually-hidden">{alt}</span>

@@ -78,7 +78,7 @@ export const PostHeader = ({
         isVisible={confirmationModal.isModalOpen}
         key="confirmation"
         onConfirm={handleDeletePost}
-        headingText="Delete post?"
+        text="Do you want to delete post?"
         closeModal={confirmationModal.closeModal}
       />
     </Tag>

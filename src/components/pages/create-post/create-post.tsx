@@ -67,7 +67,7 @@ export const CreatePost = () => {
       />
       <ConfirmationAlert
         isVisible={isModalOpen}
-        headingText="Cancel?"
+        text="Do you want to abort creating a post?"
         closeModal={closeModal}
         onConfirm={() => router.push('/')}
       />

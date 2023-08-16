@@ -56,7 +56,7 @@ export const SelectOptionStage = ({
       </div>
       <ConfirmationAlert
         isVisible={isModalOpen}
-        headingText="Remove your avatar?"
+        text="Do you want to remove your avatar?"
         closeModal={closeModal}
         onConfirm={removeAvatar}
       />

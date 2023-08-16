@@ -1,7 +1,7 @@
 import { IconCheck, IconCopy } from '@tabler/icons-react';
 
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 import { useShareModal } from '@/src/components/modals/share-modal/use-share-modal';
 
 type Props = {
@@ -23,7 +23,6 @@ export const ShareModal = ({ closeModal, textToCopy, isVisible }: Props) => {
         type="button"
         icon={isCopied ? <IconCheck /> : <IconCopy />}
         disabled={isCopied}
-        isLast
         onClick={handleCopy}
       >
         {isCopied ? 'Copied' : 'Copy link'}

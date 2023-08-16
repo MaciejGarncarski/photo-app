@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Avatar } from '@/src/components/avatar/avatar';
 import { useChatMessage } from '@/src/components/chat-message/use-message';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 import { ChatMessage as TChatMessage } from '@/src/schemas/chat';
 
 import styles from './chat-message.module.scss';
@@ -54,7 +54,6 @@ export const ChatMessage = ({ message }: Props) => {
         headingText="Message options"
       >
         <ListModalItem
-          isLast
           icon={<IconTrash />}
           type="button"
           onClick={handleDelete}

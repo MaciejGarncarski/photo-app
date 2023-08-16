@@ -16,9 +16,9 @@
   transition: all var(--transition);
   transition-property: transform, box-shadow;
 
-  @include common.button-state;
 
   @include common.mediaquery('desktop') {
+    @include common.button-state;
     padding: 0.5rem 0.9rem;
   }
 }
@@ -29,5 +29,8 @@
   color: var(--color-primary);
   box-shadow: inset 0 0 0 2px var(--color-primary);
 
-  @include common.button-secondary-state;
+
+  @include common.mediaquery('desktop') {
+    @include common.button-secondary-state;
+  }
 }

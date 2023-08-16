@@ -29,7 +29,7 @@ export const OtherSignInOptions = () => {
         <div className={styles.button}>
           <Button type="button" variant="primary" onClick={handleSignInDemo}>
             <IconTestPipe />
-            Demo account
+            Try it out
           </Button>
         </div>
 

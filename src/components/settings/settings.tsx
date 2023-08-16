@@ -8,7 +8,7 @@ import { signOut } from '@/src/utils/sign-out';
 
 import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 
 type Props = {
   closeModal: () => void;
@@ -40,7 +40,7 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
       <ListModal
         isVisible={isVisible}
         closeModal={closeModal}
-        headingText="PhotoApp settings"
+        headingText="Settings"
         data-cy="settings modal"
       >
         {isSignedIn && sessionUser?.username && (
@@ -56,7 +56,6 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
         <ListModalItem
           type="button"
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          isLast={!isSignedIn}
           icon={<ThemeButton />}
         >
           Change theme to {isDark ? 'light' : 'dark'}
@@ -65,7 +64,6 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
           <ListModalItem
             type="button"
             onClick={signOutModal.openModal}
-            isLast
             icon={<IconDoorExit />}
           >
             Sign Out
@@ -74,7 +72,7 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
       </ListModal>
       <ConfirmationAlert
         isVisible={signOutModal.isModalOpen}
-        headingText="Sign out?"
+        text="Do you want to sign out?"
         onConfirm={handleSignOut}
         closeModal={signOutModal.closeModal}
       />

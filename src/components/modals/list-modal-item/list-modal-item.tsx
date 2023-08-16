@@ -1,13 +1,11 @@
-import clsx from 'clsx';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-import styles from './list-modal.module.scss';
+import styles from './list-modal-item.module.scss';
 
 type Props = {
   icon: ReactNode;
   children: ReactNode;
-  isLast?: boolean;
   isLoading?: boolean;
   loadingText?: string;
 };
@@ -37,38 +35,32 @@ export const ListModalItem = ({
   disabled,
   href,
   onClick,
-  isLast,
   isLoading,
   loadingText,
 }: ModalListItemProps) => {
-  const listClassName = clsx(
-    { [styles.listItemLast]: isLast },
-    styles.listItem,
-  );
-
   if (isLoading) {
     return (
-      <li className={listClassName}>
-        <div className={styles.item}>{loadingText}</div>
+      <li className={styles.item}>
+        <div className={styles.content}>{loadingText}</div>
       </li>
     );
   }
 
   return (
-    <li className={listClassName}>
+    <li className={styles.item}>
       {type === 'button' && (
         <button
           type="button"
           onClick={onClick}
           disabled={disabled}
-          className={styles.item}
+          className={styles.content}
         >
           {icon}
           {children}
         </button>
       )}
       {type === 'link' && (
-        <Link href={href} className={styles.item} onClick={onClick}>
+        <Link href={href} className={styles.content} onClick={onClick}>
           {icon}
           {children}
         </Link>

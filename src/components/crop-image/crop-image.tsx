@@ -106,7 +106,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
       {isModalOpen && (
         <ConfirmationAlert
           isVisible={isModalOpen}
-          headingText="Select diffrent image?"
+          text="Do you want to select diffrent image?"
           closeModal={closeModal}
           onConfirm={onConfirm}
         />

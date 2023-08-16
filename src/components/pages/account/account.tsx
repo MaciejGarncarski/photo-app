@@ -13,7 +13,7 @@ import { signOut } from '@/src/utils/sign-out';
 import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
 import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
+import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 
 import styles from './account.module.scss';
 
@@ -70,14 +70,13 @@ export const Account = ({ userId }: Props) => {
           type="button"
           onClick={signOutModal.openModal}
           icon={<IconDoorExit />}
-          isLast
         >
           Sign out
         </ListModalItem>
       </ListModal>
       <ConfirmationAlert
         isVisible={signOutModal.isModalOpen}
-        headingText="Sign out?"
+        text="Do you want to sign out?"
         onConfirm={() => signOut(queryClient)}
         closeModal={signOutModal.closeModal}
       />

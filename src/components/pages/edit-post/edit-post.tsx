@@ -91,13 +91,13 @@ export const EditPost = () => {
       </form>
       <ConfirmationAlert
         isVisible={cancelModal.isModalOpen}
-        headingText="Abort editing?"
+        text="Abort editing?"
         onConfirm={cancelChanges}
         closeModal={cancelModal.closeModal}
       />
       <ConfirmationAlert
         isVisible={saveModal.isModalOpen}
-        headingText="Save changes?"
+        text="Save changes?"
         onConfirm={onSubmit}
         closeModal={saveModal.closeModal}
       />

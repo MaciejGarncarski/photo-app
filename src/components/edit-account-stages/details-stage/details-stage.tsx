@@ -99,7 +99,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
             Save changes
           </Button>
           <ConfirmationAlert
-            headingText="Save changes?"
+            text="Save changes?"
             isVisible={isModalOpen}
             closeModal={closeModal}
             onConfirm={onSubmit}

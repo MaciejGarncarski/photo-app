@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
+import { MotionConfig } from 'framer-motion';
 import { ThemeProvider } from 'next-themes';
 import { ReactNode, useState } from 'react';
 
@@ -16,7 +17,9 @@ export const Providers = ({ children }: Props) => {
   return (
     <ThemeProvider>
       <QueryClientProvider client={client}>
-        <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+        <ReactQueryStreamedHydration>
+          <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        </ReactQueryStreamedHydration>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>

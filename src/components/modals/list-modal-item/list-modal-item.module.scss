@@ -1,0 +1,21 @@
+@use '/src/styles/common.scss';
+
+.item {
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: var(--radius-small);
+
+    @include common.mediaquery('desktop') {
+        padding: 1rem 0.5rem;
+
+        &:hover {
+            background-color: var(--bg-focus);
+        }
+    }
+}
