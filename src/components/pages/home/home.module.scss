@@ -1,15 +1,5 @@
 @use '/src/styles/common';
 
-.home {
-  position: relative;
-  display: flex;
-  justify-content: center;
-
-  @include common.mediaquery('desktop') {
-    justify-content: space-between;
-  }
-}
-
 .posts {
   display: grid;
   justify-content: center;

@@ -28,26 +28,24 @@ export const Home = () => {
   }
 
   return (
-    <div className={styles.home}>
-      <motion.ul
-        className={styles.posts}
-        variants={containerVariants}
-        animate="show"
-        initial="hidden"
-      >
-        <NewPostNotification />
-        {data?.pages.map((page) => {
-          return page?.posts.map(({ id }, idx) => {
-            return <HomePost priority={idx < 3} key={id} postId={id} />;
-          });
-        })}
-        {!isLoading && hasNextPage && (
-          <li ref={ref}>
-            <PostPlaceholder />
-            <PostPlaceholder />
-          </li>
-        )}
-      </motion.ul>
-    </div>
+    <motion.ul
+      className={styles.posts}
+      variants={containerVariants}
+      animate="show"
+      initial="hidden"
+    >
+      <NewPostNotification />
+      {data?.pages.map((page) => {
+        return page?.posts.map(({ id }, idx) => {
+          return <HomePost priority={idx < 3} key={id} postId={id} />;
+        });
+      })}
+      {!isLoading && hasNextPage && (
+        <li ref={ref}>
+          <PostPlaceholder />
+          <PostPlaceholder />
+        </li>
+      )}
+    </motion.ul>
   );
 };
