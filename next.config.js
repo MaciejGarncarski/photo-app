@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -7,17 +8,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    fontLoaders: [
-      { loader: '@next/font/google', options: { subsets: ['latin'] } },
-    ],
-  },
   images: {
     domains: ['lh3.googleusercontent.com', 'ik.imagekit.io'],
   },
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.externals.push({
+        bufferutil: 'bufferutil',
+        'utf-8-validate': 'utf-8-validate',
+        'supports-color': 'supports-color',
+      });
+    }
+
+    return config;
   },
 };
 

@@ -1,6 +1,6 @@
-import { apiClient } from '@/src/utils/apiClient';
+import { apiClient } from '@/src/utils/api-client';
 
-import { ChatRoom } from '@/src/components/pages/chatRoom/useChatRoomData';
+import { ChatRoom } from '@/src/components/pages/chat-room/use-chat-room-data';
 import { ChatMessagesResponse } from '@/src/schemas/chat';
 
 type DeleteChatMessage = {

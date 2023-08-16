@@ -1,0 +1,19 @@
+@use '/src/styles/common';
+
+.posts {
+  display: grid;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  min-height: 100%;
+  list-style: none;
+
+  @include common.mediaquery('desktop') {
+    grid-auto-columns: auto;
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    gap: 6rem;
+  }
+}

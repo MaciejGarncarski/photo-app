@@ -1,13 +1,13 @@
-import { apiClient } from '@/src/utils/apiClient';
+import { apiClient } from '@/src/utils/api-client';
 
-import { Post, PostsResponse } from '@/src/schemas/post.schema';
+import { PostDetails, PostsResponse } from '@/src/schemas/post.schema';
 
 type GetPost = {
   postId: number;
 };
 
 export const getPost = async ({ postId }: GetPost) => {
-  const { data } = await apiClient.get<Post>(`post/${postId}`);
+  const { data } = await apiClient.get<PostDetails>(`post/${postId}`);
   return data;
 };
 

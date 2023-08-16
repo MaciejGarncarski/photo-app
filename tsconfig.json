@@ -29,6 +29,11 @@
         "./public/*"
       ]
     },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "types.d.ts",
@@ -37,7 +42,8 @@
     "jest.config.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/env.js"
+    "utils/env.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
