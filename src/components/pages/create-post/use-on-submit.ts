@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -27,6 +28,7 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
       {
         onSuccess: () => {
           router.push('/');
+          revalidatePath('/');
         },
         onError: () => {
           toast.error('Could not add post.');
