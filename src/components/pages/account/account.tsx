@@ -2,35 +2,37 @@
 
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useModal } from '@/src/hooks/use-modal';
+import { useUserByUsername } from '@/src/hooks/use-user-by-username';
 import { signOut } from '@/src/utils/sign-out';
 
 import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
 import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal/list-modal-item';
-import { User } from '@/src/schemas/user.schema';
 
 import styles from './account.module.scss';
 
 import { AccountHeaderDesktop } from './account-header-desktop';
 import { AccountHeaderMobile } from './account-header-mobile';
 
-type Props = {
-  userData: User;
-};
-
-export const Account = ({ userData }: Props) => {
+export const Account = () => {
   const { isMobile } = useIsMobile();
-
+  const pathname = usePathname();
   const queryClient = useQueryClient();
 
   const { sessionUser } = useAuth();
   const settingsModal = useModal();
   const signOutModal = useModal();
+
+  const { data: userData } = useUserByUsername({
+    username: pathname.slice(1) as string,
+  });
+
   const isOwner = sessionUser?.id === userData?.id;
 
   const accountHeaderProps = {
