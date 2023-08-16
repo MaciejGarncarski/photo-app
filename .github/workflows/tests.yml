@@ -26,3 +26,6 @@ jobs:
 
       - name: 📥 Download deps
         run: yarn install
+        
+      - name: 🔎 Type check
+        run: yarn tsc

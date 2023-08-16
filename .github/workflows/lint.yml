@@ -29,6 +29,3 @@ jobs:
 
       - name: 🔬 Lint
         run: yarn lint-format
-      
-      - name: 🔎 Type check
-        run: yarn tsc
