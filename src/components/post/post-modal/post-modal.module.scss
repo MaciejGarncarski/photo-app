@@ -39,7 +39,7 @@
 
 .columns {
   display: flex;
-
+  flex-direction: column;
   height: 40rem;
 
   @include common.mediaquery('desktop') {
