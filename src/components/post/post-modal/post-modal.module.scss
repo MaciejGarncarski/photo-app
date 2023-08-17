@@ -9,9 +9,7 @@
   right: 0;
   bottom: 0;
   top: 0;
-  overflow-y: scroll;
   border-radius: var(--radius-small);
-  max-height: 30rem;
   padding: 0.5rem 1rem;
 
   @include common.mobile-landscape {
@@ -20,10 +18,7 @@
 
   @include common.mediaquery('tablet') {
     padding: 0;
-    max-height: unset;
     width: clamp(15rem, 60vw, 70rem);
-    overflow-y: unset;
-    margin: auto;
     border-radius: var(--radius-medium);
   }
 }
@@ -32,17 +27,22 @@
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  padding: 1rem 0.5rem;
-  border-top-left-radius: var(--radius-medium);
-  border-top-right-radius: var(--radius-medium);
+  padding: 0.5rem 0;
+
+  @include common.mediaquery('desktop') {
+    padding: 1rem 0.5rem;
+  }
 }
 
 .columns {
   display: flex;
   flex-direction: column;
-  height: 40rem;
+  overflow-y: scroll;
+  max-height: 55vh;
+  max-height: 55dvh;
 
   @include common.mediaquery('desktop') {
+    height: 40rem;
     gap: 3rem;
     flex-direction: row;
   }
