@@ -1,4 +1,4 @@
-import { IconHeart, IconMessage2, IconShare } from '@tabler/icons-react';
+import { IconHeart, IconMessage2 } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
 import { useModal } from '@/src/hooks/use-modal';
@@ -21,7 +21,6 @@ type Arguments = {
 
 export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
   const postModal = useModal();
-  const shareModal = useModal();
   const { data: post } = usePost({ postId });
   const { handleLike } = useHandleLike({
     postId,
@@ -45,8 +44,7 @@ export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
       onClick: parentModalOpen ? () => null : postModalOpen,
       count: formatCount(post?.commentsCount || 0),
     },
-    { alt: 'share', icon: <IconShare />, onClick: shareModal.openModal },
   ];
 
-  return { shareModal, postModal, buttonData };
+  return { postModal, buttonData };
 };

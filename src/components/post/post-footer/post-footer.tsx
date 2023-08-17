@@ -1,7 +1,5 @@
-import { useAuth } from '@/src/hooks/use-auth';
 import { useUser } from '@/src/hooks/use-user';
 
-import { CommentForm } from '@/src/components/forms/comment-form/comment-form';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostButtons } from '@/src/components/post/post-buttons/post-buttons';
 import { usePostFooter } from '@/src/components/post/post-footer/use-post-footer';
@@ -14,7 +12,6 @@ type Props = {
 };
 
 export const PostFooter = ({ postId, parentModalOpen }: Props) => {
-  const { isSignedIn } = useAuth();
   const { data: post, isLoading } = usePost({ postId });
 
   const { data } = useUser({ userId: post?.authorId || '' });
@@ -50,7 +47,6 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
           <p className={styles.description}>{description}</p>
         )}
       </div>
-      {isSignedIn && <CommentForm postId={postId} />}
     </footer>
   );
 };

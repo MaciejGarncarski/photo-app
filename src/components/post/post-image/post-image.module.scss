@@ -26,7 +26,6 @@
 
   @include common.mediaquery('tablet') {
     max-height: 40rem;
-    min-height: 30rem;
     object-fit: contain;
   }
 }

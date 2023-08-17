@@ -1,9 +1,9 @@
+import { IconDotsVertical } from '@tabler/icons-react';
 import Link from 'next/link';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
 import { Avatar } from '@/src/components/avatar/avatar';
-import { Button } from '@/src/components/buttons/button/button';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
 import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
 import { usePostHeader } from '@/src/components/post/post-header/use-post-header';
@@ -26,18 +26,12 @@ export const PostHeader = ({
   postId,
 }: Props) => {
   const { isSignedIn, isLoading } = useAuth();
-  const {
-    dateFromNow,
-    handleDeletePost,
-    isAuthor,
-    username,
-    confirmationModal,
-    menuModal,
-  } = usePostHeader({
-    authorId,
-    createdAt,
-    postId,
-  });
+  const { handleDeletePost, isAuthor, username, confirmationModal, menuModal } =
+    usePostHeader({
+      authorId,
+      createdAt,
+      postId,
+    });
 
   if (!username || isLoading) {
     return <PostHeaderPlaceholder />;
@@ -47,33 +41,29 @@ export const PostHeader = ({
     <Tag className={styles.header}>
       <Link href={`/${username}`} className={styles.userAnchor}>
         <Avatar userId={authorId} size="small" />
-        <div>
-          <h2 className={styles.username}>{username}</h2>
-          <p>
-            <time dateTime={createdAt.toString()}>{dateFromNow}</time>
-          </p>
-        </div>
+        <h2 className={styles.username}>{username}</h2>
       </Link>
 
       {isSignedIn && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton userId={authorId} />}
+          {isAuthor && (
+            <button type="button" onClick={menuModal.openModal}>
+              <span className="visually-hidden">Settings</span>
+              <IconDotsVertical />
+            </button>
+          )}
         </div>
       )}
 
-      <Button type="button" variant="primary" onClick={menuModal.openModal}>
-        Settings
-      </Button>
-
       <PostOptions
-        isVisible={menuModal.isModalOpen && !confirmationModal.isModalOpen}
+        isVisible={menuModal.isModalOpen}
         key="options"
         postId={postId}
         authorId={authorId}
         closeModal={menuModal.closeModal}
-        openCnonfirmation={confirmationModal.openModal}
+        openConfirmation={confirmationModal.openModal}
       />
-
       <ConfirmationAlert
         isVisible={confirmationModal.isModalOpen}
         key="confirmation"

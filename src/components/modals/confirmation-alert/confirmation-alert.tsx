@@ -14,7 +14,7 @@ import styles from './confirmation-alert.module.scss';
 type Props = {
   onConfirm: () => void;
   closeModal: () => void;
-  text?: string;
+  text: string;
   isVisible: boolean;
 };
 
@@ -28,7 +28,7 @@ export const ConfirmationAlert = ({
     <AnimatePresence mode="wait">
       {isVisible && (
         <ModalBackdrop closeModal={closeModal}>
-          <ReactFocusLock>
+          <ReactFocusLock autoFocus={false}>
             <motion.div
               role="dialog"
               className={styles.container}

@@ -21,11 +21,12 @@ import { AccountHeaderDesktop } from './account-header-desktop';
 import { AccountHeaderMobile } from './account-header-mobile';
 
 type Props = {
-  userId?: string;
+  username?: string;
 };
 
-export const Account = ({ userId }: Props) => {
+export const Account = ({ username }: Props) => {
   const { isMobile } = useIsMobile();
+
   const pathname = usePathname();
   const queryClient = useQueryClient();
 
@@ -34,10 +35,10 @@ export const Account = ({ userId }: Props) => {
   const signOutModal = useModal();
 
   const { data: userData } = useUserByUsername({
-    username: pathname.slice(1) as string,
+    username: username || (pathname.slice(1) as string),
   });
 
-  const isOwner = sessionUser?.id === (userId || userData?.id);
+  const isOwner = sessionUser?.id === userData?.id;
 
   const accountHeaderProps = {
     userId: userData?.id || '',

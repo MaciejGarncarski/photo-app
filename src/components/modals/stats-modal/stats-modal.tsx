@@ -29,7 +29,7 @@ export const StatsModal = ({ closeModal, type, userId }: Props) => {
         className={styles.container}
       >
         <h3 className={styles.heading}>{type.toUpperCase()}</h3>
-        <ReactFocusLock>
+        <ReactFocusLock autoFocus={false}>
           <ModalCloseButton onClose={closeModal} />
           {isEmpty && (
             <ul className={styles.list}>

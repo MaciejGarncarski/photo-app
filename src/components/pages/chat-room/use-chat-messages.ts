@@ -3,7 +3,6 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useIsScrollingUp } from '@/src/hooks/use-is-scrolling-up';
 import { socket } from '@/src/utils/socket';
 
@@ -13,7 +12,7 @@ export const useChatMessages = () => {
   const [inputVal, setInputVal] = useState('');
   const params = useParams();
   const { sessionUser } = useAuth();
-  const { isMobile } = useIsMobile();
+
   const { isScrollingUp } = useIsScrollingUp();
 
   const friendId = params?.receiverId as string;
@@ -52,7 +51,6 @@ export const useChatMessages = () => {
     isLoading,
     hasNextPage,
     ref,
-    isMobile,
     isScrollingUp,
     friendId,
     isError,

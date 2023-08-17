@@ -1,16 +1,9 @@
 @use '/src/styles/common';
 
 .slider {
-  align-items: center;
+  width: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-medium);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-  margin-bottom: var(--post-margin);
-  border: var(--border-gray);
 }
 
 .imagesContainer {
@@ -23,7 +16,11 @@
   cursor: grab;
 }
 
-.figure {
+.row {
+  display: flex;
+}
+
+.image {
   display: flex;
   justify-content: center;
   align-items: center;

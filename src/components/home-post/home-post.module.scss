@@ -4,6 +4,6 @@
   width: var(--post-width);
 
   @include common.mediaquery('tablet') {
-    border-radius: var(--radius-small);
+    border-radius: var(--radius-medium);
   }
 }

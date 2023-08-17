@@ -6,7 +6,7 @@ import { usePostOptions } from '@/src/components/post/post-options/use-post-opti
 
 type Props = {
   closeModal: () => void;
-  openCnonfirmation: () => void;
+  openConfirmation: () => void;
   authorId: string;
   postId: number;
   isVisible: boolean;
@@ -16,7 +16,7 @@ export const PostOptions = ({
   closeModal,
   authorId,
   postId,
-  openCnonfirmation,
+  openConfirmation,
   isVisible,
 }: Props) => {
   const { isAbleToModify } = usePostOptions({ authorId });
@@ -38,7 +38,7 @@ export const PostOptions = ({
           </ListModalItem>
           <ListModalItem
             type="button"
-            onClick={openCnonfirmation}
+            onClick={openConfirmation}
             icon={<IconTrash />}
           >
             Delete

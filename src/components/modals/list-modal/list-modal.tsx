@@ -35,7 +35,7 @@ export const ListModal = ({
             variants={modalVariants}
             className={styles.container}
           >
-            <ReactFocusLock className={styles.focusLock}>
+            <ReactFocusLock className={styles.focusLock} autoFocus={false}>
               <div className={styles.header}>
                 <h3 className={styles.heading}>{headingText}</h3>
                 <ModalCloseButton onClose={closeModal} />

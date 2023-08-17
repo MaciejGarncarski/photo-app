@@ -11,94 +11,67 @@
   top: 0;
   overflow-y: scroll;
   border-radius: var(--radius-small);
-  height: 32rem;
-  padding: 0.5rem;
+  max-height: 30rem;
+  padding: 0.5rem 1rem;
 
   @include common.mobile-landscape {
     width: auto;
-    display: grid;
-    height: 16rem;
-    grid-template-columns: 42vw 17rem;
-    grid-template-rows: auto auto 1fr;
   }
 
   @include common.mediaquery('tablet') {
-    width: auto;
+    padding: 0;
+    max-height: unset;
+    width: clamp(15rem, 60vw, 70rem);
     overflow-y: unset;
     margin: auto;
-    display: grid;
-    height: 60vh;
-    grid-template-columns: 42vw 20rem;
-    grid-template-rows: auto auto 1fr;
-    padding: 1rem;
-    column-gap: 1rem;
     border-radius: var(--radius-medium);
-  }
-
-  @include common.mediaquery('desktop') {
-    max-height: unset;
-    height: 70vh;
-    grid-template-columns: 42vw 30rem;
   }
 }
 
-.likesCount {
-  grid-column: 2 / 3;
+.closeButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  padding: 1rem 0.5rem;
+  border-top-left-radius: var(--radius-medium);
+  border-top-right-radius: var(--radius-medium);
+}
+
+.columns {
+  display: flex;
+
+  height: 40rem;
+
+  @include common.mediaquery('desktop') {
+    gap: 3rem;
+    flex-direction: row;
+  }
+}
+
+.leftColumn {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightColumn {
+  flex-grow: 1;
+
+  @include common.mediaquery('desktop') {
+    padding: 1rem 0;
+    padding-right: 1rem;
+  }
 }
 
 .postButtons {
-  grid-column: 2 / 3;
   padding-right: 1rem;
 }
 
 .commentsContainer {
+  margin-top: 2rem;
+
   @include common.mobile-landscape {
-    grid-column: 2 / 3;
     margin-top: 0;
-  }
-
-  @include common.mediaquery('tablet') {
-    max-height: 32vh;
-    grid-column: 2 / 3;
-  }
-}
-
-.commentsList {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  max-height: 100%;
-
-  @include common.mobile-landscape {
-    overflow-y: unset;
-  }
-}
-
-.sliderContainer {
-  grid-row: 1 / 4;
-  position: relative;
-
-  @include common.mediaquery('desktop') {
-    height: 100%;
-  }
-
-  div {
-    display: flex;
-    align-items: center;
-  }
-
-  figure {
-    height: 100%;
-    object-fit: contain;
-    --img-width: 20rem;
-    width: var(--img-width);
-
-    @include common.mobile-landscape {
-      --img-width: 42vw;
-    }
-
-    @include common.mediaquery('tablet') {
-      --img-width: 42vw;
-    }
   }
 }

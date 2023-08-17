@@ -14,13 +14,15 @@
   --shadow-size: 2px;
   box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--bg-secondary);
 
-  &:focus {
-    outline: none;
-  }
+  @include common.mediaquery('desktop') {
+    &:focus {
+      outline: none;
+    }
 
-  &:focus,
-  &:hover {
-    box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--color-secondary);
+    &:focus,
+    &:hover {
+      box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--color-secondary);
+    }
   }
 }
 
@@ -72,9 +74,10 @@
 }
 
 .container {
+
   &:focus,
   &:hover {
-    & > .overlay {
+    &>.overlay {
       opacity: 1;
     }
   }

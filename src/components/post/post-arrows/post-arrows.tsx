@@ -9,13 +9,13 @@ import styles from './post-arrows.module.scss';
 type Props = {
   postImages: Array<PostImage>;
   currentIndex: number;
-  prevImage: () => void;
-  nextImage: () => void;
+  handlePrevImage: () => void;
+  handleNextImage: () => void;
 };
 
 export const PostArrows = ({
-  prevImage,
-  nextImage,
+  handlePrevImage,
+  handleNextImage,
   postImages,
   currentIndex,
 }: Props) => {
@@ -30,7 +30,11 @@ export const PostArrows = ({
   return (
     <>
       {isNotFirstIndex && (
-        <button type="button" className={styles.button} onClick={prevImage}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={handlePrevImage}
+        >
           <IconArrowLeft />
           <span className="visually-hidden">Previous</span>
         </button>
@@ -40,7 +44,7 @@ export const PostArrows = ({
         <button
           type="button"
           className={clsx(styles.buttonRight, styles.button)}
-          onClick={nextImage}
+          onClick={handleNextImage}
         >
           <IconArrowRight />
           <span className="visually-hidden">Next</span>

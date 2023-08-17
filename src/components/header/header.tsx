@@ -24,8 +24,9 @@ export const Header = () => {
       <Link href="/" className={styles.anchor}>
         <h1 className={styles.heading}>PhotoApp</h1>
       </Link>
-      <NavbarForDesktop />
-      <Navbar />
+      {isMobile !== 'loading' && (
+        <>{isMobile ? <Navbar /> : <NavbarForDesktop />}</>
+      )}
       {showUserOptions && (
         <div className={styles.options}>
           <button

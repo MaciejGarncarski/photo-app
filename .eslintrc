@@ -11,12 +11,10 @@
     "@typescript-eslint",
     "simple-import-sort",
     "unused-imports",
-    "prettier",
     "jsx-a11y",
     "jest"
   ],
   "extends": [
-    "prettier",
     "next",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended"
@@ -26,7 +24,6 @@
     ".yarn/*"
   ],
   "rules": {
-    "prettier/prettier": "error",
     "no-unused-vars": "off",
     "no-console": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",

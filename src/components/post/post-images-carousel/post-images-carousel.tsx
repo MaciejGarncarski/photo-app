@@ -1,13 +1,14 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 import { HeartAnimation } from '@/src/components/heart-animation/heart-animation';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostArrows } from '@/src/components/post/post-arrows/post-arrows';
 import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
 import { PostImage } from '@/src/components/post/post-image/post-image';
+import { getVariants } from '@/src/components/post/post-images-carousel/get-variants';
 import { useCarousel } from '@/src/components/post/post-images-carousel/use-carousel';
 import { useUpdateWidth } from '@/src/components/post/post-images-carousel/use-update-width';
 
@@ -27,15 +28,21 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
   });
   const { imageRef, width } = useUpdateWidth();
 
-  const { handleDragEnd, nextImage, prevImage, currentIndex } = useCarousel({
-    postImages: post?.images || [],
-  });
+  const { handleDragEnd, handleNextImage, handlePrevImage, currentIndex } =
+    useCarousel({
+      postImages: post?.images || [],
+    });
+
+  const listVariants = useMemo(
+    () => getVariants({ currentIndex, width }),
+    [currentIndex, width],
+  );
 
   if (isLoading || !post) {
     return null;
   }
 
-  const isSingleImage = true;
+  const isSingleImage = post.images.length <= 1;
 
   return (
     <motion.div
@@ -45,24 +52,33 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
     >
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
-        className={clsx(!isSingleImage && styles.grab, styles.imagesContainer)}
+        className={styles.imagesContainer}
         drag={isSingleImage ? undefined : 'x'}
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
-        dragElastic={0.3}
+        dragMomentum={false}
+        dragElastic={0.5}
+        whileDrag={{ cursor: 'grabbing' }}
+        style={{
+          cursor: isSingleImage ? 'auto' : 'grab',
+        }}
       >
         <AnimatePresence mode="wait">
           <motion.div
-            animate={{ x: -1 * currentIndex * width }}
-            exit={{ x: currentIndex * width }}
+            variants={listVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             className={styles.imagesContainer}
-            initial={{ x: 0 }}
+            style={{
+              maxWidth: width,
+            }}
           >
             {post.images.map((image, mapIndex) => {
               return (
-                <motion.figure
+                <motion.div
                   ref={currentIndex === mapIndex ? imageRef : undefined}
-                  className={styles.figure}
+                  className={styles.image}
                   key={image.fileId}
                 >
                   <PostImage
@@ -72,7 +88,7 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
                     src={image.url}
                     post={post}
                   />
-                </motion.figure>
+                </motion.div>
               );
             })}
           </motion.div>
@@ -80,9 +96,9 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
       </motion.div>
       <PostArrows
         currentIndex={currentIndex}
-        nextImage={nextImage}
+        handleNextImage={handleNextImage}
         postImages={post.images}
-        prevImage={prevImage}
+        handlePrevImage={handlePrevImage}
       />
     </motion.div>
   );

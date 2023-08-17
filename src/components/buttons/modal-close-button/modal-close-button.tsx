@@ -1,14 +1,12 @@
 import { IconX } from '@tabler/icons-react';
-import clsx from 'clsx';
 
 import styles from './modal-close-button.module.scss';
 
 type Props = {
   onClose: () => void;
-  outside?: boolean;
 };
 
-export const ModalCloseButton = ({ onClose, outside }: Props) => {
+export const ModalCloseButton = ({ onClose }: Props) => {
   const handleClose = () => {
     onClose();
   };
@@ -16,14 +14,11 @@ export const ModalCloseButton = ({ onClose, outside }: Props) => {
   return (
     <button
       data-cy="modal close"
-      className={clsx(
-        outside && styles.closeButtonExternal,
-        styles.closeButton,
-      )}
+      className={styles.closeButton}
       type="button"
       onClick={handleClose}
     >
-      <IconX />
+      <IconX size="2rem" />
       <span className="visually-hidden">close modal</span>
     </button>
   );

@@ -13,25 +13,17 @@ export const useCarousel = ({ postImages }: ArgsTypes) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevImage = () => {
+    if (currentIndex === 0) {
+      return;
+    }
     setCurrentIndex((prevImage) => prevImage - 1);
   };
 
   const handleNextImage = () => {
-    setCurrentIndex((prevImage) => prevImage + 1);
-  };
-
-  const prevImage = () => {
-    if (currentIndex === 0) {
-      return;
-    }
-    handlePrevImage();
-  };
-
-  const nextImage = () => {
     if (currentIndex === postImages.length - 1) {
       return;
     }
-    handleNextImage();
+    setCurrentIndex((prevImage) => prevImage + 1);
   };
 
   const handleDragEnd = (
@@ -40,11 +32,16 @@ export const useCarousel = ({ postImages }: ArgsTypes) => {
   ): void => {
     const { offset } = info;
     if (offset.x < CHANGE_IMG_OFFSET * -1) {
-      nextImage();
+      handleNextImage();
     }
     if (offset.x > CHANGE_IMG_OFFSET) {
-      prevImage();
+      handlePrevImage();
     }
   };
-  return { prevImage, nextImage, handleDragEnd, currentIndex };
+  return {
+    handlePrevImage,
+    handleNextImage,
+    handleDragEnd,
+    currentIndex,
+  };
 };

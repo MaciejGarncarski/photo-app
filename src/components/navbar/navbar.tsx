@@ -12,7 +12,7 @@ import styles from './navbar.module.scss';
 export const Navbar = () => {
   const { isMobile } = useIsMobile();
 
-  if (!isMobile) {
+  if (isMobile === 'loading') {
     return null;
   }
 

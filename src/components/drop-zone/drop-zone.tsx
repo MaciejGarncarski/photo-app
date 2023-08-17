@@ -20,6 +20,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
   const [error, setError] = useState<DropZoneErrors>(null);
 
   const { isMobile } = useIsMobile();
+
   const {
     active,
     onDrop,

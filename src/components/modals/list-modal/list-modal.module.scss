@@ -20,7 +20,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+
+
 }
 
 .heading {
@@ -32,10 +34,11 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-
+  gap: 1.75rem;
+  padding-bottom: 0.5rem;
 
   @include common.mediaquery('desktop') {
     gap: 0.5rem;
+    padding-bottom: 0;
   }
 }

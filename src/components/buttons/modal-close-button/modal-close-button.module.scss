@@ -1,28 +1,36 @@
 @use '/src/styles/common';
 
 .closeButton {
-  background-color: transparent;
   border: none;
-  background-color: var(--bg-secondary);
-  border: none;
-  padding: 0.4rem;
-  border-radius: 100%;
   transition: all var(--transition-fast);
   transition-property: background-color, box-shadow, color;
+  position: relative;
+  color: var(--color-secondary);
 
-  &:hover,
-  &:focus {
-    box-shadow: var(--shadow-focus);
-    color: var(--color-white);
-    background-color: var(--color-primary);
+
+  @include common.mediaquery('desktop') {
+
+    &::before {
+      content: "";
+      border-radius: 100%;
+      width: 100%;
+      height: 100%;
+      transform: scale(0);
+      background-color: var(--color-primary);
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      transition: transform var(--transition);
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--color-white);
+
+      &::before {
+        transform: scale(1.3);
+      }
+    }
   }
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.closeButtonExternal {
-  border-radius: var(--radius-medium);
-  background-color: var(--bg-primary);
 }

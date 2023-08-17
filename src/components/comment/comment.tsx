@@ -65,6 +65,7 @@ export const Comment = ({ commentData }: Props) => {
       <ConfirmationAlert
         isVisible={isModalOpen}
         closeModal={closeModal}
+        text="Do you want to delete comment?"
         onConfirm={handleDelete}
       />
     </motion.article>

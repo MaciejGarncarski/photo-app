@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 
-import { ShareModal } from '@/src/components/modals/share-modal/share-modal';
 import { usePostButtonsData } from '@/src/components/post/post-buttons/use-post-buttons';
 import { PostModal } from '@/src/components/post/post-modal/post-modal';
 
@@ -12,7 +11,7 @@ type Props = {
 };
 
 export const PostButtons = ({ postId, parentModalOpen }: Props) => {
-  const { buttonData, postModal, shareModal } = usePostButtonsData({
+  const { buttonData, postModal } = usePostButtonsData({
     postId,
     parentModalOpen,
   });
@@ -35,11 +34,6 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
         );
       })}
 
-      <ShareModal
-        isVisible={shareModal.isModalOpen}
-        closeModal={shareModal.closeModal}
-        textToCopy={`https://photoapp.maciej-garncarski.pl/post/${postId}`}
-      />
       <PostModal
         isVisible={postModal.isModalOpen}
         postId={postId}
