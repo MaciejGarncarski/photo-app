@@ -1,11 +1,8 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-
-import { useDebounce } from '@/src/hooks/use-debounce';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export const useUpdateWidth = () => {
   const imageRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
-  const debouncedWidth = useDebounce(width, 200);
 
   useLayoutEffect(() => {
     if (!imageRef.current) {
@@ -28,10 +25,8 @@ export const useUpdateWidth = () => {
     };
   }, []);
 
-  return useMemo(() => {
-    return {
-      width: debouncedWidth,
-      imageRef,
-    };
-  }, [debouncedWidth]);
+  return {
+    width,
+    imageRef,
+  };
 };

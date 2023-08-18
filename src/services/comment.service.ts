@@ -5,11 +5,10 @@ import { AddPostCommentInput } from '@/src/schemas/post-comment';
 type LikeComment = { commentId: number; isLiked: boolean };
 
 export const likeComment = ({ commentId, isLiked }: LikeComment) => {
-  if (isLiked) {
-    return apiClient.delete(`post-comment/${commentId}/like`);
-  }
-
-  return apiClient.put(`post-comment/${commentId}/like`);
+  return apiClient({
+    url: `post-comment/${commentId}/like`,
+    method: isLiked ? 'DELETE' : 'PUT',
+  });
 };
 
 type DeleteComment = {
@@ -17,12 +16,19 @@ type DeleteComment = {
 };
 
 export const deleteComment = ({ commentId }: DeleteComment) => {
-  return apiClient.delete(`post-comment/${commentId}`);
+  return apiClient({
+    url: `post-comment/${commentId}`,
+    method: 'DELETE',
+  });
 };
 
 export const addComment = ({ commentText, postId }: AddPostCommentInput) => {
-  return apiClient.post<unknown, null, AddPostCommentInput>('post-comment', {
-    commentText,
-    postId,
+  return apiClient({
+    url: 'post-comment',
+    method: 'POST',
+    body: {
+      commentText,
+      postId,
+    },
   });
 };

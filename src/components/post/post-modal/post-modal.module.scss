@@ -3,7 +3,7 @@
 .container {
   position: relative;
   z-index: 1;
-  width: calc(20rem + 1rem);
+  width: clamp(20rem, 55vw, 70rem);
   background-color: var(--bg-primary);
   left: 0;
   right: 0;
@@ -17,9 +17,12 @@
   }
 
   @include common.mediaquery('tablet') {
-    padding: 0;
-    width: clamp(15rem, 60vw, 70rem);
     border-radius: var(--radius-medium);
+  }
+
+  @include common.mediaquery('desktop') {
+    padding: 0;
+
   }
 }
 

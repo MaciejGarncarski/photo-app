@@ -1,4 +1,4 @@
-import { IconHeart, IconMessage2 } from '@tabler/icons-react';
+import { IconHeartFilled, IconMessage2 } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
 import { useModal } from '@/src/hooks/use-modal';
@@ -34,7 +34,7 @@ export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
   const buttonData: ButtonData = [
     {
       alt: 'like',
-      icon: <IconHeart color={post?.isLiked ? 'red' : undefined} />,
+      icon: <IconHeartFilled color={post?.isLiked ? 'red' : 'transparent'} />,
       onClick: handleLike,
       count: formatCount(post?.likesCount || 0),
     },

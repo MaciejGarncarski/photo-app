@@ -11,11 +11,11 @@ type UseInfiniteComments = {
 export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
   return useInfiniteQuery({
     queryKey: ['infinite comments', postId],
-    queryFn: async ({ pageParam = 0 }): Promise<CommentResponse> => {
-      const { data } = await apiClient.get(
-        `post-comment/${postId}?skip=${pageParam}`,
-      );
-      return data;
+    queryFn: ({ pageParam = 0 }): Promise<CommentResponse> => {
+      return apiClient({
+        method: 'GET',
+        url: `post-comment/${postId}?skip=${pageParam}`,
+      });
     },
     defaultPageParam: 0,
     refetchOnWindowFocus: false,

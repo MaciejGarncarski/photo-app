@@ -1,23 +1,24 @@
 import { apiClient } from '@/src/utils/api-client';
 
 import { ChatRoom } from '@/src/components/pages/chat-room/use-chat-room-data';
-import { ChatMessagesResponse } from '@/src/schemas/chat';
+import { chatMessagesResponseSchema } from '@/src/schemas/chat';
 
 type DeleteChatMessage = {
   messageId: string;
 };
 
 export const deleteChatMessage = ({ messageId }: DeleteChatMessage) => {
-  return apiClient.delete(`chat/${messageId}`);
+  return apiClient({ url: `chat/${messageId}`, method: 'DELETE' });
 };
 
 type GetChatRoomData = {
   receiverId: string;
 };
 
-export const getChatRoomData = async ({ receiverId }: GetChatRoomData) => {
-  const { data } = await apiClient.get<ChatRoom>(`chat/${receiverId}/check`);
-  return data;
+export const getChatRoomData = ({
+  receiverId,
+}: GetChatRoomData): Promise<ChatRoom> => {
+  return apiClient({ url: `chat/${receiverId}/check`, method: 'GET' });
 };
 
 type GetChatMessages = {
@@ -29,8 +30,9 @@ export const getChatMessages = async ({
   pageParam = 0,
   friendId,
 }: GetChatMessages) => {
-  const { data } = await apiClient.get<ChatMessagesResponse>(
-    `chat/${friendId}/chatMessages?skip=${pageParam}`,
-  );
-  return data;
+  return apiClient({
+    schema: chatMessagesResponseSchema,
+    url: `chat/${friendId}/chatMessages?skip=${pageParam}`,
+    method: 'GET',
+  });
 };

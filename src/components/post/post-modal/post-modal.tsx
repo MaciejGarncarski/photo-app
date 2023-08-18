@@ -25,7 +25,6 @@ type Props = {
 export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
   const { data: post, isLoading } = usePost({ postId });
   const { isMobile } = useIsMobile();
-
   if (isLoading || !post) {
     return null;
   }

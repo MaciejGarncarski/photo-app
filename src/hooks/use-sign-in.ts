@@ -11,9 +11,13 @@ export const useSignIn = () => {
 
   return useMutation({
     mutationFn: ({ email, password }: SignInFormValues) => {
-      return apiClient.post('auth/login', {
-        email,
-        password,
+      return apiClient({
+        url: 'auth/login',
+        method: 'POST',
+        body: {
+          email,
+          password,
+        },
       });
     },
     onSuccess: async () => {

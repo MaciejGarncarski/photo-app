@@ -1,22 +1,19 @@
 import { apiClient } from '@/src/utils/api-client';
 
-import { EditAccountInput } from '@/src/schemas/edit.schema';
-import { FollowersResponse } from '@/src/schemas/follower-stats';
-import { User, userApiResponseSchema } from '@/src/schemas/user.schema';
+import { followersResponseSchema } from '@/src/schemas/follower-stats';
+import { userApiResponseSchema } from '@/src/schemas/user.schema';
 
 type GetUser = {
   userId: string;
 };
 
 export const getUser = async ({ userId }: GetUser) => {
-  const { data } = await apiClient.get(`users/${userId}`);
-  const response = userApiResponseSchema.safeParse(data);
-
-  if (!response.success) {
-    throw new Error(`Invalid data, ${JSON.stringify(response.error)}`);
-  }
-
-  return response.data;
+  const data = await apiClient({
+    url: `users/${userId}`,
+    method: 'GET',
+    schema: userApiResponseSchema,
+  });
+  return data;
 };
 
 type GetUserByUsername = {
@@ -24,14 +21,13 @@ type GetUserByUsername = {
 };
 
 export const getUserByUsername = async ({ username }: GetUserByUsername) => {
-  const { data } = await apiClient.get(`users/username/${username}`);
-  const response = userApiResponseSchema.safeParse(data);
+  const data = await apiClient({
+    url: `users/username/${username}`,
+    method: 'GET',
+    schema: userApiResponseSchema,
+  });
 
-  if (!response.success) {
-    throw new Error(`Invalid data, ${JSON.stringify(response.error)}`);
-  }
-
-  return response.data;
+  return data;
 };
 
 type UploadAvatar = {
@@ -42,26 +38,28 @@ export const uploadAvatar = ({ avatarFile }: UploadAvatar) => {
   const formData = new FormData();
   formData.append('image', avatarFile);
 
-  return apiClient.postForm(`session-user/update-avatar`, formData, {
+  return apiClient({
+    url: `session-user/update-avatar`,
+    method: 'POST',
     headers: {
       'Content-Type': 'multipart/form-data',
     },
+    body: formData,
   });
 };
 
 export const deleteAvatar = () => {
-  return apiClient.delete('session-user/delete-avatar');
-};
-
-export const editAccount = (data: EditAccountInput) => {
-  return apiClient.post<unknown, unknown, EditAccountInput>(
-    `session-user/edit-account`,
-    data,
-  );
+  return apiClient({
+    url: 'session-user/delete-avatar',
+    method: 'DELETE',
+  });
 };
 
 export const getSessionUser = async () => {
-  const { data } = await apiClient.get<User>('auth/me');
+  const data = await apiClient({
+    url: 'auth/me',
+    method: 'GET',
+  });
   return data;
 };
 
@@ -73,10 +71,10 @@ type FollowOtherUser = {
 export const followOtherUser = ({ userId, isFollowing }: FollowOtherUser) => {
   const apiUrl = `users/follow/${userId}`;
 
-  if (isFollowing) {
-    return apiClient.delete(apiUrl);
-  }
-  return apiClient.put(apiUrl);
+  return apiClient({
+    url: apiUrl,
+    method: isFollowing ? 'DELETE' : 'PUT',
+  });
 };
 
 type GetFollowers = {
@@ -90,8 +88,9 @@ export const getFollowers = async ({
   type,
   userId,
 }: GetFollowers) => {
-  const { data } = await apiClient.get<FollowersResponse>(
-    `follower-stats/${type}?userId=${userId}&skip=${pageParam ?? 0}`,
-  );
-  return data;
+  return apiClient({
+    url: `follower-stats/${type}?userId=${userId}&skip=${pageParam ?? 0}`,
+    schema: followersResponseSchema,
+    method: 'GET',
+  });
 };

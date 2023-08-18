@@ -12,9 +12,13 @@ export const useEditPost = ({ postId }: { postId: number }) => {
 
   return useMutation({
     mutationFn: async ({ description }: Mutation) => {
-      return apiClient.post('post/edit-post', {
-        postId,
-        description,
+      return apiClient({
+        method: 'POST',
+        url: 'post/edit-post',
+        body: {
+          postId,
+          description,
+        },
       });
     },
     onSuccess: () => router.push(`/post/${postId}`),

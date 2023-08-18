@@ -10,7 +10,7 @@ export const useUserByUsername = ({ username }: Arguments) => {
   return useQuery({
     queryKey: ['user', username],
     queryFn: () => getUserByUsername({ username }),
-    enabled: Boolean(username),
+    enabled: Boolean(username) && username !== '',
     retry: 1,
     refetchOnWindowFocus: false,
   });

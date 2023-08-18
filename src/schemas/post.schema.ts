@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { datelikeToDate } from '@/src/utils/zod';
+
 import { PostImage } from '@/src/services/userPosts.service';
 
 export const postDescriptionSchema = z.string().min(1).max(100);
@@ -7,7 +9,7 @@ export const postDescriptionSchema = z.string().min(1).max(100);
 export type PostDescription = z.infer<typeof postDescriptionSchema>;
 
 export const postSchema = z.object({
-  createdAt: z.date(),
+  createdAt: datelikeToDate,
   id: z.number(),
   authorId: z.string(),
 });
@@ -16,7 +18,7 @@ export const postDetailsSchema = z.object({
   commentsCount: z.number(),
   likesCount: z.number(),
   images: z.array(z.custom<PostImage>()),
-  createdAt: z.date(),
+  createdAt: datelikeToDate,
   description: postDescriptionSchema,
   id: z.number(),
   isLiked: z.boolean(),

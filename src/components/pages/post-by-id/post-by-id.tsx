@@ -38,7 +38,7 @@ export const PostById = () => {
     );
   }
 
-  if (!isSuccess || !data) {
+  if (!isSuccess || !authorData?.username) {
     return <Loader marginTop color="blue" size="normal" />;
   }
 

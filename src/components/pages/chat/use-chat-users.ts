@@ -32,10 +32,9 @@ export const useChatUsers = () => {
   const chatUsers = useInfiniteQuery({
     queryKey: ['chat users', sessionUser?.id, searchedUser],
     queryFn: async ({ pageParam = 0 }) => {
-      const { data: responseData } = await apiClient.get<ChatUsersResponse>(
-        `chat/chatUsers?skip=${pageParam}&searchedUser=${searchedUser}`,
-      );
-      return responseData;
+      return await apiClient({
+        url: `chat/chatUsers?skip=${pageParam}&searchedUser=${searchedUser}`,
+      });
     },
     defaultPageParam: 0,
     enabled: isEnabled,

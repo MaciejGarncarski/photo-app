@@ -1,20 +1,30 @@
 import { apiClient } from '@/src/utils/api-client';
 
-import { PostDetails, PostsResponse } from '@/src/schemas/post.schema';
+import {
+  postDetailsSchema,
+  postsResponseSchema,
+} from '@/src/schemas/post.schema';
 
 type GetPost = {
   postId: number;
 };
 
 export const getPost = async ({ postId }: GetPost) => {
-  const { data } = await apiClient.get<PostDetails>(`post/${postId}`);
+  const data = apiClient({
+    url: `post/${postId}`,
+    method: 'GET',
+    schema: postDetailsSchema,
+  });
   return data;
 };
 
 export const getInfinitePosts = async ({ pageParam = 0 }) => {
-  const { data } = await apiClient.get<PostsResponse>(
-    `post/homepage-posts?skip=${pageParam}`,
-  );
+  const data = await apiClient({
+    url: `post/homepage-posts?skip=${pageParam}`,
+    method: 'GET',
+    schema: postsResponseSchema,
+  });
+
   return data;
 };
 
@@ -23,5 +33,8 @@ type DeletePost = {
 };
 
 export const deletePost = ({ postId }: DeletePost) => {
-  return apiClient.delete(`post/${postId}`);
+  return apiClient({
+    url: `post/${postId}`,
+    method: 'DELETE',
+  });
 };

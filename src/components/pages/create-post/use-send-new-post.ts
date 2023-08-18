@@ -22,10 +22,11 @@ const uplaodPost = ({ description, images }: CreatePostInput) => {
     }
   });
 
-  return apiClient.post(`post/create-post`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+  return apiClient({
+    method: 'POST',
+    headers: { 'Content-Type': 'multipart/form-data' },
+    body: formData,
+    url: 'post/create-post',
   });
 };
 

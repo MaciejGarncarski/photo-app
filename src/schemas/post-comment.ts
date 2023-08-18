@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { datelikeToDate } from '@/src/utils/zod';
+
 const addPostCommentInputSchema = z.object({
   commentText: z.string(),
   postId: z.number(),
@@ -24,7 +26,7 @@ export const commentTextSchema = z
 
 const commentSchema = z.object({
   commentText: z.string().max(100, { message: 'Maximum characters exceeded.' }),
-  createdAt: z.date(),
+  createdAt: datelikeToDate,
   likesCount: z.number(),
   isLiked: z.boolean(),
   postId: z.number(),
