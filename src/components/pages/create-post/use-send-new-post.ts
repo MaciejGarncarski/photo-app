@@ -15,17 +15,16 @@ const uplaodPost = ({ description, images }: CreatePostInput) => {
   const formData = new FormData();
 
   formData.append('description', description);
-
-  images.forEach((img) => {
-    if (img) {
-      formData.append('images', img);
+  for (const image of images) {
+    if (image) {
+      formData.append('images', image);
     }
-  });
+  }
 
   return apiClient({
     method: 'POST',
-    headers: { 'Content-Type': 'multipart/form-data' },
     body: formData,
+    formData: true,
     url: 'post/create-post',
   });
 };

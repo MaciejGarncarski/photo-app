@@ -9,6 +9,7 @@ type ApiClientArguments<S> = {
   body?: Record<string, unknown> | FormData;
   cache?: RequestCache;
   headers?: Record<string, unknown>;
+  formData?: boolean;
 };
 
 export const apiClient = async <S extends z.ZodTypeAny>({
@@ -17,15 +18,31 @@ export const apiClient = async <S extends z.ZodTypeAny>({
   method = 'GET',
   schema,
   cache = 'default',
+  headers,
+  formData,
 }: ApiClientArguments<S>): Promise<z.infer<S>> => {
+  const formDataOptions: RequestInit = {
+    cache,
+    body: body instanceof FormData ? body : undefined,
+    method,
+    credentials: 'include',
+  };
+
+  const options: RequestInit = {
+    cache,
+    body: body ? JSON.stringify(body) : null,
+    method,
+    credentials: 'include',
+
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+  };
+
   const apiResponse = await fetch(
     `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/${url}`,
-    {
-      cache,
-      body: JSON.stringify(body),
-      method,
-      credentials: 'include',
-    },
+    formData ? formDataOptions : options,
   );
 
   const jsonData = await apiResponse.json();

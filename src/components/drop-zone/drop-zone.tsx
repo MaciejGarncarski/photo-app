@@ -1,6 +1,6 @@
 import { IconCircleX, IconPhoto } from '@tabler/icons-react';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 
@@ -18,7 +18,7 @@ type Props = {
 
 export const DropZone = ({ setImgSrc }: Props) => {
   const [error, setError] = useState<DropZoneErrors>(null);
-
+  const inputId = useId();
   const { isMobile } = useIsMobile();
 
   const {
@@ -41,7 +41,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
   return (
     <div>
       <Heading tag="h2" size="medium">
-        1. Upload image
+        Upload image
       </Heading>
       <div
         className={clsx(
@@ -58,10 +58,11 @@ export const DropZone = ({ setImgSrc }: Props) => {
         <span className="visually-hidden">
           <input
             type="file"
-            id="dropZoneInput"
+            id={inputId}
             accept="image/*"
-            className={clsx('visually-hidden', styles.input)}
+            className={styles.input}
             ref={inputRef}
+            name="fileInput"
             onChange={onChange}
           />
         </span>
@@ -88,13 +89,15 @@ export const DropZone = ({ setImgSrc }: Props) => {
           )}
         </div>
         <label
-          htmlFor="dropZoneInput"
+          htmlFor={inputId}
           className={clsx(
-            isActive && styles.buttonInputDisabled,
+            {
+              [styles.buttonInputDisabled]: isActive,
+            },
             styles.buttonInput,
           )}
         >
-          Select from {isMobile ? 'device' : 'computer'}
+          Select file from device
         </label>
       </div>
     </div>

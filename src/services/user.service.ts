@@ -50,10 +50,8 @@ export const uploadAvatar = ({ avatarFile }: UploadAvatar) => {
   return apiClient({
     url: `session-user/update-avatar`,
     method: 'POST',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
     body: formData,
+    formData: true,
   });
 };
 
