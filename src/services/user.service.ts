@@ -1,5 +1,6 @@
 import { apiClient } from '@/src/utils/api-client';
 
+import { EditAccountInput } from '@/src/schemas/edit.schema';
 import { followersResponseSchema } from '@/src/schemas/follower-stats';
 import { userApiResponseSchema } from '@/src/schemas/user.schema';
 
@@ -28,6 +29,14 @@ export const getUserByUsername = async ({ username }: GetUserByUsername) => {
   });
 
   return data;
+};
+
+export const editAccount = (data: EditAccountInput) => {
+  return apiClient({
+    url: 'session-user/edit-account',
+    method: 'POST',
+    body: data,
+  });
 };
 
 type UploadAvatar = {
