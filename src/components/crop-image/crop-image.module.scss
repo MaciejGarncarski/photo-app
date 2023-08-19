@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
   border-radius: var(--radius-small);
-  border: var(--border-gray);
 
   @include common.mediaquery('desktop') {
     min-height: 25rem;

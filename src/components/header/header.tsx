@@ -22,7 +22,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.anchor}>
-        <h1 className={styles.heading}>PhotoApp</h1>
+        <h1 className={styles.heading}>Photo App</h1>
       </Link>
       {isMobile !== 'loading' && (
         <>{isMobile ? <Navbar /> : <NavbarForDesktop />}</>

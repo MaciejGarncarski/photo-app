@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
@@ -24,7 +23,7 @@ type Props = {
 
 export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
   const { data: post, isLoading } = usePost({ postId });
-  const { isMobile } = useIsMobile();
+
   if (isLoading || !post) {
     return null;
   }
@@ -48,32 +47,18 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
                 <ModalCloseButton onClose={closeModal} />
               </div>
 
-              <div className={styles.columns}>
-                {isMobile && (
-                  <PostHeader
-                    tag="div"
-                    authorId={authorId}
-                    createdAt={createdAt.toString()}
-                    postId={postId}
-                  />
-                )}
-                <div className={styles.leftColumn}>
-                  <PostImagesCarousel postId={postId} priority={true} />
-                </div>
-                <div className={styles.rightColumn}>
-                  {!isMobile && (
-                    <PostHeader
-                      tag="div"
-                      authorId={authorId}
-                      createdAt={createdAt.toString()}
-                      postId={postId}
-                    />
-                  )}
-                  <PostFooter postId={postId} parentModalOpen={isVisible} />
-                  <section className={styles.commentsContainer}>
-                    <PostComments postId={postId} />
-                  </section>
-                </div>
+              <div className={styles.content}>
+                <PostHeader
+                  tag="div"
+                  authorId={authorId}
+                  createdAt={createdAt.toString()}
+                  postId={postId}
+                />
+                <PostImagesCarousel postId={postId} priority={true} />
+                <PostFooter postId={postId} parentModalOpen={isVisible} />
+                <section className={styles.commentsContainer}>
+                  <PostComments postId={postId} />
+                </section>
               </div>
             </motion.div>
           </ReactFocusLock>

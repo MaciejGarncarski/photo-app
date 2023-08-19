@@ -14,8 +14,7 @@
   max-height: 12rem;
   padding: 1rem;
   border-radius: var(--radius-small);
-  border: var(--border-gray);
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
 
   &:focus {
     outline: none;
@@ -37,10 +36,10 @@
   opacity: 0.8;
 }
 
-.textArea:focus + .label,
+.textArea:focus+.label,
 .notEmpty {
   transform: translate(0.5rem, -0.75rem);
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   opacity: 1;
 }
 

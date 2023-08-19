@@ -5,32 +5,27 @@
   transition: all var(--transition-fast);
   transition-property: background-color, box-shadow, color;
   position: relative;
-  color: var(--color-secondary);
+  color: var(--text-black);
+
+  &::before {
+    content: "";
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-gray);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transform: scale(1.8);
+    transition: transform var(--transition);
+  }
 
 
   @include common.mediaquery('desktop') {
 
-    &::before {
-      content: "";
-      border-radius: 100%;
-      width: 100%;
-      height: 100%;
-      transform: scale(0);
-      background-color: var(--color-primary);
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: -1;
-      transition: transform var(--transition);
-    }
-
-    &:hover,
-    &:focus {
-      color: var(--color-white);
-
-      &::before {
-        transform: scale(1.3);
-      }
+    &:hover::before {
+      background-color: var(--color-gray-hover);
     }
   }
 }

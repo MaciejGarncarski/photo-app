@@ -18,7 +18,7 @@ export const ModalCloseButton = ({ onClose }: Props) => {
       type="button"
       onClick={handleClose}
     >
-      <IconX size="2rem" />
+      <IconX size={20} />
       <span className="visually-hidden">close modal</span>
     </button>
   );

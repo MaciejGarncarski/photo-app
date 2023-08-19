@@ -2,18 +2,19 @@
 
 .header {
   @include common.mediaquery('desktop') {
+    background-color: var(--color-secondary);
+    box-shadow: 0 2px 1px var(--shadow-1);
+    border-radius: var(--radius-big);
     display: flex;
     flex-direction: column;
-    padding-block: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    margin: 3rem 5vw;
+    padding: 2rem 1rem;
     width: var(--header-width);
-    border-right: var(--border-gray);
-    position: fixed;
-    top: 0;
+    position: sticky;
+    top: 3rem;
+    max-height: 88vh;
     left: 0;
     gap: 4rem;
-    height: 100vh;
   }
 }
 
@@ -49,7 +50,7 @@
 
   &:hover,
   &:focus {
-    background-color: var(--bg-secondary);
+    background-color: var(--color-secondary);
   }
 
   &:focus {

@@ -19,7 +19,7 @@
 
   &:hover,
   &:focus {
-    background-color: var(--bg-secondary);
+    background-color: var(--color-secondary);
   }
 
   @include common.mediaquery('desktop') {

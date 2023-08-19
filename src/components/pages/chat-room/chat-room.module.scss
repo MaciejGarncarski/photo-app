@@ -22,7 +22,7 @@
   justify-content: center;
   gap: 1.5rem;
   padding: 1rem;
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   width: var(--width);
   position: fixed;
   top: 0;
@@ -93,7 +93,7 @@
   justify-content: center;
   align-items: center;
 
-  > svg {
+  >svg {
     width: 5rem;
     height: 5rem;
   }
@@ -104,7 +104,7 @@
   bottom: 3.5rem;
   width: 100%;
   padding: 1rem 0.5rem;
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   display: flex;
   justify-content: stretch;
   align-items: stretch;
@@ -123,7 +123,7 @@
   justify-content: space-between;
   border-radius: var(--radius-small);
   padding-right: 0.5rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--color-secondary);
   border: 1px solid var(--color-gray);
   width: 100%;
 

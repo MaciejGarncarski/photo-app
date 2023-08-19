@@ -5,7 +5,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  background-color: var(--bg-secondary);
+  background-color: var(--color-secondary);
   border-radius: var(--radius-small);
   padding: 0.5rem;
   width: clamp(10rem, 80vw, 40rem);
@@ -74,7 +74,7 @@
   padding: 1rem 1.5rem;
 
   border: 0;
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   width: 100%;
 
   @include common.mediaquery('desktop') {

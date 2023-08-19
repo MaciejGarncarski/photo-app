@@ -9,7 +9,7 @@
   color: var(--color-primary);
   --loader-size: 5rem;
 
-  > svg {
+  >svg {
     width: var(--loader-size);
     height: var(--loader-size);
     animation: rotate 1s infinite linear forwards;
@@ -43,7 +43,7 @@
 }
 
 .white {
-  color: var(--color-white);
+  color: var(--color-secondary);
 }
 
 .blue {

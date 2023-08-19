@@ -18,14 +18,11 @@
   justify-content: center;
   align-items: center;
   object-fit: cover;
-  max-width: unset;
   flex-shrink: 0;
-  width: var(--post-width);
   pointer-events: none;
   user-select: none;
 
   @include common.mediaquery('tablet') {
-    max-height: 40rem;
     object-fit: contain;
   }
 }

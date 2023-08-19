@@ -4,7 +4,7 @@
   position: relative;
   z-index: 1;
   width: clamp(20rem, 55vw, 70rem);
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   left: 0;
   right: 0;
   bottom: 0;
@@ -19,11 +19,6 @@
   @include common.mediaquery('tablet') {
     border-radius: var(--radius-medium);
   }
-
-  @include common.mediaquery('desktop') {
-    padding: 0;
-
-  }
 }
 
 .closeButton {
@@ -37,7 +32,7 @@
   }
 }
 
-.columns {
+.content {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -45,25 +40,7 @@
   max-height: 55dvh;
 
   @include common.mediaquery('desktop') {
-    height: 40rem;
     gap: 3rem;
-    flex-direction: row;
-  }
-}
-
-.leftColumn {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.rightColumn {
-  flex-grow: 1;
-
-  @include common.mediaquery('desktop') {
-    padding: 1rem 0;
-    padding-right: 1rem;
   }
 }
 

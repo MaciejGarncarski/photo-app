@@ -19,10 +19,9 @@
   box-shadow: var(--shadow-secondary);
   justify-content: center;
   align-items: center;
-  border: var(--border-gray);
   position: relative;
 
-  &:hover > .deleteIconOverlay {
+  &:hover>.deleteIconOverlay {
     opacity: 1;
   }
 }
@@ -35,7 +34,7 @@
 }
 
 .emptySpace {
-  background-color: var(--bg-secondary);
+  background-color: var(--color-secondary);
   color: var(--text-black);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-secondary);
@@ -45,9 +44,8 @@
   justify-content: center;
   align-items: center;
   min-height: 5rem;
-  border: var(--border-gray);
 
-  > svg {
+  >svg {
     width: 2rem;
     height: 2rem;
   }
@@ -76,7 +74,7 @@
     background-color: var(--color-error);
   }
 
-  > svg {
+  >svg {
     color: var(--color-icon-gray);
     width: 1.75rem;
     height: 1.75rem;
@@ -86,7 +84,7 @@
     right: -1.5rem;
     top: -1.5rem;
 
-    > svg {
+    >svg {
       width: 2.5rem;
       height: 2.5rem;
     }

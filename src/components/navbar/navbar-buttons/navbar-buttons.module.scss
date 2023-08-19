@@ -6,10 +6,10 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  padding: 0.2rem 0.5rem;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--color-gray);
+  padding: 0.5rem 1rem;
+  background-color: var(--color-secondary);
   border-radius: var(--radius-medium);
+  box-shadow: 0 0 2px var(--shadow-5);
 
   @include common.mediaquery('desktop') {
     border-radius: 0;
@@ -19,6 +19,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: 0;
+    box-shadow: none;
   }
 }
 
@@ -36,7 +37,7 @@
 .listItemContent {
   display: flex;
   align-items: center;
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-small);
   gap: 0.5rem;
   padding: 0.25rem;
   font-size: 1.25rem;
@@ -51,22 +52,21 @@
 
   @include common.mediaquery('desktop') {
     padding: 1rem 0.75rem;
+    border-radius: var(--radius-medium);
     width: 100%;
 
     &:hover {
-      background-color: var(--bg-secondary);
+      background-color: var(--color-primary);
     }
 
     &:focus {
-      background-color: var(--bg-secondary);
-      box-shadow: var(--shadow-focus);
-      outline: none;
+      background-color: var(--color-primary);
     }
   }
 }
 
 .active {
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   font-weight: 700;
 
   svg {

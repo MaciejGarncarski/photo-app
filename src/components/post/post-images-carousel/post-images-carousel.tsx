@@ -70,9 +70,6 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
             animate="animate"
             exit="exit"
             className={styles.imagesContainer}
-            style={{
-              maxWidth: width,
-            }}
           >
             {post.images.map((image, mapIndex) => {
               return (

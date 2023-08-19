@@ -1,9 +1,10 @@
-import { IconHeartFilled, IconMessage2 } from '@tabler/icons-react';
+import { IconMessage2 } from '@tabler/icons-react';
 import { ReactElement } from 'react';
 
 import { useModal } from '@/src/hooks/use-modal';
 import { formatCount } from '@/src/utils/format-likes';
 
+import { HeartIcon } from '@/src/components/heart-icon';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
 
@@ -34,7 +35,7 @@ export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
   const buttonData: ButtonData = [
     {
       alt: 'like',
-      icon: <IconHeartFilled color={post?.isLiked ? 'red' : 'transparent'} />,
+      icon: <HeartIcon isLiked={post?.isLiked || false} />,
       onClick: handleLike,
       count: formatCount(post?.likesCount || 0),
     },

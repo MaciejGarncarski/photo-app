@@ -1,48 +1,37 @@
 @use '/src/styles/common';
 
 %variables {
-  --color-primary: rgb(71, 136, 214);
-  --color-secondary: rgb(149, 182, 241);
+  --color-primary: rgb(240, 242, 245);
+  --color-secondary: rgb(255, 255, 255);
   --color-error: rgb(207, 60, 30);
-  --color-disabled: rgb(63, 114, 175, 0.9);
-  --color-gray: rgb(225, 225, 225);
+  --color-error-light: rgb(255, 175, 159);
+  --color-gray: rgb(228, 230, 235);
+  --color-gray-hover: rgb(204, 208, 213);
   --color-overlay: rgb(20, 20, 20, 0.6);
-  --color-white: rgb(255, 255, 255);
-  --color-gray-transparent: rgb(30, 30, 30, 0.5);
-  --color-icon-gray: rgb(20, 20, 20);
 
-  --text-black: rgb(0, 0, 0);
-  --text-gray: rgb(61, 61, 61);
-
-  --filter-blur: blur(13px) saturate(1.2);
-  --border-gray: 2px solid var(--color-gray);
-
-  --bg-primary: rgb(255, 255, 255);
-  --bg-blur: rgb(255, 255, 255, 0.9);
-  --bg-error: rgba(204, 73, 73, 0.25);
-  --bg-secondary: rgb(235, 235, 235);
-  --bg-focus: rgb(235, 235, 235);
+  --color-text: rgb(22, 22, 22);
+  --color-text-gray: rgb(80, 80, 80);
 
   --transition: 0.25s ease;
   --transition-fast: 0.125s ease;
 
-  --gradient: linear-gradient(
-    90deg,
-    var(--color-gray) 0px,
-    #ededed 20%,
-    var(--color-gray) 40%
-  );
+  --gradient: linear-gradient(90deg,
+      var(--color-gray) 0px,
+      #ededed 20%,
+      var(--color-gray) 40%);
   --placeholder-animation: skeleton-loading 1.5s infinite linear;
   --placeholder-bg-size: 500%;
 
-  --shadow-focus: 0 0 0 0.3rem var(--bg-primary),
-    0 0 0 0.45rem var(--color-primary);
+  --shadow-1: rgba(0, 0, 0, 0.1);
+  --shadow-2: rgba(0, 0, 0, 0.2);
+  --shadow-5: rgba(0, 0, 0, 0.5);
+  --shadow-8: rgba(0, 0, 0, 0.8);
 
   --radius-big: 1rem;
   --radius-medium: 0.5rem;
   --radius-small: 0.25rem;
 
-  --header-width: 22rem;
+  --header-width: 20rem;
   --post-width: 20rem;
 
   --post-margin: 1rem;
@@ -53,23 +42,22 @@
 
   @include common.mediaquery('desktop') {
     --post-margin: 1.5rem;
-    --post-width: calc(18rem + 15vw);
+    --post-width: calc(25rem + 15vw);
   }
 }
 
 %variablesDarkTheme {
+  --color-primary: rgb(60, 60, 60);
+  --color-secondary: rgb(80, 80, 80);
+  --color-gray: rgb(100, 100, 100);
+  --color-gray-hover: rgb(130, 130, 130);
   --color-overlay: rgba(80, 80, 80, 0.85);
-  --text-black: rgb(230, 230, 230);
-  --color-gray: rgb(100, 100, 110);
-  --gradient: linear-gradient(
-    90deg,
-    var(--color-gray) 0px,
-    #929292 10%,
-    var(--color-gray) 20%
-  );
-  --text-gray: rgb(200, 200, 200);
-  --bg-primary: rgb(32, 37, 51);
-  --bg-blur: rgb(32, 37, 51, 0.9);
-  --bg-secondary: rgba(60, 60, 65);
-  --bg-focus: rgb(80, 80, 80);
+
+  --color-text: rgb(232, 232, 232);
+  --color-text-gray: rgb(190, 190, 190);
+
+  --shadow-1: rgba(255, 255, 255, 0.1);
+  --shadow-2: rgba(255, 255, 255, 0.2);
+  --shadow-5: rgba(255, 255, 255, 0.5);
+  --shadow-8: rgba(255, 255, 255, 0.8);
 }

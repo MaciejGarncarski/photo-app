@@ -15,8 +15,9 @@
         padding: 1rem 0.5rem;
         transition: background-color var(--transition);
 
-        &:hover {
-            background-color: var(--bg-focus);
+        &:hover,
+        &:focus {
+            background-color: var(--color-gray);
         }
     }
 }

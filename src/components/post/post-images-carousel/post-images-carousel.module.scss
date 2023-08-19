@@ -4,12 +4,13 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-medium);
 }
 
 .imagesContainer {
   position: relative;
   display: flex;
-  height: 100%;
+  width: 100%;
 }
 
 .grab {
@@ -23,6 +24,7 @@
 .image {
   display: flex;
   justify-content: center;
+  width: 100%;
   align-items: center;
 }
 
@@ -39,7 +41,7 @@
   z-index: 2;
   list-style-type: none;
   padding: 0.35rem 0.5rem;
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-secondary);
 }

@@ -35,7 +35,7 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     credentials: 'include',
 
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': body ? 'application/json' : 'text/plain',
       ...headers,
     },
   };

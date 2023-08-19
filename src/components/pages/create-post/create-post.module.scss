@@ -2,7 +2,7 @@
 
 .createPost {
   display: grid;
-  width: clamp(19rem, 70%, 45rem);
+  width: clamp(19rem, 70vw, 55rem);
   margin: 2rem auto;
   margin-bottom: 4rem;
   gap: 3rem;

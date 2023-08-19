@@ -2,9 +2,8 @@
 
 .dropZone {
   box-shadow: var(--shadow-secondary);
-  border: var(--border-gray);
   border-radius: var(--radius-small);
-  background-color: var(--bg-secondary);
+  background-color: var(--color-secondary);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -51,7 +50,7 @@
 .buttonInput {
   border-radius: var(--radius-small);
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-secondary);
   font-weight: 500;
   border: none;
   transition: all var(--transition);
