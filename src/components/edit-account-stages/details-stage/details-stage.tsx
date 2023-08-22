@@ -55,6 +55,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
         <Input
           type="text"
           labelText="Username"
+          placeholder="Username"
           isEmpty={getValues('username') === ''}
           error={errors.username?.message}
           {...register('username')}
@@ -62,6 +63,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
         <Input
           type="text"
           labelText="Full name"
+          placeholder="Full name"
           isEmpty={getValues('fullName') === ''}
           error={errors.fullName?.message}
           {...register('fullName')}
