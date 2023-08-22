@@ -6,7 +6,7 @@ type Props = {
 
 export const HeartIcon = ({ isLiked }: Props) => {
   if (isLiked) {
-    return <IconHeartFilled />;
+    return <IconHeartFilled style={{ color: 'var(--color-accent)' }} />;
   }
 
   return <IconHeart />;

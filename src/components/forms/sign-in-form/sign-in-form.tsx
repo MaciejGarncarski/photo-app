@@ -37,24 +37,24 @@ export const SignInForm = () => {
   return (
     <motion.form {...animation} className={styles.form} onSubmit={onSubmit}>
       <Input
-        labelText="email"
+        placeholder="email@example.com"
+        labelText="Email"
         type="email"
         isEmpty={getValues('email') === ''}
         error={errors.email?.message}
         {...register('email')}
       />
       <Input
-        labelText="password"
+        placeholder="Type in your password"
+        labelText="Password"
         type="password"
         isEmpty={getValues('password') === ''}
         error={errors.password?.message}
         {...register('password')}
       />
-      <div className={styles.continueButton}>
-        <Button type="submit" variant="primary">
-          continue
-        </Button>
-      </div>
+      <Button type="submit" variant="primary">
+        continue
+      </Button>
     </motion.form>
   );
 };

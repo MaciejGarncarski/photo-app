@@ -5,6 +5,7 @@
   flex-direction: column;
   position: relative;
   gap: 0.5rem;
+  --gap: 0.75rem;
 }
 
 .containerError {
@@ -12,16 +13,13 @@
 }
 
 .label {
-  color: var(--text-secondary);
+  color: var(--color-text-gray);
   position: absolute;
-  left: 0;
-  top: 0;
-  transform: translate(0.75rem, 1rem);
+  left: var(--gap);
+  top: 0.5rem;
   transition: all var(--transition);
   transition-property: background-color, transform, opacity;
   display: inline-block;
-  background-color: var(--color-primary);
-  padding: 0 0.25rem;
   opacity: 0.8;
 }
 
@@ -31,34 +29,30 @@
 }
 
 .input {
-  background-color: var(--color-primary);
-  padding: 1rem;
+  background-color: var(--color-secondary);
+  padding: 2rem var(--gap) 0.75rem var(--gap);
   border-radius: var(--radius-small);
+  border: none;
+  color: var(--color-text);
+  box-shadow: 0 2px 0 var(--shadow-1);
 
   &:focus {
     outline: none;
-    border-color: var(--color-primary);
-
-    &+.label {
-      @extend %label-active;
-    }
   }
 }
 
 .inputError {
-  border-color: var(--color-error);
+  background-color: var(--color-error-light);
 
-  &+.label {
-    color: var(--color-error);
+  &::placeholder {
+    color: var(--color-text);
   }
-}
 
-.notEmpty+.label {
-  @extend %label-active;
 }
 
 .error {
   color: var(--color-error);
-  padding-left: 0.5rem;
-  margin-top: 0.5rem;
+  padding-left: var(--gap);
+  margin-left: 0.75rem;
+  margin-top: 0.25rem;
 }

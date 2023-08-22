@@ -21,8 +21,8 @@ export const useSignIn = () => {
       });
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['session'] });
       router.push('/');
+      await queryClient.invalidateQueries({ queryKey: ['session'] });
     },
   });
 };

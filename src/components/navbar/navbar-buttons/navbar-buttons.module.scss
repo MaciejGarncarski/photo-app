@@ -16,8 +16,11 @@
     border: initial;
     background-color: transparent;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
     padding: 0;
     box-shadow: none;
   }
@@ -31,6 +34,7 @@
   @include common.mediaquery('desktop') {
     width: 100%;
     display: block;
+
   }
 }
 

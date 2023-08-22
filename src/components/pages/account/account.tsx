@@ -2,7 +2,7 @@
 
 import { IconDoorExit, IconEdit } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
@@ -26,7 +26,7 @@ type Props = {
 
 export const Account = ({ username }: Props) => {
   const { isMobile } = useIsMobile();
-
+  const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
 
@@ -78,7 +78,7 @@ export const Account = ({ username }: Props) => {
       <ConfirmationAlert
         isVisible={signOutModal.isModalOpen}
         text="Do you want to sign out?"
-        onConfirm={() => signOut(queryClient)}
+        onConfirm={() => signOut(queryClient, () => router.push('/'))}
         closeModal={signOutModal.closeModal}
       />
       <AccountPostsList userId={userData?.id || ''} />

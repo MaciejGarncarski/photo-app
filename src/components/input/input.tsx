@@ -4,15 +4,27 @@ import { forwardRef } from 'react';
 import styles from './input.module.scss';
 
 type Props = {
-  type?: 'text' | 'number' | 'tel' | 'email' | 'password';
   labelText: string;
+  isEmpty: boolean;
+  placeholder: string;
+  type?: 'text' | 'number' | 'tel' | 'email' | 'password';
   error?: string;
   optional?: boolean;
-  isEmpty: boolean;
 };
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ type = 'text', labelText, error, optional, isEmpty, ...props }, ref) => {
+  (
+    {
+      type = 'text',
+      labelText,
+      error,
+      optional,
+      isEmpty,
+      placeholder,
+      ...props
+    },
+    ref,
+  ) => {
     const containerClassName = clsx(
       error && styles.containerError,
       styles.container,
@@ -34,6 +46,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             type={type}
             id={labelText}
             data-testid="input"
+            placeholder={placeholder}
             className={inputClassName}
             {...props}
           />

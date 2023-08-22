@@ -3,10 +3,9 @@
 .orWith {
   background-color: var(--color-primary);
   text-transform: uppercase;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   display: inline-block;
   z-index: 1;
-  font-weight: 700;
 }
 
 .separator {
@@ -38,21 +37,6 @@
   align-items: stretch;
   flex-direction: column;
   gap: 2rem;
-
-  @include common.mediaquery('desktop') {
-    flex-direction: row;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.button {
-  >button {
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-    padding: 0.8rem;
-  }
 }
 
 .link {

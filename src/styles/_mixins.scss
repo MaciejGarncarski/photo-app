@@ -1,6 +1,5 @@
 @mixin mediaquery($query) {
-  $breakpoints: (
-    'tablet': '(min-width: 750px)',
+  $breakpoints: ('tablet': '(min-width: 750px)',
     'desktop': '(min-width: 1279px)',
   );
 
@@ -8,7 +7,9 @@
     @media screen and #{map-get($breakpoints, $query)} {
       @content;
     }
-  } @else {
+  }
+
+  @else {
     @error "ERROR: No breakpoint specified for query '#{$query}'";
   }
 }
@@ -20,39 +21,42 @@
 }
 
 @mixin button-state {
-  &:not(:disabled) {
-    &:hover {
-      transform: scale(1.05);
+  @include mediaquery('desktop') {
+    &:not(:disabled) {
+      &:focus {
+        box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
+      }
     }
-
-    &:focus {
-      box-shadow: var(--shadow-focus);
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
   }
 }
 
 @mixin button-secondary-state {
-  &:not(:disabled) {
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    &:focus {
-      box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
+  @include mediaquery('desktop') {
+    &:not(:disabled) {
+      &:focus {
+        box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
+      }
     }
   }
+}
 
-  &:disabled {
-    background-color: transparent;
-    opacity: 0.6;
+@mixin button {
+  border-radius: var(--radius-small);
+  background-color: var(--color-accent);
+  border: none;
+  color: var(--color-button-text);
+  box-shadow: 0 2px 0 var(--shadow-1);
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: capitalize;
+
+
+  @include mediaquery('desktop') {
+    @include button-state;
+    padding: 0.75rem 1.5rem;
   }
 }

@@ -9,22 +9,11 @@ export const SignIn = () => {
   return (
     <section className={styles.container}>
       <Heading tag="h2" size="big" {...animation}>
-        Sign in or sign up
+        Sign in
       </Heading>
       <div className={styles.formContainer}>
         <SignInForm />
         <OtherSignInOptions />
-        <div className={styles.info} {...animation}>
-          <Heading tag="h3" size="small">
-            How to sign in with demo account?
-          </Heading>
-          <p>Sign in with these credentials: </p>
-          <ul className={styles.list}>
-            <li>Email: test@test.pl</li>
-            <li>Password: 12345</li>
-          </ul>
-          <p>Also you can click button above named &quot;Demo account&quot;.</p>
-        </div>
       </div>
     </section>
   );

@@ -1,13 +1,12 @@
 import { IconLogin } from '@tabler/icons-react';
-import Link from 'next/link';
 
-import styles from './sign-in-button.module.scss';
+import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 
 export const SignInButton = () => {
   return (
-    <Link data-cy="signin button" href="/auth/signin" className={styles.button}>
+    <ButtonLink href="/auth/signin">
       <IconLogin />
       Sign in
-    </Link>
+    </ButtonLink>
   );
 };

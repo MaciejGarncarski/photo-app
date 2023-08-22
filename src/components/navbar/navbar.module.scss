@@ -11,8 +11,14 @@
   bottom: 0;
   left: 0;
   z-index: 3;
+  gap: 2rem;
 }
 
 .navDesktop {
   background-color: transparent;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 3rem;
 }

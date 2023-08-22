@@ -1,33 +1,13 @@
 @use '/src/styles/common';
 
 .button {
-  border-radius: var(--radius-small);
-  background-color: var(--color-secondary);
-  color: var(--color-text);
-  border: none;
-  box-shadow: 0 0 2px var(--shadow-2);
-  padding: 0.5rem 0.8rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  text-transform: capitalize;
-  transition: all var(--transition);
-  transition-property: transform, box-shadow;
-
-
-  @include common.mediaquery('desktop') {
-    @include common.button-state;
-    padding: 0.5rem 0.9rem;
-  }
+  @include common.button;
 }
 
 .secondary {
-  @extend .button;
-  background-color: var(--color-primary);
-  color: var(--color-primary);
-  box-shadow: inset 0 0 0 2px var(--color-primary);
+  @include common.button;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
 
 
   @include common.mediaquery('desktop') {

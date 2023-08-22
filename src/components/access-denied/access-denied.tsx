@@ -10,7 +10,6 @@ export const AccessDenied = () => {
       <Heading tag="h2" size="big">
         Access denied.
       </Heading>
-
       <Link href="/" className={styles.link}>
         Go to homepage.
       </Link>

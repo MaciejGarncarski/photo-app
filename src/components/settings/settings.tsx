@@ -1,6 +1,8 @@
 import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import { useMemo } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
@@ -16,14 +18,16 @@ type Props = {
 };
 
 export const Settings = ({ closeModal, isVisible }: Props) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
-  const { theme, setTheme } = useTheme();
-  const isDark = theme === 'dark';
   const { sessionUser, isSignedIn } = useAuth();
+  const { theme, setTheme } = useTheme();
   const signOutModal = useModal();
 
+  const isDark = useMemo(() => theme === 'dark', [theme]);
+
   const handleSignOut = () => {
-    signOut(queryClient);
+    signOut(queryClient, () => router.push('/'));
     closeModal();
     signOutModal.closeModal();
   };

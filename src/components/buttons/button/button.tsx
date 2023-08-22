@@ -1,5 +1,8 @@
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import { MouseEventHandler, ReactNode } from 'react';
+
+import { buttonVariants } from '@/src/components/buttons/button/button.animation';
 
 import styles from './button.module.scss';
 
@@ -22,13 +25,16 @@ export const Button = ({
   onClick,
 }: Props) => {
   return (
-    <button
+    <motion.button
       onClick={onClick}
       type={type}
       disabled={disabled}
+      variants={buttonVariants}
+      whileHover="hover"
+      whileTap="tap"
       className={clsx(styles[variant], styles.button)}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };

@@ -1,12 +1,12 @@
 'use client';
 
 import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
-import Link from 'next/link';
 
 import { useSignIn } from '@/src/hooks/use-sign-in';
 import { clientEnv } from '@/src/utils/env';
 
 import { Button } from '@/src/components/buttons/button/button';
+import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 
 import styles from './other-sign-in-options.module.scss';
 
@@ -26,22 +26,14 @@ export const OtherSignInOptions = () => {
         <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
-        <div className={styles.button}>
-          <Button type="button" variant="primary" onClick={handleSignInDemo}>
-            <IconTestPipe />
-            Try it out
-          </Button>
-        </div>
-
-        <div className={styles.button}>
-          <Link
-            href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`}
-            className={styles.link}
-          >
-            <IconBrandGoogle />
-            Google
-          </Link>
-        </div>
+        <ButtonLink href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`}>
+          <IconBrandGoogle />
+          Google
+        </ButtonLink>
+        <Button type="button" variant="primary" onClick={handleSignInDemo}>
+          <IconTestPipe />
+          Test user account
+        </Button>
       </div>
     </div>
   );
