@@ -18,7 +18,7 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
 
   return (
     <ul className={styles.list}>
-      {buttonData.map(({ alt, icon, onClick, count }) => {
+      {buttonData.map(({ alt, icon, onClick }) => {
         return (
           <li key={alt} className={styles.listItem}>
             <motion.button
@@ -28,7 +28,6 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
             >
               {icon}
               <span className="visually-hidden">{alt}</span>
-              <span className={styles.buttonCount}>{count}</span>
             </motion.button>
           </li>
         );

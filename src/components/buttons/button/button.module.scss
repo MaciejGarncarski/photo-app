@@ -2,15 +2,32 @@
 
 .button {
   @include common.button;
+
+  &:disabled {
+    background-color: var(--color-gray);
+    border-color: var(--color-gray);
+    color: var(--color-text-gray);
+    cursor: not-allowed;
+  }
+
+  @include common.mediaquery('desktop') {
+    &:focus {
+      outline-offset: 6px;
+      outline-width: 4px;
+      outline-color: var(--color-accent);
+    }
+  }
 }
 
 .secondary {
   @include common.button;
-  background-color: var(--color-secondary);
+  border-color: var(--color-text);
   color: var(--color-text);
+  background-color: transparent;
+}
 
-
-  @include common.mediaquery('desktop') {
-    @include common.button-secondary-state;
-  }
+.destructive {
+  @include common.button;
+  border-color: var(--color-error-light);
+  background-color: var(--color-error-light);
 }

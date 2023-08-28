@@ -1,4 +1,4 @@
-import { IconSearch, IconX } from '@tabler/icons-react';
+import { MagnifyingGlass, X } from '@phosphor-icons/react';
 import { ChangeEvent, FormEvent } from 'react';
 
 import { Button } from '@/src/components/buttons/button/button';
@@ -32,7 +32,7 @@ export const SearchUserForm = ({
         onChange={onChange}
       />
       <Button type="submit" variant="primary" disabled={inputValue === ''}>
-        <IconSearch />
+        <MagnifyingGlass />
         <span className="visually-hidden">Search user</span>
       </Button>
       <Button
@@ -41,7 +41,7 @@ export const SearchUserForm = ({
         onClick={resetState}
         disabled={inputValue === ''}
       >
-        <IconX />
+        <X />
         <span className="visually-hidden">reset</span>
       </Button>
     </form>

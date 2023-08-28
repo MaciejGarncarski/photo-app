@@ -2,16 +2,18 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { zodResolver } from '@hookform/resolvers/zod';
+import { SignOut } from '@phosphor-icons/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useModal } from '@/src/hooks/use-modal';
 
+import { Button } from '@/src/components/buttons/button/button';
 import { CropImage } from '@/src/components/crop-image/crop-image';
 import { CreatePostForm } from '@/src/components/forms/create-post-form/create-post-form';
 import { ImagesPreview } from '@/src/components/images-preview/images-preview';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { useFinalImages } from '@/src/components/pages/create-post/use-final-images';
 
 import styles from './create-post.module.scss';
@@ -35,7 +37,6 @@ export const CreatePost = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { dirtyFields, errors },
   } = useForm({
     resolver: zodResolver(PostDetailsSchema),
@@ -58,19 +59,25 @@ export const CreatePost = () => {
       )}
       <ImagesPreview previewImages={previewImages} onRemove={onRemove} />
       <CreatePostForm
-        isEmpty={getValues('description') === ''}
         disabled={isSubmitDisabled}
         errors={errors}
         onSubmit={handleSubmit(onSubmit)}
         openModal={openModal}
         register={register}
       />
-      <ConfirmationAlert
+      <ConfirmationDialog
         isVisible={isModalOpen}
-        text="Do you want to abort creating a post?"
         closeModal={closeModal}
-        onConfirm={() => router.push('/')}
-      />
+        text="Do you want to abort creating a post?"
+      >
+        <Button variant="destructive" onClick={() => router.push('/')}>
+          Abort creating
+          <SignOut />
+        </Button>
+        <Button variant="secondary" onClick={closeModal}>
+          Cancel
+        </Button>
+      </ConfirmationDialog>
     </div>
   );
 };

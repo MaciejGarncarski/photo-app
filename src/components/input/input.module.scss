@@ -36,6 +36,10 @@
   color: var(--color-text);
   box-shadow: 0 2px 0 var(--shadow-1);
 
+  &::placeholder {
+    color: var(--color-text-gray);
+  }
+
   &:focus {
     outline: none;
   }

@@ -19,7 +19,6 @@ export const SignInForm = () => {
   const {
     handleSubmit,
     register,
-    getValues,
     formState: { errors },
   } = useForm<SignInFormValues>({
     resolver: zodResolver(SignInSchema),
@@ -40,7 +39,6 @@ export const SignInForm = () => {
         placeholder="email@example.com"
         labelText="Email"
         type="email"
-        isEmpty={getValues('email') === ''}
         error={errors.email?.message}
         {...register('email')}
       />
@@ -48,7 +46,6 @@ export const SignInForm = () => {
         placeholder="Type in your password"
         labelText="Password"
         type="password"
-        isEmpty={getValues('password') === ''}
         error={errors.password?.message}
         {...register('password')}
       />

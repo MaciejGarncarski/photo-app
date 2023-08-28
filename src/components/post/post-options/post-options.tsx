@@ -1,4 +1,4 @@
-import { IconEdit, IconTrash, IconX } from '@tabler/icons-react';
+import { PencilSimple, Trash, X } from '@phosphor-icons/react';
 
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
@@ -32,20 +32,20 @@ export const PostOptions = ({
           <ListModalItem
             type="link"
             href={`/post/${postId}/edit`}
-            icon={<IconEdit />}
+            icon={<PencilSimple />}
           >
             Edit
           </ListModalItem>
           <ListModalItem
             type="button"
             onClick={openConfirmation}
-            icon={<IconTrash />}
+            icon={<Trash />}
           >
             Delete
           </ListModalItem>
         </>
       )}
-      <ListModalItem type="button" onClick={closeModal} icon={<IconX />}>
+      <ListModalItem type="button" onClick={closeModal} icon={<X />}>
         Close
       </ListModalItem>
     </ListModal>

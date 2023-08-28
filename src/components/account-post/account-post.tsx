@@ -1,4 +1,4 @@
-import { IconHeart, IconMessage2 } from '@tabler/icons-react';
+import { Chat } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { postItemVaraints } from '@/src/components/account-post/account-post.animation';
+import { HeartIcon } from '@/src/components/heart-icon';
 import { Loader } from '@/src/components/loader/loader';
 import { usePost } from '@/src/components/pages/account/use-post';
 
@@ -49,10 +50,11 @@ export const AccountPost = ({ postId }: Props) => {
       />
       <ul className={styles.overlay}>
         <li className={styles.count}>
-          <IconHeart color={isLiked ? 'red' : 'black'} /> {likesCount}
+          <HeartIcon isLiked={isLiked} /> {likesCount}
         </li>
         <li className={styles.count}>
-          <IconMessage2 /> {commentsCount}
+          <Chat />
+          {commentsCount}
         </li>
       </ul>
     </MotionLink>

@@ -1,6 +1,6 @@
 'use client';
 
-import { IconSettings } from '@tabler/icons-react';
+import { GearSix } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -29,19 +29,21 @@ export const NavButtons = () => {
               return null;
             }
 
+            const isActive = path === href;
+
             return (
               <li key={title} className={styles.listItem}>
                 <Link
                   href={href}
                   className={clsx(
                     {
-                      [styles.active]: path === href,
+                      [styles.active]: isActive,
                     },
                     styles.listItemContent,
                   )}
                 >
                   <span>
-                    <Icon />
+                    <Icon weight={isActive ? 'fill' : 'bold'} />
                   </span>
                   <span className={styles.title}>{title}</span>
                 </Link>
@@ -56,9 +58,7 @@ export const NavButtons = () => {
             className={styles.listItemContent}
             onClick={openModal}
           >
-            <span>
-              <IconSettings />
-            </span>
+            <GearSix />
             <span className={styles.title}>settings</span>
           </button>
         </li>

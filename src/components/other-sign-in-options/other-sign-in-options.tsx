@@ -1,6 +1,6 @@
 'use client';
 
-import { IconBrandGoogle, IconTestPipe } from '@tabler/icons-react';
+import { GoogleLogo, TestTube } from '@phosphor-icons/react';
 
 import { useSignIn } from '@/src/hooks/use-sign-in';
 import { clientEnv } from '@/src/utils/env';
@@ -27,11 +27,11 @@ export const OtherSignInOptions = () => {
       </div>
       <div className={styles.other}>
         <ButtonLink href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`}>
-          <IconBrandGoogle />
+          <GoogleLogo />
           Google
         </ButtonLink>
         <Button type="button" variant="primary" onClick={handleSignInDemo}>
-          <IconTestPipe />
+          <TestTube />
           Test user account
         </Button>
       </div>

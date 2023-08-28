@@ -1,8 +1,7 @@
 @use '/src/styles/common';
 
 .container {
-  width: clamp(18rem, 35vw, 70rem);
-  margin: 2rem auto;
+  width: clamp(20rem, 35vw, 55rem);
 }
 
 .formContainer {

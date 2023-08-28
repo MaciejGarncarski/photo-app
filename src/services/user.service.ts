@@ -51,7 +51,6 @@ export const uploadAvatar = ({ avatarFile }: UploadAvatar) => {
     url: `session-user/update-avatar`,
     method: 'POST',
     body: formData,
-    formData: true,
   });
 };
 

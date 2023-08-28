@@ -20,43 +20,20 @@
   }
 }
 
-@mixin button-state {
-  @include mediaquery('desktop') {
-    &:not(:disabled) {
-      &:focus {
-        box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
-      }
-    }
-  }
-}
-
-@mixin button-secondary-state {
-  @include mediaquery('desktop') {
-    &:not(:disabled) {
-      &:focus {
-        box-shadow: inset 0 0 0 2px var(--color-primary), var(--shadow-focus);
-      }
-    }
-  }
-}
-
 @mixin button {
   border-radius: var(--radius-small);
+  border: 2px solid var(--color-accent);
   background-color: var(--color-accent);
-  border: none;
   color: var(--color-button-text);
-  box-shadow: 0 2px 0 var(--shadow-1);
-  padding: 0.5rem 0.8rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  text-transform: capitalize;
-
+  gap: 0.6rem;
 
   @include mediaquery('desktop') {
-    @include button-state;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
   }
 }

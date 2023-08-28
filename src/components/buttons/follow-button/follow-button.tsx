@@ -19,12 +19,12 @@ export const FollowButton = ({ userId }: Props) => {
   }
 
   const { isFollowing } = data;
-
   const handleFollow = () => mutate({ isFollowing, userId });
 
   return (
     <Button
       type="button"
+      disabled={isPending}
       variant={isFollowing ? 'secondary' : 'primary'}
       onClick={handleFollow}
     >

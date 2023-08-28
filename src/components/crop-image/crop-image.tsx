@@ -1,4 +1,4 @@
-import { IconHandFinger, IconMouse } from '@tabler/icons-react';
+import { File, Hand, Mouse } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
@@ -11,7 +11,7 @@ import { useCropImage } from '@/src/components/crop-image/use-crop-image';
 import { useSaveCrop } from '@/src/components/crop-image/use-save-crop';
 import { DropZone } from '@/src/components/drop-zone/drop-zone';
 import { Loader } from '@/src/components/loader/loader';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { FinalImages } from '@/src/components/pages/create-post/types';
 import { Heading } from '@/src/components/typography/heading/heading';
 
@@ -54,10 +54,6 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
     return <DropZone setImgSrc={setImgSrc} />;
   }
 
-  const onConfirm = () => {
-    resetImgSrc();
-  };
-
   return (
     <>
       <section className={styles.addPhoto}>
@@ -78,7 +74,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           />
         </div>
         <p className={styles.info}>
-          {isMobile ? <IconHandFinger /> : <IconMouse />}
+          {isMobile ? <Hand /> : <Mouse />}
           <span>
             {isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture
           </span>
@@ -94,7 +90,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
             </Button>
             <Button
               type="button"
-              variant="secondary"
+              variant="destructive"
               disabled={!imgSrc}
               onClick={openModal}
             >
@@ -104,12 +100,19 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
         </section>
       </section>
       {isModalOpen && (
-        <ConfirmationAlert
+        <ConfirmationDialog
           isVisible={isModalOpen}
           text="Do you want to select diffrent image?"
           closeModal={closeModal}
-          onConfirm={onConfirm}
-        />
+        >
+          <Button variant="destructive" onClick={resetImgSrc}>
+            Select diffrent image
+            <File />
+          </Button>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
+        </ConfirmationDialog>
       )}
     </>
   );

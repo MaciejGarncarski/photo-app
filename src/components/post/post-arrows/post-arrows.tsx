@@ -1,4 +1,4 @@
-import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import clsx from 'clsx';
 
 import { PostSliderProgress } from '@/src/components/post/post-images-carousel/carousel-progress';
@@ -35,7 +35,7 @@ export const PostArrows = ({
           className={styles.button}
           onClick={handlePrevImage}
         >
-          <IconArrowLeft />
+          <ArrowLeft />
           <span className="visually-hidden">Previous</span>
         </button>
       )}
@@ -46,7 +46,7 @@ export const PostArrows = ({
           className={clsx(styles.buttonRight, styles.button)}
           onClick={handleNextImage}
         >
-          <IconArrowRight />
+          <ArrowRight />
           <span className="visually-hidden">Next</span>
         </button>
       )}

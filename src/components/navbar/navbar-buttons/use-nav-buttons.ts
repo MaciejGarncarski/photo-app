@@ -1,13 +1,7 @@
-import {
-  IconHome,
-  IconMessageCircle2,
-  IconSquareRoundedPlus,
-  IconUser,
-  TablerIconsProps,
-} from '@tabler/icons-react';
+import { Chat, House, Icon, PlusCircle, User } from '@phosphor-icons/react';
 
 type ListData = {
-  icon: (props: TablerIconsProps) => JSX.Element;
+  icon: Icon;
   title: string;
   href: string;
   shouldShowWhileGuest: boolean;
@@ -16,25 +10,25 @@ type ListData = {
 export const getNavListData = (username?: string | null) => {
   const navButtonsList: Array<ListData> = [
     {
-      icon: IconHome,
+      icon: House,
       title: 'Home',
       href: '/',
       shouldShowWhileGuest: true,
     },
     {
-      icon: IconMessageCircle2,
+      icon: Chat,
       title: 'Chat',
       href: '/chat',
       shouldShowWhileGuest: false,
     },
     {
-      icon: IconSquareRoundedPlus,
+      icon: PlusCircle,
       title: 'Create post',
       href: '/create-post',
       shouldShowWhileGuest: false,
     },
     {
-      icon: IconUser,
+      icon: User,
       title: 'Profile',
       href: `/${username}`,
       shouldShowWhileGuest: false,

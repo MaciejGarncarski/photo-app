@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/src/hooks/use-auth';
@@ -6,7 +7,7 @@ import { Button } from '@/src/components/buttons/button/button';
 import { EditAccountHeading } from '@/src/components/edit-account-heading/edit-account-heading';
 import { useOptionsStage } from '@/src/components/edit-account-stages/options-stage/use-options-stage';
 import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 
 import styles from '../stages.module.scss';
 
@@ -54,12 +55,19 @@ export const SelectOptionStage = ({
           Edit account details
         </Button>
       </div>
-      <ConfirmationAlert
+      <ConfirmationDialog
         isVisible={isModalOpen}
         text="Do you want to remove your avatar?"
         closeModal={closeModal}
-        onConfirm={removeAvatar}
-      />
+      >
+        <Button variant="destructive" onClick={removeAvatar}>
+          Remove forever
+          <Trash />
+        </Button>
+        <Button variant="secondary" onClick={closeModal}>
+          Cancel
+        </Button>
+      </ConfirmationDialog>
     </motion.section>
   );
 };

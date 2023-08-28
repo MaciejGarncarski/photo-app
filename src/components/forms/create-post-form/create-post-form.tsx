@@ -14,7 +14,6 @@ type Props = {
   errors: FieldErrors<PostDetails>;
   disabled: boolean;
   openModal: () => void;
-  isEmpty: boolean;
   register: UseFormRegister<PostDetails>;
 };
 
@@ -23,7 +22,6 @@ export const CreatePostForm = ({
   errors,
   onSubmit,
   openModal,
-  isEmpty,
   register,
 }: Props) => {
   const buttonList = getButtonList(openModal, disabled);
@@ -38,8 +36,8 @@ export const CreatePostForm = ({
         Post description
       </Heading>
       <TextArea
-        isEmpty={isEmpty}
-        label="description"
+        label="Description"
+        placeholder="Type in post description"
         {...register('description')}
         error={errors.description?.message}
       />

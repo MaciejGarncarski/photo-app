@@ -1,4 +1,4 @@
-import { IconDotsVertical, IconTrash } from '@tabler/icons-react';
+import { DotsThreeVertical, Trash } from '@phosphor-icons/react';
 import clsx from 'clsx';
 
 import { Avatar } from '@/src/components/avatar/avatar';
@@ -35,7 +35,7 @@ export const ChatMessage = ({ message }: Props) => {
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
       {!isReceiver && (
         <button type="button" onClick={openModal} className={styles.options}>
-          <IconDotsVertical />
+          <DotsThreeVertical />
           <span className="visually-hidden">options</span>
         </button>
       )}
@@ -53,11 +53,7 @@ export const ChatMessage = ({ message }: Props) => {
         closeModal={closeModal}
         headingText="Message options"
       >
-        <ListModalItem
-          icon={<IconTrash />}
-          type="button"
-          onClick={handleDelete}
-        >
+        <ListModalItem icon={<Trash />} type="button" onClick={handleDelete}>
           Delete
         </ListModalItem>
       </ListModal>

@@ -5,6 +5,6 @@ export const buttonVariants: Variants = {
     scale: 1.05,
   },
   tap: {
-    scale: 0.85,
+    scale: 0.92,
   },
 };

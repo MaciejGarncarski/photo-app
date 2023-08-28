@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { z } from 'zod';
 
 import { clientEnv } from '@/src/utils/env';
@@ -9,7 +10,6 @@ type ApiClientArguments<S> = {
   body?: Record<string, unknown> | FormData;
   cache?: RequestCache;
   headers?: Record<string, unknown>;
-  formData?: boolean;
 };
 
 export const apiClient = async <S extends z.ZodTypeAny>({
@@ -19,11 +19,12 @@ export const apiClient = async <S extends z.ZodTypeAny>({
   schema,
   cache = 'default',
   headers,
-  formData,
 }: ApiClientArguments<S>): Promise<z.infer<S>> => {
+  const isBodyFormData = body instanceof FormData;
+
   const formDataOptions: RequestInit = {
     cache,
-    body: body instanceof FormData ? body : undefined,
+    body: isBodyFormData ? body : undefined,
     method,
     credentials: 'include',
   };
@@ -40,24 +41,33 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     },
   };
 
-  const apiResponse = await fetch(
-    `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/${url}`,
-    formData ? formDataOptions : options,
-  );
+  try {
+    const apiResponse = await fetch(
+      `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/${url}`,
+      isBodyFormData ? formDataOptions : options,
+    );
 
-  const jsonData = await apiResponse.json();
+    if (!apiResponse.ok) {
+      throw new Error(`Cannot fetch data, status: , ${apiResponse.status}`);
+    }
 
-  if (!schema) {
-    return jsonData;
-  }
+    const jsonData = await apiResponse.json();
 
-  const parseResponse = schema.safeParse(jsonData);
+    if (!schema) {
+      return jsonData;
+    }
 
-  if (!parseResponse.success) {
-    // eslint-disable-next-line no-console
-    console.error(`Parsing error: ${parseResponse.error.message}`);
+    const parsedResponse = schema.safeParse(jsonData);
+
+    if (!parsedResponse.success) {
+      throw new Error(`Parsing error: ${parsedResponse.error.message}`);
+    }
+
+    return parsedResponse.data;
+  } catch (error) {
+    if (error instanceof String) {
+      console.error(error);
+    }
     return null;
   }
-
-  return parseResponse.data;
 };

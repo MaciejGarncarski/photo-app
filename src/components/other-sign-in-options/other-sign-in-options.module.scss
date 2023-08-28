@@ -38,22 +38,3 @@
   flex-direction: column;
   gap: 2rem;
 }
-
-.link {
-  border-radius: var(--radius-small);
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
-  font-weight: 700;
-  border: none;
-  padding: 0.8rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  text-transform: capitalize;
-  transition: all var(--transition);
-  transition-property: transform, box-shadow;
-
-  @include common.button-state;
-}

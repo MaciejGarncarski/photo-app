@@ -1,4 +1,4 @@
-import { IconHeart } from '@tabler/icons-react';
+import { Heart } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { heartVariants } from '@/src/components/heart-animation/heart-animation.animation';
@@ -20,7 +20,7 @@ export const HeartAnimation = ({ isVisible }: Props) => {
           animate="animate"
           exit="exit"
         >
-          <IconHeart />
+          <Heart weight="fill" />
         </motion.div>
       )}
     </AnimatePresence>

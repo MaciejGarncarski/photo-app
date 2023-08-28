@@ -1,6 +1,6 @@
 'use client';
 
-import { IconDoorExit, IconEdit } from '@tabler/icons-react';
+import { PencilSimple, SignOut } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -11,7 +11,8 @@ import { useUserByUsername } from '@/src/hooks/use-user-by-username';
 import { signOut } from '@/src/utils/sign-out';
 
 import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { Button } from '@/src/components/buttons/button/button';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 
@@ -57,12 +58,12 @@ export const Account = ({ username }: Props) => {
       <ListModal
         isVisible={settingsModal.isModalOpen}
         closeModal={settingsModal.closeModal}
-        headingText="Account options"
+        headingText="Options"
       >
         <ListModalItem
           type="link"
           href="/edit-account"
-          icon={<IconEdit />}
+          icon={<PencilSimple />}
           onClick={settingsModal.closeModal}
         >
           Edit account
@@ -70,17 +71,27 @@ export const Account = ({ username }: Props) => {
         <ListModalItem
           type="button"
           onClick={signOutModal.openModal}
-          icon={<IconDoorExit />}
+          icon={<SignOut />}
         >
           Sign out
         </ListModalItem>
       </ListModal>
-      <ConfirmationAlert
+      <ConfirmationDialog
         isVisible={signOutModal.isModalOpen}
         text="Do you want to sign out?"
-        onConfirm={() => signOut(queryClient, () => router.push('/'))}
         closeModal={signOutModal.closeModal}
-      />
+      >
+        <Button
+          variant="primary"
+          onClick={() => signOut(queryClient, () => router.push('/'))}
+        >
+          Sign out
+          <SignOut />
+        </Button>
+        <Button variant="secondary" onClick={signOutModal.closeModal}>
+          Cancel
+        </Button>
+      </ConfirmationDialog>
       <AccountPostsList userId={userData?.id || ''} />
     </div>
   );

@@ -1,4 +1,4 @@
-import { IconPhotoPlus, IconTrash } from '@tabler/icons-react';
+import { CameraPlus, Trash } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -56,7 +56,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
                 onClick={() => onRemove(image.id)}
                 className={styles.deleteIcon}
               >
-                <IconTrash />
+                <Trash />
                 <span className="visually-hidden">remove image</span>
               </motion.button>
               <Image
@@ -79,7 +79,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
               type="button"
               className={styles.emptySpace}
             >
-              <IconPhotoPlus />
+              <CameraPlus />
               <p>empty</p>
             </motion.button>
           );

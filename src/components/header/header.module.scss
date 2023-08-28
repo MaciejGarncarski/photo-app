@@ -5,15 +5,17 @@
     background-color: var(--color-secondary);
     box-shadow: 0 2px 1px var(--shadow-1);
     border-radius: var(--radius-big);
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 3rem 5vw;
+    margin: 3rem 0;
+    margin-left: 6rem;
     padding: 2rem 1rem;
     width: var(--header-width);
     position: sticky;
     top: 3rem;
-    max-height: 88vh;
+    height: calc(100vh - 6rem);
     left: 0;
     gap: 4rem;
   }
@@ -28,42 +30,36 @@
   }
 }
 
-.options {
-  margin-top: auto;
-  position: relative;
-}
-
-.button {
+.signedInInfo {
   display: none;
 
   @include common.mediaquery('desktop') {
+    margin: 0;
+    margin-top: auto;
+    position: relative;
     padding: 0.5rem;
+    background-color: var(--color-primary);
+    box-shadow: 0 1px 0 0 var(--shadow-1);
     border-radius: var(--radius-medium);
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
-    justify-content: center;
     gap: 0.5rem;
-    margin: 0;
     transition: all var(--transition);
     transition-property: background-color, box-shadow;
   }
-
-  &:hover,
-  &:focus {
-    background-color: var(--color-secondary);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: var(--shadow-focus);
-  }
 }
 
-.userInfo {
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userNameInfo {
   display: flex;
   justify-content: flex-start;
-  flex-direction: column;
+  gap: 0.5rem;
   text-align: left;
 }
 

@@ -1,4 +1,4 @@
-import { IconX } from '@tabler/icons-react';
+import { X } from '@phosphor-icons/react';
 
 import styles from './modal-close-button.module.scss';
 
@@ -18,7 +18,7 @@ export const ModalCloseButton = ({ onClose }: Props) => {
       type="button"
       onClick={handleClose}
     >
-      <IconX size={20} />
+      <X />
       <span className="visually-hidden">close modal</span>
     </button>
   );

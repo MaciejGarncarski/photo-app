@@ -1,4 +1,4 @@
-import { IconHeart, IconTrash } from '@tabler/icons-react';
+import { Heart, Trash } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -6,8 +6,9 @@ import Link from 'next/link';
 import { useModal } from '@/src/hooks/use-modal';
 
 import { Avatar } from '@/src/components/avatar/avatar';
+import { Button } from '@/src/components/buttons/button/button';
 import { useComment } from '@/src/components/comment/use-comment';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { Comment as TComment } from '@/src/schemas/post-comment';
 
 import styles from './comment.module.scss';
@@ -48,7 +49,7 @@ export const Comment = ({ commentData }: Props) => {
           <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
         </p>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>
-          <IconHeart />
+          <Heart />
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
         {isAbleToDelete && (
@@ -57,17 +58,23 @@ export const Comment = ({ commentData }: Props) => {
             onClick={openModal}
             className={clsx(styles.buttonLast, styles.likeBtn)}
           >
-            <IconTrash />
+            <Trash />
             delete
           </button>
         )}
       </div>
-      <ConfirmationAlert
+      <ConfirmationDialog
         isVisible={isModalOpen}
         closeModal={closeModal}
         text="Do you want to delete comment?"
-        onConfirm={handleDelete}
-      />
+      >
+        <Button variant="destructive" onClick={handleDelete}>
+          Delete
+        </Button>
+        <Button variant="secondary" onClick={closeModal}>
+          Cancel
+        </Button>
+      </ConfirmationDialog>
     </motion.article>
   );
 };

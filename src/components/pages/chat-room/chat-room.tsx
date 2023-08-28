@@ -1,6 +1,6 @@
 'use client';
 
-import { IconArrowLeft, IconSend } from '@tabler/icons-react';
+import { ArrowLeft, PaperPlaneTilt } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -39,7 +39,7 @@ export const ChatRoom = () => {
     <section className={styles.chat}>
       <header className={styles.header}>
         <Button variant="primary" type="button" onClick={goBack}>
-          <IconArrowLeft />
+          <ArrowLeft />
           <span className={styles.goBack}>Go back</span>
         </Button>
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
@@ -84,7 +84,7 @@ export const ChatRoom = () => {
             className={styles.button}
             disabled={inputVal.trim() === ''}
           >
-            <IconSend />
+            <PaperPlaneTilt />
             <span className="visually-hidden">send</span>
           </button>
         </form>

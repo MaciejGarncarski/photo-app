@@ -1,13 +1,14 @@
-import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
+import { Heart } from '@phosphor-icons/react';
 
 type Props = {
   isLiked: boolean;
 };
 
 export const HeartIcon = ({ isLiked }: Props) => {
-  if (isLiked) {
-    return <IconHeartFilled style={{ color: 'var(--color-accent)' }} />;
-  }
-
-  return <IconHeart />;
+  return (
+    <Heart
+      weight={isLiked ? 'fill' : 'bold'}
+      style={isLiked ? { color: 'var(--color-accent)' } : undefined}
+    />
+  );
 };

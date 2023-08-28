@@ -24,7 +24,6 @@ const uplaodPost = ({ description, images }: CreatePostInput) => {
   return apiClient({
     method: 'POST',
     body: formData,
-    formData: true,
     url: 'post/create-post',
   });
 };

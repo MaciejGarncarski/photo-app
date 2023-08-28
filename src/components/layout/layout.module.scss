@@ -4,6 +4,19 @@
   @include common.mediaquery('desktop') {
     min-height: 100dvh;
     display: flex;
-    gap: 7vw;
+    gap: 5rem;
+  }
+}
+
+.container {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  @include common.mediaquery('desktop') {
+    margin-right: 20rem;
   }
 }

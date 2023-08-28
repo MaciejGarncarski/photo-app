@@ -1,4 +1,4 @@
-import { IconDoorExit, IconMoon, IconSun, IconUser } from '@tabler/icons-react';
+import { Moon, SignOut, Sun, User } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -8,7 +8,8 @@ import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
 import { signOut } from '@/src/utils/sign-out';
 
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { Button } from '@/src/components/buttons/button/button';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 
@@ -34,9 +35,9 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
 
   const ThemeButton = () => {
     if (isDark) {
-      return <IconMoon />;
+      return <Moon />;
     }
-    return <IconSun />;
+    return <Sun />;
   };
 
   return (
@@ -52,7 +53,7 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
             type="link"
             href={`/${sessionUser.username}`}
             onClick={closeModal}
-            icon={<IconUser />}
+            icon={<User />}
           >
             Your profile
           </ListModalItem>
@@ -68,18 +69,25 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
           <ListModalItem
             type="button"
             onClick={signOutModal.openModal}
-            icon={<IconDoorExit />}
+            icon={<SignOut />}
           >
             Sign Out
           </ListModalItem>
         )}
       </ListModal>
-      <ConfirmationAlert
+      <ConfirmationDialog
         isVisible={signOutModal.isModalOpen}
         text="Do you want to sign out?"
-        onConfirm={handleSignOut}
         closeModal={signOutModal.closeModal}
-      />
+      >
+        <Button variant="primary" onClick={handleSignOut}>
+          Sign out
+          <SignOut />
+        </Button>
+        <Button variant="secondary" onClick={closeModal}>
+          Stay signed int
+        </Button>
+      </ConfirmationDialog>
     </>
   );
 };

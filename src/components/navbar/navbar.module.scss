@@ -1,17 +1,21 @@
 @use '/src/styles/common';
 
 .nav {
-  width: 100%;
+  padding: 0.25rem 0.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0;
-  backdrop-filter: var(--filter-blur);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 3;
   gap: 2rem;
+  position: fixed;
+  bottom: 1rem;
+  left: 2rem;
+  right: 2rem;
+  width: auto;
+  margin: 0 auto;
+  z-index: 3;
+  border-radius: var(--radius-medium);
+  box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.3);
+  background-color: var(--color-secondary);
 }
 
 .navDesktop {

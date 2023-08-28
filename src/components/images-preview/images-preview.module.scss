@@ -44,11 +44,8 @@
   justify-content: center;
   align-items: center;
   min-height: 5rem;
+  color: var(--color-text-gray);
 
-  >svg {
-    width: 2rem;
-    height: 2rem;
-  }
 
   @include common.mediaquery('desktop') {
     min-height: 8rem;
@@ -74,19 +71,8 @@
     background-color: var(--color-error);
   }
 
-  >svg {
-    color: var(--color-icon-gray);
-    width: 1.75rem;
-    height: 1.75rem;
-  }
-
   @include common.mediaquery('desktop') {
     right: -1.5rem;
     top: -1.5rem;
-
-    >svg {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
   }
 }

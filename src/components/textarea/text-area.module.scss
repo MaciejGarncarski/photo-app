@@ -2,6 +2,23 @@
 
 .textAreaContainer {
   position: relative;
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-small);
+}
+
+.label {
+  color: var(--color-text-gray);
+  position: absolute;
+  left: var(--gap);
+  top: 0.5rem;
+  left: 1rem;
+  transition: all var(--transition);
+  transition-property: background-color, transform, opacity;
+  display: inline-block;
+  opacity: 0.8;
 }
 
 .textArea {
@@ -10,37 +27,15 @@
   width: 100%;
   height: 100%;
   resize: vertical;
-  min-height: 7rem;
   max-height: 12rem;
-  padding: 1rem;
+  padding: 2rem 1rem;
+  background-color: var(--color-secondary);
   border-radius: var(--radius-small);
-  background-color: var(--color-primary);
 
   &:focus {
     outline: none;
     border-color: var(--color-primary);
   }
-}
-
-.label {
-  color: var(--text-secondary);
-  text-transform: capitalize;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transition: all var(--transition);
-  transition-property: background-color, transform, opacity;
-  transform: translate(0.5rem, 1rem);
-  display: inline-block;
-  padding: 0 0.5rem;
-  opacity: 0.8;
-}
-
-.textArea:focus+.label,
-.notEmpty {
-  transform: translate(0.5rem, -0.75rem);
-  background-color: var(--color-primary);
-  opacity: 1;
 }
 
 .error {

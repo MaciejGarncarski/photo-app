@@ -1,9 +1,10 @@
-import { IconCircleX, IconPhoto } from '@tabler/icons-react';
+import { Camera, File, X } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { useId, useState } from 'react';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 
+import { Button } from '@/src/components/buttons/button/button';
 import { CropError } from '@/src/components/crop-error/crop-error';
 import { useDropZone } from '@/src/components/drop-zone/use-drop-zone';
 import { Loader } from '@/src/components/loader/loader';
@@ -70,35 +71,28 @@ export const DropZone = ({ setImgSrc }: Props) => {
         <div className={styles.dropZoneState}>
           {isActive && (
             <>
-              <IconPhoto className={styles.dropIcon} />
+              <Camera size={40} />
               <p>Drop here.</p>
             </>
           )}
 
           {!error && !isActive && (
             <>
-              <IconPhoto className={styles.dropIcon} />
+              <Camera size={40} />
               {isMobile ? <p>Add image here.</p> : <p>Drag photo here.</p>}
             </>
           )}
           {error && !isActive && (
             <>
-              <IconCircleX className={styles.dropIconError} />
+              <X className={styles.dropIconError} />
               <CropError errorType={error} />
             </>
           )}
         </div>
-        <label
-          htmlFor={inputId}
-          className={clsx(
-            {
-              [styles.buttonInputDisabled]: isActive,
-            },
-            styles.buttonInput,
-          )}
-        >
-          Select file from device
-        </label>
+        <Button type="button" variant="primary">
+          <File />
+          <label htmlFor={inputId}>Select file from device</label>
+        </Button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { IconUser } from '@tabler/icons-react';
+import { User } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -33,7 +33,7 @@ export const Avatar = ({ userId, size }: Props) => {
     return (
       <figure className={clsx(styles[size], styles.avatar)}>
         <div className={styles.noImage}>
-          <IconUser />
+          <User />
           <span className="visually-hidden">Loading avatar</span>
         </div>
       </figure>
@@ -50,7 +50,7 @@ export const Avatar = ({ userId, size }: Props) => {
     <figure className={clsx(styles[size], styles.avatar)}>
       {hasNoImage && (
         <div className={styles.noImage}>
-          <IconUser />
+          <User />
           <span className="visually-hidden">{username}</span>
         </div>
       )}

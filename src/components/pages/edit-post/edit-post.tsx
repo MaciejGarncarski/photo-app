@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FloppyDisk, SignOut } from '@phosphor-icons/react';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,7 +10,7 @@ import { useModal } from '@/src/hooks/use-modal';
 
 import { Button } from '@/src/components/buttons/button/button';
 import { Loader } from '@/src/components/loader/loader';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostDetailsSchema } from '@/src/components/pages/create-post/create-post';
 import { useEditPost } from '@/src/components/pages/edit-post/use-edit-post';
@@ -67,7 +68,7 @@ export const EditPost = () => {
       <form className={styles.form}>
         <TextArea
           label="Description"
-          isEmpty={getValues('description') === ''}
+          placeholder="Type in new description"
           {...register('description')}
           error={errors.description?.message}
         />
@@ -89,18 +90,32 @@ export const EditPost = () => {
           </Button>
         </div>
       </form>
-      <ConfirmationAlert
+      <ConfirmationDialog
         isVisible={cancelModal.isModalOpen}
         text="Abort editing?"
-        onConfirm={cancelChanges}
         closeModal={cancelModal.closeModal}
-      />
-      <ConfirmationAlert
+      >
+        <Button variant="destructive" onClick={cancelChanges}>
+          Abort editing
+          <SignOut />
+        </Button>
+        <Button variant="secondary" onClick={cancelModal.closeModal}>
+          Cancel
+        </Button>
+      </ConfirmationDialog>
+      <ConfirmationDialog
         isVisible={saveModal.isModalOpen}
         text="Save changes?"
-        onConfirm={onSubmit}
         closeModal={saveModal.closeModal}
-      />
+      >
+        <Button variant="primary" onClick={onSubmit}>
+          Save
+          <FloppyDisk />
+        </Button>
+        <Button variant="secondary" onClick={saveModal.closeModal}>
+          Cancel
+        </Button>
+      </ConfirmationDialog>
     </section>
   );
 };

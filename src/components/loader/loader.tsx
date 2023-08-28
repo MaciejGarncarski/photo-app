@@ -1,4 +1,6 @@
-import { IconLoader2 } from '@tabler/icons-react';
+'use client';
+
+import { CircleNotch } from '@phosphor-icons/react';
 import clsx from 'clsx';
 
 import styles from './loader.module.scss';
@@ -21,7 +23,7 @@ export const Loader = ({ size, color, marginTop }: Props) => {
       aria-busy="true"
       aria-live="polite"
     >
-      <IconLoader2 />
+      <CircleNotch />
       <span className="visually-hidden">Loading</span>
     </span>
   );

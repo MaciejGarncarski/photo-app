@@ -6,25 +6,13 @@
   transition-property: background-color, box-shadow, color;
   position: relative;
   color: var(--text-black);
-
-  &::before {
-    content: "";
-    border-radius: 100%;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-gray);
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    transform: scale(1.8);
-    transition: transform var(--transition);
-  }
+  border-radius: 100%;
+  padding: 0.5rem;
+  background-color: var(--color-gray);
 
 
   @include common.mediaquery('desktop') {
-
-    &:hover::before {
+    &:hover {
       background-color: var(--color-gray-hover);
     }
   }

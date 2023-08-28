@@ -1,8 +1,7 @@
-import { IconMessage2 } from '@tabler/icons-react';
+import { Chat } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 
 import { useModal } from '@/src/hooks/use-modal';
-import { formatCount } from '@/src/utils/format-likes';
 
 import { HeartIcon } from '@/src/components/heart-icon';
 import { usePost } from '@/src/components/pages/account/use-post';
@@ -12,7 +11,6 @@ type ButtonData = Array<{
   alt: string;
   icon: ReactElement;
   onClick: () => void;
-  count?: string;
 }>;
 
 type Arguments = {
@@ -37,13 +35,11 @@ export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
       alt: 'like',
       icon: <HeartIcon isLiked={post?.isLiked || false} />,
       onClick: handleLike,
-      count: formatCount(post?.likesCount || 0),
     },
     {
       alt: 'comment',
-      icon: <IconMessage2 />,
+      icon: <Chat />,
       onClick: parentModalOpen ? () => null : postModalOpen,
-      count: formatCount(post?.commentsCount || 0),
     },
   ];
 

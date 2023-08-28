@@ -1,4 +1,4 @@
-import { IconArrowUp } from '@tabler/icons-react';
+import { ArrowUp } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { notificationVariant } from '@/src/components/new-post-notification/new-post-notification.animation';
@@ -23,7 +23,7 @@ export const NewPostNotification = () => {
           whileTap="tap"
           onClick={handleRefetchPosts}
         >
-          <IconArrowUp />
+          <ArrowUp />
           New posts
         </motion.button>
       )}

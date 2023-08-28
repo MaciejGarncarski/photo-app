@@ -1,4 +1,4 @@
-import { IconSettings } from '@tabler/icons-react';
+import { GearSix } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 
 import { useAuth } from '@/src/hooks/use-auth';
@@ -46,7 +46,7 @@ export const AccountHeaderDesktop = ({
         {!isOwner && isSignedIn && <FollowButton userId={userId} />}
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
-            <IconSettings />
+            <GearSix />
             <span className={styles.menuButtonText}>settings</span>
             <span className="visually-hidden">
               {isModalOpen ? 'Close menu' : 'Open menu'}

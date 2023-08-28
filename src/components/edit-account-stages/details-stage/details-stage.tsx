@@ -1,3 +1,4 @@
+import { FloppyDisk } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 
 import { Button } from '@/src/components/buttons/button/button';
@@ -5,7 +6,7 @@ import { EditAccountHeading } from '@/src/components/edit-account-heading/edit-a
 import { useDetailsStage } from '@/src/components/edit-account-stages/details-stage/use-details-stage';
 import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
 import { Input } from '@/src/components/input/input';
-import { ConfirmationAlert } from '@/src/components/modals/confirmation-alert/confirmation-alert';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { TextArea } from '@/src/components/textarea/text-area';
 
 import styles from '../stages.module.scss';
@@ -25,7 +26,6 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
     isError,
     isLoading,
     isModalOpen,
-    getValues,
     onClick,
     onReset,
     onSubmit,
@@ -56,7 +56,6 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
           type="text"
           labelText="Username"
           placeholder="Username"
-          isEmpty={getValues('username') === ''}
           error={errors.username?.message}
           {...register('username')}
         />
@@ -64,13 +63,12 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
           type="text"
           labelText="Full name"
           placeholder="Full name"
-          isEmpty={getValues('fullName') === ''}
           error={errors.fullName?.message}
           {...register('fullName')}
         />
         <TextArea
-          isEmpty={getValues('bio') === ''}
           error={errors.bio?.message}
+          placeholder="Bio"
           label="bio"
           {...register('bio')}
         />
@@ -100,12 +98,19 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
           >
             Save changes
           </Button>
-          <ConfirmationAlert
+          <ConfirmationDialog
             text="Save changes?"
             isVisible={isModalOpen}
             closeModal={closeModal}
-            onConfirm={onSubmit}
-          />
+          >
+            <Button variant="primary" onClick={onSubmit}>
+              Save
+              <FloppyDisk />
+            </Button>
+            <Button variant="secondary" onClick={closeModal}>
+              Cancel
+            </Button>
+          </ConfirmationDialog>
         </div>
       </motion.form>
     </>

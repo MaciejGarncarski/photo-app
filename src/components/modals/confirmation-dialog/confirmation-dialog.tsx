@@ -1,26 +1,26 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { ReactNode } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
-import { Button } from '@/src/components/buttons/button/button';
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
 
-import styles from './confirmation-alert.module.scss';
+import styles from './confirmation-dialog.module.scss';
 
 type Props = {
-  onConfirm: () => void;
   closeModal: () => void;
   text: string;
+  children: ReactNode;
   isVisible: boolean;
 };
 
-export const ConfirmationAlert = ({
+export const ConfirmationDialog = ({
   text,
-  onConfirm,
+  children,
   closeModal,
   isVisible,
 }: Props) => {
@@ -43,12 +43,13 @@ export const ConfirmationAlert = ({
               </div>
               <p className={styles.description}>{text}</p>
               <div className={styles.buttonsRow}>
-                <Button type="button" onClick={onConfirm} variant="secondary">
-                  confirm
-                </Button>
-                <Button type="button" onClick={closeModal} variant="primary">
+                {children}
+                {/* <Button type="button" onClick={closeModal} variant="secondary">
                   cancel
                 </Button>
+                <Button type="button" onClick={onConfirm} variant="primary">
+                  confirm
+                </Button> */}
               </div>
             </motion.div>
           </ReactFocusLock>
