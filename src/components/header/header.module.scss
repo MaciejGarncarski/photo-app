@@ -39,14 +39,11 @@
     position: relative;
     padding: 0.5rem;
     background-color: var(--color-primary);
-    box-shadow: 0 1px 0 0 var(--shadow-1);
     border-radius: var(--radius-medium);
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 0.5rem;
-    transition: all var(--transition);
-    transition-property: background-color, box-shadow;
   }
 }
 

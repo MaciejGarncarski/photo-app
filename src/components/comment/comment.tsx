@@ -37,32 +37,32 @@ export const Comment = ({ commentData }: Props) => {
     <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <span className="visually-hidden">@{username}</span>
-        <Avatar userId={authorId} size="small" />
+        <Avatar userId={authorId} size="xs" />
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>
         <p className={styles.content}>{commentText}</p>
       </div>
-
       <div className={styles.info}>
-        <p className={styles.createdAt}>
-          <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
-        </p>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>
           <Heart />
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
+
+        <p className={styles.createdAt}>
+          <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
+        </p>
+
         {isAbleToDelete && (
-          <button
-            type="button"
-            onClick={openModal}
-            className={clsx(styles.buttonLast, styles.likeBtn)}
-          >
-            <Trash />
-            delete
-          </button>
+          <div className={styles.buttonLast}>
+            <Button type="button" variant="destructive" onClick={openModal}>
+              <Trash />
+              Delete
+            </Button>
+          </div>
         )}
       </div>
+
       <ConfirmationDialog
         isVisible={isModalOpen}
         closeModal={closeModal}

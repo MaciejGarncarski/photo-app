@@ -1,6 +1,8 @@
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
+import { arrowVariants } from '@/src/components/post/post-arrows/post-arrows.animation';
 import { PostSliderProgress } from '@/src/components/post/post-images-carousel/carousel-progress';
 import { PostImage } from '@/src/services/userPosts.service';
 
@@ -30,25 +32,31 @@ export const PostArrows = ({
   return (
     <>
       {isNotFirstIndex && (
-        <button
+        <motion.button
           type="button"
           className={styles.button}
           onClick={handlePrevImage}
+          variants={arrowVariants}
+          whileTap="tap"
+          whileHover="hover"
         >
           <ArrowLeft />
           <span className="visually-hidden">Previous</span>
-        </button>
+        </motion.button>
       )}
       <PostSliderProgress currentIndex={currentIndex} images={postImages} />
       {isNotLastIndex && (
-        <button
+        <motion.button
           type="button"
           className={clsx(styles.buttonRight, styles.button)}
           onClick={handleNextImage}
+          variants={arrowVariants}
+          whileTap="tap"
+          whileHover="hover"
         >
           <ArrowRight />
           <span className="visually-hidden">Next</span>
-        </button>
+        </motion.button>
       )}
     </>
   );

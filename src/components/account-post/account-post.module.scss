@@ -1,27 +1,14 @@
 @use '/src/styles/common';
 
-.container {
-  position: relative;
+.link {
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-post);
   overflow: hidden;
-  aspect-ratio: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: box-shadow var(--transition);
-
-  --shadow-size: 2px;
-  box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--color-secondary);
+  position: relative;
 
   @include common.mediaquery('desktop') {
     &:focus {
       outline: none;
-    }
-
-    &:focus,
-    &:hover {
-      box-shadow: 0 0 0 calc(var(--shadow-size) * 2) var(--color-secondary);
+      box-shadow: 0 0 0 5px var(--color-primary), 0 0 0 9px var(--color-accent);
     }
   }
 }
@@ -29,55 +16,35 @@
 .image {
   width: 100%;
   height: 100%;
-  background-color: var(--color-primary);
-  object-fit: contain;
-  opacity: 1;
-  transition: opacity var(--transition);
+  background-color: var(--color-secondary);
+  height: 10rem;
+  object-fit: cover;
+
+  @include common.mediaquery('desktop') {
+    object-fit: contain;
+    height: 15rem;
+  }
 }
 
-.imageLoading {
-  position: absolute;
-  opacity: 0;
-}
 
 .overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
   left: 0;
   top: 0;
-  border-radius: var(--radius-small);
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  list-style: none;
-  gap: 0.75rem;
-  background-color: var(--color-gray-transparent);
-  color: var(--color-secondary);
-  font-weight: 700;
+  gap: 2rem;
+  background-color: var(--color-overlay);
+  color: rgb(255, 255, 255);
   opacity: 0;
+  transition: opacity var(--transition-fast);
 
-  transition: opacity var(--transition);
-
-  --text-size: 1.5rem;
-  font-size: var(--text-size);
-
-  svg {
-    width: var(--text-size);
-    height: var(--text-size);
-  }
 
   @include common.mediaquery('desktop') {
-    gap: 2rem;
-    --text-size: 3rem;
-  }
-}
-
-.container {
-
-  &:focus,
-  &:hover {
-    &>.overlay {
+    &:hover {
       opacity: 1;
     }
   }
@@ -87,8 +54,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @include common.mediaquery('desktop') {
-    gap: 0.25rem;
-  }
+  gap: 0.5rem;
+  font-size: 3rem;
 }

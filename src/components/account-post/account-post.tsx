@@ -1,4 +1,4 @@
-import { Chat } from '@phosphor-icons/react';
+import { Chat, Heart } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { postItemVaraints } from '@/src/components/account-post/account-post.animation';
-import { HeartIcon } from '@/src/components/heart-icon';
 import { Loader } from '@/src/components/loader/loader';
 import { usePost } from '@/src/components/pages/account/use-post';
 
@@ -27,7 +26,7 @@ export const AccountPost = ({ postId }: Props) => {
     return null;
   }
 
-  const { commentsCount, images, isLiked, likesCount } = postData;
+  const { commentsCount, images, likesCount } = postData;
   const [{ url, width, height }] = images;
 
   return (
@@ -35,10 +34,10 @@ export const AccountPost = ({ postId }: Props) => {
       shallow
       variants={postItemVaraints}
       href={`/post/${postId}`}
-      className={styles.container}
+      className={styles.link}
       data-cy="account post link"
     >
-      {!isLoaded && <Loader color="blue" size="normal" />}
+      {!isLoaded && <Loader color="accent" size="small" />}
       <Image
         className={clsx({ [styles.imageLoading]: !isLoaded }, styles.image)}
         src={url}
@@ -48,15 +47,16 @@ export const AccountPost = ({ postId }: Props) => {
         onLoad={() => setIsLoaded(true)}
         priority
       />
-      <ul className={styles.overlay}>
-        <li className={styles.count}>
-          <HeartIcon isLiked={isLiked} /> {likesCount}
-        </li>
-        <li className={styles.count}>
-          <Chat />
+      <span className={styles.overlay}>
+        <span className={styles.count}>
+          <Heart size={34} />
+          {likesCount}
+        </span>
+        <span className={styles.count}>
+          <Chat size={34} />
           {commentsCount}
-        </li>
-      </ul>
+        </span>
+      </span>
     </MotionLink>
   );
 };

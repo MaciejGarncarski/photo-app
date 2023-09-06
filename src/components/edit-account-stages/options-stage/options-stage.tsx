@@ -7,6 +7,7 @@ import { Button } from '@/src/components/buttons/button/button';
 import { EditAccountHeading } from '@/src/components/edit-account-heading/edit-account-heading';
 import { useOptionsStage } from '@/src/components/edit-account-stages/options-stage/use-options-stage';
 import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
+import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 
 import styles from '../stages.module.scss';
@@ -28,9 +29,7 @@ export const SelectOptionStage = ({
     useOptionsStage();
 
   if (isPending) {
-    return null;
-    // todo
-    // return <TextWithLoader text="Removing your avatar.." />;
+    return <Loader color="accent" size="small" marginTop />;
   }
 
   return (

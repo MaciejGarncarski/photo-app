@@ -6,6 +6,7 @@ import { useAuth } from '@/src/hooks/use-auth';
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
+import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { usePostHeader } from '@/src/components/post/post-header/use-post-header';
 import { PostHeaderPlaceholder } from '@/src/components/post/post-header-placeholder/post-header-placeholder';
@@ -27,12 +28,18 @@ export const PostHeader = ({
   postId,
 }: Props) => {
   const { isSignedIn, isLoading } = useAuth();
-  const { handleDeletePost, isAuthor, username, confirmationModal, menuModal } =
-    usePostHeader({
-      authorId,
-      createdAt,
-      postId,
-    });
+  const {
+    handleDeletePost,
+    deletePostMutation,
+    isAuthor,
+    username,
+    confirmationModal,
+    menuModal,
+  } = usePostHeader({
+    authorId,
+    createdAt,
+    postId,
+  });
 
   if (!username || isLoading) {
     return <PostHeaderPlaceholder />;
@@ -51,7 +58,7 @@ export const PostHeader = ({
           {isAuthor && (
             <button type="button" onClick={menuModal.openModal}>
               <span className="visually-hidden">Settings</span>
-              <DotsThreeVertical />
+              <DotsThreeVertical size={32} />
             </button>
           )}
         </div>
@@ -70,9 +77,22 @@ export const PostHeader = ({
         text="Do you want to delete post?"
         closeModal={confirmationModal.closeModal}
       >
-        <Button variant="destructive" onClick={handleDeletePost}>
-          Delete forever
-          <Trash />
+        <Button
+          variant="destructive"
+          onClick={handleDeletePost}
+          disabled={deletePostMutation.isPending}
+        >
+          {deletePostMutation.isPending ? (
+            <>
+              Deleting
+              <Loader color="primary" size="small" />
+            </>
+          ) : (
+            <>
+              Delete
+              <Trash />
+            </>
+          )}
         </Button>
         <Button variant="secondary" onClick={confirmationModal.closeModal}>
           Cancel

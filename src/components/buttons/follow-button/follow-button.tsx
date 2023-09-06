@@ -29,9 +29,9 @@ export const FollowButton = ({ userId }: Props) => {
       onClick={handleFollow}
     >
       {isPending ? (
-        <Loader size="small" color={isFollowing ? 'blue' : 'white'} />
+        <Loader size="small" color={isFollowing ? 'accent' : 'primary'} />
       ) : (
-        <span>{isFollowing ? 'unfollow' : 'follow'}</span>
+        <span>{isFollowing ? 'Unfollow' : 'Follow'}</span>
       )}
     </Button>
   );

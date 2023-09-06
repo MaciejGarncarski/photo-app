@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 
 import styles from './input.module.scss';
 
@@ -9,6 +9,8 @@ type Props = {
   type?: 'text' | 'number' | 'tel' | 'email' | 'password';
   error?: string;
   optional?: boolean;
+  value?: string;
+  onChange?: (changeEv: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const Input = forwardRef<HTMLInputElement, Props>(

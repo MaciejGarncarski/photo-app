@@ -32,22 +32,25 @@ export const ChatMessage = ({ message }: Props) => {
   };
 
   return (
-    <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
-      {!isReceiver && (
-        <button type="button" onClick={openModal} className={styles.options}>
-          <DotsThreeVertical />
-          <span className="visually-hidden">options</span>
-        </button>
-      )}
-      <p className={clsx(isReceiver && styles.timeReceiver, styles.time)}>
-        <time dateTime={createdAt.toString()}>{formattedDate}</time>
-      </p>
-      <div
-        className={clsx(isReceiver && styles.contentReceiver, styles.content)}
+    <>
+      <li
+        className={clsx(isReceiver && styles.messageReceiver, styles.message)}
       >
-        <Avatar userId={senderId} size="small" />
-        <p>{text}</p>
-      </div>
+        {!isReceiver && (
+          <button type="button" onClick={openModal} className={styles.options}>
+            <DotsThreeVertical />
+            <span className="visually-hidden">options</span>
+          </button>
+        )}
+        <p className={styles.text}>{text}</p>
+        <div className={styles.avatar}>
+          <Avatar userId={senderId} size="xs" />
+        </div>
+        <p className={styles.time}>
+          <time dateTime={createdAt.toString()}>{formattedDate}</time>
+        </p>
+      </li>
+
       <ListModal
         isVisible={isModalOpen}
         closeModal={closeModal}
@@ -57,6 +60,6 @@ export const ChatMessage = ({ message }: Props) => {
           Delete
         </ListModalItem>
       </ListModal>
-    </li>
+    </>
   );
 };

@@ -51,7 +51,7 @@ export const AccountHeaderMobile = ({
           <span className="visually-hidden">
             {isModalOpen ? 'Close menu' : 'Open menu'}
           </span>
-          <span className={styles.menuButtonText}>settings</span>
+          <span className={styles.menuButtonText}>Settings</span>
         </Button>
       )}
       {name && <p className={styles.name}>{name}</p>}

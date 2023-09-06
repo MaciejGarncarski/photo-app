@@ -81,11 +81,11 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
         closeModal={signOutModal.closeModal}
       >
         <Button variant="primary" onClick={handleSignOut}>
-          Sign out
           <SignOut />
+          Sign out
         </Button>
-        <Button variant="secondary" onClick={closeModal}>
-          Stay signed int
+        <Button variant="secondary" onClick={signOutModal.closeModal}>
+          Cancel
         </Button>
       </ConfirmationDialog>
     </>

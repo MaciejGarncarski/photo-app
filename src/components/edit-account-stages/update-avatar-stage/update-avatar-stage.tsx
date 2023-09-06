@@ -8,6 +8,7 @@ import { Button } from '@/src/components/buttons/button/button';
 import { CropImage } from '@/src/components/crop-image/crop-image';
 import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
 import { useUploadAvatar } from '@/src/components/edit-account-stages/update-avatar-stage/use-upload-avatar';
+import { Loader } from '@/src/components/loader/loader';
 import { FinalImages } from '@/src/components/pages/create-post/types';
 
 import styles from '../stages.module.scss';
@@ -31,8 +32,7 @@ export const UpdateAvatarStage = ({
   const { previewImages } = getPreviewImages(finalImages);
 
   if (isLoading) {
-    return null;
-    // return <TextWithLoader text="Uploading new avatar" />;
+    return <Loader color="accent" size="small" marginTop />;
   }
 
   const [previewImage] = previewImages;

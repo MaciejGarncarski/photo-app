@@ -3,7 +3,7 @@
 .container {
   position: relative;
   z-index: 1;
-  width: clamp(20rem, 55vw, 70rem);
+  width: clamp(20rem, 50vw, 50rem);
   background-color: var(--color-primary);
   left: 0;
   right: 0;
@@ -17,6 +17,7 @@
   }
 
   @include common.mediaquery('tablet') {
+    padding: 1rem 2rem;
     border-radius: var(--radius-medium);
   }
 }
@@ -28,7 +29,7 @@
   padding: 0.5rem 0;
 
   @include common.mediaquery('desktop') {
-    padding: 1rem 0.5rem;
+    padding: 1rem 0;
   }
 }
 
@@ -36,12 +37,17 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  max-height: 55vh;
-  max-height: 55dvh;
+  height: 55vh;
+  height: 55dvh;
 
   @include common.mediaquery('desktop') {
     gap: 3rem;
   }
+}
+
+.carousel {
+  max-width: 75%;
+  margin: 0 auto;
 }
 
 .postButtons {

@@ -16,7 +16,6 @@ export const handleDropImage = ({
   setImgSrc,
 }: HandleDropImage) => {
   const reader = new FileReader();
-
   const fileType = file.type.split('/');
 
   if (file.size > IMAGE_MAX_FILE_SIZE) {

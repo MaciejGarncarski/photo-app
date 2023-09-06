@@ -6,8 +6,8 @@ import clsx from 'clsx';
 import styles from './loader.module.scss';
 
 type Props = {
-  size: 'small' | 'normal';
-  color: 'white' | 'blue';
+  size: 'small' | 'big';
+  color: 'accent' | 'primary';
   marginTop?: boolean;
 };
 

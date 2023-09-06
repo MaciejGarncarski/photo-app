@@ -1,6 +1,6 @@
 import { Camera, File, X } from '@phosphor-icons/react';
 import clsx from 'clsx';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 
@@ -19,7 +19,6 @@ type Props = {
 
 export const DropZone = ({ setImgSrc }: Props) => {
   const [error, setError] = useState<DropZoneErrors>(null);
-  const inputId = useId();
   const { isMobile } = useIsMobile();
 
   const {
@@ -35,8 +34,14 @@ export const DropZone = ({ setImgSrc }: Props) => {
     setImgSrc,
   });
 
+  const openFileInput = () => {
+    if (inputRef.current) {
+      inputRef.current.click();
+    }
+  };
+
   if (isUploadingImage) {
-    return <Loader color="blue" size="normal" />;
+    return <Loader color="accent" size="small" />;
   }
 
   return (
@@ -59,7 +64,6 @@ export const DropZone = ({ setImgSrc }: Props) => {
         <span className="visually-hidden">
           <input
             type="file"
-            id={inputId}
             accept="image/*"
             className={styles.input}
             ref={inputRef}
@@ -89,9 +93,9 @@ export const DropZone = ({ setImgSrc }: Props) => {
             </>
           )}
         </div>
-        <Button type="button" variant="primary">
+        <Button type="button" variant="primary" onClick={openFileInput}>
           <File />
-          <label htmlFor={inputId}>Select file from device</label>
+          Select file from device
         </Button>
       </div>
     </div>

@@ -5,6 +5,7 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-medium);
+  flex-shrink: 0;
 }
 
 .imagesContainer {
@@ -26,6 +27,7 @@
   justify-content: center;
   width: 100%;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .postSliderProgress {
@@ -49,6 +51,6 @@
 .progressDot {
   width: 0.75rem;
   height: 0.75rem;
-  background-color: var(--color-primary);
+  background-color: var(--color-accent);
   border-radius: 100%;
 }

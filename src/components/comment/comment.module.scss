@@ -4,10 +4,9 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: 1fr auto;
-  row-gap: 1rem;
+  row-gap: 0.5rem;
   column-gap: 0.65rem;
   place-content: center;
-  border-bottom: var(--border-primary);
 
   @include common.mediaquery('desktop') {
     column-gap: 0.75rem;
@@ -56,6 +55,10 @@
   white-space: pre-line;
   word-break: break-all;
   padding-top: 0.3rem;
+  border-radius: var(--radius-small);
+  width: auto;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-secondary);
 }
 
 .info {
@@ -63,11 +66,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 0.8rem;
 
-  @include common.mediaquery('desktop') {
-    font-size: 0.8rem;
-  }
+  font-size: 0.8rem;
 }
 
 .createdAt {

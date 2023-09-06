@@ -44,5 +44,6 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
     dateFromNow,
     confirmationModal,
     menuModal,
+    deletePostMutation,
   };
 };

@@ -18,7 +18,7 @@ export const StatsModalItem = ({ user: { id, username } }: Props) => {
   return (
     <li key={id} className={styles.listItem}>
       <Link href={`/${username}`} className={styles.itemLink}>
-        <Avatar userId={id} size="small" />
+        <Avatar userId={id} size="xs" />
         <span className={styles.username}>@{username}</span>
       </Link>
       {id !== sessionUser?.id && <FollowButton userId={id} />}

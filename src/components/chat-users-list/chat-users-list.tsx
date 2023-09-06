@@ -34,7 +34,11 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
     enabled: isEnabled,
   });
 
-  if (isError || !data) {
+  if (!data || isLoading) {
+    return <Loader color="accent" size="big" marginTop />;
+  }
+
+  if (isError) {
     return <FetchErrorMessage message="Cannot fetch users." />;
   }
 
@@ -54,13 +58,13 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
           return page.users.map(({ id, name, username }) => {
             const isActive = id === (params?.receiverId as string);
             return (
-              <li key={id} data-cy="chat user">
+              <li key={id} data-cy="chat user" className={styles.listItem}>
                 <MotionLink
                   variants={linkVariants}
                   href={`/chat/${id}`}
                   className={clsx(isActive && styles.linkActive, styles.link)}
                 >
-                  <Avatar userId={id} size="medium" />
+                  <Avatar userId={id} size="small" />
                   <span className={styles.name}>
                     <span className={styles.fullName}>{name}</span>
                     <span className={styles.username}>@{username}</span>
@@ -72,7 +76,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
         })}
         {hasNextPage && !isLoading && (
           <div ref={ref} className={styles.loading}>
-            <Loader color="blue" size="normal" />
+            <Loader color="accent" size="small" />
           </div>
         )}
       </motion.ul>

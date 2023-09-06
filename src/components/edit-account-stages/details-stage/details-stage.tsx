@@ -6,6 +6,7 @@ import { EditAccountHeading } from '@/src/components/edit-account-heading/edit-a
 import { useDetailsStage } from '@/src/components/edit-account-stages/details-stage/use-details-stage';
 import { stageVariant } from '@/src/components/edit-account-stages/stage.animation';
 import { Input } from '@/src/components/input/input';
+import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { TextArea } from '@/src/components/textarea/text-area';
 
@@ -37,8 +38,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
   }
 
   if (editAccountLoading) {
-    return null;
-    // TODO
+    return <Loader color="accent" size="small" marginTop />;
   }
 
   return (

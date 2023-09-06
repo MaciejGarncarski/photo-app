@@ -79,8 +79,8 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
                   key={image.fileId}
                 >
                   <PostImage
-                    height={1200}
-                    width={1200}
+                    height={600}
+                    width={600}
                     priority={priority}
                     src={image.url}
                     post={post}

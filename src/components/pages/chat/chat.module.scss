@@ -7,21 +7,17 @@
   height: 100%;
   margin-inline: auto;
   padding: 1rem;
+  padding-top: 0;
   width: 100%;
   padding-bottom: 6rem;
 
   @include common.mediaquery('desktop') {
     gap: 3rem;
-    padding-top: 2rem;
     margin: 0 auto;
-    width: clamp(23rem, 70%, 45rem);
+    width: clamp(23rem, 60vw, 60rem);
   }
 }
 
 .heading {
   text-align: center;
-
-  @include common.mediaquery('desktop') {
-    text-align: left;
-  }
 }

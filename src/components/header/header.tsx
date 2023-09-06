@@ -25,9 +25,8 @@ export const Header = () => {
       )}
       {showUserOptions && (
         <div className={styles.signedInInfo}>
-          <h3>Signed in as</h3>
           <div className={styles.info}>
-            <Avatar userId={sessionUser.id} size="small" />
+            <Avatar userId={sessionUser.id} size="xs" />
             <span className={styles.userNameInfo}>
               <span className={styles.name}>{sessionUser.name}</span>
               <span className={styles.username}>@{sessionUser.username}</span>

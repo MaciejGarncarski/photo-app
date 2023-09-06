@@ -25,7 +25,7 @@ export const AccountPostsList = ({ userId }: Props) => {
   });
 
   if (!data || isLoading) {
-    return <Loader marginTop color="blue" size="normal" />;
+    return <Loader marginTop color="accent" size="small" />;
   }
 
   const hasPosts = data.pages[0].postsCount !== 0;
@@ -46,7 +46,7 @@ export const AccountPostsList = ({ userId }: Props) => {
       </motion.div>
       {hasNextPage && hasPosts && !isLoading && (
         <div ref={ref} className={styles.loading}>
-          <Loader color="blue" size="normal" />
+          <Loader color="accent" size="small" />
         </div>
       )}
     </>

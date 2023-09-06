@@ -12,6 +12,7 @@ type Arguments = {
 export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
   const [isActive, setIsActive] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +23,7 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
 
     if (changeEv.target.files.length > 0) {
       setIsUploadingImage(true);
+
       handleDropImage({ file: changeEv.target.files[0], setError, setImgSrc });
       setIsUploadingImage(false);
     }

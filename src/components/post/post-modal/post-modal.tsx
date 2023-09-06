@@ -46,15 +46,16 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
               <div className={styles.closeButton}>
                 <ModalCloseButton onClose={closeModal} />
               </div>
-
+              <PostHeader
+                tag="div"
+                authorId={authorId}
+                createdAt={createdAt.toString()}
+                postId={postId}
+              />
               <div className={styles.content}>
-                <PostHeader
-                  tag="div"
-                  authorId={authorId}
-                  createdAt={createdAt.toString()}
-                  postId={postId}
-                />
-                <PostImagesCarousel postId={postId} priority={true} />
+                <div className={styles.carousel}>
+                  <PostImagesCarousel postId={postId} priority={true} />
+                </div>
                 <PostFooter postId={postId} parentModalOpen={isVisible} />
                 <section className={styles.commentsContainer}>
                   <PostComments postId={postId} />

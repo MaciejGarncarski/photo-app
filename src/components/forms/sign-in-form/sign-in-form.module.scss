@@ -17,14 +17,3 @@
   font-weight: 700;
   font-size: 1.25rem;
 }
-
-.continueButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > button {
-    flex-grow: 1;
-    padding: 0.8rem 0;
-  }
-}

@@ -18,7 +18,13 @@
   }
 }
 
+.xs {
+  --avatar-size: 2rem;
 
+  @include common.mediaquery('desktop') {
+    --avatar-size: 2.5rem;
+  }
+}
 
 .small {
   --avatar-size: 2.75rem;

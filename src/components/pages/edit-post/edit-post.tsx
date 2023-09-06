@@ -48,7 +48,7 @@ export const EditPost = () => {
   }, [data?.description, setValue]);
 
   if (!data?.description || isLoading) {
-    return <Loader color="blue" size="normal" />;
+    return <Loader color="accent" size="small" />;
   }
 
   const onSubmit = () => {

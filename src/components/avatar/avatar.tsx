@@ -9,7 +9,7 @@ import { useUser } from '@/src/hooks/use-user';
 
 import styles from './avatar.module.scss';
 
-type Size = 'small' | 'medium' | 'big';
+type Size = 'xs' | 'small' | 'medium' | 'big';
 
 type Props = {
   userId: string;
@@ -22,6 +22,7 @@ const avatarSizes: Record<Size, number> = {
   big: 170,
   medium: 90,
   small: 38,
+  xs: 30,
 };
 
 export const Avatar = ({ userId, size }: Props) => {

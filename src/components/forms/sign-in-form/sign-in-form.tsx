@@ -50,7 +50,7 @@ export const SignInForm = () => {
         {...register('password')}
       />
       <Button type="submit" variant="primary">
-        continue
+        Sign in
       </Button>
     </motion.form>
   );

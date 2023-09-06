@@ -16,12 +16,11 @@ export const PostSliderProgress = ({ currentIndex, images }: Props) => {
         if (!image) {
           return null;
         }
-
         return (
           <motion.li
             key={image.id}
             className={styles.progressDot}
-            animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.45 }}
+            animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.3 }}
           ></motion.li>
         );
       })}

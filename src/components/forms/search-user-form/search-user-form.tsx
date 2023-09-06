@@ -2,6 +2,7 @@ import { MagnifyingGlass, X } from '@phosphor-icons/react';
 import { ChangeEvent, FormEvent } from 'react';
 
 import { Button } from '@/src/components/buttons/button/button';
+import { Input } from '@/src/components/input/input';
 
 import styles from './search-user-form.module.scss';
 
@@ -24,10 +25,10 @@ export const SearchUserForm = ({
       className={styles.form}
       onSubmit={onSubmit}
     >
-      <input
-        data-cy="search user input"
-        className={styles.input}
-        placeholder="Search"
+      <Input
+        labelText="Search user"
+        placeholder="Username"
+        type="text"
         value={inputValue}
         onChange={onChange}
       />
@@ -37,7 +38,7 @@ export const SearchUserForm = ({
       </Button>
       <Button
         type="reset"
-        variant="primary"
+        variant="destructive"
         onClick={resetState}
         disabled={inputValue === ''}
       >

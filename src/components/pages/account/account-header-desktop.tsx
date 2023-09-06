@@ -47,7 +47,7 @@ export const AccountHeaderDesktop = ({
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
             <GearSix />
-            <span className={styles.menuButtonText}>settings</span>
+            <span className={styles.menuButtonText}>Settings</span>
             <span className="visually-hidden">
               {isModalOpen ? 'Close menu' : 'Open menu'}
             </span>

@@ -17,6 +17,10 @@
       outline-color: var(--color-accent);
     }
   }
+
+  &>* {
+    flex-shrink: 0;
+  }
 }
 
 .secondary {
@@ -28,6 +32,7 @@
 
 .destructive {
   @include common.button;
+  color: var(--color-text);
   border-color: var(--color-error-light);
   background-color: var(--color-error-light);
 }
