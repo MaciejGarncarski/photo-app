@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next start",
     "prepare": "yarn husky install",
-    "tsc": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "jest",
     "format:check": "prettier -c .",
     "vercel-build": "next build",
