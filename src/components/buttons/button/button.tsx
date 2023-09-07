@@ -28,8 +28,8 @@ export const Button = ({
   return (
     <IconContext.Provider
       value={{
-        size: 20,
         weight: 'bold',
+        size: 20,
       }}
     >
       <motion.button

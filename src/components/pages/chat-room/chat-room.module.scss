@@ -63,51 +63,6 @@
   }
 }
 
-.messages {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
-  justify-content: flex-start;
-  list-style: none;
-  gap: 2rem;
-  max-height: 70dvh;
-  min-height: 50dvh;
-  overflow: auto;
-  padding: 0 1rem;
-
-  @include common.mediaquery('desktop') {
-    padding: 0 2rem;
-    gap: 3rem;
-  }
-}
-
-
-.time {
-  text-align: center;
-  width: 100%;
-}
-
-.noMessages {
-  text-align: center;
-  width: 100%;
-}
-
-.loading {
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  >svg {
-    width: 5rem;
-    height: 5rem;
-  }
-}
-
-
 .form {
   display: flex;
   align-items: center;
