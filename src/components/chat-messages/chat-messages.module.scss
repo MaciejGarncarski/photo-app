@@ -1,0 +1,40 @@
+@use '/src/styles/common.scss';
+
+.messages {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    list-style: none;
+    gap: 1.25rem;
+    max-height: 70dvh;
+    min-height: 50dvh;
+    overflow: auto;
+    padding: 0 0.5rem;
+
+    @include common.mediaquery('desktop') {
+        padding: 0 2rem;
+        gap: 2rem;
+    }
+}
+
+
+.time {
+    text-align: center;
+    width: 100%;
+}
+
+.noMessages {
+    text-align: center;
+    width: 100%;
+}
+
+.loading {
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

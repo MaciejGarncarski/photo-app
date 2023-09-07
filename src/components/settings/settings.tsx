@@ -1,5 +1,14 @@
-import { Moon, SignOut, Sun, User } from '@phosphor-icons/react';
+import {
+  Moon,
+  SignOut,
+  SpeakerHigh,
+  SpeakerLow,
+  Sun,
+  User,
+} from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
@@ -18,12 +27,15 @@ type Props = {
   isVisible: boolean;
 };
 
+export const soundAtom = atomWithStorage<'true' | 'false'>('soundOn', 'true');
+
 export const Settings = ({ closeModal, isVisible }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { sessionUser, isSignedIn } = useAuth();
   const { theme, setTheme } = useTheme();
   const signOutModal = useModal();
+  const [isSoundEnabled, setSoundEnabled] = useAtom(soundAtom);
 
   const isDark = useMemo(() => theme === 'dark', [theme]);
 
@@ -38,6 +50,19 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
       return <Moon />;
     }
     return <Sun />;
+  };
+
+  const handleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+
+  const SoundIcon = () => {
+    if (isSoundEnabled === 'true') {
+      return <SpeakerHigh />;
+    }
+    return <SpeakerLow />;
+  };
+
+  const handleSound = () => {
+    setSoundEnabled(isSoundEnabled === 'true' ? 'false' : 'true');
   };
 
   return (
@@ -60,11 +85,16 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
         )}
         <ListModalItem
           type="button"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          onClick={handleTheme}
           icon={<ThemeButton />}
         >
           Change theme to {isDark ? 'light' : 'dark'}
         </ListModalItem>
+
+        <ListModalItem type="button" onClick={handleSound} icon={<SoundIcon />}>
+          Turn {isSoundEnabled === 'true' ? 'off' : 'on'} sound notifications
+        </ListModalItem>
+
         {isSignedIn && (
           <ListModalItem
             type="button"

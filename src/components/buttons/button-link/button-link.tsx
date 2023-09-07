@@ -1,3 +1,4 @@
+import { IconContext } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ReactNode } from 'react';
@@ -15,14 +16,21 @@ const MotionLink = motion(Link);
 
 export const ButtonLink = ({ children, href }: Props) => {
   return (
-    <MotionLink
-      href={href}
-      variants={buttonVariants}
-      whileHover="hover"
-      whileTap="tap"
-      className={styles.button}
+    <IconContext.Provider
+      value={{
+        weight: 'bold',
+        size: 20,
+      }}
     >
-      {children}
-    </MotionLink>
+      <MotionLink
+        href={href}
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
+        className={styles.button}
+      >
+        {children}
+      </MotionLink>
+    </IconContext.Provider>
   );
 };

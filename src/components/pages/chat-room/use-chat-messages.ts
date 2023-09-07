@@ -12,7 +12,6 @@ export const useChatMessages = () => {
   const [inputVal, setInputVal] = useState('');
   const params = useParams();
   const { sessionUser } = useAuth();
-
   const { isScrollingUp } = useIsScrollingUp();
 
   const friendId = params?.receiverId as string;
@@ -41,6 +40,8 @@ export const useChatMessages = () => {
   const onSubmit = (ev: FormEvent) => {
     ev.preventDefault();
     setInputVal('');
+
+    //todo ws -> http then ws emit
     socket.emit('send message', message);
   };
 

@@ -3,36 +3,36 @@
 .message {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   margin-left: auto;
   position: relative;
   word-break: normal;
-  max-width: 90%;
+  max-width: 70%;
   gap: 0.5rem;
 
   @include common.mediaquery('desktop') {
+    max-width: 50%;
+  }
+}
 
-    &:hover>.options,
-    &:hover>.time {
+.textColumn {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.25rem;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: flex-end;
+
+  @include common.mediaquery('desktop') {
+
+    &:hover>.options {
       opacity: 1;
     }
   }
 }
 
-
-
-.time {
-  top: -1.25rem;
-  left: unset;
-  right: 0.25rem;
-  position: absolute;
-  font-size: 0.75rem;
-  text-align: right;
-  width: 7rem;
-  color: var(--text-black);
-  opacity: 0;
-  transition: opacity var(--transition);
-}
 
 .text {
   background-color: var(--color-accent);
@@ -64,10 +64,15 @@
   margin-left: 0;
   color: inherit;
 
-  &>.text {
-    background-color: var(--color-secondary);
-    color: var(--color-text);
+  &>.textColumn {
+    &>.textContainer {
+      justify-content: flex-start;
 
+      &>.text {
+        background-color: var(--color-secondary);
+        color: var(--color-text);
+      }
+    }
   }
 
   &>.avatar {
