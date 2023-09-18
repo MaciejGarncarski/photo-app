@@ -34,7 +34,7 @@ export const PostImage = ({ height, priority, src, width, post }: Props) => {
     <>
       {isLoading && (
         <div className={styles.loader}>
-          <Loader color="accent" size="small" />
+          <Loader color="accent" size="big" />
         </div>
       )}
       <MotionImage

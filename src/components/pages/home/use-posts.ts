@@ -10,6 +10,10 @@ export const useInfinitePosts = () => {
     queryFn: getInfinitePosts,
     refetchOnWindowFocus: false,
     getNextPageParam: (prevPosts) => {
+      if (!prevPosts) {
+        return undefined;
+      }
+
       return prevPosts.currentPage === prevPosts.totalPages
         ? undefined
         : prevPosts.currentPage + 1;

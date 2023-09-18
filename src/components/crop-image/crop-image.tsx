@@ -105,7 +105,11 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           text="Do you want to select diffrent image?"
           closeModal={closeModal}
         >
-          <Button variant="destructive" onClick={resetImgSrc}>
+          <Button
+            variant="destructive"
+            onClick={resetImgSrc}
+            disabled={!imgSrc}
+          >
             Select diffrent image
             <File />
           </Button>

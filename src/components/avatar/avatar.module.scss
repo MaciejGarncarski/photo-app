@@ -10,7 +10,8 @@
   align-items: center;
   overflow: hidden;
   flex-shrink: 0;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
+
 
   img {
     width: 100%;
@@ -44,6 +45,7 @@
 
 .big {
   --avatar-size: 6.5rem;
+  box-shadow: var(--shadow-pimary);
 
   @include common.mediaquery('desktop') {
     --avatar-size: 11rem;

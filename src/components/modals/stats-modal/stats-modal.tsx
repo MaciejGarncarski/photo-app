@@ -35,7 +35,7 @@ export const StatsModal = ({ closeModal, type, userId }: Props) => {
           </div>
           {isEmpty && (
             <ul className={styles.list}>
-              <li className={styles.noData}>No data</li>
+              <li className={styles.noData}>No {type} yet.</li>
             </ul>
           )}
           {isLoading ? (

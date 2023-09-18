@@ -41,7 +41,7 @@ export const Home = () => {
     >
       <NewPostNotification />
 
-      {data?.pages && data?.pages.length < 1 ? (
+      {data?.pages[0] && data?.pages[0].postsCount < 1 ? (
         <li className={styles.noPosts}>
           <p>No posts yet.</p>
           {isSignedIn && (
