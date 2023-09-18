@@ -26,7 +26,7 @@ export const OtherSignInOptions = () => {
         <p className={styles.orWith}>or with</p>
       </div>
       <div className={styles.other}>
-        <ButtonLink href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`}>
+        <ButtonLink href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/api/auth/google`}>
           <GoogleLogo />
           Google
         </ButtonLink>

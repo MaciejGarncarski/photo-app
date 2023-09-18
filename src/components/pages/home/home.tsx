@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '@/src/hooks/use-auth';
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
+import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { HomePost } from '@/src/components/home-post/home-post';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
@@ -14,8 +15,6 @@ import { useInfinitePosts } from '@/src/components/pages/home/use-posts';
 import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
 
 import styles from './home.module.scss';
-
-import { ButtonLink } from '../../buttons/button-link/button-link';
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } =
