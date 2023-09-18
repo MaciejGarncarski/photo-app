@@ -1,7 +1,9 @@
 'use client';
 
+import { PlusCircle } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 
+import { useAuth } from '@/src/hooks/use-auth';
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
@@ -13,9 +15,13 @@ import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-pla
 
 import styles from './home.module.scss';
 
+import { ButtonLink } from '../../buttons/button-link/button-link';
+
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } =
     useInfinitePosts();
+
+  const { isSignedIn } = useAuth();
 
   const { ref } = useInfiniteScroll({
     hasNextPage: Boolean(hasNextPage),
@@ -35,6 +41,19 @@ export const Home = () => {
       initial="hidden"
     >
       <NewPostNotification />
+
+      {data?.pages.length || 0 > 0 ? (
+        <li className={styles.noPosts}>
+          <p>No posts yet.</p>
+          {isSignedIn && (
+            <ButtonLink href="/create-post">
+              <PlusCircle />
+              Create post now
+            </ButtonLink>
+          )}
+        </li>
+      ) : null}
+
       {data?.pages.map((page) => {
         return page?.posts.map(({ id }, idx) => {
           return <HomePost priority={idx < 3} key={id} postId={id} />;
