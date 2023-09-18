@@ -29,7 +29,8 @@
   padding: 0.5rem 0;
 
   @include common.mediaquery('desktop') {
-    padding: 1rem 0;
+    padding: 0;
+    padding-bottom: 0.5rem;
   }
 }
 
@@ -55,7 +56,7 @@
 }
 
 .commentsContainer {
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   @include common.mobile-landscape {
     margin-top: 0;

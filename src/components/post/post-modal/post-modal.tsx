@@ -6,6 +6,7 @@ import ReactFocusLock from 'react-focus-lock';
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
+import { CommentForm } from '@/src/components/forms/comment-form/comment-form';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostComments } from '@/src/components/post/post-comments/post-comments';
@@ -59,6 +60,7 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
                 <PostFooter postId={postId} parentModalOpen={isVisible} />
                 <section className={styles.commentsContainer}>
                   <PostComments postId={postId} />
+                  <CommentForm postId={postId} />
                 </section>
               </div>
             </motion.div>

@@ -5,6 +5,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+
+  padding-right: 1rem;
+  margin-top: 1rem;
 }
 
 .commentInput {
@@ -16,7 +19,8 @@
   border-radius: var(--radius-small);
   padding: 0.5rem;
   transition: background-color var(--transition);
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
+  border: none;
 
   &:hover,
   &:focus {

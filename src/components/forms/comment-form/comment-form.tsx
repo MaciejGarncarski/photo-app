@@ -27,7 +27,7 @@ export const CommentForm = ({ postId }: Props) => {
         {...register('comment')}
       />
       <Button type="submit" disabled={!isDirty} variant="primary">
-        post
+        Post
       </Button>
     </form>
   );
