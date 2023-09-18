@@ -22,7 +22,7 @@ export const Comment = ({ commentData }: Props) => {
   const { openModal, closeModal, isModalOpen } = useModal();
 
   const {
-    commentText,
+    text,
     handleDelete,
     handleLike,
     isAbleToDelete,
@@ -41,7 +41,7 @@ export const Comment = ({ commentData }: Props) => {
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>
-        <p className={styles.content}>{commentText}</p>
+        <p className={styles.content}>{text}</p>
       </div>
       <div className={styles.info}>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>

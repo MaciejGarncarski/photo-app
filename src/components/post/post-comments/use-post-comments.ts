@@ -17,7 +17,7 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
         url: `post-comment/${postId}?skip=${pageParam}`,
       });
     },
-    defaultPageParam: 0,
+    initialPageParam: 0,
     refetchOnWindowFocus: false,
     getNextPageParam: (prevComments: CommentResponse) => {
       return prevComments.currentPage === prevComments.totalPages

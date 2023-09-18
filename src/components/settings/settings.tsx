@@ -90,19 +90,24 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
         >
           Change theme to {isDark ? 'light' : 'dark'}
         </ListModalItem>
-
-        <ListModalItem type="button" onClick={handleSound} icon={<SoundIcon />}>
-          Turn {isSoundEnabled === 'true' ? 'off' : 'on'} sound notifications
-        </ListModalItem>
-
         {isSignedIn && (
-          <ListModalItem
-            type="button"
-            onClick={signOutModal.openModal}
-            icon={<SignOut />}
-          >
-            Sign Out
-          </ListModalItem>
+          <>
+            <ListModalItem
+              type="button"
+              onClick={handleSound}
+              icon={<SoundIcon />}
+            >
+              Turn {isSoundEnabled === 'true' ? 'off' : 'on'} sound
+              notifications
+            </ListModalItem>
+            <ListModalItem
+              type="button"
+              onClick={signOutModal.openModal}
+              icon={<SignOut />}
+            >
+              Sign Out
+            </ListModalItem>
+          </>
         )}
       </ListModal>
       <ConfirmationDialog

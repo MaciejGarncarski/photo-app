@@ -38,7 +38,7 @@ In this app, you can create posts, comment them and chat with other users. It wa
 ### Install node dependencies
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ### Add .env
@@ -52,7 +52,7 @@ NEXT_PUBLIC_API_ROOT=
 ### Start dev server
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 ## Features

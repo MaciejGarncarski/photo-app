@@ -36,7 +36,7 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
   }
 
   if (data?.pages[0].usersCount === 0) {
-    return <p>no users found</p>;
+    return <p className={styles.notFound}>No other users found.</p>;
   }
 
   return (

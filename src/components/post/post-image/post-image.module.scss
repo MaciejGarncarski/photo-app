@@ -21,6 +21,7 @@
   flex-shrink: 0;
   pointer-events: none;
   user-select: none;
+  border-radius: var(--radius-medium);
 
   @include common.mediaquery('tablet') {
     object-fit: contain;

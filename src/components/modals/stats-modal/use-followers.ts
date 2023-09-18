@@ -12,7 +12,7 @@ export const useFollowers = ({ userId, type }: UseFollowers) => {
   return useInfiniteQuery({
     queryKey: [type, userId],
     queryFn: ({ pageParam }) => getFollowers({ pageParam, type, userId }),
-    defaultPageParam: 0,
+    initialPageParam: 0,
     refetchOnWindowFocus: false,
     getNextPageParam: (prev: FollowersResponse) => {
       return prev.currentPage === prev.totalPages
