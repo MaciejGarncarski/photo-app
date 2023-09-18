@@ -19,13 +19,19 @@ jobs:
         with:
           persist-credentials: false      
 
+      - name: Init pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: ⎔ Set up node
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
+          cache: 'pnpm'
 
       - name: 📥 Download deps
-        run: yarn install
+        run: pnpm install
 
       - name: 🔬 Lint
-        run: yarn lint-format
+        run: pnpm lint-format

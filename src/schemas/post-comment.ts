@@ -25,7 +25,7 @@ export const commentTextSchema = z
   .max(100, { message: 'Maximum characters exceeded.' });
 
 const commentSchema = z.object({
-  commentText: z.string().max(100, { message: 'Maximum characters exceeded.' }),
+  text: z.string().max(100, { message: 'Maximum characters exceeded.' }),
   createdAt: datelikeToDate,
   likesCount: z.number(),
   isLiked: z.boolean(),

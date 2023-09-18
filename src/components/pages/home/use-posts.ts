@@ -14,7 +14,7 @@ export const useInfinitePosts = () => {
         ? undefined
         : prevPosts.currentPage + 1;
     },
-    defaultPageParam: 0,
+    initialPageParam: 0,
   });
 
   return query;

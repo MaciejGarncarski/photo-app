@@ -36,7 +36,7 @@ export const useChatUsers = () => {
         url: `chat/chatUsers?skip=${pageParam}&searchedUser=${searchedUser}`,
       });
     },
-    defaultPageParam: 0,
+    initialPageParam: 0,
     enabled: isEnabled,
     refetchOnWindowFocus: false,
     getNextPageParam: (prevMessages: ChatUsersResponse) => {

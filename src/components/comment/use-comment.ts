@@ -12,7 +12,7 @@ type Arguments = {
 
 export const useComment = ({ commentData }: Arguments) => {
   const { sessionUser } = useAuth();
-  const { isLiked, commentId, commentText, createdAt, authorId, likesCount } =
+  const { isLiked, commentId, text, createdAt, authorId, likesCount } =
     commentData;
   const { data: sessionUserData } = useUser({ userId: sessionUser?.id || '' });
   const { data } = useUser({ userId: authorId });
@@ -28,7 +28,7 @@ export const useComment = ({ commentData }: Arguments) => {
 
   return {
     isLiked,
-    commentText,
+    text,
     likesCount,
     timeSinceCreated,
     handleDelete,

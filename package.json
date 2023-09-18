@@ -4,14 +4,15 @@
   "version": "0.2.0",
   "private": true,
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": "yarn lint",
-    "*.{js,jsx,ts,tsx,md,mdx}": "yarn format --cache"
+    "*.{js,ts,jsx,tsx}": "pnpm lint",
+    "*.{js,jsx,ts,tsx,md,mdx}": "pnpm format --cache"
   },
+  "packageManager": "pnpm@8.7.6",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prepare": "yarn husky install",
+    "prepare": "pnpm husky install",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "format:check": "prettier -c .",
@@ -19,14 +20,14 @@
     "postinstall": "husky install",
     "lint": "eslint --fix --max-warnings=0 \"src/**/*.{js,ts,jsx,tsx}\"",
     "format": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
-    "lint-format": "yarn format && yarn lint"
+    "lint-format": "pnpm format && pnpm lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
     "@next/bundle-analyzer": "^13.4.13",
     "@phosphor-icons/react": "^2.0.10",
-    "@tanstack/react-query": "^5.0.0-beta.0",
-    "@tanstack/react-query-next-experimental": "^5.0.0-beta.0",
+    "@tanstack/react-query": "^5.0.0-beta.31",
+    "@tanstack/react-query-next-experimental": "^5.0.0-beta.31",
     "clsx": "^1.2.1",
     "framer-motion": "^8.5.2",
     "imagekit": "^4.1.2",
@@ -42,16 +43,17 @@
     "react-intersection-observer": "^9.5.2",
     "sass": "^1.58.0",
     "socket.io-client": "^4.7.2",
-    "typescript": "5.0.3",
+    "typescript": "5.2.2",
     "zod": "^3.19.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
-    "@tanstack/react-query-devtools": "^5.0.0-beta.0",
+    "@tanstack/react-query-devtools": "^5.0.0-beta.31",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.5",
     "@types/node": "^18.11.13",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
@@ -71,12 +73,13 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^29.4.2",
+    "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.4.2",
     "lint-staged": "^13.1.0",
     "msw": "^1.0.0",
     "next-router-mock": "^0.8.0",
     "prettier": "^2.8.0",
+    "ts-jest": "^29.1.1",
     "utf-8-validate": "^6.0.3"
   }
 }

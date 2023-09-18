@@ -69,7 +69,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
         <TextArea
           error={errors.bio?.message}
           placeholder="Bio"
-          label="bio"
+          label="Bio"
           {...register('bio')}
         />
         <div className={styles.buttons}>

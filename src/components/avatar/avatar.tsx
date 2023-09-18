@@ -19,9 +19,9 @@ type Props = {
 export const MotionImage = motion(Image);
 
 const avatarSizes: Record<Size, number> = {
-  big: 170,
+  big: 140,
   medium: 90,
-  small: 38,
+  small: 40,
   xs: 30,
 };
 
@@ -51,7 +51,7 @@ export const Avatar = ({ userId, size }: Props) => {
     <figure className={clsx(styles[size], styles.avatar)}>
       {hasNoImage && (
         <div className={styles.noImage}>
-          <User />
+          <User size={avatarSizes[size]} />
           <span className="visually-hidden">{username}</span>
         </div>
       )}
