@@ -20,3 +20,10 @@ export const userApiResponseSchema = userSchema.extend({
 });
 
 export type UserApiResponse = z.infer<typeof userApiResponseSchema>;
+
+export const userWithPreferencesSchema = userSchema.extend({
+  theme: z.optional(z.enum(['DARK', 'LIGHT']).nullable()),
+  notificationSound: z.optional(z.enum(['ON', 'OFF']).nullable()),
+});
+
+export type UserWithPreferences = z.infer<typeof userWithPreferencesSchema>;

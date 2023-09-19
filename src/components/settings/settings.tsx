@@ -6,44 +6,33 @@ import {
   Sun,
   User,
 } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
-import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
-import { useMemo } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
-import { signOut } from '@/src/utils/sign-out';
 
-import { Button } from '@/src/components/buttons/button/button';
-import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
+import { Loader } from '@/src/components/loader/loader';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
+import { SignOutDialog } from '@/src/components/settings/sign-out-dialog';
+import { useNotificationSoundPreference } from '@/src/components/settings/use-notification-sound-preference';
+import { useThemePreference } from '@/src/components/settings/use-theme-preference';
 
 type Props = {
-  closeModal: () => void;
+  closeSettingsModal: () => void;
   isVisible: boolean;
 };
 
-export const soundAtom = atomWithStorage<'true' | 'false'>('soundOn', 'true');
-
-export const Settings = ({ closeModal, isVisible }: Props) => {
-  const router = useRouter();
-  const queryClient = useQueryClient();
+export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
   const { sessionUser, isSignedIn } = useAuth();
-  const { theme, setTheme } = useTheme();
   const signOutModal = useModal();
-  const [isSoundEnabled, setSoundEnabled] = useAtom(soundAtom);
 
-  const isDark = useMemo(() => theme === 'dark', [theme]);
+  const {
+    isSoundEnabled,
+    toggleNotificationSound,
+    isNotificationSoundMutationPending,
+  } = useNotificationSoundPreference();
 
-  const handleSignOut = () => {
-    signOut(queryClient, () => router.push('/'));
-    closeModal();
-    signOutModal.closeModal();
-  };
+  const { isDark, toggleTheme, isThemeMutationPending } = useThemePreference();
 
   const ThemeButton = () => {
     if (isDark) {
@@ -52,24 +41,18 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
     return <Sun />;
   };
 
-  const handleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
   const SoundIcon = () => {
-    if (isSoundEnabled === 'true') {
+    if (isSoundEnabled) {
       return <SpeakerHigh />;
     }
     return <SpeakerLow />;
-  };
-
-  const handleSound = () => {
-    setSoundEnabled(isSoundEnabled === 'true' ? 'false' : 'true');
   };
 
   return (
     <>
       <ListModal
         isVisible={isVisible}
-        closeModal={closeModal}
+        closeModal={closeSettingsModal}
         headingText="Settings"
         data-cy="settings modal"
       >
@@ -77,7 +60,7 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
           <ListModalItem
             type="link"
             href={`/${sessionUser.username}`}
-            onClick={closeModal}
+            onClick={closeSettingsModal}
             icon={<User />}
           >
             Your profile
@@ -85,20 +68,37 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
         )}
         <ListModalItem
           type="button"
-          onClick={handleTheme}
-          icon={<ThemeButton />}
+          onClick={toggleTheme}
+          icon={
+            isThemeMutationPending ? (
+              <Loader color="primary" size="small" />
+            ) : (
+              <ThemeButton />
+            )
+          }
+          disabled={isThemeMutationPending}
         >
-          Change theme to {isDark ? 'light' : 'dark'}
+          {isThemeMutationPending
+            ? 'Updating...'
+            : `Change theme to ${isDark ? 'light' : 'dark'}`}
         </ListModalItem>
         {isSignedIn && (
           <>
             <ListModalItem
               type="button"
-              onClick={handleSound}
-              icon={<SoundIcon />}
+              onClick={toggleNotificationSound}
+              disabled={isNotificationSoundMutationPending}
+              icon={
+                isNotificationSoundMutationPending ? (
+                  <Loader color="primary" size="small" />
+                ) : (
+                  <SoundIcon />
+                )
+              }
             >
-              Turn {isSoundEnabled === 'true' ? 'off' : 'on'} sound
-              notifications
+              {isNotificationSoundMutationPending
+                ? 'Updating...'
+                : `Turn ${isSoundEnabled ? 'off' : 'on'} sound notifications`}
             </ListModalItem>
             <ListModalItem
               type="button"
@@ -110,19 +110,10 @@ export const Settings = ({ closeModal, isVisible }: Props) => {
           </>
         )}
       </ListModal>
-      <ConfirmationDialog
-        isVisible={signOutModal.isModalOpen}
-        text="Do you want to sign out?"
-        closeModal={signOutModal.closeModal}
-      >
-        <Button variant="primary" onClick={handleSignOut}>
-          <SignOut />
-          Sign out
-        </Button>
-        <Button variant="secondary" onClick={signOutModal.closeModal}>
-          Cancel
-        </Button>
-      </ConfirmationDialog>
+      <SignOutDialog
+        closeSettingsModal={closeSettingsModal}
+        signOutModal={signOutModal}
+      />
     </>
   );
 };

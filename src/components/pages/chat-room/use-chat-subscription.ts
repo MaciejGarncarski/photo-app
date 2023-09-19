@@ -1,11 +1,10 @@
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
-import { soundAtom } from '@/src/components/settings/settings';
+import { useNotificationSoundPreference } from '@/src/components/settings/use-notification-sound-preference';
 
 const invalidateChat = (queryClient: QueryClient, userId: string) => {
   queryClient.invalidateQueries({
@@ -17,7 +16,7 @@ const notificationAudio = new Audio('/notification.mp3');
 
 export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
   const queryClient = useQueryClient();
-  const [isSoundEnabled] = useAtom(soundAtom);
+  const { isSoundEnabled } = useNotificationSoundPreference();
   const { sessionUser } = useAuth();
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
       const { receiverId, senderId } = data;
       invalidateChat(queryClient, receiverId);
 
-      if (isSoundEnabled === 'true' && sessionUser.id !== senderId) {
+      if (isSoundEnabled && sessionUser?.id !== senderId) {
         notificationAudio.play();
       }
 
@@ -39,5 +38,5 @@ export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
     return () => {
       socket.off('new post');
     };
-  }, [chatRoomId, isSoundEnabled, queryClient, sessionUser.id, socket]);
+  }, [chatRoomId, isSoundEnabled, queryClient, sessionUser?.id, socket]);
 };

@@ -2,7 +2,10 @@ import { apiClient } from '@/src/utils/api-client';
 
 import { EditAccountInput } from '@/src/schemas/edit.schema';
 import { followersResponseSchema } from '@/src/schemas/follower-stats';
-import { userApiResponseSchema } from '@/src/schemas/user.schema';
+import {
+  userApiResponseSchema,
+  userWithPreferencesSchema,
+} from '@/src/schemas/user.schema';
 
 type GetUser = {
   userId: string;
@@ -65,6 +68,7 @@ export const getSessionUser = async () => {
   const data = await apiClient({
     url: 'auth/me',
     method: 'GET',
+    schema: userWithPreferencesSchema,
   });
   return data;
 };

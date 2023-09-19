@@ -17,7 +17,7 @@ import styles from './navbar-buttons.module.scss';
 export const NavButtons = () => {
   const { sessionUser, isLoading, isSignedIn } = useAuth();
   const path = usePathname();
-  const { openModal, closeModal, isModalOpen } = useModal();
+  const settingsModal = useModal();
   const { navButtonsList } = getNavListData(sessionUser?.username);
 
   return (
@@ -56,7 +56,7 @@ export const NavButtons = () => {
             data-cy="settings button"
             type="button"
             className={styles.listItemContent}
-            onClick={openModal}
+            onClick={settingsModal.openModal}
           >
             <GearSix />
             <span className={styles.title}>settings</span>
@@ -64,7 +64,10 @@ export const NavButtons = () => {
         </li>
       </ul>
       {(!isSignedIn || isLoading) && <SignInButton />}
-      <Settings isVisible={isModalOpen} closeModal={closeModal} />
+      <Settings
+        isVisible={settingsModal.isModalOpen}
+        closeSettingsModal={settingsModal.closeModal}
+      />
     </>
   );
 };

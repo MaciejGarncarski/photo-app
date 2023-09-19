@@ -25,7 +25,7 @@
 
 .secondary {
   @include common.button;
-  border-color: var(--color-text);
+  border-color: var(--color-text-gray);
   color: var(--color-text);
   background-color: transparent;
 }

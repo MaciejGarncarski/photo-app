@@ -5,7 +5,7 @@
   @extend %variables;
 }
 
-[data-theme='dark'] {
+[data-theme='DARK'] {
   color-scheme: dark;
   @extend %variablesDarkTheme;
 }

@@ -52,11 +52,10 @@
     width: 100%;
     height: auto;
 
-    &:hover {
-      background-color: var(--color-primary);
-    }
 
+    &:hover,
     &:focus {
+      box-shadow: var(--shadow-pimary);
       background-color: var(--color-primary);
     }
   }
@@ -65,6 +64,7 @@
 .active {
   @include common.mediaquery('desktop') {
     background-color: var(--color-primary);
+    box-shadow: var(--shadow-pimary);
     font-weight: 700;
   }
 }
