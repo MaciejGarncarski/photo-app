@@ -33,7 +33,7 @@ export const ChatMessage = ({ messageGroup }: Props) => {
     mutate({ messageId: id });
   };
 
-  const isReceiver = receiverId === sessionUser.id;
+  const isReceiver = receiverId === sessionUser?.id;
 
   return (
     <>
