@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import debounce from 'lodash.debounce';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
@@ -15,8 +15,13 @@ export const soundAtom = atomWithStorage<'ON' | 'OFF'>(
 export const useNotificationSoundPreference = () => {
   const [notificationSound, setNotificationSound] = useAtom(soundAtom);
   const { sessionUser, isSignedIn } = useAuth();
-
   const { mutate, isPending } = useUpdatePreferences();
+
+  useEffect(() => {
+    if (sessionUser?.notificationSound) {
+      setNotificationSound(sessionUser.notificationSound);
+    }
+  }, [sessionUser?.notificationSound, setNotificationSound]);
 
   const isSoundEnabled = isSignedIn
     ? sessionUser?.notificationSound === 'ON'
@@ -39,12 +44,11 @@ export const useNotificationSoundPreference = () => {
   );
 
   const toggleNotificationSound = () => {
-    if (!isSignedIn) {
-      setNotificationSound((sound) => (sound === 'ON' ? 'OFF' : 'ON'));
-      return;
+    if (isSignedIn) {
+      return debouncedNotificationSoundMutation();
     }
 
-    debouncedNotificationSoundMutation();
+    setNotificationSound((sound) => (sound === 'ON' ? 'OFF' : 'ON'));
   };
 
   return {

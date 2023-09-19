@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 import { useTheme } from 'next-themes';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
@@ -11,9 +11,11 @@ export const useThemePreference = () => {
   const { setTheme, theme } = useTheme();
   const { mutate, isPending } = useUpdatePreferences();
 
-  if (isSignedIn) {
-    setTheme(sessionUser?.theme || 'LIGHT');
-  }
+  useEffect(() => {
+    if (sessionUser?.theme) {
+      setTheme(sessionUser.theme);
+    }
+  }, [sessionUser?.theme, setTheme]);
 
   const debouncedThemeMutation = useMemo(
     () =>
@@ -25,12 +27,11 @@ export const useThemePreference = () => {
   );
 
   const toggleTheme = () => {
-    if (!isSignedIn) {
-      setTheme(theme === 'DARK' ? 'LIGHT' : 'DARK');
-      return;
+    if (isSignedIn) {
+      return debouncedThemeMutation();
     }
 
-    debouncedThemeMutation();
+    setTheme(theme === 'DARK' ? 'LIGHT' : 'DARK');
   };
 
   const isDark = useMemo(() => theme === 'DARK', [theme]);
