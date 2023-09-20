@@ -34,7 +34,6 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     body: body ? JSON.stringify(body) : null,
     method,
     credentials: 'include',
-
     headers: {
       'Content-Type': body ? 'application/json' : 'text/plain',
       ...headers,
@@ -52,6 +51,10 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     }
 
     const jsonData = await apiResponse.json();
+
+    if (apiResponse.status !== 200) {
+      return jsonData;
+    }
 
     if (!schema) {
       return jsonData;

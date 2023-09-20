@@ -10,6 +10,7 @@ export const signOut = async (
     url: 'auth/me',
     method: 'DELETE',
   });
+
   await queryClient.invalidateQueries({ queryKey: ['session'] });
   redirect();
 };
