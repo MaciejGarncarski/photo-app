@@ -15,7 +15,7 @@ export const ProtectedPage = async ({ children, signedIn }: Props) => {
   const { isSignedIn, isLoading } = useAuth();
 
   useEffect(() => {
-    if (typeof window === 'undefined' || isLoading) {
+    if (isLoading) {
       return;
     }
 
@@ -28,7 +28,9 @@ export const ProtectedPage = async ({ children, signedIn }: Props) => {
       router.push('/access-denied');
       return;
     }
-  }, [isLoading, isSignedIn, router, signedIn]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
 
   return children;
 };
