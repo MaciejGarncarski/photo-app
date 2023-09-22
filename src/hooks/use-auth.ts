@@ -7,7 +7,7 @@ export const useAuth = () => {
   const { data: sessionUser, isLoading } = useQuery({
     queryKey: ['session'],
     queryFn: getSessionUser,
-    retry: false,
+    retry: 1,
   });
 
   const isSignedIn = Boolean(sessionUser?.id) && !isLoading;
