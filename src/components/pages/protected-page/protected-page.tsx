@@ -10,7 +10,7 @@ type Props = {
   signedIn: boolean;
 };
 
-export const ProtectedPage = async ({ children, signedIn }: Props) => {
+export const ProtectedPage = ({ children, signedIn }: Props) => {
   const router = useRouter();
   const { isSignedIn, isLoading } = useAuth();
 
