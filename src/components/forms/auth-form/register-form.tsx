@@ -60,8 +60,15 @@ export const RegisterForm = () => {
         {...register('password')}
       />
 
+      <Input
+        placeholder="Confirm password"
+        labelText="Confirm password"
+        variant="secondary"
+        type="password"
+        error={errors.confirmPassword?.message}
+        {...register('confirmPassword')}
+      />
       {errorMessage ? <Error>{errorMessage}</Error> : null}
-
       <Button type="submit" variant="primary" disabled={isPending}>
         Continue
         <SignIn />

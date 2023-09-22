@@ -41,9 +41,10 @@ export const AccountHeaderMobile = ({
       animate="show"
       className={styles.accountMobile}
     >
-      <Avatar userId={userId} size="big" />
-      <motion.h2 className={styles.username}>{username}</motion.h2>
-      <AccountStats userId={userId} />
+      <div className={styles.avatarName}>
+        <Avatar userId={userId} size="big" />
+        <motion.h2 className={styles.username}>{username}</motion.h2>
+      </div>
       {!isOwner && isSignedIn && <FollowButton userId={userId} />}
       {isOwner && (
         <Button type="button" variant="primary" onClick={openModal}>
@@ -51,9 +52,10 @@ export const AccountHeaderMobile = ({
           <span className="visually-hidden">
             {isModalOpen ? 'Close menu' : 'Open menu'}
           </span>
-          <span className={styles.menuButtonText}>Settings</span>
+          <span className={styles.menuButtonText}>Account settings</span>
         </Button>
       )}
+      <AccountStats userId={userId} />
       {name && <p className={styles.name}>{name}</p>}
       <p className={styles.bio}>{bio || 'No bio yet.'}</p>
     </motion.main>

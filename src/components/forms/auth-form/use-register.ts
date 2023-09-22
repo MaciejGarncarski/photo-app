@@ -10,7 +10,12 @@ export const useRegister = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ email, username, password }: RegisterFormValues) => {
+    mutationFn: ({
+      email,
+      username,
+      password,
+      confirmPassword,
+    }: RegisterFormValues) => {
       return apiClient({
         url: 'auth/register',
         method: 'POST',
@@ -18,6 +23,7 @@ export const useRegister = () => {
           email,
           username,
           password,
+          confirmPassword,
         },
       });
     },

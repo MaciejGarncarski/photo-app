@@ -44,7 +44,7 @@
 }
 
 .big {
-  --avatar-size: 6.5rem;
+  --avatar-size: 5rem;
   box-shadow: var(--shadow-pimary);
 
   @include common.mediaquery('desktop') {

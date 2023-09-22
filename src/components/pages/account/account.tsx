@@ -58,7 +58,7 @@ export const Account = ({ username }: Props) => {
       <ListModal
         isVisible={settingsModal.isModalOpen}
         closeModal={settingsModal.closeModal}
-        headingText="Options"
+        headingText="Account"
       >
         <ListModalItem
           type="link"

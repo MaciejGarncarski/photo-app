@@ -16,11 +16,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 
   @include common.mediaquery('tablet') {
     gap: 2.5rem;
   }
+}
+
+.avatarName {
+  display: flex;
+  gap: 1rem;
 }
 
 .accountDesktop {
@@ -34,7 +39,7 @@
 .leftCol {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
 }

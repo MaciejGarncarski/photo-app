@@ -32,12 +32,12 @@ export const Avatar = ({ userId, size }: Props) => {
 
   if (!data) {
     return (
-      <figure className={clsx(styles[size], styles.avatar)}>
+      <div className={clsx(styles[size], styles.avatar)}>
         <div className={styles.noImage}>
-          <User />
+          <User size={avatarSizes[size]} />
           <span className="visually-hidden">Loading avatar</span>
         </div>
-      </figure>
+      </div>
     );
   }
 
@@ -48,7 +48,7 @@ export const Avatar = ({ userId, size }: Props) => {
   const hasCustomImage = customImage;
 
   return (
-    <figure className={clsx(styles[size], styles.avatar)}>
+    <div className={clsx(styles[size], styles.avatar)}>
       {hasNoImage && (
         <div className={styles.noImage}>
           <User size={avatarSizes[size]} />
@@ -72,6 +72,6 @@ export const Avatar = ({ userId, size }: Props) => {
           height={avatarSize}
         />
       )}
-    </figure>
+    </div>
   );
 };
