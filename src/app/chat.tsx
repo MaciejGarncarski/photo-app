@@ -3,7 +3,7 @@ import { ProtectedPage } from '@/src/components/pages/protected-page/protected-p
 
 const ChatPage = () => {
   return (
-    <ProtectedPage shouldBeSignedIn>
+    <ProtectedPage signedIn>
       <Chat />
     </ProtectedPage>
   );

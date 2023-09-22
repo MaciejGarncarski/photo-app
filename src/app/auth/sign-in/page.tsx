@@ -1,17 +1,17 @@
 import { Metadata } from 'next';
 
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
-import { SignIn } from '@/src/components/pages/sign-in/sign-in';
+import { RegisterSignIn } from '@/src/components/pages/register-sign-in/register-sign-in';
 export const metadata: Metadata = {
   title: 'Sign in to Photo App',
 };
 
-const AuthPage = async () => {
+const SignInPage = async () => {
   return (
-    <ProtectedPage shouldBeSignedIn={false}>
-      <SignIn />
+    <ProtectedPage signedIn={false}>
+      <RegisterSignIn variant="sign-in" />
     </ProtectedPage>
   );
 };
 
-export default AuthPage;
+export default SignInPage;

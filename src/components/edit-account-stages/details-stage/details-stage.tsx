@@ -56,6 +56,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
           type="text"
           labelText="Username"
           placeholder="Username"
+          variant="primary"
           error={errors.username?.message}
           {...register('username')}
         />
@@ -63,6 +64,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
           type="text"
           labelText="Full name"
           placeholder="Full name"
+          variant="primary"
           error={errors.fullName?.message}
           {...register('fullName')}
         />

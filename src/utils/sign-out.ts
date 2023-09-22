@@ -11,6 +11,6 @@ export const signOut = async (
     method: 'DELETE',
   });
 
-  await queryClient.invalidateQueries({ queryKey: ['session'] });
+  queryClient.setQueryData(['session'], () => null);
   redirect();
 };

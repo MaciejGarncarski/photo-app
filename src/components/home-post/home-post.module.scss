@@ -3,7 +3,11 @@
 .homePost {
   width: var(--post-width);
   background-color: var(--color-secondary);
-  padding: 1rem 0.75rem;
+  padding: 1rem 1rem;
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow-pimary);
+
+  @include common.mediaquery('desktop') {
+    padding: 1rem 2rem;
+  }
 }

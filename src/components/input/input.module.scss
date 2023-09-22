@@ -45,6 +45,17 @@
   }
 }
 
+.primary {
+  background-color: var(--color-secondary);
+}
+
+.secondary {
+
+  @include common.mediaquery('desktop') {
+    background-color: var(--color-primary);
+  }
+}
+
 .inputError {
   background-color: var(--color-error-light);
 

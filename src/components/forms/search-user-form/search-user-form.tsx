@@ -29,6 +29,7 @@ export const SearchUserForm = ({
         labelText="Search user"
         placeholder="Username"
         type="text"
+        variant="primary"
         value={inputValue}
         onChange={onChange}
       />

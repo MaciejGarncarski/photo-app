@@ -8,10 +8,10 @@
   gap: 2rem;
   position: fixed;
   bottom: 1rem;
-  left: 2rem;
-  right: 2rem;
-  width: auto;
+  left: 0;
+  right: 0;
   margin: 0 auto;
+  width: clamp(20rem, 60vw, 30rem);
   z-index: 3;
   border-radius: var(--radius-medium);
   box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.3);

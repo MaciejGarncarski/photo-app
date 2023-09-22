@@ -1,5 +1,9 @@
+import { AnimatePresence, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+
+import { Loader } from '@/src/components/loader/loader';
 
 import styles from './list-modal-item.module.scss';
 
@@ -28,6 +32,22 @@ type ModalListItemConditionalProps = WithButton | WithLink;
 
 type ModalListItemProps = Props & ModalListItemConditionalProps;
 
+const itemVariants: Variants = {
+  initial: {
+    y: 20,
+  },
+  visible: {
+    y: 0,
+  },
+};
+
+const animationProps = {
+  variants: itemVariants,
+  initial: 'initial',
+  animate: 'visible',
+  exit: 'exit',
+};
+
 export const ListModalItem = ({
   type,
   icon,
@@ -38,33 +58,38 @@ export const ListModalItem = ({
   isLoading,
   loadingText,
 }: ModalListItemProps) => {
-  if (isLoading) {
-    return (
-      <li className={styles.item}>
-        <div className={styles.content}>{loadingText}</div>
-      </li>
-    );
-  }
-
   return (
     <li className={styles.item}>
-      {type === 'button' && (
-        <button
-          type="button"
-          onClick={onClick}
-          disabled={disabled}
-          className={styles.content}
-        >
-          {icon}
-          {children}
-        </button>
-      )}
-      {type === 'link' && (
-        <Link href={href} className={styles.content} onClick={onClick}>
-          {icon}
-          {children}
-        </Link>
-      )}
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <span className={styles.content} key="loader">
+            <Loader size="small" color="primary" />
+            {loadingText}
+          </span>
+        ) : (
+          <>
+            {type === 'button' && (
+              <motion.button
+                {...animationProps}
+                type="button"
+                onClick={onClick}
+                disabled={disabled}
+                className={styles.content}
+                key="button"
+              >
+                {icon}
+                {children}
+              </motion.button>
+            )}
+            {type === 'link' && (
+              <Link href={href} className={styles.content} onClick={onClick}>
+                {icon}
+                {children}
+              </Link>
+            )}
+          </>
+        )}
+      </AnimatePresence>
     </li>
   );
 };

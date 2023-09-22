@@ -6,11 +6,11 @@ import {
   Sun,
   User,
 } from '@phosphor-icons/react';
+import { useCallback } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
 
-import { Loader } from '@/src/components/loader/loader';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 import { SignOutDialog } from '@/src/components/settings/sign-out-dialog';
@@ -26,27 +26,25 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
   const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
 
-  const {
-    isSoundEnabled,
-    toggleNotificationSound,
-    isNotificationSoundMutationPending,
-  } = useNotificationSoundPreference();
+  const { isSoundEnabled, toggleNotificationSound, isSoundMutationPending } =
+    useNotificationSoundPreference();
 
   const { isDark, toggleTheme, isThemeMutationPending } = useThemePreference();
 
-  const ThemeButton = () => {
+  const ThemeButton = useCallback(() => {
     if (isDark) {
       return <Moon />;
     }
     return <Sun />;
-  };
+  }, [isDark]);
 
-  const SoundIcon = () => {
+  const SoundIcon = useCallback(() => {
     if (isSoundEnabled) {
       return <SpeakerHigh />;
     }
+
     return <SpeakerLow />;
-  };
+  }, [isSoundEnabled]);
 
   return (
     <>
@@ -69,36 +67,22 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
         <ListModalItem
           type="button"
           onClick={toggleTheme}
-          icon={
-            isThemeMutationPending ? (
-              <Loader color="primary" size="small" />
-            ) : (
-              <ThemeButton />
-            )
-          }
-          disabled={isThemeMutationPending}
+          icon={<ThemeButton />}
+          isLoading={isThemeMutationPending}
+          loadingText="Updating..."
         >
-          {isThemeMutationPending
-            ? 'Updating...'
-            : `Change theme to ${isDark ? 'light' : 'dark'}`}
+          Change theme to {isDark ? 'light' : 'dark'}
         </ListModalItem>
         {isSignedIn && (
           <>
             <ListModalItem
               type="button"
               onClick={toggleNotificationSound}
-              disabled={isNotificationSoundMutationPending}
-              icon={
-                isNotificationSoundMutationPending ? (
-                  <Loader color="primary" size="small" />
-                ) : (
-                  <SoundIcon />
-                )
-              }
+              icon={<SoundIcon />}
+              isLoading={isSoundMutationPending}
+              loadingText="Updating..."
             >
-              {isNotificationSoundMutationPending
-                ? 'Updating...'
-                : `Turn ${isSoundEnabled ? 'off' : 'on'} sound notifications`}
+              Turn {isSoundEnabled ? 'off' : 'on'} sound notifications
             </ListModalItem>
             <ListModalItem
               type="button"

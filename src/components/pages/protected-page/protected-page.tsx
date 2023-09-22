@@ -9,10 +9,10 @@ import { Loader } from '@/src/components/loader/loader';
 
 type Props = {
   children: ReactElement;
-  shouldBeSignedIn: boolean;
+  signedIn: boolean;
 };
 
-export const ProtectedPage = ({ children, shouldBeSignedIn = true }: Props) => {
+export const ProtectedPage = ({ children, signedIn }: Props) => {
   const router = useRouter();
   const { isSignedIn, isLoading } = useAuth();
 
@@ -20,12 +20,12 @@ export const ProtectedPage = ({ children, shouldBeSignedIn = true }: Props) => {
     return <Loader color="accent" size="big" marginTop />;
   }
 
-  if (isSignedIn && !shouldBeSignedIn) {
+  if (isSignedIn && !signedIn) {
     router.push('/access-denied');
     return null;
   }
 
-  if (!isSignedIn && shouldBeSignedIn) {
+  if (!isSignedIn && signedIn) {
     router.push('/access-denied');
     return null;
   }

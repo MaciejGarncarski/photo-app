@@ -2,10 +2,13 @@
 
 .orWith {
   background-color: var(--color-primary);
-  text-transform: uppercase;
   padding: 0 1.5rem;
   display: inline-block;
   z-index: 1;
+
+  @include common.mediaquery('desktop') {
+    background-color: var(--color-secondary);
+  }
 }
 
 .separator {
@@ -22,6 +25,12 @@
     position: absolute;
     top: 50%;
     left: 0;
+  }
+
+  @include common.mediaquery('desktop') {
+    &::before {
+      background-color: var(--color-primary);
+    }
   }
 }
 

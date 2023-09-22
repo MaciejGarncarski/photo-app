@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 
 import { apiClient } from '@/src/utils/api-client';
 
-import { SignInFormValues } from '@/src/schemas/sign-in.schema';
+import { SignInFormValues } from '@/src/schemas/auth.schema';
 
 export const useSignIn = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ export const useSignIn = () => {
   return useMutation({
     mutationFn: ({ email, password }: SignInFormValues) => {
       return apiClient({
-        url: 'auth/login',
+        url: 'auth/sign-in',
         method: 'POST',
         body: {
           email,

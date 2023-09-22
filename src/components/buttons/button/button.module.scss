@@ -3,6 +3,7 @@
 .button {
   @include common.button;
 
+
   &:disabled {
     background-color: var(--color-gray);
     border-color: var(--color-gray);

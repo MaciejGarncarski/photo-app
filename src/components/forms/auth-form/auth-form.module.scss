@@ -1,0 +1,15 @@
+@use '/src/styles/common.scss';
+
+.form {
+    display: grid;
+    gap: 2rem;
+
+    @include common.mediaquery('desktop') {
+        gap: 2.5rem;
+    }
+}
+
+.error {
+    text-align: center;
+    color: var(--color-error);
+}

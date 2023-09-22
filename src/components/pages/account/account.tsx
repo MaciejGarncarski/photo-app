@@ -50,7 +50,7 @@ export const Account = ({ username }: Props) => {
 
   return (
     <div className={styles.container}>
-      {isMobile ? (
+      {isMobile !== 'loading' && isMobile ? (
         <AccountHeaderMobile {...accountHeaderProps} />
       ) : (
         <AccountHeaderDesktop {...accountHeaderProps} />

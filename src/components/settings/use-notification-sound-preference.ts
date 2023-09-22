@@ -54,6 +54,6 @@ export const useNotificationSoundPreference = () => {
   return {
     isSoundEnabled,
     toggleNotificationSound,
-    isNotificationSoundMutationPending: isPending,
+    isSoundMutationPending: isPending,
   };
 };

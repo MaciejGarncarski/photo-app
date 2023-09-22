@@ -7,6 +7,7 @@ type Props = {
   labelText: string;
   placeholder: string;
   type?: 'text' | 'number' | 'tel' | 'email' | 'password';
+  variant: 'primary' | 'secondary';
   error?: string;
   optional?: boolean;
   value?: string;
@@ -15,7 +16,15 @@ type Props = {
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
-    { type = 'text', labelText, error, optional, placeholder, ...props },
+    {
+      type = 'text',
+      labelText,
+      error,
+      optional,
+      placeholder,
+      variant,
+      ...props
+    },
     ref,
   ) => {
     const containerClassName = clsx(
@@ -27,6 +36,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       {
         [styles.inputError]: Boolean(error),
       },
+      styles[variant],
       styles.input,
     );
 

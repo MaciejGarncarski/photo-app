@@ -40,37 +40,36 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     },
   };
 
-  try {
-    const apiResponse = await fetch(
-      `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/${url}`,
-      isBodyFormData ? formDataOptions : options,
-    );
+  const apiResponse = await fetch(
+    `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/${url}`,
+    isBodyFormData ? formDataOptions : options,
+  );
 
-    if (!apiResponse.ok) {
-      throw new Error(`Cannot fetch data, status: , ${apiResponse.status}`);
+  if (!apiResponse.ok) {
+    const errorData = await apiResponse.json();
+
+    if (errorData) {
+      throw new Error(errorData.message);
     }
 
-    const jsonData = await apiResponse.json();
-
-    if (apiResponse.status !== 200) {
-      return jsonData;
-    }
-
-    if (!schema) {
-      return jsonData;
-    }
-
-    const parsedResponse = schema.safeParse(jsonData);
-
-    if (!parsedResponse.success) {
-      throw new Error(`Parsing error: ${parsedResponse.error.message}`);
-    }
-
-    return parsedResponse.data;
-  } catch (error) {
-    if (error instanceof String) {
-      console.error(error);
-    }
-    return null;
+    throw new Error(`Cannot fetch data, status: , ${apiResponse.status}`);
   }
+
+  const jsonData = await apiResponse.json();
+
+  if (apiResponse.status !== 200) {
+    return jsonData;
+  }
+
+  if (!schema) {
+    return jsonData;
+  }
+
+  const parsedResponse = schema.safeParse(jsonData);
+
+  if (!parsedResponse.success) {
+    throw new Error(`Parsing error: ${parsedResponse.error.message}`);
+  }
+
+  return parsedResponse.data;
 };

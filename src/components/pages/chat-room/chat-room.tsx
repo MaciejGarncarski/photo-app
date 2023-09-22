@@ -63,6 +63,7 @@ export const ChatRoom = () => {
           type="text"
           labelText="Message"
           placeholder="Aa"
+          variant="primary"
           value={inputVal}
           onChange={onChange}
         />

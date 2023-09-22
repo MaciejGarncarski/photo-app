@@ -7,7 +7,7 @@
   --color-error: rgb(207, 60, 30);
   --color-error-light: rgb(255, 194, 194);
   --color-gray: rgb(222, 222, 222);
-  --color-gray-hover: rgb(230, 230, 230);
+  --color-gray-hover: rgb(200, 200, 200);
   --color-overlay: rgb(20, 20, 20, 0.6);
 
   --color-text: rgb(6, 20, 16);
@@ -38,7 +38,7 @@
   --radius-small: 0.3rem;
 
   --header-width: 20rem;
-  --post-width: 20rem;
+  --post-width: 21rem;
   --post-margin: 1rem;
 
   @include common.mediaquery('tablet') {
@@ -58,6 +58,9 @@
   --color-gray-hover: rgb(130, 130, 130);
   --color-overlay: rgba(80, 80, 80, 0.85);
 
+  --color-error: rgb(221, 91, 65);
+  --color-error-light: rgba(194, 83, 83, 0.3);
+
   --color-text: rgb(232, 232, 232);
   --color-text-gray: rgb(211, 211, 211);
 
@@ -65,8 +68,5 @@
   --shadow-2: rgba(255, 255, 255, 0.2);
   --shadow-5: rgba(255, 255, 255, 0.5);
   --shadow-8: rgba(255, 255, 255, 0.8);
-
-  --color-error-light: rgb(158, 40, 40);
-
   --shadow-0-1: rgb(255, 255, 255, 0.08);
 }

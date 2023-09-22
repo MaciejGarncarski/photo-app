@@ -1,0 +1,23 @@
+@use '/src/styles/common';
+
+.container {
+  width: clamp(20rem, 50vw, 44rem);
+
+  @include common.mediaquery('desktop') {
+    background-color: var(--color-secondary);
+    padding: 2.5rem 3rem;
+    border-radius: var(--radius-big);
+    box-shadow: var(--shadow-pimary);
+  }
+}
+
+.formContainer {
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include common.mediaquery('desktop') {
+    padding-bottom: 2rem;
+  }
+}
