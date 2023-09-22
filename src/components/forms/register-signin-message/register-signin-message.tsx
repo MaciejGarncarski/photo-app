@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
-import styles from './regiset-signin-message.module.scss';
-
+import styles from './register-signin-message.module.scss';
 type Props = {
   variant: 'register' | 'sign-in';
 };

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { z } from 'zod';
 
 import { clientEnv } from '@/src/utils/env';

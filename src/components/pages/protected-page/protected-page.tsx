@@ -1,34 +1,34 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
-
-import { Loader } from '@/src/components/loader/loader';
 
 type Props = {
   children: ReactElement;
   signedIn: boolean;
 };
 
-export const ProtectedPage = ({ children, signedIn }: Props) => {
+export const ProtectedPage = async ({ children, signedIn }: Props) => {
   const router = useRouter();
   const { isSignedIn, isLoading } = useAuth();
 
-  if (isLoading) {
-    return <Loader color="accent" size="big" marginTop />;
-  }
+  useEffect(() => {
+    if (typeof window === 'undefined' || isLoading) {
+      return;
+    }
 
-  if (isSignedIn && !signedIn) {
-    router.push('/access-denied');
-    return null;
-  }
+    if (isSignedIn && !signedIn) {
+      router.push('/access-denied');
+      return;
+    }
 
-  if (!isSignedIn && signedIn) {
-    router.push('/access-denied');
-    return null;
-  }
+    if (!isSignedIn && signedIn) {
+      router.push('/access-denied');
+      return;
+    }
+  }, [isLoading, isSignedIn, router, signedIn]);
 
   return children;
 };

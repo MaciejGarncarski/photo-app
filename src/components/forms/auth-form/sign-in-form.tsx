@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/src/components/buttons/button/button';
 import { Error } from '@/src/components/forms/auth-form/error';
 import { useSignIn } from '@/src/components/forms/auth-form/use-sign-in';
-import { RegisterSignInMessage } from '@/src/components/forms/register-signin-message/regiset-signin-message';
+import { RegisterSignInMessage } from '@/src/components/forms/register-signin-message/register-signin-message';
 import { Input } from '@/src/components/input/input';
 import { SignInFormValues, signInSchema } from '@/src/schemas/auth.schema';
 
