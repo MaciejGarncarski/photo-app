@@ -70,7 +70,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
         />
         <TextArea
           error={errors.bio?.message}
-          placeholder="Bio"
+          placeholder="Aa"
           label="Bio"
           {...register('bio')}
         />
@@ -81,7 +81,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
               variant="secondary"
               onClick={stageSelectImage}
             >
-              go back
+              Go back
             </Button>
             <Button
               type="reset"

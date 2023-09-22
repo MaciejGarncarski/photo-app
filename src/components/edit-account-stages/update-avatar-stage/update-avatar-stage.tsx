@@ -70,7 +70,7 @@ export const UpdateAvatarStage = ({
           </Button>
         )}
         <Button type="button" variant="secondary" onClick={stageSelectImage}>
-          go back
+          Go back
         </Button>
         <Button
           type="button"

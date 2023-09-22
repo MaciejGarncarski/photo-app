@@ -1,6 +1,5 @@
 import { toast } from 'react-hot-toast';
 
-import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
 import { useUser } from '@/src/hooks/use-user';
 import { formatDate } from '@/src/utils/format-date';
@@ -15,14 +14,11 @@ type Arguments = {
 
 export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
   const { data } = useUser({ userId: authorId });
-  const { sessionUser } = useAuth();
   const menuModal = useModal();
   const confirmationModal = useModal();
   const deletePostMutation = useDeletePost();
 
   const dateFromNow = formatDate(createdAt);
-
-  const isAuthor = sessionUser?.id === authorId;
 
   const onSettled = () => {
     confirmationModal.closeModal();
@@ -40,7 +36,6 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
   return {
     username: data?.username,
     handleDeletePost,
-    isAuthor,
     dateFromNow,
     confirmationModal,
     menuModal,

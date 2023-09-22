@@ -1,10 +1,12 @@
 @use '/src/styles/common';
 
 .layout {
+  padding-bottom: 5rem;
 
   @include common.mediaquery('desktop') {
     min-height: 100dvh;
     display: flex;
+    padding-bottom: 0;
     gap: 5rem;
   }
 }

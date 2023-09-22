@@ -40,24 +40,22 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
   }
 
   return (
-    <nav className={styles.nav}>
-      <motion.ul
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-        className={styles.list}
-      >
-        {data.pages.map((page) => {
-          return page.users.map((userId) => {
-            return <ChatUser userId={userId} key={userId} />;
-          });
-        })}
-        {hasNextPage && !isLoading && (
-          <div ref={ref} className={styles.loading}>
-            <Loader color="accent" size="small" />
-          </div>
-        )}
-      </motion.ul>
-    </nav>
+    <motion.ul
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className={styles.list}
+    >
+      {data.pages.map((page) => {
+        return page.users.map((userId) => {
+          return <ChatUser userId={userId} key={userId} />;
+        });
+      })}
+      {hasNextPage && !isLoading && (
+        <div ref={ref} className={styles.loading}>
+          <Loader color="accent" size="small" />
+        </div>
+      )}
+    </motion.ul>
   );
 };

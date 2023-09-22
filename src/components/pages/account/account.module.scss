@@ -4,7 +4,6 @@
   max-width: 70rem;
   margin-inline: auto;
   margin-top: 1rem;
-  padding-bottom: 4rem;
 
   @include common.mediaquery('tablet') {
     max-width: 60rem;

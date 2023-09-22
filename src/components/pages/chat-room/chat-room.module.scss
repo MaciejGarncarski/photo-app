@@ -6,12 +6,10 @@
   position: relative;
   max-height: 90dvh;
   min-height: 70dvh;
-  padding-bottom: 2rem;
   width: 100%;
 
   @include common.mediaquery('desktop') {
     width: clamp(23rem, 50vw, 50rem);
-    padding-bottom: 0;
   }
 }
 

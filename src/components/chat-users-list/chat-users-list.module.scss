@@ -20,9 +20,13 @@
   gap: 1rem;
   overflow-y: auto;
   max-height: 55dvh;
+  width: clamp(20rem, 70%, 40rem);
+  margin: 0 auto;
 
   @include common.mediaquery('desktop') {
     gap: 2rem;
+    width: 100%;
+    margin: 0;
     max-height: 37rem;
     padding: 0 1rem;
   }

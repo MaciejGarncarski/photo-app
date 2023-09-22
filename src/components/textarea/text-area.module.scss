@@ -1,5 +1,10 @@
 @use '/src/styles/common';
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .textAreaContainer {
   position: relative;
   min-height: 10rem;
@@ -44,6 +49,7 @@
 
 .error {
   color: var(--color-error);
-  font-weight: 700;
-  margin-top: 0.5rem;
+  font-weight: 500;
+  margin-left: 0.75rem;
+  margin-top: 0.25rem;
 }

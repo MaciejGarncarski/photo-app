@@ -12,7 +12,7 @@ export const NotFoundPage = () => {
       </Heading>
       <p>not found</p>
       <Link href="/" className={styles.error}>
-        go back to homepage
+        Go back to homepage
       </Link>
     </main>
   );

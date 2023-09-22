@@ -1,3 +1,5 @@
+'use client';
+
 import { DotsThreeVertical, Trash } from '@phosphor-icons/react';
 import Link from 'next/link';
 
@@ -27,11 +29,11 @@ export const PostHeader = ({
   createdAt,
   postId,
 }: Props) => {
-  const { isSignedIn, isLoading } = useAuth();
+  const { isLoading, sessionUser } = useAuth();
+
   const {
     handleDeletePost,
     deletePostMutation,
-    isAuthor,
     username,
     confirmationModal,
     menuModal,
@@ -41,7 +43,9 @@ export const PostHeader = ({
     postId,
   });
 
-  if (!username || isLoading) {
+  const isAuthor = sessionUser?.id === authorId;
+
+  if (isLoading) {
     return <PostHeaderPlaceholder />;
   }
 
@@ -52,7 +56,7 @@ export const PostHeader = ({
         <h2 className={styles.username}>{username}</h2>
       </Link>
 
-      {isSignedIn && (
+      {sessionUser?.id && (
         <div className={styles.options}>
           {!isAuthor && <FollowButton userId={authorId} />}
           {isAuthor && (

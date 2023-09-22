@@ -62,7 +62,7 @@ export const ListModalItem = ({
     <li className={styles.item}>
       <AnimatePresence mode="wait">
         {isLoading ? (
-          <span className={styles.content} key="loader">
+          <span className={styles.content}>
             <Loader size="small" color="primary" />
             {loadingText}
           </span>
@@ -75,7 +75,6 @@ export const ListModalItem = ({
                 onClick={onClick}
                 disabled={disabled}
                 className={styles.content}
-                key="button"
               >
                 {icon}
                 {children}

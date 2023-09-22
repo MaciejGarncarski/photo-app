@@ -51,7 +51,7 @@ export const SelectOptionStage = ({
           </Button>
         )}
         <Button type="button" variant="secondary" onClick={stagePersonalInfo}>
-          Edit account details
+          Edit details
         </Button>
       </div>
       <ConfirmationDialog
