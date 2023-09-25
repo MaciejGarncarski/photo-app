@@ -58,6 +58,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
         onDragOver={active}
         onDragEnter={active}
         onDrop={onDrop}
+        onDragStart={(ev) => ev.dataTransfer.setData('text/plain', '')}
         onDragLeave={inactive}
         data-testid="dropZoneContainer"
       >

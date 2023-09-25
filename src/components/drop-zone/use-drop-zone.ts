@@ -39,6 +39,8 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
   };
 
   const onDrop = (dropEv: DragEvent<HTMLDivElement>) => {
+    dropEv.preventDefault();
+
     inactive(dropEv);
     const {
       dataTransfer: { files },

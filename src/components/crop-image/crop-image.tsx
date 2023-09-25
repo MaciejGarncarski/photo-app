@@ -54,7 +54,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   });
 
   if (isCropping) {
-    return <Loader size="small" color="accent" />;
+    return <Loader size="big" color="accent" />;
   }
 
   if (!imgSrc) {

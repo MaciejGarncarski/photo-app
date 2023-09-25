@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 
+import { useAuth } from '@/src/hooks/use-auth';
 import { apiClient } from '@/src/utils/api-client';
 
 import { useNotificationSoundAtom } from '@/src/components/settings/use-notification-sound-atom';
@@ -15,6 +17,21 @@ export const useUpdatePreferences = () => {
   const queryClient = useQueryClient();
   const { setTheme } = useTheme();
   const { setNotificationSound } = useNotificationSoundAtom();
+
+  const { sessionUser, isRefetching } = useAuth();
+
+  useEffect(() => {
+    if (!sessionUser || isRefetching) {
+      return;
+    }
+
+    if (sessionUser.theme) {
+      setTheme(sessionUser.theme);
+    }
+    if (sessionUser.notificationSound) {
+      setNotificationSound(sessionUser.notificationSound);
+    }
+  }, [sessionUser, isRefetching, setTheme, setNotificationSound]);
 
   return useMutation({
     mutationFn: ({ theme, notificationSound }: MutationVariables) =>
@@ -42,22 +59,10 @@ export const useUpdatePreferences = () => {
         };
       });
 
-      if (newPreferences.notificationSound) {
-        setNotificationSound(newPreferences.notificationSound);
-      }
-
-      if (newPreferences.theme) {
-        setTheme(newPreferences.theme);
-      }
-
       return { previousSession };
     },
     onError: (err, newTodo, context) => {
       queryClient.setQueryData(['session'], context?.previousSession);
-      const previousPreferences = context?.previousSession;
-
-      setNotificationSound(previousPreferences?.notificationSound || 'ON');
-      setTheme(previousPreferences?.theme || 'LIGHT');
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['session'] });

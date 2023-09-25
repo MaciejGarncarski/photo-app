@@ -4,7 +4,11 @@ import { useMemo } from 'react';
 import { getSessionUser } from '@/src/services/user.service';
 
 export const useAuth = () => {
-  const { data: sessionUser, isLoading } = useQuery({
+  const {
+    data: sessionUser,
+    isLoading,
+    isRefetching,
+  } = useQuery({
     queryKey: ['session'],
     queryFn: getSessionUser,
     initialData: null,
@@ -18,6 +22,7 @@ export const useAuth = () => {
       sessionUser,
       isSignedIn,
       isLoading,
+      isRefetching,
     };
-  }, [isLoading, isSignedIn, sessionUser]);
+  }, [isLoading, isRefetching, isSignedIn, sessionUser]);
 };
