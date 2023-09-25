@@ -18,9 +18,9 @@ export const CommentForm = ({ postId }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>
-      <TextArea placeholder="Aa" {...register('comment')} />
+      <TextArea placeholder="Aa" {...register('comment')} rows={1} />
       <Button type="submit" disabled={!isDirty} variant="primary">
-        Post
+        Comment
       </Button>
     </form>
   );

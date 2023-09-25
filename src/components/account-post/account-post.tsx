@@ -37,7 +37,11 @@ export const AccountPost = ({ postId }: Props) => {
       className={styles.link}
       data-cy="account post link"
     >
-      {!isLoaded && <Loader color="accent" size="small" />}
+      {!isLoaded && (
+        <span className={styles.loader}>
+          <Loader color="accent" size="small" />
+        </span>
+      )}
       <Image
         className={clsx({ [styles.imageLoading]: !isLoaded }, styles.image)}
         src={url}

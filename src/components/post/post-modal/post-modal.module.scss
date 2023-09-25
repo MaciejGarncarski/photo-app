@@ -26,20 +26,15 @@
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  padding-bottom: 0.25rem;
-
-  @include common.mediaquery('desktop') {
-    padding: 0;
-    padding-bottom: 0.5rem;
-  }
+  padding-bottom: 0.5rem;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 55vh;
-  height: 55dvh;
+  height: 65vh;
+  height: 65dvh;
 
   @include common.mediaquery('desktop') {
     gap: 3rem;

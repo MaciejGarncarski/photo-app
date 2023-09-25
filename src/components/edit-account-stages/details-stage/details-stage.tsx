@@ -72,6 +72,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
           error={errors.bio?.message}
           placeholder="Aa"
           label="Bio"
+          rows={6}
           {...register('bio')}
         />
         <div className={styles.buttons}>

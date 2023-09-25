@@ -38,6 +38,7 @@ export const CreatePostForm = ({
       <TextArea
         label="Description"
         placeholder="Type in post description"
+        rows={6}
         {...register('description')}
         error={errors.description?.message}
       />

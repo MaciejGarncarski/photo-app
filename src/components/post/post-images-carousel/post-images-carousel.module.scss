@@ -30,27 +30,14 @@
   flex-shrink: 0;
 }
 
-.postSliderProgress {
+.progress {
   position: absolute;
-  bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  gap: 0.35rem;
-  z-index: 2;
-  list-style-type: none;
-  padding: 0.35rem 0.5rem;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+  text-align: center;
+  padding: 0.25rem 0;
   background-color: var(--color-primary);
+  box-shadow: var(--shadow-pimary);
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-secondary);
-}
-
-.progressDot {
-  width: 0.75rem;
-  height: 0.75rem;
-  background-color: var(--color-accent);
-  border-radius: 100%;
 }

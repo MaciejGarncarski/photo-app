@@ -28,9 +28,19 @@ export const ProtectedPage = ({ children, signedIn }: Props) => {
       router.push('/access-denied');
       return;
     }
+  }, [isLoading, isSignedIn, router, signedIn]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  if (isLoading) {
+    return null;
+  }
+
+  if (isSignedIn && !signedIn) {
+    return null;
+  }
+
+  if (!isSignedIn && signedIn) {
+    return null;
+  }
 
   return children;
 };

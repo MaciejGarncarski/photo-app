@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Sign in to Photo App',
 };
 
-const SignInPage = async () => {
+const SignInPage = () => {
   return (
     <ProtectedPage signedIn={false}>
       <RegisterSignIn variant="sign-in" />

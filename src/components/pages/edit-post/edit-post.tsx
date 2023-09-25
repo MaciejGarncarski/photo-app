@@ -70,6 +70,7 @@ export const EditPost = () => {
           label="Description"
           placeholder="Type in new description"
           {...register('description')}
+          rows={6}
           error={errors.description?.message}
         />
         <div className={styles.buttons}>

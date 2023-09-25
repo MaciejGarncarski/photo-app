@@ -54,7 +54,7 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
           <p className={styles.description}>{description}</p>
         )}
       </div>
-      <p>
+      <p className={styles.time}>
         <time dateTime={createdAt.toDateString()}>{formattedDate}</time>
       </p>
     </footer>

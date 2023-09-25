@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 import { PostImage } from '@/src/services/userPosts.service';
 
 import styles from './post-images-carousel.module.scss';
@@ -11,19 +9,8 @@ type Props = {
 
 export const PostSliderProgress = ({ currentIndex, images }: Props) => {
   return (
-    <ul className={styles.postSliderProgress}>
-      {images.map((image, idx) => {
-        if (!image) {
-          return null;
-        }
-        return (
-          <motion.li
-            key={image.id}
-            className={styles.progressDot}
-            animate={idx === currentIndex ? { opacity: 1 } : { opacity: 0.3 }}
-          ></motion.li>
-        );
-      })}
-    </ul>
+    <span className={styles.progress}>
+      {currentIndex + 1}/{images.length}
+    </span>
   );
 };

@@ -25,14 +25,16 @@ export const SearchUserForm = ({
       className={styles.form}
       onSubmit={onSubmit}
     >
-      <Input
-        labelText="Search user"
-        placeholder="Username"
-        type="text"
-        variant="primary"
-        value={inputValue}
-        onChange={onChange}
-      />
+      <div className={styles.inputContainer}>
+        <Input
+          labelText="Search user"
+          placeholder="Username"
+          type="text"
+          variant="primary"
+          value={inputValue}
+          onChange={onChange}
+        />
+      </div>
       <Button type="submit" variant="primary" disabled={inputValue === ''}>
         <MagnifyingGlass />
         <span className="visually-hidden">Search user</span>

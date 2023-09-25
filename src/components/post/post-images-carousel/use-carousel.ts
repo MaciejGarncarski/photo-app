@@ -7,7 +7,7 @@ type ArgsTypes = {
   postImages: Array<PostImage>;
 };
 
-const CHANGE_IMG_OFFSET = 120;
+const CHANGE_IMG_OFFSET = 50;
 
 export const useCarousel = ({ postImages }: ArgsTypes) => {
   const [currentIndex, setCurrentIndex] = useState(0);
