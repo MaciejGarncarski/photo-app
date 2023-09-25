@@ -1,27 +1,33 @@
 import Link from 'next/link';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { useUser } from '@/src/hooks/use-user';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
-import { User } from '@/src/schemas/user.schema';
+import { Loader } from '@/src/components/loader/loader';
 
 import styles from './stats-modal-item.module.scss';
 
 type Props = {
-  user: User;
+  userId: string;
 };
 
-export const StatsModalItem = ({ user: { id, username } }: Props) => {
+export const StatsModalItem = ({ userId }: Props) => {
   const { sessionUser } = useAuth();
+  const { data: user } = useUser({ userId });
+
+  if (!user) {
+    return <Loader size="small" color="primary" />;
+  }
 
   return (
-    <li key={id} className={styles.listItem}>
-      <Link href={`/${username}`} className={styles.itemLink}>
-        <Avatar userId={id} size="xs" />
-        <span className={styles.username}>@{username}</span>
+    <li className={styles.listItem}>
+      <Link href={`/${user.username}`} className={styles.itemLink}>
+        <Avatar userId={user.id} size="xs" />
+        <span className={styles.username}>@{user.username}</span>
       </Link>
-      {id !== sessionUser?.id && <FollowButton userId={id} />}
+      {user.id !== sessionUser?.id && <FollowButton userId={user.id} />}
     </li>
   );
 };

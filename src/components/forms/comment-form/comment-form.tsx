@@ -1,7 +1,6 @@
-import clsx from 'clsx';
-
 import { Button } from '@/src/components/buttons/button/button';
 import { useCommentForm } from '@/src/components/forms/comment-form/use-comment-form';
+import { TextArea } from '@/src/components/textarea/text-area';
 
 import styles from './comment-form.module.scss';
 
@@ -10,7 +9,7 @@ type Props = {
 };
 
 export const CommentForm = ({ postId }: Props) => {
-  const { errors, handleSubmit, isDirty, isPending, onSubmit, register } =
+  const { handleSubmit, isDirty, isPending, onSubmit, register } =
     useCommentForm({ postId });
 
   if (isPending) {
@@ -19,11 +18,9 @@ export const CommentForm = ({ postId }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.addComment}>
-      <textarea
-        className={clsx(
-          errors.comment && styles.commentInputError,
-          styles.commentInput,
-        )}
+      <TextArea
+        label="HILELELLELEELELLELELEL"
+        placeholder="Aa"
         {...register('comment')}
       />
       <Button type="submit" disabled={!isDirty} variant="primary">

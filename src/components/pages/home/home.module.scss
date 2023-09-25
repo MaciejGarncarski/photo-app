@@ -1,19 +1,14 @@
 @use '/src/styles/common';
 
 .posts {
-  display: grid;
-  justify-content: center;
-  gap: 3rem;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
   min-height: 100%;
   list-style: none;
+  gap: 2rem;
 
   @include common.mediaquery('desktop') {
-    grid-auto-columns: auto;
     margin: 0 auto;
-    margin-bottom: 4rem;
-    gap: 6rem;
   }
 }
 

@@ -52,7 +52,6 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
     >
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
-        className={styles.imagesContainer}
         drag={isSingleImage ? undefined : 'x'}
         dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}

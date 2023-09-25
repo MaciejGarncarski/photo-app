@@ -1,8 +1,10 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import ReactFocusLock from 'react-focus-lock';
 
+import { useUser } from '@/src/hooks/use-user';
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
@@ -24,6 +26,8 @@ type Props = {
 
 export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
   const { data: post, isLoading } = usePost({ postId });
+  const { data: author } = useUser({ userId: post?.authorId || '' });
+  const router = useRouter();
 
   if (isLoading || !post) {
     return null;
@@ -31,10 +35,15 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
 
   const { authorId, createdAt } = post;
 
+  const handleClose = () => {
+    closeModal();
+    router.push(`/${author?.username}`);
+  };
+
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
-        <ModalBackdrop closeModal={closeModal}>
+        <ModalBackdrop closeModal={handleClose}>
           <ReactFocusLock autoFocus={false}>
             <motion.div
               variants={modalVariants}
@@ -45,7 +54,7 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
               className={styles.container}
             >
               <div className={styles.closeButton}>
-                <ModalCloseButton onClose={closeModal} />
+                <ModalCloseButton onClose={handleClose} />
               </div>
               <PostHeader
                 tag="div"

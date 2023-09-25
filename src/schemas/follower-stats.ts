@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import { User } from '@/src/schemas/user.schema';
-
 const followersInputSchema = z.object({
   userId: z.string(),
   skip: z.string(),
@@ -10,7 +8,7 @@ const followersInputSchema = z.object({
 export type FollowersInput = z.infer<typeof followersInputSchema>;
 
 export const followersResponseSchema = z.object({
-  users: z.custom<Array<User>>(),
+  users: z.array(z.string()),
   totalPages: z.number(),
   roundedMaxPages: z.number(),
   currentPage: z.number(),

@@ -23,7 +23,6 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
 
     if (changeEv.target.files.length > 0) {
       setIsUploadingImage(true);
-
       handleDropImage({ file: changeEv.target.files[0], setError, setImgSrc });
       setIsUploadingImage(false);
     }

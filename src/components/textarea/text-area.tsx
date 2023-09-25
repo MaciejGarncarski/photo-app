@@ -3,8 +3,8 @@ import { forwardRef, useId } from 'react';
 import styles from './text-area.module.scss';
 
 type Props = {
-  label: string;
   placeholder: string;
+  label?: string;
   error?: string;
 };
 
@@ -14,15 +14,17 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
     return (
       <div className={styles.container}>
         <div className={styles.textAreaContainer}>
-          <label className={styles.label} htmlFor={id}>
-            {label}
-          </label>
+          {label ? (
+            <label className={styles.label} htmlFor={id}>
+              {label}
+            </label>
+          ) : null}
           <textarea
             id={id}
             ref={ref}
             className={styles.textArea}
             cols={30}
-            rows={10}
+            rows={2}
             placeholder={placeholder}
             {...otherProps}
           />

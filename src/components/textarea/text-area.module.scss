@@ -3,27 +3,32 @@
 .container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .textAreaContainer {
   position: relative;
-  min-height: 10rem;
   display: flex;
   flex-direction: column;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
+  overflow: hidden;
+  width: auto;
 }
 
 .label {
   color: var(--color-text-gray);
   position: absolute;
+  background-color: var(--color-secondary);
   left: var(--gap);
-  top: 0.5rem;
+  top: 0rem;
   left: 1rem;
+  padding-top: 0.5rem;
+  display: inline-block;
+  width: calc(100% - 1rem);
   transition: all var(--transition);
   transition-property: background-color, transform, opacity;
-  display: inline-block;
-  opacity: 0.8;
+
 }
 
 .textArea {
@@ -33,7 +38,8 @@
   height: 100%;
   resize: vertical;
   max-height: 12rem;
-  padding: 2rem 1rem;
+  padding: 1rem;
+  padding-top: 1.75rem;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
 

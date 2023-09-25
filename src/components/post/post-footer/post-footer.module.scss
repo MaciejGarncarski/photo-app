@@ -13,14 +13,17 @@
 .description {
   display: inline;
   color: var(--text-gray);
-  line-height: 1.2;
+  word-wrap: break-word;
 }
 
 .author {
   font-weight: 700;
-  padding-right: 0.5rem;
   display: inline-block;
   line-height: 1.2;
+
+  &::after {
+    content: "\00a0";
+  }
 }
 
 .showMore {

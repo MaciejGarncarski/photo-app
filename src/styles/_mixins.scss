@@ -1,17 +1,18 @@
 @mixin mediaquery($query) {
-  $breakpoints: ('tablet': '(min-width: 750px)',
+  $breakpoints: (
+    'tablet': '(min-width: 750px)',
     'desktop': '(min-width: 1279px)',
   );
 
-  @if map-has-key($breakpoints, $query) {
-    @media screen and #{map-get($breakpoints, $query)} {
-      @content;
-    }
+@if map-has-key($breakpoints, $query) {
+  @media screen and #{map-get($breakpoints, $query)} {
+    @content;
   }
+}
 
-  @else {
-    @error "ERROR: No breakpoint specified for query '#{$query}'";
-  }
+@else {
+  @error "ERROR: No breakpoint specified for query '#{$query}'";
+}
 }
 
 @mixin mobile-landscape {
@@ -27,10 +28,10 @@
   color: var(--color-button-text);
   font-weight: 500;
   padding: 0.4rem 0.8rem;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 0.6rem;
 
   @include mediaquery('desktop') {

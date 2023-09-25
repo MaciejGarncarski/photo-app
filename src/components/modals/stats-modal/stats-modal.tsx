@@ -47,8 +47,8 @@ export const StatsModal = ({ closeModal, type, userId }: Props) => {
           ) : (
             <ul className={styles.list}>
               {data?.pages.map((page) => {
-                return page.users.map((user) => {
-                  return <StatsModalItem user={user} key={user.id} />;
+                return page.users.map((userId) => {
+                  return <StatsModalItem key={userId} userId={userId} />;
                 });
               })}
             </ul>

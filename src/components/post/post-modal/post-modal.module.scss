@@ -3,7 +3,7 @@
 .container {
   position: relative;
   z-index: 1;
-  width: clamp(20rem, 50vw, 50rem);
+  width: clamp(22rem, 50vw, 50rem);
   background-color: var(--color-primary);
   left: 0;
   right: 0;
@@ -26,7 +26,7 @@
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  padding: 0.5rem 0;
+  padding-bottom: 0.25rem;
 
   @include common.mediaquery('desktop') {
     padding: 0;
@@ -47,7 +47,6 @@
 }
 
 .carousel {
-  max-width: 75%;
   margin: 0 auto;
 }
 

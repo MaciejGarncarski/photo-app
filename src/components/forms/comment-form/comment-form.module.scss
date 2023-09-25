@@ -5,30 +5,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-
   padding-right: 1rem;
   margin-top: 1rem;
-}
-
-.commentInput {
-  height: 2.5rem;
-  min-height: 2.5rem;
-  max-height: 7rem;
-  resize: vertical;
-  flex-grow: 1;
-  border-radius: var(--radius-small);
-  padding: 0.5rem;
-  transition: background-color var(--transition);
-  background-color: var(--color-secondary);
-  border: none;
-
-  &:hover,
-  &:focus {
-    background-color: var(--bg-gray);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: var(--shadow-focus);
-  }
 }

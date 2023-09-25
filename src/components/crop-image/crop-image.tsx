@@ -1,4 +1,5 @@
-import { File, Hand, Mouse } from '@phosphor-icons/react';
+/* eslint-disable jsx-a11y/alt-text */
+import { Hand, Image, Mouse } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
@@ -38,6 +39,12 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   const { isMobile } = useIsMobile();
 
   const resetImgSrc = () => setImgSrc(null);
+
+  const handleSelectOtherImage = () => {
+    resetImgSrc();
+    closeModal();
+  };
+
   const { isCropping, saveCrop } = useSaveCrop({
     cropAreaPixels,
     finalImages,
@@ -86,7 +93,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           </Heading>
           <div className={styles.buttons}>
             <Button type="button" variant="primary" onClick={saveCrop}>
-              Save crop
+              Save image
             </Button>
             <Button
               type="button"
@@ -94,7 +101,7 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
               disabled={!imgSrc}
               onClick={openModal}
             >
-              Select diffrent image
+              Select another image <Image />
             </Button>
           </div>
         </section>
@@ -102,17 +109,18 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
       {isModalOpen && (
         <ConfirmationDialog
           isVisible={isModalOpen}
-          text="Do you want to select diffrent image?"
+          text="Do you want to select another image?"
           closeModal={closeModal}
         >
           <Button
             variant="destructive"
-            onClick={resetImgSrc}
+            onClick={handleSelectOtherImage}
             disabled={!imgSrc}
           >
-            Select diffrent image
-            <File />
+            Select another
+            <Image />
           </Button>
+
           <Button variant="secondary" onClick={closeModal}>
             Cancel
           </Button>

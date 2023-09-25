@@ -66,7 +66,7 @@ export const UpdateAvatarStage = ({
       <div className={styles.buttons}>
         {isNewAvatarReady && (
           <Button type="button" variant="secondary" onClick={resetFinalImages}>
-            select diffrent image
+            Select other image
           </Button>
         )}
         <Button type="button" variant="secondary" onClick={stageSelectImage}>

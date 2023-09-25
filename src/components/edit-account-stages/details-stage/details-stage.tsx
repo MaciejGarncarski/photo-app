@@ -43,7 +43,7 @@ export const DetailsStage = ({ userId, stageSelectImage }: Props) => {
 
   return (
     <>
-      <EditAccountHeading text="Edit account details" />
+      <EditAccountHeading text="Edit details" />
       <motion.form
         variants={stageVariant}
         animate="animate"
