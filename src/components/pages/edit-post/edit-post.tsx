@@ -40,7 +40,7 @@ export const EditPost = () => {
   });
 
   if (!data?.description || isLoading) {
-    return <Loader color="accent" size="big" />;
+    return <Loader color="accent" size="big" marginTop />;
   }
 
   const onSubmit = () => {

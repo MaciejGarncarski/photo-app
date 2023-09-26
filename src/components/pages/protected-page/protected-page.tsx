@@ -33,12 +33,12 @@ export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
   }, [isFetching, sessionNeeded, router, isSignedIn]);
 
   if (!sessionUser && isFetching) {
-    return <Loader size="big" color="accent" />;
+    return <Loader size="big" color="accent" marginTop />;
   }
 
   if ((isSignedIn && sessionNeeded) || (!isSignedIn && !sessionNeeded)) {
     return children;
   }
 
-  return <Loader size="big" color="accent" />;
+  return <Loader size="big" color="accent" marginTop />;
 };

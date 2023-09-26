@@ -23,8 +23,8 @@
 
 @mixin button {
   border-radius: var(--radius-small);
-  border: 2px solid var(--color-accent);
   background-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
   color: var(--color-button-text);
   font-weight: 500;
   padding: 0.4rem 0.8rem;
