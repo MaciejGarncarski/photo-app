@@ -29,7 +29,9 @@ export const useRegister = () => {
     },
     onSuccess: async () => {
       router.push('/');
-      await queryClient.invalidateQueries({ queryKey: ['session'] });
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['session'] });
+      }, 500);
     },
   });
 };

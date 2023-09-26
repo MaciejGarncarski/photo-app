@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const RegisterPage = async () => {
   return (
-    <ProtectedPage signedIn={false}>
+    <ProtectedPage sessionNeeded={false}>
       <RegisterSignIn variant="register" />
     </ProtectedPage>
   );

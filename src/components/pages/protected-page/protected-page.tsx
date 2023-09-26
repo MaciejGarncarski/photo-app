@@ -5,42 +5,40 @@ import { ReactElement, useEffect } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
+import { Loader } from '@/src/components/loader/loader';
+
 type Props = {
   children: ReactElement;
-  signedIn: boolean;
+  sessionNeeded: boolean;
 };
 
-export const ProtectedPage = ({ children, signedIn }: Props) => {
+export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
   const router = useRouter();
-  const { isSignedIn, isLoading } = useAuth();
+  const { isSignedIn, isFetching, sessionUser } = useAuth();
 
   useEffect(() => {
-    if (isLoading) {
+    if (isFetching) {
       return;
     }
 
-    if (isSignedIn && !signedIn) {
-      router.push('/access-denied');
+    if (isSignedIn && !sessionNeeded) {
+      router.replace('/access-denied');
       return;
     }
 
-    if (!isSignedIn && signedIn) {
-      router.push('/access-denied');
+    if (!isSignedIn && sessionNeeded) {
+      router.replace('/auth/sign-in');
       return;
     }
-  }, [isLoading, isSignedIn, router, signedIn]);
+  }, [isFetching, sessionNeeded, router, isSignedIn]);
 
-  if (isLoading) {
-    return null;
+  if (!sessionUser && isFetching) {
+    return <Loader size="big" color="accent" />;
   }
 
-  if (isSignedIn && !signedIn) {
-    return null;
+  if ((isSignedIn && sessionNeeded) || (!isSignedIn && !sessionNeeded)) {
+    return children;
   }
 
-  if (!isSignedIn && signedIn) {
-    return null;
-  }
-
-  return children;
+  return <Loader size="big" color="accent" />;
 };

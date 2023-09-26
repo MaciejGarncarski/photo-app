@@ -20,9 +20,11 @@ export const useSignIn = () => {
         },
       });
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       router.push('/');
-      await queryClient.invalidateQueries({ queryKey: ['session'] });
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['session'] });
+      }, 500);
     },
   });
 };

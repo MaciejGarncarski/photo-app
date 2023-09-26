@@ -3,7 +3,6 @@
 .container {
   max-width: 70rem;
   margin-inline: auto;
-  margin-top: 1rem;
 
   @include common.mediaquery('tablet') {
     max-width: 60rem;
@@ -32,8 +31,7 @@
   display: flex;
   gap: 6rem;
   justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
+  align-items: flex-start;
 }
 
 .leftCol {

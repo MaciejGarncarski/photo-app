@@ -8,6 +8,7 @@ export const useAuth = () => {
     data: sessionUser,
     isLoading,
     isRefetching,
+    isFetching,
   } = useQuery({
     queryKey: ['session'],
     queryFn: getSessionUser,
@@ -23,6 +24,7 @@ export const useAuth = () => {
       isSignedIn,
       isLoading,
       isRefetching,
+      isFetching,
     };
-  }, [isLoading, isRefetching, isSignedIn, sessionUser]);
+  }, [isFetching, isLoading, isRefetching, isSignedIn, sessionUser]);
 };

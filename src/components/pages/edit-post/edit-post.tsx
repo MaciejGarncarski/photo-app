@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FloppyDisk, SignOut } from '@phosphor-icons/react';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useModal } from '@/src/hooks/use-modal';
@@ -41,11 +40,9 @@ export const EditPost = () => {
     },
   });
 
-  useEffect(() => {
-    if (data?.description) {
-      setValue('description', data.description);
-    }
-  }, [data?.description, setValue]);
+  if (data?.description) {
+    setValue('description', data.description);
+  }
 
   if (!data?.description || isLoading) {
     return <Loader color="accent" size="small" />;
