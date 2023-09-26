@@ -2,8 +2,15 @@
 
 .createPost {
   display: grid;
-  width: clamp(19rem, 60vw, 55rem);
+  width: clamp(20rem, 80vw, 35rem);
   margin: 0 auto;
-  margin-bottom: 4rem;
-  gap: 3rem;
+  gap: 1.5rem;
+
+  @include common.mediaquery('tablet') {
+    gap: 2.5rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    width: clamp(35rem, 50vw, 45rem);
+  }
 }

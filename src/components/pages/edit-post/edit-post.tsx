@@ -30,7 +30,6 @@ export const EditPost = () => {
   const {
     formState: { errors, isDirty },
     register,
-    setValue,
     getValues,
   } = useForm({
     mode: 'all',
@@ -40,12 +39,8 @@ export const EditPost = () => {
     },
   });
 
-  if (data?.description) {
-    setValue('description', data.description);
-  }
-
   if (!data?.description || isLoading) {
-    return <Loader color="accent" size="small" />;
+    return <Loader color="accent" size="big" />;
   }
 
   const onSubmit = () => {

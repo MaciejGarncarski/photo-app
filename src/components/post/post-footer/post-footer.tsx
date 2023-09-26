@@ -30,10 +30,11 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
   return (
     <footer className={styles.footer}>
       <PostButtons postId={postId} parentModalOpen={parentModalOpen} />
-      {likesCount > 1 ? (
-        <p className={styles.likes}>{likesCount} likes</p>
+      {likesCount > 0 ? (
+        <p className={styles.likes}>
+          {likesCount} {likesCount > 1 ? 'likes' : 'like'}
+        </p>
       ) : null}
-
       <div className={styles.descriptionContainer}>
         <p className={styles.author}>{data?.username}</p>
         {isDescriptionLong ? (

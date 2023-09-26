@@ -3,7 +3,6 @@
 import { IconContext } from '@phosphor-icons/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
 import { MotionConfig } from 'framer-motion';
 import { Provider } from 'jotai';
 import { ThemeProvider } from 'next-themes';
@@ -19,20 +18,18 @@ export const Providers = ({ children }: Props) => {
   return (
     <ThemeProvider>
       <QueryClientProvider client={client}>
-        <ReactQueryStreamedHydration>
-          <Provider>
-            <MotionConfig reducedMotion="user">
-              <IconContext.Provider
-                value={{
-                  weight: 'bold',
-                  size: 24,
-                }}
-              >
-                {children}
-              </IconContext.Provider>
-            </MotionConfig>
-          </Provider>
-        </ReactQueryStreamedHydration>
+        <Provider>
+          <MotionConfig reducedMotion="user">
+            <IconContext.Provider
+              value={{
+                weight: 'bold',
+                size: 24,
+              }}
+            >
+              {children}
+            </IconContext.Provider>
+          </MotionConfig>
+        </Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>

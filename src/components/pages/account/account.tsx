@@ -12,6 +12,7 @@ import { signOut } from '@/src/utils/sign-out';
 
 import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
 import { Button } from '@/src/components/buttons/button/button';
+import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
@@ -35,7 +36,7 @@ export const Account = ({ username }: Props) => {
   const settingsModal = useModal();
   const signOutModal = useModal();
 
-  const { data: userData } = useUserByUsername({
+  const { data: userData, isError } = useUserByUsername({
     username: username || (pathname.slice(1) as string),
   });
 
@@ -47,6 +48,10 @@ export const Account = ({ username }: Props) => {
     openModal: settingsModal.openModal,
     isOwner,
   };
+
+  if (isError) {
+    return <FetchErrorMessage message="Cannot display this profile." />;
+  }
 
   return (
     <div className={styles.container}>

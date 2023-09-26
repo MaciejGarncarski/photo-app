@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Hand, Image, Mouse } from '@phosphor-icons/react';
+import { FloppyDisk, Hand, Image, Mouse } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
@@ -93,7 +93,9 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
           </Heading>
           <div className={styles.buttons}>
             <Button type="button" variant="primary" onClick={saveCrop}>
-              Save image
+              Save
+              {isMobile ? '' : ' image'}
+              <FloppyDisk />
             </Button>
             <Button
               type="button"
@@ -101,7 +103,9 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
               disabled={!imgSrc}
               onClick={openModal}
             >
-              Select another image <Image />
+              Select another
+              {isMobile ? '' : ' image'}
+              <Image />
             </Button>
           </div>
         </section>

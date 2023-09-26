@@ -2,10 +2,10 @@
 
 .container {
   text-align: center;
+  text-wrap: balance;
   padding: 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 
   @include common.mediaquery('desktop') {
     padding: 7rem 4rem;

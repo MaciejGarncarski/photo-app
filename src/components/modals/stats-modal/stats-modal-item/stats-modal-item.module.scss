@@ -4,26 +4,28 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 2rem;
   transition: transform var(--transition);
   margin: 0.25rem 1rem;
+
+  @include common.mediaquery('desktop') {
+    gap: 2rem;
+  }
 }
 
 .itemLink {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
   gap: 1rem;
   flex-grow: 1;
   border-radius: var(--radius-medium);
 
-  &:hover,
-  &:focus {
-    background-color: var(--color-secondary);
-  }
-
   @include common.mediaquery('desktop') {
     padding: 0.4rem 1rem;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-secondary);
+    }
   }
 }
 

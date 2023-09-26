@@ -68,7 +68,7 @@
   &:hover,
   &:focus {
     outline-offset: 3px;
-    background-color: var(--color-error);
+    background-color: var(--color-error-light);
   }
 
   @include common.mediaquery('desktop') {

@@ -24,7 +24,7 @@ import { useOnSubmit } from './use-on-submit';
 export const PostDetailsSchema = z.object({
   description: z
     .string()
-    .min(1)
+    .min(1, { message: 'Description cannot be empty.' })
     .max(100, { message: 'Maximum characters exceeded.' }),
 });
 
