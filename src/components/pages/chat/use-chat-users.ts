@@ -6,7 +6,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuth } from '@/src/hooks/use-auth';
 import { apiClient } from '@/src/utils/api-client';
 
-import { ChatUsersResponse } from '@/src/schemas/chat';
+import { ChatUsersResponse, chatUsersResponseSchema } from '@/src/schemas/chat';
 
 export const useChatUsers = () => {
   const [inputValue, setInputValue] = useState('');
@@ -34,10 +34,12 @@ export const useChatUsers = () => {
     queryFn: async ({ pageParam = 0 }) => {
       return await apiClient({
         url: `chat/chatUsers?skip=${pageParam}&searchedUser=${searchedUser}`,
+        schema: chatUsersResponseSchema,
       });
     },
     initialPageParam: 0,
     enabled: isEnabled,
+    staleTime: 20000,
     refetchOnWindowFocus: false,
     getNextPageParam: (prevMessages: ChatUsersResponse) => {
       return prevMessages?.currentPage === prevMessages.totalPages

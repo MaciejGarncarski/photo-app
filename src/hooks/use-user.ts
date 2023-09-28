@@ -12,5 +12,6 @@ export const useUser = ({ userId }: Props) => {
     queryFn: () => getUser({ userId }),
     enabled: userId !== '',
     refetchOnWindowFocus: false,
+    staleTime: 15000,
   });
 };

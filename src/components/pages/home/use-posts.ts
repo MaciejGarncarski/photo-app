@@ -9,6 +9,7 @@ export const useInfinitePosts = () => {
     queryKey: HOME_POSTS_QUERY_KEY,
     queryFn: getInfinitePosts,
     refetchOnWindowFocus: false,
+    staleTime: 10000,
     getNextPageParam: (prevPosts) => {
       if (!prevPosts) {
         return undefined;

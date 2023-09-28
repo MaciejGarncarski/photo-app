@@ -15,16 +15,6 @@ const HomePage = async () => {
   const posts = await queryClient.fetchInfiniteQuery({
     queryKey: HOME_POSTS_QUERY_KEY,
     queryFn: getInfinitePosts,
-    pages: 3,
-    getNextPageParam: (prevPosts) => {
-      if (!prevPosts) {
-        return undefined;
-      }
-
-      return prevPosts.currentPage === prevPosts.totalPages
-        ? undefined
-        : prevPosts.currentPage + 1;
-    },
     initialPageParam: 0,
   });
 

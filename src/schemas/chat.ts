@@ -22,7 +22,7 @@ export const chatMessagesResponseSchema = z.object({
 
 export type ChatMessagesResponse = z.infer<typeof chatMessagesResponseSchema>;
 
-const chatUsersResponseSchema = z.object({
+export const chatUsersResponseSchema = z.object({
   users: z.array(z.string()),
   totalPages: z.number(),
   currentPage: z.number(),
