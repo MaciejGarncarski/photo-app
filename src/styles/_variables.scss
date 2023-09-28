@@ -38,7 +38,7 @@
   --radius-small: 0.375rem;
 
   --header-width: 20rem;
-  --post-width: 21rem;
+  --post-width: clamp(16rem, 85vw, 22rem);
   --post-margin: 1rem;
 
   @include common.mediaquery('tablet') {

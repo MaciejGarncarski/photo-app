@@ -73,6 +73,20 @@ export const getSessionUser = async () => {
   return data;
 };
 
+export const getSessionUserServer = async () => {
+  const { cookies: serverCookies } = await import('next/headers');
+
+  const data = await apiClient({
+    url: 'auth/me',
+    method: 'GET',
+    schema: userWithPreferencesSchema,
+    headers: {
+      Cookie: serverCookies().toString(),
+    },
+  });
+  return data;
+};
+
 type FollowOtherUser = {
   userId: string;
   isFollowing: boolean;
