@@ -31,7 +31,7 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
           const groupedMessages = groupMessagesByUser(page.messages);
 
           return groupedMessages.map((messageGroup, index, messagesArray) => {
-            if (!messagesArray[index - 1]) {
+            if (index === 0) {
               return (
                 <ChatMessage
                   messageGroup={messageGroup}

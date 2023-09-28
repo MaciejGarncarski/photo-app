@@ -7,5 +7,6 @@ export const usePost = ({ postId }: { postId: number }) => {
     queryKey: ['post', postId],
     queryFn: () => getPost({ postId }),
     enabled: Boolean(postId),
+    staleTime: 20000,
   });
 };
