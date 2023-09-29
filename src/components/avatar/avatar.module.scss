@@ -59,3 +59,36 @@
   justify-content: center;
   align-items: center;
 }
+
+.imagePlaceholder {
+  width: 70%;
+  height: auto;
+
+}
+
+.imagePlaceholderAnimation {
+  @extend .imagePlaceholder;
+  color: var(--color-gray);
+
+  animation: animate-placeholder 10s infinite;
+}
+
+@keyframes animate-placeholder {
+  10% {
+    color: var(--color-gray);
+  }
+
+  25%,
+  75% {
+    color: var(--color-text);
+  }
+
+  50% {
+    color: var(--color-gray);
+  }
+
+  90% {
+    color: var(--color-gray);
+
+  }
+}

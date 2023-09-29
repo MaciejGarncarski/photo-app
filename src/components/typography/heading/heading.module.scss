@@ -5,35 +5,28 @@
   line-height: 1.5;
   font-weight: 700;
   --heading-size: 1.5rem;
-  font-size: var(--heading-size);
-  margin-bottom: 0.75em;
-
-  @include common.mediaquery('desktop') {
-    margin-bottom: 1em;
-  }
+  letter-spacing: -0.025em;
+  margin-bottom: 0.6em;
 }
 
 .small {
-  --heading-size: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 
-  @include common.mediaquery('desktop') {
-    --heading-size: 1.5rem;
-  }
 }
 
 .medium {
-  --heading-size: 1.75rem;
-
-  @include common.mediaquery('desktop') {
-    --heading-size: 2rem;
-  }
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .big {
-  --heading-size: 2.5rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 
   @include common.mediaquery('desktop') {
-    --heading-size: 3rem;
+    font-size: 3rem;
+    line-height: 1;
   }
 }
 

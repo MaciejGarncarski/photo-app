@@ -34,7 +34,7 @@ export const Avatar = ({ userId, size }: Props) => {
     return (
       <div className={clsx(styles[size], styles.avatar)}>
         <div className={styles.noImage}>
-          <User size={avatarSizes[size]} />
+          <User className={styles.imagePlaceholderAnimation} />
           <span className="visually-hidden">Loading avatar</span>
         </div>
       </div>
@@ -51,7 +51,7 @@ export const Avatar = ({ userId, size }: Props) => {
     <div className={clsx(styles[size], styles.avatar)}>
       {hasNoImage && (
         <div className={styles.noImage}>
-          <User size={avatarSizes[size]} />
+          <User className={styles.imagePlaceholder} />
           <span className="visually-hidden">@{username}</span>
         </div>
       )}

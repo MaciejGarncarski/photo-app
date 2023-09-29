@@ -52,7 +52,7 @@
 .username {
   text-align: center;
   align-self: center;
-  max-width: 12rem;
+  max-width: 15ch;
   overflow: hidden;
   margin: 0 auto;
   text-overflow: ellipsis;
@@ -65,7 +65,7 @@
     margin: unset;
     text-align: left;
     align-self: flex-start;
-    max-width: unset;
+    max-width: 20ch;
     font-size: 2rem;
   }
 }

@@ -45,9 +45,9 @@
   }
 
   @include common.mediaquery('desktop') {
-    margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
   }
 }
 

@@ -23,26 +23,27 @@ export const ChatUser = ({ userId }: Props) => {
   const { data, isLoading } = useUser({ userId });
   const params = useParams();
 
-  if (!data || isLoading) {
-    return <Loader color="accent" size="small" />;
-  }
-
   const isActive = userId === (params?.receiverId as string);
 
   return (
     <li key={userId} data-cy="chat user" className={styles.listItem}>
-      {!data || isLoading ? <Loader color="accent" size="small" /> : null}
-      <MotionLink
-        variants={linkVariants}
-        href={`/chat/${userId}`}
-        className={clsx(isActive && styles.linkActive, styles.link)}
-      >
-        <Avatar userId={userId} size="small" />
-        <span className={styles.name}>
-          <span className={styles.fullName}>{data.name}</span>
-          <span className={styles.username}>@{data.username}</span>
+      {!data || isLoading ? (
+        <span className={clsx(styles.loading, styles.link)}>
+          <Loader color="accent" size="small" />
         </span>
-      </MotionLink>
+      ) : (
+        <MotionLink
+          variants={linkVariants}
+          href={`/chat/${userId}`}
+          className={clsx(isActive && styles.linkActive, styles.link)}
+        >
+          <Avatar userId={userId} size="small" />
+          <span className={styles.name}>
+            <span className={styles.fullName}>{data.name}</span>
+            <span className={styles.username}>@{data.username}</span>
+          </span>
+        </MotionLink>
+      )}
     </li>
   );
 };

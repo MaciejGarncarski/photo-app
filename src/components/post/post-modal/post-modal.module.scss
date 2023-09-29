@@ -3,14 +3,14 @@
 .container {
   position: relative;
   z-index: 1;
-  width: clamp(22rem, 50vw, 50rem);
+  width: clamp(23rem, 85vw, 50rem);
   background-color: var(--color-primary);
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
-  border-radius: var(--radius-small);
-  padding: 0.5rem 1rem;
+  border-radius: var(--radius-medium);
+  padding: 1rem 1rem;
 
   @include common.mobile-landscape {
     width: auto;
@@ -18,6 +18,7 @@
 
   @include common.mediaquery('tablet') {
     padding: 1rem 2rem;
+    width: clamp(30rem, 50vw, 50rem);
     border-radius: var(--radius-medium);
   }
 }
@@ -33,8 +34,10 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 65vh;
-  height: 65dvh;
+  min-height: 45vh;
+  min-height: 45dvh;
+  max-height: 65vh;
+  max-height: 65dvh;
 
   @include common.mediaquery('desktop') {
     gap: 3rem;

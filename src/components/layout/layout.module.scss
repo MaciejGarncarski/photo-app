@@ -6,8 +6,8 @@
   @include common.mediaquery('desktop') {
     min-height: 100dvh;
     display: flex;
-    padding-bottom: 0;
     gap: 5rem;
+    padding-bottom: 0;
   }
 }
 
@@ -22,5 +22,6 @@
   @include common.mediaquery('desktop') {
     margin-top: 3rem;
     margin-right: 20rem;
+    padding-bottom: 2rem;
   }
 }
