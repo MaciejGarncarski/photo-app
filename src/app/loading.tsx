@@ -1,16 +1,7 @@
-import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
-
-import styles from '../components/pages/home/home.module.scss';
+import { Loader } from '@/src/components/loader/loader';
 
 const HomePageLoading = () => {
-  return (
-    <ul className={styles.posts}>
-      <li>
-        <PostPlaceholder />
-        <PostPlaceholder />
-      </li>
-    </ul>
-  );
+  return <Loader color="accent" size="big" marginTop />;
 };
 
 export default HomePageLoading;
