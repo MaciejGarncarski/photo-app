@@ -4,7 +4,7 @@ import { IconContext } from '@phosphor-icons/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MotionConfig } from 'framer-motion';
-import { Provider } from 'jotai';
+import { Provider as JotaiProvider } from 'jotai';
 import { ThemeProvider } from 'next-themes';
 import { ReactNode, useState } from 'react';
 
@@ -16,9 +16,9 @@ export const Providers = ({ children }: Props) => {
   const [client] = useState(new QueryClient());
 
   return (
-    <ThemeProvider>
-      <QueryClientProvider client={client}>
-        <Provider>
+    <QueryClientProvider client={client}>
+      <ThemeProvider defaultTheme="LIGHT">
+        <JotaiProvider>
           <MotionConfig reducedMotion="user">
             <IconContext.Provider
               value={{
@@ -29,9 +29,9 @@ export const Providers = ({ children }: Props) => {
               {children}
             </IconContext.Provider>
           </MotionConfig>
-        </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </ThemeProvider>
+        </JotaiProvider>
+      </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };

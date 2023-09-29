@@ -14,7 +14,7 @@ export const useThemePreference = () => {
   const debouncedThemeMutation = useMemo(
     () =>
       debounce(
-        () => mutate({ theme: theme === 'DARK' ? 'LIGHT' : 'DARK' }),
+        () => mutate({ theme: theme === 'DARK' ? 'LIGHT' : 'DARK' }, {}),
         200,
       ),
     [mutate, theme],

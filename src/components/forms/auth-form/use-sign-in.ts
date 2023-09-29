@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 
 import { apiClient } from '@/src/utils/api-client';
 
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
 import { SignInFormValues } from '@/src/schemas/auth.schema';
 
 export const useSignIn = () => {
@@ -25,6 +26,7 @@ export const useSignIn = () => {
 
       setTimeout(async () => {
         await queryClient.invalidateQueries({ queryKey: ['session'] });
+        await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
       }, 1000);
     },
   });
