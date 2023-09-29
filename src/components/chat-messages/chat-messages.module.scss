@@ -7,8 +7,7 @@
     justify-content: flex-start;
     list-style: none;
     gap: 1.25rem;
-    max-height: 70dvh;
-    min-height: 50dvh;
+    height: calc(100dvh - 17rem);
     overflow: auto;
     padding: 0 0.5rem;
 

@@ -7,9 +7,9 @@ import { useRouter } from 'next/navigation';
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
 import { ChatMessages } from '@/src/components/chat-messages/chat-messages';
-import { Input } from '@/src/components/input/input';
 import { Loader } from '@/src/components/loader/loader';
 import { useChatRoom } from '@/src/components/pages/chat-room/use-chat-room';
+import { TextArea } from '@/src/components/textarea/text-area';
 
 import styles from './chat-room.module.scss';
 
@@ -20,12 +20,10 @@ export const ChatRoom = () => {
     isLoading,
     isUserLoading,
     data,
-    friendId,
     friendData,
     hasNextPage,
-    inputVal,
     onSubmit,
-    onChange,
+    form,
     ref,
   } = useChatRoom();
 
@@ -43,7 +41,7 @@ export const ChatRoom = () => {
           <span className={styles.goBack}>Go back</span>
         </Button>
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
-          <Avatar userId={friendId || ''} size="small" />
+          <Avatar userId={friendData?.id || ''} size="small" />
           <p className={styles.headerHeading}>
             {friendData?.name && <span>{friendData?.name}</span>}
             &nbsp;
@@ -51,6 +49,7 @@ export const ChatRoom = () => {
           </p>
         </Link>
       </header>
+
       <ChatMessages
         hasNextPage={hasNextPage}
         isLoading={isLoading}
@@ -59,18 +58,16 @@ export const ChatRoom = () => {
       />
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <Input
-          type="text"
-          labelText="Message"
+        <TextArea
+          label="Message"
           placeholder="Aa"
-          variant="primary"
-          value={inputVal}
-          onChange={onChange}
+          rows={2}
+          {...form.register('message')}
         />
         <Button
           type="submit"
           variant="primary"
-          disabled={inputVal.trim() === ''}
+          disabled={!form.formState.isDirty}
         >
           Send
           <PaperPlaneTilt />

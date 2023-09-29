@@ -32,6 +32,8 @@ export const Home = () => {
     return <FetchErrorMessage message="Cannot fetch data." />;
   }
 
+  const noPosts = data?.pages[0] && data?.pages[0].postsCount < 1;
+
   return (
     <motion.ul
       className={styles.posts}
@@ -41,7 +43,7 @@ export const Home = () => {
     >
       <NewPostNotification />
 
-      {data?.pages[0] && data?.pages[0].postsCount < 1 ? (
+      {noPosts ? (
         <li className={styles.noPosts}>
           <p>No posts yet.</p>
           {isSignedIn && (
