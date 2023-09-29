@@ -2,7 +2,7 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { prefetchSession } from '@/src/utils/api/prefetch-session';
 import { getQueryClient } from '@/src/utils/get-query-client';
-import Hydrate from '@/src/utils/hydrate';
+import { Hydrate } from '@/src/utils/hydrate';
 
 import { Home } from '@/src/components/pages/home/home';
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';

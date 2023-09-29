@@ -5,8 +5,6 @@ import {
   HydrationBoundaryProps,
 } from '@tanstack/react-query';
 
-function Hydrate(props: HydrationBoundaryProps) {
+export const Hydrate = (props: HydrationBoundaryProps) => {
   return <HydrationBoundary {...props} />;
-}
-
-export default Hydrate;
+};

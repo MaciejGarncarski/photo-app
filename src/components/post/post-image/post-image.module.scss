@@ -13,7 +13,6 @@
 }
 
 .sliderImage {
-  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +21,8 @@
   pointer-events: none;
   user-select: none;
   border-radius: var(--radius-medium);
+  height: auto;
+  width: 100%;
 
   @include common.mediaquery('tablet') {
     object-fit: contain;

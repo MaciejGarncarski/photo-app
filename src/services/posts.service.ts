@@ -4,6 +4,7 @@ import {
   postDetailsSchema,
   postsResponseSchema,
 } from '@/src/schemas/post.schema';
+import { userPostsSchema } from '@/src/services/userPosts.service';
 
 type GetPost = {
   postId: number;
@@ -37,4 +38,18 @@ export const deletePost = ({ postId }: DeletePost) => {
     url: `post/${postId}`,
     method: 'DELETE',
   });
+};
+
+export type FetchPost = {
+  pageParam: number;
+  userId: string;
+};
+
+export const getUserPosts = async ({ pageParam, userId }: FetchPost) => {
+  const data = await apiClient({
+    url: `users/posts/${userId}?skip=${pageParam}`,
+    method: 'GET',
+    schema: userPostsSchema,
+  });
+  return data;
 };

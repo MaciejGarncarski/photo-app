@@ -2,7 +2,7 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { apiClient } from '@/src/utils/api-client';
 import { getQueryClient } from '@/src/utils/get-query-client';
-import Hydrate from '@/src/utils/hydrate';
+import { Hydrate } from '@/src/utils/hydrate';
 
 import { Chat } from '@/src/components/pages/chat/chat';
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';

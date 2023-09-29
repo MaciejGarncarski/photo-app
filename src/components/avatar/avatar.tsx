@@ -52,22 +52,13 @@ export const Avatar = ({ userId, size }: Props) => {
       {hasNoImage && (
         <div className={styles.noImage}>
           <User size={avatarSizes[size]} />
-          <span className="visually-hidden">{username}</span>
+          <span className="visually-hidden">@{username}</span>
         </div>
       )}
-      {hasDefaultImage && (
+      {(hasDefaultImage || hasCustomImage) && (
         <MotionImage
-          src={image}
-          alt={username ?? ''}
-          width={avatarSize}
-          height={avatarSize}
-        />
-      )}
-      {hasCustomImage && (
-        <MotionImage
-          src={customImage}
-          alt={username ?? ''}
-          data-testid="customImage"
+          src={customImage ?? image ?? ''}
+          alt={`@${username} avatar`}
           width={avatarSize}
           height={avatarSize}
         />

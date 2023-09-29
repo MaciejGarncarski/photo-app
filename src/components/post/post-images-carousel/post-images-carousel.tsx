@@ -77,13 +77,7 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
                   className={styles.image}
                   key={image.fileId}
                 >
-                  <PostImage
-                    height={600}
-                    width={600}
-                    priority={priority}
-                    src={image.url}
-                    post={post}
-                  />
+                  <PostImage priority={priority} src={image.url} post={post} />
                 </motion.div>
               );
             })}

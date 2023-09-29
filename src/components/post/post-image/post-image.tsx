@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useUser } from '@/src/hooks/use-user';
 import { getDescriptionData } from '@/src/utils/get-description-data';
 
@@ -12,14 +13,13 @@ import { Post } from '@/src/schemas/post.schema';
 import styles from './post-image.module.scss';
 
 type Props = {
-  width: number;
-  height: number;
   priority: boolean;
   src: string;
   post: Post;
 };
 
-export const PostImage = ({ height, priority, src, width, post }: Props) => {
+export const PostImage = ({ priority, src, post }: Props) => {
+  const { isMobile } = useIsMobile();
   const { data } = useUser({ userId: post.authorId });
   const { data: postData } = usePost({ postId: post.id });
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +29,8 @@ export const PostImage = ({ height, priority, src, width, post }: Props) => {
   }
 
   const { shortDescription } = getDescriptionData(postData.description);
+
+  const size = isMobile ? 320 : 600;
 
   return (
     <>
@@ -41,9 +43,9 @@ export const PostImage = ({ height, priority, src, width, post }: Props) => {
         className={clsx({ [styles.imgLoading]: isLoading }, styles.sliderImage)}
         src={src}
         priority={priority}
-        width={width}
-        height={height}
         onLoad={() => setIsLoading(false)}
+        width={size}
+        height={size}
         alt={`${data?.username} - ${shortDescription}`}
       />
     </>

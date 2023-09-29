@@ -1,6 +1,6 @@
 import { Account } from '@/src/components/pages/account/account';
 
-const UserAccount = async () => {
+const UserAccount = () => {
   return <Account />;
 };
 

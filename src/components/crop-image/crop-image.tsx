@@ -9,7 +9,6 @@ import { useModal } from '@/src/hooks/use-modal';
 import { AspectRatioButtons } from '@/src/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons';
 import { Button } from '@/src/components/buttons/button/button';
 import { useCropImage } from '@/src/components/crop-image/use-crop-image';
-import { useSaveCrop } from '@/src/components/crop-image/use-save-crop';
 import { DropZone } from '@/src/components/drop-zone/drop-zone';
 import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
@@ -25,6 +24,11 @@ type Props = {
 
 export const CropImage = ({ setFinalImages, finalImages }: Props) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const { openModal, isModalOpen, closeModal } = useModal();
+  const { isMobile } = useIsMobile();
+
+  const resetImgSrc = () => setImgSrc(null);
+
   const {
     aspect,
     setAspect,
@@ -32,26 +36,15 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
     zoom,
     crop,
     setCrop,
-    cropAreaPixels,
     onCropComplete,
-  } = useCropImage();
-  const { openModal, isModalOpen, closeModal } = useModal();
-  const { isMobile } = useIsMobile();
-
-  const resetImgSrc = () => setImgSrc(null);
+    isCropping,
+    saveCrop,
+  } = useCropImage({ finalImages, imgSrc, resetImgSrc, setFinalImages });
 
   const handleSelectOtherImage = () => {
     resetImgSrc();
     closeModal();
   };
-
-  const { isCropping, saveCrop } = useSaveCrop({
-    cropAreaPixels,
-    finalImages,
-    imgSrc,
-    resetImgSrc,
-    setFinalImages,
-  });
 
   if (isCropping) {
     return <Loader size="big" color="accent" />;

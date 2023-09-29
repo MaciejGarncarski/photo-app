@@ -1,7 +1,22 @@
 import { useCallback, useState } from 'react';
 import { Area } from 'react-easy-crop';
 
-export const useCropImage = () => {
+import { useSaveCrop } from '@/src/components/crop-image/use-save-crop';
+import { FinalImages } from '@/src/components/pages/create-post/types';
+
+type Props = {
+  resetImgSrc: () => void;
+  imgSrc: string | null;
+  finalImages: FinalImages;
+  setFinalImages: (final: FinalImages) => void;
+};
+
+export const useCropImage = ({
+  finalImages,
+  imgSrc,
+  resetImgSrc,
+  setFinalImages,
+}: Props) => {
   const [aspect, setAspect] = useState(1);
   const [zoom, setZoom] = useState(1);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -12,12 +27,17 @@ export const useCropImage = () => {
     width: 0,
   });
 
-  const onCropComplete = useCallback(
-    (croppedArea: Area, croppedAreaPixels: Area) => {
-      setCropAreaPixels(croppedAreaPixels);
-    },
-    [],
-  );
+  const onCropComplete = useCallback((_: Area, croppedAreaPixels: Area) => {
+    setCropAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const { isCropping, saveCrop } = useSaveCrop({
+    cropAreaPixels,
+    finalImages,
+    imgSrc,
+    resetImgSrc,
+    setFinalImages,
+  });
 
   return {
     aspect,
@@ -26,7 +46,8 @@ export const useCropImage = () => {
     setZoom,
     crop,
     setCrop,
-    cropAreaPixels,
     onCropComplete,
+    isCropping,
+    saveCrop,
   };
 };

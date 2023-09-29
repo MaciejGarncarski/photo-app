@@ -1,22 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { apiClient } from '@/src/utils/api-client';
-
-import { userPostsSchema } from '@/src/services/userPosts.service';
-
-type FetchPost = {
-  pageParam: number;
-  userId: string;
-};
-
-const fetchPosts = async ({ pageParam, userId }: FetchPost) => {
-  const data = await apiClient({
-    url: `users/posts/${userId}?skip=${pageParam}`,
-    method: 'GET',
-    schema: userPostsSchema,
-  });
-  return data;
-};
+import { getUserPosts } from '@/src/services/posts.service';
 
 type UseAccountPost = {
   userId: string;
@@ -24,7 +8,7 @@ type UseAccountPost = {
 export const useAccountPosts = ({ userId }: UseAccountPost) => {
   return useInfiniteQuery({
     queryKey: ['account posts', userId],
-    queryFn: ({ pageParam }) => fetchPosts({ userId, pageParam }),
+    queryFn: ({ pageParam }) => getUserPosts({ userId, pageParam }),
     initialPageParam: 0,
     refetchOnWindowFocus: false,
     enabled: userId !== '',
