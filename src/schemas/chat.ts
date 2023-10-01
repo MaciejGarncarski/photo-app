@@ -15,7 +15,6 @@ export type ChatMessage = z.infer<typeof chatMessageSchema>;
 export const chatMessagesResponseSchema = z.object({
   messages: z.array(chatMessageSchema),
   totalPages: z.number(),
-  roundedMaxPages: z.number(),
   currentPage: z.number(),
   messagesCount: z.number(),
 });

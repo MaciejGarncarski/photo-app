@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { ChatMessagesResponse } from '@/src/schemas/chat';
+import { nextPageParam } from '@/src/utils/api/next-page-param';
+
 import { getChatMessages } from '@/src/services/chat.service';
 
 type Props = {
@@ -13,11 +14,7 @@ export const useInfiniteMessages = ({ friendId }: Props) => {
     queryFn: ({ pageParam }) => getChatMessages({ pageParam, friendId }),
     initialPageParam: 0,
     refetchOnWindowFocus: false,
-    getNextPageParam: (prevMessages: ChatMessagesResponse) => {
-      return prevMessages?.currentPage === prevMessages.totalPages
-        ? undefined
-        : prevMessages.currentPage + 1;
-    },
     enabled: Boolean(friendId),
+    getNextPageParam: nextPageParam,
   });
 };

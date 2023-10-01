@@ -24,9 +24,12 @@
   margin-bottom: 1rem;
 
   @include common.mediaquery('desktop') {
-    margin-bottom: 0;
-    padding: 1rem 3rem;
-    gap: 3rem;
+    justify-content: flex-start;
+    padding: 0.75rem 1.5rem;
+    gap: 5rem;
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--shadow-pimary);
     height: auto;
   }
 }
@@ -55,10 +58,6 @@
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
-
-  @include common.mediaquery('desktop') {
-    gap: 1rem;
-  }
 }
 
 .form {
@@ -69,11 +68,13 @@
   width: 100%;
   gap: 1rem;
   padding: 0 1rem;
-  margin-top: 1rem;
   max-height: 15rem;
 
   @include common.mediaquery('desktop') {
-    margin-top: 2rem;
     gap: 2rem;
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--shadow-pimary);
+    padding: 0.25rem;
   }
 }

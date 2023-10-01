@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { FollowersResponse } from '@/src/schemas/follower-stats';
+import { nextPageParam } from '@/src/utils/api/next-page-param';
+
 import { getFollowers } from '@/src/services/user.service';
 
 type UseFollowers = {
@@ -14,10 +15,6 @@ export const useFollowers = ({ userId, type }: UseFollowers) => {
     queryFn: ({ pageParam }) => getFollowers({ pageParam, type, userId }),
     initialPageParam: 0,
     refetchOnWindowFocus: false,
-    getNextPageParam: (prev: FollowersResponse) => {
-      return prev.currentPage === prev.totalPages
-        ? undefined
-        : prev.currentPage + 1;
-    },
+    getNextPageParam: nextPageParam,
   });
 };

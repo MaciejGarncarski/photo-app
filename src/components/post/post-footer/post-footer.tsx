@@ -48,7 +48,7 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
               type="button"
               onClick={toggleShowMore}
             >
-              show {showMore ? 'less' : 'more'}
+              {showMore ? 'less' : 'more'}
             </button>
           </>
         ) : (

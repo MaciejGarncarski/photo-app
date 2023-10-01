@@ -7,11 +7,12 @@
     justify-content: flex-start;
     list-style: none;
     gap: 1.25rem;
-    height: calc(100dvh - 17rem);
+    height: calc(100dvh - 15rem);
     overflow: auto;
     padding: 0 0.5rem;
 
     @include common.mediaquery('desktop') {
+        height: calc(100dvh - 20rem);
         padding: 0 2rem;
         gap: 2rem;
     }
@@ -20,7 +21,9 @@
 
 .time {
     text-align: center;
+    color: var(--color-text-gray);
     width: 100%;
+    display: block;
 }
 
 .noMessages {

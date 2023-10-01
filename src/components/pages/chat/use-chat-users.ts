@@ -4,9 +4,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { nextPageParam } from '@/src/utils/api/next-page-param';
 import { apiClient } from '@/src/utils/api-client';
 
-import { ChatUsersResponse, chatUsersResponseSchema } from '@/src/schemas/chat';
+import { chatUsersResponseSchema } from '@/src/schemas/chat';
 
 export const useChatUsers = () => {
   const [inputValue, setInputValue] = useState('');
@@ -41,11 +42,7 @@ export const useChatUsers = () => {
     enabled: isEnabled,
     staleTime: 20000,
     refetchOnWindowFocus: false,
-    getNextPageParam: (prevMessages: ChatUsersResponse) => {
-      return prevMessages?.currentPage === prevMessages.totalPages
-        ? undefined
-        : prevMessages.currentPage + 1;
-    },
+    getNextPageParam: nextPageParam,
   });
 
   return {

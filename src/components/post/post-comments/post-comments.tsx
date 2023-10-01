@@ -1,7 +1,8 @@
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { Comment } from '@/src/components/comment/comment';
-import { useInfiniteComments } from '@/src/components/post/post-comments/use-post-comments';
+import { Loader } from '@/src/components/loader/loader';
+import { useInfiniteComments } from '@/src/components/post/post-comments/use-infinite-comments';
 
 import styles from './post-comments.module.scss';
 
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export const PostComments = ({ postId }: Props) => {
-  const { data, hasNextPage, fetchNextPage } = useInfiniteComments({
+  const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteComments({
     postId: postId,
   });
 
@@ -26,8 +27,12 @@ export const PostComments = ({ postId }: Props) => {
 
   const commentsCount = data.pages[0].commentsCount;
 
+  if (commentsCount === 0) {
+    return null;
+  }
+
   return (
-    <div className={styles.commentsList} ref={ref}>
+    <div className={styles.commentsList}>
       {commentsCount > 0 && (
         <>
           {data.pages.map((page) => {
@@ -36,6 +41,11 @@ export const PostComments = ({ postId }: Props) => {
             });
           })}
         </>
+      )}
+      {hasNextPage && !isLoading && (
+        <span ref={ref}>
+          <Loader color="accent" size="small" />
+        </span>
       )}
       {commentsCount === 0 && <p>No comments.</p>}
     </div>

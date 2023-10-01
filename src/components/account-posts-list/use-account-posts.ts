@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { nextPageParam } from '@/src/utils/api/next-page-param';
+
 import { getUserPosts } from '@/src/services/posts.service';
 
 type UseAccountPost = {
@@ -12,10 +14,7 @@ export const useAccountPosts = ({ userId }: UseAccountPost) => {
     initialPageParam: 0,
     refetchOnWindowFocus: false,
     enabled: userId !== '',
-    getNextPageParam: (prevPosts) => {
-      return prevPosts.currentPage === prevPosts.totalPages
-        ? undefined
-        : prevPosts.currentPage + 1;
-    },
+    staleTime: 20000,
+    getNextPageParam: nextPageParam,
   });
 };

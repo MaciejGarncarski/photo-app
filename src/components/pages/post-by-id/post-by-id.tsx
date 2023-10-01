@@ -49,6 +49,7 @@ export const PostById = () => {
         isVisible={postModal.isModalOpen}
         postId={postId}
         closeModal={postModalClose}
+        isPostPage
       />
     </>
   );

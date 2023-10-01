@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { nextPageParam } from '@/src/utils/api/next-page-param';
 import { apiClient } from '@/src/utils/api-client';
 
 import { CommentResponse } from '@/src/schemas/post-comment';
@@ -19,10 +20,6 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
     },
     initialPageParam: 0,
     refetchOnWindowFocus: false,
-    getNextPageParam: (prevComments: CommentResponse) => {
-      return prevComments.currentPage === prevComments.totalPages
-        ? undefined
-        : prevComments.currentPage + 1;
-    },
+    getNextPageParam: nextPageParam,
   });
 };

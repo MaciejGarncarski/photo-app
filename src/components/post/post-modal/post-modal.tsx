@@ -22,9 +22,15 @@ type Props = {
   postId: number;
   closeModal: () => void;
   isVisible: boolean;
+  isPostPage?: boolean;
 };
 
-export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
+export const PostModal = ({
+  postId,
+  closeModal,
+  isVisible,
+  isPostPage,
+}: Props) => {
   const { data: post, isLoading } = usePost({ postId });
   const { data: author } = useUser({ userId: post?.authorId || '' });
   const router = useRouter();
@@ -37,7 +43,9 @@ export const PostModal = ({ postId, closeModal, isVisible }: Props) => {
 
   const handleClose = () => {
     closeModal();
-    router.push(`/${author?.username}`);
+    if (isPostPage) {
+      router.push(`/${author?.username}`);
+    }
   };
 
   return (

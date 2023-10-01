@@ -12,7 +12,8 @@
 
 .description {
   display: inline;
-  color: var(--text-gray);
+  color: var(--color-text-gray);
+  font-weight: 500;
   word-wrap: break-word;
 }
 
@@ -29,7 +30,7 @@
 .showMore {
   background-color: transparent;
   border: none;
-  text-decoration: underline;
+  color: var(--color-text-gray);
 }
 
 .time {
