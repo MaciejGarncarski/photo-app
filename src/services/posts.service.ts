@@ -47,7 +47,7 @@ export type FetchPost = {
 
 export const getUserPosts = async ({ pageParam, userId }: FetchPost) => {
   const data = await apiClient({
-    url: `users/posts/${userId}?skip=${pageParam}`,
+    url: `post/user/${userId}?skip=${pageParam}`,
     method: 'GET',
     schema: userPostsSchema,
   });

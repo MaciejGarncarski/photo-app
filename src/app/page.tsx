@@ -6,30 +6,17 @@ import { Hydrate } from '@/src/utils/hydrate';
 
 import { Home } from '@/src/components/pages/home/home';
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
-import { getInfinitePosts, getPost } from '@/src/services/posts.service';
+import { getInfinitePosts } from '@/src/services/posts.service';
 
 const HomePage = async () => {
   const queryClient = getQueryClient();
   await prefetchSession();
 
-  const posts = await queryClient.fetchInfiniteQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: HOME_POSTS_QUERY_KEY,
     queryFn: getInfinitePosts,
     initialPageParam: 0,
   });
-
-  await Promise.all(
-    posts.pages.map(async ({ posts }) => {
-      await Promise.all(
-        posts.map(async (post) => {
-          await queryClient.prefetchQuery({
-            queryKey: ['post', post.id],
-            queryFn: () => getPost({ postId: post.id }),
-          });
-        }),
-      );
-    }),
-  );
 
   return (
     <Hydrate state={dehydrate(queryClient)}>

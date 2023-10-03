@@ -15,7 +15,7 @@ export const usePostLike = () => {
   return useMutation({
     mutationFn: ({ isLiked, postId }: Mutation) => {
       return apiClient({
-        url: `post/like/${postId}`,
+        url: `post/${postId}/like`,
         method: isLiked ? 'DELETE' : 'POST',
       });
     },

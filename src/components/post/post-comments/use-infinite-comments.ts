@@ -15,7 +15,7 @@ export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
     queryFn: ({ pageParam = 0 }): Promise<CommentResponse> => {
       return apiClient({
         method: 'GET',
-        url: `post-comment/${postId}?skip=${pageParam}`,
+        url: `post/${postId}/comments?skip=${pageParam}`,
       });
     },
     initialPageParam: 0,

@@ -41,7 +41,7 @@ export const useUpdatePreferences = () => {
           theme,
           notificationSound,
         },
-        url: 'users/preferences',
+        url: 'user/preferences',
       }),
     onMutate: async (newPreferences) => {
       await queryClient.cancelQueries({ queryKey: ['session'] });

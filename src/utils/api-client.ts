@@ -40,7 +40,7 @@ export const apiClient = async <S extends z.ZodTypeAny>({
   };
 
   const apiResponse = await fetch(
-    `${clientEnv.NEXT_PUBLIC_API_ROOT}/api/${url}`,
+    `${clientEnv.NEXT_PUBLIC_API_ROOT}/${url}`,
     isBodyFormData ? formDataOptions : options,
   );
 

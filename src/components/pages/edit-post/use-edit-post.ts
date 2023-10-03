@@ -14,7 +14,7 @@ export const useEditPost = ({ postId }: { postId: number }) => {
     mutationFn: async ({ description }: Mutation) => {
       return apiClient({
         method: 'POST',
-        url: 'post/edit-post',
+        url: 'post/edit',
         body: {
           postId,
           description,

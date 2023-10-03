@@ -20,9 +20,9 @@
 
   --gradient: linear-gradient(90deg,
       var(--color-gray) 0px,
-      #ededed 20%,
+      var(--color-secondary) 20%,
       var(--color-gray) 40%);
-  --placeholder-animation: skeleton-loading 1.5s infinite linear;
+  --placeholder-animation: skeleton-loading 3s infinite linear;
   --placeholder-bg-size: 500%;
 
   --shadow-0-1: rgb(0, 0, 0, 0.08);

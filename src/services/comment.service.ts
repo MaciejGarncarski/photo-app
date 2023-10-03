@@ -6,8 +6,8 @@ type LikeComment = { commentId: number; isLiked: boolean };
 
 export const likeComment = ({ commentId, isLiked }: LikeComment) => {
   return apiClient({
-    url: `post-comment/${commentId}/like`,
-    method: isLiked ? 'DELETE' : 'PUT',
+    url: `post/comment/${commentId}/like`,
+    method: isLiked ? 'DELETE' : 'POST',
   });
 };
 
@@ -17,14 +17,14 @@ type DeleteComment = {
 
 export const deleteComment = ({ commentId }: DeleteComment) => {
   return apiClient({
-    url: `post-comment/${commentId}`,
+    url: `post/comment/${commentId}`,
     method: 'DELETE',
   });
 };
 
 export const addComment = ({ commentText, postId }: AddPostCommentInput) => {
   return apiClient({
-    url: 'post-comment',
+    url: 'post/comment',
     method: 'POST',
     body: {
       commentText,

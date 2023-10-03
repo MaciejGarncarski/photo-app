@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { apiClient } from '@/src/utils/api-client';
-import { socket } from '@/src/utils/socket';
 
 import { CreatePostInput } from '@/src/schemas/post.schema';
 
@@ -24,7 +23,7 @@ const uplaodPost = ({ description, images }: CreatePostInput) => {
   return apiClient({
     method: 'POST',
     body: formData,
-    url: 'post/create-post',
+    url: 'post',
   });
 };
 
@@ -38,9 +37,6 @@ export const useSendNewPost = () => {
       }
 
       return uplaodPost({ description, images });
-    },
-    onSuccess: () => {
-      socket.emit('new post');
     },
   });
 };

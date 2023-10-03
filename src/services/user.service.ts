@@ -13,7 +13,7 @@ type GetUser = {
 
 export const getUser = async ({ userId }: GetUser) => {
   const data = await apiClient({
-    url: `users/${userId}`,
+    url: `user/${userId}`,
     method: 'GET',
     schema: userApiResponseSchema,
   });
@@ -26,7 +26,7 @@ type GetUserByUsername = {
 
 export const getUserByUsername = async ({ username }: GetUserByUsername) => {
   const data = await apiClient({
-    url: `users/username/${username}`,
+    url: `user/username/${username}`,
     method: 'GET',
     schema: userApiResponseSchema,
   });
@@ -36,7 +36,7 @@ export const getUserByUsername = async ({ username }: GetUserByUsername) => {
 
 export const editAccount = (data: EditAccountInput) => {
   return apiClient({
-    url: 'session-user/edit-account',
+    url: 'user/edit',
     method: 'POST',
     body: data,
   });
@@ -51,7 +51,7 @@ export const uploadAvatar = ({ avatarFile }: UploadAvatar) => {
   formData.append('image', avatarFile);
 
   return apiClient({
-    url: `session-user/update-avatar`,
+    url: `user/avatar`,
     method: 'POST',
     body: formData,
   });
@@ -59,7 +59,7 @@ export const uploadAvatar = ({ avatarFile }: UploadAvatar) => {
 
 export const deleteAvatar = () => {
   return apiClient({
-    url: 'session-user/delete-avatar',
+    url: 'user/avatar',
     method: 'DELETE',
   });
 };
@@ -93,7 +93,7 @@ type FollowOtherUser = {
 };
 
 export const followOtherUser = ({ userId, isFollowing }: FollowOtherUser) => {
-  const apiUrl = `users/follow/${userId}`;
+  const apiUrl = `user/${userId}/follow`;
 
   return apiClient({
     url: apiUrl,

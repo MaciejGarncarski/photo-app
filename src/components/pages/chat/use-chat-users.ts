@@ -5,9 +5,8 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { nextPageParam } from '@/src/utils/api/next-page-param';
-import { apiClient } from '@/src/utils/api-client';
 
-import { chatUsersResponseSchema } from '@/src/schemas/chat';
+import { getChatUsers } from '@/src/services/chat.service';
 
 export const useChatUsers = () => {
   const [inputValue, setInputValue] = useState('');
@@ -32,12 +31,8 @@ export const useChatUsers = () => {
 
   const chatUsers = useInfiniteQuery({
     queryKey: ['chat users', sessionUser?.id, searchedUser],
-    queryFn: async ({ pageParam = 0 }) => {
-      return await apiClient({
-        url: `chat/chatUsers?skip=${pageParam}&searchedUser=${searchedUser}`,
-        schema: chatUsersResponseSchema,
-      });
-    },
+    queryFn: async ({ pageParam = 0 }) =>
+      getChatUsers({ pageParam, searchedUser }),
     initialPageParam: 0,
     enabled: isEnabled,
     staleTime: 20000,
