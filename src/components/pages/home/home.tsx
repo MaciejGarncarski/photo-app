@@ -10,9 +10,9 @@ import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { HomePost } from '@/src/components/home-post/home-post';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
+import { Loader } from '@/src/components/loader/loader';
 import { NewPostNotification } from '@/src/components/new-post-notification/new-post-notification';
 import { useInfinitePosts } from '@/src/components/pages/home/use-posts';
-import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
 
 import styles from './home.module.scss';
 
@@ -60,10 +60,10 @@ export const Home = () => {
           return <HomePost priority={idx < 3} key={id} postId={id} />;
         });
       })}
+
       {!isLoading && hasNextPage && (
         <li ref={ref}>
-          <PostPlaceholder />
-          <PostPlaceholder />
+          <Loader size="big" color="primary" />
         </li>
       )}
     </motion.ul>

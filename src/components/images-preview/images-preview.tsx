@@ -4,10 +4,7 @@ import Image from 'next/image';
 
 import { PreviewImages } from '@/src/utils/get-preview-images';
 
-import {
-  containerVariants,
-  itemVariants,
-} from '@/src/components/images-preview/images-preview.animation';
+import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './images-preview.module.scss';
@@ -43,11 +40,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
           }
 
           return (
-            <motion.div
-              key={image.id}
-              className={styles.previewButton}
-              variants={itemVariants}
-            >
+            <motion.div key={image.id} className={styles.previewButton}>
               <motion.button
                 whileFocus={{ scale: 1.1 }}
                 whileHover={{ scale: 1.1 }}
@@ -72,8 +65,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
 
         {arrayOfEmptyImages.map((id) => {
           return (
-            <motion.button
-              variants={itemVariants}
+            <button
               key={id}
               disabled
               type="button"
@@ -81,7 +73,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
             >
               <CameraPlus />
               <p>empty</p>
-            </motion.button>
+            </button>
           );
         })}
       </motion.div>

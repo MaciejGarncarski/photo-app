@@ -19,24 +19,40 @@ type Props = {
 
 export const ChatMessages = forwardRef<HTMLLIElement, Props>(
   ({ hasNextPage, isLoading, messagesData }, ref) => {
+    if (messagesData.pages[0].messagesCount === 0) {
+      return (
+        <div className={styles.messages}>
+          <p className={styles.noMessages}>No messages yet.</p>
+        </div>
+      );
+    }
+
     return (
       <ul className={styles.messages}>
-        {messagesData.pages[0].messagesCount === 0 && (
-          <li className={styles.noMessages}>
-            <p>No messages yet.</p>
-          </li>
-        )}
-
         {messagesData.pages.map((page) => {
+          const firstMessage = messagesData.pages[0].messages[0];
+
+          const timeFromFirstMessage = checkTimeBetweenMessages(
+            firstMessage.createdAt,
+            new Date(),
+          );
+          const formattedDate = formatDateChat(firstMessage.createdAt);
           const groupedMessages = groupMessagesByUser(page.messages);
 
           return groupedMessages.map((messageGroup, index, messagesArray) => {
             if (index === 0) {
               return (
-                <ChatMessage
-                  messageGroup={messageGroup}
-                  key={messageGroup[0].id}
-                />
+                <Fragment key={messageGroup[0].id}>
+                  <ChatMessage messageGroup={messageGroup} />
+
+                  {timeFromFirstMessage && (
+                    <p className={styles.time}>
+                      <time dateTime={firstMessage.createdAt.toDateString()}>
+                        {formattedDate}
+                      </time>
+                    </p>
+                  )}
+                </Fragment>
               );
             }
 
