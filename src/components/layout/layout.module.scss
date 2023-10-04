@@ -1,7 +1,7 @@
 @use '/src/styles/common';
 
 .layout {
-  padding-bottom: 5rem;
+  padding-bottom: 6rem;
 
   @include common.mediaquery('desktop') {
     min-height: 100dvh;

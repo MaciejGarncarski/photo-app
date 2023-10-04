@@ -10,8 +10,8 @@ import { getInfinitePosts } from '@/src/services/posts.service';
 
 const HomePage = async () => {
   const queryClient = getQueryClient();
-  await prefetchSession();
 
+  await prefetchSession();
   await queryClient.prefetchInfiniteQuery({
     queryKey: HOME_POSTS_QUERY_KEY,
     queryFn: getInfinitePosts,
