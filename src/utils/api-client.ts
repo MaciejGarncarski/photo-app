@@ -54,17 +54,26 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     throw new Error(`Cannot fetch data, status: , ${apiResponse.status}`);
   }
 
-  const jsonData = await apiResponse.json();
+  const contentType = apiResponse.headers.get('content-type');
+  const isTextPlain = contentType === 'text/plain; charset=utf-8';
+
+  if (!contentType) {
+    return null;
+  }
+
+  const responseData = isTextPlain
+    ? await apiResponse.text()
+    : await apiResponse.json();
 
   if (apiResponse.status !== 200) {
-    return jsonData;
+    return responseData;
   }
 
   if (!schema) {
-    return jsonData;
+    return responseData;
   }
 
-  const parsedResponse = schema.safeParse(jsonData);
+  const parsedResponse = schema.safeParse(responseData);
 
   if (!parsedResponse.success) {
     throw new Error(`Parsing error: ${parsedResponse.error.message}`);

@@ -39,7 +39,7 @@ export const PostById = () => {
   }
 
   if (!isSuccess || !authorData?.username) {
-    return <Loader marginTop color="accent" size="small" />;
+    return <Loader marginTop color="accent" size="big" />;
   }
 
   return (

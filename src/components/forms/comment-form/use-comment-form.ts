@@ -36,7 +36,14 @@ export const useCommentForm = ({ postId }: Arguments) => {
       return toast.error('Cannot add comment');
     }
 
-    mutate({ commentText: result.data, postId }, { onSuccess: () => reset() });
+    mutate(
+      { commentText: result.data, postId },
+      {
+        onSuccess: () => {
+          reset();
+        },
+      },
+    );
   };
 
   return { onSubmit, isPending, register, handleSubmit, isDirty, errors };

@@ -42,7 +42,6 @@ export const Home = () => {
       initial="hidden"
     >
       <NewPostNotification />
-
       {noPosts ? (
         <li className={styles.noPosts}>
           <p>No posts yet.</p>

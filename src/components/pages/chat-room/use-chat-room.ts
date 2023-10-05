@@ -58,6 +58,9 @@ export const useChatRoom = () => {
         url: 'chat/message',
       });
     },
+    onSuccess: () => {
+      form.setValue('message', '');
+    },
   });
 
   const form = useForm({

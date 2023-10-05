@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 
 import { useUser } from '@/src/hooks/use-user';
 
@@ -15,13 +14,11 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
 
   return useMutation({
     mutationFn: followOtherUser,
-    onError: () => toast.error('Error, try again later.'),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['user', userId] });
       await queryClient.invalidateQueries({
         queryKey: ['user', data?.username],
       });
-      await queryClient.invalidateQueries({ queryKey: ['other-users'] });
       await queryClient.invalidateQueries({ queryKey: ['session'] });
     },
   });
