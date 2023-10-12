@@ -33,7 +33,7 @@ export const CreatePost = () => {
   const { openModal, closeModal, isModalOpen } = useModal();
   const { finalImages, previewImages, setFinalImages, onRemove } =
     useFinalImages();
-  const { onSubmit, isUploadingPost } = useOnSubmit({ finalImages });
+  const { onSubmit, isUploadingPost, isError } = useOnSubmit({ finalImages });
 
   const {
     register,
@@ -47,6 +47,10 @@ export const CreatePost = () => {
   });
 
   const isSubmitDisabled = !dirtyFields.description || finalImages.length === 0;
+
+  if (isError) {
+    return <p>Cannot upload post.</p>;
+  }
 
   if (isUploadingPost) {
     return <Loader marginTop color="accent" size="big" />;

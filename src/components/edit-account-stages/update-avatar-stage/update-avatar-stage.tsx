@@ -47,7 +47,11 @@ export const UpdateAvatarStage = ({
       className={styles.stageContainer}
     >
       {!isNewAvatarReady && (
-        <CropImage finalImages={finalImages} setFinalImages={setFinalImages} />
+        <CropImage
+          finalImages={finalImages}
+          setFinalImages={setFinalImages}
+          isAvatarCrop
+        />
       )}
       {isNewAvatarReady && (
         <figure className={styles.preview}>

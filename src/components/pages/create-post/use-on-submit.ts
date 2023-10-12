@@ -1,4 +1,3 @@
-import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -37,17 +36,16 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
           }
 
           router.push('/');
-          revalidatePath('/');
         },
         onError: () => {
           if (toastRef.current) {
             toast.dismiss(toastRef.current);
             toastRef.current = null;
-            toast.error('Could not add post.');
           }
+          toast.error('Could not add post.');
         },
       },
     );
   };
-  return { onSubmit, isUploadingPost };
+  return { onSubmit, isUploadingPost, isError: sendNewPost.isError };
 };

@@ -19,7 +19,6 @@ const MotionLink = motion(Link);
 
 export const AccountPost = ({ postId }: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
-
   const { data: postData } = usePost({ postId });
 
   if (!postData) {
@@ -27,6 +26,10 @@ export const AccountPost = ({ postId }: Props) => {
   }
 
   const { commentsCount, images, likesCount } = postData;
+
+  if (!images[0]) {
+    return null;
+  }
 
   return (
     <MotionLink

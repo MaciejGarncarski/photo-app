@@ -20,9 +20,14 @@ import styles from './crop-image.module.scss';
 type Props = {
   setFinalImages: (final: FinalImages) => void;
   finalImages: FinalImages;
+  isAvatarCrop?: boolean;
 };
 
-export const CropImage = ({ setFinalImages, finalImages }: Props) => {
+export const CropImage = ({
+  setFinalImages,
+  finalImages,
+  isAvatarCrop,
+}: Props) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const { openModal, isModalOpen, closeModal } = useModal();
   const { isMobile } = useIsMobile();
@@ -79,7 +84,9 @@ export const CropImage = ({ setFinalImages, finalImages }: Props) => {
             {isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture
           </span>
         </p>
-        <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
+        {!isAvatarCrop && (
+          <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
+        )}
         <section className={styles.saveOrAnotherImage}>
           <Heading size="small" tag="h3">
             Save or select another image

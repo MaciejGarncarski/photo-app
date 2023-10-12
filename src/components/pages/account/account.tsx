@@ -92,7 +92,7 @@ export const Account = ({ username }: Props) => {
           Cancel
         </Button>
       </ConfirmationDialog>
-      <AccountPostsList userId={userData?.id || ''} />
+      {userData?.id && <AccountPostsList userId={userData.id} />}
     </div>
   );
 };
