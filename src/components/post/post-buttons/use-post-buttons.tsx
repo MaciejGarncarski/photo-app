@@ -10,6 +10,7 @@ import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-lik
 type ButtonData = Array<{
   alt: string;
   icon: ReactElement;
+  count?: number;
   onClick: () => void;
 }>;
 
@@ -34,11 +35,13 @@ export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
     {
       alt: 'like',
       icon: <HeartIcon isLiked={post?.isLiked || false} />,
+      count: post?.likesCount,
       onClick: handleLike,
     },
     {
       alt: 'comment',
       icon: <Chat />,
+      count: post?.commentsCount,
       onClick: parentModalOpen ? () => null : postModalOpen,
     },
   ];

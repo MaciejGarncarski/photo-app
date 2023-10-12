@@ -3,27 +3,22 @@
 .header {
   display: flex;
   margin-bottom: var(--post-margin);
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .userAnchor {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 0.8rem;
-
-  @include common.mediaquery('desktop') {
-    gap: 1rem;
-  }
 }
 
 .username {
-  max-width: 10ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 700;
+}
 
-  @include common.mediaquery('desktop') {
-    max-width: 10rem;
-  }
+.createdAt {
+  color: var(--color-text-gray);
 }
 
 .options {

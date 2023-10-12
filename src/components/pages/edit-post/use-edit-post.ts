@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { apiClient } from '@/src/utils/api-client';
+import { editPost } from '@/src/services/posts.service';
 
 type Mutation = {
   description: string;
@@ -12,14 +12,7 @@ export const useEditPost = ({ postId }: { postId: number }) => {
 
   return useMutation({
     mutationFn: async ({ description }: Mutation) => {
-      return apiClient({
-        method: 'POST',
-        url: 'post/edit',
-        body: {
-          postId,
-          description,
-        },
-      });
+      return editPost({ description, postId: postId.toString() });
     },
     onSuccess: () => router.push(`/post/${postId}`),
   });

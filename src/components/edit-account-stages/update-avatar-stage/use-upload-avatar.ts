@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { apiClient } from '@/src/utils/api/api-client';
 
 import { FinalImages } from '@/src/components/pages/create-post/types';
-import { uploadAvatar } from '@/src/services/user.service';
 
 type UseUploadAvatarArguments = {
   stagePersonalInfo: () => void;
@@ -13,7 +12,6 @@ type UseUploadAvatarArguments = {
 };
 
 export const useUploadAvatar = ({
-  stagePersonalInfo,
   finalImages,
   resetFinalImages,
 }: UseUploadAvatarArguments) => {
@@ -21,7 +19,16 @@ export const useUploadAvatar = ({
   const queryClient = useQueryClient();
 
   const uploadNewAvatar = useMutation({
-    mutationFn: uploadAvatar,
+    mutationFn: async ({ image }: { image: Blob }) => {
+      const formData = new FormData();
+      formData.append('image', image);
+
+      return apiClient({
+        url: '/user/avatar',
+        method: 'POST',
+        body: formData,
+      });
+    },
   });
 
   const isFinalImageEmpty = finalImages.filter((image) => !!image).length === 0;
@@ -30,17 +37,17 @@ export const useUploadAvatar = ({
       return;
     }
     if (!finalImages[0]?.file) {
-      return toast.error('Image not detected');
+      return;
     }
 
     uploadNewAvatar.mutate(
-      { avatarFile: finalImages[0].file },
+      { image: finalImages[0].file },
       {
         onSuccess: async () => {
+          await queryClient.invalidateQueries({ queryKey: ['session'] });
           await queryClient.invalidateQueries({
             queryKey: ['user', sessionUser?.id],
           });
-          stagePersonalInfo();
         },
         onSettled: () => {
           resetFinalImages();

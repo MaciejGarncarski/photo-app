@@ -4,7 +4,7 @@
   @include common.mediaquery('desktop') {
     background-color: var(--color-secondary);
     box-shadow: var(--shadow-pimary);
-    border-radius: var(--radius-big);
+    border-radius: calc(var(--radius-medium) + 0.5rem);
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -12,6 +12,7 @@
     margin: 3rem 0;
     margin-left: 6rem;
     padding: 2rem 1rem;
+    padding-bottom: 1rem;
     width: var(--header-width);
     position: sticky;
     top: 3rem;
@@ -64,7 +65,7 @@
 }
 
 .name {
-  max-width: 8rem;
+  max-width: 12ch;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,7 +79,7 @@
 }
 
 .username {
-  max-width: 8rem;
+  max-width: 8ch;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

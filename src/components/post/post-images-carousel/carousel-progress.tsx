@@ -1,4 +1,4 @@
-import { PostImage } from '@/src/services/userPosts.service';
+import { PostImage } from '@/src/schemas/post.schema';
 
 import styles from './post-images-carousel.module.scss';
 

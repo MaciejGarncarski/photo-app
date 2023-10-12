@@ -20,8 +20,12 @@ export const useComment = ({ commentData }: Arguments) => {
 
   const commentLike = useCommentLike();
   const commentDelete = useDeleteComment();
-  const handleLike = () => commentLike.mutate({ commentId, isLiked });
-  const handleDelete = () => commentDelete.mutate({ commentId });
+  const handleLike = () => {
+    commentLike.mutate({ commentId: commentId.toString(), isLiked });
+  };
+
+  const handleDelete = () =>
+    commentDelete.mutate({ commentId: commentId.toString() });
 
   const isAbleToDelete = sessionUserData?.id === authorId;
   const userAccountHref = `/${data?.username}`;

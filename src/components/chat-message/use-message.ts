@@ -4,7 +4,7 @@ import { useDeleteChatMessage } from '@/src/components/chat-message/use-delete-m
 
 type Props = {
   receiverId: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export const useChatMessage = ({ receiverId }: Props) => {

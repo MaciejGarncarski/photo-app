@@ -1,4 +1,4 @@
-import { Chat, Heart } from '@phosphor-icons/react';
+import { ChatCentered, Heart } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -27,7 +27,6 @@ export const AccountPost = ({ postId }: Props) => {
   }
 
   const { commentsCount, images, likesCount } = postData;
-  const [{ url, width, height }] = images;
 
   return (
     <MotionLink
@@ -44,20 +43,20 @@ export const AccountPost = ({ postId }: Props) => {
       )}
       <Image
         className={clsx({ [styles.imageLoading]: !isLoaded }, styles.image)}
-        src={url}
-        alt=""
-        width={width}
-        height={height}
+        src={images[0].url}
+        alt="post"
+        sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 15vw"
+        fill
         onLoad={() => setIsLoaded(true)}
         priority
       />
       <span className={styles.overlay}>
         <span className={styles.count}>
-          <Heart size={34} />
+          <Heart size={34} weight="fill" />
           {likesCount}
         </span>
         <span className={styles.count}>
-          <Chat size={34} />
+          <ChatCentered size={34} weight="fill" />
           {commentsCount}
         </span>
       </span>

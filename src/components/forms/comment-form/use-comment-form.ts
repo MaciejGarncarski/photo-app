@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { useAddComment } from '@/src/components/forms/comment-form/use-add-comment';
@@ -37,7 +37,7 @@ export const useCommentForm = ({ postId }: Arguments) => {
     }
 
     mutate(
-      { commentText: result.data, postId },
+      { commentText: result.data, postId: postId.toString() },
       {
         onSuccess: () => {
           reset();

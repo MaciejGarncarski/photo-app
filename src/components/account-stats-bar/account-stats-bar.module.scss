@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background-color: var(--color-secondary);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-medium);
   padding: 0.5rem;
   width: clamp(20rem, 80vw, 40rem);
   box-shadow: var(--shadow-pimary);

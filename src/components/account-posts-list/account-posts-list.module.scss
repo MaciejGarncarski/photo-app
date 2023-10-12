@@ -1,36 +1,40 @@
 @use '/src/styles/common';
 
 .posts {
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   margin-top: 3rem;
-  gap: 1.5rem;
-  grid-template-columns: repeat(2, 1fr);
-  width: clamp(20rem, 80vw, 60rem);
+  gap: 1rem;
+  width: clamp(20rem, 80vw, 40rem);
 
   @include common.mobile-landscape {
-    gap: 2rem;
     margin-top: 2rem;
   }
 
-  @include common.mediaquery('tablet') {
-    width: auto;
-    gap: 2.5rem;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   @include common.mediaquery('desktop') {
-    gap: 3rem;
+    width: 100%;
+    margin-top: 4rem;
     padding: 0;
     padding-bottom: 6rem;
-    margin-top: 4rem;
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.loading {
+
+.noPosts {
+  text-align: center;
+  margin: auto;
+}
+
+
+.row {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+}
+
+.placeholder {
+  flex: 1 0 0%;
 }

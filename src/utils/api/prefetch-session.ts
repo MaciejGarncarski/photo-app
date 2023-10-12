@@ -1,6 +1,7 @@
-import { getQueryClient } from '@/src/utils/get-query-client';
+import { getQueryClient } from '@/src/utils/api/get-query-client';
 
-import { getSessionUserServer, getUser } from '@/src/services/user.service';
+import { getSessionUserServer } from '@/src/services/auth.service';
+import { getUser } from '@/src/services/user.service';
 
 export const prefetchSession = async () => {
   const queryClient = getQueryClient();
@@ -14,7 +15,10 @@ export const prefetchSession = async () => {
     if (sessionUser.id) {
       await queryClient.prefetchQuery({
         queryKey: ['user', sessionUser.id],
-        queryFn: () => getUser({ userId: sessionUser.id }),
+        queryFn: async () => {
+          const { data: user } = await getUser({ userId: sessionUser.id });
+          return user.data;
+        },
       });
     }
   } catch (error) {}

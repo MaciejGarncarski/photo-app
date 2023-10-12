@@ -6,13 +6,23 @@ import { getInfinitePosts } from '@/src/services/posts.service';
 
 export const HOME_POSTS_QUERY_KEY: QueryKey = ['homepage infinite posts'];
 
-export const useInfinitePosts = () => {
+export const useHomepagePosts = () => {
   const query = useInfiniteQuery({
     queryKey: HOME_POSTS_QUERY_KEY,
-    queryFn: getInfinitePosts,
-    refetchOnWindowFocus: false,
-    staleTime: 10000,
+    queryFn: async ({ pageParam }) => {
+      const { data } = await getInfinitePosts({
+        skip: pageParam.toString(),
+      });
+
+      if (!data) {
+        throw new Error('Fetch failed');
+      }
+
+      return data;
+    },
     initialPageParam: 0,
+    refetchOnWindowFocus: false,
+    staleTime: 20000,
     getNextPageParam: nextPageParam,
   });
 

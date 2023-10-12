@@ -7,12 +7,12 @@ import { formatDateChat } from '@/src/utils/format-date-chat';
 import { ChatMessage } from '@/src/components/chat-message/chat-message';
 import { groupMessagesByUser } from '@/src/components/chat-messages/group-messages';
 import { Loader } from '@/src/components/loader/loader';
-import { ChatMessagesResponse } from '@/src/schemas/chat';
+import { ChatMessages as ChatMessagesType } from '@/src/schemas/chat';
 
 import styles from './chat-messages.module.scss';
 
 type Props = {
-  messagesData: InfiniteData<ChatMessagesResponse>;
+  messagesData: InfiniteData<ChatMessagesType>;
   hasNextPage: boolean;
   isLoading: boolean;
 };
@@ -47,7 +47,7 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
 
                   {timeFromFirstMessage && (
                     <p className={styles.time}>
-                      <time dateTime={firstMessage.createdAt.toDateString()}>
+                      <time dateTime={firstMessage.createdAt}>
                         {formattedDate}
                       </time>
                     </p>
@@ -71,7 +71,7 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
                 <Fragment key={messageGroup[0].id}>
                   <ChatMessage messageGroup={messageGroup} />
                   <p className={styles.time}>
-                    <time dateTime={currentMessage.createdAt.toDateString()}>
+                    <time dateTime={currentMessage.createdAt}>
                       {formattedDate}
                     </time>
                   </p>

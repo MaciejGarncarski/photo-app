@@ -1,11 +1,11 @@
 import { dehydrate } from '@tanstack/react-query';
 
+import { getQueryClient } from '@/src/utils/api/get-query-client';
+import { Hydrate } from '@/src/utils/api/hydrate';
 import { prefetchSession } from '@/src/utils/api/prefetch-session';
-import { getQueryClient } from '@/src/utils/get-query-client';
-import { Hydrate } from '@/src/utils/hydrate';
 
 import { Home } from '@/src/components/pages/home/home';
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-homepage-posts';
 import { getInfinitePosts } from '@/src/services/posts.service';
 
 const HomePage = async () => {
@@ -14,7 +14,13 @@ const HomePage = async () => {
   await prefetchSession();
   await queryClient.prefetchInfiniteQuery({
     queryKey: HOME_POSTS_QUERY_KEY,
-    queryFn: getInfinitePosts,
+    queryFn: async ({ pageParam }) => {
+      const { data } = await getInfinitePosts({
+        skip: pageParam.toString(),
+      });
+
+      return data;
+    },
     initialPageParam: 0,
   });
 

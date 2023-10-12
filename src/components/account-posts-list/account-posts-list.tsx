@@ -38,10 +38,28 @@ export const AccountPostsList = ({ userId }: Props) => {
         animate="show"
         className={styles.posts}
       >
+        {!hasPosts && <p className={styles.noPosts}>No posts yet.</p>}
         {data.pages.map((page) => {
-          return page.posts.map(({ id }) => {
-            return <AccountPost key={id} postId={id} />;
-          });
+          const placeholderArray = [
+            ...Array.from({ length: 3 - (page.postsCount % 3) }),
+          ].map((_, i) => i + 1);
+
+          return (
+            <div className={styles.row} key={page.currentPage}>
+              {page.data.map(({ id }) => {
+                return <AccountPost key={id} postId={id} />;
+              })}
+              {page.currentPage === page.totalPages && (
+                <>
+                  {placeholderArray.map((el) => {
+                    return (
+                      <span className={styles.placeholder} key={el}></span>
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          );
         })}
       </motion.div>
       {hasNextPage && hasPosts && !isLoading && (

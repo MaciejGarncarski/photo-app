@@ -24,7 +24,6 @@ export const SelectOptionStage = ({
 }: Props) => {
   const { sessionUser } = useAuth();
   const customImage = sessionUser?.customImage;
-
   const { isPending, isModalOpen, openModal, removeAvatar, closeModal } =
     useOptionsStage();
 

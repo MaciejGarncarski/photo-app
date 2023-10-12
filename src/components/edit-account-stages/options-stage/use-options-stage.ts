@@ -7,11 +7,14 @@ export const useOptionsStage = () => {
   const { mutate, isPending } = useDeleteAvatar();
 
   const removeAvatar = () => {
-    mutate(undefined, {
-      onSettled: () => {
-        closeModal();
+    mutate(
+      {},
+      {
+        onSettled: () => {
+          closeModal();
+        },
       },
-    });
+    );
   };
 
   return { openModal, isModalOpen, isPending, removeAvatar, closeModal };

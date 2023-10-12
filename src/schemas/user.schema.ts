@@ -10,17 +10,6 @@ export const userSchema = z.object({
   createdAt: z.string(),
 });
 
-export type User = z.infer<typeof userSchema>;
-
-export const userApiResponseSchema = userSchema.extend({
-  postsCount: z.number(),
-  followersCount: z.number(),
-  friendsCount: z.number(),
-  isFollowing: z.boolean(),
-});
-
-export type UserApiResponse = z.infer<typeof userApiResponseSchema>;
-
 export const userWithPreferencesSchema = userSchema.extend({
   theme: z.optional(z.enum(['DARK', 'LIGHT']).nullable()),
   notificationSound: z.optional(z.enum(['ON', 'OFF']).nullable()),

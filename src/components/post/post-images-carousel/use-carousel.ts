@@ -1,7 +1,7 @@
 import { PanInfo } from 'framer-motion';
 import { useState } from 'react';
 
-import { PostImage } from '@/src/services/userPosts.service';
+import { PostImage } from '@/src/schemas/post.schema';
 
 type ArgsTypes = {
   postImages: Array<PostImage>;

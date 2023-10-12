@@ -1,9 +1,8 @@
-import { toast } from 'react-hot-toast';
-
 import { useModal } from '@/src/hooks/use-modal';
 import { useUser } from '@/src/hooks/use-user';
 import { formatDate } from '@/src/utils/format-date';
 
+import { usePost } from '@/src/components/pages/account/use-post';
 import { useDeletePost } from '@/src/components/post/post-options/use-delete-post';
 
 type Arguments = {
@@ -17,20 +16,20 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
   const menuModal = useModal();
   const confirmationModal = useModal();
   const deletePostMutation = useDeletePost();
+  const { data: postData } = usePost({ postId });
 
   const dateFromNow = formatDate(createdAt);
 
-  const onSettled = () => {
-    confirmationModal.closeModal();
-    menuModal.closeModal();
-  };
-
   const handleDeletePost = () => {
-    toast.promise(deletePostMutation.mutateAsync({ postId }, { onSettled }), {
-      error: 'Error!',
-      loading: 'Deleting post...',
-      success: 'Deleted!',
-    });
+    deletePostMutation.mutate(
+      { postId: postId.toString() },
+      {
+        onSettled: () => {
+          confirmationModal.closeModal();
+          menuModal.closeModal();
+        },
+      },
+    );
   };
 
   return {
@@ -39,6 +38,7 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
     dateFromNow,
     confirmationModal,
     menuModal,
+    postData,
     deletePostMutation,
   };
 };

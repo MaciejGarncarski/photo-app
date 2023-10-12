@@ -4,16 +4,16 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useUser } from '@/src/hooks/use-user';
-import { apiClient } from '@/src/utils/api-client';
-import { socket } from '@/src/utils/socket';
+import { socket } from '@/src/utils/api/socket';
 
 import { useChatMessages } from '@/src/components/pages/chat-room/use-chat-messages';
 import { useChatRoomData } from '@/src/components/pages/chat-room/use-chat-room-data';
 import { useChatSubscription } from '@/src/components/pages/chat-room/use-chat-subscription';
+import { addChatMessage } from '@/src/services/chat.service';
 
 type MessageMutation = {
   senderId: string;
@@ -52,11 +52,7 @@ export const useChatRoom = () => {
 
   const messageMutation = useMutation({
     mutationFn: (body: MessageMutation) => {
-      return apiClient({
-        method: 'POST',
-        body,
-        url: 'chat/message',
-      });
+      return addChatMessage(body);
     },
     onSuccess: () => {
       form.setValue('message', '');

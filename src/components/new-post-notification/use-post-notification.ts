@@ -4,9 +4,9 @@ import { useQueryClient } from '@tanstack/react-query';
 import { atom, useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-import { socket } from '@/src/utils/socket';
+import { socket } from '@/src/utils/api/socket';
 
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-homepage-posts';
 
 export const newPostsAtom = atom(false);
 

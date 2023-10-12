@@ -11,7 +11,18 @@ type Props = {
 export const useInfiniteMessages = ({ friendId }: Props) => {
   return useInfiniteQuery({
     queryKey: ['chatMessages', friendId],
-    queryFn: ({ pageParam }) => getChatMessages({ pageParam, friendId }),
+    queryFn: async ({ pageParam }) => {
+      if (!friendId) {
+        throw new Error('No friend id.');
+      }
+
+      const { data } = await getChatMessages({
+        skip: pageParam.toString(),
+        receiverId: friendId,
+      });
+
+      return data.data;
+    },
     initialPageParam: 0,
     refetchOnWindowFocus: false,
     enabled: Boolean(friendId),

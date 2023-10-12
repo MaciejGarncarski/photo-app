@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import { arrowVariants } from '@/src/components/post/post-arrows/post-arrows.animation';
 import { PostSliderProgress } from '@/src/components/post/post-images-carousel/carousel-progress';
-import { PostImage } from '@/src/services/userPosts.service';
+import { PostImage } from '@/src/schemas/post.schema';
 
 import styles from './post-arrows.module.scss';
 

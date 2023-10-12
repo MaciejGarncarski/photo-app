@@ -1,5 +1,4 @@
 import { useUser } from '@/src/hooks/use-user';
-import { formatDate } from '@/src/utils/format-date';
 
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostButtons } from '@/src/components/post/post-buttons/post-buttons';
@@ -24,17 +23,11 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
     return null;
   }
 
-  const { description, likesCount, createdAt } = post;
-  const formattedDate = formatDate(createdAt);
+  const { description } = post;
 
   return (
     <footer className={styles.footer}>
       <PostButtons postId={postId} parentModalOpen={parentModalOpen} />
-      {likesCount > 0 ? (
-        <p className={styles.likes}>
-          {likesCount} {likesCount > 1 ? 'likes' : 'like'}
-        </p>
-      ) : null}
       <div className={styles.descriptionContainer}>
         <p className={styles.author}>{data?.username}</p>
         {isDescriptionLong ? (
@@ -55,9 +48,6 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
           <p className={styles.description}>{description}</p>
         )}
       </div>
-      <p className={styles.time}>
-        <time dateTime={createdAt.toDateString()}>{formattedDate}</time>
-      </p>
     </footer>
   );
 };

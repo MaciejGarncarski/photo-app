@@ -34,7 +34,7 @@ export const useEditDetails = ({
     const { bio, fullName, username } = getValues();
 
     editAccount.mutate(
-      { bio, name: fullName, username: username },
+      { bio: bio || null, name: fullName || null, username: username || null },
       {
         onSuccess: () => {
           router.push(`/${username}`);

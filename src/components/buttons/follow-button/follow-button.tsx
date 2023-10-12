@@ -19,7 +19,7 @@ export const FollowButton = ({ userId }: Props) => {
   }
 
   const { isFollowing } = data;
-  const handleFollow = () => mutate({ isFollowing, userId });
+  const handleFollow = () => mutate(undefined);
 
   return (
     <Button

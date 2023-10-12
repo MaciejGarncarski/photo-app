@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import { apiClient } from '@/src/utils/api-client';
+import { toast } from 'sonner';
 
 import { PostDetails } from '@/src/schemas/post.schema';
+import { likePost, unlikePost } from '@/src/services/posts.service';
 
 type Mutation = {
   isLiked: boolean;
@@ -14,10 +14,11 @@ export const usePostLike = () => {
 
   return useMutation({
     mutationFn: ({ isLiked, postId }: Mutation) => {
-      return apiClient({
-        url: `post/${postId}/like`,
-        method: isLiked ? 'DELETE' : 'POST',
-      });
+      if (isLiked) {
+        return unlikePost({ postId: postId.toString() });
+      }
+
+      return likePost({ postId: postId.toString() });
     },
     onMutate: async ({ postId, isLiked }) => {
       await queryClient.cancelQueries({ queryKey: ['post'] });
@@ -41,6 +42,7 @@ export const usePostLike = () => {
       };
     },
     onError: (err, newPostLike, ctx) => {
+      toast.error('Cannot like post. Try again later.');
       queryClient.setQueryData<PostDetails>(
         ['post', ctx?.oldPost?.id],
         ctx?.oldPost,

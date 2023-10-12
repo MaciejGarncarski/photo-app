@@ -12,7 +12,10 @@ type FormatData = Array<{
   name: Intl.RelativeTimeFormatUnit;
 }>;
 
-const formatter = new Intl.RelativeTimeFormat('en-GB');
+const formatter = new Intl.RelativeTimeFormat('en-GB', {
+  style: 'narrow',
+  numeric: 'always',
+});
 
 export const formatDate = (dateString: Date | string) => {
   const date = new Date(dateString);

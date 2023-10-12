@@ -1,55 +1,30 @@
-import { apiClient } from '@/src/utils/api-client';
+import { fetcher } from '@/src/utils/api/api-client';
 
-import {
-  postDetailsSchema,
-  postsResponseSchema,
-} from '@/src/schemas/post.schema';
-import { userPostsSchema } from '@/src/services/userPosts.service';
+export const getPost = fetcher.path('/posts/{postId}').method('get').create();
 
-type GetPost = {
-  postId: number;
-};
+export const deletePost = fetcher
+  .path('/posts/{postId}')
+  .method('delete')
+  .create();
 
-export const getPost = async ({ postId }: GetPost) => {
-  const data = apiClient({
-    url: `post/${postId}`,
-    method: 'GET',
-    schema: postDetailsSchema,
-  });
-  return data;
-};
+export const getInfinitePosts = fetcher.path('/posts').method('get').create();
 
-export const getInfinitePosts = async ({ pageParam = 0 }) => {
-  const data = await apiClient({
-    url: `post/homepage-posts?skip=${pageParam}`,
-    method: 'GET',
-    schema: postsResponseSchema,
-  });
+export const getUserPosts = fetcher
+  .path('/posts/user/{authorId}')
+  .method('get')
+  .create();
 
-  return data;
-};
+export const editPost = fetcher
+  .path('/posts/{postId}/edit')
+  .method('put')
+  .create();
 
-type DeletePost = {
-  postId: number;
-};
+export const likePost = fetcher
+  .path('/posts/{postId}/like')
+  .method('post')
+  .create();
 
-export const deletePost = ({ postId }: DeletePost) => {
-  return apiClient({
-    url: `post/${postId}`,
-    method: 'DELETE',
-  });
-};
-
-export type FetchPost = {
-  pageParam: number;
-  userId: string;
-};
-
-export const getUserPosts = async ({ pageParam, userId }: FetchPost) => {
-  const data = await apiClient({
-    url: `post/user/${userId}?skip=${pageParam}`,
-    method: 'GET',
-    schema: userPostsSchema,
-  });
-  return data;
-};
+export const unlikePost = fetcher
+  .path('/posts/{postId}/like')
+  .method('delete')
+  .create();

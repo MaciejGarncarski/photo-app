@@ -9,12 +9,12 @@ import { ChatUser } from '@/src/components/chat-users-list/chat-user';
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Loader } from '@/src/components/loader/loader';
-import { ChatUsersResponse } from '@/src/schemas/chat';
+import { ChatUsers } from '@/src/schemas/chat';
 
 import styles from './chat-users-list.module.scss';
 
 type Props = {
-  chatUsers: UseInfiniteQueryResult<InfiniteData<ChatUsersResponse>>;
+  chatUsers: UseInfiniteQueryResult<InfiniteData<ChatUsers>>;
   isEnabled: boolean;
 };
 

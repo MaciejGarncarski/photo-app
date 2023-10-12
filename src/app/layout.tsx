@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
+import { Toaster } from 'sonner';
 
 import { Providers } from '@/src/app/providers';
 import { Layout } from '@/src/components/layout/layout';
@@ -33,6 +34,12 @@ const DefaultLayout = ({ children }: Props) => {
       <head />
       <body>
         <Providers>
+          <Toaster
+            richColors
+            position="top-center"
+            closeButton
+            className={inter.className}
+          />
           <Layout>{children}</Layout>
         </Providers>
       </body>

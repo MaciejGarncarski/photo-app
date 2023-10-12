@@ -1,40 +1,24 @@
-import { z } from 'zod';
+export type PostImage = {
+  id: number;
+  fileId: string;
+  name: string;
+  url: string;
+  thumbnailUrl: string;
+  width: number;
+  height: number;
+  size: number;
+};
 
-import { datelikeToDate } from '@/src/utils/zod';
-
-import { PostImage } from '@/src/services/userPosts.service';
-
-export const postDescriptionSchema = z.string().min(1).max(100);
-
-export type PostDescription = z.infer<typeof postDescriptionSchema>;
-
-export const postSchema = z.object({
-  createdAt: datelikeToDate,
-  id: z.number(),
-  authorId: z.string(),
-});
-
-export const postDetailsSchema = z.object({
-  commentsCount: z.number(),
-  likesCount: z.number(),
-  images: z.array(z.custom<PostImage>()),
-  createdAt: datelikeToDate,
-  description: postDescriptionSchema,
-  id: z.number(),
-  isLiked: z.boolean(),
-  authorId: z.string(),
-});
-
-export const postsResponseSchema = z.object({
-  postsCount: z.number(),
-  totalPages: z.number(),
-  currentPage: z.number(),
-  posts: z.array(postSchema),
-});
-
-export type Post = z.infer<typeof postSchema>;
-export type PostDetails = z.infer<typeof postDetailsSchema>;
-export type PostsResponse = z.infer<typeof postsResponseSchema>;
+export type PostDetails = {
+  createdAt: Date;
+  id: number;
+  authorId: string;
+  commentsCount: number;
+  likesCount: number;
+  images: PostImage[];
+  description: string;
+  isLiked: boolean;
+};
 
 export type CreatePostInput = {
   description: string;

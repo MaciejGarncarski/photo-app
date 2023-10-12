@@ -12,13 +12,13 @@ import { HomePost } from '@/src/components/home-post/home-post';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Loader } from '@/src/components/loader/loader';
 import { NewPostNotification } from '@/src/components/new-post-notification/new-post-notification';
-import { useInfinitePosts } from '@/src/components/pages/home/use-posts';
+import { useHomepagePosts } from '@/src/components/pages/home/use-homepage-posts';
 
 import styles from './home.module.scss';
 
 export const Home = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, isError } =
-    useInfinitePosts();
+    useHomepagePosts();
 
   const { isSignedIn } = useAuth();
 
@@ -32,7 +32,7 @@ export const Home = () => {
     return <FetchErrorMessage message="Cannot fetch data." />;
   }
 
-  const noPosts = data?.pages[0] && data?.pages[0].postsCount < 1;
+  const noPosts = data?.pages[0] && data.pages[0].postsCount < 1;
 
   return (
     <motion.ul
@@ -55,7 +55,7 @@ export const Home = () => {
       ) : null}
 
       {data?.pages.map((page) => {
-        return page?.posts.map(({ id }, idx) => {
+        return page.data.map(({ id }, idx) => {
           return <HomePost priority={idx < 3} key={id} postId={id} />;
         });
       })}

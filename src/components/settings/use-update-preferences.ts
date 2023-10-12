@@ -3,10 +3,10 @@ import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
-import { apiClient } from '@/src/utils/api-client';
 
 import { useNotificationSoundAtom } from '@/src/components/settings/use-notification-sound-atom';
 import { UserWithPreferences } from '@/src/schemas/user.schema';
+import { updatePreferences } from '@/src/services/user.service';
 
 type MutationVariables = {
   theme?: 'DARK' | 'LIGHT';
@@ -34,15 +34,9 @@ export const useUpdatePreferences = () => {
   }, [sessionUser, isRefetching, setTheme, setNotificationSound]);
 
   return useMutation({
-    mutationFn: ({ theme, notificationSound }: MutationVariables) =>
-      apiClient({
-        method: 'POST',
-        body: {
-          theme,
-          notificationSound,
-        },
-        url: 'user/preferences',
-      }),
+    mutationFn: ({ theme, notificationSound }: MutationVariables) => {
+      return updatePreferences({ notificationSound, theme });
+    },
     onMutate: async (newPreferences) => {
       await queryClient.cancelQueries({ queryKey: ['session'] });
       const previousSession = queryClient.getQueryData<UserWithPreferences>([
@@ -61,7 +55,7 @@ export const useUpdatePreferences = () => {
 
       return { previousSession };
     },
-    onError: (err, newTodo, context) => {
+    onError: (err, newData, context) => {
       queryClient.setQueryData(['session'], context?.previousSession);
     },
     onSettled: () => {

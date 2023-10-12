@@ -1,4 +1,8 @@
-export const formatCount = (likesNumber: number) => {
+export const formatLikes = (likesNumber?: number) => {
+  if (!likesNumber) {
+    return;
+  }
+
   const formatter = new Intl.NumberFormat('en', {
     compactDisplay: 'short',
     notation: 'compact',

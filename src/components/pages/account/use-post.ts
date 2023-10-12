@@ -5,7 +5,15 @@ import { getPost } from '@/src/services/posts.service';
 export const usePost = ({ postId }: { postId: number }) => {
   return useQuery({
     queryKey: ['post', postId],
-    queryFn: () => getPost({ postId }),
+    queryFn: async () => {
+      const { data: post } = await getPost({ postId: postId.toString() });
+
+      if (!post['data']) {
+        throw new Error('No post data.');
+      }
+
+      return post['data'];
+    },
     enabled: Boolean(postId),
     staleTime: 20000,
   });

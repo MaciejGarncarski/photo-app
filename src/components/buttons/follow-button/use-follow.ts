@@ -2,7 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useUser } from '@/src/hooks/use-user';
 
-import { followOtherUser } from '@/src/services/user.service';
+import {
+  followOtherUser,
+  unfollowOtherUser,
+} from '@/src/services/user.service';
 
 type FollowMutation = {
   userId: string;
@@ -13,7 +16,13 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
   const { data } = useUser({ userId });
 
   return useMutation({
-    mutationFn: followOtherUser,
+    mutationFn: () => {
+      if (data?.isFollowing) {
+        return unfollowOtherUser({ userId });
+      }
+
+      return followOtherUser({ userId });
+    },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['user', userId] });
       await queryClient.invalidateQueries({

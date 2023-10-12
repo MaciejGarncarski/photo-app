@@ -1,14 +1,13 @@
 'use client';
 
 import { PencilSimple, SignOut } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useModal } from '@/src/hooks/use-modal';
+import { useSignOut } from '@/src/hooks/use-sign-out';
 import { useUserByUsername } from '@/src/hooks/use-user-by-username';
-import { signOut } from '@/src/utils/sign-out';
 
 import { AccountPostsList } from '@/src/components/account-posts-list/account-posts-list';
 import { Button } from '@/src/components/buttons/button/button';
@@ -28,9 +27,8 @@ type Props = {
 
 export const Account = ({ username }: Props) => {
   const { isMobile } = useIsMobile();
-  const router = useRouter();
+  const signOut = useSignOut();
   const pathname = usePathname();
-  const queryClient = useQueryClient();
 
   const { sessionUser } = useAuth();
   const settingsModal = useModal();
@@ -86,10 +84,7 @@ export const Account = ({ username }: Props) => {
         text="Do you want to sign out?"
         closeModal={signOutModal.closeModal}
       >
-        <Button
-          variant="primary"
-          onClick={() => signOut(queryClient, () => router.push('/'))}
-        >
+        <Button variant="primary" onClick={() => signOut.mutate()}>
           Sign out
           <SignOut />
         </Button>

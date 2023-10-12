@@ -37,6 +37,8 @@ export const PostHeader = ({
     username,
     confirmationModal,
     menuModal,
+    postData,
+    dateFromNow,
   } = usePostHeader({
     authorId,
     createdAt,
@@ -53,8 +55,12 @@ export const PostHeader = ({
     <Tag className={styles.header}>
       <Link href={`/${username}`} className={styles.userAnchor}>
         <Avatar userId={authorId} size="small" />
-        <h2 className={styles.username}>{username}</h2>
+        <span className={styles.username}>{username}</span>
       </Link>
+
+      <p className={styles.createdAt}>
+        <time dateTime={postData?.createdAt}>{dateFromNow}</time>
+      </p>
 
       {sessionUser?.id && (
         <div className={styles.options}>
@@ -62,7 +68,7 @@ export const PostHeader = ({
           {isAuthor && (
             <button type="button" onClick={menuModal.openModal}>
               <span className="visually-hidden">Settings</span>
-              <DotsThreeVertical size={32} />
+              <DotsThreeVertical size={28} />
             </button>
           )}
         </div>

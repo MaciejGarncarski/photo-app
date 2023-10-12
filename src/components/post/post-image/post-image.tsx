@@ -8,20 +8,19 @@ import { getDescriptionData } from '@/src/utils/get-description-data';
 import { MotionImage } from '@/src/components/avatar/avatar';
 import { Loader } from '@/src/components/loader/loader';
 import { usePost } from '@/src/components/pages/account/use-post';
-import { Post } from '@/src/schemas/post.schema';
 
 import styles from './post-image.module.scss';
 
 type Props = {
   priority: boolean;
   src: string;
-  post: Post;
+  postId: number;
 };
 
-export const PostImage = ({ priority, src, post }: Props) => {
+export const PostImage = ({ priority, src, postId }: Props) => {
   const { isMobile } = useIsMobile();
-  const { data } = useUser({ userId: post.authorId });
-  const { data: postData } = usePost({ postId: post.id });
+  const { data: postData } = usePost({ postId: postId });
+  const { data } = useUser({ userId: postData?.authorId || '' });
   const [isLoading, setIsLoading] = useState(true);
 
   if (!postData) {
@@ -45,6 +44,7 @@ export const PostImage = ({ priority, src, post }: Props) => {
         priority={priority}
         onLoad={() => setIsLoading(false)}
         width={size}
+        quality={100}
         height={size}
         alt={`${data?.username} - ${shortDescription}`}
       />

@@ -1,15 +1,27 @@
+import { Fetcher } from '@qdrant/openapi-typescript-fetch';
 import { z } from 'zod';
 
 import { clientEnv } from '@/src/utils/env';
 
+import { paths } from '@/types';
+
 type ApiClientArguments<S> = {
-  url: string;
+  url: keyof paths;
   method?: 'POST' | 'GET' | 'PUT' | 'DELETE' | 'PATCH';
   schema?: S;
   body?: Record<string, unknown> | FormData;
   cache?: RequestCache;
   headers?: Record<string, unknown>;
 };
+
+export const fetcher = Fetcher.for<paths>();
+
+fetcher.configure({
+  baseUrl: clientEnv.NEXT_PUBLIC_API_ROOT,
+  init: {
+    credentials: 'include',
+  },
+});
 
 export const apiClient = async <S extends z.ZodTypeAny>({
   url,
@@ -40,30 +52,26 @@ export const apiClient = async <S extends z.ZodTypeAny>({
   };
 
   const apiResponse = await fetch(
-    `${clientEnv.NEXT_PUBLIC_API_ROOT}/${url}`,
+    `${clientEnv.NEXT_PUBLIC_API_ROOT}${url}`,
     isBodyFormData ? formDataOptions : options,
   );
 
   if (!apiResponse.ok) {
     const errorData = await apiResponse.json();
-
     if (errorData) {
-      throw new Error(errorData.message);
+      throw new Error(`Something went wrong. Error: ${errorData.message}`);
     }
 
-    throw new Error(`Cannot fetch data, status: , ${apiResponse.status}`);
+    throw new Error('Something went wrong.');
   }
 
   const contentType = apiResponse.headers.get('content-type');
-  const isTextPlain = contentType === 'text/plain; charset=utf-8';
-
   if (!contentType) {
     return null;
   }
 
-  const responseData = isTextPlain
-    ? await apiResponse.text()
-    : await apiResponse.json();
+  const convertedResponse = await apiResponse.json();
+  const responseData = convertedResponse.data;
 
   if (apiResponse.status !== 200) {
     return responseData;
@@ -74,7 +82,6 @@ export const apiClient = async <S extends z.ZodTypeAny>({
   }
 
   const parsedResponse = schema.safeParse(responseData);
-
   if (!parsedResponse.success) {
     throw new Error(`Parsing error: ${parsedResponse.error.message}`);
   }

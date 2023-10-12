@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { apiClient } from '@/src/utils/api-client';
-
 import { RegisterFormValues } from '@/src/schemas/auth.schema';
+import { registerUser } from '@/src/services/auth.service';
 
 export const useRegister = () => {
   const router = useRouter();
@@ -16,16 +15,7 @@ export const useRegister = () => {
       password,
       confirmPassword,
     }: RegisterFormValues) => {
-      return apiClient({
-        url: 'auth/register',
-        method: 'POST',
-        body: {
-          email,
-          username,
-          password,
-          confirmPassword,
-        },
-      });
+      return registerUser({ email, confirmPassword, password, username });
     },
     onSuccess: async () => {
       router.push('/');

@@ -1,6 +1,7 @@
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { useFollowers } from '@/src/components/modals/stats-modal/use-followers';
+import { useFriends } from '@/src/components/modals/stats-modal/use-friends';
 
 type Arguments = {
   userId: string;
@@ -8,17 +9,29 @@ type Arguments = {
 };
 
 export const useStatsModal = ({ userId, type }: Arguments) => {
-  const { data, hasNextPage, isLoading, fetchNextPage } = useFollowers({
+  const followers = useFollowers({
     userId,
-    type,
   });
-  const isEmpty = data?.pages[0].users.length === 0;
+
+  const friends = useFriends({
+    userId,
+  });
+
+  const currentData = type === 'friends' ? friends : followers;
+
+  const isEmpty = currentData.data?.pages[0].users.length === 0;
 
   const { ref } = useInfiniteScroll({
-    hasNextPage: Boolean(hasNextPage),
-    fetchNextPage,
+    hasNextPage: Boolean(currentData.hasNextPage),
+    fetchNextPage: currentData.fetchNextPage,
     enabled: true,
   });
 
-  return { isEmpty, ref, isLoading, data, hasNextPage };
+  return {
+    isEmpty,
+    ref,
+    isLoading: currentData.isLoading,
+    data: currentData.data,
+    hasNextPage: currentData.hasNextPage,
+  };
 };

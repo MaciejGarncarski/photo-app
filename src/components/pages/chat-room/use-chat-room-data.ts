@@ -5,12 +5,6 @@ import { useAuth } from '@/src/hooks/use-auth';
 
 import { getChatRoomData } from '@/src/services/chat.service';
 
-export type ChatRoom = {
-  id: number;
-  sender_id: string;
-  receiver_id: string;
-};
-
 export const useChatRoomData = () => {
   const params = useParams();
   const { sessionUser } = useAuth();
@@ -18,7 +12,11 @@ export const useChatRoomData = () => {
 
   return useQuery({
     queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],
-    queryFn: () => getChatRoomData({ receiverId }),
+    queryFn: async () => {
+      const { data } = await getChatRoomData({ receiverId });
+
+      return data.data;
+    },
     enabled: Boolean(sessionUser?.id && receiverId),
     refetchOnWindowFocus: false,
   });

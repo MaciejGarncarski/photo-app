@@ -2,17 +2,17 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { nextPageParam } from '@/src/utils/api/next-page-param';
 
-import { getFollowers } from '@/src/services/user.service';
+import { getFriends } from '@/src/services/user.service';
 
-type UseFollowers = {
+type UseFriends = {
   userId: string;
 };
 
-export const useFollowers = ({ userId }: UseFollowers) => {
+export const useFriends = ({ userId }: UseFriends) => {
   return useInfiniteQuery({
     queryKey: ['followers', userId],
     queryFn: async ({ pageParam }) => {
-      const { data } = await getFollowers({
+      const { data } = await getFriends({
         skip: pageParam.toString(),
         userId,
       });

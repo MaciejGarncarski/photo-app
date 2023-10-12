@@ -1,10 +1,8 @@
 'use client';
 
 import { SignOut } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
-import { signOut } from '@/src/utils/sign-out';
+import { useSignOut } from '@/src/hooks/use-sign-out';
 
 import { Button } from '@/src/components/buttons/button/button';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
@@ -19,11 +17,10 @@ type Props = {
 };
 
 export const SignOutDialog = ({ closeSettingsModal, signOutModal }: Props) => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+  const signOut = useSignOut();
 
   const handleSignOut = () => {
-    signOut(queryClient, () => router.push('/'));
+    signOut.mutate();
     closeSettingsModal();
     signOutModal.closeModal();
   };

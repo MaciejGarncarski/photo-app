@@ -31,8 +31,18 @@ export const useChatUsers = () => {
 
   const chatUsers = useInfiniteQuery({
     queryKey: ['chat users', sessionUser?.id, searchedUser],
-    queryFn: async ({ pageParam = 0 }) =>
-      getChatUsers({ pageParam, searchedUser }),
+    queryFn: async ({ pageParam = 0 }) => {
+      const { data } = await getChatUsers({
+        skip: pageParam.toString(),
+        searchedUser,
+      });
+
+      if (!data.data) {
+        throw new Error('No data');
+      }
+
+      return data.data;
+    },
     initialPageParam: 0,
     enabled: isEnabled,
     staleTime: 20000,

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-homepage-posts';
 import { deletePost } from '@/src/services/posts.service';
 
 export const useDeletePost = () => {

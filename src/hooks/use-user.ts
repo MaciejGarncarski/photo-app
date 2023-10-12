@@ -9,7 +9,15 @@ type Props = {
 export const useUser = ({ userId }: Props) => {
   return useQuery({
     queryKey: ['user', userId],
-    queryFn: () => getUser({ userId }),
+    queryFn: async () => {
+      const { data: user } = await getUser({ userId });
+
+      if (!user['data']) {
+        throw new Error('No user data.');
+      }
+
+      return user['data'];
+    },
     enabled: userId !== '',
     refetchOnWindowFocus: false,
     staleTime: 15000,

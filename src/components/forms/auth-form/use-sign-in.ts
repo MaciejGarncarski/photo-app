@@ -1,25 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { apiClient } from '@/src/utils/api-client';
-
-import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-posts';
+import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-homepage-posts';
 import { SignInFormValues } from '@/src/schemas/auth.schema';
+import { signIn } from '@/src/services/auth.service';
 
 export const useSignIn = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ email, password }: SignInFormValues) => {
-      return apiClient({
-        url: 'auth/sign-in',
-        method: 'POST',
-        body: {
-          email,
-          password,
-        },
-      });
+    mutationFn: async ({ email, password }: SignInFormValues) => {
+      const request = await signIn({ email, password });
+
+      if (!request['data']) {
+        throw new Error('No Data!!');
+      }
+
+      return request.data;
     },
     onSuccess: () => {
       router.replace('/');
