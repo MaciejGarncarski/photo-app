@@ -1,4 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { apiClient } from '@/src/utils/api/api-client';
@@ -17,6 +19,7 @@ export const useUploadAvatar = ({
 }: UseUploadAvatarArguments) => {
   const { sessionUser } = useAuth();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const uploadNewAvatar = useMutation({
     mutationFn: async ({ image }: { image: Blob }) => {
@@ -25,9 +28,13 @@ export const useUploadAvatar = ({
 
       return apiClient({
         url: '/user/avatar',
-        method: 'POST',
+        method: 'PUT',
         body: formData,
       });
+    },
+    onSuccess: () => {
+      toast.success('Avatar updated.');
+      router.push(`/${sessionUser?.username}`);
     },
   });
 
