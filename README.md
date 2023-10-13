@@ -84,7 +84,7 @@ pnpm dev
 ### Testing
 
 - Cypress
-- Jest
+- Vitest
 - React Testing Library
 - MSW
 
