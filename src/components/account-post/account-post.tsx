@@ -41,7 +41,7 @@ export const AccountPost = ({ postId }: Props) => {
     >
       {!isLoaded && (
         <span className={styles.loader}>
-          <Loader color="accent" size="small" />
+          <Loader color="accent" size="big" />
         </span>
       )}
       <Image

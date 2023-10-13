@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { username } from '@/src/components/edit-account-stages/account-details-validation';
+import { username } from '@/src/schemas/user.schema';
 
 export const signInSchema = z.object({
   email: z.string().email({ message: 'Invalid email.' }),

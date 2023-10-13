@@ -35,10 +35,6 @@
   border: none;
   color: var(--color-text);
 
-  &::placeholder {
-    color: var(--color-text-gray);
-  }
-
   &:focus {
     outline: none;
   }

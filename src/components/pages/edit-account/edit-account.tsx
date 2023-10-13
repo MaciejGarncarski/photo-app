@@ -1,55 +1,117 @@
 'use client';
 
+import { CameraPlus } from '@phosphor-icons/react';
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import ReactFocusLock from 'react-focus-lock';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { useModal } from '@/src/hooks/use-modal';
 
-import { DetailsStage } from '@/src/components/edit-account-stages/details-stage/details-stage';
-import { SelectOptionStage } from '@/src/components/edit-account-stages/options-stage/options-stage';
-import { UpdateAvatarStage } from '@/src/components/edit-account-stages/update-avatar-stage/update-avatar-stage';
+import { Avatar } from '@/src/components/avatar/avatar';
+import { Button } from '@/src/components/buttons/button/button';
+import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
+import { DetailsForm } from '@/src/components/details-form/details-form';
+import { Loader } from '@/src/components/loader/loader';
+import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
+import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
+import { useDeleteAvatar } from '@/src/components/pages/edit-account/use-delete-avatar';
+import { Heading } from '@/src/components/typography/heading/heading';
+import { UpdateAvatarView } from '@/src/components/update-avatar-view/update-avatar-view';
 
 import styles from './edit-account.module.scss';
 
-export type Stages = 'selectImage' | 'cropImage' | 'personalInfo';
-
 export const EditAccount = () => {
-  const [stage, setStage] = useState<Stages>('selectImage');
   const { sessionUser } = useAuth();
+  const updateAvatarModal = useModal();
+  const removeAvatarModal = useModal();
 
-  const stageSelectImage = () => setStage('selectImage');
-  const stageCropImage = () => setStage('cropImage');
-  const stagePersonalInfo = () => setStage('personalInfo');
+  const { mutate, isPending } = useDeleteAvatar();
 
-  const userId = sessionUser?.id || '';
+  const removeAvatar = () => {
+    mutate(
+      {},
+      {
+        onSuccess: () => {
+          removeAvatarModal.closeModal();
+        },
+      },
+    );
+  };
+
+  if (!sessionUser) {
+    return <Loader size="big" color="accent" marginTop />;
+  }
+
+  const hasProfilePicture = sessionUser.customImage || sessionUser.image;
 
   return (
-    <main id="main" className={styles.container}>
-      <AnimatePresence mode="wait">
-        {stage === 'selectImage' && (
-          <SelectOptionStage
-            key="selectOptionStage"
-            stageCropImage={stageCropImage}
-            stagePersonalInfo={stagePersonalInfo}
-            stageSelectImage={stageSelectImage}
-          />
-        )}
-        {stage === 'cropImage' && (
-          <UpdateAvatarStage
-            key="cropImageStage"
-            stagePersonalInfo={stagePersonalInfo}
-            stageSelectImage={stageSelectImage}
-          />
-        )}
+    <>
+      <div className={styles.container}>
+        <Heading tag="h2" size="big">
+          Edit profile
+        </Heading>
+        <div className={styles.avatar}>
+          <button
+            type="button"
+            className={styles.avatarButton}
+            onClick={updateAvatarModal.openModal}
+          >
+            <span className={styles.icon}>
+              <CameraPlus />
+            </span>
+            <Avatar userId={sessionUser.id} size="big" />
+            <span className="visually-hidden">Update avatar</span>
+          </button>
+          {hasProfilePicture && (
+            <Button
+              type="button"
+              variant="destructive"
+              onClick={removeAvatarModal.openModal}
+              disabled={isPending}
+            >
+              Remove profile picture
+            </Button>
+          )}
+        </div>
+        <DetailsForm user={sessionUser} />
+      </div>
 
-        {stage === 'personalInfo' && (
-          <DetailsStage
-            key="detailsStage"
-            stageSelectImage={stageSelectImage}
-            userId={userId}
-          />
+      <ConfirmationDialog
+        isVisible={removeAvatarModal.isModalOpen}
+        text="Remove your profile picture? Be careful, this action cannot be reversed!"
+        closeModal={removeAvatarModal.closeModal}
+      >
+        <Button type="button" variant="destructive" onClick={removeAvatar}>
+          Remove profile picture
+        </Button>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={removeAvatarModal.closeModal}
+        >
+          Cancel
+        </Button>
+      </ConfirmationDialog>
+
+      <AnimatePresence mode="wait">
+        {updateAvatarModal.isModalOpen && (
+          <ModalBackdrop closeModal={() => null}>
+            <ReactFocusLock autoFocus={false}>
+              <div className={styles.modal}>
+                <div className={styles.modalHeader}>
+                  <Heading size="medium" tag="h3">
+                    Update avatar
+                  </Heading>
+                  <div className={styles.closeButton}>
+                    <ModalCloseButton onClose={updateAvatarModal.closeModal} />
+                  </div>
+                </div>
+                <UpdateAvatarView closeModal={updateAvatarModal.closeModal} />
+              </div>
+            </ReactFocusLock>
+          </ModalBackdrop>
         )}
       </AnimatePresence>
-    </main>
+    </>
   );
 };

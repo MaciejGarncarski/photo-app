@@ -39,7 +39,7 @@
     "types.d.ts",
     "next-env.d.ts",
     "jest.setup.js",
-    "jest.config.ts",
+    "jest.config.mjs",
     "**/*.ts",
     "**/*.tsx",
     "utils/env.js",

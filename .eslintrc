@@ -6,13 +6,11 @@
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "jest-dom",
     "testing-library",
     "@typescript-eslint",
     "simple-import-sort",
     "unused-imports",
-    "jsx-a11y",
-    "jest"
+    "jsx-a11y"
   ],
   "extends": [
     "next",

@@ -1,22 +1,15 @@
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
-import { UseFormGetValues } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 
-import { AccountDetails } from '@/src/components/edit-account-stages/account-details-validation';
 import { useEditAccount } from '@/src/components/pages/edit-account/use-edit-account';
+import { AccountDetails } from '@/src/schemas/user.schema';
 
 type UseEditDetailsArguments = {
   reset: () => void;
-  openModal: () => void;
-  getValues: UseFormGetValues<AccountDetails>;
-  userId: string;
 };
 
-export const useEditDetails = ({
-  reset,
-  openModal,
-  getValues,
-}: UseEditDetailsArguments) => {
+export const useEditDetails = ({ reset }: UseEditDetailsArguments) => {
   const router = useRouter();
   const editAccount = useEditAccount();
 
@@ -25,14 +18,11 @@ export const useEditDetails = ({
     reset();
   };
 
-  const onClick = (clickEv: MouseEvent) => {
-    clickEv.preventDefault();
-    openModal();
-  };
-
-  const onSubmit = async () => {
-    const { bio, fullName, username } = getValues();
-
+  const editDetails: SubmitHandler<AccountDetails> = async ({
+    bio,
+    fullName,
+    username,
+  }) => {
     editAccount.mutate(
       { bio: bio || null, name: fullName || null, username: username || null },
       {
@@ -44,9 +34,8 @@ export const useEditDetails = ({
   };
 
   return {
-    onClick,
     onReset,
-    onSubmit,
-    editAccountLoading: editAccount.isPending,
+    editDetails,
+    isPending: editAccount.isPending,
   };
 };

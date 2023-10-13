@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  --gap: 0.75rem;
 }
 
 .textAreaContainer {
@@ -22,7 +23,6 @@
   background-color: var(--color-secondary);
   left: var(--gap);
   top: 0rem;
-  left: 1rem;
   padding-top: 0.5rem;
   display: inline-block;
   width: calc(100% - 1rem);
@@ -38,7 +38,7 @@
   height: 100%;
   resize: vertical;
   max-height: 12rem;
-  padding: 1rem;
+  padding: 1rem var(--gap);
   padding-top: 1.75rem;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
@@ -46,10 +46,6 @@
   &:focus {
     outline: none;
     border-color: var(--color-primary);
-  }
-
-  &::placeholder {
-    font-weight: 500;
   }
 }
 

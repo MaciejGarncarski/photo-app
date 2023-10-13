@@ -1,0 +1,34 @@
+@use '/src/styles/common.scss';
+
+.updateAvatar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.removeButton {
+    align-self: flex-start;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    @include common.mediaquery('desktop') {
+        gap: 2rem;
+    }
+}
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.previewImg {
+    border-radius: 100%;
+}

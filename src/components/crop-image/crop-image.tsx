@@ -13,7 +13,6 @@ import { DropZone } from '@/src/components/drop-zone/drop-zone';
 import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { FinalImages } from '@/src/components/pages/create-post/types';
-import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './crop-image.module.scss';
 
@@ -62,10 +61,6 @@ export const CropImage = ({
   return (
     <>
       <section className={styles.addPhoto}>
-        <Heading size="medium" tag="h2">
-          Crop image
-        </Heading>
-
         <div className={styles.cropContainer}>
           <Cropper
             image={imgSrc}
@@ -88,12 +83,9 @@ export const CropImage = ({
           <AspectRatioButtons aspect={aspect} setAspect={setAspect} />
         )}
         <section className={styles.saveOrAnotherImage}>
-          <Heading size="small" tag="h3">
-            Save or select another image
-          </Heading>
           <div className={styles.buttons}>
             <Button type="button" variant="primary" onClick={saveCrop}>
-              Save
+              Crop
               {isMobile ? '' : ' image'}
               <FloppyDisk />
             </Button>
@@ -105,7 +97,7 @@ export const CropImage = ({
             >
               Select another
               {isMobile ? '' : ' image'}
-              <Image />
+              {!isMobile && <Image />}
             </Button>
           </div>
         </section>

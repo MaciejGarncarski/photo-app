@@ -14,7 +14,7 @@
 
   @include common.mediaquery('desktop') {
     border-radius: var(--radius-medium);
-    height: 15rem;
+    height: 14rem;
 
     &:focus {
       box-shadow: 0 5px 0 0 var(--color-accent), 0 0 0 1px var(--color-accent);

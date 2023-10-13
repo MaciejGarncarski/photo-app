@@ -1,0 +1,17 @@
+@use '/src/styles/common';
+
+.form {
+    display: grid;
+    gap: 2rem;
+
+    @include common.mediaquery('desktop') {
+        margin-top: 3rem;
+    }
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}

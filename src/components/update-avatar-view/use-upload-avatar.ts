@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { useAuth } from '@/src/hooks/use-auth';
@@ -8,18 +7,18 @@ import { apiClient } from '@/src/utils/api/api-client';
 import { FinalImages } from '@/src/components/pages/create-post/types';
 
 type UseUploadAvatarArguments = {
-  stagePersonalInfo: () => void;
   finalImages: FinalImages;
   resetFinalImages: () => void;
+  closeModal: () => void;
 };
 
 export const useUploadAvatar = ({
   finalImages,
   resetFinalImages,
+  closeModal,
 }: UseUploadAvatarArguments) => {
   const { sessionUser } = useAuth();
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const uploadNewAvatar = useMutation({
     mutationFn: async ({ image }: { image: Blob }) => {
@@ -32,13 +31,18 @@ export const useUploadAvatar = ({
         body: formData,
       });
     },
+    onError: () => {
+      toast.error('Cannot update avatar.');
+      closeModal();
+    },
     onSuccess: () => {
       toast.success('Avatar updated.');
-      router.push(`/${sessionUser?.username}`);
+      closeModal();
     },
   });
 
   const isFinalImageEmpty = finalImages.filter((image) => !!image).length === 0;
+
   const onSaveImage = async () => {
     if (isFinalImageEmpty) {
       return;
