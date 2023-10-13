@@ -11,13 +11,15 @@ export const useSignIn = () => {
 
   return useMutation({
     mutationFn: async ({ email, password }: SignInFormValues) => {
-      const request = await signIn({ email, password });
-
-      if (!request['data']) {
-        throw new Error('No Data!!');
+      try {
+        const request = await signIn({ email, password });
+        return request.data;
+      } catch (err) {
+        if (err instanceof signIn.Error) {
+          const { data } = err.getActualType();
+          throw new Error(data.message);
+        }
       }
-
-      return request.data;
     },
     onSuccess: () => {
       router.replace('/');

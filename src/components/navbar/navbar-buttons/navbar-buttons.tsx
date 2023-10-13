@@ -30,7 +30,6 @@ export const NavButtons = () => {
             }
 
             const isActive = path === href;
-
             return (
               <li key={title} className={styles.listItem}>
                 <Link

@@ -1,7 +1,7 @@
 @use '/src/styles/common';
 
 .header {
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     background-color: var(--color-secondary);
     box-shadow: var(--shadow-pimary);
     border-radius: calc(var(--radius-medium) + 0.5rem);
@@ -13,7 +13,7 @@
     margin-left: 6rem;
     padding: 2rem 1rem;
     padding-bottom: 1rem;
-    width: var(--header-width);
+    width: fit-content;
     position: sticky;
     top: 3rem;
     height: calc(100vh - 6rem);
@@ -21,6 +21,10 @@
     overflow: auto;
     left: 0;
     gap: 4rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    width: var(--header-width);
   }
 }
 

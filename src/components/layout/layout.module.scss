@@ -3,7 +3,7 @@
 .layout {
   padding-bottom: 6rem;
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     min-height: 100dvh;
     display: flex;
     gap: 5rem;
@@ -19,9 +19,13 @@
   align-items: center;
   flex-direction: column;
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     margin-top: 3rem;
-    margin-right: 20rem;
+    margin-right: 5rem;
     padding-bottom: 2rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    margin-right: 20rem;
   }
 }

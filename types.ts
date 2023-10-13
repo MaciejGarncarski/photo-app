@@ -43,6 +43,26 @@ export interface paths {
             };
           };
         };
+        /** @description Default Response */
+        400: {
+          content: {
+            'application/json': {
+              statusCode: number;
+              message: string;
+              error: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        404: {
+          content: {
+            'application/json': {
+              statusCode: number;
+              message: string;
+              error: string;
+            };
+          };
+        };
       };
     };
   };
@@ -73,6 +93,16 @@ export interface paths {
                 bio: string | null;
                 createdAt: string;
               };
+            };
+          };
+        };
+        /** @description Default Response */
+        400: {
+          content: {
+            'application/json': {
+              statusCode: number;
+              message: string;
+              error: string;
             };
           };
         };

@@ -9,13 +9,26 @@ export const useRegister = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       email,
       username,
       password,
       confirmPassword,
     }: RegisterFormValues) => {
-      return registerUser({ email, confirmPassword, password, username });
+      try {
+        const { data } = await registerUser({
+          email,
+          confirmPassword,
+          password,
+          username,
+        });
+        return data.data;
+      } catch (err) {
+        if (err instanceof registerUser.Error) {
+          const { data } = err.getActualType();
+          throw new Error(data.message);
+        }
+      }
     },
     onSuccess: async () => {
       router.push('/');
