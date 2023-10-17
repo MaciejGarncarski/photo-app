@@ -13,3 +13,4 @@ node_modules/
 .public/
 tsconfig.json
 jest.setup.js
+types.ts

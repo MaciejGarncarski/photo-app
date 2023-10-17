@@ -15,18 +15,19 @@ import styles from './chat-users-list.module.scss';
 
 type Props = {
   userId: string;
+  message: string;
 };
 
 const MotionLink = motion(Link);
 
-export const ChatUser = ({ userId }: Props) => {
+export const ChatUser = ({ userId, message }: Props) => {
   const { data, isLoading } = useUser({ userId });
   const params = useParams();
 
   const isActive = userId === (params?.receiverId as string);
 
   return (
-    <li key={userId} data-cy="chat user" className={styles.listItem}>
+    <li className={styles.listItem}>
       {!data || isLoading ? (
         <span className={clsx(styles.loading, styles.link)}>
           <Loader color="accent" size="small" />
@@ -37,10 +38,12 @@ export const ChatUser = ({ userId }: Props) => {
           href={`/chat/${userId}`}
           className={clsx(isActive && styles.linkActive, styles.link)}
         >
-          <Avatar userId={userId} size="small" />
-          <span className={styles.name}>
-            <span className={styles.fullName}>{data.name}</span>
+          <Avatar userId={userId} size="medium" />
+          <span className={styles.rightCol}>
             <span className={styles.username}>@{data.username}</span>
+            <span className={styles.message}>
+              {message || 'No messages yet.'}
+            </span>
           </span>
         </MotionLink>
       )}

@@ -5,8 +5,12 @@
   margin-inline: auto;
 
   @include common.mediaquery('tablet') {
-    max-width: 60rem;
+    max-width: 50rem;
     padding: 0 2rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    max-width: 60rem;
   }
 }
 

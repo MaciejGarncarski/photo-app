@@ -20,7 +20,7 @@
     max-height: 100rem;
     overflow: auto;
     left: 0;
-    gap: 4rem;
+    gap: 5vh;
   }
 
   @include common.mediaquery('desktop') {

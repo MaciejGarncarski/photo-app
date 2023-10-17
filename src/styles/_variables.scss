@@ -15,8 +15,8 @@
 
   --color-button-text: rgb(22, 22, 22);
 
-  --transition: 0.25s ease;
-  --transition-fast: 0.125s ease;
+  --transition: 0.25s ease-in-out;
+  --transition-fast: 0.125s ease-in-out;
 
   --gradient: linear-gradient(90deg,
       var(--color-gray) 0px,
@@ -37,7 +37,7 @@
   --radius-medium: 0.7rem;
   --radius-small: 0.375rem;
 
-  --header-width: 20rem;
+  --header-width: calc(10rem + 10vw);
   --post-width: clamp(16rem, 85vw, 22rem);
   --post-margin: 1rem;
 

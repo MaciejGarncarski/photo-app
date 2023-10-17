@@ -38,15 +38,17 @@ export const ChatRoom = () => {
       <header className={styles.header}>
         <Button variant="primary" type="button" onClick={goBack}>
           <ArrowLeft />
-          <span className={styles.goBack}>Go back</span>
         </Button>
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
           <Avatar userId={friendData?.id || ''} size="small" />
-          <p className={styles.headerHeading}>
-            {friendData?.name && <span>{friendData?.name}</span>}
-            &nbsp;
-            <span data-cy="chatroom username">@{friendData?.username}</span>
-          </p>
+          <span className={styles.userInfo}>
+            <span className={styles.name}>
+              {friendData?.name && <span>{friendData?.name}</span>}
+            </span>
+            <span data-cy="chatroom username" className={styles.username}>
+              @{friendData?.username}
+            </span>
+          </span>
         </Link>
       </header>
 

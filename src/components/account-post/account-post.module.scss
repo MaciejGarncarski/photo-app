@@ -6,7 +6,7 @@
   position: relative;
   display: block;
   background-color: var(--color-secondary);
-  box-shadow: 0 5px 0 0 var(--shadow-1), 0 0 0 1px var(--shadow-1);
+  box-shadow: 0 0 0 2px var(--shadow-1);
   border: none;
   transition: box-shadow var(--transition-fast);
   flex: 1 0 0%;
@@ -17,7 +17,7 @@
     height: 14rem;
 
     &:focus {
-      box-shadow: 0 5px 0 0 var(--color-accent), 0 0 0 1px var(--color-accent);
+      box-shadow: 0 0 0 2px var(--color-accent);
       outline: none;
     }
   }
@@ -50,7 +50,7 @@
   background-color: var(--color-overlay);
   color: rgb(255, 255, 255);
   opacity: 0;
-  transition: opacity var(--transition-fast);
+  transition: opacity var(--transition);
 
   @include common.mediaquery('desktop') {
     &:hover {

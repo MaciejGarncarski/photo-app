@@ -10,10 +10,12 @@
     height: calc(100dvh - 15rem);
     overflow: auto;
     padding: 0 0.5rem;
+    padding-bottom: 1rem;
 
-    @include common.mediaquery('desktop') {
-        height: calc(100dvh - 20rem);
-        padding: 0 2rem;
+    @include common.mediaquery('tablet') {
+        height: calc(100dvh - 18rem);
+        padding: 0;
+        padding-bottom: 2rem;
         gap: 2rem;
     }
 }

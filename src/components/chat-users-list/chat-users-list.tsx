@@ -1,7 +1,7 @@
 'use client';
 
-import { InfiniteData, UseInfiniteQueryResult } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { Fragment } from 'react';
 
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
@@ -9,22 +9,18 @@ import { ChatUser } from '@/src/components/chat-users-list/chat-user';
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Loader } from '@/src/components/loader/loader';
-import { ChatUsers } from '@/src/schemas/chat';
+import { useChatUsers } from '@/src/components/pages/chat/use-chat-users';
 
 import styles from './chat-users-list.module.scss';
 
-type Props = {
-  chatUsers: UseInfiniteQueryResult<InfiniteData<ChatUsers>>;
-  isEnabled: boolean;
-};
-
-export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
-  const { data, isLoading, fetchNextPage, hasNextPage, isError } = chatUsers;
+export const ChatUsersList = () => {
+  const { data, hasNextPage, fetchNextPage, isLoading, isError } =
+    useChatUsers();
 
   const { ref } = useInfiniteScroll({
     hasNextPage: Boolean(hasNextPage),
     fetchNextPage,
-    enabled: isEnabled,
+    enabled: true,
   });
 
   if (!data || isLoading) {
@@ -47,8 +43,17 @@ export const ChatUsersList = ({ chatUsers, isEnabled }: Props) => {
       className={styles.list}
     >
       {data.pages.map((page) => {
-        return page.users.map((userId) => {
-          return <ChatUser userId={userId} key={userId} />;
+        return page.users.map(({ id, message }, idx) => {
+          return (
+            <Fragment key={id}>
+              <ChatUser userId={id} message={message} />
+              {page.users.length - 1 !== idx && (
+                <li>
+                  <hr className={styles.separator}></hr>
+                </li>
+              )}
+            </Fragment>
+          );
         });
       })}
       {hasNextPage && !isLoading && (

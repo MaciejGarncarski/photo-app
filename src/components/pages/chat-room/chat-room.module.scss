@@ -23,7 +23,7 @@
   height: 3rem;
   margin-bottom: 1rem;
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     justify-content: flex-start;
     padding: 0.75rem 1.5rem;
     gap: 5rem;
@@ -42,22 +42,28 @@
   }
 }
 
-.headerHeading {
-  font-size: 1.5rem;
-  max-width: 10rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @include common.mediaquery('tablet') {
-    max-width: unset;
-  }
-}
-
 .userHeader {
   display: flex;
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+
+  @include common.mediaquery('tablet') {
+    gap: 1rem;
+  }
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.username {
+  font-size: 0.9rem;
 }
 
 .form {
@@ -69,9 +75,8 @@
   gap: 1rem;
   padding: 0 1rem;
   max-height: 15rem;
-  margin-top: 1rem;
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     gap: 2rem;
     background-color: var(--color-secondary);
     border-radius: var(--radius-medium);

@@ -11,14 +11,14 @@
   width: clamp(20rem, 80vw, 40rem);
   box-shadow: var(--shadow-pimary);
 
-  @include common.mediaquery('desktop') {
+  @include common.mediaquery('tablet') {
     margin: 0;
     width: auto;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     padding: 0.75rem 1.5rem;
-    width: clamp(25rem, 35vw, 34rem);
+    width: clamp(25rem, 34vw, 34rem);
   }
 }
 

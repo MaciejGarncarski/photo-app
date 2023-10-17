@@ -17,9 +17,13 @@
   }
 
   @include common.mediaquery('tablet') {
-    padding: 1rem 2rem;
+    padding: 1rem;
     width: clamp(30rem, 50vw, 50rem);
     border-radius: var(--radius-medium);
+  }
+
+  @include common.mediaquery('desktop') {
+    padding: 1rem 2rem;
   }
 }
 
@@ -61,6 +65,5 @@
 
   @include common.mediaquery('desktop') {
     margin-top: 0;
-
   }
 }
