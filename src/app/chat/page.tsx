@@ -19,7 +19,6 @@ const ChatPage = async () => {
       queryFn: async ({ pageParam }) => {
         const data = await getChatUsers({
           skip: pageParam.toString(),
-          searchedUser: '',
         });
 
         if (!data['data']) {
