@@ -15,7 +15,7 @@ import styles from './chat-users-list.module.scss';
 
 type Props = {
   userId: string;
-  message: string;
+  message: string | null;
 };
 
 const MotionLink = motion(Link);

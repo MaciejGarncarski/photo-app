@@ -38,11 +38,11 @@ const ChatPage = async () => {
         }
 
         await Promise.all(
-          data.users.map(async (user) => {
+          data.users.map(async (userData) => {
             await queryClient.prefetchQuery({
-              queryKey: ['user', user],
+              queryKey: ['user', userData.id],
               queryFn: async () => {
-                const userRequest = await getUser({ userId: user });
+                const userRequest = await getUser({ userId: userData.id });
                 if (!userRequest.data) {
                   throw new Error('no user');
                 }
