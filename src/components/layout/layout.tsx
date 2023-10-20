@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 
-import { Header } from '@/src/components/header/header';
+import { Navbar } from '@/src/components/navbar/navbar';
 
 import styles from './layout.module.scss';
 
@@ -13,7 +13,7 @@ type Props = {
 export const Layout = ({ children }: Props) => {
   return (
     <div className={styles.layout}>
-      <Header />
+      <Navbar />
       <div className={styles.container}>{children}</div>
     </div>
   );

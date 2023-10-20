@@ -1,6 +1,6 @@
 @use '/src/styles/common';
 
-.nav {
+.navbar {
   padding: 0.25rem 0.75rem;
   display: flex;
   justify-content: center;
@@ -11,23 +11,85 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: clamp(20rem, 60vw, 30rem);
+  width: clamp(20rem, 60vw, 25rem);
   z-index: 3;
   border-radius: var(--radius-medium);
   box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.3);
   background-color: var(--color-secondary);
 
-  @include common.mediaquery('desktop') {
-    background-color: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    width: 100%;
-    padding: 0;
-    position: static;
-    flex-direction: column;
-    margin: 0;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
 
+  @include common.mediaquery('tablet') {
+    padding: 0.5rem;
+  }
+}
+
+.navbarDesktop {
+  background-color: var(--color-secondary);
+  padding: 1rem;
+  flex: 0 0 20rem;
+  --gap-top: 3rem;
+  height: calc(100vh - calc(var(--gap-top) * 2));
+  top: var(--gap-top);
+  position: sticky;
+  box-shadow: var(--shadow-pimary);
+  border-radius: calc(var(--radius-medium) + 0.5rem);
+  margin-left: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-left: 0.75rem;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.signedInInfo {
+  box-shadow: var(--shadow-pimary);
+  margin-top: auto;
+  margin: 0;
+  margin-top: auto;
+  position: relative;
+  padding: 0.5rem;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-medium);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userNameInfo {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.name {
+  max-width: 12ch;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.username {
+  max-width: 8ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

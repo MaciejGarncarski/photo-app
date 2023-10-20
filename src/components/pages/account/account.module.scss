@@ -9,6 +9,7 @@
   }
 
   @include common.mediaquery('desktop') {
+    margin-top: 1rem;
     padding: 0 2rem;
     max-width: 60rem;
   }
