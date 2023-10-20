@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const MOBILE_DEVICE_MAX_WIDTH = 749;
+const MOBILE_DEVICE_MAX_WIDTH = 1279;
 
 export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState<boolean | 'loading'>('loading');

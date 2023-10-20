@@ -19,14 +19,14 @@ type Props = {
 export const UpdateAvatarView = ({ closeModal }: Props) => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
   const resetFinalImages = () => setFinalImages([]);
-  const { onSaveImage, isLoading, isFinalImageEmpty } = useUploadAvatar({
+  const { onSaveImage, isPending, isFinalImageEmpty } = useUploadAvatar({
     finalImages,
     closeModal,
     resetFinalImages,
   });
   const { previewImages } = getPreviewImages(finalImages);
 
-  if (isLoading) {
+  if (isPending) {
     return <Loader color="accent" size="big" />;
   }
 
@@ -57,7 +57,7 @@ export const UpdateAvatarView = ({ closeModal }: Props) => {
             <Button
               type="button"
               variant="primary"
-              disabled={isLoading || isFinalImageEmpty}
+              disabled={isPending || isFinalImageEmpty}
               onClick={onSaveImage}
             >
               Save new image

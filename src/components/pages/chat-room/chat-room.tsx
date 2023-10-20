@@ -17,7 +17,7 @@ export const ChatRoom = () => {
   const router = useRouter();
 
   const {
-    isLoading,
+    isPending,
     isUserLoading,
     data,
     friendData,
@@ -27,7 +27,7 @@ export const ChatRoom = () => {
     ref,
   } = useChatRoom();
 
-  if (isLoading || isUserLoading || !data) {
+  if (isPending || isUserLoading || !data) {
     return <Loader color="accent" size="big" marginTop />;
   }
 
@@ -54,7 +54,7 @@ export const ChatRoom = () => {
 
       <ChatMessages
         hasNextPage={hasNextPage}
-        isLoading={isLoading}
+        isPending={isPending}
         messagesData={data}
         ref={ref}
       />

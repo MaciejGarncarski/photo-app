@@ -21,7 +21,7 @@ export const PostImage = ({ priority, src, postId }: Props) => {
   const { isMobile } = useIsMobile();
   const { data: postData } = usePost({ postId: postId });
   const { data } = useUser({ userId: postData?.authorId || '' });
-  const [isLoading, setIsLoading] = useState(true);
+  const [isPending, setisPending] = useState(true);
 
   if (!postData) {
     return null;
@@ -33,18 +33,18 @@ export const PostImage = ({ priority, src, postId }: Props) => {
 
   return (
     <>
-      {isLoading && (
+      {isPending && (
         <div className={styles.loader}>
           <Loader color="accent" size="big" />
         </div>
       )}
       <MotionImage
-        className={clsx({ [styles.imgLoading]: isLoading }, styles.sliderImage)}
+        className={clsx({ [styles.imgLoading]: isPending }, styles.sliderImage)}
         src={src}
         priority={priority}
-        onLoad={() => setIsLoading(false)}
-        width={size}
+        onLoad={() => setisPending(false)}
         quality={100}
+        width={size}
         height={size}
         alt={`${data?.username} - ${shortDescription}`}
       />

@@ -10,7 +10,7 @@ import styles from './list-modal-item.module.scss';
 type Props = {
   icon: ReactNode;
   children: ReactNode;
-  isLoading?: boolean;
+  isPending?: boolean;
   loadingText?: string;
 };
 
@@ -55,13 +55,13 @@ export const ListModalItem = ({
   disabled,
   href,
   onClick,
-  isLoading,
+  isPending,
   loadingText,
 }: ModalListItemProps) => {
   return (
     <li className={styles.item}>
       <AnimatePresence mode="wait">
-        {isLoading ? (
+        {isPending ? (
           <span className={styles.content}>
             <Loader size="small" color="primary" />
             {loadingText}

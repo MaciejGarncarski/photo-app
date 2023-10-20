@@ -1,25 +1,6 @@
 @use '/src/styles/common';
 
 
-@keyframes animate-bg {
-  0% {
-    background-color: var(--color-secondary);
-  }
-
-  50% {
-    background-color: var(--color-gray);
-  }
-
-  90% {
-    background-color: var(--color-secondary);
-  }
-}
-
-%gradient {
-  background-size: var(--placeholder-bg-size);
-  background-color: var(--color-secondary);
-  animation: animate-bg 2s ease infinite;
-}
 
 .placeholder {
   width: var(--post-width);
@@ -28,8 +9,8 @@
   display: flex;
   flex-direction: column;
   height: 22rem;
-  @extend %gradient;
-  box-shadow: var(--shadow-pimary);
+  background-color: var(--color-secondary);
+  animation: var(--skeleton-animation);
 
   @include common.mediaquery('tablet') {
     height: 30rem;

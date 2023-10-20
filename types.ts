@@ -373,7 +373,17 @@ export interface paths {
       responses: {
         /** @description Default Response */
         200: {
-          content: never;
+          content: {
+            "application/json": {
+              data?: {
+                id: number;
+                userId: string;
+                postId: number;
+                createdAt: string;
+                text: string;
+              };
+            };
+          };
         };
       };
     };

@@ -27,7 +27,7 @@ export const useChatRoom = () => {
 
   const {
     data,
-    isLoading,
+    isPending,
     ref,
     hasNextPage,
     friendId,
@@ -36,7 +36,7 @@ export const useChatRoom = () => {
 
   const {
     data: friendData,
-    isLoading: isUserLoading,
+    isPending: isUserLoading,
     isError: userError,
   } = useUser({ userId: friendId || '' });
   const { data: chatRoomData, isError: chatRoomError } = useChatRoomData();
@@ -75,7 +75,7 @@ export const useChatRoom = () => {
   );
 
   return {
-    isLoading,
+    isPending,
     isUserLoading,
     data,
     friendId,

@@ -6,19 +6,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
-import { useModal } from '@/src/hooks/use-modal';
 
 import { SignInButton } from '@/src/components/buttons/sign-in-button/sign-in-button';
 import { getNavListData } from '@/src/components/navbar/navbar-buttons/use-nav-buttons';
-import { Settings } from '@/src/components/settings/settings';
+import { useSettingsAtom } from '@/src/components/settings/use-settings-atom';
 
 import styles from './navbar-buttons.module.scss';
 
 export const NavButtons = () => {
-  const { sessionUser, isLoading, isSignedIn } = useAuth();
+  const { sessionUser, isPending, isSignedIn } = useAuth();
   const path = usePathname();
-  const settingsModal = useModal();
   const { navButtonsList } = getNavListData(sessionUser?.username);
+  const { setSettingsOpen } = useSettingsAtom();
 
   return (
     <>
@@ -55,18 +54,14 @@ export const NavButtons = () => {
             data-cy="settings button"
             type="button"
             className={styles.listItemContent}
-            onClick={settingsModal.openModal}
+            onClick={() => setSettingsOpen(true)}
           >
             <GearSix />
             <span className={styles.title}>settings</span>
           </button>
         </li>
       </ul>
-      {(!isSignedIn || isLoading) && <SignInButton />}
-      <Settings
-        isVisible={settingsModal.isModalOpen}
-        closeSettingsModal={settingsModal.closeModal}
-      />
+      {(!isSignedIn || isPending) && <SignInButton />}
     </>
   );
 };

@@ -12,14 +12,14 @@ type Props = {
 };
 
 export const PostFooter = ({ postId, parentModalOpen }: Props) => {
-  const { data: post, isLoading } = usePost({ postId });
+  const { data: post, isPending } = usePost({ postId });
 
   const { data } = useUser({ userId: post?.authorId || '' });
 
   const { isDescriptionLong, shortDescription, showMore, toggleShowMore } =
     usePostFooter({ description: post?.description || '' });
 
-  if (isLoading || !post) {
+  if (isPending || !post) {
     return null;
   }
 

@@ -30,7 +30,7 @@ export const useStatsModal = ({ userId, type }: Arguments) => {
   return {
     isEmpty,
     ref,
-    isLoading: currentData.isLoading,
+    isPending: currentData.isPending,
     data: currentData.data,
     hasNextPage: currentData.hasNextPage,
   };

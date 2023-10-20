@@ -69,7 +69,7 @@ export const useUploadAvatar = ({
 
   return {
     onSaveImage,
-    isLoading: uploadNewAvatar.isPending,
+    isPending: uploadNewAvatar.isPending,
     isFinalImageEmpty,
   };
 };

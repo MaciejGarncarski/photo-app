@@ -6,7 +6,7 @@ import { getSessionUser } from '@/src/services/auth.service';
 export const useAuth = () => {
   const {
     data: sessionUser,
-    isLoading,
+    isPending,
     isRefetching,
     isFetching,
   } = useQuery({
@@ -24,15 +24,15 @@ export const useAuth = () => {
     retry: false,
   });
 
-  const isSignedIn = Boolean(sessionUser?.id) && !isLoading;
+  const isSignedIn = Boolean(sessionUser?.id) && !isPending;
 
   return useMemo(() => {
     return {
       sessionUser,
       isSignedIn,
-      isLoading,
+      isPending,
       isRefetching,
       isFetching,
     };
-  }, [isFetching, isLoading, isRefetching, isSignedIn, sessionUser]);
+  }, [isFetching, isPending, isRefetching, isSignedIn, sessionUser]);
 };

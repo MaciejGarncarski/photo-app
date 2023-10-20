@@ -17,8 +17,7 @@
   box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.3);
   background-color: var(--color-secondary);
 
-
-  @include common.mediaquery('tablet') {
+  @include common.mediaquery('desktop') {
     background-color: transparent;
     box-shadow: none;
     border-radius: 0;

@@ -2,16 +2,13 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { useAuth } from '@/src/hooks/use-auth';
 import { nextPageParam } from '@/src/utils/api/next-page-param';
 
 import { getChatUsers } from '@/src/services/chat.service';
 
 export const useChatUsers = () => {
-  const { sessionUser } = useAuth();
-
   return useInfiniteQuery({
-    queryKey: ['chat users', sessionUser?.id],
+    queryKey: ['chat users'],
     queryFn: async ({ pageParam = 0 }) => {
       const { data } = await getChatUsers({
         skip: pageParam.toString(),

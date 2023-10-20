@@ -12,9 +12,9 @@ type Props = {
 };
 
 export const HomePost = ({ postId, priority }: Props) => {
-  const { data: post, isLoading } = usePost({ postId });
+  const { data: post, isPending } = usePost({ postId });
 
-  if (isLoading || !post) {
+  if (isPending || !post) {
     return (
       <li>
         <PostPlaceholder />

@@ -10,7 +10,7 @@ export const useChatMessages = () => {
   const friendId = params?.receiverId as string;
   const { isScrollingUp } = useIsScrollingUp();
 
-  const { isLoading, fetchNextPage, hasNextPage, isError, data } =
+  const { isPending, fetchNextPage, hasNextPage, isError, data } =
     useInfiniteMessages({
       friendId,
     });
@@ -23,7 +23,7 @@ export const useChatMessages = () => {
 
   return {
     data,
-    isLoading,
+    isPending,
     hasNextPage,
     ref,
     isScrollingUp,

@@ -22,7 +22,7 @@ export const EditPost = () => {
   const router = useRouter();
   const params = useParams();
   const postId = parseInt(params?.postId as string);
-  const { data, isLoading } = usePost({ postId });
+  const { data, isPending } = usePost({ postId });
   const { mutate } = useEditPost({ postId });
   const saveModal = useModal();
   const cancelModal = useModal();
@@ -39,7 +39,7 @@ export const EditPost = () => {
     },
   });
 
-  if (!data?.description || isLoading) {
+  if (!data?.description || isPending) {
     return <Loader color="accent" size="big" marginTop />;
   }
 

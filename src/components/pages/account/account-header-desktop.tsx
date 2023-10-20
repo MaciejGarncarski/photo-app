@@ -26,9 +26,9 @@ export const AccountHeaderDesktop = ({
   openModal,
 }: Props) => {
   const { isSignedIn } = useAuth();
-  const { data, isLoading } = useUser({ userId });
+  const { data, isPending } = useUser({ userId });
 
-  if (isLoading || !data) {
+  if (isPending || !data) {
     return null;
   }
 

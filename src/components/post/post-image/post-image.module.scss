@@ -16,13 +16,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  object-fit: cover;
   flex-shrink: 0;
   pointer-events: none;
   user-select: none;
   border-radius: var(--radius-small);
   height: auto;
   width: 100%;
+  object-fit: contain;
+  max-height: 70vh;
 
   @include common.mediaquery('tablet') {
     object-fit: contain;

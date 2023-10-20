@@ -14,11 +14,11 @@ import styles from './chat-messages.module.scss';
 type Props = {
   messagesData: InfiniteData<ChatMessagesType>;
   hasNextPage: boolean;
-  isLoading: boolean;
+  isPending: boolean;
 };
 
 export const ChatMessages = forwardRef<HTMLLIElement, Props>(
-  ({ hasNextPage, isLoading, messagesData }, ref) => {
+  ({ hasNextPage, isPending, messagesData }, ref) => {
     if (messagesData.pages[0].messagesCount === 0) {
       return (
         <div className={styles.messages}>
@@ -88,7 +88,7 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
           });
         })}
 
-        {hasNextPage && !isLoading && (
+        {hasNextPage && !isPending && (
           <li className={styles.loading} ref={ref}>
             <Loader color="accent" size="big" />
           </li>

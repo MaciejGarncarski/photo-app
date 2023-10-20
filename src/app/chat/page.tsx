@@ -5,7 +5,6 @@ import { Hydrate } from '@/src/utils/api/hydrate';
 
 import { Chat } from '@/src/components/pages/chat/chat';
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
-import { getSessionUserServer } from '@/src/services/auth.service';
 import { getChatUsers } from '@/src/services/chat.service';
 import { getUser } from '@/src/services/user.service';
 
@@ -13,9 +12,8 @@ const ChatPage = async () => {
   const queryClient = getQueryClient();
 
   try {
-    const sessionUser = await getSessionUserServer();
     const users = await queryClient.fetchInfiniteQuery({
-      queryKey: ['chat users', sessionUser.id, ''],
+      queryKey: ['chat users'],
       queryFn: async ({ pageParam }) => {
         const data = await getChatUsers({
           skip: pageParam.toString(),

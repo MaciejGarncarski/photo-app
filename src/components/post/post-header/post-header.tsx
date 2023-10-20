@@ -10,6 +10,7 @@ import { Button } from '@/src/components/buttons/button/button';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
 import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
+import { usePost } from '@/src/components/pages/account/use-post';
 import { usePostHeader } from '@/src/components/post/post-header/use-post-header';
 import { PostHeaderPlaceholder } from '@/src/components/post/post-header-placeholder/post-header-placeholder';
 import { PostOptions } from '@/src/components/post/post-options/post-options';
@@ -18,18 +19,13 @@ import styles from './post-header.module.scss';
 
 type Props = {
   tag?: 'header' | 'div';
-  authorId: string;
-  createdAt: string;
   postId: number;
 };
 
-export const PostHeader = ({
-  tag: Tag = 'header',
-  authorId,
-  createdAt,
-  postId,
-}: Props) => {
-  const { isLoading, sessionUser } = useAuth();
+export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
+  const { isPending, sessionUser } = useAuth();
+
+  const { data } = usePost({ postId });
 
   const {
     handleDeletePost,
@@ -40,14 +36,15 @@ export const PostHeader = ({
     postData,
     dateFromNow,
   } = usePostHeader({
-    authorId,
-    createdAt,
+    authorId: data?.authorId || '',
+    createdAt: data?.createdAt || '',
     postId,
   });
 
-  const isAuthor = sessionUser?.id === authorId;
+  const isAuthor = sessionUser?.id === data?.authorId || '';
+  const authorId = data?.authorId;
 
-  if (isLoading) {
+  if (isPending || !authorId) {
     return <PostHeaderPlaceholder />;
   }
 

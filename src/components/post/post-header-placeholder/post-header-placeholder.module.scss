@@ -1,10 +1,5 @@
 @use '/src/styles/common.scss';
 
-%gradient {
-  background-size: var(--placeholder-bg-size);
-  background-image: var(--gradient);
-  animation: var(--placeholder-animation);
-}
 
 .placeholder {
   display: flex;
@@ -17,10 +12,15 @@
   }
 }
 
-.avatar {
-  @extend %gradient;
+.commonPlaceholder {
+  background-color: var(--color-primary);
+  animation: var(--skeleton-animation);
+}
 
-  border-radius: var(--radius-small);
+.avatar {
+  @extend .commonPlaceholder;
+
+  border-radius: 100%;
   --avatar-size-placeholder: 2.5rem;
   width: var(--avatar-size-placeholder);
   height: var(--avatar-size-placeholder);
@@ -31,7 +31,7 @@
 }
 
 .name {
-  @extend %gradient;
+  @extend .commonPlaceholder;
 
   height: 2.5rem;
   width: 7rem;
@@ -39,7 +39,7 @@
 }
 
 .button {
-  @extend %gradient;
+  @extend .commonPlaceholder;
 
   width: 4rem;
   height: 2.5rem;

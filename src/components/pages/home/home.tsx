@@ -17,7 +17,7 @@ import { useHomepagePosts } from '@/src/components/pages/home/use-homepage-posts
 import styles from './home.module.scss';
 
 export const Home = () => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isError } =
+  const { data, isPending, hasNextPage, fetchNextPage, isError } =
     useHomepagePosts();
 
   const { isSignedIn } = useAuth();
@@ -60,7 +60,7 @@ export const Home = () => {
         });
       })}
 
-      {!isLoading && hasNextPage && (
+      {!isPending && hasNextPage && (
         <li ref={ref}>
           <Loader size="big" color="primary" />
         </li>

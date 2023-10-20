@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const AccountPostsList = ({ userId }: Props) => {
-  const { data, isLoading, hasNextPage, fetchNextPage } = useAccountPosts({
+  const { data, isPending, hasNextPage, fetchNextPage } = useAccountPosts({
     userId,
   });
 
@@ -24,7 +24,7 @@ export const AccountPostsList = ({ userId }: Props) => {
     enabled: true,
   });
 
-  if (!data || isLoading) {
+  if (!data || isPending) {
     return <Loader marginTop color="accent" size="big" />;
   }
 
@@ -45,7 +45,7 @@ export const AccountPostsList = ({ userId }: Props) => {
           });
         })}
       </motion.div>
-      {hasNextPage && hasPosts && !isLoading && (
+      {hasNextPage && hasPosts && !isPending && (
         <div ref={ref} className={styles.loading}>
           <Loader color="primary" size="big" />
         </div>

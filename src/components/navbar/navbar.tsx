@@ -13,12 +13,16 @@ export const Navbar = () => {
   const { isMobile } = useIsMobile();
 
   if (isMobile === 'loading') {
-    return null;
+    return (
+      <nav className={styles.nav}>
+        <NavButtons />
+      </nav>
+    );
   }
 
   return (
     <motion.nav
-      variants={navbarVariants}
+      variants={isMobile ? navbarVariants : {}}
       initial="hidden"
       animate="visible"
       className={styles.nav}

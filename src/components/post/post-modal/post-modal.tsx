@@ -1,20 +1,15 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import ReactFocusLock from 'react-focus-lock';
 
-import { useUser } from '@/src/hooks/use-user';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
-import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
-import { CommentForm } from '@/src/components/forms/comment-form/comment-form';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
-import { usePost } from '@/src/components/pages/account/use-post';
-import { PostComments } from '@/src/components/post/post-comments/post-comments';
-import { PostFooter } from '@/src/components/post/post-footer/post-footer';
-import { PostHeader } from '@/src/components/post/post-header/post-header';
-import { PostImagesCarousel } from '@/src/components/post/post-images-carousel/post-images-carousel';
+import { PostModalDesktop } from '@/src/components/post/post-modal/post-modal-desktop';
+import { PostModalMobile } from '@/src/components/post/post-modal/post-modal-mobile';
+import { usePostModal } from '@/src/components/post/post-modal/use-post-modal';
 
 import styles from './post-modal.module.scss';
 
@@ -26,33 +21,27 @@ type Props = {
 };
 
 export const PostModal = ({
-  postId,
   closeModal,
   isVisible,
+  postId,
   isPostPage,
 }: Props) => {
-  const { data: post, isLoading } = usePost({ postId });
-  const { data: author } = useUser({ userId: post?.authorId || '' });
-  const router = useRouter();
+  const { isMobile } = useIsMobile();
+  const { handleClose } = usePostModal({
+    closeModal,
+    isPostPage: Boolean(isPostPage),
+    postId,
+  });
 
-  if (isLoading || !post) {
+  if (isMobile === 'loading') {
     return null;
   }
-
-  const { authorId, createdAt } = post;
-
-  const handleClose = () => {
-    closeModal();
-    if (isPostPage) {
-      router.push(`/${author?.username}`);
-    }
-  };
 
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
         <ModalBackdrop closeModal={handleClose}>
-          <ReactFocusLock autoFocus={false}>
+          <ReactFocusLock autoFocus={false} className={styles.focusLock}>
             <motion.div
               variants={modalVariants}
               initial="hidden"
@@ -61,25 +50,11 @@ export const PostModal = ({
               role="dialog"
               className={styles.container}
             >
-              <div className={styles.closeButton}>
-                <ModalCloseButton onClose={handleClose} />
-              </div>
-              <PostHeader
-                tag="div"
-                authorId={authorId}
-                createdAt={createdAt.toString()}
-                postId={postId}
-              />
-              <div className={styles.content}>
-                <div className={styles.carousel}>
-                  <PostImagesCarousel postId={postId} priority={true} />
-                </div>
-                <PostFooter postId={postId} parentModalOpen={isVisible} />
-                <section className={styles.commentsContainer}>
-                  <PostComments postId={postId} />
-                  <CommentForm postId={postId} />
-                </section>
-              </div>
+              {isMobile ? (
+                <PostModalMobile closeModal={closeModal} postId={postId} />
+              ) : (
+                <PostModalDesktop closeModal={closeModal} postId={postId} />
+              )}
             </motion.div>
           </ReactFocusLock>
         </ModalBackdrop>

@@ -3,6 +3,13 @@
 .container {
   margin: 0 auto;
   width: clamp(20rem, 80vw, 50rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include common.mediaquery('tablet') {
+    width: clamp(20rem, 50vw, 50rem);
+  }
 }
 
 .avatar {
@@ -20,7 +27,7 @@
 
     &:hover,
     &:focus {
-      >.icon {
+      > .icon {
         opacity: 1;
       }
     }
@@ -32,7 +39,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
+  z-index: 1;
   padding: 0.5rem;
   border-radius: var(--radius-medium);
   background-color: rgb(0 0 0 / 0.6);

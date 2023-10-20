@@ -7,6 +7,7 @@ import {
   User,
 } from '@phosphor-icons/react';
 import { useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
@@ -46,7 +47,7 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
     return <SpeakerLow />;
   }, [isSoundEnabled]);
 
-  return (
+  return createPortal(
     <>
       <ListModal
         isVisible={isVisible}
@@ -68,7 +69,7 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
           type="button"
           onClick={toggleTheme}
           icon={<ThemeButton />}
-          isLoading={isThemeMutationPending}
+          isPending={isThemeMutationPending}
           loadingText="Updating..."
         >
           Change theme to {isDark ? 'light' : 'dark'}
@@ -79,7 +80,7 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
               type="button"
               onClick={toggleNotificationSound}
               icon={<SoundIcon />}
-              isLoading={isSoundMutationPending}
+              isPending={isSoundMutationPending}
               loadingText="Updating..."
             >
               Turn {isSoundEnabled ? 'off' : 'on'} sound notifications
@@ -98,6 +99,7 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
         closeSettingsModal={closeSettingsModal}
         signOutModal={signOutModal}
       />
-    </>
+    </>,
+    document.querySelector('#modal') as Element,
   );
 };

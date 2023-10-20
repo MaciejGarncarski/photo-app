@@ -40,7 +40,10 @@ const DefaultLayout = ({ children }: Props) => {
             closeButton
             className={inter.className}
           />
-          <Layout>{children}</Layout>
+          <Layout>
+            {children}
+            <div id="modal"></div>
+          </Layout>
         </Providers>
       </body>
     </html>

@@ -18,12 +18,7 @@
   --transition: 0.25s ease-in-out;
   --transition-fast: 0.125s ease-in-out;
 
-  --gradient: linear-gradient(90deg,
-      var(--color-gray) 0px,
-      var(--color-secondary) 20%,
-      var(--color-gray) 40%);
-  --placeholder-animation: skeleton-loading 3s infinite linear;
-  --placeholder-bg-size: 500%;
+  --skeleton-animation: skeleton 3s linear infinite forwards;
 
   --shadow-0-1: rgb(0, 0, 0, 0.08);
   --shadow-1: rgba(0, 0, 0, 0.1);

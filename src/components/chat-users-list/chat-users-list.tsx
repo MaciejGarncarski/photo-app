@@ -14,7 +14,7 @@ import { useChatUsers } from '@/src/components/pages/chat/use-chat-users';
 import styles from './chat-users-list.module.scss';
 
 export const ChatUsersList = () => {
-  const { data, hasNextPage, fetchNextPage, isLoading, isError } =
+  const { data, hasNextPage, fetchNextPage, isPending, isError } =
     useChatUsers();
 
   const { ref } = useInfiniteScroll({
@@ -23,7 +23,7 @@ export const ChatUsersList = () => {
     enabled: true,
   });
 
-  if (!data || isLoading) {
+  if (!data || isPending) {
     return <Loader color="accent" size="big" marginTop />;
   }
 
@@ -56,7 +56,7 @@ export const ChatUsersList = () => {
           );
         });
       })}
-      {hasNextPage && !isLoading && (
+      {hasNextPage && !isPending && (
         <div ref={ref} className={styles.loading}>
           <Loader color="accent" size="small" />
         </div>

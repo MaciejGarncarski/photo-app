@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const PostImagesCarousel = ({ postId, priority }: Props) => {
-  const { data: post, isLoading } = usePost({ postId });
+  const { data: post, isPending } = usePost({ postId });
 
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
     postId,
@@ -38,7 +38,7 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
     [currentIndex, width],
   );
 
-  if (isLoading || !post) {
+  if (isPending || !post) {
     return null;
   }
 

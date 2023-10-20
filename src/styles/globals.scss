@@ -56,16 +56,6 @@ a {
   text-decoration: none;
 }
 
-@keyframes skeleton-loading {
-  0% {
-    background-position: 90%;
-  }
-
-  100% {
-    background-position: -50%;
-  }
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -76,4 +66,18 @@ a {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
