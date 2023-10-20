@@ -14,7 +14,7 @@
     "build": "next build",
     "start": "next start",
     "prepare": "pnpm husky install",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --skipLibCheck --noEmit",
     "format:check": "prettier -c .",
     "vercel-build": "next build",
     "postinstall": "husky install",

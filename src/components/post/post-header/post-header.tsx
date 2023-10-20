@@ -36,8 +36,8 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
     postData,
     dateFromNow,
   } = usePostHeader({
-    authorId: data?.authorId || '',
-    createdAt: data?.createdAt || '',
+    authorId: data?.authorId,
+    createdAt: data?.createdAt,
     postId,
   });
 
