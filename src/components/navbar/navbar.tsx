@@ -22,11 +22,7 @@ export const Navbar = () => {
   const showUserOptions = !isMobile && sessionUser?.id && !isPending;
 
   if (isMobile === 'loading') {
-    return (
-      <nav className={styles.navbar}>
-        <NavButtons />
-      </nav>
-    );
+    return null;
   }
 
   if (isMobile) {
