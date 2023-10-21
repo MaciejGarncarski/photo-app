@@ -16,7 +16,7 @@ export const AspectRatioButtons = ({ setAspect, aspect }: Props) => {
   return (
     <section className={styles.container}>
       <Heading tag="h3" size="small">
-        Choose desired aspect ratio
+        Preferred aspect ratio
       </Heading>
       <motion.div
         className={styles.aspectRatioButtons}

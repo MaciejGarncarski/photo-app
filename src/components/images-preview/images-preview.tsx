@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { PreviewImages } from '@/src/utils/get-preview-images';
 
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
-import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './images-preview.module.scss';
 
@@ -18,27 +17,33 @@ type Props = {
 
 export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
   const emptyImagesLength = MAX_IMAGES_LENGTH - previewImages.length;
-  const arrayOfEmptyImages = Array.from(
-    { length: emptyImagesLength },
-    (_, el) => el,
-  );
+
+  const placeholders = Array.from({ length: emptyImagesLength }, (_, el) => el);
+
+  const images = [...previewImages, ...placeholders];
 
   return (
     <div>
-      <Heading tag="h2" size="medium">
-        Images in post
-      </Heading>
       <motion.div
         className={styles.previewContainer}
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        {previewImages.map((image) => {
-          if (!image?.src) {
-            return null;
+        {images.map((image) => {
+          if (!image || typeof image === 'number') {
+            return (
+              <button
+                key={image}
+                disabled
+                type="button"
+                className={styles.emptySpace}
+              >
+                <CameraPlus />
+                Empty
+              </button>
+            );
           }
-
           return (
             <motion.div key={image.id} className={styles.previewButton}>
               <motion.button
@@ -60,20 +65,6 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
                 height={200}
               />
             </motion.div>
-          );
-        })}
-
-        {arrayOfEmptyImages.map((id) => {
-          return (
-            <button
-              key={id}
-              disabled
-              type="button"
-              className={styles.emptySpace}
-            >
-              <CameraPlus />
-              <p>empty</p>
-            </button>
           );
         })}
       </motion.div>

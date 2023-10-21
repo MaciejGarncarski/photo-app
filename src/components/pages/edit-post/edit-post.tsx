@@ -54,7 +54,7 @@ export const EditPost = () => {
 
   return (
     <section className={styles.editPost}>
-      <Heading tag="h2" size="medium">
+      <Heading tag="h2" size="big">
         Edit post
       </Heading>
       <form className={styles.form}>

@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: flex-start;
-  margin-top: 3.5rem;
+  margin-top: 2rem;
   gap: 1rem;
   width: 100%;
   padding-bottom: 2rem;
@@ -14,6 +14,7 @@
   }
 
   @include common.mediaquery('tablet') {
+    margin-top: 3.5rem;
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -22,7 +23,6 @@
     padding-bottom: 2rem;
   }
 }
-
 
 .noPosts {
   grid-column: span 3;

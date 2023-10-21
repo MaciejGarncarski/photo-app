@@ -5,7 +5,6 @@ import { Button } from '@/src/components/buttons/button/button';
 import { getButtonList } from '@/src/components/forms/create-post-form/create-post-form.data';
 import { PostDetails } from '@/src/components/pages/create-post/types';
 import { TextArea } from '@/src/components/textarea/text-area';
-import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './create-post-form.module.scss';
 
@@ -32,9 +31,6 @@ export const CreatePostForm = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <Heading tag="h2" size="medium">
-        Post description
-      </Heading>
       <TextArea
         label="Description"
         placeholder="Type in post description"

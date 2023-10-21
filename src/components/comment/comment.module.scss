@@ -66,8 +66,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--color-text-gray);
 }
 
 .createdAt {
@@ -83,7 +83,7 @@
   background-color: transparent;
   align-items: center;
 
-  >svg {
+  > svg {
     width: 1rem;
     height: 1rem;
   }

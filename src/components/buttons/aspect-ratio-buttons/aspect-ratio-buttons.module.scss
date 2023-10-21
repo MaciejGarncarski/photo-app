@@ -2,13 +2,16 @@
 
 .container {
   margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .aspectRatioButtons {
   display: flex;
   gap: 1rem;
 
-  >button {
+  > button {
     flex-grow: 1;
   }
 }

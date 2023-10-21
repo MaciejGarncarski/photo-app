@@ -6,20 +6,17 @@
     align-items: flex-start;
     justify-content: flex-start;
     list-style: none;
-    gap: 1.25rem;
+    gap: 1.5rem;
     height: calc(100dvh - 15rem);
     overflow: auto;
     padding: 0 0.5rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 
-    @include common.mediaquery('tablet') {
+    @include common.mediaquery('desktop') {
         height: calc(100dvh - 18rem);
-        padding: 0;
-        padding-bottom: 2rem;
         gap: 2rem;
     }
 }
-
 
 .time {
     text-align: center;

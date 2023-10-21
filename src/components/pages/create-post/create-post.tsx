@@ -15,6 +15,7 @@ import { CreatePostForm } from '@/src/components/forms/create-post-form/create-p
 import { ImagesPreview } from '@/src/components/images-preview/images-preview';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { useFinalImages } from '@/src/components/pages/create-post/use-final-images';
+import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './create-post.module.scss';
 
@@ -54,6 +55,9 @@ export const CreatePost = () => {
 
   return (
     <div className={styles.createPost}>
+      <Heading tag="h2" size="big">
+        Create post
+      </Heading>
       {finalImages.length <= 3 && (
         <CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
       )}

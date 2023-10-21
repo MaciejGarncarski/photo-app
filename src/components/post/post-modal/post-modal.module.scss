@@ -3,7 +3,7 @@
 .container {
   position: relative;
   z-index: 1;
-  width: clamp(23rem, 85vw, 50rem);
+  width: clamp(22rem, 85vw, 50rem);
   background-color: var(--color-primary);
   left: 0;
   right: 0;
@@ -99,16 +99,11 @@
 }
 
 .commentsDesktop {
-  @include common.mediaquery('tablet') {
-    grid-column: 2 / 3;
-    height: 100%;
-    overflow: auto;
-    max-height: 60vh;
-  }
-
-  @include common.mediaquery('desktop') {
-    max-height: 60vh;
-  }
+  grid-column: 2 / 3;
+  height: 100%;
+  overflow: auto;
+  padding: 1rem 0;
+  max-height: 60vh;
 }
 
 .commentForm {

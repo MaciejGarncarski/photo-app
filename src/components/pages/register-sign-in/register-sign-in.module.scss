@@ -2,6 +2,9 @@
 
 .container {
   width: clamp(20rem, 50vw, 44rem);
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
 
   @include common.mediaquery('desktop') {
     background-color: var(--color-secondary);

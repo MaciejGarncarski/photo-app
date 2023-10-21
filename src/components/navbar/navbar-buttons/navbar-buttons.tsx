@@ -15,9 +15,15 @@ import styles from './navbar-buttons.module.scss';
 
 export const NavButtons = () => {
   const { sessionUser, isPending, isSignedIn } = useAuth();
-  const path = usePathname();
+  const paths = usePathname();
+
+  const [currentPathname] = paths
+    .split('/')
+    .filter((el, idx) => idx === 1)
+    .map((el) => '/' + el);
+
   const { navButtonsList } = getNavListData(sessionUser?.username);
-  const { setSettingsOpen } = useSettingsAtom();
+  const { isSettingsOpen, setSettingsOpen } = useSettingsAtom();
 
   return (
     <>
@@ -28,7 +34,8 @@ export const NavButtons = () => {
               return null;
             }
 
-            const isActive = path === href;
+            const isActive = currentPathname === href && !isSettingsOpen;
+
             return (
               <li key={title} className={styles.listItem}>
                 <Link
@@ -53,10 +60,15 @@ export const NavButtons = () => {
           <button
             data-cy="settings button"
             type="button"
-            className={styles.listItemContent}
+            className={clsx(
+              {
+                [styles.active]: isSettingsOpen,
+              },
+              styles.listItemContent,
+            )}
             onClick={() => setSettingsOpen(true)}
           >
-            <GearSix />
+            <GearSix weight={isSettingsOpen ? 'fill' : 'bold'} />
             <span className={styles.title}>settings</span>
           </button>
         </li>

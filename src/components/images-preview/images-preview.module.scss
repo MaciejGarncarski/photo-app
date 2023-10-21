@@ -21,7 +21,7 @@
   align-items: center;
   position: relative;
 
-  &:hover>.deleteIconOverlay {
+  &:hover > .deleteIconOverlay {
     opacity: 1;
   }
 }
@@ -47,7 +47,8 @@
 
 
   @include common.mediaquery('desktop') {
-    min-height: 8rem;
+    gap: 1rem;
+    min-height: 9rem;
   }
 }
 

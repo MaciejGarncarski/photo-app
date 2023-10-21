@@ -1,4 +1,4 @@
-import { Heart, Trash } from '@phosphor-icons/react';
+import { Trash } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -8,6 +8,7 @@ import { useModal } from '@/src/hooks/use-modal';
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
 import { useComment } from '@/src/components/comment/use-comment';
+import { HeartIcon } from '@/src/components/heart-icon';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { Comment as TComment } from '@/src/schemas/post-comment';
 
@@ -18,16 +19,13 @@ type Props = {
 };
 
 export const Comment = ({ commentData }: Props) => {
-  const { authorId, createdAt } = commentData;
+  const { authorId, createdAt, text, isLiked, likesCount } = commentData;
   const { openModal, closeModal, isModalOpen } = useModal();
 
   const {
-    text,
     handleDelete,
     handleLike,
     isAbleToDelete,
-    isLiked,
-    likesCount,
     timeSinceCreated,
     userAccountHref,
     username,
@@ -45,7 +43,7 @@ export const Comment = ({ commentData }: Props) => {
       </div>
       <div className={styles.info}>
         <button type="button" onClick={handleLike} className={styles.likeBtn}>
-          <Heart />
+          <HeartIcon isLiked={isLiked} />
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
 

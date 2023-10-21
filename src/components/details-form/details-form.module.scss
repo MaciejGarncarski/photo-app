@@ -3,12 +3,7 @@
 .form {
     display: grid;
     gap: 2rem;
-
-    @include common.mediaquery('desktop') {
-        margin-top: 3rem;
-    }
 }
-
 
 .buttons {
     display: flex;

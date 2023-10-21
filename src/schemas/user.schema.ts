@@ -26,6 +26,7 @@ export const fullName = z
   .string()
   .min(4, { message: 'Full name must contain at least 2 characters.' })
   .optional();
+
 export const username = z
   .string()
   .min(4, { message: 'Username must contain at least 4 characters.' })

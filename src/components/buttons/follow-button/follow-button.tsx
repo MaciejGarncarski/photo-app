@@ -3,7 +3,6 @@ import { useUser } from '@/src/hooks/use-user';
 
 import { Button } from '@/src/components/buttons/button/button';
 import { useFollowMutation } from '@/src/components/buttons/follow-button/use-follow';
-import { Loader } from '@/src/components/loader/loader';
 
 type Props = {
   userId: string;
@@ -11,7 +10,7 @@ type Props = {
 
 export const FollowButton = ({ userId }: Props) => {
   const { data } = useUser({ userId });
-  const { isPending, mutate } = useFollowMutation({ userId });
+  const { mutate } = useFollowMutation({ userId });
   const { isSignedIn } = useAuth();
 
   if (!isSignedIn || !data) {
@@ -24,15 +23,10 @@ export const FollowButton = ({ userId }: Props) => {
   return (
     <Button
       type="button"
-      disabled={isPending}
       variant={isFollowing ? 'secondary' : 'primary'}
       onClick={handleFollow}
     >
-      {isPending ? (
-        <Loader size="small" color="primary" />
-      ) : (
-        <span>{isFollowing ? 'Unfollow' : 'Follow'}</span>
-      )}
+      {isFollowing ? 'Unfollow' : 'Follow'}
     </Button>
   );
 };

@@ -11,6 +11,20 @@ type FollowMutation = {
   userId: string;
 };
 
+type UserWithDetails = {
+  username: string;
+  name: string | null;
+  id: string;
+  image: string | null;
+  customImage: string | null;
+  bio: string | null;
+  createdAt: string;
+  postsCount: number;
+  followersCount: number;
+  friendsCount: number;
+  isFollowing: boolean;
+};
+
 export const useFollowMutation = ({ userId }: FollowMutation) => {
   const queryClient = useQueryClient();
   const { data } = useUser({ userId });
@@ -22,6 +36,30 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
       }
 
       return followOtherUser({ userId });
+    },
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ['user', userId] });
+      const oldUserData = queryClient.getQueryData<UserWithDetails>([
+        'user',
+        userId,
+      ]);
+
+      queryClient.setQueryData<UserWithDetails>(['user', userId], (user) => {
+        if (!user) {
+          return user;
+        }
+
+        return {
+          ...user,
+          isFollowing: !user.isFollowing,
+          followersCount:
+            (user?.followersCount ?? 0) + (user.isFollowing ? -1 : 1),
+        };
+      });
+
+      return {
+        oldUserData,
+      };
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['user', userId] });

@@ -28,7 +28,6 @@
   width: calc(100% - 1rem);
   transition: all var(--transition);
   transition-property: background-color, transform, opacity;
-
 }
 
 .textArea {
@@ -39,7 +38,7 @@
   resize: vertical;
   max-height: 12rem;
   padding: 1rem var(--gap);
-  padding-top: 1.75rem;
+  padding-top: 2rem;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
 

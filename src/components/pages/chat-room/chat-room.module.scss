@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
+  width: clamp(22rem, 80vw, 60rem);
 
   @include common.mediaquery('desktop') {
-    width: clamp(23rem, 50vw, 50rem);
+    width: clamp(40rem, 50vw, 50rem);
   }
 }
 
