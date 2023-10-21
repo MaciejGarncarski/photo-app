@@ -92,3 +92,9 @@
     border-width: 0;
   }
 }
+
+.signInButton {
+  @include common.mediaquery('desktop') {
+    margin-top: auto;
+  }
+}

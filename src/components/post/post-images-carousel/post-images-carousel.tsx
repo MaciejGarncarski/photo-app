@@ -1,14 +1,12 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 import { HeartAnimation } from '@/src/components/heart-animation/heart-animation';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostArrows } from '@/src/components/post/post-arrows/post-arrows';
 import { useHandleLike } from '@/src/components/post/post-buttons/use-handle-like';
 import { PostImage } from '@/src/components/post/post-image/post-image';
-import { getVariants } from '@/src/components/post/post-images-carousel/get-variants';
 import { useCarousel } from '@/src/components/post/post-images-carousel/use-carousel';
 import { useUpdateWidth } from '@/src/components/post/post-images-carousel/use-update-width';
 
@@ -21,22 +19,17 @@ type Props = {
 
 export const PostImagesCarousel = ({ postId, priority }: Props) => {
   const { data: post, isPending } = usePost({ postId });
+  const { width, imageRef } = useUpdateWidth();
 
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
     postId,
     isLiked: post?.isLiked || false,
   });
-  const { imageRef, width } = useUpdateWidth();
 
   const { handleDragEnd, handleNextImage, handlePrevImage, currentIndex } =
     useCarousel({
       postImages: post?.images || [],
     });
-
-  const listVariants = useMemo(
-    () => getVariants({ currentIndex, width }),
-    [currentIndex, width],
-  );
 
   if (isPending || !post) {
     return null;
@@ -62,31 +55,28 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
           cursor: isSingleImage ? 'auto' : 'grab',
         }}
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            variants={listVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className={styles.imagesContainer}
-          >
-            {post.images.map((image, mapIndex) => {
-              return (
-                <motion.div
-                  ref={currentIndex === mapIndex ? imageRef : undefined}
-                  className={styles.image}
-                  key={image.fileId}
-                >
-                  <PostImage
-                    priority={priority}
-                    src={image.url}
-                    postId={post.id}
-                  />
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          ref={imageRef}
+          animate={{
+            x: `calc(calc(${-1 * width}px - var(--gap)) * ${currentIndex})`,
+            transition: {
+              ease: 'linear',
+            },
+          }}
+          className={styles.imagesContainer}
+        >
+          {post.images.map((image) => {
+            return (
+              <motion.div className={styles.image} key={image.fileId}>
+                <PostImage
+                  priority={priority}
+                  src={image.url}
+                  postId={post.id}
+                />
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </motion.div>
       <PostArrows
         currentIndex={currentIndex}

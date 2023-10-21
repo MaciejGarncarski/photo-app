@@ -29,6 +29,7 @@
   flex: 0 0 20rem;
   --gap-top: 3rem;
   height: calc(100vh - calc(var(--gap-top) * 2));
+  overflow: auto;
   top: var(--gap-top);
   position: sticky;
   box-shadow: var(--shadow-pimary);

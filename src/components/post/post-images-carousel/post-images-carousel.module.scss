@@ -10,6 +10,8 @@
 .imagesContainer {
   position: relative;
   display: flex;
+  --gap: 2rem;
+  gap: var(--gap);
   width: 100%;
 }
 
