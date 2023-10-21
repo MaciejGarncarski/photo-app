@@ -1,7 +1,6 @@
 @use '/src/styles/common';
 
 
-
 .placeholder {
   width: var(--post-width);
   border-radius: var(--radius-small);
@@ -11,6 +10,7 @@
   height: 22rem;
   background-color: var(--color-secondary);
   animation: var(--skeleton-animation);
+  box-shadow: var(--shadow-pimary);
 
   @include common.mediaquery('tablet') {
     height: 30rem;
