@@ -1,7 +1,6 @@
 import { InfiniteData } from '@tanstack/react-query';
 import { forwardRef, Fragment } from 'react';
 
-import { checkTimeBetweenMessages } from '@/src/utils/check-time-between-messages';
 import { formatDateChat } from '@/src/utils/format-date-chat';
 
 import { ChatMessage } from '@/src/components/chat-message/chat-message';
@@ -19,6 +18,8 @@ type Props = {
 
 export const ChatMessages = forwardRef<HTMLLIElement, Props>(
   ({ hasNextPage, isPending, messagesData }, ref) => {
+    const allMessages = messagesData.pages.flatMap((el) => el.messages);
+
     if (messagesData.pages[0].messagesCount === 0) {
       return (
         <div className={styles.messages}>
@@ -27,65 +28,23 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
       );
     }
 
+    const groupedMessages = groupMessagesByUser(allMessages);
+
     return (
       <ul className={styles.messages}>
-        {messagesData.pages.map((page) => {
-          const firstMessage = messagesData.pages[0].messages[0];
-
-          const timeFromFirstMessage = checkTimeBetweenMessages(
-            firstMessage.createdAt,
-            new Date(),
+        {groupedMessages.map((group) => {
+          return (
+            <Fragment key={group[0].id}>
+              <ChatMessage messageGroup={group} />
+              {group[0].shouldShowTime && (
+                <li className={styles.time}>
+                  <time dateTime={group[0].createdAt}>
+                    {formatDateChat(group[0].createdAt)}
+                  </time>
+                </li>
+              )}
+            </Fragment>
           );
-          const formattedDate = formatDateChat(firstMessage.createdAt);
-          const groupedMessages = groupMessagesByUser(page.messages);
-
-          return groupedMessages.map((messageGroup, index, messagesArray) => {
-            if (index === 0) {
-              return (
-                <Fragment key={messageGroup[0].id}>
-                  <ChatMessage messageGroup={messageGroup} />
-
-                  {timeFromFirstMessage && (
-                    <p className={styles.time}>
-                      <time dateTime={firstMessage.createdAt}>
-                        {formattedDate}
-                      </time>
-                    </p>
-                  )}
-                </Fragment>
-              );
-            }
-
-            const currentMessage = messagesArray[index][0];
-            const prevMessage = messagesArray[index - 1][0];
-
-            const shouldShowTime = checkTimeBetweenMessages(
-              currentMessage.createdAt,
-              prevMessage.createdAt,
-            );
-
-            if (shouldShowTime) {
-              const formattedDate = formatDateChat(currentMessage.createdAt);
-
-              return (
-                <Fragment key={messageGroup[0].id}>
-                  <ChatMessage messageGroup={messageGroup} />
-                  <p className={styles.time}>
-                    <time dateTime={currentMessage.createdAt}>
-                      {formattedDate}
-                    </time>
-                  </p>
-                </Fragment>
-              );
-            }
-
-            return (
-              <ChatMessage
-                messageGroup={messageGroup}
-                key={messageGroup[0].id}
-              />
-            );
-          });
         })}
 
         {hasNextPage && !isPending && (

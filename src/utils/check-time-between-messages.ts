@@ -1,4 +1,4 @@
-const TIME_PERIOD = 360 * 10 * 1000;
+const ONE_HOUR = 1000 * 60 * 60;
 
 export const checkTimeBetweenMessages = (
   date: Date | string,
@@ -7,7 +7,7 @@ export const checkTimeBetweenMessages = (
   const time = new Date(date).getTime();
   const prevTime = new Date(prevDate).getTime();
 
-  if (prevTime - time > TIME_PERIOD) {
+  if (prevTime - time > ONE_HOUR) {
     return true;
   }
 

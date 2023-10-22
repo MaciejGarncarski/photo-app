@@ -6,6 +6,7 @@ import {
   Sun,
   User,
 } from '@phosphor-icons/react';
+import { usePreventScroll } from '@react-aria/overlays';
 import { useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -26,6 +27,8 @@ type Props = {
 export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
   const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
+
+  usePreventScroll({ isDisabled: !isVisible });
 
   const { isSoundEnabled, toggleNotificationSound, isSoundMutationPending } =
     useNotificationSoundPreference();

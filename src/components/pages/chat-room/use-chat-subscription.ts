@@ -1,16 +1,10 @@
-import { QueryClient, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
 import { useNotificationSoundPreference } from '@/src/components/settings/use-notification-sound-preference';
-
-const invalidateChat = (queryClient: QueryClient, userId: string) => {
-  queryClient.invalidateQueries({
-    queryKey: ['chatMessages', userId],
-  });
-};
 
 const notificationAudio = new Audio('/notification.mp3');
 
@@ -24,19 +18,28 @@ export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
       socket.emit('join chat room', { chatRoomId });
     }
 
-    socket.on('new message', (data) => {
-      const { receiverId, senderId } = data;
-      invalidateChat(queryClient, receiverId);
+    const newMessage = (message: {
+      senderId: string;
+      receiverId: string;
+      text: string;
+      createdAt: string;
+      id: string;
+    }) => {
+      const userId =
+        sessionUser?.id === message.receiverId
+          ? message.senderId
+          : message.receiverId;
+      queryClient.invalidateQueries({ queryKey: ['chatMessages', userId] });
 
-      if (isSoundEnabled && sessionUser?.id !== senderId) {
+      if (isSoundEnabled && sessionUser?.id !== message.senderId) {
         notificationAudio.play();
       }
+    };
 
-      invalidateChat(queryClient, senderId);
-    });
+    socket.on('new message', newMessage);
 
     return () => {
-      socket.off('new post');
+      socket.off('new message', newMessage);
     };
   }, [chatRoomId, isSoundEnabled, queryClient, sessionUser?.id, socket]);
 };

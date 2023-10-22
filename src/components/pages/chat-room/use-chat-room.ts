@@ -15,11 +15,13 @@ import { useChatRoomData } from '@/src/components/pages/chat-room/use-chat-room-
 import { useChatSubscription } from '@/src/components/pages/chat-room/use-chat-subscription';
 import { addChatMessage } from '@/src/services/chat.service';
 
-type MessageMutation = {
+export type MessageMutation = {
   senderId: string;
   receiverId: string;
   message: string;
 };
+
+export const messageMutationKey = ['new chat message'];
 
 export const useChatRoom = () => {
   const router = useRouter();
@@ -51,9 +53,11 @@ export const useChatRoom = () => {
   }, [chatRoomError, messagesError, router, userError]);
 
   const messageMutation = useMutation({
+    mutationKey: messageMutationKey,
     mutationFn: (body: MessageMutation) => {
       return addChatMessage(body);
     },
+
     onSuccess: () => {
       form.setValue('message', '');
     },

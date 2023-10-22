@@ -15,13 +15,15 @@ export const useNewPost = () => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    socket.on('new post', () => {
+    const onNewPost = () => {
       setHasNewPosts(true);
-    });
+    };
+
+    socket.on('new post', onNewPost);
 
     return () => {
       setHasNewPosts(false);
-      socket.off('new post');
+      socket.off('new post', onNewPost);
     };
   }, [setHasNewPosts]);
 
