@@ -64,12 +64,14 @@ export const ChatRoom = () => {
           label="Message"
           placeholder="Aa"
           rows={2}
-          {...form.register('message')}
+          {...form.register('text')}
         />
         <Button
           type="submit"
           variant="primary"
-          disabled={!form.formState.isDirty}
+          disabled={
+            !form.formState.isDirty || Boolean(form.formState.errors.text)
+          }
         >
           Send
           <PaperPlaneTilt />

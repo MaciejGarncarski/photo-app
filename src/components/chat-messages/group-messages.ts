@@ -1,6 +1,6 @@
 import { checkTimeBetweenMessages } from '@/src/utils/check-time-between-messages';
 
-import { ChatMessage } from '@/src/schemas/chat';
+import { ChatMessage } from '@/src/schemas/chat.schema';
 
 type Message = ChatMessage & {
   shouldShowTime: boolean;

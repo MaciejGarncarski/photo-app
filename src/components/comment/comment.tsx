@@ -10,7 +10,7 @@ import { Button } from '@/src/components/buttons/button/button';
 import { useComment } from '@/src/components/comment/use-comment';
 import { HeartIcon } from '@/src/components/heart-icon';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
-import { Comment as TComment } from '@/src/schemas/post-comment';
+import { Comment as TComment } from '@/src/schemas/post-comment.schema';
 
 import styles from './comment.module.scss';
 

@@ -6,7 +6,7 @@ import { formatDateChat } from '@/src/utils/format-date-chat';
 import { ChatMessage } from '@/src/components/chat-message/chat-message';
 import { groupMessagesByUser } from '@/src/components/chat-messages/group-messages';
 import { Loader } from '@/src/components/loader/loader';
-import { ChatMessages as ChatMessagesType } from '@/src/schemas/chat';
+import { ChatMessages as ChatMessagesType } from '@/src/schemas/chat.schema';
 
 import styles from './chat-messages.module.scss';
 

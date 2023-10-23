@@ -3,7 +3,6 @@ import { SignIn } from '@phosphor-icons/react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/src/components/buttons/button/button';
-import { Error } from '@/src/components/forms/auth-form/error';
 import { useSignIn } from '@/src/components/forms/auth-form/use-sign-in';
 import { RegisterSignInMessage } from '@/src/components/forms/register-signin-message/register-signin-message';
 import { Input } from '@/src/components/input/input';
@@ -29,8 +28,6 @@ export const SignInForm = () => {
 
   const onSubmit = handleSubmit((data) => signInCredentials.mutate(data));
 
-  const errorMessage = signInCredentials.error?.message;
-
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <Input
@@ -50,8 +47,6 @@ export const SignInForm = () => {
         error={errors.password?.message}
         {...register('password')}
       />
-
-      {errorMessage ? <Error>{errorMessage}</Error> : null}
 
       <Button type="submit" variant="primary">
         Continue

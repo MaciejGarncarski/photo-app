@@ -1,3 +1,11 @@
+import { z } from 'zod';
+
+export const addChatMessageSchema = z.object({
+  text: z.string().trim().min(1),
+});
+
+export type AddChatMessage = z.infer<typeof addChatMessageSchema>;
+
 export type ChatMessage = {
   senderId: string;
   receiverId: string;

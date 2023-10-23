@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { useAddComment } from '@/src/components/forms/comment-form/use-add-comment';
-import { commentTextSchema } from '@/src/schemas/post-comment';
+import { commentTextSchema } from '@/src/schemas/post-comment.schema';
 
 const commentFormSchema = z.object({
   comment: z.string().max(50),

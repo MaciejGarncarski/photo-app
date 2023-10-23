@@ -73,9 +73,11 @@ export const NavButtons = () => {
           </button>
         </li>
       </ul>
-      <div className={styles.signInButton}>
-        {(!isSignedIn || isPending) && <SignInButton />}
-      </div>
+      {(!isSignedIn || isPending) && (
+        <div className={styles.signInButton}>
+          <SignInButton />
+        </div>
+      )}
     </>
   );
 };

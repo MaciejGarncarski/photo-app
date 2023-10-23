@@ -10,7 +10,7 @@ import { useChatMessage } from '@/src/components/chat-message/use-message';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
-import { ChatMessage as TChatMessage } from '@/src/schemas/chat';
+import { ChatMessage as TChatMessage } from '@/src/schemas/chat.schema';
 
 import styles from './chat-message.module.scss';
 

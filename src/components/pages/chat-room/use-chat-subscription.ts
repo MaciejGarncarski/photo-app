@@ -1,21 +1,33 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Socket } from 'socket.io-client';
+import { toast } from 'sonner';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { socket } from '@/src/utils/api/socket';
 
+import { useChatRoomData } from '@/src/components/pages/chat-room/use-chat-room-data';
 import { useNotificationSoundPreference } from '@/src/components/settings/use-notification-sound-preference';
 
 const notificationAudio = new Audio('/notification.mp3');
 
-export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
+export const useChatSubscription = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const { data: chatRoomData, isError: chatRoomError } = useChatRoomData();
   const { isSoundEnabled } = useNotificationSoundPreference();
   const { sessionUser } = useAuth();
 
   useEffect(() => {
-    if (chatRoomId !== 0) {
-      socket.emit('join chat room', { chatRoomId });
+    if (chatRoomError) {
+      router.push('/chat/');
+      toast.error('Cannot connect to chat');
+    }
+  }, [chatRoomError, router]);
+
+  useEffect(() => {
+    if (chatRoomData?.id !== 0) {
+      socket.emit('join chat room', { chatRoomId: chatRoomData?.id });
     }
 
     const newMessage = (message: {
@@ -41,5 +53,5 @@ export const useChatSubscription = (socket: Socket, chatRoomId: number) => {
     return () => {
       socket.off('new message', newMessage);
     };
-  }, [chatRoomId, isSoundEnabled, queryClient, sessionUser?.id, socket]);
+  }, [chatRoomData?.id, isSoundEnabled, queryClient, sessionUser?.id]);
 };

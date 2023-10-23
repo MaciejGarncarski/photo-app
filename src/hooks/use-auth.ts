@@ -1,14 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 
 import { getSessionUser } from '@/src/services/auth.service';
 
 export const useAuth = () => {
+  const queryClient = useQueryClient();
+
   const {
     data: sessionUser,
     isPending,
     isRefetching,
     isFetching,
+    error,
   } = useQuery({
     queryKey: ['session'],
     queryFn: async () => {
@@ -23,6 +26,12 @@ export const useAuth = () => {
     initialData: null,
     retry: false,
   });
+
+  useEffect(() => {
+    if (error) {
+      queryClient.setQueryData(['session'], () => null);
+    }
+  }, [error, queryClient]);
 
   const isSignedIn = Boolean(sessionUser?.id) && !isPending;
 

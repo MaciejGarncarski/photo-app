@@ -3,7 +3,6 @@ import { SignIn } from '@phosphor-icons/react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/src/components/buttons/button/button';
-import { Error } from '@/src/components/forms/auth-form/error';
 import { useRegister } from '@/src/components/forms/auth-form/use-register';
 import { RegisterSignInMessage } from '@/src/components/forms/register-signin-message/register-signin-message';
 import { Input } from '@/src/components/input/input';
@@ -12,7 +11,7 @@ import { RegisterFormValues, registerSchema } from '@/src/schemas/auth.schema';
 import styles from './auth-form.module.scss';
 
 export const RegisterForm = () => {
-  const { mutate: mutateRegister, isPending, error } = useRegister();
+  const { mutate: mutateRegister, isPending } = useRegister();
 
   const {
     formState: { errors },
@@ -26,8 +25,6 @@ export const RegisterForm = () => {
       password: '',
     },
   });
-
-  const errorMessage = error?.message;
 
   const onSubmit = handleSubmit((data) => mutateRegister(data));
 
@@ -68,7 +65,7 @@ export const RegisterForm = () => {
         error={errors.confirmPassword?.message}
         {...register('confirmPassword')}
       />
-      {errorMessage ? <Error>{errorMessage}</Error> : null}
+
       <Button type="submit" variant="primary" disabled={isPending}>
         Continue
         <SignIn />

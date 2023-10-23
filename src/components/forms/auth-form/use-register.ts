@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { RegisterFormValues } from '@/src/schemas/auth.schema';
 import { registerUser } from '@/src/services/auth.service';
@@ -29,6 +30,9 @@ export const useRegister = () => {
           throw new Error(data.message);
         }
       }
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
     onSuccess: async () => {
       router.push('/');

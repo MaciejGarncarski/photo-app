@@ -57,10 +57,7 @@
 .username {
   text-align: center;
   align-self: center;
-  max-width: 8ch;
-  overflow: hidden;
   margin: 0 auto;
-  text-overflow: ellipsis;
 
   &::before {
     content: '@';

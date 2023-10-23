@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { HOME_POSTS_QUERY_KEY } from '@/src/components/pages/home/use-homepage-posts';
 import { SignInFormValues } from '@/src/schemas/auth.schema';
@@ -20,6 +21,9 @@ export const useSignIn = () => {
           throw new Error(data.message);
         }
       }
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
     onSuccess: () => {
       router.replace('/');

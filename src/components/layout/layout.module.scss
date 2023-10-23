@@ -7,11 +7,11 @@
     min-height: 100dvh;
     display: flex;
     gap: 2rem;
-    padding-bottom: 0;
   }
 
   @include common.mediaquery('desktop') {
-    gap: 5rem;
+    padding-bottom: 0;
+    gap: 3rem;
   }
 }
 
