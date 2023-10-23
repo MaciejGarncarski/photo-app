@@ -702,7 +702,8 @@ export interface paths {
               data: {
                 users: ({
                     id: string;
-                    message: string | null;
+                    message: string;
+                    messageCreatedAt: string | null;
                   })[];
                 totalPages: number;
                 currentPage: number;

@@ -1,7 +1,9 @@
-import { DotsThreeVertical, Trash } from '@phosphor-icons/react';
+import { DotsThree, Trash } from '@phosphor-icons/react';
 import clsx from 'clsx';
 
 import { useAuth } from '@/src/hooks/use-auth';
+import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useLongPress } from '@/src/hooks/use-long-press';
 import { useModal } from '@/src/hooks/use-modal';
 
 import { Avatar } from '@/src/components/avatar/avatar';
@@ -21,13 +23,18 @@ type Props = {
 export const ChatMessage = ({ messageGroup }: Props) => {
   const { senderId, receiverId, createdAt, id } = messageGroup[0];
   const { sessionUser } = useAuth();
+  const { isMobile } = useIsMobile();
+  const confirmation = useModal();
 
   const { closeModal, isModalOpen, mutate, openModal } = useChatMessage({
     receiverId,
     createdAt,
   });
 
-  const confirmation = useModal();
+  const { onTouchEnd, onTouchStart } = useLongPress({
+    onStart: closeModal,
+    onEnd: openModal,
+  });
 
   const handleDelete = () => {
     mutate({ messageId: id });
@@ -46,17 +53,24 @@ export const ChatMessage = ({ messageGroup }: Props) => {
 
             return (
               <div key={id} className={styles.textContainer}>
-                {!isReceiver && (
+                {!isReceiver && !isMobile && (
                   <button
                     type="button"
                     onClick={openModal}
                     className={styles.options}
                   >
-                    <DotsThreeVertical />
+                    <DotsThree />
                     <span className="visually-hidden">options</span>
                   </button>
                 )}
-                <p className={styles.text}>{text}</p>
+                <button
+                  type="button"
+                  onTouchStart={onTouchStart}
+                  onTouchEnd={onTouchEnd}
+                  className={styles.text}
+                >
+                  {text}
+                </button>
               </div>
             );
           })}

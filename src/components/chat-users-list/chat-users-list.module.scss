@@ -15,10 +15,12 @@
   width: 100%;
   margin: 0 auto;
 
+
   @include common.mediaquery('tablet') {
     gap: 1rem;
     margin: 0;
-    max-height: 40rem;
+    max-height: unset;
+    height: calc(100vh - 15rem);
   }
 }
 
@@ -32,6 +34,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   border-radius: var(--radius-medium);
   background-color: var(--color-primary);
@@ -68,10 +71,11 @@
   font-weight: 500;
   text-overflow: ellipsis;
   font-size: 1rem;
-  padding-top: 0.25rem;
   color: var(--text-gray);
 
   @include common.mediaquery('desktop') {
+    font-size: 1.5rem;
+    font-weight: 400;
     max-width: unset;
   }
 }
@@ -79,6 +83,10 @@
 .message {
   font-size: 0.9rem;
   color: var(--color-text-gray);
+
+  @include common.mediaquery('desktop') {
+    font-size: 1rem;
+  }
 }
 
 .separator {
@@ -88,7 +96,6 @@
   width: 95%;
   margin: auto;
 }
-
 
 .loading {
   justify-content: center;
@@ -101,4 +108,9 @@
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
   animation: var(--skeleton-animation);
+}
+
+.createdAt {
+  margin-left: auto;
+  @extend .message;
 }

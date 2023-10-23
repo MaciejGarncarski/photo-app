@@ -43,10 +43,14 @@ export const ChatUsersList = () => {
       className={styles.list}
     >
       {data.pages.map((page) => {
-        return page.users.map(({ id, message }, idx) => {
+        return page.users.map(({ id, message, messageCreatedAt }, idx) => {
           return (
             <Fragment key={id}>
-              <ChatUser userId={id} message={message} />
+              <ChatUser
+                userId={id}
+                message={message}
+                messageCreatedAt={messageCreatedAt}
+              />
               {page.users.length - 1 !== idx && (
                 <li>
                   <hr className={styles.separator}></hr>

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { useUser } from '@/src/hooks/use-user';
+import { formatDate } from '@/src/utils/format-date';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { linkVariants } from '@/src/components/chat-users-list/chat-users-list.animation';
@@ -14,12 +15,13 @@ import styles from './chat-users-list.module.scss';
 
 type Props = {
   userId: string;
-  message: string | null;
+  message: string;
+  messageCreatedAt: string | null;
 };
 
 const MotionLink = motion(Link);
 
-export const ChatUser = ({ userId, message }: Props) => {
+export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
   const { data, isPending, isSuccess } = useUser({ userId });
   const params = useParams();
 
@@ -47,6 +49,13 @@ export const ChatUser = ({ userId, message }: Props) => {
             {message || 'No messages yet.'}
           </span>
         </span>
+        {messageCreatedAt && (
+          <span className={styles.createdAt}>
+            <time dateTime={messageCreatedAt}>
+              {formatDate(messageCreatedAt)}
+            </time>
+          </span>
+        )}
       </MotionLink>
     </li>
   );

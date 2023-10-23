@@ -45,6 +45,10 @@ export const useChatSubscription = () => {
 
       if (isSoundEnabled && sessionUser?.id !== message.senderId) {
         notificationAudio.play();
+
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(200);
+        }
       }
     };
 
