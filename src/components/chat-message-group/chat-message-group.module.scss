@@ -25,25 +25,4 @@
 .messageReceiver {
   margin-left: 0;
   color: inherit;
-
-  & > .textColumn {
-    & > .textContainer {
-      justify-content: flex-start;
-
-      & > .text {
-        background-color: var(--color-secondary);
-        color: var(--color-text);
-      }
-    }
-  }
-
-  & > .avatar {
-    order: -1;
-  }
-
-  & > .time {
-    right: unset;
-    left: 0.5rem;
-    text-align: left;
-  }
 }

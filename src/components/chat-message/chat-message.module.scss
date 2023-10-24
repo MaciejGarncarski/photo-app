@@ -49,6 +49,15 @@
     opacity: 1;
 }
 
+.textContainerReceiver {
+    justify-content: flex-start;
+
+    & > .text {
+        background-color: var(--color-secondary);
+        color: var(--color-text);
+    }
+}
+
 .popoverContent {
     padding: 0.5rem;
     border-radius: var(--radius-medium);

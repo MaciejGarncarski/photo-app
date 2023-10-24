@@ -14,7 +14,7 @@
 
     @include common.mediaquery('desktop') {
         height: calc(100dvh - 18rem);
-        gap: 2rem;
+        gap: 3rem;
     }
 }
 
@@ -23,6 +23,11 @@
     color: var(--color-text-gray);
     width: 100%;
     display: block;
+    user-select: none;
+
+    @include common.mediaquery('desktop') {
+        user-select: auto;
+    }
 }
 
 .noMessages {

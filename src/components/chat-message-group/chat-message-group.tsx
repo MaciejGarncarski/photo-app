@@ -20,6 +20,11 @@ export const ChatMessageGroup = ({ messageGroup }: Props) => {
 
   return (
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
+      {isReceiver && (
+        <div className={styles.avatar}>
+          <Avatar userId={senderId} size="xs" />
+        </div>
+      )}
       <div className={styles.textColumn}>
         {messageGroup.map(({ text, id, createdAt, receiverId }) => {
           const isReceiver = receiverId === sessionUser?.id;
@@ -36,12 +41,6 @@ export const ChatMessageGroup = ({ messageGroup }: Props) => {
           );
         })}
       </div>
-
-      {isReceiver && (
-        <div className={styles.avatar}>
-          <Avatar userId={senderId} size="xs" />
-        </div>
-      )}
     </li>
   );
 };

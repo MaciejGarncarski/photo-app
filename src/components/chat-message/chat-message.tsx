@@ -2,7 +2,6 @@ import { DotsThree, Trash } from '@phosphor-icons/react';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useLongPress } from '@/src/hooks/use-long-press';
@@ -11,6 +10,7 @@ import { useModal } from '@/src/hooks/use-modal';
 import { Button } from '@/src/components/buttons/button/button';
 import { ChatMessagePopover } from '@/src/components/chat-message/chat-message-popover';
 import { useDeleteChatMessage } from '@/src/components/chat-message-group/use-delete-message';
+import { useDropdownAtom } from '@/src/components/chat-message-group/use-dropdown-atom';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 
 import styles from './chat-message.module.scss';
@@ -30,12 +30,12 @@ export const ChatMessage = ({
   id,
   receiverId,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setDropdown } = useDropdownAtom({ messageId: id });
   const { isMobile } = useIsMobile();
 
   const { onTouchEnd, onTouchStart } = useLongPress({
-    onStart: () => setIsOpen(false),
-    onEnd: () => setIsOpen(true),
+    onStart: () => setDropdown({ messageId: null, open: false }),
+    onEnd: () => setDropdown({ messageId: id, open: true }),
   });
 
   const { mutate } = useDeleteChatMessage({ receiverId });
@@ -50,14 +50,19 @@ export const ChatMessage = ({
       <Dropdown.Root
         modal={!confirmation.isModalOpen}
         open={isOpen}
-        onOpenChange={setIsOpen}
+        onOpenChange={(isOpen) => setDropdown({ open: isOpen, messageId: id })}
       >
-        <div className={styles.textContainer}>
+        <div
+          className={clsx(
+            isReceiver && styles.textContainerReceiver,
+            styles.textContainer,
+          )}
+        >
           {!isReceiver && !isMobile && (
             <Dropdown.Trigger asChild>
               <button
                 type="button"
-                onClick={() => setIsOpen(true)}
+                onClick={() => setDropdown({ messageId: id, open: true })}
                 className={clsx(isOpen && styles.optionsOpen, styles.options)}
               >
                 <DotsThree />
@@ -66,7 +71,7 @@ export const ChatMessage = ({
             </Dropdown.Trigger>
           )}
 
-          {isMobile ? (
+          {isMobile && !isReceiver ? (
             <Dropdown.Trigger asChild>
               <button
                 type="button"
@@ -84,7 +89,7 @@ export const ChatMessage = ({
             {isOpen && (
               <ChatMessagePopover
                 messageText={text}
-                closeModal={() => setIsOpen(false)}
+                closeModal={() => setDropdown({ messageId: null, open: false })}
                 createdAt={createdAt}
                 confirmationModal={confirmation}
               />
