@@ -3,6 +3,7 @@
 
 .textContainer {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
 
     @include common.mediaquery('desktop') {
@@ -18,8 +19,12 @@
     color: var(--color-button-text);
     border-radius: var(--radius-medium);
     padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
+    max-width: 40ch;
+    display: inline-block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+    text-align: left;
     user-select: none;
     gap: 0.5rem;
 
@@ -28,7 +33,7 @@
     }
 
     @include common.mediaquery('desktop') {
-        max-width: 20rem;
+        max-width: 65ch;
         padding: 0.5rem 1rem;
     }
 }
@@ -37,6 +42,7 @@
     opacity: 0;
     transition: opacity var(--transition);
     margin-right: 1rem;
+    flex-shrink: 0;
 
     @include common.mediaquery('desktop') {
         &:focus {
@@ -47,6 +53,12 @@
 
 .optionsOpen {
     opacity: 1;
+}
+
+.optionsReceiver {
+    order: 2;
+    margin-right: 0;
+    margin-left: 1rem;
 }
 
 .textContainerReceiver {

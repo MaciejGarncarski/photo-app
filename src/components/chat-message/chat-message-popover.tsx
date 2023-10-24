@@ -12,6 +12,7 @@ type Props = {
   createdAt: string;
   messageText: string;
   closeModal: () => void;
+  isReceiver: boolean;
   confirmationModal: {
     isModalOpen: boolean;
     closeModal: () => void;
@@ -24,6 +25,7 @@ export const ChatMessagePopover = ({
   confirmationModal,
   messageText,
   closeModal,
+  isReceiver,
 }: Props) => {
   const handleCopy = async () => {
     try {
@@ -67,19 +69,21 @@ export const ChatMessagePopover = ({
               </button>
             </Dropdown.Item>
 
-            <Dropdown.Item asChild>
-              <button
-                type="button"
-                onClick={confirmationModal.openModal}
-                className={clsx(
-                  styles.popoverItem,
-                  styles.popoverItemDestructive,
-                )}
-              >
-                <Trash size={17} />
-                <span>Delete</span>
-              </button>
-            </Dropdown.Item>
+            {isReceiver ? null : (
+              <Dropdown.Item asChild>
+                <button
+                  type="button"
+                  onClick={confirmationModal.openModal}
+                  className={clsx(
+                    styles.popoverItem,
+                    styles.popoverItemDestructive,
+                  )}
+                >
+                  <Trash size={17} />
+                  <span>Delete</span>
+                </button>
+              </Dropdown.Item>
+            )}
           </div>
           <Dropdown.Arrow
             width={25}

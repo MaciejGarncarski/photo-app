@@ -19,5 +19,13 @@ export const useDropdownAtom = ({ messageId }: UseDropdownAtomArugments) => {
 
   const isOpen = dropdown.open && messageId === dropdown.messageId;
 
-  return { isOpen, setDropdown };
+  const openDropdownForCurrentMessage = () => {
+    setDropdown({ messageId, open: true });
+  };
+
+  const closeDropdown = () => {
+    setDropdown({ messageId: null, open: false });
+  };
+
+  return { isOpen, setDropdown, openDropdownForCurrentMessage, closeDropdown };
 };

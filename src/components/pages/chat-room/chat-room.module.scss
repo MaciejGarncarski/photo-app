@@ -85,7 +85,6 @@
   border-radius: var(--radius-small);
   width: 100%;
   gap: 1rem;
-  padding: 0 1rem;
   max-height: 15rem;
 
   @include common.mediaquery('tablet') {

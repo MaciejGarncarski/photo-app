@@ -1,7 +1,7 @@
 @use '/src/styles/common';
 
 .layout {
-  padding-bottom: 6rem;
+  padding-bottom: 4rem;
 
   @include common.mediaquery('tablet') {
     min-height: 100dvh;

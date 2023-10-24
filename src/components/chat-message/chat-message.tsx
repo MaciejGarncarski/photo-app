@@ -30,12 +30,13 @@ export const ChatMessage = ({
   id,
   receiverId,
 }: Props) => {
-  const { isOpen, setDropdown } = useDropdownAtom({ messageId: id });
+  const { isOpen, setDropdown, closeDropdown, openDropdownForCurrentMessage } =
+    useDropdownAtom({ messageId: id });
   const { isMobile } = useIsMobile();
 
   const { onTouchEnd, onTouchStart } = useLongPress({
-    onStart: () => setDropdown({ messageId: null, open: false }),
-    onEnd: () => setDropdown({ messageId: id, open: true }),
+    onStart: closeDropdown,
+    onEnd: openDropdownForCurrentMessage,
   });
 
   const { mutate } = useDeleteChatMessage({ receiverId });
@@ -48,7 +49,7 @@ export const ChatMessage = ({
   return (
     <>
       <Dropdown.Root
-        modal={!confirmation.isModalOpen}
+        modal={false}
         open={isOpen}
         onOpenChange={(isOpen) => setDropdown({ open: isOpen, messageId: id })}
       >
@@ -58,12 +59,20 @@ export const ChatMessage = ({
             styles.textContainer,
           )}
         >
-          {!isReceiver && !isMobile && (
+          {!isMobile && (
             <Dropdown.Trigger asChild>
               <button
                 type="button"
-                onClick={() => setDropdown({ messageId: id, open: true })}
-                className={clsx(isOpen && styles.optionsOpen, styles.options)}
+                onClick={() => {
+                  if (!isOpen) {
+                    openDropdownForCurrentMessage();
+                  }
+                }}
+                className={clsx(
+                  isReceiver && styles.optionsReceiver,
+                  isOpen && styles.optionsOpen,
+                  styles.options,
+                )}
               >
                 <DotsThree />
                 <span className="visually-hidden">options</span>
@@ -71,7 +80,7 @@ export const ChatMessage = ({
             </Dropdown.Trigger>
           )}
 
-          {isMobile && !isReceiver ? (
+          {isMobile ? (
             <Dropdown.Trigger asChild>
               <button
                 type="button"
@@ -89,8 +98,9 @@ export const ChatMessage = ({
             {isOpen && (
               <ChatMessagePopover
                 messageText={text}
-                closeModal={() => setDropdown({ messageId: null, open: false })}
+                closeModal={closeDropdown}
                 createdAt={createdAt}
+                isReceiver={isReceiver}
                 confirmationModal={confirmation}
               />
             )}
