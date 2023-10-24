@@ -1,100 +1,97 @@
 import { DotsThree, Trash } from '@phosphor-icons/react';
+import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
+import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
-import { useAuth } from '@/src/hooks/use-auth';
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useLongPress } from '@/src/hooks/use-long-press';
 import { useModal } from '@/src/hooks/use-modal';
 
-import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
-import { useChatMessage } from '@/src/components/chat-message/use-message';
+import { ChatMessagePopover } from '@/src/components/chat-message/chat-message-popover';
+import { useDeleteChatMessage } from '@/src/components/chat-message-group/use-delete-message';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
-import { ListModal } from '@/src/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
-import { ChatMessage as TChatMessage } from '@/src/schemas/chat.schema';
 
 import styles from './chat-message.module.scss';
 
 type Props = {
-  messageGroup: Array<TChatMessage>;
+  text: string;
+  createdAt: string;
+  isReceiver: boolean;
+  receiverId: string;
+  id: string;
 };
 
-export const ChatMessage = ({ messageGroup }: Props) => {
-  const { senderId, receiverId, createdAt, id } = messageGroup[0];
-  const { sessionUser } = useAuth();
+export const ChatMessage = ({
+  text,
+  createdAt,
+  isReceiver,
+  id,
+  receiverId,
+}: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { isMobile } = useIsMobile();
-  const confirmation = useModal();
-
-  const { closeModal, isModalOpen, mutate, openModal } = useChatMessage({
-    receiverId,
-    createdAt,
-  });
 
   const { onTouchEnd, onTouchStart } = useLongPress({
-    onStart: closeModal,
-    onEnd: openModal,
+    onStart: () => setIsOpen(false),
+    onEnd: () => setIsOpen(true),
   });
+
+  const { mutate } = useDeleteChatMessage({ receiverId });
+  const confirmation = useModal();
 
   const handleDelete = () => {
     mutate({ messageId: id });
   };
 
-  const isReceiver = receiverId === sessionUser?.id;
-
   return (
     <>
-      <li
-        className={clsx(isReceiver && styles.messageReceiver, styles.message)}
+      <Dropdown.Root
+        modal={!confirmation.isModalOpen}
+        open={isOpen}
+        onOpenChange={setIsOpen}
       >
-        <div className={styles.textColumn}>
-          {messageGroup.map(({ text, id }) => {
-            const isReceiver = receiverId === sessionUser?.id;
+        <div className={styles.textContainer}>
+          {!isReceiver && !isMobile && (
+            <Dropdown.Trigger asChild>
+              <button
+                type="button"
+                onClick={() => setIsOpen(true)}
+                className={clsx(isOpen && styles.optionsOpen, styles.options)}
+              >
+                <DotsThree />
+                <span className="visually-hidden">options</span>
+              </button>
+            </Dropdown.Trigger>
+          )}
 
-            return (
-              <div key={id} className={styles.textContainer}>
-                {!isReceiver && !isMobile && (
-                  <button
-                    type="button"
-                    onClick={openModal}
-                    className={styles.options}
-                  >
-                    <DotsThree />
-                    <span className="visually-hidden">options</span>
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onTouchStart={onTouchStart}
-                  onTouchEnd={onTouchEnd}
-                  className={styles.text}
-                >
-                  {text}
-                </button>
-              </div>
-            );
-          })}
+          {isMobile ? (
+            <Dropdown.Trigger asChild>
+              <button
+                type="button"
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+                className={styles.text}
+              >
+                {text}
+              </button>
+            </Dropdown.Trigger>
+          ) : (
+            <span className={styles.text}>{text}</span>
+          )}
+          <AnimatePresence mode="wait">
+            {isOpen && (
+              <ChatMessagePopover
+                messageText={text}
+                closeModal={() => setIsOpen(false)}
+                createdAt={createdAt}
+                confirmationModal={confirmation}
+              />
+            )}
+          </AnimatePresence>
         </div>
-        {isReceiver && (
-          <div className={styles.avatar}>
-            <Avatar userId={senderId} size="xs" />
-          </div>
-        )}
-      </li>
-
-      <ListModal
-        isVisible={isModalOpen}
-        closeModal={closeModal}
-        headingText="Message options"
-      >
-        <ListModalItem
-          icon={<Trash />}
-          type="button"
-          onClick={confirmation.openModal}
-        >
-          Delete
-        </ListModalItem>
-      </ListModal>
+      </Dropdown.Root>
 
       <ConfirmationDialog
         closeModal={confirmation.closeModal}

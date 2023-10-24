@@ -3,7 +3,7 @@ import { forwardRef, Fragment } from 'react';
 
 import { formatDateChat } from '@/src/utils/format-date-chat';
 
-import { ChatMessage } from '@/src/components/chat-message/chat-message';
+import { ChatMessageGroup } from '@/src/components/chat-message-group/chat-message-group';
 import { groupMessagesByUser } from '@/src/components/chat-messages/group-messages';
 import { Loader } from '@/src/components/loader/loader';
 import { ChatMessages as ChatMessagesType } from '@/src/schemas/chat.schema';
@@ -35,7 +35,7 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
         {groupedMessages.map((group) => {
           return (
             <Fragment key={group[0].id}>
-              <ChatMessage messageGroup={group} />
+              <ChatMessageGroup messageGroup={group} />
               {group[0].shouldShowTime && (
                 <li className={styles.time}>
                   <time dateTime={group[0].createdAt}>

@@ -22,7 +22,7 @@ export const useLongPress = ({ onEnd, onStart }: UseLongPressArguments) => {
       longPressRef.current = true;
       onEnd();
       if (navigator.vibrate) {
-        navigator.vibrate(100);
+        navigator.vibrate(50);
       }
     }, 500);
   };
