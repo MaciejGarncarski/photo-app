@@ -7,6 +7,7 @@ import { useUser } from '@/src/hooks/use-user';
 import { AccountStats } from '@/src/components/account-stats-bar/account-stats-bar';
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
+import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
 import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 
@@ -43,7 +44,12 @@ export const AccountHeaderDesktop = ({
         className={styles.leftCol}
       >
         <Avatar userId={userId} size="big" />
-        {!isOwner && isSignedIn && <FollowButton userId={userId} />}
+        {!isOwner && isSignedIn && (
+          <div className={styles.accountButtons}>
+            <FollowButton userId={userId} />
+            <ButtonLink href={`/chat/${userId}`}>Send message</ButtonLink>
+          </div>
+        )}
         {isOwner && (
           <Button type="button" variant="primary" onClick={openModal}>
             <GearSix />

@@ -51,9 +51,9 @@ export const PostModal = ({
               className={styles.container}
             >
               {isMobile ? (
-                <PostModalMobile closeModal={closeModal} postId={postId} />
+                <PostModalMobile closeModal={handleClose} postId={postId} />
               ) : (
-                <PostModalDesktop closeModal={closeModal} postId={postId} />
+                <PostModalDesktop closeModal={handleClose} postId={postId} />
               )}
             </motion.div>
           </ReactFocusLock>

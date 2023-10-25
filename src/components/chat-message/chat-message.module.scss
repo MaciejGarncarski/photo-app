@@ -69,37 +69,3 @@
         color: var(--color-text);
     }
 }
-
-.popoverContent {
-    padding: 0.5rem;
-    border-radius: var(--radius-medium);
-    background-color: var(--color-secondary);
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .16));
-}
-
-.popoverItem {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.5rem;
-    border-radius: var(--radius-small);
-    font-size: 13px;
-    font-weight: 500;
-
-
-    @include common.mediaquery('desktop') {
-
-        &:hover,
-        &:focus {
-            background-color: var(--color-primary);
-        }
-    }
-}
-
-.popoverItemDestructive {
-    color: var(--color-error);
-}
-
-.popoverArrow {
-    fill: var(--color-secondary);
-}

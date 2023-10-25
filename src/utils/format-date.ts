@@ -13,8 +13,8 @@ type FormatData = Array<{
 }>;
 
 const formatter = new Intl.RelativeTimeFormat('en-GB', {
-  style: 'narrow',
-  numeric: 'always',
+  style: 'short',
+  numeric: 'auto',
 });
 
 export const formatDate = (dateString: Date | string) => {
@@ -46,10 +46,11 @@ export const formatDate = (dateString: Date | string) => {
   ] satisfies FormatData;
 
   if (minutesCount === 0) {
-    return 'a few seconds ago';
+    return 'now';
   }
 
   const foundItem = formatData.find(({ condition }) => condition);
+
   if (foundItem) {
     return formatter.format(foundItem.value * -1, foundItem.name);
   }

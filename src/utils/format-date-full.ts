@@ -1,4 +1,4 @@
-export const formatDateChat = (date: Date | string) => {
+export const formatDateFull = (date: Date | string) => {
   const formattedDate = new Intl.DateTimeFormat('en-GB', {
     year: 'numeric',
     month: 'short',

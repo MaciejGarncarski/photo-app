@@ -1,7 +1,7 @@
 import { InfiniteData } from '@tanstack/react-query';
 import { forwardRef, Fragment } from 'react';
 
-import { formatDateChat } from '@/src/utils/format-date-chat';
+import { formatDateFull } from '@/src/utils/format-date-full';
 
 import { ChatMessageGroup } from '@/src/components/chat-message-group/chat-message-group';
 import { groupMessagesByUser } from '@/src/components/chat-messages/group-messages';
@@ -39,7 +39,7 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
               {group[0].shouldShowTime && (
                 <li className={styles.time}>
                   <time dateTime={group[0].createdAt}>
-                    {formatDateChat(group[0].createdAt)}
+                    {formatDateFull(group[0].createdAt)}
                   </time>
                 </li>
               )}

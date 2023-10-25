@@ -12,7 +12,6 @@
     gap: 0.75rem;
     padding: 0.75rem 0;
     border-radius: var(--radius-small);
-    font-weight: 500;
 
     @include common.mediaquery('desktop') {
         padding: 1rem 0.5rem;
@@ -20,6 +19,8 @@
 
         &:hover,
         &:focus {
+            outline: none;
+            font-weight: 500;
             background-color: var(--color-gray);
         }
     }

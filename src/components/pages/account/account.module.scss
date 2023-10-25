@@ -54,6 +54,15 @@
   gap: 1.5rem;
 }
 
+.accountButtons {
+  display: flex;
+  gap: 1rem;
+
+  @include common.mediaquery('desktop') {
+    flex-direction: column;
+  }
+}
+
 .username {
   text-align: center;
   align-self: center;

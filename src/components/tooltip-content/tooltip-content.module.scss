@@ -1,0 +1,11 @@
+.tooltipContent {
+    z-index: 3;
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-pimary);
+    border-radius: var(--radius-small);
+    padding: 0.5rem;
+}
+
+.tooltipArrow {
+    fill: var(--color-primary);
+}

@@ -57,8 +57,12 @@
   padding-top: 0.3rem;
   border-radius: var(--radius-small);
   width: auto;
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 0.5rem;
   background-color: var(--color-secondary);
+
+  @include common.mediaquery('tablet') {
+    padding: 0.5rem 1rem;
+  }
 }
 
 .info {

@@ -8,7 +8,7 @@ import { useLongPress } from '@/src/hooks/use-long-press';
 import { useModal } from '@/src/hooks/use-modal';
 
 import { Button } from '@/src/components/buttons/button/button';
-import { ChatMessagePopover } from '@/src/components/chat-message/chat-message-popover';
+import { ChatMessageDropdown } from '@/src/components/chat-message/chat-message-dropdown';
 import { useDeleteChatMessage } from '@/src/components/chat-message-group/use-delete-message';
 import { useDropdownAtom } from '@/src/components/chat-message-group/use-dropdown-atom';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
@@ -96,7 +96,7 @@ export const ChatMessage = ({
           )}
           <AnimatePresence mode="wait">
             {isOpen && (
-              <ChatMessagePopover
+              <ChatMessageDropdown
                 messageText={text}
                 closeModal={closeDropdown}
                 createdAt={createdAt}

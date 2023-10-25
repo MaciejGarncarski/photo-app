@@ -22,7 +22,7 @@ export const usePostModal = ({
   const handleClose = () => {
     closeModal();
     if (isPostPage) {
-      router.push(`/${authorQuery.data?.username}`);
+      router.replace(`/${authorQuery.data?.username}`);
     }
   };
 

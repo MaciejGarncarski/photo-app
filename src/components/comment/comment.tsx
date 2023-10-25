@@ -1,15 +1,22 @@
-import { Trash } from '@phosphor-icons/react';
+import { DotsThree, Trash } from '@phosphor-icons/react';
+import * as Dropdown from '@radix-ui/react-dropdown-menu';
+import * as Tooltip from '@radix-ui/react-tooltip';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { useModal } from '@/src/hooks/use-modal';
+import { formatDateFull } from '@/src/utils/format-date-full';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
 import { useComment } from '@/src/components/comment/use-comment';
+import { DropdownContent } from '@/src/components/dropdown/dropdown-content/dropdown-content';
+import { DropdownItem } from '@/src/components/dropdown/dropdown-item/dropdown-item';
 import { HeartIcon } from '@/src/components/heart-icon';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
+import { TooltipContent } from '@/src/components/tooltip-content/tooltip-content';
 import { Comment as TComment } from '@/src/schemas/post-comment.schema';
 
 import styles from './comment.module.scss';
@@ -21,6 +28,7 @@ type Props = {
 export const Comment = ({ commentData }: Props) => {
   const { authorId, createdAt, text, isLiked, likesCount } = commentData;
   const { openModal, closeModal, isModalOpen } = useModal();
+  const [isOpen, setIsOpen] = useState(false);
 
   const {
     handleDelete,
@@ -47,16 +55,39 @@ export const Comment = ({ commentData }: Props) => {
           <p className={clsx(isLiked && styles.isLiked)}>{likesCount}</p>
         </button>
 
-        <p className={styles.createdAt}>
-          <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
-        </p>
+        <Tooltip.Provider>
+          <Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
+            <Tooltip.Trigger asChild>
+              <button className={styles.createdAt}>
+                <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
+              </button>
+            </Tooltip.Trigger>
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <TooltipContent>{formatDateFull(createdAt)}</TooltipContent>
+              ) : null}
+            </AnimatePresence>
+          </Tooltip.Root>
+        </Tooltip.Provider>
 
         {isAbleToDelete && (
           <div className={styles.buttonLast}>
-            <Button type="button" variant="destructive" onClick={openModal}>
-              <Trash />
-              Delete
-            </Button>
+            <Dropdown.Root>
+              <Dropdown.Trigger asChild>
+                <button type="button" onClick={openModal}>
+                  <span className="visually-hidden">options</span>
+                  <DotsThree />
+                </button>
+              </Dropdown.Trigger>
+              <Dropdown.Portal>
+                <DropdownContent>
+                  <DropdownItem variant="destructive" onSelect={openModal}>
+                    <Trash />
+                    <span>Delete</span>
+                  </DropdownItem>
+                </DropdownContent>
+              </Dropdown.Portal>
+            </Dropdown.Root>
           </div>
         )}
       </div>
