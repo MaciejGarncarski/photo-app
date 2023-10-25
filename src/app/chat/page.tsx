@@ -1,12 +1,18 @@
 import { dehydrate } from '@tanstack/react-query';
+import { Metadata } from 'next';
 
 import { getQueryClient } from '@/src/utils/api/get-query-client';
 import { Hydrate } from '@/src/utils/api/hydrate';
+import { getTitle } from '@/src/utils/get-title';
 
 import { Chat } from '@/src/components/pages/chat/chat';
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 import { getChatUsers } from '@/src/services/chat.service';
 import { getUser } from '@/src/services/user.service';
+
+export const metadata: Metadata = {
+  title: getTitle('Chat'),
+};
 
 const ChatPage = async () => {
   const queryClient = getQueryClient();

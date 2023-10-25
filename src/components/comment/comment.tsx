@@ -64,8 +64,8 @@ export const Comment = ({ commentData }: Props) => {
             </Tooltip.Trigger>
             <AnimatePresence mode="wait">
               {isOpen ? (
-                <TooltipContent side="left">
-                  {formatDateFull(createdAt)}
+                <TooltipContent>
+                  {formatDateFull(createdAt, { fullMonth: true })}
                 </TooltipContent>
               ) : null}
             </AnimatePresence>
@@ -82,7 +82,7 @@ export const Comment = ({ commentData }: Props) => {
                 </button>
               </Dropdown.Trigger>
               <Dropdown.Portal>
-                <DropdownContent>
+                <DropdownContent side="left">
                   <DropdownItem variant="destructive" onSelect={openModal}>
                     <Trash />
                     <span>Delete</span>

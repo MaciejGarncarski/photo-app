@@ -41,7 +41,7 @@ export const ChatMessageDropdown = ({
       <DropdownContent side="top" sideOffset={0}>
         <DropdownItem variant="primary">
           <Clock size={17} />
-          <span>{formatDateFull(createdAt)}</span>
+          <span>{formatDateFull(createdAt, { fullMonth: true })}</span>
         </DropdownItem>
         <DropdownItem onSelect={handleCopy} variant="primary">
           <Copy size={17} />

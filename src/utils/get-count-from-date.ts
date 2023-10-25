@@ -8,11 +8,9 @@ export const HOUR = 60;
 export const getCountFromDate = (date: Date) => {
   const currentTime = new Date().getTime();
   const oldTime = date.getTime();
+  const secondsCount = Math.round((currentTime - oldTime) / 1000);
   const minutesCount = Math.round((currentTime - oldTime) / ONE_MINUTE);
   const hoursCount = Math.round(minutesCount / HOUR);
-  const daysCount = Math.round(hoursCount / DAY);
-  const weeksCount = Math.round(daysCount / WEEK);
-  const monthsCount = Math.round(daysCount / MONTH);
 
-  return { daysCount, weeksCount, monthsCount, hoursCount, minutesCount };
+  return { hoursCount, minutesCount, secondsCount };
 };

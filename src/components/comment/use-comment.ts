@@ -1,6 +1,6 @@
 import { useAuth } from '@/src/hooks/use-auth';
 import { useUser } from '@/src/hooks/use-user';
-import { formatDate } from '@/src/utils/format-date';
+import { formatDateRelative } from '@/src/utils/format-date-relative';
 
 import { useDeleteComment } from '@/src/components/comment/use-delete-comment';
 import { useCommentLike } from '@/src/components/comment/use-like';
@@ -15,7 +15,7 @@ export const useComment = ({ commentData }: Arguments) => {
   const { isLiked, commentId, createdAt, authorId } = commentData;
   const { data: sessionUserData } = useUser({ userId: sessionUser?.id || '' });
   const { data } = useUser({ userId: authorId });
-  const timeSinceCreated = formatDate(createdAt);
+  const timeSinceCreated = formatDateRelative(createdAt);
 
   const commentLike = useCommentLike();
   const commentDelete = useDeleteComment();

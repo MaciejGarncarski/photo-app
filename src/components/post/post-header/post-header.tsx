@@ -73,7 +73,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
           <AnimatePresence mode="wait">
             {isOpen ? (
               <TooltipContent>
-                {formatDateFull(postData?.createdAt || '')}
+                {formatDateFull(postData?.createdAt || '', { fullMonth: true })}
               </TooltipContent>
             ) : null}
           </AnimatePresence>

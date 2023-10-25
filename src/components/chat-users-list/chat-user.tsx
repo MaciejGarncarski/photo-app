@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { useUser } from '@/src/hooks/use-user';
-import { formatDate } from '@/src/utils/format-date';
+import { formatDateRelative } from '@/src/utils/format-date-relative';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { linkVariants } from '@/src/components/chat-users-list/chat-users-list.animation';
@@ -52,7 +52,7 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
         {messageCreatedAt && (
           <span className={styles.createdAt}>
             <time dateTime={messageCreatedAt}>
-              {formatDate(messageCreatedAt)}
+              {formatDateRelative(messageCreatedAt)}
             </time>
           </span>
         )}
