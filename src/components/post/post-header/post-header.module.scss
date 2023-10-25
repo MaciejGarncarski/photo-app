@@ -18,7 +18,12 @@
 }
 
 .createdAt {
+  font-size: 0.9rem;
   color: var(--color-text-gray);
+
+  @include common.mediaquery('tablet') {
+    font-size: 1rem;
+  }
 }
 
 .options {

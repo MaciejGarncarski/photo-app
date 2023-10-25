@@ -1,7 +1,6 @@
 @use '/src/styles/common';
 
 .container {
-  position: relative;
   z-index: 1;
   width: clamp(22rem, 85vw, 50rem);
   background-color: var(--color-primary);
@@ -38,10 +37,9 @@
 }
 
 .closeButton {
-  display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
-  padding-bottom: 0.5rem;
+  position: absolute;
+  right: 0;
+  top: -3rem;
 }
 
 .closeButtonDesktop {

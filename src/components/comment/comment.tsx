@@ -64,7 +64,9 @@ export const Comment = ({ commentData }: Props) => {
             </Tooltip.Trigger>
             <AnimatePresence mode="wait">
               {isOpen ? (
-                <TooltipContent>{formatDateFull(createdAt)}</TooltipContent>
+                <TooltipContent side="left">
+                  {formatDateFull(createdAt)}
+                </TooltipContent>
               ) : null}
             </AnimatePresence>
           </Tooltip.Root>

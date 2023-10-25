@@ -64,6 +64,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
         <Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
           <Tooltip.Trigger asChild>
             <button className={styles.createdAt}>
+              &#8226;&nbsp;
               <time dateTime={postData?.createdAt.toString()}>
                 {dateFromNow}
               </time>

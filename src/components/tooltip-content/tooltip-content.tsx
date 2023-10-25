@@ -6,12 +6,18 @@ import styles from './tooltip-content.module.scss';
 
 type Props = {
   children: ReactNode;
-};
+} & Tooltip.TooltipContentProps;
 
 export const TooltipContent = forwardRef<HTMLDivElement, Props>(
-  ({ children }, ref) => {
+  ({ children, ...otherProps }, ref) => {
     return (
-      <Tooltip.Content forceMount sideOffset={5} asChild ref={ref}>
+      <Tooltip.Content
+        forceMount
+        sideOffset={5}
+        asChild
+        ref={ref}
+        {...otherProps}
+      >
         <motion.div
           className={styles.tooltipContent}
           initial={{

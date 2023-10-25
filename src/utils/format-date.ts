@@ -13,7 +13,7 @@ type FormatData = Array<{
 }>;
 
 const formatter = new Intl.RelativeTimeFormat('en-GB', {
-  style: 'short',
+  style: 'narrow',
   numeric: 'auto',
 });
 
