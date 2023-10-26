@@ -1,6 +1,5 @@
 import { QueryCache } from '@tanstack/react-query';
 import { afterAll, afterEach, beforeAll } from 'vitest';
-import '@testing-library/jest-dom';
 
 import { server } from '@/src/mocks/mocks';
 
