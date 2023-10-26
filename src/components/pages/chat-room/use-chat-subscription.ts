@@ -47,7 +47,7 @@ export const useChatSubscription = () => {
         notificationAudio.play();
 
         if (window.navigator.vibrate) {
-          window.navigator.vibrate(200);
+          window.navigator.vibrate(100);
         }
       }
     };

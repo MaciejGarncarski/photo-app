@@ -17,7 +17,7 @@ type ApiClientArguments<S> = {
 export const fetcher = Fetcher.for<paths>();
 
 fetcher.configure({
-  baseUrl: clientEnv.NEXT_PUBLIC_API_ROOT,
+  baseUrl: clientEnv.NEXT_PUBLIC_API_ROOT || 'http://localhost:3001',
   init: {
     credentials: 'include',
   },

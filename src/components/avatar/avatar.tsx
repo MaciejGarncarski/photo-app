@@ -26,11 +26,10 @@ const avatarSizes: Record<Size, number> = {
 };
 
 export const Avatar = ({ userId, size }: Props) => {
-  const { data } = useUser({ userId });
-
+  const { data, isPending } = useUser({ userId });
   const avatarSize = avatarSizes[size];
 
-  if (!data) {
+  if (!data || isPending) {
     return (
       <div className={clsx(styles[size], styles.avatar)}>
         <div className={styles.noImage}>
@@ -52,7 +51,7 @@ export const Avatar = ({ userId, size }: Props) => {
       {hasNoImage && (
         <div className={styles.noImage}>
           <User className={styles.imagePlaceholder} />
-          <span className="visually-hidden">@{username}</span>
+          <span className="visually-hidden">{`@${username}`} avatar</span>
         </div>
       )}
       {(hasDefaultImage || hasCustomImage) && (

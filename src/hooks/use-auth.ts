@@ -33,7 +33,7 @@ export const useAuth = () => {
     }
   }, [error, queryClient]);
 
-  const isSignedIn = Boolean(sessionUser?.id) && !isPending;
+  const isSignedIn = Boolean(sessionUser?.id);
 
   return useMemo(() => {
     return {

@@ -41,7 +41,9 @@
     "**/*.ts",
     "**/*.tsx",
     "utils/env.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/mocks/mocks.js",
+    "src/mocks/mocks.js"
   ],
   "exclude": [
     "node_modules",

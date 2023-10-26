@@ -8,6 +8,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
+    setupFiles: ['./src/utils/tests/setup'],
     environment: 'jsdom',
     alias: {
       '^~/(.*)$': new URL('./', import.meta.url).pathname,

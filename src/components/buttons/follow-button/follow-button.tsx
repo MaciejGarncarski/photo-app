@@ -17,16 +17,15 @@ export const FollowButton = ({ userId }: Props) => {
     return null;
   }
 
-  const { isFollowing } = data;
   const handleFollow = () => mutate(undefined);
 
   return (
     <Button
       type="button"
-      variant={isFollowing ? 'secondary' : 'primary'}
+      variant={data.isFollowing ? 'secondary' : 'primary'}
       onClick={handleFollow}
     >
-      {isFollowing ? 'Unfollow' : 'Follow'}
+      {data.isFollowing ? 'Unfollow' : 'Follow'}
     </Button>
   );
 };

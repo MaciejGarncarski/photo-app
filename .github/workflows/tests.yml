@@ -35,3 +35,6 @@ jobs:
         
       - name: 🔎 Type check
         run: pnpm tsc
+
+      - name: 🧪 Test
+        run: pnpm coverage
