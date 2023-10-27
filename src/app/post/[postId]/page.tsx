@@ -4,6 +4,7 @@ import { getQueryClient } from '@/src/utils/api/get-query-client';
 import { setTitle } from '@/src/utils/set-title';
 
 import { PostById } from '@/src/components/pages/post-by-id/post-by-id';
+import { APP_URL } from '@/src/constants';
 import { getPost } from '@/src/services/posts.service';
 import { getUser } from '@/src/services/user.service';
 
@@ -44,10 +45,11 @@ export const generateMetadata = async ({
   return {
     title: setTitle('Post'),
     metadataBase: new URL('https://ik.imagekit.io'),
+    description: postData.description,
     openGraph: {
       title: setTitle(`@${userData.username} Post`),
       description: postData.description,
-
+      url: APP_URL,
       images: [
         {
           url: image.thumbnailUrl,
