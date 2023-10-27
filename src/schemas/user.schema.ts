@@ -4,9 +4,8 @@ export const userSchema = z.object({
   username: z.string(),
   name: z.string().nullable(),
   id: z.string(),
-  image: z.string().nullable(),
   bio: z.string().nullable(),
-  customImage: z.string().nullable(),
+  avatar: z.string().nullable(),
   createdAt: z.string(),
 });
 

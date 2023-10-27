@@ -42,7 +42,7 @@ export const EditAccount = () => {
     return <Loader size="big" color="accent" marginTop />;
   }
 
-  const hasProfilePicture = sessionUser.customImage || sessionUser.image;
+  const hasProfilePicture = sessionUser.avatar;
 
   return (
     <>

@@ -35,8 +35,7 @@ export interface paths {
                 username: string;
                 name: string | null;
                 id: string;
-                image: string | null;
-                customImage: string | null;
+                avatar: string;
                 bio: string | null;
                 createdAt: string;
               };
@@ -88,8 +87,7 @@ export interface paths {
                 username: string;
                 name: string | null;
                 id: string;
-                image: string | null;
-                customImage: string | null;
+                avatar: string;
                 bio: string | null;
                 createdAt: string;
               };
@@ -120,8 +118,7 @@ export interface paths {
                 username: string;
                 name: string | null;
                 id: string;
-                image: string | null;
-                customImage: string | null;
+                avatar: string;
                 bio: string | null;
                 createdAt: string;
                 theme: "LIGHT" | "DARK";
@@ -535,8 +532,7 @@ export interface paths {
                 username: string;
                 name: string | null;
                 id: string;
-                image: string | null;
-                customImage: string | null;
+                avatar: string;
                 bio: string | null;
                 createdAt: string;
                 postsCount: number;
@@ -566,8 +562,7 @@ export interface paths {
                 username: string;
                 name: string | null;
                 id: string;
-                image: string | null;
-                customImage: string | null;
+                avatar: string;
                 bio: string | null;
                 createdAt: string;
                 postsCount: number;

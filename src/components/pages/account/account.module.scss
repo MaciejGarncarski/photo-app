@@ -5,7 +5,7 @@
   margin-inline: auto;
 
   @include common.mediaquery('tablet') {
-    max-width: 45rem;
+    max-width: 60rem;
   }
 
   @include common.mediaquery('desktop') {

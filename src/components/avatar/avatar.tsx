@@ -40,27 +40,24 @@ export const Avatar = ({ userId, size }: Props) => {
     );
   }
 
-  const { image, customImage, username } = data;
+  const { avatar, username } = data;
 
-  const hasNoImage = Boolean(!image && !customImage);
-  const hasDefaultImage = image && !Boolean(customImage);
-  const hasCustomImage = customImage;
+  const hasImage = Boolean(avatar);
 
   return (
     <div className={clsx(styles[size], styles.avatar)}>
-      {hasNoImage && (
-        <div className={styles.noImage}>
-          <User className={styles.imagePlaceholder} />
-          <span className="visually-hidden">{`@${username}`} avatar</span>
-        </div>
-      )}
-      {(hasDefaultImage || hasCustomImage) && (
+      {hasImage ? (
         <MotionImage
-          src={customImage ?? image ?? ''}
+          src={avatar}
           alt={`@${username} avatar`}
           width={avatarSize}
           height={avatarSize}
         />
+      ) : (
+        <div className={styles.noImage}>
+          <User className={styles.imagePlaceholder} />
+          <span className="visually-hidden">{`@${username}`} avatar</span>
+        </div>
       )}
     </div>
   );
