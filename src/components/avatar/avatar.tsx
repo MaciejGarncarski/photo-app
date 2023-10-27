@@ -42,11 +42,9 @@ export const Avatar = ({ userId, size }: Props) => {
 
   const { avatar, username } = data;
 
-  const hasImage = Boolean(avatar);
-
   return (
     <div className={clsx(styles[size], styles.avatar)}>
-      {hasImage ? (
+      {avatar ? (
         <MotionImage
           src={avatar}
           alt={`@${username} avatar`}

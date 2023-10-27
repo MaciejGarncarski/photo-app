@@ -6,19 +6,22 @@
   &:disabled {
     background-color: var(--color-gray);
     color: var(--color-text-gray);
-    cursor: not-allowed;
   }
 
   @include common.mediaquery('desktop') {
 
     &:hover {
       background-color: var(--color-active);
-      box-shadow: 0 0 0 1px var(--color-active);
     }
 
     &:focus {
       outline: none;
-      box-shadow: inset 0 0 0 3px var(--color-primary), 0 0 0 3px var(--color-accent);
+      box-shadow: inset 0 0 0 2px var(--color-primary), 0 0 0 3px var(--color-accent);
+    }
+
+    &:hover:disabled {
+      background-color: var(--color-gray);
+      color: var(--color-text-gray);
     }
   }
 
@@ -33,7 +36,6 @@
   background-color: transparent;
 
   @include common.mediaquery('desktop') {
-
     &:hover {
       color: var(--color-button-text)
     }
@@ -44,4 +46,10 @@
   @include common.button;
   color: var(--color-text);
   background-color: var(--color-error-light);
+
+  @include common.mediaquery('desktop') {
+    &:hover {
+      background-color: var(--color-error-light-active);
+    }
+  }
 }
