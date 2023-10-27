@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
 
 import { getQueryClient } from '@/src/utils/api/get-query-client';
-import { getTitle } from '@/src/utils/get-title';
+import { setTitle } from '@/src/utils/set-title';
 
 import { PostById } from '@/src/components/pages/post-by-id/post-by-id';
 import { getPost } from '@/src/services/posts.service';
+import { getUser } from '@/src/services/user.service';
 
 type Props = {
   params: { postId: string };
@@ -31,18 +32,22 @@ export const generateMetadata = async ({
 
   if (!postData) {
     return {
-      title: getTitle('Post'),
+      title: setTitle('Post'),
     };
   }
+  const {
+    data: { data: userData },
+  } = await getUser({ userId: postData.authorId });
 
   const image = postData.images[0];
 
   return {
-    title: getTitle('Post'),
+    title: setTitle('Post'),
     metadataBase: new URL('https://ik.imagekit.io'),
     openGraph: {
-      title: getTitle('Post'),
-      url: 'https://nextjs.org',
+      title: setTitle(`@${userData.username} Post`),
+      description: postData.description,
+
       images: [
         {
           url: image.thumbnailUrl,

@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 
-import { getTitle } from '@/src/utils/get-title';
+import { setTitle } from '@/src/utils/set-title';
 
 import { ChatRoom } from '@/src/components/pages/chat-room/chat-room';
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 
 export const metadata: Metadata = {
-  title: getTitle('Chat'),
+  title: setTitle('Chat'),
 };
 
 const ChatRoomPage = () => {

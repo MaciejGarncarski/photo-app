@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 import { getQueryClient } from '@/src/utils/api/get-query-client';
 import { Hydrate } from '@/src/utils/api/hydrate';
-import { getTitle } from '@/src/utils/get-title';
+import { setTitle } from '@/src/utils/set-title';
 
 import { Chat } from '@/src/components/pages/chat/chat';
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
@@ -11,7 +11,7 @@ import { getChatUsers } from '@/src/services/chat.service';
 import { getUser } from '@/src/services/user.service';
 
 export const metadata: Metadata = {
-  title: getTitle('Chat'),
+  title: setTitle('Chat'),
 };
 
 const ChatPage = async () => {

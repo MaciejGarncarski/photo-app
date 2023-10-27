@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icons/favicon.ico',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: 'rgb(109, 194, 171)',
 };
 
 const DefaultLayout = ({ children }: Props) => {
