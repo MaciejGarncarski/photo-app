@@ -1,6 +1,7 @@
 import { InfiniteData } from '@tanstack/react-query';
 import { forwardRef, Fragment } from 'react';
 
+import { checkTimeBetweenMessages } from '@/src/utils/check-time-between-messages';
 import { formatDateFull } from '@/src/utils/format-date-full';
 
 import { ChatMessageGroup } from '@/src/components/chat-message-group/chat-message-group';
@@ -18,7 +19,24 @@ type Props = {
 
 export const ChatMessages = forwardRef<HTMLLIElement, Props>(
   ({ hasNextPage, isPending, messagesData }, ref) => {
-    const allMessages = messagesData.pages.flatMap((el) => el.messages);
+    const allMessages = messagesData.pages.flatMap((el) => {
+      return el.messages.map((message, idx, arr) => {
+        if (!arr[idx + 1]) {
+          return {
+            ...message,
+            shouldShowTime: true,
+          };
+        }
+
+        return {
+          ...message,
+          shouldShowTime: checkTimeBetweenMessages(
+            arr[idx + 1].createdAt,
+            message.createdAt,
+          ),
+        };
+      });
+    });
 
     if (messagesData.pages[0].messagesCount === 0) {
       return (
@@ -33,13 +51,15 @@ export const ChatMessages = forwardRef<HTMLLIElement, Props>(
     return (
       <ul className={styles.messages}>
         {groupedMessages.map((group) => {
+          const message = group[group.length - 1];
+
           return (
-            <Fragment key={group[0].id}>
+            <Fragment key={message.id}>
               <ChatMessageGroup messageGroup={group} />
-              {group[0].shouldShowTime && (
+              {message.shouldShowTime && (
                 <li className={styles.time}>
-                  <time dateTime={group[0].createdAt}>
-                    {formatDateFull(group[0].createdAt)}
+                  <time dateTime={message.createdAt}>
+                    {formatDateFull(message.createdAt)}
                   </time>
                 </li>
               )}
