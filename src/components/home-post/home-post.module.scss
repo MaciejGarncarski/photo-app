@@ -5,7 +5,7 @@
   background-color: var(--color-secondary);
   padding: 1rem 1rem;
   border-radius: calc(0.5rem + var(--radius-small));
-  box-shadow: var(--shadow-pimary);
+  box-shadow: var(--shadow-border-small);
 
   @include common.mediaquery('desktop') {
     padding: 1rem 1.5rem;

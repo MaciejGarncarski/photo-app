@@ -1,5 +1,3 @@
-'use client';
-
 import { usePreventScroll } from '@react-aria/overlays';
 import { useState } from 'react';
 

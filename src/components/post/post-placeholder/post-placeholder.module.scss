@@ -10,7 +10,7 @@
   height: 22rem;
   background-color: var(--color-secondary);
   animation: var(--skeleton-animation);
-  box-shadow: var(--shadow-pimary);
+  box-shadow: var(--shadow-border-small);
 
   @include common.mediaquery('tablet') {
     height: 30rem;

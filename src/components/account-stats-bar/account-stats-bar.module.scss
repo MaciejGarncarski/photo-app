@@ -9,7 +9,7 @@
   border-radius: var(--radius-medium);
   padding: 0.5rem;
   width: clamp(20rem, 80vw, 40rem);
-  box-shadow: var(--shadow-pimary);
+  box-shadow: var(--shadow-border-small);
 
   @include common.mediaquery('tablet') {
     margin: 0;

@@ -31,7 +31,7 @@
   overflow: auto;
   top: var(--gap-top);
   position: sticky;
-  box-shadow: var(--shadow-pimary);
+  box-shadow: var(--shadow-border-medium);
   border-radius: calc(var(--radius-medium) + 0.5rem);
   margin-left: 6rem;
   display: flex;
@@ -46,7 +46,7 @@
 }
 
 .signedInInfo {
-  box-shadow: var(--shadow-pimary);
+  box-shadow: var(--shadow-border-small);
   margin-top: auto;
   margin: 0;
   margin-top: auto;

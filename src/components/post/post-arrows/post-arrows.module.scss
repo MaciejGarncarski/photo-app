@@ -18,7 +18,7 @@
   left: 0.5rem;
   z-index: 2;
   opacity: 0.7;
-  box-shadow: var(--shadow-primary);
+  box-shadow: var(--shadow-border-small);
   transition: box-shadow var(--transition-fast);
 
   @include common.mediaquery('desktop') {

@@ -5,34 +5,43 @@
 
   &:disabled {
     background-color: var(--color-gray);
-    box-shadow: 0 0 0 1px var(--color-gray);
     color: var(--color-text-gray);
     cursor: not-allowed;
   }
 
   @include common.mediaquery('desktop') {
+
+    &:hover {
+      background-color: var(--color-active);
+      box-shadow: 0 0 0 1px var(--color-active);
+    }
+
     &:focus {
-      outline-offset: 6px;
-      outline-width: 4px;
-      outline-color: var(--color-accent);
+      outline: none;
+      box-shadow: inset 0 0 0 3px var(--color-primary), 0 0 0 3px var(--color-accent);
     }
   }
 
-  &>* {
+  & > * {
     flex-shrink: 0;
   }
 }
 
 .secondary {
   @include common.button;
-  box-shadow: 0 0 0 1px var(--color-gray);
   color: var(--color-text);
   background-color: transparent;
+
+  @include common.mediaquery('desktop') {
+
+    &:hover {
+      color: var(--color-button-text)
+    }
+  }
 }
 
 .destructive {
   @include common.button;
   color: var(--color-text);
-  box-shadow: 0 0 0 1px var(--color-error-light);
   background-color: var(--color-error-light);
 }

@@ -29,7 +29,7 @@
     gap: 5rem;
     background-color: var(--color-secondary);
     border-radius: var(--radius-medium);
-    box-shadow: var(--shadow-pimary);
+    box-shadow: var(--shadow-border-small);
     height: auto;
   }
 
@@ -91,7 +91,7 @@
     gap: 2rem;
     background-color: var(--color-secondary);
     border-radius: var(--radius-medium);
-    box-shadow: var(--shadow-pimary);
+    box-shadow: var(--shadow-border-small);
     padding: 0.25rem;
   }
 }

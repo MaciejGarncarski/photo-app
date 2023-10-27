@@ -19,7 +19,9 @@ export const PostById = () => {
   const postId = parseInt(params.postId as string);
   const postModal = useModal(true);
   const { data, isSuccess, isError } = usePost({ postId });
-  const { data: authorData } = useUser({ userId: data?.authorId || '' });
+  const { data: authorData, isPending } = useUser({
+    userId: data?.authorId || '',
+  });
 
   const postModalClose = () => {
     postModal.closeModal();
@@ -38,12 +40,12 @@ export const PostById = () => {
     );
   }
 
-  if (!isSuccess || !authorData?.username) {
+  if (!isSuccess || !authorData?.username || isPending) {
     return <Loader marginTop color="accent" size="big" />;
   }
 
   return (
-    <>
+    <div>
       <Account username={authorData?.username} />
       <PostModal
         isVisible={postModal.isModalOpen}
@@ -51,6 +53,6 @@ export const PostById = () => {
         closeModal={postModalClose}
         isPostPage
       />
-    </>
+    </div>
   );
 };

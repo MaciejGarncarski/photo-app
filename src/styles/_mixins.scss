@@ -24,7 +24,6 @@
 @mixin button {
   border-radius: var(--radius-small);
   background-color: var(--color-accent);
-  box-shadow: 0 0 0 1px var(--color-accent);
   color: var(--color-button-text);
   font-weight: 500;
   padding: 0.4rem 0.8rem;
@@ -33,6 +32,8 @@
   align-items: center;
   text-align: center;
   gap: 0.6rem;
+  transition: all var(--transition-fast);
+  transition-property: background-color, color, box-shadow;
 
   @include mediaquery('desktop') {
     padding: 0.5rem 1rem;

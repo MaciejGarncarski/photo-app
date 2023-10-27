@@ -1,9 +1,6 @@
 import { IconContext } from '@phosphor-icons/react';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
 import { MouseEventHandler, ReactNode } from 'react';
-
-import { buttonVariants } from '@/src/components/buttons/button/button.animation';
 
 import styles from './button.module.scss';
 
@@ -32,17 +29,14 @@ export const Button = ({
         size: 20,
       }}
     >
-      <motion.button
+      <button
         onClick={onClick}
         type={type}
         disabled={disabled}
-        variants={buttonVariants}
-        whileHover={disabled ? undefined : 'hover'}
-        whileTap={disabled ? undefined : 'tap'}
         className={clsx(styles[variant], styles.button)}
       >
         {children}
-      </motion.button>
+      </button>
     </IconContext.Provider>
   );
 };
