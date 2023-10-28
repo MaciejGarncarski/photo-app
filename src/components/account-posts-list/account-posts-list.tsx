@@ -1,9 +1,6 @@
-import { motion } from 'framer-motion';
-
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { AccountPost } from '@/src/components/account-post/account-post';
-import { postContainerVariants } from '@/src/components/account-posts-list/account-posts-list.animation';
 import { useAccountPosts } from '@/src/components/account-posts-list/use-account-posts';
 import { Loader } from '@/src/components/loader/loader';
 
@@ -32,19 +29,14 @@ export const AccountPostsList = ({ userId }: Props) => {
 
   return (
     <>
-      <motion.div
-        variants={postContainerVariants}
-        initial="hidden"
-        animate="show"
-        className={styles.posts}
-      >
+      <div className={styles.posts}>
         {!hasPosts && <p className={styles.noPosts}>No posts yet.</p>}
         {data.pages.map((page) => {
           return page.data.map(({ id }) => {
             return <AccountPost key={id} postId={id} />;
           });
         })}
-      </motion.div>
+      </div>
       {hasNextPage && hasPosts && !isPending && (
         <div ref={ref} className={styles.loading}>
           <Loader color="primary" size="big" />

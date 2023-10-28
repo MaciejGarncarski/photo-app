@@ -1,7 +1,6 @@
 import { InfiniteData } from '@tanstack/react-query';
 import { forwardRef, Fragment } from 'react';
 
-import { checkTimeBetweenMessages } from '@/src/utils/check-time-between-messages';
 import { formatDateFull } from '@/src/utils/format-date-full';
 
 import { ChatMessageGroup } from '@/src/components/chat-message-group/chat-message-group';
@@ -19,34 +18,17 @@ type Props = {
 
 export const ChatMessages = forwardRef<HTMLLIElement, Props>(
   ({ hasNextPage, isPending, messagesData }, ref) => {
-    const allMessages = messagesData.pages.flatMap((el) => {
-      return el.messages.map((message, idx, arr) => {
-        if (!arr[idx + 1]) {
-          return {
-            ...message,
-            shouldShowTime: true,
-          };
-        }
+    const { groupedMessages, isEmpty } = groupMessagesByUser(
+      messagesData.pages,
+    );
 
-        return {
-          ...message,
-          shouldShowTime: checkTimeBetweenMessages(
-            arr[idx + 1].createdAt,
-            message.createdAt,
-          ),
-        };
-      });
-    });
-
-    if (messagesData.pages[0].messagesCount === 0) {
+    if (isEmpty) {
       return (
         <div className={styles.messages}>
           <p className={styles.noMessages}>No messages yet.</p>
         </div>
       );
     }
-
-    const groupedMessages = groupMessagesByUser(allMessages);
 
     return (
       <ul className={styles.messages}>

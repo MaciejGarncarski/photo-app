@@ -1,5 +1,4 @@
 import { ChatCentered, Heart } from '@phosphor-icons/react';
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,6 +15,7 @@ type Props = {
 };
 
 const MotionLink = motion(Link);
+const MotionImage = motion(Image);
 
 export const AccountPost = ({ postId }: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,22 +34,40 @@ export const AccountPost = ({ postId }: Props) => {
   return (
     <MotionLink
       shallow
-      variants={postItemVaraints}
       href={`/post/${postId}`}
       className={styles.link}
       data-cy="account post link"
+      variants={postItemVaraints}
+      initial="hidden"
+      animate="show"
+      transition={{
+        duration: 0.15,
+        ease: [0, 0.71, 0.4, 1],
+        scale: {
+          type: 'spring',
+          damping: 7,
+          stiffness: 80,
+          restDelta: 0.02,
+        },
+      }}
     >
       {!isLoaded && (
         <span className={styles.loader}>
-          <Loader color="accent" size="big" />
+          <Loader color="accent" size="small" />
         </span>
       )}
-      <Image
-        className={clsx({ [styles.imageLoading]: !isLoaded }, styles.image)}
+      <MotionImage
+        className={styles.image}
         src={images[0].url}
         alt="post"
         sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 15vw"
         fill
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: isLoaded ? 1 : 0,
+        }}
         onLoad={() => setIsLoaded(true)}
         priority
       />

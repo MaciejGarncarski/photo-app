@@ -6,7 +6,7 @@
   position: relative;
   display: block;
   background-color: var(--color-secondary);
-  box-shadow: 0 0 0 2px var(--shadow-1);
+  box-shadow: var(--shadow-border-small);
   border: none;
   transition: box-shadow var(--transition-fast);
   flex: 1 0 0%;
@@ -30,11 +30,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-overlay);
+  z-index: 1;
 }
 
 .image {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .overlay {
@@ -50,7 +50,7 @@
   background-color: var(--color-overlay);
   color: rgb(255, 255, 255);
   opacity: 0;
-  transition: opacity var(--transition);
+  transition: opacity var(--transition-fast);
 
   @include common.mediaquery('desktop') {
     &:hover {
