@@ -1,7 +1,7 @@
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
-import { useFollowers } from '@/src/components/modals/stats-modal/use-followers';
-import { useFriends } from '@/src/components/modals/stats-modal/use-friends';
+import { useFollowers } from '@/src/components/modals/followers-friends-modal/use-followers';
+import { useFriends } from '@/src/components/modals/followers-friends-modal/use-friends';
 
 type Arguments = {
   userId: string;
@@ -11,14 +11,15 @@ type Arguments = {
 export const useStatsModal = ({ userId, type }: Arguments) => {
   const followers = useFollowers({
     userId,
+    enabled: type === 'followers',
   });
 
   const friends = useFriends({
     userId,
+    enabled: type === 'friends',
   });
 
   const currentData = type === 'friends' ? friends : followers;
-
   const isEmpty = currentData.data?.pages[0].users.length === 0;
 
   const { ref } = useInfiniteScroll({

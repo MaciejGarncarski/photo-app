@@ -7,13 +7,13 @@ import { Avatar } from '@/src/components/avatar/avatar';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
 import { Loader } from '@/src/components/loader/loader';
 
-import styles from './stats-modal-item.module.scss';
+import styles from './followers-friends-item.module.scss';
 
 type Props = {
   userId: string;
 };
 
-export const StatsModalItem = ({ userId }: Props) => {
+export const FollowersFriendsItem = ({ userId }: Props) => {
   const { sessionUser } = useAuth();
   const { data: user } = useUser({ userId });
 

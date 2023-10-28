@@ -11,7 +11,7 @@
   overflow: hidden;
   flex-shrink: 0;
   background-color: var(--color-secondary);
-  filter: drop-shadow(1px 1px 5px var(--shadow-2));
+  filter: drop-shadow(0px 0px 5px var(--shadow-1));
 
 
   img {
@@ -46,7 +46,7 @@
 
 .big {
   --avatar-size: 5rem;
-  filter: drop-shadow(1px 1px 5px var(--shadow-5));
+  filter: drop-shadow(0px 0px 8px var(--shadow-1));
 
   @include common.mediaquery('desktop') {
     --avatar-size: 11rem;

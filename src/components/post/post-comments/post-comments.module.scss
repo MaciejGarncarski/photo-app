@@ -10,3 +10,48 @@
     gap: 2rem;
   }
 }
+
+.noComments {
+  text-align: center;
+  color: var(--color-text-gray);
+}
+
+.sort {
+  display: flex;
+  margin-left: auto;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.35rem;
+  padding-right: 1rem;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radioItem {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+
+
+  @include common.mediaquery('desktop') {
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      background-color: var(--color-primary);
+    }
+  }
+}
+
+.radioItem[data-disabled] {
+  color: var(--color-button-text);
+  background-color: var(--color-accent);
+}

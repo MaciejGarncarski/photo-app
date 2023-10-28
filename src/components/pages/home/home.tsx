@@ -62,7 +62,7 @@ export const Home = () => {
 
       {!isPending && hasNextPage && (
         <li ref={ref}>
-          <Loader size="big" color="primary" />
+          <Loader size="small" color="primary" />
         </li>
       )}
     </motion.ul>

@@ -31,7 +31,7 @@
   overflow: auto;
   top: var(--gap-top);
   position: sticky;
-  box-shadow: var(--shadow-border-medium);
+  box-shadow: 0px 4px 8px var(--shadow-1);
   border-radius: calc(var(--radius-medium) + 0.5rem);
   margin-left: 6rem;
   display: flex;

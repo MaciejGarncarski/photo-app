@@ -13,10 +13,13 @@
   height: 10rem;
 
   @include common.mediaquery('desktop') {
-    border-radius: var(--radius-medium);
     height: 14rem;
 
     &:focus {
+      & > .overlay {
+        opacity: 1;
+      }
+
       box-shadow: 0 0 0 2px var(--color-accent);
       outline: none;
     }
@@ -50,9 +53,9 @@
   background-color: var(--color-overlay);
   color: rgb(255, 255, 255);
   opacity: 0;
-  transition: opacity var(--transition-fast);
 
   @include common.mediaquery('desktop') {
+
     &:hover {
       opacity: 1;
     }
@@ -64,6 +67,6 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 700;
-  font-size: 2rem;
+  font-weight: 500;
+  font-size: 1.5rem;
 }

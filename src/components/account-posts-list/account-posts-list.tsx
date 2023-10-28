@@ -39,7 +39,7 @@ export const AccountPostsList = ({ userId }: Props) => {
       </div>
       {hasNextPage && hasPosts && !isPending && (
         <div ref={ref} className={styles.loading}>
-          <Loader color="primary" size="big" />
+          <Loader color="primary" size="small" />
         </div>
       )}
     </>

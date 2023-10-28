@@ -6,9 +6,10 @@ import { getFollowers } from '@/src/services/user.service';
 
 type UseFollowers = {
   userId: string;
+  enabled: boolean;
 };
 
-export const useFollowers = ({ userId }: UseFollowers) => {
+export const useFollowers = ({ userId, enabled }: UseFollowers) => {
   return useInfiniteQuery({
     queryKey: ['followers', userId],
     queryFn: async ({ pageParam }) => {
@@ -24,6 +25,7 @@ export const useFollowers = ({ userId }: UseFollowers) => {
       return data.data;
     },
     initialPageParam: 0,
+    enabled,
     refetchOnWindowFocus: false,
     getNextPageParam: nextPageParam,
   });

@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
+import { FollowersFriendsItem } from '@/src/components/modals/followers-friends-modal/followers-friends-item/followers-friends-item';
+import { useStatsModal } from '@/src/components/modals/followers-friends-modal/use-stats-modal';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
-import { StatsModalItem } from '@/src/components/modals/stats-modal/stats-modal-item/stats-modal-item';
-import { useStatsModal } from '@/src/components/modals/stats-modal/use-stats-modal';
 
-import styles from './stats-modal.module.scss';
+import styles from './followers-friends-modal.module.scss';
 
 type Props = {
   userId: string;
@@ -14,7 +14,7 @@ type Props = {
   closeModal: () => void;
 };
 
-export const StatsModal = ({ closeModal, type, userId }: Props) => {
+export const FollowersFriendsModal = ({ closeModal, type, userId }: Props) => {
   const { isPending, data, isEmpty, ref } = useStatsModal({
     userId,
     type,
@@ -48,7 +48,7 @@ export const StatsModal = ({ closeModal, type, userId }: Props) => {
             <ul className={styles.list}>
               {data?.pages.map((page) => {
                 return page.users.map((userId) => {
-                  return <StatsModalItem key={userId} userId={userId} />;
+                  return <FollowersFriendsItem key={userId} userId={userId} />;
                 });
               })}
             </ul>

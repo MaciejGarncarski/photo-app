@@ -6,11 +6,12 @@ import { getFriends } from '@/src/services/user.service';
 
 type UseFriends = {
   userId: string;
+  enabled: boolean;
 };
 
-export const useFriends = ({ userId }: UseFriends) => {
+export const useFriends = ({ userId, enabled }: UseFriends) => {
   return useInfiniteQuery({
-    queryKey: ['followers', userId],
+    queryKey: ['friends', userId],
     queryFn: async ({ pageParam }) => {
       const { data } = await getFriends({
         skip: pageParam.toString(),
@@ -18,12 +19,13 @@ export const useFriends = ({ userId }: UseFriends) => {
       });
 
       if (!data['data']) {
-        throw new Error('NO data');
+        throw new Error('No data');
       }
 
       return data.data;
     },
     initialPageParam: 0,
+    enabled,
     refetchOnWindowFocus: false,
     getNextPageParam: nextPageParam,
   });

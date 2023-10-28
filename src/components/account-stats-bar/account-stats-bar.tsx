@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useUserStats } from '@/src/components/account-stats-bar/use-user-stats';
-import { StatsModal } from '@/src/components/modals/stats-modal/stats-modal';
+import { FollowersFriendsModal } from '@/src/components/modals/followers-friends-modal/followers-friends-modal';
 
 import styles from './account-stats-bar.module.scss';
 
@@ -28,14 +28,14 @@ export const AccountStats = ({ userId }: Props) => {
       </motion.ul>
       <AnimatePresence>
         {friendsModal.isModalOpen && (
-          <StatsModal
+          <FollowersFriendsModal
             type="friends"
             closeModal={friendsModal.closeModal}
             userId={userId}
           />
         )}
         {followersModal.isModalOpen && (
-          <StatsModal
+          <FollowersFriendsModal
             type="followers"
             closeModal={followersModal.closeModal}
             userId={userId}

@@ -41,13 +41,13 @@ export const AccountPost = ({ postId }: Props) => {
       initial="hidden"
       animate="show"
       transition={{
-        duration: 0.15,
-        ease: [0, 0.71, 0.4, 1],
+        duration: 0.015,
+        ease: [0, 0.8, 0.2, 1],
         scale: {
           type: 'spring',
-          damping: 7,
+          damping: 8,
           stiffness: 80,
-          restDelta: 0.02,
+          restDelta: 0.001,
         },
       }}
     >
@@ -73,11 +73,11 @@ export const AccountPost = ({ postId }: Props) => {
       />
       <span className={styles.overlay}>
         <span className={styles.count}>
-          <Heart size={34} weight="fill" />
+          <Heart size={28} weight="fill" />
           {likesCount}
         </span>
         <span className={styles.count}>
-          <ChatCentered size={34} weight="fill" />
+          <ChatCentered size={28} weight="fill" />
           {commentsCount}
         </span>
       </span>
