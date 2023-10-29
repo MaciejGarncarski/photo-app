@@ -29,12 +29,13 @@
     gap: 0.5rem;
 
     &:not(:disabled) {
-        cursor: default;
+        cursor: auto;
     }
 
     @include common.mediaquery('desktop') {
         max-width: 65ch;
         padding: 0.5rem 1rem;
+        user-select: auto;
     }
 }
 

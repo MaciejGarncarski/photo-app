@@ -3,7 +3,7 @@
 .container {
   width: clamp(20rem, 50vw, 44rem);
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   flex-direction: column;
 
   @include common.mediaquery('desktop') {
@@ -15,12 +15,7 @@
 }
 
 .formContainer {
-  padding-bottom: 6rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-
-  @include common.mediaquery('desktop') {
-    padding-bottom: 2rem;
-  }
+  gap: 2rem;
 }
