@@ -6,9 +6,9 @@ import {
   Sun,
   User,
 } from '@phosphor-icons/react';
-import { usePreventScroll } from '@react-aria/overlays';
 import { useCallback } from 'react';
 import { createPortal } from 'react-dom';
+import { RemoveScroll } from 'react-remove-scroll';
 
 import { useAuth } from '@/src/hooks/use-auth';
 import { useModal } from '@/src/hooks/use-modal';
@@ -27,8 +27,6 @@ type Props = {
 export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
   const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
-
-  usePreventScroll({ isDisabled: !isVisible });
 
   const { isSoundEnabled, toggleNotificationSound, isSoundMutationPending } =
     useNotificationSoundPreference();
@@ -51,7 +49,7 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
   }, [isSoundEnabled]);
 
   return createPortal(
-    <>
+    <RemoveScroll enabled={isVisible}>
       <ListModal
         isVisible={isVisible}
         closeModal={closeSettingsModal}
@@ -102,7 +100,7 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
         closeSettingsModal={closeSettingsModal}
         signOutModal={signOutModal}
       />
-    </>,
+    </RemoveScroll>,
     document.querySelector('#modal') as Element,
   );
 };

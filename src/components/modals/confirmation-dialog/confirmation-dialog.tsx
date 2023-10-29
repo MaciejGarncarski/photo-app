@@ -39,7 +39,7 @@ export const ConfirmationDialog = ({
             >
               <div className={styles.headingContainer}>
                 <h3 className={styles.heading}>Confirmation</h3>
-                <ModalCloseButton onClose={closeModal} />
+                <ModalCloseButton onClose={closeModal} variant="primary" />
               </div>
               <p className={styles.description}>{text}</p>
               <div className={styles.buttonsRow}>

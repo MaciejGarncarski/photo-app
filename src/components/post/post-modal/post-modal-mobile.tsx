@@ -18,7 +18,7 @@ export const PostModalMobile = ({ postId, closeModal }: Props) => {
   return (
     <>
       <div className={styles.closeButton}>
-        <ModalCloseButton onClose={closeModal} />
+        <ModalCloseButton onClose={closeModal} variant="secondary" />
       </div>
       <PostHeader tag="div" postId={postId} />
       <div className={styles.content}>

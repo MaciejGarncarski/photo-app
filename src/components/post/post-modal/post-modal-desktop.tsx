@@ -18,7 +18,7 @@ export const PostModalDesktop = ({ postId, closeModal }: Props) => {
   return (
     <>
       <div className={styles.closeButtonDesktop}>
-        <ModalCloseButton onClose={closeModal} />
+        <ModalCloseButton onClose={closeModal} variant="secondary" />
       </div>
 
       <div className={styles.desktop}>

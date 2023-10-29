@@ -11,8 +11,24 @@
 
 
   @include common.mediaquery('desktop') {
+    &:focus {
+      outline: 0;
+      box-shadow: inset 0 0 0 3px var(--color-primary), 0 0 0 4px var(--color-accent);
+    }
+
     &:hover {
       background-color: var(--color-gray-hover);
+    }
+  }
+}
+
+.secondary {
+  background-color: var(--color-text);
+  color: var(--color-secondary);
+
+  @include common.mediaquery('desktop') {
+    &:hover {
+      background-color: var(--color-text);
     }
   }
 }

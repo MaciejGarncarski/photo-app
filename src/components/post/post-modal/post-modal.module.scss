@@ -10,6 +10,7 @@
   top: 0;
   border-radius: var(--radius-medium);
   padding: 1rem 1rem;
+  box-shadow: 0 10px 10px 0 var(--shadow-1);
 
   @include common.mobile-landscape {
     width: auto;

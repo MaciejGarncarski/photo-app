@@ -10,7 +10,7 @@
   --color-error-light-active: rgb(231, 114, 114);
   --color-gray: rgb(222, 222, 222);
   --color-gray-hover: rgb(200, 200, 200);
-  --color-overlay: rgb(20, 20, 20, 0.6);
+  --color-overlay: rgba(200, 200, 200, 0.7);
 
   --color-text: rgb(6, 20, 16);
   --color-text-gray: rgb(80, 80, 80);
@@ -63,8 +63,8 @@
   --color-text: rgb(232, 232, 232);
   --color-text-gray: rgb(211, 211, 211);
 
-  --shadow-1: rgba(255, 255, 255, 0.1);
-  --shadow-2: rgba(255, 255, 255, 0.2);
-  --shadow-5: rgba(255, 255, 255, 0.5);
-  --shadow-8: rgba(255, 255, 255, 0.8);
+  --shadow-1: rgba(222, 222, 222, 0.1);
+  --shadow-2: rgba(222, 222, 222, 0.2);
+  --shadow-5: rgba(222, 222, 222, 0.5);
+  --shadow-8: rgba(222, 222, 222, 0.8);
 }
