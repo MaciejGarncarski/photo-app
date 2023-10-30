@@ -27,7 +27,7 @@ export const PostModalDesktop = ({ postId, closeModal }: Props) => {
         </div>
         <PostHeader postId={postId} />
         <div className={styles.commentsDesktop}>
-          <PostComments postId={postId} />
+          <PostComments postId={postId} closeModal={closeModal} />
         </div>
         <div className={styles.commentForm}>
           <PostFooter postId={postId} parentModalOpen />

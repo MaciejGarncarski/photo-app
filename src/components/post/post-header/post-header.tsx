@@ -102,7 +102,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
       />
       <ConfirmationDialog
         isVisible={confirmationModal.isModalOpen}
-        text="Do you want to delete post?"
+        text="Your post will be removed from our servers. This action is irreversible."
         closeModal={confirmationModal.closeModal}
       >
         <Button

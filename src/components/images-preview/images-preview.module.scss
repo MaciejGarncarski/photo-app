@@ -16,7 +16,6 @@
   background-color: transparent;
   display: flex;
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-border-small);
   justify-content: center;
   align-items: center;
   position: relative;
@@ -36,7 +35,7 @@
 .emptySpace {
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-border-small);
+  box-shadow: var(--shadow-border);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

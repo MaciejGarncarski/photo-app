@@ -38,7 +38,8 @@
 
   @include common.mediaquery('desktop') {
     &:hover {
-      color: var(--color-button-text)
+      color: var(--color-always-black);
+      box-shadow: none;
     }
 
   }

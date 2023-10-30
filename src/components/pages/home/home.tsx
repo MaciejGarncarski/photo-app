@@ -35,7 +35,7 @@ export const Home = () => {
   const noPosts = data?.pages[0] && data.pages[0].postsCount < 1;
 
   return (
-    <motion.ul
+    <motion.div
       className={styles.posts}
       variants={containerVariants}
       animate="show"
@@ -43,7 +43,7 @@ export const Home = () => {
     >
       <NewPostNotification />
       {noPosts ? (
-        <li className={styles.noPosts}>
+        <div className={styles.noPosts}>
           <p>No posts yet.</p>
           {isSignedIn && (
             <ButtonLink href="/create-post">
@@ -51,7 +51,7 @@ export const Home = () => {
               Create post now
             </ButtonLink>
           )}
-        </li>
+        </div>
       ) : null}
 
       {data?.pages.map((page) => {
@@ -61,10 +61,10 @@ export const Home = () => {
       })}
 
       {!isPending && hasNextPage && (
-        <li ref={ref}>
+        <div role="status" ref={ref}>
           <Loader size="small" color="primary" />
-        </li>
+        </div>
       )}
-    </motion.ul>
+    </motion.div>
   );
 };

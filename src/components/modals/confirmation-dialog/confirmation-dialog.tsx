@@ -6,7 +6,6 @@ import ReactFocusLock from 'react-focus-lock';
 
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
-import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
 
 import styles from './confirmation-dialog.module.scss';
@@ -30,7 +29,7 @@ export const ConfirmationDialog = ({
         <ModalBackdrop closeModal={closeModal}>
           <ReactFocusLock autoFocus={false}>
             <motion.div
-              role="dialog"
+              role="alertdialog"
               className={styles.container}
               variants={modalVariants}
               initial="hidden"
@@ -38,19 +37,10 @@ export const ConfirmationDialog = ({
               exit="exit"
             >
               <div className={styles.headingContainer}>
-                <h3 className={styles.heading}>Confirmation</h3>
-                <ModalCloseButton onClose={closeModal} variant="primary" />
+                <h3 className={styles.heading}>Are you sure?</h3>
               </div>
-              <p className={styles.description}>{text}</p>
-              <div className={styles.buttonsRow}>
-                {children}
-                {/* <Button type="button" onClick={closeModal} variant="secondary">
-                  cancel
-                </Button>
-                <Button type="button" onClick={onConfirm} variant="primary">
-                  confirm
-                </Button> */}
-              </div>
+              <p className={styles.text}>{text}</p>
+              <div className={styles.buttonsRow}>{children}</div>
             </motion.div>
           </ReactFocusLock>
         </ModalBackdrop>

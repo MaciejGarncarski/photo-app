@@ -34,7 +34,7 @@ type ModalListItemProps = Props & ModalListItemConditionalProps;
 
 const itemVariants: Variants = {
   initial: {
-    y: 20,
+    y: 10,
   },
   visible: {
     y: 0,

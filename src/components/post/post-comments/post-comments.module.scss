@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow: auto;
+  height: 100%;
 
   @include common.mediaquery('desktop') {
     gap: 2rem;
@@ -23,7 +25,7 @@
   align-items: center;
   gap: 0.35rem;
   overflow: hidden;
-
+  margin-bottom: 0.5rem;
 }
 
 .radioGroup {
@@ -48,11 +50,15 @@
 
     &:focus {
       background-color: var(--color-primary);
+      color: var(--color-text);
     }
   }
 }
 
-.radioItem[data-disabled] {
-  color: var(--color-button-text);
+.radioItemChecked {
+  cursor: auto;
+  color: var(--color-always-black);
   background-color: var(--color-accent);
+
+
 }

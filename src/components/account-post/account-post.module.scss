@@ -6,7 +6,7 @@
   position: relative;
   display: block;
   background-color: var(--color-secondary);
-  box-shadow: var(--shadow-border-small);
+  box-shadow: var(--shadow-border);
   border: none;
   transition: box-shadow var(--transition-fast);
   flex: 1 0 0%;
@@ -51,7 +51,7 @@
   align-items: center;
   gap: 2rem;
   background-color: var(--color-overlay);
-  color: rgb(255, 255, 255);
+  color: var(--color-always-white);
   opacity: 0;
 
   @include common.mediaquery('desktop') {

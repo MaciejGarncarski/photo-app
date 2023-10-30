@@ -14,7 +14,7 @@
   height: 100%;
 
   & > svg {
-    filter: drop-shadow(0 2px 8px var(--color-gray-transparent));
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.2));
     color: white;
     fill: white;
 

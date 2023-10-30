@@ -10,7 +10,7 @@
   top: 0;
   border-radius: var(--radius-medium);
   padding: 1rem 1rem;
-  box-shadow: 0 10px 10px 0 var(--shadow-1);
+  box-shadow: var(--shadow-border);
 
   @include common.mobile-landscape {
     width: auto;
@@ -30,7 +30,7 @@
 .desktop {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-template-rows: 5rem 1fr auto;
+  grid-template-rows: auto 1fr auto;
   align-items: flex-start;
   column-gap: 2rem;
   width: 100%;
@@ -78,6 +78,7 @@
   padding-right: 1rem;
 }
 
+
 .commentsContainer {
   margin-top: 1rem;
 
@@ -100,9 +101,8 @@
 .commentsDesktop {
   grid-column: 2 / 3;
   height: 100%;
-  overflow: auto;
-  padding: 1rem 0;
   max-height: 60vh;
+  padding: 1rem 0;
 }
 
 .commentForm {

@@ -1,9 +1,11 @@
 import { CaretDown } from '@phosphor-icons/react';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
+import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
+import { useOnEscape } from '@/src/hooks/use-on-escape';
 
 import { Comment } from '@/src/components/comment/comment';
 import { DropdownContent } from '@/src/components/dropdown/dropdown-content/dropdown-content';
@@ -18,14 +20,16 @@ import styles from './post-comments.module.scss';
 
 type Props = {
   postId: number;
+  closeModal: () => void;
 };
 
-export const PostComments = ({ postId }: Props) => {
+export const PostComments = ({ postId, closeModal }: Props) => {
   const { data, hasNextPage, fetchNextPage, isPending } = useInfiniteComments({
     postId: postId,
   });
 
   const [isOpen, setIsOpen] = useState(false);
+  useOnEscape({ callback: closeModal, disabled: isOpen });
 
   const { sortOption, changeSelectedSort, sortedData } = useSort({
     commentsData: data,
@@ -44,7 +48,7 @@ export const PostComments = ({ postId }: Props) => {
   const commentsCount = data.pages[0].commentsCount;
 
   return (
-    <div className={styles.commentsList}>
+    <>
       {commentsCount === 0 ? (
         <p className={styles.noComments}>No comments added yet.</p>
       ) : (
@@ -68,6 +72,7 @@ export const PostComments = ({ postId }: Props) => {
             <Dropdown.Portal>
               <DropdownContent>
                 <Dropdown.RadioGroup
+                  value={sortOption}
                   onValueChange={changeSelectedSort}
                   className={styles.radioGroup}
                 >
@@ -76,8 +81,9 @@ export const PostComments = ({ postId }: Props) => {
                       <Dropdown.RadioItem
                         key={value}
                         value={value}
-                        disabled={sortOption === value}
-                        className={styles.radioItem}
+                        className={clsx(styles.radioItem, {
+                          [styles.radioItemChecked]: value === sortOption,
+                        })}
                       >
                         <Icon weight="fill" size={20} />
                         {text}
@@ -88,16 +94,18 @@ export const PostComments = ({ postId }: Props) => {
               </DropdownContent>
             </Dropdown.Portal>
           </Dropdown.Root>
-          {sortedData.map((comment) => {
-            return <Comment key={comment.commentId} commentData={comment} />;
-          })}
+          <div className={styles.commentsList}>
+            {sortedData.map((comment) => {
+              return <Comment key={comment.commentId} commentData={comment} />;
+            })}
+            {hasNextPage && !isPending && (
+              <span ref={ref}>
+                <Loader color="accent" size="small" />
+              </span>
+            )}
+          </div>
         </>
       )}
-      {hasNextPage && !isPending && (
-        <span ref={ref}>
-          <Loader color="accent" size="small" />
-        </span>
-      )}
-    </div>
+    </>
   );
 };

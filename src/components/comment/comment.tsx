@@ -15,6 +15,7 @@ import { useComment } from '@/src/components/comment/use-comment';
 import { DropdownContent } from '@/src/components/dropdown/dropdown-content/dropdown-content';
 import { DropdownItem } from '@/src/components/dropdown/dropdown-item/dropdown-item';
 import { HeartIcon } from '@/src/components/heart-icon';
+import { Loader } from '@/src/components/loader/loader';
 import { ConfirmationDialog } from '@/src/components/modals/confirmation-dialog/confirmation-dialog';
 import { TooltipContent } from '@/src/components/tooltip-content/tooltip-content';
 import { Comment as TComment } from '@/src/schemas/post-comment.schema';
@@ -33,6 +34,7 @@ export const Comment = ({ commentData }: Props) => {
   const {
     handleDelete,
     handleLike,
+    isDeleting,
     isAbleToDelete,
     timeSinceCreated,
     userAccountHref,
@@ -100,7 +102,8 @@ export const Comment = ({ commentData }: Props) => {
         text="Do you want to delete comment?"
       >
         <Button variant="destructive" onClick={handleDelete}>
-          Delete
+          {isDeleting ? <Loader color="primary" size="small" /> : <Trash />}
+          {isDeleting ? 'Deleting...' : 'Delete'}
         </Button>
         <Button variant="secondary" onClick={closeModal}>
           Cancel

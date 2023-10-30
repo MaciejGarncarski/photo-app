@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { useState } from 'react';
 
 import { useIsMobile } from '@/src/hooks/use-is-mobile';
@@ -6,7 +5,6 @@ import { useUser } from '@/src/hooks/use-user';
 import { getDescriptionData } from '@/src/utils/get-description-data';
 
 import { MotionImage } from '@/src/components/avatar/avatar';
-import { Loader } from '@/src/components/loader/loader';
 import { usePost } from '@/src/components/pages/account/use-post';
 
 import styles from './post-image.module.scss';
@@ -21,7 +19,7 @@ export const PostImage = ({ priority, src, postId }: Props) => {
   const { isMobile } = useIsMobile();
   const { data: postData } = usePost({ postId: postId });
   const { data } = useUser({ userId: postData?.authorId || '' });
-  const [isPending, setisPending] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   if (!postData) {
     return null;
@@ -32,22 +30,18 @@ export const PostImage = ({ priority, src, postId }: Props) => {
   const size = isMobile ? 320 : 600;
 
   return (
-    <>
-      {isPending && (
-        <div className={styles.loader}>
-          <Loader color="accent" size="big" />
-        </div>
-      )}
-      <MotionImage
-        className={clsx({ [styles.imgLoading]: isPending }, styles.sliderImage)}
-        src={src}
-        priority={priority}
-        onLoad={() => setisPending(false)}
-        quality={100}
-        width={size}
-        height={size}
-        alt={`${data?.username} - ${shortDescription}`}
-      />
-    </>
+    <MotionImage
+      className={styles.sliderImage}
+      src={src}
+      priority={priority}
+      quality={100}
+      animate={{
+        opacity: isLoading ? 0 : 1,
+      }}
+      onLoad={() => setIsLoading(false)}
+      width={size}
+      height={size}
+      alt={`${data?.username} - ${shortDescription}`}
+    />
   );
 };

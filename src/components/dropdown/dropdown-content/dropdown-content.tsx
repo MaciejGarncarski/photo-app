@@ -11,7 +11,12 @@ type Props = {
 export const DropdownContent = forwardRef<HTMLDivElement, Props>(
   ({ children, ...otherProps }, ref) => {
     return (
-      <Dropdown.Content forceMount asChild ref={ref} {...otherProps}>
+      <Dropdown.Content
+        asChild
+        ref={ref}
+        {...otherProps}
+        onEscapeKeyDown={(ev) => ev.stopPropagation()}
+      >
         <motion.div
           className={styles.content}
           initial={{ y: 20, opacity: 0 }}

@@ -13,7 +13,8 @@ export const modalVariants: Variants = {
     transition: {
       type: 'spring',
       bounce: 0.3,
-      duration: 0.7,
+      duration: 0.6,
+      delay: 0.1,
     },
   },
   exit: {

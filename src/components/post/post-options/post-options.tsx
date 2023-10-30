@@ -1,5 +1,7 @@
 import { PencilSimple, Trash, X } from '@phosphor-icons/react';
 
+import { useOnEscape } from '@/src/hooks/use-on-escape';
+
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
 import { usePostOptions } from '@/src/components/post/post-options/use-post-options';
@@ -20,6 +22,7 @@ export const PostOptions = ({
   isVisible,
 }: Props) => {
   const { isAbleToModify } = usePostOptions({ authorId });
+  useOnEscape({ callback: closeModal });
 
   return (
     <ListModal

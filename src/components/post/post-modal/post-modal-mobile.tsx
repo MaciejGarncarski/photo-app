@@ -30,7 +30,7 @@ export const PostModalMobile = ({ postId, closeModal }: Props) => {
         </div>
         <section className={styles.commentsContainer}>
           <div className={styles.postComments}>
-            <PostComments postId={postId} />
+            <PostComments postId={postId} closeModal={closeModal} />
           </div>
           <div className={styles.form}>
             <CommentForm postId={postId} />

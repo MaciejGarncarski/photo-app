@@ -17,6 +17,7 @@
 
 
   @include common.mediaquery('tablet') {
+    padding: 0 1rem;
     gap: 1rem;
     margin: 0;
     max-height: unset;

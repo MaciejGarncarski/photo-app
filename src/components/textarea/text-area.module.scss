@@ -13,7 +13,6 @@
   flex-direction: column;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-border-small);
   overflow: hidden;
   width: auto;
 }
@@ -42,6 +41,7 @@
   padding-top: 2rem;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
+  box-shadow: var(--shadow-border);
 
   &:focus {
     outline: none;

@@ -2,7 +2,7 @@ import { Variants } from 'framer-motion';
 
 export const backdropVariants: Variants = {
   hidden: {
-    opacity: 0.5,
+    opacity: 0,
   },
   visible: {
     opacity: 1,

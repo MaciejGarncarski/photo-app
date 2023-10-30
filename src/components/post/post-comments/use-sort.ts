@@ -58,7 +58,10 @@ export const useSort = ({ commentsData }: Props) => {
   const changeSelectedSort = (option: string) => {
     if (isSortOption(option)) {
       setSortOption(option);
+      return;
     }
+
+    setSortOption('newest');
   };
 
   const sortedData = useMemo(

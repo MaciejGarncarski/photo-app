@@ -65,6 +65,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
           ref={inputRef}
           name="fileInput"
           onChange={onChange}
+          tabIndex={-1}
         />
       </span>
 

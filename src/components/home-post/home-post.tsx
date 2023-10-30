@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostFooter } from '@/src/components/post/post-footer/post-footer';
 import { PostHeader } from '@/src/components/post/post-header/post-header';
@@ -19,12 +21,16 @@ export const HomePost = ({ postId, priority }: Props) => {
   }
 
   return (
-    <li>
-      <article className={styles.homePost}>
+    <motion.article
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={styles.homePost}
+    >
+      <div className={styles.header}>
         <PostHeader postId={postId} />
-        <PostImagesCarousel postId={postId} priority={priority} />
-        <PostFooter postId={postId} />
-      </article>
-    </li>
+      </div>
+      <PostImagesCarousel postId={postId} priority={priority} />
+      <PostFooter postId={postId} />
+    </motion.article>
   );
 };

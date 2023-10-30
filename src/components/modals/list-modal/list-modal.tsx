@@ -31,6 +31,7 @@ export const ListModal = ({
           <motion.div
             initial="hidden"
             animate="visible"
+            role="dialog"
             exit="exit"
             variants={modalVariants}
             className={styles.container}

@@ -35,6 +35,7 @@ export const useComment = ({ commentData }: Arguments) => {
     handleLike,
     isAbleToDelete,
     userAccountHref,
+    isDeleting: commentDelete.isPending,
     username: data?.username || '',
   };
 };

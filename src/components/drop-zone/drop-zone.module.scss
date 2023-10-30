@@ -1,7 +1,7 @@
 @use '/src/styles/common';
 
 .dropZone {
-  box-shadow: var(--shadow-border-small);
+  box-shadow: var(--shadow-border);
   border-radius: var(--radius-small);
   background-color: var(--color-secondary);
   width: 100%;

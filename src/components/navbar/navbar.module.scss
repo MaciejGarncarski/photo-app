@@ -14,7 +14,7 @@
   width: clamp(20rem, 60vw, 25rem);
   z-index: 3;
   border-radius: var(--radius-medium);
-  box-shadow: 0 1px 3px 0 rgb(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-border);
   background-color: var(--color-secondary);
 
   @include common.mediaquery('tablet') {
@@ -31,7 +31,7 @@
   overflow: auto;
   top: var(--gap-top);
   position: sticky;
-  box-shadow: 0px 4px 8px var(--shadow-1);
+  box-shadow: var(--shadow-border);
   border-radius: calc(var(--radius-medium) + 0.5rem);
   margin-left: 6rem;
   display: flex;
@@ -46,7 +46,7 @@
 }
 
 .signedInInfo {
-  box-shadow: var(--shadow-border-small);
+  box-shadow: var(--shadow-border);
   margin-top: auto;
   margin: 0;
   margin-top: auto;
