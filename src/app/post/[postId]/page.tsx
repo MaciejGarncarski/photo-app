@@ -21,7 +21,10 @@ export const generateMetadata = async ({
   const postData = await queryClient.fetchQuery({
     queryKey: ['post', postId],
     queryFn: async () => {
-      const { data: post } = await getPost({ postId: postId });
+      const { data: post } = await getPost(
+        { postId: postId },
+        { cache: 'no-cache' },
+      );
 
       if (!post['data']) {
         throw new Error('No post data.');
@@ -38,7 +41,7 @@ export const generateMetadata = async ({
   }
   const {
     data: { data: userData },
-  } = await getUser({ userId: postData.authorId });
+  } = await getUser({ userId: postData.authorId }, { cache: 'no-cache' });
 
   const image = postData.images[0];
 

@@ -17,11 +17,11 @@ export const generateMetadata = async ({
 
   const {
     data: { data: userData },
-  } = await getUserByUsername({ username: username });
+  } = await getUserByUsername({ username: username }, { cache: 'no-cache' });
 
   if (!userData.avatar) {
     return {
-      title: setTitle('Account'),
+      title: setTitle(username),
     };
   }
 
