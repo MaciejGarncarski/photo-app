@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 type UseCloseOnEscapeArguments = {
   callback: () => void;
@@ -9,19 +9,20 @@ export const useOnEscape = ({
   callback,
   disabled,
 }: UseCloseOnEscapeArguments) => {
-  const onKeyDown = (keyboardEvent: KeyboardEvent) => {
-    keyboardEvent.stopPropagation();
-
-    if (!disabled && keyboardEvent.code === 'Escape') {
-      callback();
-    }
-  };
+  const onKeyDown = useMemo(
+    () => (keyboardEvent: KeyboardEvent) => {
+      if (!disabled && keyboardEvent.code === 'Escape') {
+        callback();
+      }
+    },
+    [callback, disabled],
+  );
 
   useEffect(() => {
-    window.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('keydown', onKeyDown);
     };
   });
 };

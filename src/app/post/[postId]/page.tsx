@@ -43,22 +43,24 @@ export const generateMetadata = async ({
   const image = postData.images[0];
 
   return {
-    title: setTitle('Post'),
+    title: setTitle(`@${userData.username} post`),
     metadataBase: new URL('https://ik.imagekit.io'),
     description: postData.description,
     openGraph: {
-      title: setTitle(`@${userData.username} Post`),
+      title: setTitle(`@${userData.username} post`),
       description: postData.description,
       url: APP_URL,
+      siteName: 'Photo App',
+      locale: 'en_GB',
+      type: 'article',
       images: [
         {
+          alt: `${userData.username} post. Description: ${postData.description}`,
           url: image.thumbnailUrl,
           width: image.width,
           height: image.height,
         },
       ],
-      locale: 'en_GB',
-      type: 'article',
     },
   };
 };

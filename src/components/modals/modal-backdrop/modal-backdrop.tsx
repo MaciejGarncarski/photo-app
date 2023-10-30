@@ -23,6 +23,7 @@ export const ModalBackdrop = ({ closeModal, children }: Props) => {
       onClick={handleOverlayClick}
       variants={backdropVariants}
       className={styles.backdrop}
+      data-backdrop
       initial="hidden"
       animate="visible"
       exit="exit"

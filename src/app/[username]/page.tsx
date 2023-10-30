@@ -19,6 +19,12 @@ export const generateMetadata = async ({
     data: { data: userData },
   } = await getUserByUsername({ username: username });
 
+  if (!userData.avatar) {
+    return {
+      title: setTitle('Account'),
+    };
+  }
+
   return {
     title: setTitle(username),
     metadataBase: new URL('https://ik.imagekit.io'),
@@ -27,17 +33,17 @@ export const generateMetadata = async ({
       title: setTitle(username),
       description: userData.bio || undefined,
       url: APP_URL,
-      images: userData?.avatar
-        ? [
-            {
-              url: userData.avatar,
-              width: 720,
-              height: 720,
-            },
-          ]
-        : undefined,
+      siteName: 'Photo App',
       locale: 'en_GB',
-      type: 'article',
+      type: 'profile',
+      username: username,
+      images: [
+        {
+          url: userData?.avatar,
+          width: 720,
+          height: 720,
+        },
+      ],
     },
   };
 };
