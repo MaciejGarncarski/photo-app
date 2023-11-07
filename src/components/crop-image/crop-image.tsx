@@ -85,8 +85,7 @@ export const CropImage = ({
         <section className={styles.saveOrAnotherImage}>
           <div className={styles.buttons}>
             <Button type="button" variant="primary" onClick={saveCrop}>
-              Crop
-              {isMobile ? '' : ' image'}
+              {isMobile ? 'Save crop' : 'Save cropped image'}
               <FloppyDisk />
             </Button>
             <Button

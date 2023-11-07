@@ -31,7 +31,7 @@ export const Providers = ({ children }: Props) => {
           </MotionConfig>
         </JotaiProvider>
       </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-right" />
     </QueryClientProvider>
   );
 };

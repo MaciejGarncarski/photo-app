@@ -7,6 +7,7 @@
   gap: 1rem;
   overflow: auto;
   height: 100%;
+  padding: 0.5rem 0;
 
   @include common.mediaquery('desktop') {
     gap: 2rem;
@@ -42,7 +43,6 @@
   justify-content: flex-start;
   gap: 0.5rem;
 
-
   @include common.mediaquery('desktop') {
     &:hover {
       cursor: pointer;
@@ -55,10 +55,22 @@
   }
 }
 
+
 .radioItemChecked {
   cursor: auto;
   color: var(--color-always-black);
   background-color: var(--color-accent);
+  box-shadow: var(--shadow-border);
 
+  & > .dropdownItemIcon {
+    color: var(--color-always-white);
+  }
 
+  @include common.mediaquery('desktop') {
+    &:hover {
+      & > .dropdownItemIcon {
+        color: var(--color-always-black);
+      }
+    }
+  }
 }

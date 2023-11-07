@@ -47,7 +47,7 @@ export const NavButtons = () => {
                     styles.listItemContent,
                   )}
                 >
-                  <span>
+                  <span className={styles.icon}>
                     <Icon weight={isActive ? 'fill' : 'bold'} />
                   </span>
                   <span className={styles.title}>{title}</span>

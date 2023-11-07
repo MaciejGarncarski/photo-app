@@ -17,7 +17,7 @@
 }
 
 .cropImage {
-  box-shadow: var(--shadow-focus);
+  box-shadow: var(--shadow-border);
 }
 
 .info {
@@ -40,7 +40,7 @@
   align-items: center;
   gap: 1rem;
 
-  >button {
+  > button {
     flex-grow: 1;
   }
 

@@ -13,18 +13,17 @@ export const modalVariants: Variants = {
     transition: {
       type: 'spring',
       bounce: 0.3,
-      duration: 0.6,
-      delay: 0.1,
+      duration: 0.5,
     },
   },
   exit: {
     opacity: 0,
-    scale: 0.4,
+    scale: 0.6,
     y: '40vh',
     transition: {
       type: 'spring',
       bounce: 0.3,
-      duration: 0.4,
+      duration: 0.3,
     },
   },
 };

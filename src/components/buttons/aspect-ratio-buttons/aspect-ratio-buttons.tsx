@@ -1,8 +1,5 @@
-import { motion } from 'framer-motion';
-
 import { buttonData } from '@/src/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons.data';
 import { Button } from '@/src/components/buttons/button/button';
-import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Heading } from '@/src/components/typography/heading/heading';
 
 import styles from './aspect-ratio-buttons.module.scss';
@@ -18,12 +15,7 @@ export const AspectRatioButtons = ({ setAspect, aspect }: Props) => {
       <Heading tag="h3" size="small">
         Preferred aspect ratio
       </Heading>
-      <motion.div
-        className={styles.aspectRatioButtons}
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-      >
+      <div className={styles.aspectRatioButtons}>
         {buttonData.map(({ text, aspectRatio }) => {
           return (
             <Button
@@ -36,7 +28,7 @@ export const AspectRatioButtons = ({ setAspect, aspect }: Props) => {
             </Button>
           );
         })}
-      </motion.div>
+      </div>
     </section>
   );
 };

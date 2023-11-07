@@ -9,7 +9,6 @@ import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
 import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
-import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 
 import styles from './account.module.scss';
 
@@ -36,12 +35,7 @@ export const AccountHeaderMobile = ({
   const { bio, name, username } = data;
 
   return (
-    <motion.main
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-      className={styles.accountMobile}
-    >
+    <motion.main className={styles.accountMobile}>
       <div className={styles.avatarName}>
         <Avatar userId={userId} size="big" />
         <motion.h2 className={styles.username}>{username}</motion.h2>

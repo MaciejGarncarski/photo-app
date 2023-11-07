@@ -9,7 +9,6 @@ import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
 import { HomePost } from '@/src/components/home-post/home-post';
-import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Loader } from '@/src/components/loader/loader';
 import { NewPostNotification } from '@/src/components/new-post-notification/new-post-notification';
 import { useHomepagePosts } from '@/src/components/pages/home/use-homepage-posts';
@@ -35,12 +34,7 @@ export const Home = () => {
   const noPosts = data?.pages[0] && data.pages[0].postsCount < 1;
 
   return (
-    <motion.div
-      className={styles.posts}
-      variants={containerVariants}
-      animate="show"
-      initial="hidden"
-    >
+    <motion.div className={styles.posts}>
       <NewPostNotification />
       {noPosts ? (
         <div className={styles.noPosts}>

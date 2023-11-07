@@ -30,6 +30,18 @@
     width: 100%;
     padding: 0;
     display: block;
+
+
+    &:active {
+      & > .listItemContent {
+        transform: scale(0.95);
+        opacity: 0.9;
+
+        & > .icon {
+          transform: scale(0.95);
+        }
+      }
+    }
   }
 }
 
@@ -41,8 +53,8 @@
   gap: 1rem;
   padding: 0.6rem;
   font-size: 1.25rem;
-  transition: all var(--transition);
-  transition-property: background-color, box-shadow;
+  transition: transform var(--transition-fast);
+
 
   @include common.mediaquery('desktop') {
     justify-content: flex-start;
@@ -50,19 +62,27 @@
     border-radius: var(--radius-medium);
     width: 100%;
     height: auto;
-
-
-    &:hover,
-    &:focus {
-      background-color: var(--color-primary);
-    }
   }
+
+  &:hover,
+  &:focus {
+    @extend .active;
+  }
+
+}
+
+.icon {
+  transition: transform var(--transition-fast);
 }
 
 .active {
   @include common.mediaquery('desktop') {
     background-color: var(--color-primary);
     font-weight: 700;
+
+    & > .icon {
+      transform: scale(1.1);
+    }
   }
 }
 

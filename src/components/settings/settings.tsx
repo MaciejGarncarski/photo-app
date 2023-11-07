@@ -48,57 +48,59 @@ export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
   }, [isSoundEnabled]);
 
   return (
-    <RemoveScroll enabled={isVisible}>
-      <ListModal
-        isVisible={isVisible}
-        closeModal={closeSettingsModal}
-        headingText="Settings"
-        data-cy="settings modal"
-      >
-        {isSignedIn && sessionUser?.username && (
-          <ListModalItem
-            type="link"
-            href={`/${sessionUser.username}`}
-            onClick={closeSettingsModal}
-            icon={<User />}
-          >
-            Your profile
-          </ListModalItem>
-        )}
-        <ListModalItem
-          type="button"
-          onClick={toggleTheme}
-          icon={<ThemeButton />}
-          isPending={isThemeMutationPending}
-          loadingText="Updating..."
+    <>
+      <RemoveScroll enabled={isVisible} forwardProps>
+        <ListModal
+          isVisible={isVisible}
+          closeModal={closeSettingsModal}
+          headingText="Settings"
+          data-cy="settings modal"
         >
-          Change theme to {isDark ? 'light' : 'dark'}
-        </ListModalItem>
-        {isSignedIn && (
-          <>
+          {isSignedIn && sessionUser?.username && (
             <ListModalItem
-              type="button"
-              onClick={toggleNotificationSound}
-              icon={<SoundIcon />}
-              isPending={isSoundMutationPending}
-              loadingText="Updating..."
+              type="link"
+              href={`/${sessionUser.username}`}
+              onClick={closeSettingsModal}
+              icon={<User />}
             >
-              Turn {isSoundEnabled ? 'off' : 'on'} sound notifications
+              Your profile
             </ListModalItem>
-            <ListModalItem
-              type="button"
-              onClick={signOutModal.openModal}
-              icon={<SignOut />}
-            >
-              Sign Out
-            </ListModalItem>
-          </>
-        )}
-      </ListModal>
+          )}
+          <ListModalItem
+            type="button"
+            onClick={toggleTheme}
+            icon={<ThemeButton />}
+            isPending={isThemeMutationPending}
+            loadingText="Updating..."
+          >
+            Change theme to {isDark ? 'light' : 'dark'}
+          </ListModalItem>
+          {isSignedIn && (
+            <>
+              <ListModalItem
+                type="button"
+                onClick={toggleNotificationSound}
+                icon={<SoundIcon />}
+                isPending={isSoundMutationPending}
+                loadingText="Updating..."
+              >
+                Turn {isSoundEnabled ? 'off' : 'on'} sound notifications
+              </ListModalItem>
+              <ListModalItem
+                type="button"
+                onClick={signOutModal.openModal}
+                icon={<SignOut />}
+              >
+                Sign Out
+              </ListModalItem>
+            </>
+          )}
+        </ListModal>
+      </RemoveScroll>
       <SignOutDialog
         closeSettingsModal={closeSettingsModal}
         signOutModal={signOutModal}
       />
-    </RemoveScroll>
+    </>
   );
 };

@@ -28,7 +28,7 @@ export const generateMetadata = async ({
   return {
     title: setTitle(username),
     metadataBase: new URL('https://ik.imagekit.io'),
-    description: userData.bio || undefined,
+    description: userData.bio,
     openGraph: {
       title: setTitle(username),
       description: userData.bio || undefined,

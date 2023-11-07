@@ -24,8 +24,7 @@
 }
 
 %commonActiveState {
-  box-shadow: var(--shadow-focus);
-  color: var(--color-primary);
+  box-shadow: var(--shadow-border);
 }
 
 .dropZoneError {
@@ -36,9 +35,9 @@
   @extend %commonActiveState;
 }
 
-.dropIcon {
-  width: 3rem;
-  height: 3rem;
+.dropIcon,
+.text {
+  pointer-events: none;
 }
 
 .dropIconError {

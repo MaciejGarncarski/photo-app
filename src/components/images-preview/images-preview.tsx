@@ -4,8 +4,6 @@ import Image from 'next/image';
 
 import { PreviewImages } from '@/src/utils/get-preview-images';
 
-import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
-
 import styles from './images-preview.module.scss';
 
 const MAX_IMAGES_LENGTH = 3;
@@ -24,12 +22,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
 
   return (
     <div>
-      <motion.div
-        className={styles.previewContainer}
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-      >
+      <div className={styles.previewContainer}>
         {images.map((image) => {
           if (!image || typeof image === 'number') {
             return (
@@ -45,18 +38,20 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
             );
           }
           return (
-            <motion.div key={image.id} className={styles.previewButton}>
-              <motion.button
-                whileFocus={{ scale: 1.1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+            <motion.div
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              key={image.id}
+              className={styles.previewButton}
+            >
+              <button
                 type="button"
                 onClick={() => onRemove(image.id)}
                 className={styles.deleteIcon}
               >
                 <Trash />
                 <span className="visually-hidden">remove image</span>
-              </motion.button>
+              </button>
               <Image
                 className={styles.imgPreview}
                 src={image.src}
@@ -67,7 +62,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
             </motion.div>
           );
         })}
-      </motion.div>
+      </div>
     </div>
   );
 };

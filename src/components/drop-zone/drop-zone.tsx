@@ -1,4 +1,4 @@
-import { Camera, File, X } from '@phosphor-icons/react';
+import { File, Folder, FolderDashed, X } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { useState } from 'react';
 
@@ -53,7 +53,6 @@ export const DropZone = ({ setImgSrc }: Props) => {
       onDragOver={active}
       onDragEnter={active}
       onDrop={onDrop}
-      onDragStart={(ev) => ev.dataTransfer.setData('text/plain', '')}
       onDragLeave={inactive}
       data-testid="dropZoneContainer"
     >
@@ -72,15 +71,17 @@ export const DropZone = ({ setImgSrc }: Props) => {
       <div className={styles.dropZoneState}>
         {isActive && (
           <>
-            <Camera size={40} />
-            <p>Drop here.</p>
+            <FolderDashed size={40} className={styles.dropIcon} />
+            <p className={styles.text}>Drop here</p>
           </>
         )}
 
         {!error && !isActive && (
           <>
-            <Camera size={40} />
-            {isMobile ? <p>Add image here.</p> : <p>Drag photo here.</p>}
+            <Folder size={40} className={styles.dropIcon} />
+            <p className={styles.text}>
+              {isMobile ? 'Add image here' : 'Drag photo here'}
+            </p>
           </>
         )}
         {error && !isActive && (

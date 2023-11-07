@@ -85,7 +85,11 @@ export const PostComments = ({ postId, closeModal }: Props) => {
                           [styles.radioItemChecked]: value === sortOption,
                         })}
                       >
-                        <Icon weight="fill" size={20} />
+                        <Icon
+                          weight="fill"
+                          size={20}
+                          className={styles.dropdownItemIcon}
+                        />
                         {text}
                       </Dropdown.RadioItem>
                     );

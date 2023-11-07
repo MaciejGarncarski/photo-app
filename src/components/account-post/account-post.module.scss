@@ -53,9 +53,9 @@
   background-color: var(--color-overlay);
   color: var(--color-always-white);
   opacity: 0;
+  transition: opacity var(--transition-fast);
 
   @include common.mediaquery('desktop') {
-
     &:hover {
       opacity: 1;
     }

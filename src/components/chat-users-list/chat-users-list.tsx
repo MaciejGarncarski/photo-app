@@ -1,13 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Fragment } from 'react';
 
 import { useInfiniteScroll } from '@/src/hooks/use-infinite-scroll';
 
 import { ChatUser } from '@/src/components/chat-users-list/chat-user';
 import { FetchErrorMessage } from '@/src/components/fetch-error-message/fetch-error-message';
-import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 import { Loader } from '@/src/components/loader/loader';
 import { useChatUsers } from '@/src/components/pages/chat/use-chat-users';
 
@@ -36,12 +34,7 @@ export const ChatUsersList = () => {
   }
 
   return (
-    <motion.ul
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-      className={styles.list}
-    >
+    <ul className={styles.list}>
       {data.pages.map((page) => {
         return page.users.map(({ id, message, messageCreatedAt }, idx) => {
           return (
@@ -65,6 +58,6 @@ export const ChatUsersList = () => {
           <Loader color="accent" size="small" />
         </div>
       )}
-    </motion.ul>
+    </ul>
   );
 };

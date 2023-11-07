@@ -19,10 +19,6 @@
   justify-content: center;
   align-items: center;
   position: relative;
-
-  &:hover > .deleteIconOverlay {
-    opacity: 1;
-  }
 }
 
 .imgPreview {
@@ -63,11 +59,14 @@
   color: var(--text-primary);
   padding: 0.3rem;
   border: none;
+  transition: all var(--transition-fast);
+  transition-property: color, background-color;
 
   &:hover,
   &:focus {
     outline-offset: 3px;
-    background-color: var(--color-error-light);
+    color: var(--color-primary);
+    background-color: var(--color-error);
   }
 
   @include common.mediaquery('desktop') {

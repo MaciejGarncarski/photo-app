@@ -9,7 +9,6 @@ import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
 import { ButtonLink } from '@/src/components/buttons/button-link/button-link';
 import { FollowButton } from '@/src/components/buttons/follow-button/follow-button';
-import { containerVariants } from '@/src/components/images-preview/images-preview.animation';
 
 import styles from './account.module.scss';
 
@@ -37,12 +36,7 @@ export const AccountHeaderDesktop = ({
 
   return (
     <main className={styles.accountDesktop}>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-        className={styles.leftCol}
-      >
+      <div className={styles.leftCol}>
         <Avatar userId={userId} size="big" />
         {!isOwner && isSignedIn && (
           <div className={styles.accountButtons}>
@@ -59,18 +53,13 @@ export const AccountHeaderDesktop = ({
             </span>
           </Button>
         )}
-      </motion.div>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-        className={styles.rightCol}
-      >
+      </div>
+      <div className={styles.rightCol}>
         <motion.h2 className={styles.username}>{username}</motion.h2>
         <AccountStats userId={userId} />
         {name && <motion.p className={styles.name}>{name}</motion.p>}
         <motion.p className={styles.bio}>{bio || 'No bio yet.'}</motion.p>
-      </motion.div>
+      </div>
     </main>
   );
 };
