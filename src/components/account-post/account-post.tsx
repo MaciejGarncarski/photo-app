@@ -1,4 +1,4 @@
-import { ChatCentered, Heart } from '@phosphor-icons/react';
+import { ChatCentered, CopySimple, Heart } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,6 +26,8 @@ export const AccountPost = ({ postId }: Props) => {
   }
 
   const { commentsCount, images, likesCount } = postData;
+
+  const imagesLength = images.length;
 
   if (!images[0]) {
     return null;
@@ -56,6 +58,12 @@ export const AccountPost = ({ postId }: Props) => {
           <Loader color="accent" size="small" />
         </span>
       )}
+      {imagesLength > 1 ? (
+        <span className={styles.manyPhotosIcon}>
+          <CopySimple weight="fill" />
+        </span>
+      ) : null}
+
       <MotionImage
         className={styles.image}
         src={images[0].url}

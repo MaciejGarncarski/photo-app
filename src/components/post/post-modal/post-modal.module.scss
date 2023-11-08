@@ -61,6 +61,10 @@
   max-height: 65dvh;
 }
 
+.header {
+  margin-bottom: 1rem;
+}
+
 .footer {
   grid-row: 2 / 2;
 }
@@ -68,12 +72,14 @@
 .carousel {
   margin: 0 auto;
   width: 100%;
+  height: 100%;
 }
 
 .carouselDesktop {
   place-self: center;
   grid-row: 1 / 4;
   width: 100%;
+  height: 100%;
 }
 
 .postButtons {

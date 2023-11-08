@@ -39,8 +39,8 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
           }
           return (
             <motion.div
-              animate={{ opacity: 1 }}
-              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0 }}
               key={image.id}
               className={styles.previewButton}
             >

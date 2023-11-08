@@ -5,9 +5,7 @@ type Props = {
   userId: string;
 };
 
-type Titles = 'posts' | 'followers' | 'friends';
-
-type ListData = Array<{ title: Titles; count: number; onClick: () => void }>;
+type ListData = Array<{ title: string; count: number; onClick: () => void }>;
 
 export const useUserStats = ({ userId }: Props) => {
   const { data } = useUser({ userId });
@@ -16,17 +14,17 @@ export const useUserStats = ({ userId }: Props) => {
 
   const listData: ListData = [
     {
-      title: 'posts',
+      title: (data?.postsCount || 0) > 1 ? 'Posts' : 'Post',
       count: data?.postsCount || 0,
       onClick: () => window.scrollBy({ top: 200, behavior: 'smooth' }),
     },
     {
-      title: 'followers',
+      title: (data?.followersCount || 0) > 1 ? 'Followers' : 'Follower',
       count: data?.followersCount || 0,
       onClick: followersModal.openModal,
     },
     {
-      title: 'friends',
+      title: 'following',
       count: data?.friendsCount || 0,
       onClick: friendsModal.openModal,
     },

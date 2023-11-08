@@ -40,7 +40,6 @@
   min-height: 5rem;
   color: var(--color-text-gray);
 
-
   @include common.mediaquery('desktop') {
     gap: 1rem;
     min-height: 9rem;
@@ -49,8 +48,8 @@
 
 .deleteIcon {
   position: absolute;
-  right: -0.75rem;
-  top: -1rem;
+  right: -0.5rem;
+  top: -0.5rem;
   background-color: var(--color-secondary);
   border-radius: 100%;
   display: flex;
@@ -61,6 +60,7 @@
   border: none;
   transition: all var(--transition-fast);
   transition-property: color, background-color;
+  box-shadow: var(--shadow-border);
 
   &:hover,
   &:focus {
@@ -70,7 +70,7 @@
   }
 
   @include common.mediaquery('desktop') {
-    right: -1.5rem;
-    top: -1.5rem;
+    right: -1rem;
+    top: -1rem;
   }
 }

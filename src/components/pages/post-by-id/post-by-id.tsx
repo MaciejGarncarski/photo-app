@@ -45,14 +45,16 @@ export const PostById = () => {
   }
 
   return (
-    <div>
+    <>
       <Account username={authorData?.username} />
-      <PostModal
-        isVisible={postModal.isModalOpen}
-        postId={postId}
-        closeModal={postModalClose}
-        isPostPage
-      />
-    </div>
+      {data && (
+        <PostModal
+          isVisible={postModal.isModalOpen}
+          postId={postId}
+          closeModal={postModalClose}
+          isPostPage
+        />
+      )}
+    </>
   );
 };

@@ -29,7 +29,9 @@ export const HomePost = ({ postId, priority }: Props) => {
       <div className={styles.header}>
         <PostHeader postId={postId} />
       </div>
-      <PostImagesCarousel postId={postId} priority={priority} />
+      <div className={styles.carousel}>
+        <PostImagesCarousel postId={postId} priority={priority} />
+      </div>
       <PostFooter postId={postId} />
     </motion.article>
   );

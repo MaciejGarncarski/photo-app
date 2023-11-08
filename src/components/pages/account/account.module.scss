@@ -1,17 +1,12 @@
 @use '/src/styles/common';
 
 .container {
-  max-width: 70rem;
   margin-inline: auto;
-
-  @include common.mediaquery('tablet') {
-    max-width: 60rem;
-  }
 
   @include common.mediaquery('desktop') {
     margin-top: 1rem;
     padding: 0 2rem;
-    max-width: 60rem;
+    max-width: 70rem;
   }
 }
 

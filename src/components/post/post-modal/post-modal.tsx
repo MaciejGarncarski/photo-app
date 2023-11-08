@@ -40,9 +40,9 @@ export const PostModal = ({
   }
 
   return (
-    <RemoveScroll enabled={isVisible}>
-      <AnimatePresence mode="wait">
-        {isVisible && (
+    <AnimatePresence mode="wait">
+      {isVisible && (
+        <RemoveScroll enabled={isVisible} forwardProps>
           <ModalBackdrop closeModal={handleClose}>
             <ReactFocusLock autoFocus={false} className={styles.focusLock}>
               <motion.div
@@ -61,8 +61,8 @@ export const PostModal = ({
               </motion.div>
             </ReactFocusLock>
           </ModalBackdrop>
-        )}
-      </AnimatePresence>
-    </RemoveScroll>
+        </RemoveScroll>
+      )}
+    </AnimatePresence>
   );
 };

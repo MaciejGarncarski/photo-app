@@ -11,12 +11,12 @@
   @include common.mediaquery('desktop') {
 
     &:hover {
-      background-color: var(--color-active);
+      background-color: var(--color-accent-active);
     }
 
     &:focus {
       outline: none;
-      box-shadow: inset 0 0 0 2px var(--color-primary), 0 0 0 3px var(--color-accent);
+      box-shadow: inset 0 0 0 3px var(--color-primary), 0 0 0 2px var(--color-accent);
     }
 
     &:hover:disabled {
@@ -34,14 +34,13 @@
   @include common.button;
   color: var(--color-text);
   background-color: transparent;
-  box-shadow: inset 0 0 0 2px var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-gray);
 
   @include common.mediaquery('desktop') {
     &:hover {
-      color: var(--color-always-black);
-      box-shadow: none;
+      color: var(--color-text);
+      background-color: var(--color-gray-active);
     }
-
   }
 }
 

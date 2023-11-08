@@ -20,7 +20,9 @@ export const PostModalMobile = ({ postId, closeModal }: Props) => {
       <div className={styles.closeButton}>
         <ModalCloseButton onClose={closeModal} variant="secondary" />
       </div>
-      <PostHeader tag="div" postId={postId} />
+      <div className={styles.header}>
+        <PostHeader tag="div" postId={postId} />
+      </div>
       <div className={styles.content}>
         <div className={styles.carousel}>
           <PostImagesCarousel postId={postId} priority />

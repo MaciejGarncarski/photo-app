@@ -51,6 +51,7 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
         dragMomentum={false}
         dragElastic={0.5}
         whileDrag={{ cursor: 'grabbing' }}
+        className={styles.draggable}
         style={{
           cursor: isSingleImage ? 'auto' : 'grab',
         }}
@@ -71,6 +72,8 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
                 <PostImage
                   priority={priority}
                   src={image.url}
+                  width={image.width}
+                  height={image.height}
                   postId={post.id}
                 />
               </motion.div>

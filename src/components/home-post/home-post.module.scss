@@ -13,5 +13,17 @@
 }
 
 .header {
-  padding-bottom: 1.25rem;
+  margin-bottom: 1rem;
+
+  @include common.mediaquery('desktop') {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.carousel {
+  height: var(--post-width);
+
+  @include common.mediaquery('desktop') {
+    height: 40rem;
+  }
 }

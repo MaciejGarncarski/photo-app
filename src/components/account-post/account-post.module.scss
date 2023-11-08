@@ -40,6 +40,16 @@
   object-fit: cover;
 }
 
+.manyPhotosIcon {
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+  z-index: 1;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-always-white);
+}
+
 .overlay {
   position: absolute;
   left: 0;

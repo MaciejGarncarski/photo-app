@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
 import { useUser } from '@/src/hooks/use-user';
 import { getDescriptionData } from '@/src/utils/get-description-data';
 
@@ -12,11 +12,29 @@ import styles from './post-image.module.scss';
 type Props = {
   priority: boolean;
   src: string;
+  width: number;
+  height: number;
   postId: number;
 };
 
-export const PostImage = ({ priority, src, postId }: Props) => {
-  const { isMobile } = useIsMobile();
+const ASPECT_RATIO_LANDSCAPE = 191;
+const ASPECT_RATIO_PORTRAIT = 80;
+
+const getAspectRatio = (width: number, height: number) => {
+  const calculatedAspectRatio = Math.round((width / height) * 100);
+
+  if (calculatedAspectRatio === ASPECT_RATIO_LANDSCAPE) {
+    return 'landscape';
+  }
+
+  if (calculatedAspectRatio === ASPECT_RATIO_PORTRAIT) {
+    return 'portrait';
+  }
+
+  return 'square';
+};
+
+export const PostImage = ({ priority, src, height, width, postId }: Props) => {
   const { data: postData } = usePost({ postId: postId });
   const { data } = useUser({ userId: postData?.authorId || '' });
   const [isLoading, setIsLoading] = useState(true);
@@ -25,13 +43,13 @@ export const PostImage = ({ priority, src, postId }: Props) => {
     return null;
   }
 
-  const { shortDescription } = getDescriptionData(postData.description);
+  const imageAspectRatio = getAspectRatio(width, height);
 
-  const size = isMobile ? 320 : 600;
+  const { shortDescription } = getDescriptionData(postData.description);
 
   return (
     <MotionImage
-      className={styles.sliderImage}
+      className={clsx(styles[imageAspectRatio], styles.sliderImage)}
       src={src}
       priority={priority}
       quality={100}
@@ -39,8 +57,8 @@ export const PostImage = ({ priority, src, postId }: Props) => {
         opacity: isLoading ? 0 : 1,
       }}
       onLoad={() => setIsLoading(false)}
-      width={size}
-      height={size}
+      width={width}
+      height={height}
       alt={`${data?.username} - ${shortDescription}`}
     />
   );
