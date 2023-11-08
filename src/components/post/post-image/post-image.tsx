@@ -11,7 +11,7 @@ import styles from './post-image.module.scss';
 
 type Props = {
   priority: boolean;
-  src: string;
+  url: string;
   width: number;
   height: number;
   postId: number;
@@ -34,7 +34,7 @@ const getAspectRatio = (width: number, height: number) => {
   return 'square';
 };
 
-export const PostImage = ({ priority, src, height, width, postId }: Props) => {
+export const PostImage = ({ priority, url, height, width, postId }: Props) => {
   const { data: postData } = usePost({ postId: postId });
   const { data } = useUser({ userId: postData?.authorId || '' });
   const [isLoading, setIsLoading] = useState(true);
@@ -50,10 +50,11 @@ export const PostImage = ({ priority, src, height, width, postId }: Props) => {
   return (
     <MotionImage
       className={clsx(styles[imageAspectRatio], styles.sliderImage)}
-      src={src}
+      src={url}
       priority={priority}
       quality={100}
       animate={{
+        filter: isLoading ? 'blur(5px)' : 'blur(0px)',
         opacity: isLoading ? 0 : 1,
       }}
       onLoad={() => setIsLoading(false)}
