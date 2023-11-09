@@ -23,7 +23,7 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
 
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
     postId,
-    isLiked: post?.isLiked || false,
+    isLiked: Boolean(post?.isLiked),
   });
 
   const { handleDragEnd, handleNextImage, handlePrevImage, currentIndex } =

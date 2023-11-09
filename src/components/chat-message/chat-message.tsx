@@ -3,7 +3,7 @@ import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 import { useLongPress } from '@/src/hooks/use-long-press';
 import { useModal } from '@/src/hooks/use-modal';
 
@@ -30,9 +30,9 @@ export const ChatMessage = ({
   id,
   receiverId,
 }: Props) => {
+  const { isTabletOrMobile } = useIsTabletOrMobile();
   const { isOpen, setDropdown, closeDropdown, openDropdownForCurrentMessage } =
     useDropdownAtom({ messageId: id });
-  const { isMobile } = useIsMobile();
 
   const { onTouchEnd, onTouchStart } = useLongPress({
     onStart: closeDropdown,
@@ -59,7 +59,7 @@ export const ChatMessage = ({
             styles.textContainer,
           )}
         >
-          {!isMobile && (
+          {!isTabletOrMobile && (
             <Dropdown.Trigger asChild>
               <button
                 type="button"
@@ -80,7 +80,7 @@ export const ChatMessage = ({
             </Dropdown.Trigger>
           )}
 
-          {isMobile ? (
+          {isTabletOrMobile ? (
             <Dropdown.Trigger asChild>
               <button
                 type="button"

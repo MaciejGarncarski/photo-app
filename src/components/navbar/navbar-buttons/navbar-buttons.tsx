@@ -9,7 +9,7 @@ import { useAuth } from '@/src/hooks/use-auth';
 
 import { SignInButton } from '@/src/components/buttons/sign-in-button/sign-in-button';
 import { getNavListData } from '@/src/components/navbar/navbar-buttons/use-nav-buttons';
-import { useSettingsAtom } from '@/src/components/settings/use-settings-atom';
+import { useSettingsAtom } from '@/src/components/settings-modal/use-settings-atom';
 
 import styles from './navbar-buttons.module.scss';
 

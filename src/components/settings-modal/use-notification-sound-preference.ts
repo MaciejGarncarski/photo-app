@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
-import { useNotificationSoundAtom } from '@/src/components/settings/use-notification-sound-atom';
-import { useUpdatePreferences } from '@/src/components/settings/use-update-preferences';
+import { useNotificationSoundAtom } from '@/src/components/settings-modal/use-notification-sound-atom';
+import { useUpdatePreferences } from '@/src/components/settings-modal/use-update-preferences';
 
 export const useNotificationSoundPreference = () => {
   const { sessionUser, isSignedIn } = useAuth();

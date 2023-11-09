@@ -7,7 +7,6 @@ import { useModal } from '@/src/hooks/use-modal';
 import { useUser } from '@/src/hooks/use-user';
 
 import { Loader } from '@/src/components/loader/loader';
-import { Account } from '@/src/components/pages/account/account';
 import { usePost } from '@/src/components/pages/account/use-post';
 import { PostModal } from '@/src/components/post/post-modal/post-modal';
 import { Heading } from '@/src/components/typography/heading/heading';
@@ -46,7 +45,6 @@ export const PostById = () => {
 
   return (
     <>
-      <Account username={authorData?.username} />
       {data && (
         <PostModal
           isVisible={postModal.isModalOpen}

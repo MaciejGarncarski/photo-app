@@ -4,7 +4,7 @@ import { PencilSimple, SignOut } from '@phosphor-icons/react';
 import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/src/hooks/use-auth';
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 import { useModal } from '@/src/hooks/use-modal';
 import { useSignOut } from '@/src/hooks/use-sign-out';
 import { useUserByUsername } from '@/src/hooks/use-user-by-username';
@@ -26,7 +26,7 @@ type Props = {
 };
 
 export const Account = ({ username }: Props) => {
-  const { isMobile } = useIsMobile();
+  const { isTabletOrMobile } = useIsTabletOrMobile();
   const signOut = useSignOut();
   const pathname = usePathname();
 
@@ -53,7 +53,7 @@ export const Account = ({ username }: Props) => {
 
   return (
     <div className={styles.container}>
-      {isMobile !== 'loading' && isMobile ? (
+      {isTabletOrMobile ? (
         <AccountHeaderMobile {...accountHeaderProps} />
       ) : (
         <AccountHeaderDesktop {...accountHeaderProps} />

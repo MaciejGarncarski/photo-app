@@ -40,7 +40,7 @@ export const RegisterForm = () => {
       />
 
       <Input
-        placeholder="username"
+        placeholder="Your username"
         labelText="Username"
         type="text"
         variant="secondary"
@@ -58,7 +58,7 @@ export const RegisterForm = () => {
       />
 
       <Input
-        placeholder="Confirm password"
+        placeholder="Type in again your password"
         labelText="Confirm password"
         variant="secondary"
         type="password"

@@ -3,7 +3,7 @@ import { FloppyDisk, Hand, Image, Mouse } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 import { useModal } from '@/src/hooks/use-modal';
 
 import { AspectRatioButtons } from '@/src/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons';
@@ -29,7 +29,7 @@ export const CropImage = ({
 }: Props) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const { openModal, isModalOpen, closeModal } = useModal();
-  const { isMobile } = useIsMobile();
+  const { isTabletOrMobile } = useIsTabletOrMobile();
 
   const resetImgSrc = () => setImgSrc(null);
 
@@ -74,9 +74,10 @@ export const CropImage = ({
           />
         </div>
         <p className={styles.info}>
-          {isMobile ? <Hand /> : <Mouse />}
+          {isTabletOrMobile ? <Hand /> : <Mouse />}
           <span>
-            {isMobile ? 'Pinch' : 'Use scroll to'} to zoom in your picture
+            {isTabletOrMobile ? 'Pinch' : 'Use scroll to'} to zoom in your
+            picture
           </span>
         </p>
         {!isAvatarCrop && (
@@ -85,7 +86,7 @@ export const CropImage = ({
         <section className={styles.saveOrAnotherImage}>
           <div className={styles.buttons}>
             <Button type="button" variant="primary" onClick={saveCrop}>
-              {isMobile ? 'Save crop' : 'Save cropped image'}
+              {isTabletOrMobile ? 'Save crop' : 'Save cropped image'}
               <FloppyDisk />
             </Button>
             <Button
@@ -95,8 +96,8 @@ export const CropImage = ({
               onClick={openModal}
             >
               Select another
-              {isMobile ? '' : ' image'}
-              {!isMobile && <Image />}
+              {isTabletOrMobile ? '' : ' image'}
+              {!isTabletOrMobile && <Image />}
             </Button>
           </div>
         </section>

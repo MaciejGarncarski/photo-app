@@ -10,10 +10,14 @@
   border: none;
   transition: box-shadow var(--transition-fast);
   flex: 1 0 0%;
-  height: 10rem;
+  height: 9rem;
+
+  @include common.mediaquery('tablet') {
+    height: 11rem;
+  }
 
   @include common.mediaquery('desktop') {
-    height: 14rem;
+    height: 15rem;
 
     &:focus {
       & > .overlay {

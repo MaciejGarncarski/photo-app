@@ -4,46 +4,30 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { useAuth } from '@/src/hooks/use-auth';
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { navbarVariants } from '@/src/components/navbar/navbar.animation';
 import { NavButtons } from '@/src/components/navbar/navbar-buttons/navbar-buttons';
-import { Settings } from '@/src/components/settings/settings';
-import { useSettingsAtom } from '@/src/components/settings/use-settings-atom';
+import { SettingsModal } from '@/src/components/settings-modal/settings-modal';
+import { useSettingsAtom } from '@/src/components/settings-modal/use-settings-atom';
 
 import styles from './navbar.module.scss';
 
 export const Navbar = () => {
-  const { isMobile } = useIsMobile();
   const { sessionUser, isPending } = useAuth();
   const { isSettingsOpen, setSettingsOpen } = useSettingsAtom();
+  const { isTabletOrMobile } = useIsTabletOrMobile();
 
-  const showUserOptions = !isMobile && sessionUser?.id && !isPending;
-
-  if (isMobile === 'loading') {
-    return null;
-  }
-
-  if (isMobile) {
-    return (
-      <motion.nav
-        variants={navbarVariants}
-        initial="hidden"
-        animate="visible"
-        className={styles.navbar}
-      >
-        <NavButtons />
-        <Settings
-          isVisible={isSettingsOpen}
-          closeSettingsModal={() => setSettingsOpen(false)}
-        />
-      </motion.nav>
-    );
-  }
+  const showUserOptions = !isTabletOrMobile && sessionUser?.id && !isPending;
 
   return (
-    <nav className={styles.navbarDesktop}>
+    <motion.nav
+      variants={isTabletOrMobile ? navbarVariants : {}}
+      initial="hidden"
+      animate="visible"
+      className={styles.navbar}
+    >
       <h1 className={styles.heading}>
         <Link href="/">Photo App</Link>
       </h1>
@@ -59,10 +43,10 @@ export const Navbar = () => {
           </div>
         </div>
       )}
-      <Settings
+      <SettingsModal
         isVisible={isSettingsOpen}
         closeSettingsModal={() => setSettingsOpen(false)}
       />
-    </nav>
+    </motion.nav>
   );
 };

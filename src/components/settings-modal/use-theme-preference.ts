@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
-import { useUpdatePreferences } from '@/src/components/settings/use-update-preferences';
+import { useUpdatePreferences } from '@/src/components/settings-modal/use-update-preferences';
 
 export const useThemePreference = () => {
   const { isSignedIn } = useAuth();

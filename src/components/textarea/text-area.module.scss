@@ -13,7 +13,6 @@
   flex-direction: column;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
-  box-shadow: var(--shadow-border);
   overflow: hidden;
   width: auto;
 }
@@ -37,6 +36,7 @@
   width: 100%;
   height: 100%;
   resize: vertical;
+  height: 4.5rem;
   max-height: 12rem;
   padding: 1rem var(--gap);
   padding-top: 2rem;

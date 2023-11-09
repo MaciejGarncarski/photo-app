@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 
-import { setTitle } from '@/src/utils/set-title';
+import { getPageTitle } from '@/src/utils/get-page-title';
 
 import { CreatePost } from '@/src/components/pages/create-post/create-post';
 import { ProtectedPage } from '@/src/components/pages/protected-page/protected-page';
 
 export const metadata: Metadata = {
-  title: setTitle('Create Post'),
+  title: getPageTitle('Create Post'),
 };
 
 const CreatePostPage = () => {

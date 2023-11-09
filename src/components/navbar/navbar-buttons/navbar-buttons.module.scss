@@ -114,5 +114,6 @@
 .signInButton {
   @include common.mediaquery('desktop') {
     margin-top: auto;
+    width: 100%;
   }
 }

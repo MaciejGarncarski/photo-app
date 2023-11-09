@@ -14,16 +14,16 @@ import { useModal } from '@/src/hooks/use-modal';
 
 import { ListModal } from '@/src/components/modals/list-modal/list-modal';
 import { ListModalItem } from '@/src/components/modals/list-modal-item/list-modal-item';
-import { SignOutDialog } from '@/src/components/settings/sign-out-dialog';
-import { useNotificationSoundPreference } from '@/src/components/settings/use-notification-sound-preference';
-import { useThemePreference } from '@/src/components/settings/use-theme-preference';
+import { SignOutDialog } from '@/src/components/settings-modal/sign-out-dialog';
+import { useNotificationSoundPreference } from '@/src/components/settings-modal/use-notification-sound-preference';
+import { useThemePreference } from '@/src/components/settings-modal/use-theme-preference';
 
 type Props = {
   closeSettingsModal: () => void;
   isVisible: boolean;
 };
 
-export const Settings = ({ closeSettingsModal, isVisible }: Props) => {
+export const SettingsModal = ({ closeSettingsModal, isVisible }: Props) => {
   const { sessionUser, isSignedIn } = useAuth();
   const signOutModal = useModal();
 

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { useAuth } from '@/src/hooks/use-auth';
 
-import { useNotificationSoundAtom } from '@/src/components/settings/use-notification-sound-atom';
+import { useNotificationSoundAtom } from '@/src/components/settings-modal/use-notification-sound-atom';
 import { UserWithPreferences } from '@/src/schemas/user.schema';
 import { updatePreferences } from '@/src/services/user.service';
 

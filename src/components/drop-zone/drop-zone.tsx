@@ -2,7 +2,7 @@ import { File, Folder, FolderDashed, X } from '@phosphor-icons/react';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 
 import { Button } from '@/src/components/buttons/button/button';
 import { CropError } from '@/src/components/crop-error/crop-error';
@@ -18,7 +18,7 @@ type Props = {
 
 export const DropZone = ({ setImgSrc }: Props) => {
   const [error, setError] = useState<DropZoneErrors>(null);
-  const { isMobile } = useIsMobile();
+  const { isTabletOrMobile } = useIsTabletOrMobile();
 
   const {
     active,
@@ -80,7 +80,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
           <>
             <Folder size={40} className={styles.dropIcon} />
             <p className={styles.text}>
-              {isMobile ? 'Add image here' : 'Drag photo here'}
+              {isTabletOrMobile ? 'Add image here' : 'Drag photo here'}
             </p>
           </>
         )}

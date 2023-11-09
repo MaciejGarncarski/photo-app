@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 
 import { Avatar } from '@/src/components/avatar/avatar';
 import { Button } from '@/src/components/buttons/button/button';
@@ -17,7 +17,7 @@ import { TextArea } from '@/src/components/textarea/text-area';
 import styles from './chat-room.module.scss';
 
 export const ChatRoom = () => {
-  const { isMobile } = useIsMobile();
+  const { isTabletOrMobile } = useIsTabletOrMobile();
   const router = useRouter();
 
   const {
@@ -79,7 +79,7 @@ export const ChatRoom = () => {
         >
           <span
             className={clsx({
-              'visually-hidden': isMobile,
+              'visually-hidden': isTabletOrMobile,
             })}
           >
             Send

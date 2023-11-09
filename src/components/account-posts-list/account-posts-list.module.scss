@@ -4,16 +4,18 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: flex-start;
-  margin-top: 2rem;
-  gap: 1rem;
+  margin-top: 1rem;
+  gap: 0.5rem;
   width: 100%;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 
   @include common.mobile-landscape {
     grid-template-columns: repeat(3, 1fr);
   }
 
   @include common.mediaquery('tablet') {
+    margin-top: 2rem;
+    gap: 1rem;
     margin-top: 3.5rem;
     grid-template-columns: repeat(3, 1fr);
   }

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 
-import { useIsMobile } from '@/src/hooks/use-is-mobile';
+import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 import { modalVariants } from '@/src/utils/animations/modal.animation';
 
 import { ModalBackdrop } from '@/src/components/modals/modal-backdrop/modal-backdrop';
@@ -27,17 +27,12 @@ export const PostModal = ({
   postId,
   isPostPage,
 }: Props) => {
-  const { isMobile } = useIsMobile();
-
+  const { isTabletOrMobile } = useIsTabletOrMobile();
   const { handleClose } = usePostModal({
     closeModal,
     isPostPage: Boolean(isPostPage),
     postId,
   });
-
-  if (isMobile === 'loading') {
-    return null;
-  }
 
   return (
     <AnimatePresence mode="wait">
@@ -53,7 +48,7 @@ export const PostModal = ({
                 role="dialog"
                 className={styles.container}
               >
-                {isMobile ? (
+                {isTabletOrMobile ? (
                   <PostModalMobile closeModal={handleClose} postId={postId} />
                 ) : (
                   <PostModalDesktop closeModal={handleClose} postId={postId} />

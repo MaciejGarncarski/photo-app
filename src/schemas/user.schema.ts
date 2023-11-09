@@ -19,7 +19,6 @@ export const userWithPreferencesSchema = userSchema.extend({
 export type UserWithPreferences = z.infer<typeof userWithPreferencesSchema>;
 
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
-const smallCharactersRegexp = /^[a-z0-9_\-]+$/;
 
 export const fullName = z
   .string()
@@ -28,12 +27,9 @@ export const fullName = z
 
 export const username = z
   .string()
-  .min(4, { message: 'Username must contain at least 4 characters.' })
+  .min(4, { message: 'Minimum 4 characters.' })
+  .max(9, { message: 'Maximum 9 characters allowed.' })
   .regex(usernameRegex, { message: 'Invalid username' })
-  .regex(smallCharactersRegexp, {
-    message: 'Only lowercase characters allowed.',
-  })
-  .max(9, { message: 'Only 9 characters allowed.' })
   .optional();
 
 export const bio = z

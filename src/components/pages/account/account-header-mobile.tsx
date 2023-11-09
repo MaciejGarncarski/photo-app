@@ -37,7 +37,7 @@ export const AccountHeaderMobile = ({
   return (
     <motion.main className={styles.accountMobile}>
       <div className={styles.avatarName}>
-        <Avatar userId={userId} size="big" />
+        <Avatar isBordered userId={userId} size="big" />
         <motion.h2 className={styles.username}>{username}</motion.h2>
       </div>
       {!isOwner && isSignedIn && (

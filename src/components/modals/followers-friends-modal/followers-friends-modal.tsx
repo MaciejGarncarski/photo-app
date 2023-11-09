@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
 
 import { ModalCloseButton } from '@/src/components/buttons/modal-close-button/modal-close-button';
@@ -38,21 +38,25 @@ export const FollowersFriendsModal = ({ closeModal, type, userId }: Props) => {
               <li className={styles.noData}>No {type} yet.</li>
             </ul>
           )}
-          {isPending ? (
-            <ul className={styles.list} ref={ref}>
-              {Array.from({ length: 3 }, (_, item) => item).map((el) => {
-                return <li className={styles.placeholder} key={el}></li>;
-              })}
-            </ul>
-          ) : (
-            <ul className={styles.list}>
-              {data?.pages.map((page) => {
-                return page.users.map((userId) => {
-                  return <FollowersFriendsItem key={userId} userId={userId} />;
-                });
-              })}
-            </ul>
-          )}
+          <AnimatePresence mode="wait">
+            {isPending ? (
+              <ul className={styles.list} ref={ref}>
+                {Array.from({ length: 3 }, (_, item) => item).map((el) => {
+                  return <li className={styles.placeholder} key={el}></li>;
+                })}
+              </ul>
+            ) : (
+              <ul className={styles.list}>
+                {data?.pages.map((page) => {
+                  return page.users.map((userId) => {
+                    return (
+                      <FollowersFriendsItem key={userId} userId={userId} />
+                    );
+                  });
+                })}
+              </ul>
+            )}
+          </AnimatePresence>
         </ReactFocusLock>
       </motion.div>
     </ModalBackdrop>

@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
@@ -22,41 +22,49 @@ type Props = {
 const MotionLink = motion(Link);
 
 export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
-  const { data, isPending, isSuccess } = useUser({ userId });
+  const { data, isPending } = useUser({ userId });
   const params = useParams();
 
   const isActive = userId === (params?.receiverId as string);
 
-  if (isPending || !isSuccess) {
-    return (
-      <li className={styles.listItem}>
-        <div className={styles.placeholderLoading}></div>
-      </li>
-    );
-  }
-
   return (
-    <li className={styles.listItem}>
-      <MotionLink
-        variants={linkVariants}
-        href={`/chat/${userId}`}
-        className={clsx(isActive && styles.linkActive, styles.link)}
-      >
-        <Avatar userId={userId} size="medium" />
-        <span className={styles.rightCol}>
-          <span className={styles.username}>@{data.username}</span>
-          <span className={styles.message}>
-            {message || 'No messages yet.'}
-          </span>
-        </span>
-        {messageCreatedAt && (
-          <span className={styles.createdAt}>
-            <time dateTime={messageCreatedAt}>
-              {formatDateRelative(messageCreatedAt)}
-            </time>
-          </span>
-        )}
-      </MotionLink>
-    </li>
+    <AnimatePresence mode="wait">
+      {isPending || !data ? (
+        <motion.li
+          key={`placeholder-${userId}`}
+          className={styles.listItem}
+          exit={{ opacity: 0 }}
+        >
+          <div className={styles.placeholderLoading}></div>
+        </motion.li>
+      ) : (
+        <motion.li
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={styles.listItem}
+        >
+          <MotionLink
+            variants={linkVariants}
+            href={`/chat/${userId}`}
+            className={clsx(isActive && styles.linkActive, styles.link)}
+          >
+            <Avatar userId={userId} size="small" isBordered />
+            <span className={styles.rightCol}>
+              <span className={styles.username}>@{data.username}</span>
+              <span className={styles.message}>
+                {message || 'No messages yet.'}
+              </span>
+            </span>
+            {messageCreatedAt && (
+              <span className={styles.createdAt}>
+                <time dateTime={messageCreatedAt}>
+                  {formatDateRelative(messageCreatedAt)}
+                </time>
+              </span>
+            )}
+          </MotionLink>
+        </motion.li>
+      )}
+    </AnimatePresence>
   );
 };

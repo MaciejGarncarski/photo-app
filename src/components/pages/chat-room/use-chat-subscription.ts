@@ -7,7 +7,7 @@ import { useAuth } from '@/src/hooks/use-auth';
 import { socket } from '@/src/utils/api/socket';
 
 import { useChatRoomData } from '@/src/components/pages/chat-room/use-chat-room-data';
-import { useNotificationSoundPreference } from '@/src/components/settings/use-notification-sound-preference';
+import { useNotificationSoundPreference } from '@/src/components/settings-modal/use-notification-sound-preference';
 
 const notificationAudio = new Audio('/notification.mp3');
 

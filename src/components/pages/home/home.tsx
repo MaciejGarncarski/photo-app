@@ -12,6 +12,7 @@ import { HomePost } from '@/src/components/home-post/home-post';
 import { Loader } from '@/src/components/loader/loader';
 import { NewPostNotification } from '@/src/components/new-post-notification/new-post-notification';
 import { useHomepagePosts } from '@/src/components/pages/home/use-homepage-posts';
+import { PostPlaceholder } from '@/src/components/post/post-placeholder/post-placeholder';
 
 import styles from './home.module.scss';
 
@@ -29,6 +30,16 @@ export const Home = () => {
 
   if (isError) {
     return <FetchErrorMessage message="Cannot fetch data." />;
+  }
+
+  if (isPending) {
+    return (
+      <motion.div className={styles.posts}>
+        <PostPlaceholder />
+        <PostPlaceholder />
+        <PostPlaceholder />
+      </motion.div>
+    );
   }
 
   const noPosts = data?.pages[0] && data.pages[0].postsCount < 1;

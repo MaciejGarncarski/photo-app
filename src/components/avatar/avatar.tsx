@@ -14,6 +14,7 @@ type Size = 'xs' | 'small' | 'medium' | 'big';
 type Props = {
   userId: string;
   size: Size;
+  isBordered?: boolean;
 };
 
 export const MotionImage = motion(Image);
@@ -25,25 +26,33 @@ const avatarSizes: Record<Size, number> = {
   xs: 30,
 };
 
-export const Avatar = ({ userId, size }: Props) => {
+export const Avatar = ({ userId, size, isBordered }: Props) => {
   const { data, isPending } = useUser({ userId });
   const avatarSize = avatarSizes[size];
 
+  const avatarClassName = clsx(
+    styles[size],
+    {
+      [styles.bordered]: isBordered,
+    },
+    styles.avatar,
+  );
+
   if (!data || isPending) {
     return (
-      <div className={clsx(styles[size], styles.avatar)}>
-        <div className={styles.noImage}>
-          <User className={styles.imagePlaceholderAnimation} />
+      <span className={avatarClassName}>
+        <span className={styles.noImage}>
+          <User className={styles.imagePlaceholder} />
           <span className="visually-hidden">Loading avatar</span>
-        </div>
-      </div>
+        </span>
+      </span>
     );
   }
 
   const { avatar, username } = data;
 
   return (
-    <div className={clsx(styles[size], styles.avatar)}>
+    <span className={avatarClassName}>
       {avatar ? (
         <MotionImage
           src={avatar}
@@ -52,11 +61,11 @@ export const Avatar = ({ userId, size }: Props) => {
           height={avatarSize}
         />
       ) : (
-        <div className={styles.noImage}>
+        <span className={styles.noImage}>
           <User className={styles.imagePlaceholder} />
           <span className="visually-hidden">{`@${username}`} avatar</span>
-        </div>
+        </span>
       )}
-    </div>
+    </span>
   );
 };

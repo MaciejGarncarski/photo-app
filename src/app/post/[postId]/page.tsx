@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import { getQueryClient } from '@/src/utils/api/get-query-client';
-import { setTitle } from '@/src/utils/set-title';
+import { getPageTitle } from '@/src/utils/get-page-title';
 
 import { PostById } from '@/src/components/pages/post-by-id/post-by-id';
 import { APP_URL } from '@/src/constants';
@@ -36,7 +36,7 @@ export const generateMetadata = async ({
 
   if (!postData) {
     return {
-      title: setTitle('Post'),
+      title: getPageTitle('Post'),
     };
   }
   const {
@@ -46,11 +46,11 @@ export const generateMetadata = async ({
   const image = postData.images[0];
 
   return {
-    title: setTitle(`@${userData.username} post`),
+    title: getPageTitle(`@${userData.username} post`),
     metadataBase: new URL('https://ik.imagekit.io'),
     description: postData.description,
     openGraph: {
-      title: setTitle(`@${userData.username} post`),
+      title: getPageTitle(`@${userData.username} post`),
       description: postData.description,
       url: APP_URL,
       siteName: 'Photo App',
