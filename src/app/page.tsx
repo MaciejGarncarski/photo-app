@@ -11,8 +11,7 @@ import { getInfinitePosts } from '@/src/services/posts.service';
 const HomePage = async () => {
   const queryClient = getQueryClient();
 
-  await prefetchSession();
-  await queryClient.prefetchInfiniteQuery({
+  const postsRequest = queryClient.prefetchInfiniteQuery({
     queryKey: HOME_POSTS_QUERY_KEY,
     queryFn: async ({ pageParam }) => {
       const { data } = await getInfinitePosts({
@@ -23,6 +22,8 @@ const HomePage = async () => {
     },
     initialPageParam: 0,
   });
+
+  await Promise.all([prefetchSession(), postsRequest]);
 
   return (
     <Hydrate state={dehydrate(queryClient)}>

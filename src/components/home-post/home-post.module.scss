@@ -21,9 +21,6 @@
 }
 
 .carousel {
-  height: var(--post-width);
-
-  @include common.mediaquery('desktop') {
-    height: 40rem;
-  }
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }

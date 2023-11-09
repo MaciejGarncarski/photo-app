@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactFocusLock from 'react-focus-lock';
-import { RemoveScroll } from 'react-remove-scroll';
 
 import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 import { modalVariants } from '@/src/utils/animations/modal.animation';
@@ -37,26 +36,24 @@ export const PostModal = ({
   return (
     <AnimatePresence mode="wait">
       {isVisible && (
-        <RemoveScroll enabled={isVisible} forwardProps>
-          <ModalBackdrop closeModal={handleClose}>
-            <ReactFocusLock autoFocus={false} className={styles.focusLock}>
-              <motion.div
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                role="dialog"
-                className={styles.container}
-              >
-                {isTabletOrMobile ? (
-                  <PostModalMobile closeModal={handleClose} postId={postId} />
-                ) : (
-                  <PostModalDesktop closeModal={handleClose} postId={postId} />
-                )}
-              </motion.div>
-            </ReactFocusLock>
-          </ModalBackdrop>
-        </RemoveScroll>
+        <ModalBackdrop closeModal={handleClose}>
+          <ReactFocusLock autoFocus={false} className={styles.focusLock}>
+            <motion.div
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              role="dialog"
+              className={styles.container}
+            >
+              {isTabletOrMobile ? (
+                <PostModalMobile closeModal={handleClose} postId={postId} />
+              ) : (
+                <PostModalDesktop closeModal={handleClose} postId={postId} />
+              )}
+            </motion.div>
+          </ReactFocusLock>
+        </ModalBackdrop>
       )}
     </AnimatePresence>
   );

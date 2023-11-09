@@ -66,8 +66,8 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
           opacity: isLoading ? 0 : 1,
         }}
         onLoad={() => setIsLoading(false)}
-        width={width}
-        height={height}
+        width={600}
+        height={600}
         alt={`${data?.username} - ${shortDescription}`}
       />
     </>
