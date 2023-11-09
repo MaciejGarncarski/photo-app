@@ -5,6 +5,7 @@ import { useUser } from '@/src/hooks/use-user';
 import { getDescriptionData } from '@/src/utils/get-description-data';
 
 import { MotionImage } from '@/src/components/avatar/avatar';
+import { Loader } from '@/src/components/loader/loader';
 import { usePost } from '@/src/components/pages/account/use-post';
 
 import styles from './post-image.module.scss';
@@ -48,19 +49,27 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
   const { shortDescription } = getDescriptionData(postData.description);
 
   return (
-    <MotionImage
-      className={clsx(styles[imageAspectRatio], styles.sliderImage)}
-      src={url}
-      priority={priority}
-      quality={100}
-      animate={{
-        filter: isLoading ? 'blur(5px)' : 'blur(0px)',
-        opacity: isLoading ? 0 : 1,
-      }}
-      onLoad={() => setIsLoading(false)}
-      width={width}
-      height={height}
-      alt={`${data?.username} - ${shortDescription}`}
-    />
+    <>
+      {isLoading && (
+        <span className={styles.loader}>
+          <Loader color="primary" size="big" />
+        </span>
+      )}
+
+      <MotionImage
+        className={clsx(styles[imageAspectRatio], styles.sliderImage)}
+        src={url}
+        priority={priority}
+        quality={100}
+        animate={{
+          filter: isLoading ? 'blur(5px)' : 'blur(0px)',
+          opacity: isLoading ? 0 : 1,
+        }}
+        onLoad={() => setIsLoading(false)}
+        width={width}
+        height={height}
+        alt={`${data?.username} - ${shortDescription}`}
+      />
+    </>
   );
 };

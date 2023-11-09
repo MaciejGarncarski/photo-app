@@ -23,7 +23,7 @@ export const NewPostNotification = () => {
           whileTap="tap"
           onClick={handleRefetchPosts}
         >
-          <ArrowUp />
+          <ArrowUp size={20} />
           New posts
         </motion.button>
       )}
