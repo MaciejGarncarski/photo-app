@@ -4,6 +4,10 @@
 
 # PhotoApp
 
+## Backend
+
+[Backend repo](https://github.com/MaciejGarncarski/photo-app-backend)
+
 - [PhotoApp](#photoapp)
   - [Overview](#overview)
   - [Live](#live)
@@ -33,7 +37,7 @@ In this app, you can create posts, comment them and chat with other users. It wa
 
 <https://photoapp.maciej-garncarski.pl/>
 
-## Installation & running
+## Installation and running
 
 ### Install node dependencies
 
@@ -58,10 +62,10 @@ pnpm dev
 ## Features
 
 - Authentication
-- Chat
-- Uploading post system
-- Post likes system
-- Post comments system
+- Chat based on websocket
+- Adding posts, liking and commenting them
+- Edit account
+- Database synced user preferences
 
 ## Tech used
 
@@ -73,17 +77,8 @@ pnpm dev
 - [Tanstack Query React](https://tanstack.com/query/latest/docs/react/overview)
 - [Tabler icons](https://tabler-icons.io/)
 
-### Backend
-
-[Backend repo](https://github.com/MaciejGarncarski/photo-app-backend)
-
-- [Fastify](https://www.fastify.io/)
-- [Planetscale database](https://planetscale.com/)
-- Websockets server
-
 ### Testing
 
-- Cypress
 - Vitest
 - React Testing Library
 - MSW
@@ -95,7 +90,6 @@ pnpm dev
 - Husky
 - Conventional Commits config
 - Github Actions CI
-- Vercel
 
 ## Screenshots
 
@@ -103,15 +97,12 @@ pnpm dev
 ### Home
 ![home](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/home.png)
 
-### Chat selection
-![chat](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)
-
-### Chat room
-![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chatRoom.png)
-
 ### Create post
-![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/createPost.png)
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/create-post.png)
 
 ### Profile
 ![profile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/profile.png)
+
+### Chat
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)
 

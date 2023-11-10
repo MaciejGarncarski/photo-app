@@ -22,7 +22,6 @@ export const useHomepagePosts = () => {
     },
     initialPageParam: 0,
     refetchOnWindowFocus: false,
-    staleTime: 20000,
     getNextPageParam: nextPageParam,
   });
 

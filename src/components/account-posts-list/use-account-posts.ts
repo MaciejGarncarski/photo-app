@@ -26,7 +26,6 @@ export const useAccountPosts = ({ userId }: UseAccountPost) => {
     initialPageParam: 0,
     refetchOnWindowFocus: false,
     enabled: userId !== '',
-    staleTime: 20000,
     getNextPageParam: nextPageParam,
   });
 };

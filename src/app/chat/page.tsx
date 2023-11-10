@@ -32,7 +32,6 @@ const ChatPage = async () => {
         return data['data'];
       },
       initialPageParam: 0,
-      staleTime: 6000,
     });
 
     await Promise.all(

@@ -13,7 +13,16 @@ type Props = {
 };
 
 export const Providers = ({ children }: Props) => {
-  const [client] = useState(new QueryClient());
+  const [client] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 1800000,
+          gcTime: 2500000,
+        },
+      },
+    }),
+  );
 
   return (
     <QueryClientProvider client={client}>

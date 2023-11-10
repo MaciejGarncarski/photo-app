@@ -1,5 +1,6 @@
 import { QueryCache } from '@tanstack/react-query';
 import { afterAll, afterEach, beforeAll } from 'vitest';
+import 'vitest-dom/extend-expect';
 
 import { server } from '@/src/mocks/mocks';
 

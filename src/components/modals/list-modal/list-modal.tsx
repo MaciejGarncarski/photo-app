@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 
 import { modalVariants } from '@/src/utils/animations/modal.animation';
@@ -18,34 +18,32 @@ type Props = {
   isVisible: boolean;
 };
 
-export const ListModal = ({
-  closeModal,
-  headingText,
-  children,
-  isVisible,
-}: Props) => {
-  return (
-    <AnimatePresence mode="wait">
-      {isVisible && (
-        <ModalBackdrop closeModal={closeModal}>
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            role="dialog"
-            exit="exit"
-            variants={modalVariants}
-            className={styles.container}
-          >
-            <ReactFocusLock className={styles.focusLock}>
-              <div className={styles.header}>
-                <h3 className={styles.heading}>{headingText}</h3>
-                <ModalCloseButton onClose={closeModal} variant="primary" />
-              </div>
-              <ul className={styles.list}>{children}</ul>
-            </ReactFocusLock>
-          </motion.div>
-        </ModalBackdrop>
-      )}
-    </AnimatePresence>
-  );
-};
+export const ListModal = forwardRef<HTMLDivElement, Props>(
+  ({ closeModal, headingText, children, isVisible }, ref) => {
+    return (
+      <AnimatePresence mode="wait">
+        {isVisible && (
+          <ModalBackdrop closeModal={closeModal}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              role="dialog"
+              exit="exit"
+              variants={modalVariants}
+              ref={ref}
+              className={styles.container}
+            >
+              <ReactFocusLock className={styles.focusLock}>
+                <div className={styles.header}>
+                  <h3 className={styles.heading}>{headingText}</h3>
+                  <ModalCloseButton onClose={closeModal} variant="primary" />
+                </div>
+                <ul className={styles.list}>{children}</ul>
+              </ReactFocusLock>
+            </motion.div>
+          </ModalBackdrop>
+        )}
+      </AnimatePresence>
+    );
+  },
+);

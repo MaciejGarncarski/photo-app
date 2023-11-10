@@ -7,8 +7,10 @@ import { defineConfig } from 'vitest/config';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+
   test: {
-    setupFiles: ['./src/utils/tests/setup'],
+    globals: true,
+    setupFiles: ['./src/utils/tests/vitest-setup'],
     environment: 'jsdom',
     alias: {
       '^~/(.*)$': new URL('./', import.meta.url).pathname,

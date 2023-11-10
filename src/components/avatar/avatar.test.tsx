@@ -16,11 +16,11 @@ describe('Avatar component', () => {
   test('should render loading if no userId provided', async () => {
     render(<Avatar size="small" userId="" />);
     const loadingText = screen.queryByText(/Loading avatar/);
-    expect(loadingText).toBeDefined();
+    expect(loadingText).toBeInTheDocument();
     expect(loadingText?.className).toBe('visually-hidden');
 
     await waitFor(() => {
-      expect(screen.queryByText(`@`)).toBeNull();
+      expect(screen.queryByText(`@`)).not.toBeInTheDocument();
     });
   });
 
@@ -31,6 +31,6 @@ describe('Avatar component', () => {
 
     const avatar = screen.queryByAltText(/@/);
     const avatarPlaceholder = screen.queryByText(/@/);
-    expect(avatar || avatarPlaceholder).toBeDefined();
+    expect(avatar || avatarPlaceholder).toBeInTheDocument();
   });
 });

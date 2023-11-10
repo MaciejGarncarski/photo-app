@@ -15,6 +15,5 @@ export const usePost = ({ postId }: { postId: number }) => {
       return post['data'];
     },
     enabled: Boolean(postId),
-    staleTime: 20000,
   });
 };

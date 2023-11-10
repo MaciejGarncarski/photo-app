@@ -24,6 +24,8 @@ export const useAuth = () => {
       return sessionUser['data'];
     },
     initialData: null,
+    staleTime: 0,
+    gcTime: 10000,
     retry: false,
   });
 

@@ -1,11 +1,9 @@
-import { getQueryClient } from '@/src/utils/api/get-query-client';
+import { QueryClient } from '@tanstack/react-query';
 
 import { getSessionUserServer } from '@/src/services/auth.service';
 import { getUser } from '@/src/services/user.service';
 
-export const prefetchSession = async () => {
-  const queryClient = getQueryClient();
-
+export const prefetchSession = async (queryClient: QueryClient) => {
   try {
     const sessionUser = await queryClient.fetchQuery({
       queryKey: ['session'],

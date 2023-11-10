@@ -20,6 +20,5 @@ export const useUser = ({ userId }: Props) => {
     },
     enabled: userId !== '',
     refetchOnWindowFocus: false,
-    staleTime: 15000,
   });
 };

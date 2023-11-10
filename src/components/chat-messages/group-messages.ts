@@ -1,4 +1,4 @@
-import { mapMessages } from '@/src/utils/map-messages';
+import { checkTimeBetweenMessages } from '@/src/utils/check-time-between-messages';
 
 import { ChatMessage, ChatMessages } from '@/src/schemas/chat.schema';
 
@@ -7,6 +7,25 @@ type Message = ChatMessage & {
 };
 
 type MessageGroup = Array<Array<Message>>;
+
+export const mapMessages = (el: ChatMessages) => {
+  return el.messages.map((message, idx, arr) => {
+    if (!arr[idx + 1]) {
+      return {
+        ...message,
+        shouldShowTime: true,
+      };
+    }
+
+    return {
+      ...message,
+      shouldShowTime: checkTimeBetweenMessages(
+        arr[idx + 1].createdAt,
+        message.createdAt,
+      ),
+    };
+  });
+};
 
 export const groupMessagesByUser = (pages: Array<ChatMessages>) => {
   const allMessages = pages.flatMap(mapMessages);

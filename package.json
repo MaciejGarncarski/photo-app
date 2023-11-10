@@ -90,6 +90,7 @@
     "prettier": "^3.0.3",
     "utf-8-validate": "^6.0.3",
     "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "vitest-dom": "^0.1.1"
   }
 }

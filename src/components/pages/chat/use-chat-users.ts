@@ -21,7 +21,6 @@ export const useChatUsers = () => {
       return data.data;
     },
     initialPageParam: 0,
-    staleTime: 20000,
     refetchOnWindowFocus: false,
     getNextPageParam: nextPageParam,
   });

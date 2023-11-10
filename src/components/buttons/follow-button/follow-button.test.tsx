@@ -11,13 +11,16 @@ describe('follow button test', () => {
     render(<FollowButton userId="" />);
 
     waitFor(() => {
-      expect(screen.queryByText('Unfollow')).toBeNull();
+      expect(
+        screen.getByRole('button', { name: 'Unfollow' }),
+      ).not.toBeInTheDocument();
     });
   });
 
   test('should display correct text', async () => {
     render(<FollowButton userId="someId" />);
-    expect(screen.queryByText('Unfollow')).toBeDefined();
-    screen.debug();
+    await waitFor(() => {
+      expect(screen.getByRole('button')).toHaveTextContent(/follow|unfollow/i);
+    });
   });
 });
