@@ -43,7 +43,6 @@ export const AccountPost = ({ postId }: Props) => {
       initial="hidden"
       animate="show"
       transition={{
-        duration: 0.005,
         ease: [0, 0.8, 0.2, 1],
         scale: {
           type: 'spring',

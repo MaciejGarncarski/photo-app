@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 type UseInfiniteScroll = {
@@ -16,13 +15,14 @@ export const useInfiniteScroll = ({
   enabled,
   rootMargin,
 }: UseInfiniteScroll) => {
-  const { ref, inView } = useInView({ rootMargin: rootMargin ?? '200px' });
-
-  useEffect(() => {
-    if (inView && hasNextPage && enabled) {
-      fetchNextPage();
-    }
-  }, [enabled, fetchNextPage, hasNextPage, inView]);
+  const { ref, inView } = useInView({
+    rootMargin: rootMargin ?? '200px',
+    onChange: (inView) => {
+      if (inView && hasNextPage && enabled) {
+        fetchNextPage();
+      }
+    },
+  });
 
   return { inView, ref };
 };
