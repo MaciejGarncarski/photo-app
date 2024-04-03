@@ -24,7 +24,7 @@ export const FollowersFriendsItem = ({ userId }: Props) => {
   return (
     <li className={styles.listItem}>
       <Link href={`/${user.username}`} className={styles.itemLink}>
-        <Avatar userId={user.id} size="xs" />
+        <Avatar userId={user.id} size="small" />
         <span className={styles.username}>@{user.username}</span>
       </Link>
       {user.id !== sessionUser?.id && <FollowButton userId={user.id} />}

@@ -53,13 +53,12 @@
   gap: 1rem;
   padding: 0.6rem;
   font-size: 1.25rem;
-  transition: transform var(--transition-fast);
-
 
   @include common.mediaquery('desktop') {
     justify-content: flex-start;
     padding: 1rem 0.75rem;
     border-radius: var(--radius-medium);
+    transition: all var(--transition-fast);
     width: 100%;
     height: auto;
   }
@@ -79,6 +78,7 @@
   @include common.mediaquery('desktop') {
     background-color: var(--color-primary);
     font-weight: 700;
+    box-shadow: var(--shadow-border);
 
     & > .icon {
       transform: scale(1.1);

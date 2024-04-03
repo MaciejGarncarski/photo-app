@@ -12,7 +12,7 @@
   @include common.mediaquery('desktop') {
     &:focus {
       outline: 0;
-      box-shadow: 0 0 0 4px var(--color-primary), 0 0 0 8px var(--color-accent);
+      box-shadow: 0 0 0 4px var(--color-primary), 0 0 0 6px var(--color-accent);
     }
 
     &:hover {

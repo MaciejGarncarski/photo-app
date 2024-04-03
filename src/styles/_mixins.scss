@@ -1,7 +1,7 @@
 @mixin mediaquery($query) {
   $breakpoints: (
     'tablet': '(min-width: 750px)',
-    'desktop': '(min-width: 1279px)',
+    'desktop': '(min-width: 1101px)',
   );
 
 @if map-has-key($breakpoints, $query) {
@@ -16,16 +16,16 @@
 }
 
 @mixin mobile-landscape {
-  @media screen and (max-width: 1200px) and (orientation: landscape) {
+  @media screen and (max-width: 1000px) and (orientation: landscape) {
     @content;
   }
 }
 
 @mixin button {
   border-radius: var(--radius-small);
-  background-color: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-darker));
   color: var(--color-always-black);
-  font-weight: 400;
+  font-weight: 500;
   padding: 0.4rem 0.8rem;
   display: flex;
   justify-content: center;

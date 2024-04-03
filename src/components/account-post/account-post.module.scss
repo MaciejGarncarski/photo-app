@@ -6,8 +6,7 @@
   position: relative;
   display: block;
   background-color: var(--color-secondary);
-  box-shadow: var(--shadow-border);
-  border: none;
+  border: 2px solid var(--color-gray);
   transition: box-shadow var(--transition-fast);
   flex: 1 0 0%;
   height: 9rem;

@@ -48,10 +48,12 @@ export const SignInForm = () => {
         {...register('password')}
       />
 
-      <Button type="submit" variant="primary">
-        Continue
-        <SignIn />
-      </Button>
+      <div className={styles.button}>
+        <Button type="submit" variant="primary">
+          Continue
+          <SignIn />
+        </Button>
+      </div>
 
       <RegisterSignInMessage variant="sign-in" />
     </form>

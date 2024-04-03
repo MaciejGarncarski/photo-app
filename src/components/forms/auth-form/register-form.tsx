@@ -66,10 +66,12 @@ export const RegisterForm = () => {
         {...register('confirmPassword')}
       />
 
-      <Button type="submit" variant="primary" disabled={isPending}>
-        Continue
-        <SignIn />
-      </Button>
+      <div className={styles.button}>
+        <Button type="submit" variant="primary" disabled={isPending}>
+          Continue
+          <SignIn />
+        </Button>
+      </div>
 
       <RegisterSignInMessage variant="register" />
     </form>

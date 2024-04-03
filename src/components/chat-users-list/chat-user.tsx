@@ -48,7 +48,7 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
             href={`/chat/${userId}`}
             className={clsx(isActive && styles.linkActive, styles.link)}
           >
-            <Avatar userId={userId} size="small" isBordered />
+            <Avatar userId={userId} size="small" />
             <span className={styles.rightCol}>
               <span className={styles.username}>@{data.username}</span>
               <span className={styles.message}>

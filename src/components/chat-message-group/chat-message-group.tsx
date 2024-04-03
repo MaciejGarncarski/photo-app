@@ -22,7 +22,7 @@ export const ChatMessageGroup = ({ messageGroup }: Props) => {
     <li className={clsx(isReceiver && styles.messageReceiver, styles.message)}>
       {isReceiver && (
         <div className={styles.avatar}>
-          <Avatar userId={senderId} size="xs" />
+          <Avatar userId={senderId} size="small" />
         </div>
       )}
       <div className={styles.textColumn}>

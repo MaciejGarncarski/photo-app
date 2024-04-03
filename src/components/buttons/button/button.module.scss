@@ -4,6 +4,7 @@
   @include common.button;
 
   &:disabled {
+    background-image: none;
     background-color: var(--color-gray);
     color: var(--color-text-gray);
   }
@@ -11,7 +12,7 @@
   @include common.mediaquery('desktop') {
 
     &:hover {
-      background-color: var(--color-accent-active);
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-darker));
     }
 
     &:focus {
@@ -20,6 +21,7 @@
     }
 
     &:hover:disabled {
+      background-image: none;
       background-color: var(--color-gray);
       color: var(--color-text-gray);
     }
@@ -33,12 +35,13 @@
 .secondary {
   @include common.button;
   color: var(--color-text);
+  background-image: none;
   background-color: transparent;
   box-shadow: inset 0 0 0 1px var(--color-gray);
 
   @include common.mediaquery('desktop') {
     &:hover {
-      color: var(--color-text);
+      color: var(--color-secondary);
       background-color: var(--color-gray-active);
     }
   }
@@ -47,10 +50,12 @@
 .destructive {
   @include common.button;
   color: var(--color-text);
+  background-image: none;
   background-color: var(--color-error-light);
 
   @include common.mediaquery('desktop') {
     &:hover {
+      background-image: none;
       background-color: var(--color-error-light-active);
     }
   }

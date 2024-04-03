@@ -23,7 +23,7 @@ export const OtherSignInOptions = () => {
   return (
     <div className={styles.otherOptions}>
       <div className={styles.separator}>
-        <p className={styles.orWith}>Or sign in using</p>
+        <p className={styles.orWith}>Check out other options!</p>
       </div>
       <div className={styles.other}>
         <ButtonLink href={`${clientEnv.NEXT_PUBLIC_API_ROOT}/auth/google`}>
@@ -37,7 +37,7 @@ export const OtherSignInOptions = () => {
           disabled={isPending}
         >
           <TestTube />
-          Test user account
+          Try it without an account
         </Button>
       </div>
     </div>

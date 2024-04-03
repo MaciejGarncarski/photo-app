@@ -35,7 +35,7 @@ export const Navbar = () => {
       {showUserOptions && (
         <div className={styles.signedInInfo}>
           <div className={styles.info}>
-            <Avatar userId={sessionUser.id} size="xs" />
+            <Avatar userId={sessionUser.id} size="small" />
             <span className={styles.userNameInfo}>
               <span className={styles.name}>{sessionUser.name}</span>
               <span className={styles.username}>@{sessionUser.username}</span>

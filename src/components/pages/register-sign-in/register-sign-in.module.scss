@@ -8,6 +8,7 @@
 
   @include common.mediaquery('desktop') {
     background-color: var(--color-secondary);
+    gap: 3rem;
     padding: 2.5rem 3rem;
     border-radius: var(--radius-big);
     box-shadow: var(--shadow-border);

@@ -37,7 +37,7 @@ export const AccountHeaderDesktop = ({
   return (
     <main className={styles.accountDesktop}>
       <div className={styles.leftCol}>
-        <Avatar userId={userId} size="big" isBordered />
+        <Avatar userId={userId} size="big" />
         {!isOwner && isSignedIn && (
           <div className={styles.accountButtons}>
             <FollowButton userId={userId} />

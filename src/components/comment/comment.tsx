@@ -45,7 +45,7 @@ export const Comment = ({ commentData }: Props) => {
     <motion.article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <span className="visually-hidden">@{username}</span>
-        <Avatar userId={authorId} size="xs" />
+        <Avatar userId={authorId} size="small" />
       </Link>
       <div className={styles.commentText}>
         <h3 className={styles.author}>{username}</h3>

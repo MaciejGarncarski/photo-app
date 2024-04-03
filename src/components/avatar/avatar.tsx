@@ -9,12 +9,11 @@ import { useUser } from '@/src/hooks/use-user';
 
 import styles from './avatar.module.scss';
 
-type Size = 'xs' | 'small' | 'medium' | 'big';
+type Size = 'small' | 'medium' | 'big';
 
 type Props = {
   userId: string;
   size: Size;
-  isBordered?: boolean;
 };
 
 export const MotionImage = motion(Image);
@@ -22,21 +21,14 @@ export const MotionImage = motion(Image);
 const avatarSizes: Record<Size, number> = {
   big: 140,
   medium: 90,
-  small: 40,
-  xs: 30,
+  small: 30,
 };
 
-export const Avatar = ({ userId, size, isBordered }: Props) => {
+export const Avatar = ({ userId, size }: Props) => {
   const { data, isPending } = useUser({ userId });
   const avatarSize = avatarSizes[size];
 
-  const avatarClassName = clsx(
-    styles[size],
-    {
-      [styles.bordered]: isBordered,
-    },
-    styles.avatar,
-  );
+  const avatarClassName = clsx(styles[size], styles.avatar);
 
   if (!data || isPending) {
     return (
