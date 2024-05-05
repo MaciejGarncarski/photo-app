@@ -7,7 +7,6 @@
     "src/**/*.{js,ts,jsx,tsx}": "pnpm lint",
     "src/**/*.{js,jsx,ts,tsx,md,mdx}": "pnpm format --cache"
   },
-  "packageManager": "pnpm@8.7.6",
   "proxy": "http://localhost:3001",
   "scripts": {
     "dev": "next dev",
