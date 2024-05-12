@@ -48,6 +48,7 @@
     "react-remove-scroll": "^2.5.7",
     "react-responsive": "^9.0.2",
     "sass": "^1.68.0",
+    "sharp": "^0.33.3",
     "socket.io-client": "^4.7.2",
     "sonner": "^1.0.3",
     "typescript": "5.2.2",
