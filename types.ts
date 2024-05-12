@@ -531,7 +531,7 @@ export interface paths {
               data: {
                 username: string;
                 name: string | null;
-                id: string;
+                userId: string;
                 avatar: string | null;
                 bio: string | null;
                 createdAt: string;
@@ -561,7 +561,7 @@ export interface paths {
               data: {
                 username: string;
                 name: string | null;
-                id: string;
+                userId: string;
                 avatar: string | null;
                 bio: string | null;
                 createdAt: string;
@@ -696,7 +696,7 @@ export interface paths {
             "application/json": {
               data: {
                 users: ({
-                    id: string;
+                    userId: string;
                     message: string;
                     messageCreatedAt: string | null;
                   })[];

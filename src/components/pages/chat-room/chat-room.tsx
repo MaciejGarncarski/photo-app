@@ -44,7 +44,7 @@ export const ChatRoom = () => {
           <ArrowLeft />
         </Button>
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
-          <Avatar userId={friendData?.id || ''} size="small" />
+          <Avatar userId={friendData?.userId || ''} size="small" />
           <span className={styles.userInfo}>
             <span className={styles.name}>
               {friendData?.name && <span>{friendData?.name}</span>}

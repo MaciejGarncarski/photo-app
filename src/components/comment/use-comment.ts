@@ -26,7 +26,7 @@ export const useComment = ({ commentData }: Arguments) => {
   const handleDelete = () =>
     commentDelete.mutate({ commentId: commentId.toString() });
 
-  const isAbleToDelete = sessionUserData?.id === authorId;
+  const isAbleToDelete = sessionUserData?.userId === authorId;
   const userAccountHref = `/${data?.username}`;
 
   return {

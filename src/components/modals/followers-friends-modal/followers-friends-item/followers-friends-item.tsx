@@ -24,10 +24,10 @@ export const FollowersFriendsItem = ({ userId }: Props) => {
   return (
     <li className={styles.listItem}>
       <Link href={`/${user.username}`} className={styles.itemLink}>
-        <Avatar userId={user.id} size="small" />
+        <Avatar userId={user.userId} size="small" />
         <span className={styles.username}>@{user.username}</span>
       </Link>
-      {user.id !== sessionUser?.id && <FollowButton userId={user.id} />}
+      {user.userId !== sessionUser?.id && <FollowButton userId={user.userId} />}
     </li>
   );
 };

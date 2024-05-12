@@ -38,10 +38,10 @@ export const Account = ({ username }: Props) => {
     username: username || (pathname.slice(1) as string),
   });
 
-  const isOwner = sessionUser?.id === userData?.id;
+  const isOwner = sessionUser?.id === userData?.userId;
 
   const accountHeaderProps = {
-    userId: userData?.id || '',
+    userId: userData?.userId || '',
     isModalOpen: settingsModal.isModalOpen,
     openModal: settingsModal.openModal,
     isOwner,
@@ -92,7 +92,7 @@ export const Account = ({ username }: Props) => {
           Cancel
         </Button>
       </ConfirmationDialog>
-      {userData?.id && <AccountPostsList userId={userData.id} />}
+      {userData?.userId && <AccountPostsList userId={userData.userId} />}
     </div>
   );
 };

@@ -7,7 +7,6 @@ import { useAuth } from '@/src/hooks/use-auth';
 import { useIsTabletOrMobile } from '@/src/hooks/use-is-tablet-or-mobile';
 
 import { Avatar } from '@/src/components/avatar/avatar';
-import { navbarVariants } from '@/src/components/navbar/navbar.animation';
 import { NavButtons } from '@/src/components/navbar/navbar-buttons/navbar-buttons';
 import { SettingsModal } from '@/src/components/settings-modal/settings-modal';
 import { useSettingsAtom } from '@/src/components/settings-modal/use-settings-atom';
@@ -23,7 +22,7 @@ export const Navbar = () => {
 
   return (
     <motion.nav
-      variants={isTabletOrMobile ? navbarVariants : {}}
+      // variants={isTabletOrMobile ? navbarVariants : {}}
       initial="hidden"
       animate="visible"
       className={styles.navbar}

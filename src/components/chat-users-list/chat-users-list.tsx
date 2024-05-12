@@ -36,11 +36,11 @@ export const ChatUsersList = () => {
   return (
     <ul className={styles.list}>
       {data.pages.map((page) => {
-        return page.users.map(({ id, message, messageCreatedAt }, idx) => {
+        return page.users.map(({ userId, message, messageCreatedAt }, idx) => {
           return (
-            <Fragment key={id}>
+            <Fragment key={userId}>
               <ChatUser
-                userId={id}
+                userId={userId}
                 message={message}
                 messageCreatedAt={messageCreatedAt}
               />
