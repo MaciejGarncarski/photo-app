@@ -27,8 +27,6 @@ export const useChatSubscription = () => {
 
   useEffect(() => {
     if (typeof chatRoomData !== 'undefined' && chatRoomData?.id !== 0) {
-      console.log({ chatRoomData });
-
       socket.emit('join chat room', { chatRoomId: chatRoomData?.id });
     }
 
