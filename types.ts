@@ -606,11 +606,11 @@ export interface paths {
       };
     };
   };
-  "/chat/check-user/{receiverId}": {
+  "/chat/check-user/{username}": {
     get: {
       parameters: {
         path: {
-          receiverId: string;
+          username: string;
         };
       };
       responses: {

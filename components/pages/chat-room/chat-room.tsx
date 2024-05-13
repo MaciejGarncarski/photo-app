@@ -64,12 +64,7 @@ export const ChatRoom = () => {
       />
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <TextArea
-          label="Message"
-          placeholder="Aa"
-          rows={2}
-          {...form.register('text')}
-        />
+        <TextArea placeholder="Aa" rows={2} {...form.register('text')} />
         <Button
           type="submit"
           variant="primary"

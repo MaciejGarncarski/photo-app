@@ -11,7 +11,7 @@ export const deleteChatMessage = fetcher
   .create();
 
 export const getChatRoomData = fetcher
-  .path('/chat/check-user/{receiverId}')
+  .path('/chat/check-user/{username}')
   .method('get')
   .create();
 

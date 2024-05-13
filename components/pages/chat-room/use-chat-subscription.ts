@@ -26,7 +26,9 @@ export const useChatSubscription = () => {
   }, [chatRoomError, router]);
 
   useEffect(() => {
-    if (chatRoomData?.id !== 0) {
+    if (typeof chatRoomData !== 'undefined' && chatRoomData?.id !== 0) {
+      console.log({ chatRoomData });
+
       socket.emit('join chat room', { chatRoomId: chatRoomData?.id });
     }
 
@@ -57,5 +59,11 @@ export const useChatSubscription = () => {
     return () => {
       socket.off('new message', newMessage);
     };
-  }, [chatRoomData?.id, isSoundEnabled, queryClient, sessionUser?.id]);
+  }, [
+    chatRoomData,
+    chatRoomData?.id,
+    isSoundEnabled,
+    queryClient,
+    sessionUser?.id,
+  ]);
 };

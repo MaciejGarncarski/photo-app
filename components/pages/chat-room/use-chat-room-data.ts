@@ -8,16 +8,16 @@ import { getChatRoomData } from '@/services/chat.service';
 export const useChatRoomData = () => {
   const params = useParams();
   const { sessionUser } = useAuth();
-  const receiverId = params?.receiverId as string;
+  const username = params?.username as string;
 
   return useQuery({
-    queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, receiverId }],
+    queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, username }],
     queryFn: async () => {
-      const { data } = await getChatRoomData({ receiverId });
+      const { data } = await getChatRoomData({ username });
 
       return data.data;
     },
-    enabled: Boolean(sessionUser?.id && receiverId),
+    enabled: Boolean(sessionUser?.id && username),
     refetchOnWindowFocus: false,
   });
 };
