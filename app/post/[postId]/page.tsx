@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { getQueryClient } from '@/utils/api/get-query-client';
 import { getPageTitle } from '@/utils/get-page-title';
 
 import { PostById } from '@/components/pages/post-by-id/post-by-id';
@@ -15,24 +14,14 @@ type Props = {
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const queryClient = getQueryClient();
   const { postId } = params;
 
-  const postData = await queryClient.fetchQuery({
-    queryKey: ['post', postId],
-    queryFn: async () => {
-      const { data: post } = await getPost(
-        { postId: postId },
-        { cache: 'no-cache' },
-      );
+  const { data: post } = await getPost(
+    { postId: postId },
+    { cache: 'no-cache' },
+  );
 
-      if (!post['data']) {
-        throw new Error('No post data.');
-      }
-
-      return post['data'];
-    },
-  });
+  const postData = post.data;
 
   if (!postData) {
     return {

@@ -6,14 +6,35 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MotionConfig } from 'framer-motion';
 import { Provider as JotaiProvider } from 'jotai';
 import { ThemeProvider } from 'next-themes';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
 };
 
+function makeQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 4 * 1000,
+      },
+    },
+  });
+}
+
+let browserQueryClient: QueryClient | undefined = undefined;
+
+function getQueryClient() {
+  if (typeof window === 'undefined') {
+    return makeQueryClient();
+  } else {
+    if (!browserQueryClient) browserQueryClient = makeQueryClient();
+    return browserQueryClient;
+  }
+}
+
 export const Providers = ({ children }: Props) => {
-  const [client] = useState(new QueryClient());
+  const client = getQueryClient();
 
   return (
     <QueryClientProvider client={client}>

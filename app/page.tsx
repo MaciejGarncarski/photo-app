@@ -1,18 +1,29 @@
-import { dehydrate } from '@tanstack/react-query';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 
-import { getQueryClient } from '@/utils/api/get-query-client';
-import { Hydrate } from '@/utils/api/hydrate';
-
+import { getPostQueryOptions } from '@/components/pages/account/use-post';
 import { Home } from '@/components/pages/home/home';
+import { getHomepagePostsOptions } from '@/components/pages/home/use-homepage-posts';
 
-const HomePage = async () => {
-  const queryClient = getQueryClient();
+export default async function HomePage() {
+  const queryClient = new QueryClient();
+
+  const data = await queryClient.fetchInfiniteQuery(getHomepagePostsOptions);
+
+  const postIds = data.pages.map(({ data }) => data.map(({ id }) => id))[0];
+
+  await Promise.all(
+    postIds.map((id) => {
+      return queryClient.prefetchQuery(getPostQueryOptions(id));
+    }),
+  );
 
   return (
-    <Hydrate state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <Home />
-    </Hydrate>
+    </HydrationBoundary>
   );
-};
-
-export default HomePage;
+}

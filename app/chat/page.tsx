@@ -1,8 +1,10 @@
-import { dehydrate } from '@tanstack/react-query';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import { Metadata } from 'next';
 
-import { getQueryClient } from '@/utils/api/get-query-client';
-import { Hydrate } from '@/utils/api/hydrate';
 import { getPageTitle } from '@/utils/get-page-title';
 
 import { Chat } from '@/components/pages/chat/chat';
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const ChatPage = async () => {
-  const queryClient = getQueryClient();
+  const queryClient = new QueryClient();
 
   try {
     const users = await queryClient.fetchInfiniteQuery({
@@ -61,11 +63,11 @@ const ChatPage = async () => {
   } catch (error) {}
 
   return (
-    <Hydrate state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <ProtectedPage sessionNeeded={true}>
         <Chat />
       </ProtectedPage>
-    </Hydrate>
+    </HydrationBoundary>
   );
 };
 
