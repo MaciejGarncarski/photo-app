@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 import { useAuth } from '@/hooks/use-auth';
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
+import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
 
 import { ButtonLink } from '@/components/buttons/button-link/button-link';
 import { FetchErrorMessage } from '@/components/fetch-error-message/fetch-error-message';
@@ -21,6 +22,8 @@ export const Home = () => {
     useHomepagePosts();
 
   const { isSignedIn } = useAuth();
+
+  const { isTabletOrMobile } = useIsTabletOrMobile();
 
   const { ref } = useInfiniteScroll({
     hasNextPage: Boolean(hasNextPage),
@@ -61,7 +64,13 @@ export const Home = () => {
 
       {data?.pages.map((page) => {
         return page.data.map(({ id }, idx) => {
-          return <HomePost priority={idx < 3} key={id} postId={id} />;
+          return (
+            <HomePost
+              priority={isTabletOrMobile ? idx <= 1 : idx === 0}
+              key={id}
+              postId={id}
+            />
+          );
         });
       })}
 
