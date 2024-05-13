@@ -1,0 +1,48 @@
+@use 'common';
+
+.orWith {
+  background-color: var(--color-primary);
+  padding: 0 1.5rem;
+  display: inline-block;
+  z-index: 1;
+
+  @include common.mediaquery('desktop') {
+    background-color: var(--color-secondary);
+  }
+}
+
+.separator {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-gray);
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+}
+
+.otherOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.other {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include common.mediaquery('desktop') {
+    flex-direction: row;
+  }
+}

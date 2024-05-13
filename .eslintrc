@@ -54,17 +54,17 @@
             "^\\u0000"
           ],
           [
-            "^@/src/hooks",
-            "^@/src/utils"
+            "^@/hooks",
+            "^@/utils"
           ],
           [
-            "^@/src/components/atoms"
+            "^@/components/atoms"
           ],
           [
-            "^@/src/components/molecules"
+            "^@/components/molecules"
           ],
           [
-            "^@/src/components/organisms"
+            "^@/components/organisms"
           ],
           [
             "^@/"
@@ -83,7 +83,7 @@
             "^\\.\\./\\.\\./\\.\\.(?!/?$)"
           ],
           [
-            "^@/src/types"
+            "^@/types"
           ],
           [
             "^"

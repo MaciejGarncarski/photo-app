@@ -1,0 +1,23 @@
+@use 'common';
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  list-style: none;
+  gap: 2rem;
+
+  @include common.mediaquery('desktop') {
+    margin: 0 auto;
+    gap: 3rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.noPosts {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}

@@ -1,0 +1,46 @@
+@use 'common';
+
+.messages {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: flex-start;
+  list-style: none;
+  gap: 1.5rem;
+  height: calc(100dvh - 15rem);
+  overflow: auto;
+  padding: 0 0.5rem;
+  padding-bottom: 2rem;
+
+  @include common.mediaquery('desktop') {
+    height: calc(100dvh - 18rem);
+    gap: 3rem;
+  }
+}
+
+.time {
+  text-align: center;
+  color: var(--color-text-gray);
+  width: 100%;
+  display: block;
+  user-select: none;
+
+  @include common.mediaquery('desktop') {
+    user-select: auto;
+  }
+}
+
+.noMessages {
+  text-align: center;
+  width: 100%;
+}
+
+.loading {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

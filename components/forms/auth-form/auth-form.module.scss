@@ -1,0 +1,19 @@
+@use 'common';
+
+.form {
+  display: grid;
+  gap: 2rem;
+
+  @include common.mediaquery('desktop') {
+    gap: 2rem;
+  }
+}
+
+.error {
+  text-align: center;
+  color: var(--color-error);
+}
+
+.button {
+  margin: 0 auto;
+}

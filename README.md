@@ -61,7 +61,6 @@ pnpm dev
 - Chat based on websocket
 - Adding posts, liking and commenting them
 - Edit account
-- Database synced user preferences
 
 ## Tech used
 

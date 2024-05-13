@@ -1,0 +1,33 @@
+@use 'common';
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.userAnchor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.username {
+  font-weight: 700;
+}
+
+.createdAt {
+  font-size: 0.9rem;
+  color: var(--color-text-gray);
+
+  @include common.mediaquery('tablet') {
+    font-size: 1rem;
+  }
+}
+
+.options {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}

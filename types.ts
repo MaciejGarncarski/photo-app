@@ -121,8 +121,6 @@ export interface paths {
                 avatar: string | null;
                 bio: string | null;
                 createdAt: string;
-                theme: "LIGHT" | "DARK";
-                notificationSound: "ON" | "OFF";
               };
             };
           };
@@ -604,24 +602,6 @@ export interface paths {
           content: {
             "application/json": Record<string, never>;
           };
-        };
-      };
-    };
-  };
-  "/user/preferences": {
-    put: {
-      requestBody?: {
-        content: {
-          "application/json": {
-            theme?: "LIGHT" | "DARK";
-            notificationSound?: "ON" | "OFF";
-          };
-        };
-      };
-      responses: {
-        /** @description Default Response */
-        200: {
-          content: never;
         };
       };
     };

@@ -1,0 +1,22 @@
+@use 'common';
+
+.placeholder {
+  width: var(--post-width);
+  border-radius: var(--radius-small);
+  opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  height: 26rem;
+  background-color: var(--color-secondary);
+  animation: var(--skeleton-animation);
+  box-shadow: var(--shadow);
+
+  @include common.mediaquery('tablet') {
+    height: 38rem;
+  }
+
+  @include common.mediaquery('desktop') {
+    border-radius: var(--radius-big);
+    height: 50rem;
+  }
+}

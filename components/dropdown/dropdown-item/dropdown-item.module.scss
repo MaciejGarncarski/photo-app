@@ -1,0 +1,26 @@
+@use 'common';
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: var(--radius-small);
+  font-size: 13px;
+  font-weight: 500;
+
+  @include common.mediaquery('desktop') {
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-primary);
+    }
+  }
+}
+
+.destructive {
+  color: var(--color-error);
+}

@@ -1,0 +1,57 @@
+@use 'common';
+
+.loading {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-primary);
+
+  > svg {
+    width: var(--loader-size);
+    height: var(--loader-size);
+    animation: rotate 1s infinite linear forwards;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.margin-top {
+  margin-top: 3rem;
+
+  @include common.mediaquery('desktop') {
+    margin-top: 6rem;
+  }
+}
+
+.small {
+  --loader-size: 1.5erem;
+}
+
+.big {
+  --loader-size: 5rem;
+}
+
+.primary {
+  color: var(--color-text);
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+.marginTop {
+  margin-top: 4rem;
+
+  @include common.mediaquery('desktop') {
+    margin-top: 10rem;
+  }
+}
