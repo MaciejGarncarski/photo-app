@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import { getUser } from '@/services/user.service';
 
@@ -6,8 +6,8 @@ type Props = {
   userId: string;
 };
 
-export const useUser = ({ userId }: Props) => {
-  return useQuery({
+export const userQueryOptions = (userId: string) =>
+  queryOptions({
     queryKey: ['user', userId],
     queryFn: async () => {
       const { data: user } = await getUser({ userId });
@@ -21,4 +21,7 @@ export const useUser = ({ userId }: Props) => {
     enabled: userId !== '',
     refetchOnWindowFocus: false,
   });
+
+export const useUser = ({ userId }: Props) => {
+  return useQuery(userQueryOptions(userId));
 };

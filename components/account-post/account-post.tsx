@@ -59,7 +59,7 @@ export const AccountPost = ({ postId }: Props) => {
       )}
       {imagesLength > 1 ? (
         <span className={styles.manyPhotosIcon}>
-          <CopySimple weight="fill" />
+          <CopySimple weight="fill" size={40} />
         </span>
       ) : null}
 
@@ -69,6 +69,7 @@ export const AccountPost = ({ postId }: Props) => {
         alt="post"
         sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 15vw"
         fill
+        quality={100}
         initial={{
           opacity: 0,
         }}

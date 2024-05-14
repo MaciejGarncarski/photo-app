@@ -8,6 +8,7 @@
   box-shadow: var(--shadow);
 
   @include common.mediaquery('desktop') {
+    border: 1px solid var(--shadow-0-5);
     padding: 1rem 1.5rem;
   }
 }

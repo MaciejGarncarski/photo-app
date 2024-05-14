@@ -26,26 +26,24 @@ export const Navbar = () => {
         <Link href="/">Photo App</Link>
       </h1>
 
-      <div className={styles.navbarContent}>
-        <NavButtons />
-        {showUserOptions && (
-          <div className={styles.signedInInfo}>
-            <div className={styles.info}>
-              <Avatar userId={sessionUser.id} size="small" />
-              <span className={styles.userNameInfo}>
-                {sessionUser.name && (
-                  <span className={styles.name}>{sessionUser.name}</span>
-                )}
-                <span className={styles.username}>@{sessionUser.username}</span>
-              </span>
-            </div>
+      <NavButtons />
+      {showUserOptions && (
+        <div className={styles.signedInInfo}>
+          <div className={styles.info}>
+            <Avatar userId={sessionUser.id} size="small" />
+            <span className={styles.userNameInfo}>
+              {sessionUser.name && (
+                <span className={styles.name}>{sessionUser.name}</span>
+              )}
+              <span className={styles.username}>@{sessionUser.username}</span>
+            </span>
           </div>
-        )}
-        <SettingsModal
-          isVisible={isSettingsOpen}
-          closeSettingsModal={() => setSettingsOpen(false)}
-        />
-      </div>
+        </div>
+      )}
+      <SettingsModal
+        isVisible={isSettingsOpen}
+        closeSettingsModal={() => setSettingsOpen(false)}
+      />
     </motion.nav>
   );
 };

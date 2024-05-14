@@ -8,7 +8,7 @@
   background-color: var(--color-primary);
   border-radius: var(--radius-medium);
   padding: 0.5rem 1rem;
-  width: clamp(20rem, 80vw, 40rem);
+  width: clamp(15rem, 80vw, 20rem);
   border: 1px solid var(--shadow-1);
   box-shadow: var(--shadow);
 
@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: space-evenly;
     padding: 0.75rem 1.5rem;
-    width: clamp(30rem, 50vw, 40rem);
+    width: clamp(30rem, 50vw, 35rem);
   }
 
   @include common.mediaquery('desktop') {

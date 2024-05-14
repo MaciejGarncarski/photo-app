@@ -2,11 +2,11 @@
 
 .container {
   margin-inline: auto;
+  width: 100%;
 
   @include common.mediaquery('desktop') {
     margin-top: 1rem;
     padding: 0 2rem;
-    width: 100%;
   }
 }
 
