@@ -43,7 +43,7 @@ export const AccountHeaderMobile = ({
       {!isOwner && isSignedIn && (
         <div className={styles.accountButtons}>
           <FollowButton userId={userId} />
-          <ButtonLink href={`/chat/${userId}`}>Send message</ButtonLink>
+          <ButtonLink href={`/chat/${data.username}`}>Send message</ButtonLink>
         </div>
       )}
       {isOwner && (

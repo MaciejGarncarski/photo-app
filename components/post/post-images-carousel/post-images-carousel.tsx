@@ -46,10 +46,12 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
         drag={isSingleImage ? undefined : 'x'}
-        dragConstraints={{ right: 0, left: 0 }}
         onDragEnd={handleDragEnd}
-        dragMomentum={false}
-        dragElastic={0.5}
+        dragConstraints={{ right: 0, left: 0 }}
+        dragMomentum={true}
+        dragTransition={{
+          bounceDamping: 30,
+        }}
         whileDrag={{ cursor: 'grabbing' }}
         className={styles.draggable}
         style={{
@@ -61,7 +63,8 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
           animate={{
             x: `calc(calc(${-1 * width}px - var(--gap)) * ${currentIndex})`,
             transition: {
-              ease: 'linear',
+              ease: 'easeOut',
+              duration: 0.2,
             },
           }}
           className={styles.imagesContainer}

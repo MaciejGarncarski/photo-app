@@ -24,7 +24,7 @@
   flex-direction: column;
 
   @include common.mediaquery('desktop') {
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-right: 5vw;
     padding-bottom: 2rem;
   }

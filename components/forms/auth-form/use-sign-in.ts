@@ -14,6 +14,10 @@ export const useSignIn = () => {
     mutationFn: async ({ email, password }: SignInFormValues) => {
       try {
         const request = await signIn({ email, password });
+
+        await queryClient.invalidateQueries({ queryKey: ['session'] });
+        await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
+
         router.push('/');
 
         return request.data;

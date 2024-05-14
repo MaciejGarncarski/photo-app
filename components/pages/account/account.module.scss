@@ -30,6 +30,7 @@
 .accountDesktop {
   display: flex;
   background-color: var(--color-secondary);
+  box-shadow: var(--shadow);
   justify-content: space-evenly;
   align-items: flex-start;
   max-width: 60rem;
