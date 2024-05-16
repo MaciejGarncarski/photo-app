@@ -69,11 +69,11 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
           }}
           className={styles.imagesContainer}
         >
-          {post.images.map((image) => {
+          {post.images.map((image, idx) => {
             return (
               <motion.div className={styles.image} key={image.fileId}>
                 <PostImage
-                  priority={priority}
+                  priority={priority && idx === 0}
                   url={image.url}
                   width={image.width}
                   height={image.height}

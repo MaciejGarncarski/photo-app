@@ -7,6 +7,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "testing-library",
+    "eslint-plugin-react-compiler",
     "@typescript-eslint",
     "simple-import-sort",
     "unused-imports",
@@ -22,6 +23,7 @@
     "types.ts"
   ],
   "rules": {
+    "react-compiler/react-compiler": 2,
     "no-unused-vars": "off",
     "no-console": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
