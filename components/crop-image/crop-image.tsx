@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { FloppyDisk, Hand, Image, Mouse } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';

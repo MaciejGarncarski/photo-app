@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ReactElement, useEffect } from 'react';
 
 import { useAuth } from '@/hooks/use-auth';
@@ -14,8 +14,7 @@ type Props = {
 
 export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
   const router = useRouter();
-  const { isSignedIn, isFetching, sessionUser } = useAuth();
-  const path = usePathname();
+  const { isSignedIn, isFetching } = useAuth();
 
   useEffect(() => {
     if (isFetching) {
@@ -31,9 +30,9 @@ export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
       router.replace(`/auth/sign-in`);
       return;
     }
-  }, [isFetching, sessionNeeded, router, isSignedIn, path]);
+  }, []);
 
-  if (!sessionUser && isFetching) {
+  if (isFetching) {
     return <Loader size="big" color="accent" marginTop />;
   }
 

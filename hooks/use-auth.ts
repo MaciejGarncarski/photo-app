@@ -25,7 +25,7 @@ export const useAuth = () => {
       }
     },
     initialData: undefined,
-    staleTime: 10000,
+    staleTime: 20 * 1000,
     retry: false,
   });
 
