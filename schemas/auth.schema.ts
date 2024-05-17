@@ -1,19 +1,19 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { username } from '@/schemas/user.schema';
+import { username } from "@/schemas/user.schema";
 
 export const signInSchema = z.object({
-  email: z.string().email({ message: 'Invalid email.' }),
-  password: z.string().min(5, { message: 'Password is too short.' }),
+  email: z.string().email({ message: "Invalid email." }),
+  password: z.string().min(5, { message: "Password is too short." }),
 });
 
 export type SignInFormValues = z.infer<typeof signInSchema>;
 
 export const registerSchema = z
   .object({
-    email: z.string().email({ message: 'Invalid email.' }),
+    email: z.string().email({ message: "Invalid email." }),
     username: username,
-    password: z.string().min(5, { message: 'Password is too short.' }),
+    password: z.string().min(5, { message: "Password is too short." }),
     confirmPassword: z.string(),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
@@ -23,9 +23,9 @@ export const registerSchema = z
 
     if (confirmPassword !== password) {
       ctx.addIssue({
-        code: 'custom',
-        message: 'Passwords do not match.',
-        path: ['confirmPassword'],
+        code: "custom",
+        message: "Passwords do not match.",
+        path: ["confirmPassword"],
       });
     }
   });

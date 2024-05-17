@@ -1,9 +1,9 @@
-import { useModal } from '@/hooks/use-modal';
-import { useUser } from '@/hooks/use-user';
-import { formatDateRelative } from '@/utils/format-date-relative';
+import { useModal } from "@/hooks/use-modal";
+import { useUser } from "@/hooks/use-user";
+import { formatDateRelative } from "@/utils/format-date-relative";
 
-import { usePost } from '@/components/pages/account/use-post';
-import { useDeletePost } from '@/components/post/post-options/use-delete-post';
+import { usePost } from "@/components/pages/account/use-post";
+import { useDeletePost } from "@/components/post/post-options/use-delete-post";
 
 type Arguments = {
   authorId?: string;
@@ -12,13 +12,13 @@ type Arguments = {
 };
 
 export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
-  const { data } = useUser({ userId: authorId || '' });
+  const { data } = useUser({ userId: authorId || "" });
   const menuModal = useModal();
   const confirmationModal = useModal();
   const deletePostMutation = useDeletePost();
   const { data: postData } = usePost({ postId });
 
-  const dateFromNow = createdAt ? formatDateRelative(createdAt) : '';
+  const dateFromNow = createdAt ? formatDateRelative(createdAt) : "";
 
   const handleDeletePost = () => {
     deletePostMutation.mutate(

@@ -1,16 +1,16 @@
-import { GearSix } from '@phosphor-icons/react';
-import { motion } from 'framer-motion';
+import { GearSix } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
-import { useAuth } from '@/hooks/use-auth';
-import { useUser } from '@/hooks/use-user';
+import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
 
-import { AccountStats } from '@/components/account-stats-bar/account-stats-bar';
-import { Avatar } from '@/components/avatar/avatar';
-import { Button } from '@/components/buttons/button/button';
-import { ButtonLink } from '@/components/buttons/button-link/button-link';
-import { FollowButton } from '@/components/buttons/follow-button/follow-button';
+import { AccountStats } from "@/components/account-stats-bar/account-stats-bar";
+import { Avatar } from "@/components/avatar/avatar";
+import { Button } from "@/components/buttons/button/button";
+import { ButtonLink } from "@/components/buttons/button-link/button-link";
+import { FollowButton } from "@/components/buttons/follow-button/follow-button";
 
-import styles from './account.module.scss';
+import styles from "./account.module.scss";
 
 type Props = {
   userId: string;
@@ -50,14 +50,14 @@ export const AccountHeaderMobile = ({
         <Button type="button" variant="primary" onClick={openModal}>
           <GearSix />
           <span className="visually-hidden">
-            {isModalOpen ? 'Close menu' : 'Open menu'}
+            {isModalOpen ? "Close menu" : "Open menu"}
           </span>
           <span className={styles.menuButtonText}>Account settings</span>
         </Button>
       )}
       <AccountStats userId={userId} />
       {name && <p className={styles.name}>{name}</p>}
-      <p className={styles.bio}>{bio || 'No bio yet.'}</p>
+      <p className={styles.bio}>{bio || "No bio yet."}</p>
     </motion.main>
   );
 };

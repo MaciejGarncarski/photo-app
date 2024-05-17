@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion';
-import type { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { motion } from "framer-motion";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
-import { Button } from '@/components/buttons/button/button';
-import { getButtonList } from '@/components/forms/create-post-form/create-post-form.data';
-import type { PostDetails } from '@/components/pages/create-post/create-post-schema';
-import { TextArea } from '@/components/textarea/text-area';
+import { Button } from "@/components/buttons/button/button";
+import { getButtonList } from "@/components/forms/create-post-form/create-post-form.data";
+import type { PostDetails } from "@/components/pages/create-post/create-post-schema";
+import { TextArea } from "@/components/textarea/text-area";
 
-import styles from './create-post-form.module.scss';
+import styles from "./create-post-form.module.scss";
 
 type Props = {
   onSubmit: () => void;
@@ -35,7 +35,7 @@ export const CreatePostForm = ({
         label="Description"
         placeholder="Type in post description"
         rows={6}
-        {...register('description')}
+        {...register("description")}
         error={errors.description?.message}
       />
       <div className={styles.actionButtons}>

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { AccessDenied } from '@/components/access-denied/access-denied';
+import { AccessDenied } from "@/components/access-denied/access-denied";
 
 export const metadata: Metadata = {
-  title: 'Access Denied',
+  title: "Access Denied",
 };
 
 const AccessDeniedPage = () => {

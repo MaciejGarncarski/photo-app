@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { User } from '@phosphor-icons/react';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { User } from "@phosphor-icons/react";
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
-import { useUser } from '@/hooks/use-user';
+import { useUser } from "@/hooks/use-user";
 
-import styles from './avatar.module.scss';
+import styles from "./avatar.module.scss";
 
-type Size = 'small' | 'medium' | 'big';
+type Size = "small" | "medium" | "big";
 
 type Props = {
   userId: string;

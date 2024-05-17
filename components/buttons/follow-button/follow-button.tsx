@@ -1,8 +1,8 @@
-import { useAuth } from '@/hooks/use-auth';
-import { useUser } from '@/hooks/use-user';
+import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
 
-import { Button } from '@/components/buttons/button/button';
-import { useFollowMutation } from '@/components/buttons/follow-button/use-follow';
+import { Button } from "@/components/buttons/button/button";
+import { useFollowMutation } from "@/components/buttons/follow-button/use-follow";
 
 type Props = {
   userId: string;
@@ -22,10 +22,10 @@ export const FollowButton = ({ userId }: Props) => {
   return (
     <Button
       type="button"
-      variant={data.isFollowing ? 'secondary' : 'primary'}
+      variant={data.isFollowing ? "secondary" : "primary"}
       onClick={handleFollow}
     >
-      {data.isFollowing ? 'Unfollow' : 'Follow'}
+      {data.isFollowing ? "Unfollow" : "Follow"}
     </Button>
   );
 };

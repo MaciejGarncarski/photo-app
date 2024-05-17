@@ -1,12 +1,12 @@
-import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
+import clsx from "clsx";
+import { motion } from "framer-motion";
 
-import { arrowVariants } from '@/components/post/post-arrows/post-arrows.animation';
-import { PostSliderProgress } from '@/components/post/post-images-carousel/carousel-progress';
-import type { PostImage } from '@/schemas/post.schema';
+import { arrowVariants } from "@/components/post/post-arrows/post-arrows.animation";
+import { PostSliderProgress } from "@/components/post/post-images-carousel/carousel-progress";
+import type { PostImage } from "@/schemas/post.schema";
 
-import styles from './post-arrows.module.scss';
+import styles from "./post-arrows.module.scss";
 
 type Props = {
   postImages: Array<PostImage>;

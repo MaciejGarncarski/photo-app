@@ -1,9 +1,9 @@
-import { useRouter } from 'next/navigation';
-import type { MouseEvent } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
+import { useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
+import type { SubmitHandler } from "react-hook-form";
 
-import { useEditAccount } from '@/components/pages/edit-account/use-edit-account';
-import type { AccountDetails } from '@/schemas/user.schema';
+import { useEditAccount } from "@/components/pages/edit-account/use-edit-account";
+import type { AccountDetails } from "@/schemas/user.schema";
 
 type UseEditDetailsArguments = {
   reset: () => void;

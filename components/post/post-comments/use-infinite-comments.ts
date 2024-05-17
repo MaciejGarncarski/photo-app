@@ -1,8 +1,8 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { nextPageParam } from '@/utils/api/next-page-param';
+import { nextPageParam } from "@/utils/api/next-page-param";
 
-import { getComments } from '@/services/comment.service';
+import { getComments } from "@/services/comment.service";
 
 type UseInfiniteComments = {
   postId: number;
@@ -10,7 +10,7 @@ type UseInfiniteComments = {
 
 export const useInfiniteComments = ({ postId }: UseInfiniteComments) => {
   return useInfiniteQuery({
-    queryKey: ['infinite comments', postId],
+    queryKey: ["infinite comments", postId],
     queryFn: async ({ pageParam = 0 }) => {
       const { data } = await getComments({
         postId: postId.toString(),

@@ -1,9 +1,9 @@
-import { type SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
-import { useAddComment } from '@/components/forms/comment-form/use-add-comment';
-import { commentTextSchema } from '@/schemas/post-comment.schema';
+import { useAddComment } from "@/components/forms/comment-form/use-add-comment";
+import { commentTextSchema } from "@/schemas/post-comment.schema";
 
 const commentFormSchema = z.object({
   comment: z.string().max(50),
@@ -23,7 +23,7 @@ export const useCommentForm = ({ postId }: Arguments) => {
     formState: { isDirty, errors },
   } = useForm<CommentFormValues>({
     defaultValues: {
-      comment: '',
+      comment: "",
     },
   });
 
@@ -33,7 +33,7 @@ export const useCommentForm = ({ postId }: Arguments) => {
     const result = commentTextSchema.safeParse(comment);
 
     if (!result.success) {
-      return toast.error('Cannot add comment');
+      return toast.error("Cannot add comment");
     }
 
     mutate(

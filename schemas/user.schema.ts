@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const userSchema = z.object({
   username: z.string(),
@@ -15,19 +15,19 @@ const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim;
 
 export const fullName = z
   .string()
-  .min(4, { message: 'Full name must contain at least 2 characters.' })
+  .min(4, { message: "Full name must contain at least 2 characters." })
   .optional();
 
 export const username = z
   .string()
-  .min(4, { message: 'Minimum 4 characters.' })
-  .max(9, { message: 'Maximum 9 characters allowed.' })
-  .regex(usernameRegex, { message: 'Invalid username' })
+  .min(4, { message: "Minimum 4 characters." })
+  .max(9, { message: "Maximum 9 characters allowed." })
+  .regex(usernameRegex, { message: "Invalid username" })
   .optional();
 
 export const bio = z
   .string()
-  .max(200, { message: 'Bio contains too many characters.' })
+  .max(200, { message: "Bio contains too many characters." })
   .optional();
 
 export const AccountDetailsSchema = z.object({

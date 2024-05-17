@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { SignOut } from '@phosphor-icons/react';
+import { SignOut } from "@phosphor-icons/react";
 
-import { useSignOut } from '@/hooks/use-sign-out';
+import { useSignOut } from "@/hooks/use-sign-out";
 
-import { Button } from '@/components/buttons/button/button';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
+import { Button } from "@/components/buttons/button/button";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
 
 type Props = {
   closeSettingsModal: () => void;

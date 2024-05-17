@@ -1,26 +1,26 @@
-import { DotsThree, Trash } from '@phosphor-icons/react';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import * as Tooltip from '@radix-ui/react-tooltip';
-import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
-import Link from 'next/link';
-import { useState } from 'react';
+import { DotsThree, Trash } from "@phosphor-icons/react";
+import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
 
-import { useModal } from '@/hooks/use-modal';
-import { formatDateFull } from '@/utils/format-date-full';
+import { useModal } from "@/hooks/use-modal";
+import { formatDateFull } from "@/utils/format-date-full";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { Button } from '@/components/buttons/button/button';
-import { useComment } from '@/components/comment/use-comment';
-import { DropdownContent } from '@/components/dropdown/dropdown-content/dropdown-content';
-import { DropdownItem } from '@/components/dropdown/dropdown-item/dropdown-item';
-import { HeartIcon } from '@/components/heart-icon';
-import { Loader } from '@/components/loader/loader';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import { TooltipContent } from '@/components/tooltip-content/tooltip-content';
-import type { Comment as TComment } from '@/schemas/post-comment.schema';
+import { Avatar } from "@/components/avatar/avatar";
+import { Button } from "@/components/buttons/button/button";
+import { useComment } from "@/components/comment/use-comment";
+import { DropdownContent } from "@/components/dropdown/dropdown-content/dropdown-content";
+import { DropdownItem } from "@/components/dropdown/dropdown-item/dropdown-item";
+import { HeartIcon } from "@/components/heart-icon";
+import { Loader } from "@/components/loader/loader";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
+import { TooltipContent } from "@/components/tooltip-content/tooltip-content";
+import type { Comment as TComment } from "@/schemas/post-comment.schema";
 
-import styles from './comment.module.scss';
+import styles from "./comment.module.scss";
 
 type Props = {
   commentData: TComment;
@@ -103,7 +103,7 @@ export const Comment = ({ commentData }: Props) => {
       >
         <Button variant="destructive" onClick={handleDelete}>
           {isDeleting ? <Loader color="primary" size="small" /> : <Trash />}
-          {isDeleting ? 'Deleting...' : 'Delete'}
+          {isDeleting ? "Deleting..." : "Delete"}
         </Button>
         <Button variant="secondary" onClick={closeModal}>
           Cancel

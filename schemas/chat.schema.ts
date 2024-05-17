@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const addChatMessageSchema = z.object({
   text: z.string().trim().min(1),

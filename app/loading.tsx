@@ -1,4 +1,4 @@
-import { Loader } from '@/components/loader/loader';
+import { Loader } from "@/components/loader/loader";
 
 const HomePageLoading = () => {
   return <Loader color="accent" size="big" marginTop />;

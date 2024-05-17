@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
-import type { Area } from 'react-easy-crop';
+import { useCallback, useState } from "react";
+import type { Area } from "react-easy-crop";
 
-import { useSaveCrop } from '@/components/crop-image/use-save-crop';
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import { useSaveCrop } from "@/components/crop-image/use-save-crop";
+import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
 
 type Props = {
   resetImgSrc: () => void;

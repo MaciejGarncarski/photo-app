@@ -1,6 +1,6 @@
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-import { getUser } from '@/services/user.service';
+import { getUser } from "@/services/user.service";
 
 type Props = {
   userId: string;
@@ -8,17 +8,17 @@ type Props = {
 
 export const userQueryOptions = (userId: string) =>
   queryOptions({
-    queryKey: ['user', userId],
+    queryKey: ["user", userId],
     queryFn: async () => {
       const { data: user } = await getUser({ userId });
 
       if (!user.data) {
-        throw new Error('No user data.');
+        throw new Error("No user data.");
       }
 
       return user.data;
     },
-    enabled: userId !== '',
+    enabled: userId !== "",
     refetchOnWindowFocus: false,
   });
 

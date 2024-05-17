@@ -1,9 +1,9 @@
-import { Heart } from '@phosphor-icons/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Heart } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
 
-import { heartVariants } from '@/components/heart-animation/heart-animation.animation';
+import { heartVariants } from "@/components/heart-animation/heart-animation.animation";
 
-import styles from './heart-animation.module.scss';
+import styles from "./heart-animation.module.scss";
 
 type Props = {
   isVisible: boolean;

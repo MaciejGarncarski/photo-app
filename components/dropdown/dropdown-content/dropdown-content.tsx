@@ -1,8 +1,8 @@
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import { motion } from 'framer-motion';
-import { type ReactNode, forwardRef } from 'react';
+import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import { motion } from "framer-motion";
+import { forwardRef, type ReactNode } from "react";
 
-import styles from './dropdown-content.module.scss';
+import styles from "./dropdown-content.module.scss";
 
 type Props = {
   children: ReactNode;

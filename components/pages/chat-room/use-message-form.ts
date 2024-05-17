@@ -1,15 +1,15 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { useForm } from "react-hook-form";
 
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
 import {
   type AddChatMessage,
   addChatMessageSchema,
-} from '@/schemas/chat.schema';
-import { addChatMessage } from '@/services/chat.service';
+} from "@/schemas/chat.schema";
+import { addChatMessage } from "@/services/chat.service";
 
 export type MessageMutation = {
   senderId: string;
@@ -17,7 +17,7 @@ export type MessageMutation = {
   message: string;
 };
 
-export const messageMutationKey = ['new chat message'];
+export const messageMutationKey = ["new chat message"];
 
 type UseMessageFormArguments = {
   friendId?: string;
@@ -33,15 +33,15 @@ export const useMessageForm = ({ friendId }: UseMessageFormArguments) => {
     },
 
     onSuccess: () => {
-      form.setValue('text', '');
+      form.setValue("text", "");
     },
   });
 
   const form = useForm<AddChatMessage>({
-    mode: 'all',
+    mode: "all",
     resolver: zodResolver(addChatMessageSchema),
     defaultValues: {
-      text: '',
+      text: "",
     },
   });
 
@@ -52,7 +52,7 @@ export const useMessageForm = ({ friendId }: UseMessageFormArguments) => {
 
     messageMutation.mutate({
       message: text,
-      senderId: sessionUser?.id || '',
+      senderId: sessionUser?.id || "",
       receiverId: friendId,
     });
   });

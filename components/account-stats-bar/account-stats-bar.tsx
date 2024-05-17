@@ -1,9 +1,9 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
-import { useUserStats } from '@/components/account-stats-bar/use-user-stats';
-import { FollowersFriendsModal } from '@/components/modals/followers-friends-modal/followers-friends-modal';
+import { useUserStats } from "@/components/account-stats-bar/use-user-stats";
+import { FollowersFriendsModal } from "@/components/modals/followers-friends-modal/followers-friends-modal";
 
-import styles from './account-stats-bar.module.scss';
+import styles from "./account-stats-bar.module.scss";
 
 type Props = {
   userId: string;

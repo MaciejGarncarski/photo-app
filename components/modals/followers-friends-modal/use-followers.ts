@@ -1,8 +1,8 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { nextPageParam } from '@/utils/api/next-page-param';
+import { nextPageParam } from "@/utils/api/next-page-param";
 
-import { getFollowers } from '@/services/user.service';
+import { getFollowers } from "@/services/user.service";
 
 type UseFollowers = {
   userId: string;
@@ -11,7 +11,7 @@ type UseFollowers = {
 
 export const useFollowers = ({ userId, enabled }: UseFollowers) => {
   return useInfiniteQuery({
-    queryKey: ['followers', userId],
+    queryKey: ["followers", userId],
     queryFn: async ({ pageParam }) => {
       const { data } = await getFollowers({
         skip: pageParam.toString(),
@@ -19,7 +19,7 @@ export const useFollowers = ({ userId, enabled }: UseFollowers) => {
       });
 
       if (!data.data) {
-        throw new Error('NO data');
+        throw new Error("NO data");
       }
 
       return data.data;

@@ -1,11 +1,11 @@
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
-import { useUserByUsername } from '@/hooks/use-user-by-username';
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
+import { useUserByUsername } from "@/hooks/use-user-by-username";
 
-import { useChatSubscription } from '@/components/pages/chat-room/use-chat-subscription';
-import { useInfiniteMessages } from '@/components/pages/chat-room/use-infinite-messages';
-import { useMessageForm } from '@/components/pages/chat-room/use-message-form';
+import { useChatSubscription } from "@/components/pages/chat-room/use-chat-subscription";
+import { useInfiniteMessages } from "@/components/pages/chat-room/use-infinite-messages";
+import { useMessageForm } from "@/components/pages/chat-room/use-message-form";
 
 export const useChatRoom = () => {
   const params = useParams();

@@ -5,18 +5,18 @@ import {
   SpeakerLow,
   Sun,
   User,
-} from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
+} from "@phosphor-icons/react";
+import { useCallback } from "react";
+import { RemoveScroll } from "react-remove-scroll";
 
-import { useAuth } from '@/hooks/use-auth';
-import { useModal } from '@/hooks/use-modal';
+import { useAuth } from "@/hooks/use-auth";
+import { useModal } from "@/hooks/use-modal";
 
-import { ListModal } from '@/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/components/modals/list-modal-item/list-modal-item';
-import { SignOutDialog } from '@/components/settings-modal/sign-out-dialog';
-import { useNotificationSoundPreference } from '@/components/settings-modal/use-notification-sound-preference';
-import { useThemePreference } from '@/components/settings-modal/use-theme-preference';
+import { ListModal } from "@/components/modals/list-modal/list-modal";
+import { ListModalItem } from "@/components/modals/list-modal-item/list-modal-item";
+import { SignOutDialog } from "@/components/settings-modal/sign-out-dialog";
+import { useNotificationSoundPreference } from "@/components/settings-modal/use-notification-sound-preference";
+import { useThemePreference } from "@/components/settings-modal/use-theme-preference";
 
 type Props = {
   closeSettingsModal: () => void;
@@ -72,7 +72,7 @@ export const SettingsModal = ({ closeSettingsModal, isVisible }: Props) => {
             icon={<ThemeButton />}
             loadingText="Updating..."
           >
-            Change theme to {isDark ? 'light' : 'dark'}
+            Change theme to {isDark ? "light" : "dark"}
           </ListModalItem>
           {isSignedIn && (
             <>
@@ -82,7 +82,7 @@ export const SettingsModal = ({ closeSettingsModal, isVisible }: Props) => {
                 icon={<SoundIcon />}
                 loadingText="Updating..."
               >
-                Turn {isSoundEnabled ? 'off' : 'on'} sound notifications
+                Turn {isSoundEnabled ? "off" : "on"} sound notifications
               </ListModalItem>
               <ListModalItem
                 type="button"

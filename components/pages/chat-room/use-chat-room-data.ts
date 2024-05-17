@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
-import { getChatRoomData } from '@/services/chat.service';
+import { getChatRoomData } from "@/services/chat.service";
 
 export const useChatRoomData = () => {
   const params = useParams();
@@ -11,7 +11,7 @@ export const useChatRoomData = () => {
   const username = params?.username as string;
 
   return useQuery({
-    queryKey: ['chatRoomData', { sessionUser: sessionUser?.id, username }],
+    queryKey: ["chatRoomData", { sessionUser: sessionUser?.id, username }],
     queryFn: async () => {
       const { data } = await getChatRoomData({ username });
 

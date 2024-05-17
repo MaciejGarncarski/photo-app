@@ -1,7 +1,7 @@
-import clsx from 'clsx';
-import { forwardRef, useId } from 'react';
+import clsx from "clsx";
+import { forwardRef, useId } from "react";
 
-import styles from './text-area.module.scss';
+import styles from "./text-area.module.scss";
 
 type Props = {
   placeholder: string;

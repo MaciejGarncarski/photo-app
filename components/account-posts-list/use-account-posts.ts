@@ -1,8 +1,8 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { nextPageParam } from '@/utils/api/next-page-param';
+import { nextPageParam } from "@/utils/api/next-page-param";
 
-import { getUserPosts } from '@/services/posts.service';
+import { getUserPosts } from "@/services/posts.service";
 
 type UseAccountPost = {
   userId: string;
@@ -10,7 +10,7 @@ type UseAccountPost = {
 
 export const useAccountPosts = ({ userId }: UseAccountPost) => {
   return useInfiniteQuery({
-    queryKey: ['account posts', userId],
+    queryKey: ["account posts", userId],
     queryFn: async ({ pageParam }) => {
       const { data } = await getUserPosts({
         authorId: userId,
@@ -18,14 +18,14 @@ export const useAccountPosts = ({ userId }: UseAccountPost) => {
       });
 
       if (!data) {
-        throw new Error('Fetch failed');
+        throw new Error("Fetch failed");
       }
 
       return data;
     },
     initialPageParam: 0,
     refetchOnWindowFocus: false,
-    enabled: userId !== '',
+    enabled: userId !== "",
     getNextPageParam: nextPageParam,
   });
 };

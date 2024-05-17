@@ -1,11 +1,11 @@
-import { Chat } from '@phosphor-icons/react';
-import type { ReactElement } from 'react';
+import { Chat } from "@phosphor-icons/react";
+import type { ReactElement } from "react";
 
-import { useModal } from '@/hooks/use-modal';
+import { useModal } from "@/hooks/use-modal";
 
-import { HeartIcon } from '@/components/heart-icon';
-import { usePost } from '@/components/pages/account/use-post';
-import { useHandleLike } from '@/components/post/post-buttons/use-handle-like';
+import { HeartIcon } from "@/components/heart-icon";
+import { usePost } from "@/components/pages/account/use-post";
+import { useHandleLike } from "@/components/post/post-buttons/use-handle-like";
 
 type ButtonData = Array<{
   alt: string;
@@ -33,13 +33,13 @@ export const usePostButtonsData = ({ postId, parentModalOpen }: Arguments) => {
 
   const buttonData: ButtonData = [
     {
-      alt: 'like',
+      alt: "like",
       icon: <HeartIcon isLiked={post?.isLiked || false} />,
       count: post?.likesCount,
       onClick: handleLike,
     },
     {
-      alt: 'comment',
+      alt: "comment",
       icon: <Chat />,
       count: post?.commentsCount,
       onClick: parentModalOpen ? () => null : postModalOpen,

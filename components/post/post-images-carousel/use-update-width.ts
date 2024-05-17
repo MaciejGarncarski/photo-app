@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { useDebounce } from '@/hooks/use-debounce';
+import { useDebounce } from "@/hooks/use-debounce";
 
 export const useUpdateWidth = () => {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -16,10 +16,10 @@ export const useUpdateWidth = () => {
 
   useEffect(() => {
     setWidth(imageRef.current?.clientWidth || 0);
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [handleResize]);
 

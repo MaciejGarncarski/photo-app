@@ -1,14 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SignIn } from '@phosphor-icons/react';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignIn } from "@phosphor-icons/react";
+import { useForm } from "react-hook-form";
 
-import { Button } from '@/components/buttons/button/button';
-import { useSignIn } from '@/components/forms/auth-form/use-sign-in';
-import { RegisterSignInMessage } from '@/components/forms/register-signin-message/register-signin-message';
-import { Input } from '@/components/input/input';
-import { type SignInFormValues, signInSchema } from '@/schemas/auth.schema';
+import { Button } from "@/components/buttons/button/button";
+import { useSignIn } from "@/components/forms/auth-form/use-sign-in";
+import { RegisterSignInMessage } from "@/components/forms/register-signin-message/register-signin-message";
+import { Input } from "@/components/input/input";
+import { type SignInFormValues, signInSchema } from "@/schemas/auth.schema";
 
-import styles from './auth-form.module.scss';
+import styles from "./auth-form.module.scss";
 
 export const SignInForm = () => {
   const signInCredentials = useSignIn();
@@ -19,10 +19,10 @@ export const SignInForm = () => {
     handleSubmit,
   } = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
-    mode: 'all',
+    mode: "all",
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -36,7 +36,7 @@ export const SignInForm = () => {
         type="email"
         variant="secondary"
         error={errors.email?.message}
-        {...register('email')}
+        {...register("email")}
       />
 
       <Input
@@ -45,7 +45,7 @@ export const SignInForm = () => {
         variant="secondary"
         type="password"
         error={errors.password?.message}
-        {...register('password')}
+        {...register("password")}
       />
 
       <div className={styles.button}>

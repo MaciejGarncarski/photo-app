@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusCircle } from '@phosphor-icons/react';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PlusCircle } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { CropImage } from '@/components/crop-image/crop-image';
-import { CreatePostForm } from '@/components/forms/create-post-form/create-post-form';
-import { ImagesPreview } from '@/components/images-preview/images-preview';
-import { useFinalImages } from '@/components/pages/create-post/use-final-images';
-import { Heading } from '@/components/typography/heading/heading';
+import { CropImage } from "@/components/crop-image/crop-image";
+import { CreatePostForm } from "@/components/forms/create-post-form/create-post-form";
+import { ImagesPreview } from "@/components/images-preview/images-preview";
+import { useFinalImages } from "@/components/pages/create-post/use-final-images";
+import { Heading } from "@/components/typography/heading/heading";
 
-import styles from './create-post.module.scss';
+import styles from "./create-post.module.scss";
 
-import { useOnSubmit } from './use-on-submit';
+import { useOnSubmit } from "./use-on-submit";
 
 export const PostDetailsSchema = z.object({
   description: z
     .string()
-    .min(1, { message: 'Description cannot be empty.' })
-    .max(100, { message: 'Maximum characters exceeded.' }),
+    .min(1, { message: "Description cannot be empty." })
+    .max(100, { message: "Maximum characters exceeded." }),
 });
 
 export const CreatePost = () => {
@@ -36,7 +36,7 @@ export const CreatePost = () => {
   } = useForm({
     resolver: zodResolver(PostDetailsSchema),
     defaultValues: {
-      description: '',
+      description: "",
     },
   });
 

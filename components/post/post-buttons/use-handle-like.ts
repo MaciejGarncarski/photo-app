@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { toast } from 'sonner';
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
-import { usePostLike } from '@/components/post/post-buttons/use-post-like';
+import { usePostLike } from "@/components/post/post-buttons/use-post-like";
 
 const TIMEOUT = 1000;
 
@@ -28,7 +28,7 @@ export const useHandleLike = ({ postId, isLiked }: Props) => {
         return;
       }
 
-      toastRef.current = toast.error('Not signed in.', {
+      toastRef.current = toast.error("Not signed in.", {
         onAutoClose: () => {
           toastRef.current = null;
         },

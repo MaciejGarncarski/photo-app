@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { CameraPlus, Pencil } from '@phosphor-icons/react';
-import { AnimatePresence } from 'framer-motion';
-import ReactFocusLock from 'react-focus-lock';
+import { CameraPlus, Pencil } from "@phosphor-icons/react";
+import { AnimatePresence } from "framer-motion";
+import ReactFocusLock from "react-focus-lock";
 
-import { useAuth } from '@/hooks/use-auth';
-import { useModal } from '@/hooks/use-modal';
+import { useAuth } from "@/hooks/use-auth";
+import { useModal } from "@/hooks/use-modal";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { Button } from '@/components/buttons/button/button';
-import { ModalCloseButton } from '@/components/buttons/modal-close-button/modal-close-button';
-import { DetailsForm } from '@/components/details-form/details-form';
-import { Loader } from '@/components/loader/loader';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop';
-import { useDeleteAvatar } from '@/components/pages/edit-account/use-delete-avatar';
-import { Heading } from '@/components/typography/heading/heading';
-import { UpdateAvatarView } from '@/components/update-avatar-view/update-avatar-view';
+import { Avatar } from "@/components/avatar/avatar";
+import { Button } from "@/components/buttons/button/button";
+import { ModalCloseButton } from "@/components/buttons/modal-close-button/modal-close-button";
+import { DetailsForm } from "@/components/details-form/details-form";
+import { Loader } from "@/components/loader/loader";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
+import { ModalBackdrop } from "@/components/modals/modal-backdrop/modal-backdrop";
+import { useDeleteAvatar } from "@/components/pages/edit-account/use-delete-avatar";
+import { Heading } from "@/components/typography/heading/heading";
+import { UpdateAvatarView } from "@/components/update-avatar-view/update-avatar-view";
 
-import styles from './edit-account.module.scss';
+import styles from "./edit-account.module.scss";
 
 export const EditAccount = () => {
   const { sessionUser } = useAuth();

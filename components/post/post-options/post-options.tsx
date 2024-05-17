@@ -1,10 +1,10 @@
-import { PencilSimple, Trash, X } from '@phosphor-icons/react';
+import { PencilSimple, Trash, X } from "@phosphor-icons/react";
 
-import { useOnEscape } from '@/hooks/use-on-escape';
+import { useOnEscape } from "@/hooks/use-on-escape";
 
-import { ListModal } from '@/components/modals/list-modal/list-modal';
-import { ListModalItem } from '@/components/modals/list-modal-item/list-modal-item';
-import { usePostOptions } from '@/components/post/post-options/use-post-options';
+import { ListModal } from "@/components/modals/list-modal/list-modal";
+import { ListModalItem } from "@/components/modals/list-modal-item/list-modal-item";
+import { usePostOptions } from "@/components/post/post-options/use-post-options";
 
 type Props = {
   closeModal: () => void;

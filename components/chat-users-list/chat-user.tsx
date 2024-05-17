@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
-import { useUser } from '@/hooks/use-user';
-import { formatDateRelative } from '@/utils/format-date-relative';
+import { useUser } from "@/hooks/use-user";
+import { formatDateRelative } from "@/utils/format-date-relative";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { linkVariants } from '@/components/chat-users-list/chat-users-list.animation';
+import { Avatar } from "@/components/avatar/avatar";
+import { linkVariants } from "@/components/chat-users-list/chat-users-list.animation";
 
-import styles from './chat-users-list.module.scss';
+import styles from "./chat-users-list.module.scss";
 
 type Props = {
   userId: string;
@@ -52,7 +52,7 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
             <span className={styles.rightCol}>
               <span className={styles.username}>@{data.username}</span>
               <span className={styles.message}>
-                {message || 'No messages yet.'}
+                {message || "No messages yet."}
               </span>
             </span>
             {messageCreatedAt && (

@@ -1,9 +1,9 @@
-import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-export const soundAtom = atomWithStorage<'ON' | 'OFF'>(
-  'notificationSound',
-  'ON',
+export const soundAtom = atomWithStorage<"ON" | "OFF">(
+  "notificationSound",
+  "ON",
   undefined,
   { getOnInit: true },
 );

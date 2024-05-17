@@ -1,8 +1,8 @@
-import { type ChangeEvent, type DragEvent, useRef, useState } from 'react';
+import { type ChangeEvent, type DragEvent, useRef, useState } from "react";
 
-import { handleDropImage } from '@/utils/handle-drop-image';
+import { handleDropImage } from "@/utils/handle-drop-image";
 
-import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import type { DropZoneErrors } from "@/components/pages/create-post/create-post-schema";
 
 type Arguments = {
   setError: (error: DropZoneErrors) => void;
@@ -17,7 +17,7 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
 
   const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
     if (!changeEv.target.files) {
-      setError('NO_IMAGE_DETECTED');
+      setError("NO_IMAGE_DETECTED");
       return;
     }
 
@@ -49,11 +49,11 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
     const firstFile = files[0];
 
     if (!files || !firstFile) {
-      return setError('NO_IMAGE_DETECTED');
+      return setError("NO_IMAGE_DETECTED");
     }
 
     if (files.length > 1) {
-      return setError('TOO_MANY_IMAGES');
+      return setError("TOO_MANY_IMAGES");
     }
 
     setIsUploadingImage(true);

@@ -1,10 +1,10 @@
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 
-import { AccountPost } from '@/components/account-post/account-post';
-import { useAccountPosts } from '@/components/account-posts-list/use-account-posts';
-import { Loader } from '@/components/loader/loader';
+import { AccountPost } from "@/components/account-post/account-post";
+import { useAccountPosts } from "@/components/account-posts-list/use-account-posts";
+import { Loader } from "@/components/loader/loader";
 
-import styles from './account-posts-list.module.scss';
+import styles from "./account-posts-list.module.scss";
 
 type Props = {
   userId: string;

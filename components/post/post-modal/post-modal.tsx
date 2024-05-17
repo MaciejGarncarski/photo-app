@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import ReactFocusLock from 'react-focus-lock';
+import { AnimatePresence, motion } from "framer-motion";
+import ReactFocusLock from "react-focus-lock";
 
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
-import { modalVariants } from '@/utils/animations/modal.animation';
+import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
+import { modalVariants } from "@/utils/animations/modal.animation";
 
-import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop';
-import { PostModalDesktop } from '@/components/post/post-modal/post-modal-desktop';
-import { PostModalMobile } from '@/components/post/post-modal/post-modal-mobile';
-import { usePostModal } from '@/components/post/post-modal/use-post-modal';
+import { ModalBackdrop } from "@/components/modals/modal-backdrop/modal-backdrop";
+import { PostModalDesktop } from "@/components/post/post-modal/post-modal-desktop";
+import { PostModalMobile } from "@/components/post/post-modal/post-modal-mobile";
+import { usePostModal } from "@/components/post/post-modal/use-post-modal";
 
-import styles from './post-modal.module.scss';
+import styles from "./post-modal.module.scss";
 
 type Props = {
   postId: number;

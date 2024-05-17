@@ -1,6 +1,6 @@
-import type { PostImage } from '@/schemas/post.schema';
+import type { PostImage } from "@/schemas/post.schema";
 
-import styles from './post-images-carousel.module.scss';
+import styles from "./post-images-carousel.module.scss";
 
 type Props = {
   currentIndex: number;

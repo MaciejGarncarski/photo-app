@@ -1,10 +1,10 @@
-import { ArrowUp } from '@phosphor-icons/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUp } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
 
-import { notificationVariant } from '@/components/new-post-notification/new-post-notification.animation';
-import { useNewPost } from '@/components/new-post-notification/use-post-notification';
+import { notificationVariant } from "@/components/new-post-notification/new-post-notification.animation";
+import { useNewPost } from "@/components/new-post-notification/use-post-notification";
 
-import styles from './new-post-notification.module.scss';
+import styles from "./new-post-notification.module.scss";
 
 export const NewPostNotification = () => {
   const { hasNewPosts, handleRefetchPosts } = useNewPost();

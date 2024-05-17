@@ -1,14 +1,14 @@
-import clsx from 'clsx';
-import { useState } from 'react';
+import clsx from "clsx";
+import { useState } from "react";
 
-import { useUser } from '@/hooks/use-user';
-import { getDescriptionData } from '@/utils/get-description-data';
+import { useUser } from "@/hooks/use-user";
+import { getDescriptionData } from "@/utils/get-description-data";
 
-import { MotionImage } from '@/components/avatar/avatar';
-import { Loader } from '@/components/loader/loader';
-import { usePost } from '@/components/pages/account/use-post';
+import { MotionImage } from "@/components/avatar/avatar";
+import { Loader } from "@/components/loader/loader";
+import { usePost } from "@/components/pages/account/use-post";
 
-import styles from './post-image.module.scss';
+import styles from "./post-image.module.scss";
 
 type Props = {
   priority: boolean;
@@ -25,19 +25,19 @@ const getAspectRatio = (width: number, height: number) => {
   const calculatedAspectRatio = Math.round((width / height) * 100);
 
   if (calculatedAspectRatio === ASPECT_RATIO_LANDSCAPE) {
-    return 'landscape';
+    return "landscape";
   }
 
   if (calculatedAspectRatio === ASPECT_RATIO_PORTRAIT) {
-    return 'portrait';
+    return "portrait";
   }
 
-  return 'square';
+  return "square";
 };
 
 export const PostImage = ({ priority, url, height, width, postId }: Props) => {
   const { data: postData } = usePost({ postId: postId });
-  const { data } = useUser({ userId: postData?.authorId || '' });
+  const { data } = useUser({ userId: postData?.authorId || "" });
   const [isLoading, setIsLoading] = useState(true);
 
   if (!postData) {
@@ -62,7 +62,7 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
         priority={priority}
         quality={100}
         animate={{
-          filter: isLoading ? 'blur(5px)' : 'blur(0px)',
+          filter: isLoading ? "blur(5px)" : "blur(0px)",
           opacity: isLoading ? 0 : 1,
         }}
         onLoad={() => setIsLoading(false)}

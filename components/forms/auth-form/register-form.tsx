@@ -1,14 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SignIn } from '@phosphor-icons/react';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignIn } from "@phosphor-icons/react";
+import { useForm } from "react-hook-form";
 
-import { Button } from '@/components/buttons/button/button';
-import { useRegister } from '@/components/forms/auth-form/use-register';
-import { RegisterSignInMessage } from '@/components/forms/register-signin-message/register-signin-message';
-import { Input } from '@/components/input/input';
-import { type RegisterFormValues, registerSchema } from '@/schemas/auth.schema';
+import { Button } from "@/components/buttons/button/button";
+import { useRegister } from "@/components/forms/auth-form/use-register";
+import { RegisterSignInMessage } from "@/components/forms/register-signin-message/register-signin-message";
+import { Input } from "@/components/input/input";
+import { type RegisterFormValues, registerSchema } from "@/schemas/auth.schema";
 
-import styles from './auth-form.module.scss';
+import styles from "./auth-form.module.scss";
 
 export const RegisterForm = () => {
   const { mutate: mutateRegister, isPending } = useRegister();
@@ -19,10 +19,10 @@ export const RegisterForm = () => {
     handleSubmit,
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
-    mode: 'all',
+    mode: "all",
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -36,7 +36,7 @@ export const RegisterForm = () => {
         type="email"
         variant="secondary"
         error={errors.email?.message}
-        {...register('email')}
+        {...register("email")}
       />
 
       <Input
@@ -45,7 +45,7 @@ export const RegisterForm = () => {
         type="text"
         variant="secondary"
         error={errors.username?.message}
-        {...register('username')}
+        {...register("username")}
       />
 
       <Input
@@ -54,7 +54,7 @@ export const RegisterForm = () => {
         variant="secondary"
         type="password"
         error={errors.password?.message}
-        {...register('password')}
+        {...register("password")}
       />
 
       <Input
@@ -63,7 +63,7 @@ export const RegisterForm = () => {
         variant="secondary"
         type="password"
         error={errors.confirmPassword?.message}
-        {...register('confirmPassword')}
+        {...register("confirmPassword")}
       />
 
       <div className={styles.button}>

@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-import type { RegisterFormValues } from '@/schemas/auth.schema';
-import { registerUser } from '@/services/auth.service';
+import type { RegisterFormValues } from "@/schemas/auth.schema";
+import { registerUser } from "@/services/auth.service";
 
 export const useRegister = () => {
   const queryClient = useQueryClient();
@@ -34,7 +34,7 @@ export const useRegister = () => {
     },
     onSuccess: async () => {
       setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['session'] });
+        queryClient.invalidateQueries({ queryKey: ["session"] });
       }, 500);
     },
   });

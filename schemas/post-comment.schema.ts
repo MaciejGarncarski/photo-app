@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const commentTextSchema = z
   .string()
-  .max(100, { message: 'Maximum characters exceeded.' });
+  .max(100, { message: "Maximum characters exceeded." });
 
 const commentSchema = z.object({
-  text: z.string().max(100, { message: 'Maximum characters exceeded.' }),
+  text: z.string().max(100, { message: "Maximum characters exceeded." }),
   createdAt: z.string(),
   likesCount: z.number(),
   isLiked: z.boolean(),

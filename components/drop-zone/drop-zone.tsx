@@ -1,16 +1,16 @@
-import { File, Folder, FolderDashed, X } from '@phosphor-icons/react';
-import clsx from 'clsx';
-import { useState } from 'react';
+import { File, Folder, FolderDashed, X } from "@phosphor-icons/react";
+import clsx from "clsx";
+import { useState } from "react";
 
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
+import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
 
-import { Button } from '@/components/buttons/button/button';
-import { CropError } from '@/components/crop-error/crop-error';
-import { useDropZone } from '@/components/drop-zone/use-drop-zone';
-import { Loader } from '@/components/loader/loader';
-import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import { Button } from "@/components/buttons/button/button";
+import { CropError } from "@/components/crop-error/crop-error";
+import { useDropZone } from "@/components/drop-zone/use-drop-zone";
+import { Loader } from "@/components/loader/loader";
+import type { DropZoneErrors } from "@/components/pages/create-post/create-post-schema";
 
-import styles from './drop-zone.module.scss';
+import styles from "./drop-zone.module.scss";
 
 type Props = {
   setImgSrc: (src: string | null) => void;
@@ -80,7 +80,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
           <>
             <Folder size={40} className={styles.dropIcon} />
             <p className={styles.text}>
-              {isTabletOrMobile ? 'Add image here' : 'Drag photo here'}
+              {isTabletOrMobile ? "Add image here" : "Drag photo here"}
             </p>
           </>
         )}

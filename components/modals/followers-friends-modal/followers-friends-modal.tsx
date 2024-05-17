@@ -1,16 +1,16 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import ReactFocusLock from 'react-focus-lock';
+import { AnimatePresence, motion } from "framer-motion";
+import ReactFocusLock from "react-focus-lock";
 
-import { ModalCloseButton } from '@/components/buttons/modal-close-button/modal-close-button';
-import { FollowersFriendsItem } from '@/components/modals/followers-friends-modal/followers-friends-item/followers-friends-item';
-import { useStatsModal } from '@/components/modals/followers-friends-modal/use-stats-modal';
-import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop';
+import { ModalCloseButton } from "@/components/buttons/modal-close-button/modal-close-button";
+import { FollowersFriendsItem } from "@/components/modals/followers-friends-modal/followers-friends-item/followers-friends-item";
+import { useStatsModal } from "@/components/modals/followers-friends-modal/use-stats-modal";
+import { ModalBackdrop } from "@/components/modals/modal-backdrop/modal-backdrop";
 
-import styles from './followers-friends-modal.module.scss';
+import styles from "./followers-friends-modal.module.scss";
 
 type Props = {
   userId: string;
-  type: 'friends' | 'followers';
+  type: "friends" | "followers";
   closeModal: () => void;
 };
 

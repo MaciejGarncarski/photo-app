@@ -1,10 +1,10 @@
-import { useAuth } from '@/hooks/use-auth';
-import { useUser } from '@/hooks/use-user';
-import { formatDateRelative } from '@/utils/format-date-relative';
+import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
+import { formatDateRelative } from "@/utils/format-date-relative";
 
-import { useDeleteComment } from '@/components/comment/use-delete-comment';
-import { useCommentLike } from '@/components/comment/use-like';
-import type { Comment } from '@/schemas/post-comment.schema';
+import { useDeleteComment } from "@/components/comment/use-delete-comment";
+import { useCommentLike } from "@/components/comment/use-like";
+import type { Comment } from "@/schemas/post-comment.schema";
 
 type Arguments = {
   commentData: Comment;
@@ -13,7 +13,7 @@ type Arguments = {
 export const useComment = ({ commentData }: Arguments) => {
   const { sessionUser } = useAuth();
   const { isLiked, commentId, createdAt, authorId } = commentData;
-  const { data: sessionUserData } = useUser({ userId: sessionUser?.id || '' });
+  const { data: sessionUserData } = useUser({ userId: sessionUser?.id || "" });
   const { data } = useUser({ userId: authorId });
   const timeSinceCreated = formatDateRelative(createdAt);
 
@@ -36,6 +36,6 @@ export const useComment = ({ commentData }: Arguments) => {
     isAbleToDelete,
     userAccountHref,
     isDeleting: commentDelete.isPending,
-    username: data?.username || '',
+    username: data?.username || "",
   };
 };

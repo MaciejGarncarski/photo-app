@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { likeComment, unlikeComment } from '@/services/comment.service';
+import { likeComment, unlikeComment } from "@/services/comment.service";
 
 export const useCommentLike = () => {
   const queryClient = useQueryClient();
@@ -21,7 +21,7 @@ export const useCommentLike = () => {
     },
 
     onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['infinite comments'] });
+      await queryClient.invalidateQueries({ queryKey: ["infinite comments"] });
     },
   });
 };

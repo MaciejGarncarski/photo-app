@@ -1,13 +1,13 @@
-import { Fetcher } from '@qdrant/openapi-typescript-fetch';
-import type { z } from 'zod';
+import { Fetcher } from "@qdrant/openapi-typescript-fetch";
+import type { z } from "zod";
 
-import { clientEnv } from '@/utils/env';
+import { clientEnv } from "@/utils/env";
 
-import type { paths } from '@/types';
+import type { paths } from "@/types";
 
 type ApiClientArguments<S> = {
   url: keyof paths;
-  method?: 'POST' | 'GET' | 'PUT' | 'DELETE' | 'PATCH';
+  method?: "POST" | "GET" | "PUT" | "DELETE" | "PATCH";
   schema?: S;
   body?: Record<string, unknown> | FormData;
   cache?: RequestCache;
@@ -17,18 +17,18 @@ type ApiClientArguments<S> = {
 export const fetcher = Fetcher.for<paths>();
 
 fetcher.configure({
-  baseUrl: clientEnv.NEXT_PUBLIC_API_ROOT || 'http://localhost:3001',
+  baseUrl: clientEnv.NEXT_PUBLIC_API_ROOT || "http://localhost:3001",
   init: {
-    credentials: 'include',
+    credentials: "include",
   },
 });
 
 export const apiClient = async <S extends z.ZodTypeAny>({
   url,
   body,
-  method = 'GET',
+  method = "GET",
   schema,
-  cache = 'default',
+  cache = "default",
   headers,
 }: ApiClientArguments<S>): Promise<z.infer<S>> => {
   const isBodyFormData = body instanceof FormData;
@@ -37,16 +37,16 @@ export const apiClient = async <S extends z.ZodTypeAny>({
     cache,
     body: isBodyFormData ? body : undefined,
     method,
-    credentials: 'include',
+    credentials: "include",
   };
 
   const options: RequestInit = {
     cache,
     body: body ? JSON.stringify(body) : null,
     method,
-    credentials: 'include',
+    credentials: "include",
     headers: {
-      'Content-Type': body ? 'application/json' : 'text/plain',
+      "Content-Type": body ? "application/json" : "text/plain",
       ...headers,
     },
   };
@@ -62,10 +62,10 @@ export const apiClient = async <S extends z.ZodTypeAny>({
       throw new Error(`Something went wrong. Error: ${errorData.message}`);
     }
 
-    throw new Error('Something went wrong.');
+    throw new Error("Something went wrong.");
   }
 
-  const contentType = apiResponse.headers.get('content-type');
+  const contentType = apiResponse.headers.get("content-type");
   if (!contentType) {
     return null;
   }

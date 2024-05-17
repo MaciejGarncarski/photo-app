@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { usePost } from '@/components/pages/account/use-post';
-import { PostFooter } from '@/components/post/post-footer/post-footer';
-import { PostHeader } from '@/components/post/post-header/post-header';
-import { PostImagesCarousel } from '@/components/post/post-images-carousel/post-images-carousel';
-import { PostPlaceholder } from '@/components/post/post-placeholder/post-placeholder';
+import { usePost } from "@/components/pages/account/use-post";
+import { PostFooter } from "@/components/post/post-footer/post-footer";
+import { PostHeader } from "@/components/post/post-header/post-header";
+import { PostImagesCarousel } from "@/components/post/post-images-carousel/post-images-carousel";
+import { PostPlaceholder } from "@/components/post/post-placeholder/post-placeholder";
 
-import styles from './home-post.module.scss';
+import styles from "./home-post.module.scss";
 
 type Props = {
   postId: number;

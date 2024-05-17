@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-import type { PostDetails } from '@/schemas/post.schema';
-import { likePost, unlikePost } from '@/services/posts.service';
+import type { PostDetails } from "@/schemas/post.schema";
+import { likePost, unlikePost } from "@/services/posts.service";
 
 type Mutation = {
   isLiked: boolean;
@@ -21,11 +21,11 @@ export const usePostLike = () => {
       return likePost({ postId: postId.toString() });
     },
     onMutate: async ({ postId, isLiked }) => {
-      await queryClient.cancelQueries({ queryKey: ['post'] });
+      await queryClient.cancelQueries({ queryKey: ["post"] });
 
-      const oldPost = queryClient.getQueryData<PostDetails>(['post', postId]);
+      const oldPost = queryClient.getQueryData<PostDetails>(["post", postId]);
 
-      queryClient.setQueryData<PostDetails>(['post', postId], (post) => {
+      queryClient.setQueryData<PostDetails>(["post", postId], (post) => {
         if (!post) {
           return post;
         }
@@ -42,14 +42,14 @@ export const usePostLike = () => {
       };
     },
     onError: (err, newPostLike, ctx) => {
-      toast.error('Cannot like post. Try again later.');
+      toast.error("Cannot like post. Try again later.");
       queryClient.setQueryData<PostDetails>(
-        ['post', ctx?.oldPost?.id],
+        ["post", ctx?.oldPost?.id],
         ctx?.oldPost,
       );
     },
     onSettled: (data, _, { postId }) => {
-      queryClient.invalidateQueries({ queryKey: ['post', postId] });
+      queryClient.invalidateQueries({ queryKey: ["post", postId] });
     },
   });
 };

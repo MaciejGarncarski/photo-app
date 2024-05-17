@@ -1,16 +1,16 @@
-import type { Area } from 'react-easy-crop';
+import type { Area } from "react-easy-crop";
 
 const createImage = (url: string) =>
   new Promise<HTMLImageElement>((resolve) => {
     const image = new Image();
-    image.addEventListener('load', () => resolve(image));
+    image.addEventListener("load", () => resolve(image));
     image.src = url;
   });
 
 export const convertToBlob = async (imageSrc: string, pixelCrop: Area) => {
   const image = await createImage(imageSrc);
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
   if (!ctx) {
     return null;
@@ -43,7 +43,7 @@ export const convertToBlob = async (imageSrc: string, pixelCrop: Area) => {
           resolve(file);
         }
       },
-      'image/jpeg',
+      "image/jpeg",
       1,
     );
   });

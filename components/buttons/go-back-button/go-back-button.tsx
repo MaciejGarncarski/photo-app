@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ArrowLeft } from '@phosphor-icons/react';
-import { useRouter } from 'next/navigation';
+import { ArrowLeft } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
 
-import { Button } from '@/components/buttons/button/button';
+import { Button } from "@/components/buttons/button/button";
 
 type Props = {
   onClick?: () => void;

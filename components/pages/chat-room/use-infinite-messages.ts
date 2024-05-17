@@ -1,8 +1,8 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { nextPageParam } from '@/utils/api/next-page-param';
+import { nextPageParam } from "@/utils/api/next-page-param";
 
-import { getChatMessages } from '@/services/chat.service';
+import { getChatMessages } from "@/services/chat.service";
 
 type Props = {
   friendId?: string;
@@ -10,10 +10,10 @@ type Props = {
 
 export const useInfiniteMessages = ({ friendId }: Props) => {
   return useInfiniteQuery({
-    queryKey: ['chatMessages', friendId],
+    queryKey: ["chatMessages", friendId],
     queryFn: async ({ pageParam }) => {
       if (!friendId) {
-        throw new Error('No friend id.');
+        throw new Error("No friend id.");
       }
 
       const { data } = await getChatMessages({

@@ -1,4 +1,4 @@
-import type { Variants } from 'framer-motion';
+import type { Variants } from "framer-motion";
 
 export const modalVariants: Variants = {
   hidden: {
@@ -9,7 +9,7 @@ export const modalVariants: Variants = {
     opacity: 1,
     scale: 1,
     transition: {
-      type: 'spring',
+      type: "spring",
       bounce: 0.2,
       duration: 0.25,
     },
@@ -18,7 +18,7 @@ export const modalVariants: Variants = {
     opacity: 0,
     scale: 0.75,
     transition: {
-      type: 'spring',
+      type: "spring",
       bounce: 0.3,
       duration: 0.25,
     },

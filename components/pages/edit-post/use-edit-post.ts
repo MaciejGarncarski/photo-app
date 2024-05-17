@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
-import { editPost } from '@/services/posts.service';
+import { editPost } from "@/services/posts.service";
 
 type Mutation = {
   description: string;

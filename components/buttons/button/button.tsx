@@ -1,11 +1,11 @@
-import { IconContext } from '@phosphor-icons/react';
-import clsx from 'clsx';
-import type { MouseEventHandler, ReactNode } from 'react';
+import { IconContext } from "@phosphor-icons/react";
+import clsx from "clsx";
+import type { MouseEventHandler, ReactNode } from "react";
 
-import styles from './button.module.scss';
+import styles from "./button.module.scss";
 
-type ButtonTypes = 'button' | 'submit' | 'reset';
-type Variants = 'secondary' | 'primary' | 'destructive';
+type ButtonTypes = "button" | "submit" | "reset";
+type Variants = "secondary" | "primary" | "destructive";
 
 type Props = {
   type?: ButtonTypes;
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const Button = ({
-  type = 'button',
+  type = "button",
   disabled,
   children,
   variant,
@@ -25,7 +25,7 @@ export const Button = ({
   return (
     <IconContext.Provider
       value={{
-        weight: 'bold',
+        weight: "bold",
         size: 20,
       }}
     >

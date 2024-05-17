@@ -1,8 +1,8 @@
-import * as Tooltip from '@radix-ui/react-tooltip';
-import { motion } from 'framer-motion';
-import { type ReactNode, forwardRef } from 'react';
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { motion } from "framer-motion";
+import { forwardRef, type ReactNode } from "react";
 
-import styles from './tooltip-content.module.scss';
+import styles from "./tooltip-content.module.scss";
 
 type Props = {
   children: ReactNode;

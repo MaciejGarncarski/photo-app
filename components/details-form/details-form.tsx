@@ -1,14 +1,14 @@
-import { Trash } from '@phosphor-icons/react';
+import { Trash } from "@phosphor-icons/react";
 
-import { Button } from '@/components/buttons/button/button';
-import { useDetailsForm } from '@/components/details-form/use-details-form';
-import { Input } from '@/components/input/input';
-import { Loader } from '@/components/loader/loader';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import { TextArea } from '@/components/textarea/text-area';
-import type { User } from '@/schemas/user.schema';
+import { Button } from "@/components/buttons/button/button";
+import { useDetailsForm } from "@/components/details-form/use-details-form";
+import { Input } from "@/components/input/input";
+import { Loader } from "@/components/loader/loader";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
+import { TextArea } from "@/components/textarea/text-area";
+import type { User } from "@/schemas/user.schema";
 
-import styles from './details-form.module.scss';
+import styles from "./details-form.module.scss";
 
 type DetailsForm = {
   user: User;
@@ -38,7 +38,7 @@ export const DetailsForm = ({ user }: DetailsForm) => {
         placeholder="Username"
         variant="primary"
         error={errors.username?.message}
-        {...register('username')}
+        {...register("username")}
       />
       <Input
         type="text"
@@ -46,14 +46,14 @@ export const DetailsForm = ({ user }: DetailsForm) => {
         placeholder="Full name"
         variant="primary"
         error={errors.fullName?.message}
-        {...register('fullName')}
+        {...register("fullName")}
       />
       <TextArea
         error={errors.bio?.message}
         placeholder="Aa"
         label="Bio"
         rows={6}
-        {...register('bio')}
+        {...register("bio")}
       />
       <div className={styles.buttons}>
         <Button

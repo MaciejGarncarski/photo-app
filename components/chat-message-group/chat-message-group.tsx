@@ -1,12 +1,12 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { ChatMessage } from '@/components/chat-message/chat-message';
-import type { ChatMessage as TChatMessage } from '@/schemas/chat.schema';
+import { Avatar } from "@/components/avatar/avatar";
+import { ChatMessage } from "@/components/chat-message/chat-message";
+import type { ChatMessage as TChatMessage } from "@/schemas/chat.schema";
 
-import styles from './chat-message-group.module.scss';
+import styles from "./chat-message-group.module.scss";
 
 type Props = {
   messageGroup: Array<TChatMessage>;

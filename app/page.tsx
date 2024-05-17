@@ -2,13 +2,13 @@ import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 
-import { userQueryOptions } from '@/hooks/use-user';
+import { userQueryOptions } from "@/hooks/use-user";
 
-import { getPostQueryOptions } from '@/components/pages/account/use-post';
-import { Home } from '@/components/pages/home/home';
-import { getHomepagePostsOptions } from '@/components/pages/home/use-homepage-posts';
+import { getPostQueryOptions } from "@/components/pages/account/use-post";
+import { Home } from "@/components/pages/home/home";
+import { getHomepagePostsOptions } from "@/components/pages/home/use-homepage-posts";
 
 export default async function HomePage() {
   const queryClient = new QueryClient();

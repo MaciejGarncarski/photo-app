@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { editAccount } from '@/services/user.service';
+import { editAccount } from "@/services/user.service";
 
 export const useEditAccount = () => {
   const queryClient = useQueryClient();
@@ -8,7 +8,7 @@ export const useEditAccount = () => {
   return useMutation({
     mutationFn: editAccount,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user'] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 };

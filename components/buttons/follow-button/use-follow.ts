@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useUser } from '@/hooks/use-user';
+import { useUser } from "@/hooks/use-user";
 
-import { followOtherUser, unfollowOtherUser } from '@/services/user.service';
+import { followOtherUser, unfollowOtherUser } from "@/services/user.service";
 
 type FollowMutation = {
   userId: string;
@@ -35,13 +35,13 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
       return followOtherUser({ userId });
     },
     onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: ['user', userId] });
+      await queryClient.cancelQueries({ queryKey: ["user", userId] });
       const oldUserData = queryClient.getQueryData<UserWithDetails>([
-        'user',
+        "user",
         userId,
       ]);
 
-      queryClient.setQueryData<UserWithDetails>(['user', userId], (user) => {
+      queryClient.setQueryData<UserWithDetails>(["user", userId], (user) => {
         if (!user) {
           return user;
         }
@@ -59,11 +59,11 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
       };
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['user', userId] });
+      await queryClient.invalidateQueries({ queryKey: ["user", userId] });
       await queryClient.invalidateQueries({
-        queryKey: ['user', data?.username],
+        queryKey: ["user", data?.username],
       });
-      await queryClient.invalidateQueries({ queryKey: ['session'] });
+      await queryClient.invalidateQueries({ queryKey: ["session"] });
     },
   });
 };

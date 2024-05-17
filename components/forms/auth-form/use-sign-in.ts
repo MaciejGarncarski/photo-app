@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/use-homepage-posts';
-import type { SignInFormValues } from '@/schemas/auth.schema';
-import { signIn } from '@/services/auth.service';
+import { HOME_POSTS_QUERY_KEY } from "@/components/pages/home/use-homepage-posts";
+import type { SignInFormValues } from "@/schemas/auth.schema";
+import { signIn } from "@/services/auth.service";
 
 export const useSignIn = () => {
   const queryClient = useQueryClient();
@@ -15,10 +15,10 @@ export const useSignIn = () => {
       try {
         const request = await signIn({ email, password });
 
-        await queryClient.invalidateQueries({ queryKey: ['session'] });
+        await queryClient.invalidateQueries({ queryKey: ["session"] });
         await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
 
-        router.push('/');
+        router.push("/");
 
         return request.data;
       } catch (err) {
@@ -32,7 +32,7 @@ export const useSignIn = () => {
       toast.error(error.message);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['session'] });
+      await queryClient.invalidateQueries({ queryKey: ["session"] });
       await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
     },
   });

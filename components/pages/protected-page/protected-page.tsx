@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { type ReactElement, useEffect } from 'react';
+import { useRouter } from "next/navigation";
+import { type ReactElement, useEffect } from "react";
 
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
-import { Loader } from '@/components/loader/loader';
+import { Loader } from "@/components/loader/loader";
 
 type Props = {
   children: ReactElement;
@@ -22,12 +22,12 @@ export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
     }
 
     if (isSignedIn && !sessionNeeded) {
-      router.replace('/access-denied');
+      router.replace("/access-denied");
       return;
     }
 
     if (!isSignedIn && sessionNeeded) {
-      router.replace('/auth/sign-in');
+      router.replace("/auth/sign-in");
       return;
     }
   }, [isFetching, router.replace, isSignedIn, sessionNeeded]);

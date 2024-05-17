@@ -1,19 +1,19 @@
-import { DotsThree, Trash } from '@phosphor-icons/react';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import clsx from 'clsx';
-import { AnimatePresence } from 'framer-motion';
+import { DotsThree, Trash } from "@phosphor-icons/react";
+import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import clsx from "clsx";
+import { AnimatePresence } from "framer-motion";
 
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
-import { useLongPress } from '@/hooks/use-long-press';
-import { useModal } from '@/hooks/use-modal';
+import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
+import { useLongPress } from "@/hooks/use-long-press";
+import { useModal } from "@/hooks/use-modal";
 
-import { Button } from '@/components/buttons/button/button';
-import { ChatMessageDropdown } from '@/components/chat-message/chat-message-dropdown';
-import { useDeleteChatMessage } from '@/components/chat-message-group/use-delete-message';
-import { useDropdownAtom } from '@/components/chat-message-group/use-dropdown-atom';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
+import { Button } from "@/components/buttons/button/button";
+import { ChatMessageDropdown } from "@/components/chat-message/chat-message-dropdown";
+import { useDeleteChatMessage } from "@/components/chat-message-group/use-delete-message";
+import { useDropdownAtom } from "@/components/chat-message-group/use-dropdown-atom";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
 
-import styles from './chat-message.module.scss';
+import styles from "./chat-message.module.scss";
 
 type Props = {
   text: string;

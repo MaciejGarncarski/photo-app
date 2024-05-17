@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import type { ReactNode } from 'react';
-import ReactFocusLock from 'react-focus-lock';
+import { AnimatePresence, motion } from "framer-motion";
+import type { ReactNode } from "react";
+import ReactFocusLock from "react-focus-lock";
 
-import { modalVariants } from '@/utils/animations/modal.animation';
+import { modalVariants } from "@/utils/animations/modal.animation";
 
-import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop';
+import { ModalBackdrop } from "@/components/modals/modal-backdrop/modal-backdrop";
 
-import styles from './confirmation-dialog.module.scss';
+import styles from "./confirmation-dialog.module.scss";
 
 type Props = {
   closeModal: () => void;

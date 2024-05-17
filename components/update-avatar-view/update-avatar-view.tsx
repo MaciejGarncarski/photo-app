@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState } from "react";
 
-import { getPreviewImages } from '@/utils/get-preview-images';
+import { getPreviewImages } from "@/utils/get-preview-images";
 
-import { Button } from '@/components/buttons/button/button';
-import { CropImage } from '@/components/crop-image/crop-image';
-import { Loader } from '@/components/loader/loader';
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
-import { useUploadAvatar } from '@/components/update-avatar-view/use-upload-avatar';
+import { Button } from "@/components/buttons/button/button";
+import { CropImage } from "@/components/crop-image/crop-image";
+import { Loader } from "@/components/loader/loader";
+import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
+import { useUploadAvatar } from "@/components/update-avatar-view/use-upload-avatar";
 
-import styles from './update-avatar-view.module.scss';
+import styles from "./update-avatar-view.module.scss";
 
 type Props = {
   closeModal: () => void;

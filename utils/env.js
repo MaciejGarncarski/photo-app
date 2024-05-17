@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const clientSchema = z.object({
   NEXT_PUBLIC_API_ROOT: z.string().url(),

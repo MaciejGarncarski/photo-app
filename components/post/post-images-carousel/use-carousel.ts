@@ -1,7 +1,7 @@
-import type { PanInfo } from 'framer-motion';
-import { useState } from 'react';
+import type { PanInfo } from "framer-motion";
+import { useState } from "react";
 
-import type { PostImage } from '@/schemas/post.schema';
+import type { PostImage } from "@/schemas/post.schema";
 
 type ArgsTypes = {
   postImages: Array<PostImage>;

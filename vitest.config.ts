@@ -1,8 +1,8 @@
 /// <reference types="vitest" />
 
-import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import { defineConfig } from 'vitest/config';
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,14 +10,14 @@ export default defineConfig({
 
   test: {
     globals: true,
-    setupFiles: ['./src/utils/tests/vitest-setup'],
-    environment: 'jsdom',
+    setupFiles: ["./src/utils/tests/vitest-setup"],
+    environment: "jsdom",
     alias: {
-      '^~/(.*)$': new URL('./', import.meta.url).pathname,
-      '^@/(.*)$': new URL('./src/', import.meta.url).pathname,
+      "^~/(.*)$": new URL("./", import.meta.url).pathname,
+      "^@/(.*)$": new URL("./src/", import.meta.url).pathname,
     },
     coverage: {
-      provider: 'v8',
+      provider: "v8",
     },
   },
 });

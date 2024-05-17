@@ -1,8 +1,8 @@
 type Button = {
-  variant: 'secondary' | 'primary';
+  variant: "secondary" | "primary";
   onClick?: () => void;
   disabled?: boolean;
-  type: 'submit' | 'button' | 'reset';
+  type: "submit" | "button" | "reset";
   text: string;
 };
 
@@ -12,16 +12,16 @@ export const getButtonList = (
 ) => {
   const buttonList: Array<Button> = [
     {
-      variant: 'secondary',
+      variant: "secondary",
       onClick: openModal,
-      text: 'Cancel',
-      type: 'button',
+      text: "Cancel",
+      type: "button",
     },
     {
       disabled: submitDisabled,
-      type: 'submit',
-      text: 'Upload new post',
-      variant: 'primary',
+      type: "submit",
+      text: "Upload new post",
+      variant: "primary",
     },
   ];
 

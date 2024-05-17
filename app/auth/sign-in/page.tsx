@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { getPageTitle } from '@/utils/get-page-title';
+import { getPageTitle } from "@/utils/get-page-title";
 
-import { ProtectedPage } from '@/components/pages/protected-page/protected-page';
-import { RegisterSignIn } from '@/components/pages/register-sign-in/register-sign-in';
+import { ProtectedPage } from "@/components/pages/protected-page/protected-page";
+import { RegisterSignIn } from "@/components/pages/register-sign-in/register-sign-in";
 
 export const metadata: Metadata = {
-  title: getPageTitle('Sign in'),
+  title: getPageTitle("Sign in"),
 };
 
 const SignInPage = () => {

@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
-import { useModal } from '@/hooks/use-modal';
-import { useUser } from '@/hooks/use-user';
+import { useModal } from "@/hooks/use-modal";
+import { useUser } from "@/hooks/use-user";
 
-import { Loader } from '@/components/loader/loader';
-import { usePost } from '@/components/pages/account/use-post';
-import { PostModal } from '@/components/post/post-modal/post-modal';
-import { Heading } from '@/components/typography/heading/heading';
+import { Loader } from "@/components/loader/loader";
+import { usePost } from "@/components/pages/account/use-post";
+import { PostModal } from "@/components/post/post-modal/post-modal";
+import { Heading } from "@/components/typography/heading/heading";
 
-import styles from './post-by-id.module.scss';
+import styles from "./post-by-id.module.scss";
 
 export const PostById = () => {
   const params = useParams();
@@ -19,7 +19,7 @@ export const PostById = () => {
   const postModal = useModal(true);
   const { data, isSuccess, isError } = usePost({ postId });
   const { data: authorData, isPending } = useUser({
-    userId: data?.authorId || '',
+    userId: data?.authorId || "",
   });
 
   const postModalClose = () => {

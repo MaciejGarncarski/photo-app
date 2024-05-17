@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import { useDebounce } from '@/hooks/use-debounce';
+import { useDebounce } from "@/hooks/use-debounce";
 
 export const useIsScrollingUp = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
@@ -17,12 +17,12 @@ export const useIsScrollingUp = () => {
   useEffect(() => {
     lastScroll.current = window.scrollY;
 
-    window.addEventListener('scroll', handleScroll, {
+    window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
 

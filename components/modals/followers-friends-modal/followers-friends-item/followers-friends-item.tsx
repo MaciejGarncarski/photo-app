@@ -1,13 +1,13 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { useAuth } from '@/hooks/use-auth';
-import { useUser } from '@/hooks/use-user';
+import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { FollowButton } from '@/components/buttons/follow-button/follow-button';
-import { Loader } from '@/components/loader/loader';
+import { Avatar } from "@/components/avatar/avatar";
+import { FollowButton } from "@/components/buttons/follow-button/follow-button";
+import { Loader } from "@/components/loader/loader";
 
-import styles from './followers-friends-item.module.scss';
+import styles from "./followers-friends-item.module.scss";
 
 type Props = {
   userId: string;

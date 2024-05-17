@@ -1,19 +1,19 @@
-import { CaretDown } from '@phosphor-icons/react';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { CaretDown } from "@phosphor-icons/react";
+import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
-import { useOnEscape } from '@/hooks/use-on-escape';
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
+import { useOnEscape } from "@/hooks/use-on-escape";
 
-import { Comment } from '@/components/comment/comment';
-import { DropdownContent } from '@/components/dropdown/dropdown-content/dropdown-content';
-import { Loader } from '@/components/loader/loader';
-import { useInfiniteComments } from '@/components/post/post-comments/use-infinite-comments';
-import { radioItems, useSort } from '@/components/post/post-comments/use-sort';
+import { Comment } from "@/components/comment/comment";
+import { DropdownContent } from "@/components/dropdown/dropdown-content/dropdown-content";
+import { Loader } from "@/components/loader/loader";
+import { useInfiniteComments } from "@/components/post/post-comments/use-infinite-comments";
+import { radioItems, useSort } from "@/components/post/post-comments/use-sort";
 
-import styles from './post-comments.module.scss';
+import styles from "./post-comments.module.scss";
 
 type Props = {
   postId: number;

@@ -1,14 +1,14 @@
-import { IMAGE_MAX_FILE_SIZE } from '@/utils/handle-drop-image';
+import { IMAGE_MAX_FILE_SIZE } from "@/utils/handle-drop-image";
 
-import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import type { DropZoneErrors } from "@/components/pages/create-post/create-post-schema";
 
-export const DimensionError = 'Image dimensions are too small 🥺';
+export const DimensionError = "Image dimensions are too small 🥺";
 export const FileSizeError = `Maximum file size is ${
   IMAGE_MAX_FILE_SIZE / 1000000
 }MB 😲`;
-export const InvalidTypeError = 'Invalid file type 🤔';
-export const NoImageDetectedError = 'No image detected 😒';
-export const TooManyImagesError = 'Too many images at once 🤦‍♂️';
+export const InvalidTypeError = "Invalid file type 🤔";
+export const NoImageDetectedError = "No image detected 😒";
+export const TooManyImagesError = "Too many images at once 🤦‍♂️";
 
 type CropErrors = NonNullable<DropZoneErrors>;
 

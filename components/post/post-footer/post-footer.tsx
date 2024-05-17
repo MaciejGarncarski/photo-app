@@ -1,10 +1,10 @@
-import { useUser } from '@/hooks/use-user';
+import { useUser } from "@/hooks/use-user";
 
-import { usePost } from '@/components/pages/account/use-post';
-import { PostButtons } from '@/components/post/post-buttons/post-buttons';
-import { usePostFooter } from '@/components/post/post-footer/use-post-footer';
+import { usePost } from "@/components/pages/account/use-post";
+import { PostButtons } from "@/components/post/post-buttons/post-buttons";
+import { usePostFooter } from "@/components/post/post-footer/use-post-footer";
 
-import styles from './post-footer.module.scss';
+import styles from "./post-footer.module.scss";
 
 type Props = {
   postId: number;
@@ -14,10 +14,10 @@ type Props = {
 export const PostFooter = ({ postId, parentModalOpen }: Props) => {
   const { data: post, isPending } = usePost({ postId });
 
-  const { data } = useUser({ userId: post?.authorId || '' });
+  const { data } = useUser({ userId: post?.authorId || "" });
 
   const { isDescriptionLong, shortDescription, showMore, toggleShowMore } =
-    usePostFooter({ description: post?.description || '' });
+    usePostFooter({ description: post?.description || "" });
 
   if (isPending || !post) {
     return null;
@@ -41,7 +41,7 @@ export const PostFooter = ({ postId, parentModalOpen }: Props) => {
               type="button"
               onClick={toggleShowMore}
             >
-              {showMore ? 'less' : 'more'}
+              {showMore ? "less" : "more"}
             </button>
           </>
         ) : (

@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { PlusCircle } from '@phosphor-icons/react';
-import { motion } from 'framer-motion';
+import { PlusCircle } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
-import { useAuth } from '@/hooks/use-auth';
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
+import { useAuth } from "@/hooks/use-auth";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
+import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
 
-import { ButtonLink } from '@/components/buttons/button-link/button-link';
-import { FetchErrorMessage } from '@/components/fetch-error-message/fetch-error-message';
-import { HomePost } from '@/components/home-post/home-post';
-import { Loader } from '@/components/loader/loader';
-import { NewPostNotification } from '@/components/new-post-notification/new-post-notification';
-import { useHomepagePosts } from '@/components/pages/home/use-homepage-posts';
-import { PostPlaceholder } from '@/components/post/post-placeholder/post-placeholder';
+import { ButtonLink } from "@/components/buttons/button-link/button-link";
+import { FetchErrorMessage } from "@/components/fetch-error-message/fetch-error-message";
+import { HomePost } from "@/components/home-post/home-post";
+import { Loader } from "@/components/loader/loader";
+import { NewPostNotification } from "@/components/new-post-notification/new-post-notification";
+import { useHomepagePosts } from "@/components/pages/home/use-homepage-posts";
+import { PostPlaceholder } from "@/components/post/post-placeholder/post-placeholder";
 
-import styles from './home.module.scss';
+import styles from "./home.module.scss";
 
 export const Home = () => {
   const { data, isPending, hasNextPage, fetchNextPage, isError } =

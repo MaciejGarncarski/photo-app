@@ -1,7 +1,7 @@
-import { errorMessages } from '@/components/crop-error/crop-error.data';
-import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import { errorMessages } from "@/components/crop-error/crop-error.data";
+import type { DropZoneErrors } from "@/components/pages/create-post/create-post-schema";
 
-import styles from './crop-error.module.scss';
+import styles from "./crop-error.module.scss";
 
 type Props = {
   errorType: DropZoneErrors;

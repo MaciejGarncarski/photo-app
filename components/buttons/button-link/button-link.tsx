@@ -1,8 +1,8 @@
-import { IconContext } from '@phosphor-icons/react';
-import Link from 'next/link';
-import type { ReactNode } from 'react';
+import { IconContext } from "@phosphor-icons/react";
+import Link from "next/link";
+import type { ReactNode } from "react";
 
-import styles from './button-link.module.scss';
+import styles from "./button-link.module.scss";
 
 type Props = {
   href: string;
@@ -13,7 +13,7 @@ export const ButtonLink = ({ children, href }: Props) => {
   return (
     <IconContext.Provider
       value={{
-        weight: 'bold',
+        weight: "bold",
         size: 20,
       }}
     >

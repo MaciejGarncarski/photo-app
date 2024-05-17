@@ -1,4 +1,4 @@
-import styles from './post-header-placeholder.module.scss';
+import styles from "./post-header-placeholder.module.scss";
 
 export const PostHeaderPlaceholder = () => {
   return (

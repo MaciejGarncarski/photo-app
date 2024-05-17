@@ -3,14 +3,14 @@ import {
   SortAscending,
   SortDescending,
   Star,
-} from '@phosphor-icons/react';
-import type { InfiniteData } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+} from "@phosphor-icons/react";
+import type { InfiniteData } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
 
-import { sortComments } from '@/components/post/post-comments/sort-comments';
-import type { Comment } from '@/schemas/post-comment.schema';
+import { sortComments } from "@/components/post/post-comments/sort-comments";
+import type { Comment } from "@/schemas/post-comment.schema";
 
-const SORT_OPTIONS = ['newest', 'oldest', 'likes'] as const;
+const SORT_OPTIONS = ["newest", "oldest", "likes"] as const;
 export type SortOption = (typeof SORT_OPTIONS)[number];
 
 const isSortOption = (option: string): option is SortOption => {
@@ -26,18 +26,18 @@ type SortItem = {
 export const radioItems: Array<SortItem> = [
   {
     icon: SortAscending,
-    text: 'Newest first',
-    value: 'newest',
+    text: "Newest first",
+    value: "newest",
   },
   {
     icon: SortDescending,
-    text: 'Oldest first',
-    value: 'oldest',
+    text: "Oldest first",
+    value: "oldest",
   },
   {
     icon: Star,
-    text: 'Most liked first',
-    value: 'likes',
+    text: "Most liked first",
+    value: "likes",
   },
 ];
 
@@ -53,7 +53,7 @@ type Props = {
 };
 
 export const useSort = ({ commentsData }: Props) => {
-  const [sortOption, setSortOption] = useState<SortOption>('newest');
+  const [sortOption, setSortOption] = useState<SortOption>("newest");
 
   const changeSelectedSort = (option: string) => {
     if (isSortOption(option)) {
@@ -61,7 +61,7 @@ export const useSort = ({ commentsData }: Props) => {
       return;
     }
 
-    setSortOption('newest');
+    setSortOption("newest");
   };
 
   const sortedData = useMemo(

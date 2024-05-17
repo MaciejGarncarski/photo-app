@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FetchErrorMessage } from '@/components/fetch-error-message/fetch-error-message';
+import { FetchErrorMessage } from "@/components/fetch-error-message/fetch-error-message";
 
 const ErrorPage = () => {
   return <FetchErrorMessage message="Cannot fetch data." />;

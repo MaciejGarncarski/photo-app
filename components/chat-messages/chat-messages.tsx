@@ -1,14 +1,14 @@
-import type { InfiniteData } from '@tanstack/react-query';
-import { Fragment, forwardRef } from 'react';
+import type { InfiniteData } from "@tanstack/react-query";
+import { forwardRef, Fragment } from "react";
 
-import { formatDateFull } from '@/utils/format-date-full';
+import { formatDateFull } from "@/utils/format-date-full";
 
-import { ChatMessageGroup } from '@/components/chat-message-group/chat-message-group';
-import { groupMessagesByUser } from '@/components/chat-messages/group-messages';
-import { Loader } from '@/components/loader/loader';
-import type { ChatMessages as ChatMessagesType } from '@/schemas/chat.schema';
+import { ChatMessageGroup } from "@/components/chat-message-group/chat-message-group";
+import { groupMessagesByUser } from "@/components/chat-messages/group-messages";
+import { Loader } from "@/components/loader/loader";
+import type { ChatMessages as ChatMessagesType } from "@/schemas/chat.schema";
 
-import styles from './chat-messages.module.scss';
+import styles from "./chat-messages.module.scss";
 
 type Props = {
   messagesData: InfiniteData<ChatMessagesType>;

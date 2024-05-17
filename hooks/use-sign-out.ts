@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
-import { signOut } from '@/services/auth.service';
+import { signOut } from "@/services/auth.service";
 
 export const useSignOut = () => {
   const router = useRouter();
@@ -12,8 +12,8 @@ export const useSignOut = () => {
       return signOut({});
     },
     onSuccess: () => {
-      queryClient.setQueryData(['session'], () => null);
-      router.push('/');
+      queryClient.setQueryData(["session"], () => null);
+      router.push("/");
     },
   });
 };

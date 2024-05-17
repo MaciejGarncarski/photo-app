@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { getPageTitle } from '@/utils/get-page-title';
+import { getPageTitle } from "@/utils/get-page-title";
 
-import { ChatRoom } from '@/components/pages/chat-room/chat-room';
-import { ProtectedPage } from '@/components/pages/protected-page/protected-page';
+import { ChatRoom } from "@/components/pages/chat-room/chat-room";
+import { ProtectedPage } from "@/components/pages/protected-page/protected-page";
 
 type Params = {
   params: {
@@ -14,7 +14,7 @@ type Params = {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!params.username) {
     return {
-      title: getPageTitle('Chat'),
+      title: getPageTitle("Chat"),
     };
   }
 

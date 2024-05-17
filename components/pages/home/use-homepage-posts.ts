@@ -1,14 +1,14 @@
 import {
-  type QueryKey,
   infiniteQueryOptions,
+  type QueryKey,
   useInfiniteQuery,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 
-import { nextPageParam } from '@/utils/api/next-page-param';
+import { nextPageParam } from "@/utils/api/next-page-param";
 
-import { getInfinitePosts } from '@/services/posts.service';
+import { getInfinitePosts } from "@/services/posts.service";
 
-export const HOME_POSTS_QUERY_KEY: QueryKey = ['homepage infinite posts'];
+export const HOME_POSTS_QUERY_KEY: QueryKey = ["homepage infinite posts"];
 
 export const getHomepagePostsOptions = infiniteQueryOptions({
   queryKey: HOME_POSTS_QUERY_KEY,
@@ -18,7 +18,7 @@ export const getHomepagePostsOptions = infiniteQueryOptions({
     });
 
     if (!data) {
-      throw new Error('Fetch failed');
+      throw new Error("Fetch failed");
     }
 
     return data;
@@ -33,7 +33,7 @@ export const TEST = infiniteQueryOptions({
   queryFn: async ({ pageParam }) => {
     const sleep: Promise<string> = new Promise((resolve) => {
       setTimeout(() => {
-        resolve('');
+        resolve("");
       }, 5000);
     });
 
@@ -44,7 +44,7 @@ export const TEST = infiniteQueryOptions({
     });
 
     if (!data) {
-      throw new Error('Fetch failed');
+      throw new Error("Fetch failed");
     }
 
     return data;

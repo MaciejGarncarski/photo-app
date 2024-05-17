@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
-import type { MouseEvent, ReactNode } from 'react';
-import { createPortal } from 'react-dom';
+import { motion } from "framer-motion";
+import type { MouseEvent, ReactNode } from "react";
+import { createPortal } from "react-dom";
 
-import { backdropVariants } from '@/components/modals/modal-backdrop/modal-backdrop.animation';
+import { backdropVariants } from "@/components/modals/modal-backdrop/modal-backdrop.animation";
 
-import styles from './modal-backdrop.module.scss';
+import styles from "./modal-backdrop.module.scss";
 
 type Props = {
   closeModal: () => void;

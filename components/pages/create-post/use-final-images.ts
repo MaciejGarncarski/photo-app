@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState } from "react";
 
-import { getPreviewImages } from '@/utils/get-preview-images';
+import { getPreviewImages } from "@/utils/get-preview-images";
 
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
 
 export const useFinalImages = () => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);

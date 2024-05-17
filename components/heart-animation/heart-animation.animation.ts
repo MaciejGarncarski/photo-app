@@ -1,4 +1,4 @@
-import type { Variants } from 'framer-motion';
+import type { Variants } from "framer-motion";
 
 export const heartVariants: Variants = {
   initial: {
@@ -7,7 +7,7 @@ export const heartVariants: Variants = {
   animate: {
     scale: 1,
     transition: {
-      type: 'spring',
+      type: "spring",
     },
   },
   exit: {

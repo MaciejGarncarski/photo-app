@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { HeartAnimation } from '@/components/heart-animation/heart-animation';
-import { usePost } from '@/components/pages/account/use-post';
-import { PostArrows } from '@/components/post/post-arrows/post-arrows';
-import { useHandleLike } from '@/components/post/post-buttons/use-handle-like';
-import { PostImage } from '@/components/post/post-image/post-image';
-import { useCarousel } from '@/components/post/post-images-carousel/use-carousel';
-import { useUpdateWidth } from '@/components/post/post-images-carousel/use-update-width';
+import { HeartAnimation } from "@/components/heart-animation/heart-animation";
+import { usePost } from "@/components/pages/account/use-post";
+import { PostArrows } from "@/components/post/post-arrows/post-arrows";
+import { useHandleLike } from "@/components/post/post-buttons/use-handle-like";
+import { PostImage } from "@/components/post/post-image/post-image";
+import { useCarousel } from "@/components/post/post-images-carousel/use-carousel";
+import { useUpdateWidth } from "@/components/post/post-images-carousel/use-update-width";
 
-import styles from './post-images-carousel.module.scss';
+import styles from "./post-images-carousel.module.scss";
 
 type Props = {
   postId: number;
@@ -45,17 +45,17 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
     >
       <HeartAnimation isVisible={isLikeAnimationShown} />
       <motion.div
-        drag={isSingleImage ? undefined : 'x'}
+        drag={isSingleImage ? undefined : "x"}
         onDragEnd={handleDragEnd}
         dragConstraints={{ right: 0, left: 0 }}
         dragMomentum={true}
         dragTransition={{
           bounceDamping: 30,
         }}
-        whileDrag={{ cursor: 'grabbing' }}
+        whileDrag={{ cursor: "grabbing" }}
         className={styles.draggable}
         style={{
-          cursor: isSingleImage ? 'auto' : 'grab',
+          cursor: isSingleImage ? "auto" : "grab",
         }}
       >
         <motion.div
@@ -63,7 +63,7 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
           animate={{
             x: `calc(calc(${-1 * width}px - var(--gap)) * ${currentIndex})`,
             transition: {
-              ease: 'easeOut',
+              ease: "easeOut",
               duration: 0.2,
             },
           }}

@@ -1,4 +1,4 @@
-import { Heart } from '@phosphor-icons/react';
+import { Heart } from "@phosphor-icons/react";
 
 type Props = {
   isLiked: boolean;
@@ -7,8 +7,8 @@ type Props = {
 export const HeartIcon = ({ isLiked }: Props) => {
   return (
     <Heart
-      weight={isLiked ? 'fill' : 'bold'}
-      style={isLiked ? { color: 'var(--color-accent)' } : undefined}
+      weight={isLiked ? "fill" : "bold"}
+      style={isLiked ? { color: "var(--color-accent)" } : undefined}
     />
   );
 };

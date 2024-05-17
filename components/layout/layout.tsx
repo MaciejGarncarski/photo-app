@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-import { Navbar } from '@/components/navbar/navbar';
+import { Navbar } from "@/components/navbar/navbar";
 
-import styles from './layout.module.scss';
+import styles from "./layout.module.scss";
 
 type Props = {
   children: ReactNode;

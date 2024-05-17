@@ -1,13 +1,13 @@
-import clsx from 'clsx';
-import { type ChangeEvent, forwardRef } from 'react';
+import clsx from "clsx";
+import { type ChangeEvent, forwardRef } from "react";
 
-import styles from './input.module.scss';
+import styles from "./input.module.scss";
 
 type Props = {
   labelText: string;
   placeholder: string;
-  type?: 'text' | 'number' | 'tel' | 'email' | 'password';
-  variant: 'primary' | 'secondary';
+  type?: "text" | "number" | "tel" | "email" | "password";
+  variant: "primary" | "secondary";
   error?: string;
   optional?: boolean;
   value?: string;
@@ -17,7 +17,7 @@ type Props = {
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
     {
-      type = 'text',
+      type = "text",
       labelText,
       error,
       optional,
@@ -44,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <div>
         <div className={containerClassName}>
           <label className={styles.label} htmlFor={labelText}>
-            {labelText} {optional && '(optional)'}
+            {labelText} {optional && "(optional)"}
           </label>
           <input
             ref={ref}

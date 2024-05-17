@@ -4,7 +4,7 @@ import {
   type Icon,
   PlusCircle,
   User,
-} from '@phosphor-icons/react';
+} from "@phosphor-icons/react";
 
 type ListData = {
   icon: Icon;
@@ -17,25 +17,25 @@ export const getNavListData = (username?: string | null) => {
   const navButtonsList: Array<ListData> = [
     {
       icon: House,
-      title: 'Home',
-      href: '/',
+      title: "Home",
+      href: "/",
       shouldShowWhileGuest: true,
     },
     {
       icon: Chat,
-      title: 'Chat',
-      href: '/chat',
+      title: "Chat",
+      href: "/chat",
       shouldShowWhileGuest: false,
     },
     {
       icon: PlusCircle,
-      title: 'Create post',
-      href: '/create-post',
+      title: "Create post",
+      href: "/create-post",
       shouldShowWhileGuest: false,
     },
     {
       icon: User,
-      title: 'Profile',
+      title: "Profile",
       href: `/${username}`,
       shouldShowWhileGuest: false,
     },

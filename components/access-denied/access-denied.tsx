@@ -1,8 +1,8 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { Heading } from '@/components/typography/heading/heading';
+import { Heading } from "@/components/typography/heading/heading";
 
-import styles from './access-denied.module.scss';
+import styles from "./access-denied.module.scss";
 
 export const AccessDenied = () => {
   return (

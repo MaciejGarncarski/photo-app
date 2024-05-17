@@ -1,19 +1,20 @@
-import { FloppyDisk, Hand, Image, Mouse } from '@phosphor-icons/react';
-import { useState } from 'react';
-import Cropper from 'react-easy-crop';
+/* eslint-disable jsx-a11y/alt-text */
+import { FloppyDisk, Hand, Image, Mouse } from "@phosphor-icons/react";
+import { useState } from "react";
+import Cropper from "react-easy-crop";
 
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
-import { useModal } from '@/hooks/use-modal';
+import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
+import { useModal } from "@/hooks/use-modal";
 
-import { AspectRatioButtons } from '@/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons';
-import { Button } from '@/components/buttons/button/button';
-import { useCropImage } from '@/components/crop-image/use-crop-image';
-import { DropZone } from '@/components/drop-zone/drop-zone';
-import { Loader } from '@/components/loader/loader';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import { AspectRatioButtons } from "@/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons";
+import { Button } from "@/components/buttons/button/button";
+import { useCropImage } from "@/components/crop-image/use-crop-image";
+import { DropZone } from "@/components/drop-zone/drop-zone";
+import { Loader } from "@/components/loader/loader";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
+import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
 
-import styles from './crop-image.module.scss';
+import styles from "./crop-image.module.scss";
 
 type Props = {
   setFinalImages: (final: FinalImages) => void;
@@ -75,7 +76,7 @@ export const CropImage = ({
         <p className={styles.info}>
           {isTabletOrMobile ? <Hand /> : <Mouse />}
           <span>
-            {isTabletOrMobile ? 'Pinch' : 'Use scroll to'} to zoom in your
+            {isTabletOrMobile ? "Pinch" : "Use scroll to"} to zoom in your
             picture
           </span>
         </p>
@@ -85,7 +86,7 @@ export const CropImage = ({
         <section className={styles.saveOrAnotherImage}>
           <div className={styles.buttons}>
             <Button type="button" variant="primary" onClick={saveCrop}>
-              {isTabletOrMobile ? 'Save crop' : 'Save cropped image'}
+              {isTabletOrMobile ? "Save crop" : "Save cropped image"}
               <FloppyDisk />
             </Button>
             <Button
@@ -95,7 +96,7 @@ export const CropImage = ({
               onClick={openModal}
             >
               Select another
-              {isTabletOrMobile ? '' : ' image'}
+              {isTabletOrMobile ? "" : " image"}
               {!isTabletOrMobile && <Image />}
             </Button>
           </div>

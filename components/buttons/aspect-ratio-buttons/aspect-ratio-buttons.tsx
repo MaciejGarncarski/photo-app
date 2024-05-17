@@ -1,8 +1,8 @@
-import { buttonData } from '@/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons.data';
-import { Button } from '@/components/buttons/button/button';
-import { Heading } from '@/components/typography/heading/heading';
+import { buttonData } from "@/components/buttons/aspect-ratio-buttons/aspect-ratio-buttons.data";
+import { Button } from "@/components/buttons/button/button";
+import { Heading } from "@/components/typography/heading/heading";
 
-import styles from './aspect-ratio-buttons.module.scss';
+import styles from "./aspect-ratio-buttons.module.scss";
 
 type Props = {
   setAspect: (aspect: number) => void;
@@ -20,7 +20,7 @@ export const AspectRatioButtons = ({ setAspect, aspect }: Props) => {
           return (
             <Button
               type="button"
-              variant={aspectRatio === aspect ? 'primary' : 'secondary'}
+              variant={aspectRatio === aspect ? "primary" : "secondary"}
               onClick={() => setAspect(aspectRatio)}
               key={aspectRatio}
             >

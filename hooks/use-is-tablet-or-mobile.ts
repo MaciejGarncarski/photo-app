@@ -1,6 +1,6 @@
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
 export const useIsTabletOrMobile = () => {
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1100px)' });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1100px)" });
   return { isTabletOrMobile };
 };

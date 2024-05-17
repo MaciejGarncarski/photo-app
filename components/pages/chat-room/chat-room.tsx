@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { ArrowLeft, PaperPlaneTilt } from '@phosphor-icons/react';
-import clsx from 'clsx';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { ArrowLeft, PaperPlaneTilt } from "@phosphor-icons/react";
+import clsx from "clsx";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile';
+import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { Button } from '@/components/buttons/button/button';
-import { ChatMessages } from '@/components/chat-messages/chat-messages';
-import { Loader } from '@/components/loader/loader';
-import { useChatRoom } from '@/components/pages/chat-room/use-chat-room';
-import { TextArea } from '@/components/textarea/text-area';
+import { Avatar } from "@/components/avatar/avatar";
+import { Button } from "@/components/buttons/button/button";
+import { ChatMessages } from "@/components/chat-messages/chat-messages";
+import { Loader } from "@/components/loader/loader";
+import { useChatRoom } from "@/components/pages/chat-room/use-chat-room";
+import { TextArea } from "@/components/textarea/text-area";
 
-import styles from './chat-room.module.scss';
+import styles from "./chat-room.module.scss";
 
 export const ChatRoom = () => {
   const { isTabletOrMobile } = useIsTabletOrMobile();
@@ -35,7 +35,7 @@ export const ChatRoom = () => {
     return <Loader color="accent" size="big" marginTop />;
   }
 
-  const goBack = () => router.push('/chat');
+  const goBack = () => router.push("/chat");
 
   return (
     <section className={styles.chat}>
@@ -44,7 +44,7 @@ export const ChatRoom = () => {
           <ArrowLeft />
         </Button>
         <Link href={`/${friendData?.username}`} className={styles.userHeader}>
-          <Avatar userId={friendData?.userId || ''} size="small" />
+          <Avatar userId={friendData?.userId || ""} size="small" />
           <span className={styles.userInfo}>
             <span className={styles.name}>
               {friendData?.name && <span>{friendData?.name}</span>}
@@ -64,7 +64,7 @@ export const ChatRoom = () => {
       />
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <TextArea placeholder="Aa" rows={2} {...form.register('text')} />
+        <TextArea placeholder="Aa" rows={2} {...form.register("text")} />
         <Button
           type="submit"
           variant="primary"
@@ -74,7 +74,7 @@ export const ChatRoom = () => {
         >
           <span
             className={clsx({
-              'visually-hidden': isTabletOrMobile,
+              "visually-hidden": isTabletOrMobile,
             })}
           >
             Send

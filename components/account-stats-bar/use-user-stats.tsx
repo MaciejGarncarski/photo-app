@@ -1,5 +1,5 @@
-import { useModal } from '@/hooks/use-modal';
-import { useUser } from '@/hooks/use-user';
+import { useModal } from "@/hooks/use-modal";
+import { useUser } from "@/hooks/use-user";
 
 type Props = {
   userId: string;
@@ -19,20 +19,20 @@ export const useUserStats = ({ userId }: Props) => {
 
   const listData: ListData = [
     {
-      title: 'Posts',
-      titleOne: 'Post',
+      title: "Posts",
+      titleOne: "Post",
       count: data?.postsCount || 0,
-      onClick: () => window.scrollBy({ top: 200, behavior: 'smooth' }),
+      onClick: () => window.scrollBy({ top: 200, behavior: "smooth" }),
     },
     {
-      title: 'Followers',
-      titleOne: 'Follower',
+      title: "Followers",
+      titleOne: "Follower",
       count: data?.followersCount || 0,
       onClick: followersModal.openModal,
     },
     {
-      title: 'Following',
-      titleOne: 'Following',
+      title: "Following",
+      titleOne: "Following",
       count: data?.friendsCount || 0,
       onClick: friendsModal.openModal,
     },

@@ -1,10 +1,10 @@
-import { CameraPlus, Trash } from '@phosphor-icons/react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { CameraPlus, Trash } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
-import type { PreviewImages } from '@/utils/get-preview-images';
+import type { PreviewImages } from "@/utils/get-preview-images";
 
-import styles from './images-preview.module.scss';
+import styles from "./images-preview.module.scss";
 
 const MAX_IMAGES_LENGTH = 3;
 
@@ -24,7 +24,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
     <div>
       <div className={styles.previewContainer}>
         {images.map((image) => {
-          if (!image || typeof image === 'number') {
+          if (!image || typeof image === "number") {
             return (
               <button
                 key={image}

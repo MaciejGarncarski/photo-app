@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { formatLikes } from '@/utils/format-likes';
+import { formatLikes } from "@/utils/format-likes";
 
-import { usePostButtonsData } from '@/components/post/post-buttons/use-post-buttons';
-import { PostModal } from '@/components/post/post-modal/post-modal';
+import { usePostButtonsData } from "@/components/post/post-buttons/use-post-buttons";
+import { PostModal } from "@/components/post/post-modal/post-modal";
 
-import styles from './post-buttons.module.scss';
+import styles from "./post-buttons.module.scss";
 
 type Props = {
   postId: number;

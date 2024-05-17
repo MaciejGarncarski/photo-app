@@ -1,6 +1,6 @@
-import { SignIn } from '@phosphor-icons/react';
+import { SignIn } from "@phosphor-icons/react";
 
-import { ButtonLink } from '@/components/buttons/button-link/button-link';
+import { ButtonLink } from "@/components/buttons/button-link/button-link";
 
 export const SignInButton = () => {
   return (

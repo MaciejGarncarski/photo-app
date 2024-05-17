@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { type ReactNode, forwardRef } from 'react';
-import ReactFocusLock from 'react-focus-lock';
+import { AnimatePresence, motion } from "framer-motion";
+import { forwardRef, type ReactNode } from "react";
+import ReactFocusLock from "react-focus-lock";
 
-import { modalVariants } from '@/utils/animations/modal.animation';
+import { modalVariants } from "@/utils/animations/modal.animation";
 
-import { ModalCloseButton } from '@/components/buttons/modal-close-button/modal-close-button';
-import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop';
+import { ModalCloseButton } from "@/components/buttons/modal-close-button/modal-close-button";
+import { ModalBackdrop } from "@/components/modals/modal-backdrop/modal-backdrop";
 
-import styles from './list-modal.module.scss';
+import styles from "./list-modal.module.scss";
 
 type Props = {
   closeModal: () => void;

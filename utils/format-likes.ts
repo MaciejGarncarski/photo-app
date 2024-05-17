@@ -3,9 +3,9 @@ export const formatLikes = (likesNumber?: number) => {
     return;
   }
 
-  const formatter = new Intl.NumberFormat('en', {
-    compactDisplay: 'short',
-    notation: 'compact',
+  const formatter = new Intl.NumberFormat("en", {
+    compactDisplay: "short",
+    notation: "compact",
   });
   return formatter.format(likesNumber).toLowerCase();
 };

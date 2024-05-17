@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FloppyDisk, SignOut } from '@phosphor-icons/react';
-import { useParams, useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FloppyDisk, SignOut } from "@phosphor-icons/react";
+import { useParams, useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
-import { useModal } from '@/hooks/use-modal';
+import { useModal } from "@/hooks/use-modal";
 
-import { Button } from '@/components/buttons/button/button';
-import { Loader } from '@/components/loader/loader';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import { usePost } from '@/components/pages/account/use-post';
-import { PostDetailsSchema } from '@/components/pages/create-post/create-post';
-import { useEditPost } from '@/components/pages/edit-post/use-edit-post';
-import { TextArea } from '@/components/textarea/text-area';
-import { Heading } from '@/components/typography/heading/heading';
+import { Button } from "@/components/buttons/button/button";
+import { Loader } from "@/components/loader/loader";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
+import { usePost } from "@/components/pages/account/use-post";
+import { PostDetailsSchema } from "@/components/pages/create-post/create-post";
+import { useEditPost } from "@/components/pages/edit-post/use-edit-post";
+import { TextArea } from "@/components/textarea/text-area";
+import { Heading } from "@/components/typography/heading/heading";
 
-import styles from './edit-post.module.scss';
+import styles from "./edit-post.module.scss";
 
 export const EditPost = () => {
   const router = useRouter();
@@ -32,10 +32,10 @@ export const EditPost = () => {
     register,
     getValues,
   } = useForm({
-    mode: 'all',
+    mode: "all",
     resolver: zodResolver(PostDetailsSchema),
     defaultValues: {
-      description: data?.description ?? '',
+      description: data?.description ?? "",
     },
   });
 
@@ -61,7 +61,7 @@ export const EditPost = () => {
         <TextArea
           label="Description"
           placeholder="Type in new description"
-          {...register('description')}
+          {...register("description")}
           rows={6}
           error={errors.description?.message}
         />

@@ -1,6 +1,6 @@
-import { Heading } from '@/components/typography/heading/heading';
+import { Heading } from "@/components/typography/heading/heading";
 
-import styles from './fetch-error-message.module.scss';
+import styles from "./fetch-error-message.module.scss";
 
 type Props = {
   message: string;

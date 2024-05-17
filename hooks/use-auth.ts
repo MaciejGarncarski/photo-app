@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
-import { getSessionUser } from '@/services/auth.service';
+import { getSessionUser } from "@/services/auth.service";
 
 export const useAuth = () => {
   const {
@@ -10,13 +10,13 @@ export const useAuth = () => {
     isRefetching,
     isFetching,
   } = useQuery({
-    queryKey: ['session'],
+    queryKey: ["session"],
     queryFn: async () => {
       try {
         const { data: sessionUser } = await getSessionUser({});
 
         if (!sessionUser.data) {
-          throw new Error('No session data');
+          throw new Error("No session data");
         }
 
         return sessionUser.data;

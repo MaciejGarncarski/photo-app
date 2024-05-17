@@ -1,13 +1,13 @@
-import { IconContext } from '@phosphor-icons/react';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import clsx from 'clsx';
-import type { ReactNode } from 'react';
+import { IconContext } from "@phosphor-icons/react";
+import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import clsx from "clsx";
+import type { ReactNode } from "react";
 
-import styles from './dropdown-item.module.scss';
+import styles from "./dropdown-item.module.scss";
 
 type Props = {
   children: ReactNode;
-  variant: 'primary' | 'destructive';
+  variant: "primary" | "destructive";
 } & Dropdown.DropdownMenuItemProps;
 
 export const DropdownItem = ({ children, variant, ...otherProps }: Props) => {
@@ -18,7 +18,7 @@ export const DropdownItem = ({ children, variant, ...otherProps }: Props) => {
     >
       <IconContext.Provider
         value={{
-          weight: 'regular',
+          weight: "regular",
           size: 17,
         }}
       >

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 
-import { ChatUser } from '@/components/chat-users-list/chat-user';
-import { FetchErrorMessage } from '@/components/fetch-error-message/fetch-error-message';
-import { Loader } from '@/components/loader/loader';
-import { useChatUsers } from '@/components/pages/chat/use-chat-users';
+import { ChatUser } from "@/components/chat-users-list/chat-user";
+import { FetchErrorMessage } from "@/components/fetch-error-message/fetch-error-message";
+import { Loader } from "@/components/loader/loader";
+import { useChatUsers } from "@/components/pages/chat/use-chat-users";
 
-import styles from './chat-users-list.module.scss';
+import styles from "./chat-users-list.module.scss";
 
 export const ChatUsersList = () => {
   const { data, hasNextPage, fetchNextPage, isPending, isError } =

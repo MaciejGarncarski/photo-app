@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { getDescriptionData } from '@/utils/get-description-data';
+import { getDescriptionData } from "@/utils/get-description-data";
 
 type Arguments = {
   description: string;

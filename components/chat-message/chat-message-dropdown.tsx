@@ -1,11 +1,11 @@
-import { Clock, Copy, Trash } from '@phosphor-icons/react';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import { toast } from 'sonner';
+import { Clock, Copy, Trash } from "@phosphor-icons/react";
+import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import { toast } from "sonner";
 
-import { formatDateFull } from '@/utils/format-date-full';
+import { formatDateFull } from "@/utils/format-date-full";
 
-import { DropdownContent } from '@/components/dropdown/dropdown-content/dropdown-content';
-import { DropdownItem } from '@/components/dropdown/dropdown-item/dropdown-item';
+import { DropdownContent } from "@/components/dropdown/dropdown-content/dropdown-content";
+import { DropdownItem } from "@/components/dropdown/dropdown-item/dropdown-item";
 
 type Props = {
   createdAt: string;
@@ -29,10 +29,10 @@ export const ChatMessageDropdown = ({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(messageText);
-      toast.success('Copied.');
+      toast.success("Copied.");
       closeModal();
     } catch (err) {
-      toast.error('Cannot coppy message.');
+      toast.error("Cannot coppy message.");
     }
   };
 

@@ -1,11 +1,11 @@
-import { X } from '@phosphor-icons/react';
-import clsx from 'clsx';
+import { X } from "@phosphor-icons/react";
+import clsx from "clsx";
 
-import styles from './modal-close-button.module.scss';
+import styles from "./modal-close-button.module.scss";
 
 type Props = {
   onClose: () => void;
-  variant: 'primary' | 'secondary';
+  variant: "primary" | "secondary";
 };
 
 export const ModalCloseButton = ({ onClose, variant }: Props) => {

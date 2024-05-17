@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useQueryClient } from '@tanstack/react-query';
-import { atom, useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { useQueryClient } from "@tanstack/react-query";
+import { atom, useAtom } from "jotai";
+import { useEffect } from "react";
 
-import { socket } from '@/utils/api/socket';
+import { socket } from "@/utils/api/socket";
 
-import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/use-homepage-posts';
+import { HOME_POSTS_QUERY_KEY } from "@/components/pages/home/use-homepage-posts";
 
 export const newPostsAtom = atom(false);
 
@@ -19,17 +19,17 @@ export const useNewPost = () => {
       setHasNewPosts(true);
     };
 
-    socket.on('new post', onNewPost);
+    socket.on("new post", onNewPost);
 
     return () => {
       setHasNewPosts(false);
-      socket.off('new post', onNewPost);
+      socket.off("new post", onNewPost);
     };
   }, [setHasNewPosts]);
 
   const handleRefetchPosts = async () => {
     await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setHasNewPosts(false);
   };
 

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { CircleNotch } from '@phosphor-icons/react';
-import clsx from 'clsx';
+import { CircleNotch } from "@phosphor-icons/react";
+import clsx from "clsx";
 
-import styles from './loader.module.scss';
+import styles from "./loader.module.scss";
 
 type Props = {
-  size: 'small' | 'big';
-  color: 'accent' | 'primary';
+  size: "small" | "big";
+  color: "accent" | "primary";
   marginTop?: boolean;
 };
 

@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-import { addComment } from '@/services/comment.service';
+import { addComment } from "@/services/comment.service";
 
-export const COMMENT_MUTATION_KEY = ['comment mutation'] as const;
+export const COMMENT_MUTATION_KEY = ["comment mutation"] as const;
 
 export type CommentMutationVariables = {
   commentText: string;
@@ -20,12 +20,12 @@ export const useAddComment = ({ postId }: { postId: number }) => {
       return data;
     },
     onError: () => {
-      toast.error('Cannot add comment. Try again later.');
+      toast.error("Cannot add comment. Try again later.");
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['post', postId] });
+      queryClient.invalidateQueries({ queryKey: ["post", postId] });
       queryClient.invalidateQueries({
-        queryKey: ['infinite comments', postId],
+        queryKey: ["infinite comments", postId],
       });
     },
   });

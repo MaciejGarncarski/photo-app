@@ -2,22 +2,23 @@
 //   enabled: process.env.ANALYZE === 'true',
 // });
 
-const path = require('node:path');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require("node:path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, "styles")],
   },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       },
       {
-        protocol: 'https',
-        hostname: 'ik.imagekit.io',
+        protocol: "https",
+        hostname: "ik.imagekit.io",
       },
     ],
   },

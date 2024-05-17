@@ -44,7 +44,7 @@ pnpm install
 ### Add .env
 
 ```
-# .env 
+# .env
 
 NEXT_PUBLIC_API_ROOT=
 ```
@@ -92,16 +92,18 @@ pnpm dev
 
 ## Screenshots
 
-
 ### Home
+
 ![home](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/home.png)
 
 ### Create post
+
 ![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/create-post.png)
 
 ### Profile
+
 ![profile](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/profile.png)
 
 ### Chat
-![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)
 
+![create post](https://raw.githubusercontent.com/MaciejGarncarski/photo-app/main/.github/screenshots/chat.png)

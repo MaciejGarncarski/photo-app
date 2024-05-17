@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { IconContext } from '@phosphor-icons/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { MotionConfig } from 'framer-motion';
-import { Provider as JotaiProvider } from 'jotai';
-import { ThemeProvider } from 'next-themes';
-import type { ReactNode } from 'react';
+import { IconContext } from "@phosphor-icons/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { MotionConfig } from "framer-motion";
+import { Provider as JotaiProvider } from "jotai";
+import { ThemeProvider } from "next-themes";
+import type { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -25,7 +25,7 @@ function makeQueryClient() {
 let browserQueryClient: QueryClient | undefined = undefined;
 
 function getQueryClient() {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return makeQueryClient();
   }
   if (!browserQueryClient) browserQueryClient = makeQueryClient();
@@ -42,7 +42,7 @@ export const Providers = ({ children }: Props) => {
           <MotionConfig reducedMotion="user">
             <IconContext.Provider
               value={{
-                weight: 'bold',
+                weight: "bold",
                 size: 24,
               }}
             >

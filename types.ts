@@ -3,7 +3,6 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
   "/ping": {
     get: {
@@ -204,10 +203,10 @@ export interface paths {
               totalPages: number;
               currentPage: number;
               data: {
-                  createdAt: string;
-                  id: number;
-                  authorId: string;
-                }[];
+                createdAt: string;
+                id: number;
+                authorId: string;
+              }[];
             };
           };
         };
@@ -241,10 +240,10 @@ export interface paths {
               totalPages: number;
               currentPage: number;
               data: {
-                  createdAt: string;
-                  id: number;
-                  authorId: string;
-                }[];
+                createdAt: string;
+                id: number;
+                authorId: string;
+              }[];
             };
           };
         };
@@ -289,15 +288,15 @@ export interface paths {
                 commentsCount: number;
                 likesCount: number;
                 images: {
-                    id: number;
-                    fileId: string;
-                    name: string;
-                    url: string;
-                    thumbnailUrl: string;
-                    width: number;
-                    height: number;
-                    size: number;
-                  }[];
+                  id: number;
+                  fileId: string;
+                  name: string;
+                  url: string;
+                  thumbnailUrl: string;
+                  width: number;
+                  height: number;
+                  size: number;
+                }[];
                 createdAt: string;
                 description: string;
                 id: number;
@@ -417,14 +416,14 @@ export interface paths {
             "application/json": {
               data: {
                 comments: {
-                    text: string;
-                    createdAt: string;
-                    likesCount: number;
-                    isLiked: boolean;
-                    postId: number;
-                    commentId: number;
-                    authorId: string;
-                  }[];
+                  text: string;
+                  createdAt: string;
+                  likesCount: number;
+                  isLiked: boolean;
+                  postId: number;
+                  commentId: number;
+                  authorId: string;
+                }[];
                 commentsCount: number;
                 totalPages: number;
                 currentPage: number;
@@ -646,12 +645,12 @@ export interface paths {
             "application/json": {
               data: {
                 messages: {
-                    senderId: string;
-                    receiverId: string;
-                    text: string;
-                    createdAt: string;
-                    id: string;
-                  }[];
+                  senderId: string;
+                  receiverId: string;
+                  text: string;
+                  createdAt: string;
+                  id: string;
+                }[];
                 totalPages: number;
                 currentPage: number;
                 messagesCount: number;
@@ -675,11 +674,11 @@ export interface paths {
           content: {
             "application/json": {
               data: {
-                users: ({
-                    userId: string;
-                    message: string;
-                    messageCreatedAt: string | null;
-                  })[];
+                users: {
+                  userId: string;
+                  message: string;
+                  messageCreatedAt: string | null;
+                }[];
                 totalPages: number;
                 currentPage: number;
                 usersCount: number;
@@ -751,8 +750,7 @@ export interface paths {
 export type webhooks = Record<string, never>;
 
 export interface components {
-  schemas: {
-  };
+  schemas: {};
   responses: never;
   parameters: never;
   requestBodies: never;

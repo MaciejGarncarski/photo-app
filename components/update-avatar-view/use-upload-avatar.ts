@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-import { useAuth } from '@/hooks/use-auth';
-import { apiClient } from '@/utils/api/api-client';
+import { useAuth } from "@/hooks/use-auth";
+import { apiClient } from "@/utils/api/api-client";
 
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
 
 type UseUploadAvatarArguments = {
   finalImages: FinalImages;
@@ -23,20 +23,20 @@ export const useUploadAvatar = ({
   const uploadNewAvatar = useMutation({
     mutationFn: async ({ image }: { image: Blob }) => {
       const formData = new FormData();
-      formData.append('image', image);
+      formData.append("image", image);
 
       return apiClient({
-        url: '/user/avatar',
-        method: 'PUT',
+        url: "/user/avatar",
+        method: "PUT",
         body: formData,
       });
     },
     onError: () => {
-      toast.error('Cannot update avatar.');
+      toast.error("Cannot update avatar.");
       closeModal();
     },
     onSuccess: () => {
-      toast.success('Avatar updated.');
+      toast.success("Avatar updated.");
       closeModal();
     },
   });
@@ -55,9 +55,9 @@ export const useUploadAvatar = ({
       { image: finalImages[0].file },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({ queryKey: ['session'] });
+          await queryClient.invalidateQueries({ queryKey: ["session"] });
           await queryClient.invalidateQueries({
-            queryKey: ['user', sessionUser?.id],
+            queryKey: ["user", sessionUser?.id],
           });
         },
         onSettled: () => {

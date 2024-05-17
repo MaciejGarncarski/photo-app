@@ -1,9 +1,9 @@
-import { AnimatePresence, type Variants } from 'framer-motion';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import type { ReactNode } from 'react';
+import { AnimatePresence, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import type { ReactNode } from "react";
 
-import styles from './list-modal-item.module.scss';
+import styles from "./list-modal-item.module.scss";
 
 type Props = {
   icon: ReactNode;
@@ -12,14 +12,14 @@ type Props = {
 };
 
 type WithButton = {
-  type: 'button';
+  type: "button";
   href?: never;
   onClick: () => void;
   disabled?: boolean;
 };
 
 type WithLink = {
-  type: 'link';
+  type: "link";
   href: string;
   onClick?: () => void;
   disabled?: never;
@@ -40,9 +40,9 @@ const itemVariants: Variants = {
 
 const animationProps = {
   variants: itemVariants,
-  initial: 'initial',
-  animate: 'visible',
-  exit: 'exit',
+  initial: "initial",
+  animate: "visible",
+  exit: "exit",
 };
 
 export const ListModalItem = ({
@@ -56,7 +56,7 @@ export const ListModalItem = ({
   return (
     <li className={styles.item}>
       <AnimatePresence mode="wait">
-        {type === 'button' && (
+        {type === "button" && (
           <motion.button
             {...animationProps}
             type="button"
@@ -68,7 +68,7 @@ export const ListModalItem = ({
             {children}
           </motion.button>
         )}
-        {type === 'link' && (
+        {type === "link" && (
           <Link href={href} className={styles.content} onClick={onClick}>
             {icon}
             {children}

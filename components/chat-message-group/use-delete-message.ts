@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { deleteChatMessage } from '@/services/chat.service';
+import { deleteChatMessage } from "@/services/chat.service";
 
 type Arguments = {
   receiverId: string;
@@ -12,7 +12,7 @@ export const useDeleteChatMessage = ({ receiverId }: Arguments) => {
   return useMutation({
     mutationFn: deleteChatMessage,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['chatMessages', receiverId] });
+      queryClient.invalidateQueries({ queryKey: ["chatMessages", receiverId] });
     },
   });
 };

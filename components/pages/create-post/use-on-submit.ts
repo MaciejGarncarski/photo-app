@@ -1,10 +1,10 @@
-import { useRouter } from 'next/navigation';
-import type { SubmitHandler } from 'react-hook-form';
-import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
+import type { SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
-import { useSendNewPost } from '@/components/pages/create-post/use-send-new-post';
+import { useSendNewPost } from "@/components/pages/create-post/use-send-new-post";
 
-import type { FinalImages, PostDetails } from './create-post-schema';
+import type { FinalImages, PostDetails } from "./create-post-schema";
 
 type Arguments = { finalImages: FinalImages };
 
@@ -24,14 +24,14 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
         { description, images: finalImagesToBlob },
         {
           onSuccess: () => {
-            router.push('/');
+            router.push("/");
           },
         },
       ),
       {
-        loading: 'Creating post...',
-        success: 'Post created.',
-        error: 'Could not add post.',
+        loading: "Creating post...",
+        success: "Post created.",
+        error: "Could not add post.",
       },
     );
   };

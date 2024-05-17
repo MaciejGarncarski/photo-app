@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { GearSix } from '@phosphor-icons/react';
-import clsx from 'clsx';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { GearSix } from "@phosphor-icons/react";
+import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from "@/hooks/use-auth";
 
-import { SignInButton } from '@/components/buttons/sign-in-button/sign-in-button';
-import { getNavListData } from '@/components/navbar/navbar-buttons/use-nav-buttons';
-import { useSettingsAtom } from '@/components/settings-modal/use-settings-atom';
+import { SignInButton } from "@/components/buttons/sign-in-button/sign-in-button";
+import { getNavListData } from "@/components/navbar/navbar-buttons/use-nav-buttons";
+import { useSettingsAtom } from "@/components/settings-modal/use-settings-atom";
 
-import styles from './navbar-buttons.module.scss';
+import styles from "./navbar-buttons.module.scss";
 
 export const NavButtons = () => {
   const { sessionUser, isPending, isSignedIn } = useAuth();
   const paths = usePathname();
 
   const [currentPathname] = paths
-    .split('/')
+    .split("/")
     .filter((el, idx) => idx === 1)
     .map((el) => `/${el}`);
 
@@ -48,7 +48,7 @@ export const NavButtons = () => {
                   )}
                 >
                   <span className={styles.icon}>
-                    <Icon weight={isActive ? 'fill' : 'bold'} />
+                    <Icon weight={isActive ? "fill" : "bold"} />
                   </span>
                   <span className={styles.title}>{title}</span>
                 </Link>
@@ -68,7 +68,7 @@ export const NavButtons = () => {
             )}
             onClick={() => setSettingsOpen(true)}
           >
-            <GearSix weight={isSettingsOpen ? 'fill' : 'bold'} />
+            <GearSix weight={isSettingsOpen ? "fill" : "bold"} />
             <span className={styles.title}>settings</span>
           </button>
         </li>

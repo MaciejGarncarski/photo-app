@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { getPageTitle } from '@/utils/get-page-title';
+import { getPageTitle } from "@/utils/get-page-title";
 
-import { Account } from '@/components/pages/account/account';
-import { APP_URL } from '@/constants';
-import { getUserByUsername } from '@/services/user.service';
+import { Account } from "@/components/pages/account/account";
+import { APP_URL } from "@/constants";
+import { getUserByUsername } from "@/services/user.service";
 
 type Props = {
   params: { username: string };
@@ -20,7 +20,7 @@ export const generateMetadata = async ({
   try {
     const {
       data: { data: userData },
-    } = await getUserByUsername({ username: username }, { cache: 'no-cache' });
+    } = await getUserByUsername({ username: username }, { cache: "no-cache" });
 
     if (!userData.avatar) {
       return {
@@ -30,15 +30,15 @@ export const generateMetadata = async ({
 
     return {
       title: usernameTitle,
-      metadataBase: new URL('https://ik.imagekit.io'),
+      metadataBase: new URL("https://ik.imagekit.io"),
       description: userData.bio,
       openGraph: {
         title: usernameTitle,
         description: userData.bio || undefined,
         url: APP_URL,
-        siteName: 'Photo App',
-        locale: 'en_GB',
-        type: 'profile',
+        siteName: "Photo App",
+        locale: "en_GB",
+        type: "profile",
         username: username,
         images: [
           {

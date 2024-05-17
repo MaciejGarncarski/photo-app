@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import { DotsThreeVertical, Trash } from '@phosphor-icons/react';
-import * as Tooltip from '@radix-ui/react-tooltip';
-import { AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
-import { useState } from 'react';
+import { DotsThreeVertical, Trash } from "@phosphor-icons/react";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
 
-import { useAuth } from '@/hooks/use-auth';
-import { formatDateFull } from '@/utils/format-date-full';
+import { useAuth } from "@/hooks/use-auth";
+import { formatDateFull } from "@/utils/format-date-full";
 
-import { Avatar } from '@/components/avatar/avatar';
-import { Button } from '@/components/buttons/button/button';
-import { FollowButton } from '@/components/buttons/follow-button/follow-button';
-import { Loader } from '@/components/loader/loader';
-import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import { usePost } from '@/components/pages/account/use-post';
-import { PostHeaderPlaceholder } from '@/components/post/post-header-placeholder/post-header-placeholder';
-import { usePostHeader } from '@/components/post/post-header/use-post-header';
-import { PostOptions } from '@/components/post/post-options/post-options';
-import { TooltipContent } from '@/components/tooltip-content/tooltip-content';
+import { Avatar } from "@/components/avatar/avatar";
+import { Button } from "@/components/buttons/button/button";
+import { FollowButton } from "@/components/buttons/follow-button/follow-button";
+import { Loader } from "@/components/loader/loader";
+import { ConfirmationDialog } from "@/components/modals/confirmation-dialog/confirmation-dialog";
+import { usePost } from "@/components/pages/account/use-post";
+import { usePostHeader } from "@/components/post/post-header/use-post-header";
+import { PostHeaderPlaceholder } from "@/components/post/post-header-placeholder/post-header-placeholder";
+import { PostOptions } from "@/components/post/post-options/post-options";
+import { TooltipContent } from "@/components/tooltip-content/tooltip-content";
 
-import styles from './post-header.module.scss';
+import styles from "./post-header.module.scss";
 
 type Props = {
-  tag?: 'header' | 'div';
+  tag?: "header" | "div";
   postId: number;
 };
 
-export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
+export const PostHeader = ({ tag: Tag = "header", postId }: Props) => {
   const { isPending, sessionUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const { data } = usePost({ postId });
@@ -46,7 +46,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
     postId,
   });
 
-  const isAuthor = sessionUser?.id === data?.authorId || '';
+  const isAuthor = sessionUser?.id === data?.authorId || "";
   const authorId = data?.authorId;
 
   if (isPending || !authorId) {
@@ -73,7 +73,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
           <AnimatePresence mode="wait">
             {isOpen ? (
               <TooltipContent>
-                {formatDateFull(postData?.createdAt || '', { fullMonth: true })}
+                {formatDateFull(postData?.createdAt || "", { fullMonth: true })}
               </TooltipContent>
             ) : null}
           </AnimatePresence>

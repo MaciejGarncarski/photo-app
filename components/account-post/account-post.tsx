@@ -1,14 +1,14 @@
-import { ChatCentered, CopySimple, Heart } from '@phosphor-icons/react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import { ChatCentered, CopySimple, Heart } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
-import { postItemVaraints } from '@/components/account-post/account-post.animation';
-import { Loader } from '@/components/loader/loader';
-import { usePost } from '@/components/pages/account/use-post';
+import { postItemVaraints } from "@/components/account-post/account-post.animation";
+import { Loader } from "@/components/loader/loader";
+import { usePost } from "@/components/pages/account/use-post";
 
-import styles from './account-post.module.scss';
+import styles from "./account-post.module.scss";
 
 type Props = {
   postId: number;
@@ -45,7 +45,7 @@ export const AccountPost = ({ postId }: Props) => {
       transition={{
         ease: [0, 0.8, 0.2, 1],
         scale: {
-          type: 'spring',
+          type: "spring",
           damping: 8,
           stiffness: 80,
           restDelta: 0.001,
