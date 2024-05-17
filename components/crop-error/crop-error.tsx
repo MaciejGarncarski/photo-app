@@ -1,5 +1,5 @@
 import { errorMessages } from '@/components/crop-error/crop-error.data';
-import { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
 
 import styles from './crop-error.module.scss';
 

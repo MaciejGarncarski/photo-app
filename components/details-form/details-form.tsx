@@ -6,7 +6,7 @@ import { Input } from '@/components/input/input';
 import { Loader } from '@/components/loader/loader';
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
 import { TextArea } from '@/components/textarea/text-area';
-import { User } from '@/schemas/user.schema';
+import type { User } from '@/schemas/user.schema';
 
 import styles from './details-form.module.scss';
 

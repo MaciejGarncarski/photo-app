@@ -1,7 +1,7 @@
-import { AnimatePresence, Variants } from 'framer-motion';
+import { AnimatePresence, type Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import styles from './list-modal-item.module.scss';
 

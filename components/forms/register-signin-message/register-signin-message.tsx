@@ -13,7 +13,7 @@ export const RegisterSignInMessage = ({ variant }: Props) => {
     : "Don't have an account?";
 
   const linkText = isRegister ? 'Sign in here.' : 'Register here.';
-  const href = isRegister ? `/auth/sign-in` : `/auth/register`;
+  const href = isRegister ? '/auth/sign-in' : '/auth/register';
 
   return (
     <p className={styles.registerSignInMessage}>

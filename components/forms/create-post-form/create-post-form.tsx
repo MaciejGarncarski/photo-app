@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import { Button } from '@/components/buttons/button/button';
 import { getButtonList } from '@/components/forms/create-post-form/create-post-form.data';
-import { PostDetails } from '@/components/pages/create-post/create-post-schema';
+import type { PostDetails } from '@/components/pages/create-post/create-post-schema';
 import { TextArea } from '@/components/textarea/text-area';
 
 import styles from './create-post-form.module.scss';

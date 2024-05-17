@@ -5,7 +5,10 @@ import { useForm } from 'react-hook-form';
 
 import { useAuth } from '@/hooks/use-auth';
 
-import { AddChatMessage, addChatMessageSchema } from '@/schemas/chat.schema';
+import {
+  type AddChatMessage,
+  addChatMessageSchema,
+} from '@/schemas/chat.schema';
 import { addChatMessage } from '@/services/chat.service';
 
 export type MessageMutation = {

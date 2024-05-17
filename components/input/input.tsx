@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ChangeEvent, forwardRef } from 'react';
+import { type ChangeEvent, forwardRef } from 'react';
 
 import styles from './input.module.scss';
 

@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
-import { SubmitHandler } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { useSendNewPost } from '@/components/pages/create-post/use-send-new-post';
 
-import { FinalImages, PostDetails } from './create-post-schema';
+import type { FinalImages, PostDetails } from './create-post-schema';
 
 type Arguments = { finalImages: FinalImages };
 

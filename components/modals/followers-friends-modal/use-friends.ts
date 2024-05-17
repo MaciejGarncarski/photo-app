@@ -18,7 +18,7 @@ export const useFriends = ({ userId, enabled }: UseFriends) => {
         userId,
       });
 
-      if (!data['data']) {
+      if (!data.data) {
         throw new Error('No data');
       }
 

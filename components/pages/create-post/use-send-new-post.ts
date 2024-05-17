@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { apiClient } from '@/utils/api/api-client';
 
 import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/use-homepage-posts';
-import { CreatePostInput } from '@/schemas/post.schema';
+import type { CreatePostInput } from '@/schemas/post.schema';
 
 const uplaodPost = ({ description, images }: CreatePostInput) => {
   const formData = new FormData();

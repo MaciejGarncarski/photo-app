@@ -11,7 +11,7 @@ import { useCropImage } from '@/components/crop-image/use-crop-image';
 import { DropZone } from '@/components/drop-zone/drop-zone';
 import { Loader } from '@/components/loader/loader';
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
-import { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
 
 import styles from './crop-image.module.scss';
 

@@ -1,6 +1,6 @@
 import { IMAGE_MAX_FILE_SIZE } from '@/utils/handle-drop-image';
 
-import { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
 
 export const DimensionError = 'Image dimensions are too small 🥺';
 export const FileSizeError = `Maximum file size is ${

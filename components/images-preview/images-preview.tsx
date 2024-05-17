@@ -2,7 +2,7 @@ import { CameraPlus, Trash } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-import { PreviewImages } from '@/utils/get-preview-images';
+import type { PreviewImages } from '@/utils/get-preview-images';
 
 import styles from './images-preview.module.scss';
 

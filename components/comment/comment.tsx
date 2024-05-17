@@ -18,7 +18,7 @@ import { HeartIcon } from '@/components/heart-icon';
 import { Loader } from '@/components/loader/loader';
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
 import { TooltipContent } from '@/components/tooltip-content/tooltip-content';
-import { Comment as TComment } from '@/schemas/post-comment.schema';
+import type { Comment as TComment } from '@/schemas/post-comment.schema';
 
 import styles from './comment.module.scss';
 
@@ -60,7 +60,7 @@ export const Comment = ({ commentData }: Props) => {
         <Tooltip.Provider>
           <Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
             <Tooltip.Trigger asChild>
-              <button className={styles.createdAt}>
+              <button type="button" className={styles.createdAt}>
                 <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
               </button>
             </Tooltip.Trigger>

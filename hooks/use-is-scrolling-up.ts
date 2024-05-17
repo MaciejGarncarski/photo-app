@@ -24,7 +24,7 @@ export const useIsScrollingUp = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return { isScrollingUp: debouncedIsGoingUp };
 };

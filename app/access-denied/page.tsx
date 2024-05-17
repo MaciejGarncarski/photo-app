@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 import { AccessDenied } from '@/components/access-denied/access-denied';
 

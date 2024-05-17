@@ -18,7 +18,7 @@ export const useFollowers = ({ userId, enabled }: UseFollowers) => {
         userId,
       });
 
-      if (!data['data']) {
+      if (!data.data) {
         throw new Error('NO data');
       }
 

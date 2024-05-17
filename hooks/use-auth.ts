@@ -15,11 +15,11 @@ export const useAuth = () => {
       try {
         const { data: sessionUser } = await getSessionUser({});
 
-        if (!sessionUser['data']) {
+        if (!sessionUser.data) {
           throw new Error('No session data');
         }
 
-        return sessionUser['data'];
+        return sessionUser.data;
       } catch (error) {
         return null;
       }

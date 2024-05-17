@@ -27,6 +27,6 @@ export const useInfiniteMessages = ({ friendId }: Props) => {
     refetchOnWindowFocus: false,
     enabled: Boolean(friendId),
     getNextPageParam: nextPageParam,
-    staleTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
   });
 };

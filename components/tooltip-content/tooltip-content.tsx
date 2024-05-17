@@ -1,6 +1,6 @@
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { motion } from 'framer-motion';
-import { forwardRef, ReactNode } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 
 import styles from './tooltip-content.module.scss';
 

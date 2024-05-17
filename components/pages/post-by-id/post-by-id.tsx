@@ -15,7 +15,7 @@ import styles from './post-by-id.module.scss';
 
 export const PostById = () => {
   const params = useParams();
-  const postId = parseInt(params.postId as string);
+  const postId = Number.parseInt(params.postId as string);
   const postModal = useModal(true);
   const { data, isSuccess, isError } = usePost({ postId });
   const { data: authorData, isPending } = useUser({

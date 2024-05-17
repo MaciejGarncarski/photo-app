@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MouseEvent, ReactNode } from 'react';
+import type { MouseEvent, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 import { backdropVariants } from '@/components/modals/modal-backdrop/modal-backdrop.animation';

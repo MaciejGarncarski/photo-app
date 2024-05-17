@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/use-auth';
 
 import { Avatar } from '@/components/avatar/avatar';
 import { ChatMessage } from '@/components/chat-message/chat-message';
-import { ChatMessage as TChatMessage } from '@/schemas/chat.schema';
+import type { ChatMessage as TChatMessage } from '@/schemas/chat.schema';
 
 import styles from './chat-message-group.module.scss';
 

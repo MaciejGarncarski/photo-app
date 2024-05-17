@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { forwardRef, ReactNode } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 
 import { modalVariants } from '@/utils/animations/modal.animation';

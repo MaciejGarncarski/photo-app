@@ -1,5 +1,5 @@
-import { SortOption } from '@/components/post/post-comments/use-sort';
-import { Comment } from '@/schemas/post-comment.schema';
+import type { SortOption } from '@/components/post/post-comments/use-sort';
+import type { Comment } from '@/schemas/post-comment.schema';
 
 export const sortComments = (
   a: Comment,

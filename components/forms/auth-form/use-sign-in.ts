@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { HOME_POSTS_QUERY_KEY } from '@/components/pages/home/use-homepage-posts';
-import { SignInFormValues } from '@/schemas/auth.schema';
+import type { SignInFormValues } from '@/schemas/auth.schema';
 import { signIn } from '@/services/auth.service';
 
 export const useSignIn = () => {

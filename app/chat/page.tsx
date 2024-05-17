@@ -1,9 +1,9 @@
 import {
-  dehydrate,
   HydrationBoundary,
   QueryClient,
+  dehydrate,
 } from '@tanstack/react-query';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 import { getPageTitle } from '@/utils/get-page-title';
 
@@ -27,11 +27,11 @@ const ChatPage = async () => {
           skip: pageParam.toString(),
         });
 
-        if (!data['data']) {
+        if (!data.data) {
           throw new Error('No data');
         }
 
-        return data['data'];
+        return data.data;
       },
       initialPageParam: 0,
     });

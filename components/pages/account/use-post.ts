@@ -8,11 +8,11 @@ export const getPostQueryOptions = (postId: number) =>
     queryFn: async () => {
       const { data: post } = await getPost({ postId: postId.toString() });
 
-      if (!post['data']) {
+      if (!post.data) {
         throw new Error('No post data.');
       }
 
-      return post['data'];
+      return post.data;
     },
     enabled: Boolean(postId),
   });

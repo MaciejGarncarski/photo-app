@@ -1,9 +1,9 @@
 import { Fetcher } from '@qdrant/openapi-typescript-fetch';
-import { z } from 'zod';
+import type { z } from 'zod';
 
 import { clientEnv } from '@/utils/env';
 
-import { paths } from '@/types';
+import type { paths } from '@/types';
 
 type ApiClientArguments<S> = {
   url: keyof paths;

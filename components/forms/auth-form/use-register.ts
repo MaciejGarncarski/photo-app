@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { RegisterFormValues } from '@/schemas/auth.schema';
+import type { RegisterFormValues } from '@/schemas/auth.schema';
 import { registerUser } from '@/services/auth.service';
 
 export const useRegister = () => {

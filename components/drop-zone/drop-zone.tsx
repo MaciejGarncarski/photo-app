@@ -8,7 +8,7 @@ import { Button } from '@/components/buttons/button/button';
 import { CropError } from '@/components/crop-error/crop-error';
 import { useDropZone } from '@/components/drop-zone/use-drop-zone';
 import { Loader } from '@/components/loader/loader';
-import { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
 
 import styles from './drop-zone.module.scss';
 

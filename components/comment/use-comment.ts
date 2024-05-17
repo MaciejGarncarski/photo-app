@@ -4,7 +4,7 @@ import { formatDateRelative } from '@/utils/format-date-relative';
 
 import { useDeleteComment } from '@/components/comment/use-delete-comment';
 import { useCommentLike } from '@/components/comment/use-like';
-import { Comment } from '@/schemas/post-comment.schema';
+import type { Comment } from '@/schemas/post-comment.schema';
 
 type Arguments = {
   commentData: Comment;

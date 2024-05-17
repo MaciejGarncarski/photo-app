@@ -21,7 +21,7 @@ import styles from './edit-post.module.scss';
 export const EditPost = () => {
   const router = useRouter();
   const params = useParams();
-  const postId = parseInt(params?.postId as string);
+  const postId = Number.parseInt(params?.postId as string);
   const { data, isPending } = usePost({ postId });
   const { mutate } = useEditPost({ postId });
   const saveModal = useModal();

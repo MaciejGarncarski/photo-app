@@ -1,6 +1,6 @@
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import { motion } from 'framer-motion';
-import { forwardRef, ReactNode } from 'react';
+import { type ReactNode, forwardRef } from 'react';
 
 import styles from './dropdown-content.module.scss';
 

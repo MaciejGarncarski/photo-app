@@ -12,11 +12,11 @@ export const userQueryOptions = (userId: string) =>
     queryFn: async () => {
       const { data: user } = await getUser({ userId });
 
-      if (!user['data']) {
+      if (!user.data) {
         throw new Error('No user data.');
       }
 
-      return user['data'];
+      return user.data;
     },
     enabled: userId !== '',
     refetchOnWindowFocus: false,

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { PostDetails } from '@/schemas/post.schema';
+import type { PostDetails } from '@/schemas/post.schema';
 import { likePost, unlikePost } from '@/services/posts.service';
 
 type Mutation = {

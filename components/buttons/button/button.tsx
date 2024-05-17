@@ -1,6 +1,6 @@
 import { IconContext } from '@phosphor-icons/react';
 import clsx from 'clsx';
-import { MouseEventHandler, ReactNode } from 'react';
+import type { MouseEventHandler, ReactNode } from 'react';
 
 import styles from './button.module.scss';
 

@@ -46,7 +46,7 @@ export const ChatUsersList = () => {
               />
               {page.users.length - 1 !== idx && (
                 <li>
-                  <hr className={styles.separator}></hr>
+                  <hr className={styles.separator} />
                 </li>
               )}
             </Fragment>

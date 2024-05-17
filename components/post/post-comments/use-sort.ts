@@ -1,14 +1,14 @@
 import {
-  Icon,
+  type Icon,
   SortAscending,
   SortDescending,
   Star,
 } from '@phosphor-icons/react';
-import { InfiniteData } from '@tanstack/react-query';
+import type { InfiniteData } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
 import { sortComments } from '@/components/post/post-comments/sort-comments';
-import { Comment } from '@/schemas/post-comment.schema';
+import type { Comment } from '@/schemas/post-comment.schema';
 
 const SORT_OPTIONS = ['newest', 'oldest', 'likes'] as const;
 export type SortOption = (typeof SORT_OPTIONS)[number];

@@ -1,4 +1,4 @@
-import { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
 
 export type PreviewImages = Array<
   | {

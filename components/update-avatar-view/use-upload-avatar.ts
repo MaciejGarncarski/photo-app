@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { useAuth } from '@/hooks/use-auth';
 import { apiClient } from '@/utils/api/api-client';
 
-import { FinalImages } from '@/components/pages/create-post/create-post-schema';
+import type { FinalImages } from '@/components/pages/create-post/create-post-schema';
 
 type UseUploadAvatarArguments = {
   finalImages: FinalImages;

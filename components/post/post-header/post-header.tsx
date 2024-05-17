@@ -15,8 +15,8 @@ import { FollowButton } from '@/components/buttons/follow-button/follow-button';
 import { Loader } from '@/components/loader/loader';
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog';
 import { usePost } from '@/components/pages/account/use-post';
-import { usePostHeader } from '@/components/post/post-header/use-post-header';
 import { PostHeaderPlaceholder } from '@/components/post/post-header-placeholder/post-header-placeholder';
+import { usePostHeader } from '@/components/post/post-header/use-post-header';
 import { PostOptions } from '@/components/post/post-options/post-options';
 import { TooltipContent } from '@/components/tooltip-content/tooltip-content';
 
@@ -63,7 +63,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
       <Tooltip.Provider>
         <Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
           <Tooltip.Trigger asChild>
-            <button className={styles.createdAt}>
+            <button type="button" className={styles.createdAt}>
               &#8226;&nbsp;
               <time dateTime={postData?.createdAt.toString()}>
                 {dateFromNow}

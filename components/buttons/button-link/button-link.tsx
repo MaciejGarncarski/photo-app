@@ -1,6 +1,6 @@
 import { IconContext } from '@phosphor-icons/react';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import styles from './button-link.module.scss';
 

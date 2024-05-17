@@ -6,7 +6,7 @@ import { Button } from '@/components/buttons/button/button';
 import { useRegister } from '@/components/forms/auth-form/use-register';
 import { RegisterSignInMessage } from '@/components/forms/register-signin-message/register-signin-message';
 import { Input } from '@/components/input/input';
-import { RegisterFormValues, registerSchema } from '@/schemas/auth.schema';
+import { type RegisterFormValues, registerSchema } from '@/schemas/auth.schema';
 
 import styles from './auth-form.module.scss';
 

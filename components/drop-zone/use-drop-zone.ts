@@ -1,8 +1,8 @@
-import { ChangeEvent, DragEvent, useRef, useState } from 'react';
+import { type ChangeEvent, type DragEvent, useRef, useState } from 'react';
 
 import { handleDropImage } from '@/utils/handle-drop-image';
 
-import { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
+import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema';
 
 type Arguments = {
   setError: (error: DropZoneErrors) => void;

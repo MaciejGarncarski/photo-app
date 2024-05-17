@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ReactElement, useEffect } from 'react';
+import { type ReactElement, useEffect } from 'react';
 
 import { useAuth } from '@/hooks/use-auth';
 
@@ -27,10 +27,10 @@ export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
     }
 
     if (!isSignedIn && sessionNeeded) {
-      router.replace(`/auth/sign-in`);
+      router.replace('/auth/sign-in');
       return;
     }
-  }, []);
+  }, [isFetching, router.replace, isSignedIn, sessionNeeded]);
 
   if (isFetching) {
     return <Loader size="big" color="accent" marginTop />;

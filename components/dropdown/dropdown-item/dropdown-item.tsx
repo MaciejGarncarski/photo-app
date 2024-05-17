@@ -1,7 +1,7 @@
 import { IconContext } from '@phosphor-icons/react';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import styles from './dropdown-item.module.scss';
 

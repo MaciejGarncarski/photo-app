@@ -1,5 +1,5 @@
 import { Chat } from '@phosphor-icons/react';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import { useModal } from '@/hooks/use-modal';
 

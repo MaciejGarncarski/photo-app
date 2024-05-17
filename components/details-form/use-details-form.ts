@@ -5,9 +5,9 @@ import { useModal } from '@/hooks/use-modal';
 
 import { useEditDetails } from '@/components/details-form/use-edit-details';
 import {
-  AccountDetails,
+  type AccountDetails,
   AccountDetailsSchema,
-  User,
+  type User,
 } from '@/schemas/user.schema';
 
 type DetailsForm = {

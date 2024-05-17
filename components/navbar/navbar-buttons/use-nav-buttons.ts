@@ -1,4 +1,10 @@
-import { Chat, House, Icon, PlusCircle, User } from '@phosphor-icons/react';
+import {
+  Chat,
+  House,
+  type Icon,
+  PlusCircle,
+  User,
+} from '@phosphor-icons/react';
 
 type ListData = {
   icon: Icon;

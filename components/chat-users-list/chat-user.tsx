@@ -35,7 +35,7 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
           className={styles.listItem}
           exit={{ opacity: 0 }}
         >
-          <div className={styles.placeholderLoading}></div>
+          <div className={styles.placeholderLoading} />
         </motion.li>
       ) : (
         <motion.li

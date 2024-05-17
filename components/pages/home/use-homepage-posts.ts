@@ -1,6 +1,6 @@
 import {
+  type QueryKey,
   infiniteQueryOptions,
-  QueryKey,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 

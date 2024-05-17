@@ -20,7 +20,7 @@ export const NavButtons = () => {
   const [currentPathname] = paths
     .split('/')
     .filter((el, idx) => idx === 1)
-    .map((el) => '/' + el);
+    .map((el) => `/${el}`);
 
   const { navButtonsList } = getNavListData(sessionUser?.username);
   const { isSettingsOpen, setSettingsOpen } = useSettingsAtom();
