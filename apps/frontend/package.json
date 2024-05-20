@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "proxy": "http://localhost:3001",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "check-types": "tsc --skipLibCheck --noEmit",
@@ -45,8 +45,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
     "@faker-js/faker": "^8.2.0",
     "@tanstack/react-query-devtools": "^5.36.1",
     "@testing-library/react": "^14.0.0",
