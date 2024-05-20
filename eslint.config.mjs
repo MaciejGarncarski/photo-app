@@ -1,5 +1,4 @@
-import { fixupConfigRules } from "@eslint/compat";
-import { FlatCompat } from "@eslint/eslintrc";
+import { fixupPluginRules } from "@eslint/compat";
 import next from "@next/eslint-plugin-next";
 import importPlugin from "eslint-plugin-import";
 import jsxa11y from "eslint-plugin-jsx-a11y";
@@ -9,16 +8,25 @@ import testingLibrary from "eslint-plugin-testing-library";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
-const compat = new FlatCompat();
-
 export default [
-  {
-    ignores: ["types.ts", ".next"],
-  },
   ...tseslint.configs.recommended,
-  ...fixupConfigRules(compat.extends("plugin:@next/next/core-web-vitals")),
   {
-    files: ["**/*.ts", "**/*.tsx", "**/*.js"],
+    ignores: [
+      "**/types.ts",
+      "**/frontend/types.ts",
+      "**/frontend/.next",
+      "**/frontend/next.d.ts",
+      "**/frontend/next-env.d.ts",
+      "**/frontend/vitest.config.ts",
+      "**/frontend/types.d.ts",
+    ],
+  },
+  {
+    files: [
+      "apps/frontend/**/*.ts",
+      "apps/frontend/**/*.tsx",
+      "apps/frontend/**/*.js",
+    ],
     languageOptions: {
       parser: tseslint.parser,
       globals: {
@@ -34,7 +42,7 @@ export default [
       "jsx-a11y": jsxa11y,
       react: react,
       "simple-import-sort": simpleImportSort,
-      "unused-imports": unusedImports,
+      "unused-imports": fixupPluginRules(unusedImports),
     },
     rules: {
       // ...next.rules,
@@ -67,7 +75,7 @@ export default [
       "jsx-a11y/role-supports-aria-props": "warn",
       "react/jsx-no-target-blank": "off",
       "@typescript-eslint/no-unused-vars": "off",
-      "unused-imports/no-unused-imports": "warn",
+      "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": "off",
       "simple-import-sort/exports": "warn",
       "simple-import-sort/imports": [
@@ -96,6 +104,32 @@ export default [
           ],
         },
       ],
+    },
+  },
+  {
+    files: [
+      "apps/backend/**/*.ts",
+      "apps/backend/**/*.tsx",
+      "apps/backend/**/*.js",
+    ],
+    languageOptions: {
+      parser: tseslint.parser,
+    },
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+      import: importPlugin,
+      "simple-import-sort": simpleImportSort,
+      "unused-imports": fixupPluginRules(unusedImports),
+    },
+    rules: {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-console": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "import/no-anonymous-default-export": "warn",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": "off",
+      "simple-import-sort/exports": "warn",
     },
   },
 ];

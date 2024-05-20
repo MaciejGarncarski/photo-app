@@ -1,0 +1,74 @@
+@use "common";
+
+%variables {
+  --color-primary: rgb(255, 255, 255);
+  --color-secondary: rgb(245, 245, 245);
+  --color-accent: rgb(109, 194, 171);
+  --color-accent-darker: rgb(2, 189, 117);
+  --color-accent-active: rgb(121, 206, 183);
+  --color-always-black: rgb(22, 22, 22);
+  --color-always-white: rgb(255, 255, 255);
+
+  --color-active: rgb(242, 242, 242);
+  --color-error: rgb(207, 60, 30);
+  --color-error-light: rgb(245, 157, 157);
+  --color-error-light-active: rgb(231, 114, 114);
+  --color-gray: rgb(222, 222, 222);
+  --color-gray-active: rgb(242, 242, 242);
+  --color-overlay: rgba(0, 0, 0, 0.4);
+
+  --color-text: rgb(6, 20, 16);
+  --color-text-gray: rgb(80, 80, 80);
+
+  --transition: 0.2s ease-in-out;
+  --transition-fast: 0.125s ease-in-out;
+
+  --skeleton-animation: skeleton 2.5s linear infinite forwards;
+
+  --shadow-0-1: rgb(255, 255, 255, 0.145);
+  --shadow-0-5: rgb(0, 0, 0, 0.05);
+  --shadow-1: rgba(0, 0, 0, 0.1);
+  --shadow-2: rgba(0, 0, 0, 0.2);
+  --shadow-5: rgba(0, 0, 0, 0.5);
+  --shadow-8: rgba(0, 0, 0, 0.8);
+
+  --shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius-big: 0.8rem;
+  --radius-medium: 0.42rem;
+  --radius-small: 0.3rem;
+
+  --header-width: calc(10rem + 10vw);
+  --post-width: clamp(16rem, 85vw, 22rem);
+
+  @include common.mediaquery("tablet") {
+    --post-width: calc(18rem + 15vw);
+  }
+
+  @include common.mediaquery("desktop") {
+    --post-width: calc(25rem + 15vw);
+  }
+}
+
+%variablesDarkTheme {
+  --color-primary: rgb(35 39 47);
+  --color-secondary: rgb(52 58 70);
+
+  --color-error: rgb(221, 91, 65);
+  --color-error-light: rgba(194, 83, 83, 0.3);
+  --color-error-light-active: rgba(194, 83, 83, 0.5);
+
+  --color-gray: rgb(190, 190, 190, 0.3);
+  --color-gray-active: rgba(78, 78, 78, 0.8);
+
+  --color-text: rgb(232, 232, 232);
+  --color-text-gray: rgb(211, 211, 211);
+
+  --shadow: 0px 5px 10px 2px rgba(255, 255, 255, 0.03),
+    inset 0px 0px 2px 0px rgba(255, 255, 255, 0.04);
+
+  --shadow-0-5: rgb(222, 222, 222, 0.05);
+  --shadow-1: rgba(222, 222, 222, 0.1);
+  --shadow-2: rgba(222, 222, 222, 0.2);
+  --shadow-5: rgba(222, 222, 222, 0.5);
+  --shadow-8: rgba(222, 222, 222, 0.8);
+}

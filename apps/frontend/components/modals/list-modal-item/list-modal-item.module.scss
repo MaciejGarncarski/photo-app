@@ -1,0 +1,30 @@
+@use "common";
+
+.item {
+  overflow: hidden;
+  width: 100%;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-radius: var(--radius-medium);
+
+  @include common.mediaquery("desktop") {
+    padding: 1rem 1rem;
+    transition: all var(--transition-fast);
+    transition-property: background-color, box-shadow, border;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      border: 1px solid var(--shadow-1);
+      box-shadow: var(--shadow);
+      background-color: var(--color-primary);
+    }
+  }
+}

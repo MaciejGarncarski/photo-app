@@ -1,0 +1,47 @@
+@use "common";
+
+.dropZone {
+  box-shadow: var(--shadow);
+  border-radius: var(--radius-small);
+  background-color: var(--color-secondary);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid var(--shadow-0-5);
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.dropZoneState {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+%commonActiveState {
+  box-shadow: var(--shadow);
+}
+
+.dropZoneError {
+  background-color: var(--color-secondary);
+}
+
+.dropZoneActive {
+  @extend %commonActiveState;
+}
+
+.dropIcon,
+.text {
+  pointer-events: none;
+}
+
+.dropIconError {
+  @extend .dropIcon;
+  color: var(--color-error);
+}

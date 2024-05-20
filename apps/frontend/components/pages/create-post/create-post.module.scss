@@ -1,0 +1,24 @@
+@use "common";
+
+.createPost {
+  display: grid;
+  width: clamp(20rem, 80vw, 35rem);
+  margin: 0 auto;
+  gap: 2rem;
+
+  @include common.mediaquery("tablet") {
+    gap: 3rem;
+  }
+
+  @include common.mediaquery("desktop") {
+    width: clamp(35rem, 50vw, 45rem);
+  }
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}

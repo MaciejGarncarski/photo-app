@@ -1,0 +1,70 @@
+@use "common";
+
+.textContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  @include common.mediaquery("desktop") {
+    &:hover > .options {
+      opacity: 1;
+    }
+  }
+}
+
+.text {
+  background-color: var(--color-accent);
+  color: var(--color-always-black);
+  border-radius: var(--radius-medium);
+  padding: 0.5rem 1rem;
+  max-width: 40ch;
+  display: inline-block;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
+  text-align: left;
+  user-select: none;
+  gap: 0.5rem;
+
+  &:not(:disabled) {
+    cursor: auto;
+  }
+
+  @include common.mediaquery("desktop") {
+    max-width: 65ch;
+    padding: 0.5rem 1rem;
+    user-select: auto;
+  }
+}
+
+.options {
+  opacity: 0;
+  transition: opacity var(--transition);
+  margin-right: 1rem;
+  flex-shrink: 0;
+
+  @include common.mediaquery("desktop") {
+    &:focus {
+      opacity: 1;
+    }
+  }
+}
+
+.optionsOpen {
+  opacity: 1;
+}
+
+.optionsReceiver {
+  order: 2;
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+.textContainerReceiver {
+  justify-content: flex-start;
+
+  & > .text {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+  }
+}

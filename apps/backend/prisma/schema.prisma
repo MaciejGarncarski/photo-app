@@ -1,0 +1,172 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid @unique
+  userId            String  @db.Uuid 
+  type              String
+  provider          String
+  providerAccountId String
+  refreshToken      String? @db.Text
+  accessToken       String? @db.Text
+  expiresAt         Int?
+  tokenType         String?
+  scope             String?
+  idToken           String? @db.Text
+  sessionState      String?
+
+  user User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  @@index([userId])
+}
+
+model Session {
+  id        String   @id @unique
+  sid       String   @unique
+  data      String   @db.Text
+  expiresAt DateTime
+}
+
+model User {
+  userId          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid @unique
+  email           String?
+  emailverified   DateTime?         @db.Timestamptz(6)
+  name            String?           @db.VarChar(50)
+  password        String?           @db.VarChar(200)
+  username        String?           @unique(map: "username_unique") @db.VarChar(50)
+  bio             String?
+  Account         Account[]
+  avatarUrl    String?
+
+  postsLikes    PostLike[]
+  postsComments PostComment[]
+  fromUser      Follower[]    @relation("Follower")
+  toUser        Follower[]    @relation("Following")
+  createdAt     DateTime      @default(now()) @db.Timestamptz()
+  commentLike   CommentLike[]
+
+  sentMessages     Message[] @relation("Sent")
+  receivedMessages Message[] @relation("Received")
+
+  sender   ChatRoom[] @relation("UserOne")
+  receiver ChatRoom[] @relation("UserTwo")
+
+  Post Post[]
+
+  @@index([username])
+}
+
+
+model Post {
+  id            Int           @id @default(autoincrement()) @db.Integer @unique
+  author        User          @relation(fields: [authorId], references: [userId], onDelete: Cascade)
+  authorId      String        @db.Uuid 
+  description   String        @db.Text
+  createdAt     DateTime      @default(now()) @db.Timestamp(0)
+  images        PostImage[]
+  postsLikes    PostLike[]
+  postsComments PostComment[]
+
+  @@index([authorId])
+}
+
+model PostImage {
+  id           Int    @id @default(autoincrement()) @db.Integer @unique
+  fileId       String
+  name         String
+  url          String
+  thumbnailUrl String
+  width        Int
+  height       Int
+  size         Int
+  post         Post?  @relation(fields: [postId], references: [id])
+  postId       Int?   @db.Integer
+
+  @@index([postId])
+}
+
+model PostLike {
+  id     Int    @id @default(autoincrement()) @db.Integer @unique
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int    @db.Integer
+  user   User   @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId String  @db.Uuid
+
+  @@index([postId])
+  @@index([userId])
+}
+
+model PostComment {
+  id          Int           @id @default(autoincrement()) @db.Integer @unique
+  user        User          @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId      String  @db.Uuid
+  post        Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId      Int           @db.Integer
+  createdAt   DateTime      @default(now()) @db.Timestamp(0)
+  text        String        @db.Text
+  commentLike CommentLike[]
+
+  @@index([userId])
+  @@index([postId])
+}
+
+model CommentLike {
+  id        Int         @id @default(autoincrement()) @db.Integer @unique
+  comment   PostComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId Int         @db.Integer
+  user      User        @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId    String  @db.Uuid
+
+  @@index([commentId])
+  @@index([userId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Follower {
+  id        Int      @id @default(autoincrement()) @db.Integer @unique
+  fromUser  User     @relation(fields: [from], references: [userId], name: "Follower", onDelete: Cascade)
+  from      String   @db.Uuid
+  toUser    User     @relation(fields: [to], references: [userId], name: "Following", onDelete: Cascade)
+  to        String   @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+
+  @@index([to])
+  @@index([from])
+}
+
+model ChatRoom {
+  id         Int       @id @default(autoincrement()) @db.Integer @unique
+  sender     User      @relation(fields: [senderId], references: [userId], name: "UserOne", onDelete: Cascade)
+  senderId   String    @db.Uuid
+  userTwo    User      @relation(fields: [receiverId], references: [userId], name: "UserTwo", onDelete: Cascade)
+  receiverId String    @db.Uuid
+  messages   Message[] @relation("Chatroom")
+
+  @@index([senderId])
+  @@index([receiverId])
+}
+
+model Message {
+  id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid @unique
+  text       String
+  senderId   String   @db.Uuid
+  sender     User     @relation(fields: [senderId], references: [userId], name: "Sent", onDelete: Cascade)
+  receiverId String   @db.Uuid
+  receiver   User     @relation(fields: [receiverId], references: [userId], name: "Received", onDelete: Cascade)
+  createdAt  DateTime @default(now()) @db.Timestamp(0)
+  chatroom   ChatRoom @relation(fields: [chatroomId], references: [id], name: "Chatroom")
+  chatroomId Int
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([chatroomId])
+}

@@ -1,0 +1,35 @@
+@use "common";
+
+.layout {
+  padding-bottom: 4rem;
+
+  @include common.mediaquery("tablet") {
+    min-height: 100dvh;
+    display: flex;
+    gap: 2rem;
+  }
+
+  @include common.mediaquery("desktop") {
+    padding-bottom: 0;
+    gap: 3rem;
+  }
+}
+
+.container {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  @include common.mediaquery("desktop") {
+    margin-top: 3rem;
+    margin-right: 5vw;
+    padding-bottom: 2rem;
+  }
+
+  @include common.mediaquery("desktop-big") {
+    margin-right: 10vw;
+  }
+}
