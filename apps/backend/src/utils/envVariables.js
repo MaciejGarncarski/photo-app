@@ -10,7 +10,6 @@ export const envVariablesSchema = Type.Object({
   BACKEND_URL: Type.String({ format: 'uri' }),
   GOOGLE_CLIENT_ID: Type.String(),
   GOOGLE_CLIENT_SECRET: Type.String(),
-  PRODUCTION: Type.String(),
 });
 
 /**
@@ -26,5 +25,4 @@ export const envVariables = {
   BACKEND_URL: process.env.BACKEND_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-  PRODUCTION: process.env.PRODUCTION,
 };

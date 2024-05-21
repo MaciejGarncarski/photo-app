@@ -4,7 +4,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "pnpm prisma generate && pnpm tsc",
+    "build": "NODE_ENV=production pnpm prisma generate && pnpm tsc",
+    "build:dev": "pnpm prisma generate && pnpm tsc",
     "start": "node ./dist",
     "check-types": "tsc --noEmit",
     "dev": "pnpm nodemon ./src/index.ts"
