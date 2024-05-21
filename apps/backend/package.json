@@ -1,5 +1,6 @@
 {
   "name": "backend",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -8,7 +9,6 @@
     "check-types": "tsc --noEmit",
     "dev": "pnpm nodemon ./src/index.ts"
   },
-  "type": "module",
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
     "@fastify/cors": "^8.2.0",

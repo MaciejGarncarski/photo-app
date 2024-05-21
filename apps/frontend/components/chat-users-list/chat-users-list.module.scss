@@ -8,7 +8,6 @@
 .list {
   list-style-type: none;
   display: flex;
-  background-color: var(--color-secondary);
   flex-direction: column;
   gap: 0.5rem;
   overflow-y: auto;
@@ -18,6 +17,8 @@
 
   @include common.mediaquery("tablet") {
     border-radius: calc(var(--radius-small) + 1rem);
+    background-color: var(--color-secondary);
+    box-shadow: var(--shadow);
     padding: 2rem;
     gap: 1rem;
     margin: 0;

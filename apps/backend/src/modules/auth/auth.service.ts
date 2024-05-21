@@ -41,51 +41,55 @@ export const createGoogleUser = async (googleUserData: GoogleUser, token: Token)
   const { randomUUID } = new ShortUniqueId({ length: 6 });
   const temporaryUsername = `user${randomUUID().toUpperCase()}`;
 
-  const account = await db.account.findFirst({
-    where: {
-      providerAccountId: id,
-    },
-  });
-
-  const accountExists = Boolean(account);
-
-  const createdUser = await db.user.create({
-    data: {
-      userId: account?.userId,
-      name: name,
-      username: temporaryUsername,
-      avatarUrl: picture,
-    },
-  });
-
-  if (!accountExists) {
-    await db.account.create({
-      data: {
-        userId: createdUser.userId,
-        type: 'oauth',
-        provider: 'google',
+  const user = await db.$transaction(async (tx) => {
+    const account = await tx.account.findFirst({
+      where: {
         providerAccountId: id,
-        expiresAt: expiresAt,
-      },
-      select: {
-        user: true,
       },
     });
-  }
 
-  const mappedUser = mapPrismaUser(createdUser);
-  return mappedUser;
+    const accountExists = Boolean(account);
+
+    const createdUser = await tx.user.create({
+      data: {
+        userId: account?.userId,
+        name: name,
+        username: temporaryUsername,
+        avatarUrl: picture,
+      },
+    });
+
+    if (!accountExists) {
+      await tx.account.create({
+        data: {
+          userId: createdUser.userId,
+          type: 'oauth',
+          provider: 'google',
+          providerAccountId: id,
+          expiresAt: expiresAt,
+        },
+        select: {
+          user: true,
+        },
+      });
+    }
+
+    const mappedUser = mapPrismaUser(createdUser);
+    return mappedUser;
+  });
+
+  return user;
 };
 
 export const signInGoogle = async (googleId: string) => {
-  try {
-    const account = await db.account.findFirst({
+  const user = await db.$transaction(async (tx) => {
+    const account = await tx.account.findFirst({
       where: {
         providerAccountId: googleId,
       },
     });
 
-    const user = await db.user.findUnique({
+    const user = await tx.user.findUnique({
       where: {
         userId: account?.userId,
       },
@@ -97,5 +101,7 @@ export const signInGoogle = async (googleId: string) => {
     }
 
     return null;
-  } catch (error) {}
+  });
+
+  return user;
 };

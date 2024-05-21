@@ -32,7 +32,13 @@ export default async function HomePage() {
         return queryClient.prefetchQuery(userQueryOptions(authorId));
       })
     );
-  } catch (error) {}
+
+    // eslint-disable-next-line no-console
+    console.log({ data });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log({ error });
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
