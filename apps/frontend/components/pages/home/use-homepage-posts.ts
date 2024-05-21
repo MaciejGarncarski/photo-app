@@ -28,33 +28,7 @@ export const getHomepagePostsOptions = infiniteQueryOptions({
   getNextPageParam: nextPageParam,
 });
 
-export const TEST = infiniteQueryOptions({
-  queryKey: HOME_POSTS_QUERY_KEY,
-  queryFn: async ({ pageParam }) => {
-    const sleep: Promise<string> = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("");
-      }, 5000);
-    });
-
-    await sleep;
-
-    const { data } = await getInfinitePosts({
-      skip: pageParam.toString(),
-    });
-
-    if (!data) {
-      throw new Error("Fetch failed");
-    }
-
-    return data;
-  },
-  initialPageParam: 0,
-  refetchOnWindowFocus: false,
-  getNextPageParam: nextPageParam,
-});
-
 export const useHomepagePosts = () => {
-  const query = useInfiniteQuery(TEST);
+  const query = useInfiniteQuery(getHomepagePostsOptions);
   return query;
 };

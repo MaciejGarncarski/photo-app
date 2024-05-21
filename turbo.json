@@ -9,6 +9,7 @@
     },
     "lint": {},
     "format": {},
+    "start": {},
     "check-types": {},
     "dev": {
       "cache": false

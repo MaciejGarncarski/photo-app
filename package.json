@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "start": "turbo start",
     "lint": "pnpm lint",
     "lint-format": "pnpm lint-format",
     "format": "pnpm prettier --write \"**/*.{ts,tsx}\"",
