@@ -1,7 +1,6 @@
 "use client";
 
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -9,7 +8,6 @@ import { useUser } from "@/hooks/use-user";
 import { formatDateRelative } from "@/utils/format-date-relative";
 
 import { Avatar } from "@/components/avatar/avatar";
-import { linkVariants } from "@/components/chat-users-list/chat-users-list.animation";
 
 import styles from "./chat-users-list.module.scss";
 
@@ -19,8 +17,6 @@ type Props = {
   messageCreatedAt: string | null;
 };
 
-const MotionLink = motion(Link);
-
 export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
   const { data, isPending } = useUser({ userId });
   const params = useParams();
@@ -28,23 +24,14 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
   const isActive = userId === (params?.receiverId as string);
 
   return (
-    <AnimatePresence mode="wait">
+    <>
       {isPending || !data ? (
-        <motion.li
-          key={`placeholder-${userId}`}
-          className={styles.listItem}
-          exit={{ opacity: 0 }}
-        >
+        <li key={`placeholder-${userId}`} className={styles.listItem}>
           <div className={styles.placeholderLoading} />
-        </motion.li>
+        </li>
       ) : (
-        <motion.li
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className={styles.listItem}
-        >
-          <MotionLink
-            variants={linkVariants}
+        <li className={styles.listItem}>
+          <Link
             href={`/chat/${data.username}`}
             className={clsx(isActive && styles.linkActive, styles.link)}
           >
@@ -62,9 +49,9 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
                 </time>
               </span>
             )}
-          </MotionLink>
-        </motion.li>
+          </Link>
+        </li>
       )}
-    </AnimatePresence>
+    </>
   );
 };

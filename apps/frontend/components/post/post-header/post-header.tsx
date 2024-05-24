@@ -2,7 +2,6 @@
 
 import { DotsThreeVertical, Trash } from "@phosphor-icons/react";
 import * as Tooltip from "@radix-ui/react-tooltip";
-import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -70,13 +69,11 @@ export const PostHeader = ({ tag: Tag = "header", postId }: Props) => {
               </time>
             </button>
           </Tooltip.Trigger>
-          <AnimatePresence mode="wait">
-            {isOpen ? (
-              <TooltipContent>
-                {formatDateFull(postData?.createdAt || "", { fullMonth: true })}
-              </TooltipContent>
-            ) : null}
-          </AnimatePresence>
+          {isOpen ? (
+            <TooltipContent>
+              {formatDateFull(postData?.createdAt || "", { fullMonth: true })}
+            </TooltipContent>
+          ) : null}
         </Tooltip.Root>
       </Tooltip.Provider>
 

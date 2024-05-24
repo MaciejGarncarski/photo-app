@@ -1,7 +1,6 @@
 "use client";
 
 import { PlusCircle } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
 
 import { useAuth } from "@/hooks/use-auth";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
@@ -34,18 +33,18 @@ export const Home = () => {
 
   if (isPending) {
     return (
-      <motion.div className={styles.posts}>
+      <div className={styles.posts}>
         <PostPlaceholder />
         <PostPlaceholder />
         <PostPlaceholder />
-      </motion.div>
+      </div>
     );
   }
 
   const noPosts = data?.pages[0] && data.pages[0].postsCount < 1;
 
   return (
-    <motion.div className={styles.posts}>
+    <div className={styles.posts}>
       <NewPostNotification />
       {noPosts ? (
         <div className={styles.noPosts}>
@@ -70,6 +69,6 @@ export const Home = () => {
           <Loader size="small" color="primary" />
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };

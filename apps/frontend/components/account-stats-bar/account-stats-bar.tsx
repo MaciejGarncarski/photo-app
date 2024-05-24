@@ -1,5 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
-
 import { useUserStats } from "@/components/account-stats-bar/use-user-stats";
 import { FollowersFriendsModal } from "@/components/modals/followers-friends-modal/followers-friends-modal";
 
@@ -14,7 +12,7 @@ export const AccountStats = ({ userId }: Props) => {
 
   return (
     <>
-      <motion.ul className={styles.list}>
+      <ul className={styles.list}>
         {listData.map(({ onClick, title, titleOne, count }) => {
           return (
             <li className={styles.listItem} key={title}>
@@ -27,23 +25,21 @@ export const AccountStats = ({ userId }: Props) => {
             </li>
           );
         })}
-      </motion.ul>
-      <AnimatePresence>
-        {friendsModal.isModalOpen && (
-          <FollowersFriendsModal
-            type="friends"
-            closeModal={friendsModal.closeModal}
-            userId={userId}
-          />
-        )}
-        {followersModal.isModalOpen && (
-          <FollowersFriendsModal
-            type="followers"
-            closeModal={followersModal.closeModal}
-            userId={userId}
-          />
-        )}
-      </AnimatePresence>
+      </ul>
+      {friendsModal.isModalOpen && (
+        <FollowersFriendsModal
+          type="friends"
+          closeModal={friendsModal.closeModal}
+          userId={userId}
+        />
+      )}
+      {followersModal.isModalOpen && (
+        <FollowersFriendsModal
+          type="followers"
+          closeModal={followersModal.closeModal}
+          userId={userId}
+        />
+      )}
     </>
   );
 };

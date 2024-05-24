@@ -25,8 +25,8 @@ export const Button = ({
   return (
     <IconContext.Provider
       value={{
-        weight: "bold",
-        size: 20,
+        weight: "fill",
+        size: 19,
       }}
     >
       <button

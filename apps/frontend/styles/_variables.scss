@@ -1,15 +1,14 @@
 @use "common";
 
 %variables {
-  --color-primary: rgb(255, 255, 255);
+  --color-primary: #ffffff;
   --color-secondary: rgb(245, 245, 245);
   --color-accent: rgb(109, 194, 171);
   --color-accent-darker: rgb(2, 189, 117);
-  --color-accent-active: rgb(121, 206, 183);
-  --color-always-black: rgb(22, 22, 22);
+  --color-accent-active: rgb(113, 190, 170);
+  --color-always-black: #041f1e;
   --color-always-white: rgb(255, 255, 255);
 
-  --color-active: rgb(242, 242, 242);
   --color-error: rgb(207, 60, 30);
   --color-error-light: rgb(245, 157, 157);
   --color-error-light-active: rgb(231, 114, 114);
@@ -17,7 +16,7 @@
   --color-gray-active: rgb(242, 242, 242);
   --color-overlay: rgba(0, 0, 0, 0.4);
 
-  --color-text: rgb(6, 20, 16);
+  --color-text: #041f1e;
   --color-text-gray: rgb(80, 80, 80);
 
   --transition: 0.2s ease-in-out;
@@ -37,7 +36,10 @@
   --radius-medium: 0.42rem;
   --radius-small: 0.3rem;
 
+  --margin-label: 0.2rem;
+
   --header-width: calc(10rem + 10vw);
+
   --post-width: clamp(16rem, 85vw, 22rem);
 
   @include common.mediaquery("tablet") {

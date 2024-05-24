@@ -51,23 +51,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-medium);
   gap: 1rem;
-  padding: 0.6rem;
+  border: 1px solid transparent;
+  padding: 0.5rem;
   font-size: 1.25rem;
+  transition: all var(--transition) ease-in-out;
 
   @include common.mediaquery("desktop") {
     justify-content: flex-start;
     padding: 1rem 0.75rem;
-    border-radius: var(--radius-medium);
-    transition: all var(--transition-fast);
     width: 100%;
     height: auto;
-  }
-
-  &:hover,
-  &:focus {
-    @extend .active;
   }
 }
 
@@ -76,10 +71,13 @@
 }
 
 .active {
+  background-color: var(--color-primary);
+  border: 1px solid var(--shadow-0-5);
+  box-shadow: var(--shadow);
+
   @include common.mediaquery("desktop") {
     background-color: var(--color-primary);
     font-weight: 700;
-    box-shadow: var(--shadow);
 
     & > .icon {
       transform: scale(1.1);

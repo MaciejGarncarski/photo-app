@@ -1,21 +1,24 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-
-import { useDebounce } from "@/hooks/use-debounce";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useUpdateWidth = () => {
   const imageRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
-  const debouncedWidth = useDebounce(width, 350);
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const handleResize = useCallback(() => {
     if (!imageRef.current) {
       return;
     }
-    setWidth(imageRef.current.clientWidth);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    setWidth(imageRef.current?.getBoundingClientRect().width);
   }, []);
 
   useEffect(() => {
-    setWidth(imageRef.current?.clientWidth || 0);
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -23,10 +26,8 @@ export const useUpdateWidth = () => {
     };
   }, [handleResize]);
 
-  return useMemo(() => {
-    return {
-      width: debouncedWidth,
-      imageRef,
-    };
-  }, [debouncedWidth]);
+  return {
+    width: width,
+    imageRef,
+  };
 };

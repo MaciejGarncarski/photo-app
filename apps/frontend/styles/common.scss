@@ -29,16 +29,16 @@
   );
   color: var(--color-always-black);
   font-weight: 500;
-  padding: 0.4rem 0.8rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  letter-spacing: 0em;
+  line-height: 1.25rem;
+  height: 2.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   transition: all var(--transition-fast);
   transition-property: background-color, color, box-shadow;
-
-  @include mediaquery("desktop") {
-    padding: 0.5rem 1rem;
-  }
 }

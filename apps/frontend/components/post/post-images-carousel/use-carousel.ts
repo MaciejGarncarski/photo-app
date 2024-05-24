@@ -1,49 +1,30 @@
-import type { PanInfo } from "framer-motion";
 import { useState } from "react";
 
-import type { PostImage } from "@/schemas/post.schema";
+const percentWidthToChangePhoto = 20;
 
-type ArgsTypes = {
-  postImages: Array<PostImage>;
-};
-
-const CHANGE_IMG_OFFSET = 50;
-
-export const useCarousel = ({ postImages }: ArgsTypes) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const useCarousel = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [side, setSide] = useState<"left" | "right">("right");
 
   const handlePrevImage = () => {
-    if (currentIndex === 0) {
-      return;
-    }
-    setCurrentIndex((prevImage) => prevImage - 1);
+    setCurrentImage((prev) => {
+      if (prev >= 0) {
+        return prev - 1;
+      }
+
+      return prev;
+    });
   };
 
   const handleNextImage = () => {
-    if (currentIndex === postImages.length - 1) {
-      return;
-    }
-    setCurrentIndex((prevImage) => prevImage + 1);
+    setCurrentImage((prev) => {
+      if (prev <= 2) {
+        return prev + 1;
+      }
+
+      return prev;
+    });
   };
 
-  const handleDragEnd = (
-    _: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
-  ): void => {
-    const { offset } = info;
-    if (offset.x < CHANGE_IMG_OFFSET * -1) {
-      handleNextImage();
-      return;
-    }
-
-    if (offset.x > CHANGE_IMG_OFFSET) {
-      handlePrevImage();
-    }
-  };
-  return {
-    handlePrevImage,
-    handleNextImage,
-    handleDragEnd,
-    currentIndex,
-  };
+  return { currentImage, handlePrevImage, handleNextImage };
 };

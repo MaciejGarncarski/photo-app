@@ -15,7 +15,7 @@
   z-index: 3;
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow);
-  border: 1px solid var(--shadow-0-5);
+  border: 1px solid var(--shadow-1);
   background-color: var(--color-secondary);
 
   @include common.mediaquery("tablet") {

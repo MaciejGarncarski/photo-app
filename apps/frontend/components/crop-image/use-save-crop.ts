@@ -1,10 +1,10 @@
+import { nanoid } from "nanoid";
 import { useCallback, useState } from "react";
 import type { Area } from "react-easy-crop";
 
 import { convertToBlob } from "@/utils/convert-to-blob";
 
 import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
-
 type Arguments = {
   resetImgSrc: () => void;
   imgSrc: string | null;
@@ -26,7 +26,7 @@ export const useSaveCrop = ({
     setIsCropping(true);
     if (cropAreaPixels && imgSrc) {
       const blob = await convertToBlob(imgSrc, cropAreaPixels);
-      const imageId = crypto.randomUUID();
+      const imageId = nanoid();
 
       if (!blob) {
         return;

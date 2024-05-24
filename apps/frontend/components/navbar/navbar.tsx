@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { useAuth } from "@/hooks/use-auth";
@@ -21,7 +20,7 @@ export const Navbar = () => {
   const showUserOptions = !isTabletOrMobile && sessionUser?.id && !isPending;
 
   return (
-    <motion.nav initial="hidden" animate="visible" className={styles.navbar}>
+    <nav className={styles.navbar}>
       <h1 className={styles.heading}>
         <Link href="/">Photo App</Link>
       </h1>
@@ -44,6 +43,6 @@ export const Navbar = () => {
         isVisible={isSettingsOpen}
         closeSettingsModal={() => setSettingsOpen(false)}
       />
-    </motion.nav>
+    </nav>
   );
 };

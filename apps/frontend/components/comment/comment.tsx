@@ -2,7 +2,6 @@ import { DotsThree, Trash } from "@phosphor-icons/react";
 import * as Dropdown from "@radix-ui/react-dropdown-menu";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -42,7 +41,7 @@ export const Comment = ({ commentData }: Props) => {
   } = useComment({ commentData });
 
   return (
-    <motion.article className={styles.comment}>
+    <article className={styles.comment}>
       <Link href={userAccountHref} className={styles.avatarContainer}>
         <span className="visually-hidden">@{username}</span>
         <Avatar userId={authorId} size="small" />
@@ -64,13 +63,11 @@ export const Comment = ({ commentData }: Props) => {
                 <time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
               </button>
             </Tooltip.Trigger>
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <TooltipContent>
-                  {formatDateFull(createdAt, { fullMonth: true })}
-                </TooltipContent>
-              ) : null}
-            </AnimatePresence>
+            {isOpen ? (
+              <TooltipContent>
+                {formatDateFull(createdAt, { fullMonth: true })}
+              </TooltipContent>
+            ) : null}
           </Tooltip.Root>
         </Tooltip.Provider>
 
@@ -109,6 +106,6 @@ export const Comment = ({ commentData }: Props) => {
           Cancel
         </Button>
       </ConfirmationDialog>
-    </motion.article>
+    </article>
   );
 };

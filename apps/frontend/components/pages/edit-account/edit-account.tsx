@@ -1,7 +1,6 @@
 "use client";
 
 import { CameraPlus, Pencil } from "@phosphor-icons/react";
-import { AnimatePresence } from "framer-motion";
 import ReactFocusLock from "react-focus-lock";
 
 import { useAuth } from "@/hooks/use-auth";
@@ -96,28 +95,26 @@ export const EditAccount = () => {
         </Button>
       </ConfirmationDialog>
 
-      <AnimatePresence mode="wait">
-        {updateAvatarModal.isModalOpen && (
-          <ModalBackdrop closeModal={() => null}>
-            <ReactFocusLock autoFocus={false}>
-              <div className={styles.modal}>
-                <div className={styles.modalHeader}>
-                  <Heading size="medium" tag="h3">
-                    Update avatar
-                  </Heading>
-                  <div className={styles.closeButton}>
-                    <ModalCloseButton
-                      onClose={updateAvatarModal.closeModal}
-                      variant="primary"
-                    />
-                  </div>
+      {updateAvatarModal.isModalOpen && (
+        <ModalBackdrop closeModal={() => null}>
+          <ReactFocusLock autoFocus={false}>
+            <div className={styles.modal}>
+              <div className={styles.modalHeader}>
+                <Heading size="medium" tag="h3">
+                  Update avatar
+                </Heading>
+                <div className={styles.closeButton}>
+                  <ModalCloseButton
+                    onClose={updateAvatarModal.closeModal}
+                    variant="primary"
+                  />
                 </div>
-                <UpdateAvatarView closeModal={updateAvatarModal.closeModal} />
               </div>
-            </ReactFocusLock>
-          </ModalBackdrop>
-        )}
-      </AnimatePresence>
+              <UpdateAvatarView closeModal={updateAvatarModal.closeModal} />
+            </div>
+          </ReactFocusLock>
+        </ModalBackdrop>
+      )}
     </>
   );
 };

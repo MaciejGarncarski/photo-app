@@ -1,7 +1,7 @@
 @use "common";
 
 .container {
-  width: clamp(20rem, 50vw, 44rem);
+  width: clamp(20rem, 65vw, 55rem);
   display: flex;
   gap: 1rem;
   flex-direction: column;

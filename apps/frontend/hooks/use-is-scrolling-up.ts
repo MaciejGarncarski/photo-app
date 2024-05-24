@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useDebounce } from "@/hooks/use-debounce";
 
@@ -7,12 +7,12 @@ export const useIsScrollingUp = () => {
   const debouncedIsGoingUp = useDebounce(isScrollingUp);
   const lastScroll = useRef<number>(0);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const isGoingUp = window.scrollY < lastScroll.current;
     setIsScrollingUp(isGoingUp);
 
     lastScroll.current = scrollY > 0 ? scrollY : 0;
-  };
+  }, []);
 
   useEffect(() => {
     lastScroll.current = window.scrollY;

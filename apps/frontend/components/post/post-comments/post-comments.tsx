@@ -1,7 +1,6 @@
 import { CaretDown } from "@phosphor-icons/react";
 import * as Dropdown from "@radix-ui/react-dropdown-menu";
 import clsx from "clsx";
-import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
@@ -57,13 +56,9 @@ export const PostComments = ({ postId, closeModal }: Props) => {
                   radioItems.find((sortItem) => sortItem.value === sortOption)
                     ?.text
                 }
-                <motion.span
-                  animate={{
-                    rotate: isOpen ? 180 : 0,
-                  }}
-                >
+                <span>
                   <CaretDown size={20} />
-                </motion.span>
+                </span>
               </button>
             </Dropdown.Trigger>
             <Dropdown.Portal>

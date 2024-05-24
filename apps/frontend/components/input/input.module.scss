@@ -17,6 +17,7 @@
   transition: all var(--transition);
   transition-property: background-color, transform, opacity;
   display: inline-block;
+  margin-left: var(--margin-label);
 }
 
 .input {
@@ -43,7 +44,7 @@
 }
 
 .inputError {
-  background-color: var(--color-error-light);
+  border-color: var(--color-error-light);
 
   &::placeholder {
     color: var(--color-text);
@@ -55,6 +56,6 @@
   color: var(--color-error);
   padding-left: var(--gap);
   font-weight: 400;
-  margin-left: 0.75rem;
+  margin-left: var(--margin-label);
   margin-top: 0.25rem;
 }

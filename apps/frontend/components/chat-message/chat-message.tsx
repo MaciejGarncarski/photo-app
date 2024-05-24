@@ -1,7 +1,6 @@
 import { DotsThree, Trash } from "@phosphor-icons/react";
 import * as Dropdown from "@radix-ui/react-dropdown-menu";
 import clsx from "clsx";
-import { AnimatePresence } from "framer-motion";
 
 import { useIsTabletOrMobile } from "@/hooks/use-is-tablet-or-mobile";
 import { useLongPress } from "@/hooks/use-long-press";
@@ -94,17 +93,15 @@ export const ChatMessage = ({
           ) : (
             <span className={styles.text}>{text}</span>
           )}
-          <AnimatePresence mode="wait">
-            {isOpen && (
-              <ChatMessageDropdown
-                messageText={text}
-                closeModal={closeDropdown}
-                createdAt={createdAt}
-                isReceiver={isReceiver}
-                confirmationModal={confirmation}
-              />
-            )}
-          </AnimatePresence>
+          {isOpen && (
+            <ChatMessageDropdown
+              messageText={text}
+              closeModal={closeDropdown}
+              createdAt={createdAt}
+              isReceiver={isReceiver}
+              confirmationModal={confirmation}
+            />
+          )}
         </div>
       </Dropdown.Root>
 

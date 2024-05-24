@@ -1,5 +1,5 @@
 import type { InfiniteData } from "@tanstack/react-query";
-import { forwardRef, Fragment } from "react";
+import { Fragment, Ref } from "react";
 
 import { formatDateFull } from "@/utils/format-date-full";
 
@@ -14,47 +14,49 @@ type Props = {
   messagesData: InfiniteData<ChatMessagesType>;
   hasNextPage: boolean;
   isPending: boolean;
+  ref: Ref<HTMLLIElement>;
 };
 
-export const ChatMessages = forwardRef<HTMLLIElement, Props>(
-  ({ hasNextPage, isPending, messagesData }, ref) => {
-    const { groupedMessages, isEmpty } = groupMessagesByUser(
-      messagesData.pages
-    );
+export const ChatMessages = ({
+  hasNextPage,
+  isPending,
+  messagesData,
+  ref,
+}: Props) => {
+  const { groupedMessages, isEmpty } = groupMessagesByUser(messagesData.pages);
 
-    if (isEmpty) {
-      return (
-        <div className={styles.messages}>
-          <p className={styles.noMessages}>No messages yet.</p>
-        </div>
-      );
-    }
-
+  if (isEmpty) {
     return (
-      <ul className={styles.messages}>
-        {groupedMessages.map((group) => {
-          const message = group[group.length - 1];
-
-          return (
-            <Fragment key={message.id}>
-              <ChatMessageGroup messageGroup={group} />
-              {message.shouldShowTime && (
-                <li className={styles.time}>
-                  <time dateTime={message.createdAt}>
-                    {formatDateFull(message.createdAt)}
-                  </time>
-                </li>
-              )}
-            </Fragment>
-          );
-        })}
-
-        {hasNextPage && !isPending && (
-          <li className={styles.loading} ref={ref}>
-            <Loader color="accent" size="big" />
-          </li>
-        )}
-      </ul>
+      <div className={styles.messages}>
+        <p className={styles.noMessages}>No messages yet.</p>
+      </div>
     );
   }
-);
+
+  return (
+    <ul className={styles.messages}>
+      {groupedMessages.map((group) => {
+        const message = group[group.length - 1];
+
+        return (
+          <Fragment key={message.id}>
+            <ChatMessageGroup messageGroup={group} />
+            {message.shouldShowTime && (
+              <li className={styles.time}>
+                <time dateTime={message.createdAt}>
+                  {formatDateFull(message.createdAt)}
+                </time>
+              </li>
+            )}
+          </Fragment>
+        );
+      })}
+
+      {hasNextPage && !isPending && (
+        <li className={styles.loading} ref={ref}>
+          <Loader color="accent" size="big" />
+        </li>
+      )}
+    </ul>
+  );
+};

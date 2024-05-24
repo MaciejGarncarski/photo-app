@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import ReactFocusLock from "react-focus-lock";
 
 import { ModalCloseButton } from "@/components/buttons/modal-close-button/modal-close-button";
@@ -22,12 +21,7 @@ export const FollowersFriendsModal = ({ closeModal, type, userId }: Props) => {
 
   return (
     <ModalBackdrop closeModal={closeModal}>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className={styles.container}
-      >
+      <div className={styles.container}>
         <ReactFocusLock autoFocus={false}>
           <div className={styles.header}>
             <h3 className={styles.heading}>{type.toUpperCase()}</h3>
@@ -38,27 +32,23 @@ export const FollowersFriendsModal = ({ closeModal, type, userId }: Props) => {
               <li className={styles.noData}>No {type} yet.</li>
             </ul>
           )}
-          <AnimatePresence mode="wait">
-            {isPending ? (
-              <ul className={styles.list} ref={ref}>
-                {Array.from({ length: 3 }, (_, item) => item).map((el) => {
-                  return <li className={styles.placeholder} key={el} />;
-                })}
-              </ul>
-            ) : (
-              <ul className={styles.list}>
-                {data?.pages.map((page) => {
-                  return page.users.map((userId) => {
-                    return (
-                      <FollowersFriendsItem key={userId} userId={userId} />
-                    );
-                  });
-                })}
-              </ul>
-            )}
-          </AnimatePresence>
+          {isPending ? (
+            <ul className={styles.list} ref={ref}>
+              {Array.from({ length: 3 }, (_, item) => item).map((el) => {
+                return <li className={styles.placeholder} key={el} />;
+              })}
+            </ul>
+          ) : (
+            <ul className={styles.list}>
+              {data?.pages.map((page) => {
+                return page.users.map((userId) => {
+                  return <FollowersFriendsItem key={userId} userId={userId} />;
+                });
+              })}
+            </ul>
+          )}
         </ReactFocusLock>
-      </motion.div>
+      </div>
     </ModalBackdrop>
   );
 };

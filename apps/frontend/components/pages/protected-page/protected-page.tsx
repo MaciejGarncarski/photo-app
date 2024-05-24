@@ -14,10 +14,10 @@ type Props = {
 
 export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
   const router = useRouter();
-  const { isSignedIn, isFetching } = useAuth();
+  const { isSignedIn, isFetching, isPending } = useAuth();
 
   useEffect(() => {
-    if (isFetching) {
+    if (isFetching || isPending) {
       return;
     }
 
@@ -30,7 +30,14 @@ export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
       router.replace("/auth/sign-in");
       return;
     }
-  }, [isFetching, router.replace, isSignedIn, sessionNeeded]);
+  }, [
+    isFetching,
+    router.replace,
+    isSignedIn,
+    sessionNeeded,
+    isPending,
+    router,
+  ]);
 
   if (isFetching) {
     return <Loader size="big" color="accent" marginTop />;

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { CSSProperties } from "react";
 
 import { HeartAnimation } from "@/components/heart-animation/heart-animation";
 import { usePost } from "@/components/pages/account/use-post";
@@ -20,76 +20,54 @@ type Props = {
 export const PostImagesCarousel = ({ postId, priority }: Props) => {
   const { data: post, isPending } = usePost({ postId });
   const { width, imageRef } = useUpdateWidth();
+  const { currentImage, handleNextImage, handlePrevImage } = useCarousel();
 
   const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
     postId,
     isLiked: Boolean(post?.isLiked),
   });
 
-  const { handleDragEnd, handleNextImage, handlePrevImage, currentIndex } =
-    useCarousel({
-      postImages: post?.images || [],
-    });
-
   if (isPending || !post) {
     return null;
   }
 
-  const isSingleImage = post.images.length <= 1;
-
   return (
-    <motion.div
+    <div
       onDoubleClick={handleLikeWithAnimation}
       className={styles.slider}
       data-cy="post slider"
     >
       <HeartAnimation isVisible={isLikeAnimationShown} />
-      <motion.div
-        drag={isSingleImage ? undefined : "x"}
-        onDragEnd={handleDragEnd}
-        dragConstraints={{ right: 0, left: 0 }}
-        dragMomentum={true}
-        dragTransition={{
-          bounceDamping: 30,
-        }}
-        whileDrag={{ cursor: "grabbing" }}
-        className={styles.draggable}
-        style={{
-          cursor: isSingleImage ? "auto" : "grab",
-        }}
+      <div
+        ref={imageRef}
+        className={styles.imagesContainer}
+        style={
+          {
+            "--currentImage": currentImage,
+            "--width": `${width}px`,
+          } as CSSProperties
+        }
       >
-        <motion.div
-          ref={imageRef}
-          animate={{
-            x: `calc(calc(${-1 * width}px - var(--gap)) * ${currentIndex})`,
-            transition: {
-              ease: "easeOut",
-              duration: 0.2,
-            },
-          }}
-          className={styles.imagesContainer}
-        >
-          {post.images.map((image, idx) => {
-            return (
-              <motion.div className={styles.image} key={image.fileId}>
-                <PostImage
-                  priority={priority && idx === 0}
-                  url={image.url}
-                  width={image.width}
-                  height={image.height}
-                  postId={post.id}
-                />
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </motion.div>
+        {post.images.map((image, idx) => {
+          return (
+            <div className={styles.image} key={image.fileId}>
+              <PostImage
+                priority={priority && idx === 0}
+                url={image.url}
+                width={image.width}
+                height={image.height}
+                postId={post.id}
+              />
+            </div>
+          );
+        })}
+      </div>
       <PostArrows
-        currentIndex={currentIndex}
-        handleNextImage={handleNextImage}
+        currentIndex={currentImage}
         postImages={post.images}
         handlePrevImage={handlePrevImage}
+        handleNextImage={handleNextImage}
       />
-    </motion.div>
+    </div>
   );
 };

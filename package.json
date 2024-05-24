@@ -5,21 +5,21 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "start": "turbo start",
-    "lint": "pnpm lint",
+    "lint": "pnpm eslint -c eslint.config.mjs --fix",
     "lint-format": "pnpm lint-format",
     "format": "pnpm prettier --write \"**/*.{ts,tsx}\"",
     "check-types": "pnpm run check-types --parallel",
-    "prepare": "pnpm husky"
+    "prepare": "pnpm husky",
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
-    "husky": "^9.0.11",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "lint-staged": "^15.2.2",
-    "turbo": "^1.13.3",
-    "typescript-eslint": "8.0.0-alpha.13",
+    "@eslint/compat": "^1.0.1",
+    "@eslint/eslintrc": "^3.0.2",
+    "@next/eslint-plugin-next": "15.0.0-rc.0",
     "eslint": "^9.3.0",
-    "eslint-config-next": "^14.2.3",
+    "eslint-config-next": "15.0.0-rc.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^5.1.3",
@@ -28,8 +28,9 @@
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslint-plugin-testing-library": "^6.2.2",
     "eslint-plugin-unused-imports": "^3.2.0",
-    "@eslint/compat": "^1.0.1",
-    "@eslint/eslintrc": "^3.0.2",
-    "@next/eslint-plugin-next": "^14.2.3"
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "turbo": "^1.13.3",
+    "typescript-eslint": "8.0.0-alpha.13"
   }
 }

@@ -1,5 +1,3 @@
-import { AnimatePresence, type Variants } from "framer-motion";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -29,22 +27,6 @@ type ModalListItemConditionalProps = WithButton | WithLink;
 
 type ModalListItemProps = Props & ModalListItemConditionalProps;
 
-const itemVariants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-};
-
-const animationProps = {
-  variants: itemVariants,
-  initial: "initial",
-  animate: "visible",
-  exit: "exit",
-};
-
 export const ListModalItem = ({
   type,
   icon,
@@ -55,26 +37,23 @@ export const ListModalItem = ({
 }: ModalListItemProps) => {
   return (
     <li className={styles.item}>
-      <AnimatePresence mode="wait">
-        {type === "button" && (
-          <motion.button
-            {...animationProps}
-            type="button"
-            onClick={onClick}
-            disabled={disabled}
-            className={styles.content}
-          >
-            {icon}
-            {children}
-          </motion.button>
-        )}
-        {type === "link" && (
-          <Link href={href} className={styles.content} onClick={onClick}>
-            {icon}
-            {children}
-          </Link>
-        )}
-      </AnimatePresence>
+      {type === "button" && (
+        <button
+          type="button"
+          onClick={onClick}
+          disabled={disabled}
+          className={styles.content}
+        >
+          {icon}
+          {children}
+        </button>
+      )}
+      {type === "link" && (
+        <Link href={href} className={styles.content} onClick={onClick}>
+          {icon}
+          {children}
+        </Link>
+      )}
     </li>
   );
 };

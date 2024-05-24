@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 import { formatLikes } from "@/utils/format-likes";
 
 import { usePostButtonsData } from "@/components/post/post-buttons/use-post-buttons";
@@ -23,14 +21,10 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
       {buttonData.map(({ alt, icon, onClick, count }) => {
         return (
           <li key={alt} className={styles.listItem}>
-            <motion.button
-              className={styles.button}
-              type="button"
-              onClick={onClick}
-            >
+            <button className={styles.button} type="button" onClick={onClick}>
               {icon}
               <span className="visually-hidden">{alt}</span>
-            </motion.button>
+            </button>
             {count !== 0 && (
               <span className={styles.count}>{formatLikes(count)}</span>
             )}

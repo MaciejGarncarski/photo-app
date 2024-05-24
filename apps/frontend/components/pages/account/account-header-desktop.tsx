@@ -1,5 +1,4 @@
 import { GearSix } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
 
 import { useAuth } from "@/hooks/use-auth";
 import { useUser } from "@/hooks/use-user";
@@ -57,10 +56,10 @@ export const AccountHeaderDesktop = ({
         )}
       </div>
       <div className={styles.rightCol}>
-        <motion.h2 className={styles.username}>{username}</motion.h2>
+        <h2 className={styles.username}>{username}</h2>
         <AccountStats userId={userId} />
-        {name && <motion.p className={styles.name}>{name}</motion.p>}
-        <motion.p className={styles.bio}>{bio || "No bio yet."}</motion.p>
+        {name && <p className={styles.name}>{name}</p>}
+        <p className={styles.bio}>{bio || "No bio yet."}</p>
       </div>
     </main>
   );

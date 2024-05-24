@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { getPreviewImages } from "@/utils/get-preview-images";
 
@@ -6,10 +6,7 @@ import type { FinalImages } from "@/components/pages/create-post/create-post-sch
 
 export const useFinalImages = () => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
-  const { previewImages } = useMemo(
-    () => getPreviewImages(finalImages),
-    [finalImages]
-  );
+  const { previewImages } = getPreviewImages(finalImages);
 
   const onRemove = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {

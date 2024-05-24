@@ -1,7 +1,7 @@
 @use "common";
 
 .button {
-  --button-width: 2.5rem;
+  --button-width: 2.25rem;
   width: var(--button-width);
   height: var(--button-width);
   position: absolute;
@@ -17,7 +17,7 @@
   bottom: 0;
   left: 0.5rem;
   z-index: 2;
-  opacity: 0.7;
+  opacity: 0.85;
   box-shadow: var(--shadow);
   transition: box-shadow var(--transition-fast);
 

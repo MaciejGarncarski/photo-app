@@ -1,5 +1,4 @@
 import { CameraPlus, Trash } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 import type { PreviewImages } from "@/utils/get-preview-images";
@@ -38,12 +37,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
             );
           }
           return (
-            <motion.div
-              animate={{ opacity: 1, scale: 1 }}
-              initial={{ opacity: 0, scale: 0 }}
-              key={image.id}
-              className={styles.previewButton}
-            >
+            <div key={image.id} className={styles.previewButton}>
               <button
                 type="button"
                 onClick={() => onRemove(image.id)}
@@ -59,7 +53,7 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
                 width={200}
                 height={200}
               />
-            </motion.div>
+            </div>
           );
         })}
       </div>

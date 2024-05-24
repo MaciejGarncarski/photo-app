@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import { Button } from "@/components/buttons/button/button";
@@ -26,11 +25,7 @@ export const CreatePostForm = ({
   const buttonList = getButtonList(openModal, disabled);
 
   return (
-    <motion.form
-      onSubmit={onSubmit}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
+    <form onSubmit={onSubmit}>
       <TextArea
         label="Description"
         placeholder="Type in post description"
@@ -51,6 +46,6 @@ export const CreatePostForm = ({
           </Button>
         ))}
       </div>
-    </motion.form>
+    </form>
   );
 };

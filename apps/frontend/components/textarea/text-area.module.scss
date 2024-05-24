@@ -23,6 +23,7 @@
   margin-bottom: 0.5rem;
   display: inline-block;
   width: calc(100% - 1rem);
+  margin-left: var(--margin-label);
   transition: all var(--transition);
   transition-property: background-color, transform, opacity;
 }

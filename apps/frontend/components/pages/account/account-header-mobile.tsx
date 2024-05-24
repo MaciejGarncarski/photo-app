@@ -1,5 +1,4 @@
 import { GearSix } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
 
 import { useAuth } from "@/hooks/use-auth";
 import { useUser } from "@/hooks/use-user";
@@ -35,10 +34,10 @@ export const AccountHeaderMobile = ({
   const { bio, name, username } = data;
 
   return (
-    <motion.main className={styles.accountMobile}>
+    <main className={styles.accountMobile}>
       <div className={styles.avatarName}>
         <Avatar userId={userId} size="big" />
-        <motion.h2 className={styles.username}>{username}</motion.h2>
+        <h2 className={styles.username}>{username}</h2>
       </div>
       {!isOwner && isSignedIn && (
         <div className={styles.accountButtons}>
@@ -58,6 +57,6 @@ export const AccountHeaderMobile = ({
       <AccountStats userId={userId} />
       {name && <p className={styles.name}>{name}</p>}
       <p className={styles.bio}>{bio || "No bio yet."}</p>
-    </motion.main>
+    </main>
   );
 };

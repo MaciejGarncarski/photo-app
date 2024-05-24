@@ -1,13 +1,16 @@
 import { fixupPluginRules } from "@eslint/compat";
-import next from "@next/eslint-plugin-next";
 import importPlugin from "eslint-plugin-import";
+import nextPlugin from "@next/eslint-plugin-next";
+// import nextConfig from "@next/eslint-plugin-next";
 import jsxa11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import testingLibrary from "eslint-plugin-testing-library";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
+/** @type { import("eslint").Linter.FlatConfig[] } */
 export default [
   ...tseslint.configs.recommended,
   {
@@ -22,6 +25,7 @@ export default [
     ],
   },
   {
+    name: "PhotoApp - Frontend",
     files: [
       "apps/frontend/**/*.ts",
       "apps/frontend/**/*.tsx",
@@ -36,31 +40,25 @@ export default [
     },
     plugins: {
       "@typescript-eslint": tseslint.plugin,
+      next: fixupPluginRules(nextPlugin),
       "testing-library": testingLibrary,
-      next: next,
       import: importPlugin,
       "jsx-a11y": jsxa11y,
       react: react,
+      "react-hooks": fixupPluginRules(reactHooks),
       "simple-import-sort": simpleImportSort,
       "unused-imports": fixupPluginRules(unusedImports),
     },
     rules: {
-      // ...next.rules,
+      ...reactHooks.configs.recommended.rules,
       "no-unused-vars": "off",
       "no-console": "warn",
       "@typescript-eslint/explicit-module-boundary-types": "off",
-      // 'react/display-name': 'off',
-      // 'react/jsx-curly-brace-presence': [
-      //   'warn',
-      //   {
-      //     props: 'never',
-      //     children: 'never',
-      //   },
-      // ],
       "import/no-anonymous-default-export": "warn",
       "react/no-unknown-property": "off",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
+      "react-hooks/rules-of-hooks": "error",
       "jsx-a11y/alt-text": [
         "warn",
         {
@@ -107,6 +105,7 @@ export default [
     },
   },
   {
+    name: "PhotoApp - Backend",
     files: [
       "apps/backend/**/*.ts",
       "apps/backend/**/*.tsx",

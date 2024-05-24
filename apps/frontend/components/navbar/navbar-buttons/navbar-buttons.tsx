@@ -68,7 +68,9 @@ export const NavButtons = () => {
             )}
             onClick={() => setSettingsOpen(true)}
           >
-            <GearSix weight={isSettingsOpen ? "fill" : "bold"} />
+            <span className={styles.icon}>
+              <GearSix weight={isSettingsOpen ? "fill" : "bold"} />
+            </span>
             <span className={styles.title}>settings</span>
           </button>
         </li>

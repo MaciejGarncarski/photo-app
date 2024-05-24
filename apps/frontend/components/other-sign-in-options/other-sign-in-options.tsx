@@ -37,7 +37,7 @@ export const OtherSignInOptions = () => {
           disabled={isPending}
         >
           <TestTube />
-          Try it without an account
+          Continue without an account
         </Button>
       </div>
     </div>

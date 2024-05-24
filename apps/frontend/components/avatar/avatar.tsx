@@ -2,7 +2,6 @@
 
 import { User } from "@phosphor-icons/react";
 import clsx from "clsx";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 import { useUser } from "@/hooks/use-user";
@@ -15,8 +14,6 @@ type Props = {
   userId: string;
   size: Size;
 };
-
-export const MotionImage = motion(Image);
 
 const avatarSizes: Record<Size, number> = {
   big: 140,
@@ -46,7 +43,7 @@ export const Avatar = ({ userId, size }: Props) => {
   return (
     <span className={avatarClassName}>
       {avatar ? (
-        <MotionImage
+        <Image
           src={avatar}
           alt={`@${username} avatar`}
           width={avatarSize}

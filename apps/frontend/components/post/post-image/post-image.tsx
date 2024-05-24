@@ -1,10 +1,10 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { useState } from "react";
 
 import { useUser } from "@/hooks/use-user";
 import { getDescriptionData } from "@/utils/get-description-data";
 
-import { MotionImage } from "@/components/avatar/avatar";
 import { Loader } from "@/components/loader/loader";
 import { usePost } from "@/components/pages/account/use-post";
 
@@ -55,16 +55,11 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
           <Loader color="primary" size="big" />
         </span>
       )}
-
-      <MotionImage
+      <Image
         className={clsx(styles[imageAspectRatio], styles.sliderImage)}
         src={url}
         priority={priority}
         quality={100}
-        animate={{
-          filter: isLoading ? "blur(5px)" : "blur(0px)",
-          opacity: isLoading ? 0 : 1,
-        }}
         onLoad={() => setIsLoading(false)}
         width={600}
         height={600}
