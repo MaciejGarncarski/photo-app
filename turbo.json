@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "tasks": {
-    "#build": {
+    "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
@@ -12,7 +12,9 @@
     "frontend#build": {
       "dependsOn": ["^build", "backend#restart-deploy"]
     },
-    "backend#restart-deploy": {},
+    "backend#restart-deploy": {
+      "dependsOn": ["backend#build"]
+    },
     "format": {},
     "start": {},
     "check-types": {},
