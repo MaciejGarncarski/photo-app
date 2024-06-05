@@ -1,3 +1,5 @@
+"use client";
+
 import { usePost } from "@/components/pages/account/use-post";
 import { PostFooter } from "@/components/post/post-footer/post-footer";
 import { PostHeader } from "@/components/post/post-header/post-header";

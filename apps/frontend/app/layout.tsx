@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 
 const DefaultLayout = ({ children }: Props) => {
   return (
-    <html suppressHydrationWarning lang="en" className={inter.className}>
+    <html lang="en" className={inter.className}>
       <head />
       <body>
         <Providers>

@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUp } from "@phosphor-icons/react";
 
 import { useNewPost } from "@/components/new-post-notification/use-post-notification";

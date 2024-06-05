@@ -21,7 +21,6 @@ export const getHomepagePosts = async (skip: number) => {
       createdAt: 'desc',
     },
   });
-
   const postsCountRequest = db.post.count();
   const [postsList, postsCount] = await Promise.all([postsRequest, postsCountRequest]);
   const maxPages = postsCount / POSTS_PER_SCROLL;
