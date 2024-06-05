@@ -6,9 +6,9 @@ const withBundleAnalyzer = withBundleAnalyzerConfig({
 
 /** @type {import('next').NextConfig} */
 export default withBundleAnalyzer({
-  experimental: {
-    reactCompiler: true,
-  },
+  // experimental: {
+  //   reactCompiler: true,
+  // },
   images: {
     remotePatterns: [
       {
