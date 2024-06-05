@@ -27,7 +27,7 @@
     "jotai": "^2.8.0",
     "lodash.debounce": "^4.0.8",
     "nanoid": "^5.0.7",
-    "next": "15.0.0-canary.7",
+    "next": "15.0.0-canary.12",
     "next-themes": "^0.3.0",
     "react": "19.0.0-rc-6d3110b4d9-20240531",
     "react-dom": "19.0.0-rc-6d3110b4d9-20240531",
@@ -43,7 +43,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "15.0.0-canary.7",
+    "@next/bundle-analyzer": "15.0.0-canary.12",
     "@tanstack/react-query-devtools": "^5.36.1",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.7.0",
