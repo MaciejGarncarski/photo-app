@@ -1,4 +1,4 @@
-import { Static, Type } from '@fastify/type-provider-typebox';
+import { type Static, Type } from '@fastify/type-provider-typebox';
 
 export const addPostCommentInputSchema = Type.Object({
   commentText: Type.String(),

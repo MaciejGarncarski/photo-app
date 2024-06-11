@@ -1,4 +1,4 @@
-import { Static, Type } from '@fastify/type-provider-typebox';
+import { type Static, Type } from '@fastify/type-provider-typebox';
 
 import { username } from '../auth/auth.schema.js';
 import { Nullable } from '../../utils/nullable.js';

@@ -1,4 +1,4 @@
-import { Static, Type } from '@fastify/type-provider-typebox';
+import { type Static, Type } from '@fastify/type-provider-typebox';
 
 export const signInSchema = Type.Object({
   email: Type.String({ format: 'email' }),

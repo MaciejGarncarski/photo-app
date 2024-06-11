@@ -1,6 +1,6 @@
-import { FastifyRequest } from 'fastify';
+import type { FastifyRequest } from 'fastify';
 
-import { FollowersInput } from './follower-stats.schema.js';
+import type { FollowersInput } from './follower-stats.schema.js';
 import { getFollowersStats, getFriendsStats } from './follower-stats.service.js';
 
 export const getFollowersStatsHandler = async (request: FastifyRequest<{ Querystring: FollowersInput }>) => {

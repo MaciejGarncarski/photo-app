@@ -1,7 +1,7 @@
-import { MultipartFile } from '@fastify/multipart';
-import { FastifyRequest } from 'fastify';
+import type { MultipartFile } from '@fastify/multipart';
+import type { FastifyRequest } from 'fastify';
 
-import { EditAccountInput, UserWithStats } from './user.schema.js';
+import type { EditAccountInput, UserWithStats } from './user.schema.js';
 import { db } from '../../utils/db.js';
 import { getCount } from '../../utils/getCount.js';
 import { imageKit } from '../../utils/imagekit.js';

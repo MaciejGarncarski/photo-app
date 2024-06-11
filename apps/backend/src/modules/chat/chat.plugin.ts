@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 
 export const chatPlugin = async (server: FastifyInstance) => {
   server.ready((err) => {

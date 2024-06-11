@@ -1,8 +1,8 @@
-import { MultipartFile } from '@fastify/multipart';
-import { FastifyRequest } from 'fastify';
+import type { MultipartFile } from '@fastify/multipart';
+import type { FastifyRequest } from 'fastify';
 import { v4 } from 'uuid';
 
-import { CreatePostInput, GetUserPostsInput, PostDetails, PostsResponse } from './post.schema.js';
+import type { CreatePostInput, GetUserPostsInput, PostDetails, PostsResponse } from './post.schema.js';
 import { db } from '../../utils/db.js';
 import { imageKit } from '../../utils/imagekit.js';
 

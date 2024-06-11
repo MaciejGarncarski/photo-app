@@ -1,7 +1,7 @@
 type MappedChatUser = {
   userId: string;
-  message: string;
-  messageCreatedAt: string | null;
+  message: string | undefined | null;
+  messageCreatedAt: string | undefined | null;
 };
 
 export const sortChatUsers = (a: MappedChatUser, b: MappedChatUser) => {

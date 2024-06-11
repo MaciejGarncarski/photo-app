@@ -1,9 +1,9 @@
-import { Token } from '@fastify/oauth2';
+import type { Token } from '@fastify/oauth2';
 import { hash } from 'argon2';
 import ShortUniqueId from 'short-unique-id';
 
-import { GoogleUser, RegisterValues } from '../auth/auth.schema.js';
-import { User } from '../user/user.schema.js';
+import type { GoogleUser, RegisterValues } from '../auth/auth.schema.js';
+import type { User } from '../user/user.schema.js';
 import { db } from '../../utils/db.js';
 import { mapPrismaUser } from '../../utils/map-prisma-user.js';
 

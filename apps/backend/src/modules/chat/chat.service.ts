@@ -1,4 +1,4 @@
-import { ChatMessage, ChatMessagesResponse, ChatUsersResponse, CreateMessage } from './chat.schema.js';
+import type { ChatMessage, ChatMessagesResponse, ChatUsersResponse, CreateMessage } from './chat.schema.js';
 import { db } from '../../utils/db.js';
 import { getChatUsers } from '../../utils/get-chat-users.js';
 import { mapChatUsers } from '../../utils/map-chat-users.js';

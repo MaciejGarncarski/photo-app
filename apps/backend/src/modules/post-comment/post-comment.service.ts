@@ -1,4 +1,4 @@
-import { Comment, CommentResponse } from './post-comment.schema.js';
+import type { Comment, CommentResponse } from './post-comment.schema.js';
 import { db } from '../../utils/db.js';
 
 export const addComment = async (commentText: string, postId: number, sessionUserId: string) => {

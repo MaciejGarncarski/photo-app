@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox';
-import { FastifyPluginAsync } from 'fastify';
+import type { FastifyPluginAsync } from 'fastify';
 
 import { getFollowersStatsHandler, getFriendsStatsHandler } from './follower-stats.controller.js';
 import { followersInputSchema, followersResponseSchema } from './follower-stats.schema.js';

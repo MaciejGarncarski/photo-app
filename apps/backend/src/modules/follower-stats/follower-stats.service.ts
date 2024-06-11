@@ -1,4 +1,4 @@
-import { FollowersResponse } from './follower-stats.schema.js';
+import { type FollowersResponse } from './follower-stats.schema.js';
 import { db } from '../../utils/db.js';
 
 export const USERS_PER_REQUEST = 4;
