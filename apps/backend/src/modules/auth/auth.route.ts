@@ -1,5 +1,5 @@
-import { Type, TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
-import { FastifyPluginAsync } from 'fastify';
+import { Type, type TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import type { FastifyPluginAsync } from 'fastify';
 
 import {
   getCurrentUserHandler,

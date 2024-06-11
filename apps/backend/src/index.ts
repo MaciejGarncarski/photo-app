@@ -2,13 +2,13 @@ import fastifyCookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import fastifyMultipart, { ajvFilePlugin } from '@fastify/multipart';
 import fastifySensible from '@fastify/sensible';
-import { fastifySession, SessionStore } from '@fastify/session';
+import { fastifySession, type SessionStore } from '@fastify/session';
 import fastifySwagger from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
-import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { PrismaClient } from '@prisma/client';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
-import Fastify, { preHandlerHookHandler } from 'fastify';
+import Fastify, { type preHandlerHookHandler } from 'fastify';
 
 import { cookie } from './consts/cookie.js';
 import { authorize } from './middlewares/auth.middleware.js';

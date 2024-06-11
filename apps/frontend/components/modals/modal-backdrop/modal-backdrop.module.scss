@@ -10,8 +10,18 @@
   right: 0;
   z-index: 3;
   background-color: var(--color-overlay);
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  animation: show-backdrop 300ms ease-out forwards;
+}
+
+@keyframes show-backdrop {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

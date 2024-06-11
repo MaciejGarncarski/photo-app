@@ -1,4 +1,4 @@
-import { CookieOptions } from '@fastify/session';
+import type { CookieOptions } from '@fastify/session';
 import ms from 'ms';
 
 const isProd = process.env.NODE_ENV === 'production';

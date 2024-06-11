@@ -2,36 +2,27 @@
 
 .button {
   @include common.button;
+}
+
+.primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-darker)
+  );
+  background-size: 150% 150%;
+  background-position: 0%;
+  transition: background-position var(--transition-fast);
+  color: var(--color-always-black);
 
   &:disabled {
-    background-image: none;
-    background-color: var(--color-gray);
-    color: var(--color-text-gray);
+    background: var(--color-gray);
   }
 
   @include common.mediaquery("desktop") {
-    &:hover {
-      background: linear-gradient(
-        135deg,
-        var(--color-accent),
-        var(--color-accent-darker)
-      );
+    &:hover:not(:disabled) {
+      background-position: 100%;
     }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px var(--color-accent);
-    }
-
-    &:hover:disabled {
-      background-image: none;
-      background-color: var(--color-gray);
-      color: var(--color-text-gray);
-    }
-  }
-
-  & > * {
-    flex-shrink: 0;
   }
 }
 
@@ -44,7 +35,6 @@
 
   @include common.mediaquery("desktop") {
     &:hover {
-      color: var(--color-secondary);
       background-color: var(--color-gray-active);
     }
   }
@@ -58,7 +48,6 @@
 
   @include common.mediaquery("desktop") {
     &:hover {
-      background-image: none;
       background-color: var(--color-error-light-active);
     }
   }

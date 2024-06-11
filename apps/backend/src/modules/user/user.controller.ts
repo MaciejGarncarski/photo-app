@@ -1,7 +1,7 @@
-import { MultipartFile } from '@fastify/multipart';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import type { MultipartFile } from '@fastify/multipart';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 
-import { EditAccountInput, FollowUserInput, GetUserInput, GetUserInputByUsername } from './user.schema.js';
+import type { EditAccountInput, FollowUserInput, GetUserInput, GetUserInputByUsername } from './user.schema.js';
 import { deleteAvatar, editAccount, followUser, getUser, unfollowUser, updateAvatar } from './user.service.js';
 
 export const getUserHandler = async (

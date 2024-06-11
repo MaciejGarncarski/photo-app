@@ -1,6 +1,6 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 
-import {
+import type {
   ChatMessagesParams,
   ChatMessagesQuery,
   ChatRoomInput,

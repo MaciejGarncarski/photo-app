@@ -5,7 +5,6 @@ import nextPlugin from "@next/eslint-plugin-next";
 // ADD TO CONFIG WHEN ITS UPDATED
 import jsxa11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
-import reactCompiler from "eslint-plugin-react-compiler";
 import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import testingLibrary from "eslint-plugin-testing-library";
@@ -19,6 +18,7 @@ export default [
     ignores: [
       "**/types.ts",
       "**/frontend/types.ts",
+      "**/backend/dist/",
       "**/frontend/.next",
       "**/frontend/next.d.ts",
       "**/frontend/next-env.d.ts",
@@ -48,7 +48,6 @@ export default [
       import: importPlugin,
       "jsx-a11y": jsxa11y,
       react: react,
-      "react-compiler": reactCompiler,
       "react-hooks": fixupPluginRules(reactHooks),
       "simple-import-sort": simpleImportSort,
       "unused-imports": fixupPluginRules(unusedImports),
@@ -62,7 +61,6 @@ export default [
       "react/no-unknown-property": "off",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
-      "react-compiler/react-compiler": "error",
       "react-hooks/rules-of-hooks": "error",
       "jsx-a11y/alt-text": [
         "warn",

@@ -1,6 +1,6 @@
-import { User as PrismaUser } from '@prisma/client';
+import { type User as PrismaUser } from '@prisma/client';
 
-import { User } from '../modules/user/user.schema';
+import { type User } from '../modules/user/user.schema.js';
 
 type PrismaUserWithAvatar = PrismaUser;
 

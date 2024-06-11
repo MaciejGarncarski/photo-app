@@ -3,6 +3,7 @@
 .container {
   background-color: var(--color-primary);
   border-radius: var(--radius-medium);
+  border: 1px solid var(--shadow-0-5);
   position: relative;
   display: flex;
   flex-direction: column;

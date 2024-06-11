@@ -14,7 +14,7 @@ export const mapChatUsers = ({ userId, sentMessages, receivedMessages }: ChatUse
   const sentMessage = sentMessages[0] || null;
   const receivedMessage = receivedMessages[0] || null;
 
-  if (!sentMessage && !receivedMessage) {
+  if (!sentMessage?.text && !receivedMessage?.text) {
     return {
       userId,
       message: 'No messages yet.',
@@ -22,7 +22,7 @@ export const mapChatUsers = ({ userId, sentMessages, receivedMessages }: ChatUse
     };
   }
 
-  if (!sentMessage && receivedMessage) {
+  if (!sentMessage?.text && receivedMessage?.text) {
     return {
       userId,
       message: `You: ${receivedMessage.text}`,
@@ -30,7 +30,7 @@ export const mapChatUsers = ({ userId, sentMessages, receivedMessages }: ChatUse
     };
   }
 
-  if (!receivedMessage && sentMessage) {
+  if (!receivedMessage?.text && sentMessage?.text) {
     return {
       userId,
       message: sentMessage.text,
@@ -38,12 +38,13 @@ export const mapChatUsers = ({ userId, sentMessages, receivedMessages }: ChatUse
     };
   }
 
-  const hasSentLastMessage = sentMessage.createdAt < receivedMessage.createdAt;
-  const message = hasSentLastMessage ? `You: ${receivedMessage.text}` : sentMessage.text;
+  const hasSentLastMessage =
+    sentMessage?.createdAt && receivedMessage?.createdAt && sentMessage.createdAt < receivedMessage.createdAt;
+  const message = hasSentLastMessage ? `You: ${receivedMessage.text}` : sentMessage?.text;
 
   return {
     userId,
     message: message,
-    messageCreatedAt: (hasSentLastMessage ? receivedMessage.createdAt : sentMessage.createdAt).toString(),
+    messageCreatedAt: (hasSentLastMessage ? receivedMessage?.createdAt : sentMessage?.createdAt)?.toString(),
   };
 };

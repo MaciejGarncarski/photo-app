@@ -1,10 +1,10 @@
-import fastifyOauth2, { OAuth2Namespace } from '@fastify/oauth2';
+import { fastifyOauth2, type OAuth2Namespace } from '@fastify/oauth2';
 import axios from 'axios';
-import { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 
-import { GoogleUser } from './auth.schema.js';
+import type { GoogleUser } from './auth.schema.js';
 import { createGoogleUser, signInGoogle } from './auth.service.js';
-import { User } from '../user/user.schema.js';
+import type { User } from '../user/user.schema.js';
 import { envVariables } from '../../utils/envVariables.js';
 import { retry } from '../../utils/retry.js';
 

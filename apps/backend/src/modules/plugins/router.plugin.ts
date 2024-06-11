@@ -1,7 +1,7 @@
 import { TypeBoxError } from '@fastify/type-provider-typebox';
 import { Prisma } from '@prisma/client';
-import { FastifyPluginAsync } from 'fastify';
-import serverIo from 'fastify-socket.io';
+import { type FastifyPluginAsync } from 'fastify';
+import fastifySocketIO from 'fastify-socket.io';
 import { Server } from 'socket.io';
 
 import { authRoutesPlugin } from '../auth/auth.route.js';
@@ -45,7 +45,7 @@ export const routerPlugin: FastifyPluginAsync = async (fastify) => {
       rep.code(200).send('pong');
     },
   });
-  fastify.register(serverIo);
+  fastify.register(fastifySocketIO.default);
   fastify.register(authRoutesPlugin);
   fastify.register(followerStatsRoutesPlugin);
   fastify.register(postRoutesPlugin);

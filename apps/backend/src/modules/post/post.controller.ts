@@ -1,7 +1,7 @@
-import { MultipartFile } from '@fastify/multipart';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import type { MultipartFile } from '@fastify/multipart';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 
-import {
+import type {
   DeletePostInput,
   EditPostInput,
   EditPostParams,

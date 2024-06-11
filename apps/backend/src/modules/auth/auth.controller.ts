@@ -1,7 +1,7 @@
 import { verify } from 'argon2';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 
-import { RegisterValues, SignInValues } from './auth.schema.js';
+import type { RegisterValues, SignInValues } from './auth.schema.js';
 import { registerUser } from './auth.service.js';
 import { db } from '../../utils/db.js';
 import { mapPrismaUser } from '../../utils/map-prisma-user.js';

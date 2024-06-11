@@ -22,12 +22,6 @@
 
 @mixin button {
   border-radius: var(--radius-small);
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-accent-darker)
-  );
-  color: var(--color-always-black);
   font-weight: 500;
   padding-right: 1rem;
   padding-left: 1rem;
