@@ -1,11 +1,5 @@
-import withBundleAnalyzerConfig from "@next/bundle-analyzer";
-
-const withBundleAnalyzer = withBundleAnalyzerConfig({
-  enabled: process.env.ANALYZE === "true",
-});
-
 /** @type {import('next').NextConfig} */
-export default withBundleAnalyzer({
+export default {
   images: {
     remotePatterns: [
       {
@@ -18,4 +12,4 @@ export default withBundleAnalyzer({
       },
     ],
   },
-});
+};
