@@ -12,11 +12,11 @@
   box-shadow: var(--shadow);
 
   @include common.mediaquery("tablet") {
-    height: 38rem;
+    height: 35rem;
   }
 
   @include common.mediaquery("desktop") {
     border-radius: var(--radius-big);
-    height: 50rem;
+    height: 43rem;
   }
 }
