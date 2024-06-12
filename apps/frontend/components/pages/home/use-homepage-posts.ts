@@ -1,7 +1,7 @@
 import {
   infiniteQueryOptions,
   type QueryKey,
-  useInfiniteQuery,
+  useSuspenseInfiniteQuery,
 } from "@tanstack/react-query";
 
 import { nextPageParam } from "@/utils/api/next-page-param";
@@ -29,6 +29,6 @@ export const getHomepagePostsOptions = infiniteQueryOptions({
 });
 
 export const useHomepagePosts = () => {
-  const query = useInfiniteQuery(getHomepagePostsOptions);
+  const query = useSuspenseInfiniteQuery(getHomepagePostsOptions);
   return query;
 };

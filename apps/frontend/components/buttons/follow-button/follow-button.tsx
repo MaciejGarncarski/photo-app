@@ -8,7 +8,7 @@ type Props = {
   userId: string;
 };
 
-export const FollowButton = ({ userId }: Props) => {
+const FollowButtonContent = ({ userId }: Props) => {
   const { data } = useUser({ userId });
   const { mutate } = useFollowMutation({ userId });
   const { isSignedIn } = useAuth();
@@ -28,4 +28,8 @@ export const FollowButton = ({ userId }: Props) => {
       {data.isFollowing ? "Unfollow" : "Follow"}
     </Button>
   );
+};
+
+export const FollowButton = ({ userId }: Props) => {
+  return <FollowButtonContent userId={userId} />;
 };

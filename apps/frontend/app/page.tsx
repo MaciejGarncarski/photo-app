@@ -6,6 +6,7 @@ import {
 
 import { userQueryOptions } from "@/hooks/use-user";
 
+import { getPostQueryOptions } from "@/components/pages/account/use-post";
 import { Home } from "@/components/pages/home/home";
 import { getHomepagePostsOptions } from "@/components/pages/home/use-homepage-posts";
 
@@ -16,13 +17,18 @@ export default async function HomePage() {
 
   const data = await queryClient.fetchInfiniteQuery(getHomepagePostsOptions);
 
-  const authorIds = data.pages.map(({ data }) =>
-    data.map(({ authorId }) => authorId)
+  const postData = data.pages.map(({ data }) =>
+    data.map(({ authorId, id }) => [authorId, id])
   )[0];
 
   await Promise.all(
-    authorIds.map((authorId) => {
-      return queryClient.prefetchQuery(userQueryOptions(authorId));
+    postData.map(([authorId, postId]) => {
+      if (typeof authorId === "string") {
+        return queryClient.prefetchQuery(userQueryOptions(authorId));
+      }
+      if (typeof postId === "number") {
+        return queryClient.prefetchQuery(getPostQueryOptions(postId));
+      }
     })
   );
 

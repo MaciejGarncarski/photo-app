@@ -21,13 +21,13 @@ const avatarSizes: Record<Size, number> = {
   small: 30,
 };
 
-export const Avatar = ({ userId, size }: Props) => {
-  const { data, isPending } = useUser({ userId });
+const AvatarContent = ({ userId, size }: Props) => {
+  const { data } = useUser({ userId });
   const avatarSize = avatarSizes[size];
 
   const avatarClassName = clsx(styles[size], styles.avatar);
 
-  if (!data || isPending) {
+  if (!data) {
     return (
       <span className={avatarClassName}>
         <span className={styles.noImage}>
@@ -57,4 +57,8 @@ export const Avatar = ({ userId, size }: Props) => {
       )}
     </span>
   );
+};
+
+export const Avatar = ({ userId, size }: Props) => {
+  return <AvatarContent userId={userId} size={size} />;
 };
