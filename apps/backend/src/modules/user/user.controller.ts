@@ -14,7 +14,11 @@ export const getUserHandler = async (
     params: { userId },
   } = request;
 
-  const data = await getUser({ userId: userId }, request);
+  if (userId.trim() === '') {
+    return reply.notFound('User not found.');
+  }
+
+  const data = await getUser({ userId: userId }, request.session.userId);
 
   if (data) {
     return { data };
@@ -33,7 +37,7 @@ export const getUserByUsernameHandler = async (
     params: { username },
   } = request;
 
-  const data = await getUser({ username: username }, request);
+  const data = await getUser({ username: username }, request.session.userId);
 
   if (data) {
     return { data };

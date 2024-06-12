@@ -1,35 +1,17 @@
 "use client";
 
 import { IconContext } from "@phosphor-icons/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 
+import { getQueryClient } from "@/utils/get-query-client";
+
 type Props = {
   children: ReactNode;
 };
-
-function makeQueryClient() {
-  return new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 4 * 1000,
-      },
-    },
-  });
-}
-
-let browserQueryClient: QueryClient | undefined = undefined;
-
-function getQueryClient() {
-  if (typeof window === "undefined") {
-    return makeQueryClient();
-  }
-  if (!browserQueryClient) browserQueryClient = makeQueryClient();
-  return browserQueryClient;
-}
 
 export const Providers = ({ children }: Props) => {
   const client = getQueryClient();

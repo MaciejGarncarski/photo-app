@@ -1,6 +1,6 @@
 {
   "name": "monorepo-root",
-  "packageManager": "pnpm@9.1.4",
+  "packageManager": "pnpm@9.3.0",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -31,7 +31,7 @@
     "eslint-plugin-unused-imports": "^4.0.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "turbo": "^2.0.1",
+    "turbo": "^2.0.3",
     "typescript-eslint": "^7.13.0"
   }
 }

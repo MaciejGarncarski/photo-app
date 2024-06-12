@@ -14,13 +14,7 @@ export const useSignIn = () => {
     mutationFn: async ({ email, password }: SignInFormValues) => {
       try {
         const request = await signIn({ email, password });
-
-        await queryClient.invalidateQueries({ queryKey: ["session"] });
-        await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
-
-        if (request.data.data.id) {
-          router.push("/");
-        }
+        router.push("/");
 
         return request.data;
       } catch (err) {
@@ -34,8 +28,9 @@ export const useSignIn = () => {
       toast.error(error.message);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["session"] });
+      router.push("/");
       await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
+      await queryClient.invalidateQueries({ queryKey: ["session"] });
     },
   });
 };

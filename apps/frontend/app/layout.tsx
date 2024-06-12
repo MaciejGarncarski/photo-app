@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 
@@ -12,8 +12,9 @@ type Props = {
   children: ReactNode;
 };
 
-const inter = Inter({
-  subsets: ["latin"],
+const font = Rubik({
+  subsets: ["latin-ext", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -34,7 +35,7 @@ export const viewport: Viewport = {
 
 const DefaultLayout = ({ children }: Props) => {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={font.className}>
       <head />
       <body>
         <Providers>
@@ -42,7 +43,7 @@ const DefaultLayout = ({ children }: Props) => {
             richColors
             position="top-center"
             closeButton
-            className={inter.className}
+            className={font.className}
           />
           <Layout>{children}</Layout>
         </Providers>

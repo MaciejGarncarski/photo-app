@@ -1,11 +1,11 @@
 import type { Token } from '@fastify/oauth2';
 import { hash } from 'argon2';
-import ShortUniqueId from 'short-unique-id';
 
 import type { GoogleUser, RegisterValues } from '../auth/auth.schema.js';
 import type { User } from '../user/user.schema.js';
 import { db } from '../../utils/db.js';
 import { mapPrismaUser } from '../../utils/map-prisma-user.js';
+import { nanoid } from 'nanoid';
 
 export const registerUser = async ({ email, username, password }: RegisterValues) => {
   const hashedPassword = await hash(password);
@@ -38,8 +38,7 @@ export const createGoogleUser = async (googleUserData: GoogleUser, token: Token)
   const currentDate = new Date(expires_at);
   const expiresAt = Math.ceil(currentDate.getTime() / 1000);
 
-  const { randomUUID } = new ShortUniqueId({ length: 6 });
-  const temporaryUsername = `user${randomUUID().toUpperCase()}`;
+  const temporaryUsername = `user-${nanoid()}`;
 
   const user = await db.$transaction(async (tx) => {
     const account = await tx.account.findFirst({

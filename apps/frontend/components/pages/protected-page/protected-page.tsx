@@ -30,14 +30,8 @@ export const ProtectedPage = ({ children, sessionNeeded }: Props) => {
       router.replace("/auth/sign-in");
       return;
     }
-  }, [
-    isFetching,
-    router.replace,
-    isSignedIn,
-    sessionNeeded,
-    isPending,
-    router,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFetching, isPending]);
 
   if (isFetching) {
     return <Loader size="big" color="accent" marginTop />;

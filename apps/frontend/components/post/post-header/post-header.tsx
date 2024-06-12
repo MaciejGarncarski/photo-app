@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const PostHeader = ({ tag: Tag = "header", postId }: Props) => {
-  const { isPending, sessionUser } = useAuth();
+  const { sessionUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const { data } = usePost({ postId });
 
@@ -48,7 +48,7 @@ export const PostHeader = ({ tag: Tag = "header", postId }: Props) => {
   const isAuthor = sessionUser?.id === data?.authorId || "";
   const authorId = data?.authorId;
 
-  if (isPending || !authorId) {
+  if (!authorId) {
     return <PostHeaderPlaceholder />;
   }
 

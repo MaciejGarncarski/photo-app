@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  animation: heart 2s cubic-bezier(0.165, 0.84, 0.44, 1.1) forwards;
 
   & > svg {
     filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.2));
@@ -26,5 +27,25 @@
     @include common.mediaquery("desktop") {
       --heart-size: 10rem;
     }
+  }
+}
+
+@keyframes heart {
+  0% {
+    opacity: 0.5;
+    transform: translateY(300px) scale(0.7);
+  }
+  45% {
+    opacity: 1;
+    transform: translateY(0) scale(1.1);
+  }
+  55% {
+    transform: translateY(0) scale(1.5);
+  }
+  80% {
+    transform: translateY(0) scale(1.1);
+  }
+  100% {
+    transform: translateY(300px) scale(0.7);
   }
 }

@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 export default {
+  experimental: {
+    optimizePackageImports: ["@phosphor-icons/react"],
+  },
   images: {
     remotePatterns: [
       {

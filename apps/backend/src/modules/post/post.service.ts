@@ -1,6 +1,6 @@
 import type { MultipartFile } from '@fastify/multipart';
 import type { FastifyRequest } from 'fastify';
-import { v4 } from 'uuid';
+import { nanoid } from 'nanoid';
 
 import type { CreatePostInput, GetUserPostsInput, PostDetails, PostsResponse } from './post.schema.js';
 import { db } from '../../utils/db.js';
@@ -61,7 +61,7 @@ export const createPost = async (
 
     const { fileId, width, height, thumbnailUrl, url, size, name } = await imageKit.upload({
       file: file,
-      fileName: `${v4()}.webp`,
+      fileName: `${nanoid()}.webp`,
       folder: `post-images/${post.id}/`,
     });
 

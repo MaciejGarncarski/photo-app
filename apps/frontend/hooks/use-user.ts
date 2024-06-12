@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 import { getUser } from "@/services/user.service";
 
@@ -23,5 +23,5 @@ export const userQueryOptions = (userId: string) =>
   });
 
 export const useUser = ({ userId }: Props) => {
-  return useQuery(userQueryOptions(userId));
+  return useSuspenseQuery(userQueryOptions(userId));
 };

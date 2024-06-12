@@ -1,5 +1,4 @@
 import type { MultipartFile } from '@fastify/multipart';
-import type { FastifyRequest } from 'fastify';
 
 import type { EditAccountInput, UserWithStats } from './user.schema.js';
 import { db } from '../../utils/db.js';
@@ -16,9 +15,7 @@ type Config =
       userId: string;
     };
 
-export const getUser = async (config: Config, request: FastifyRequest) => {
-  const sessionUserId = request.session.userId;
-
+export const getUser = async (config: Config, sessionUserId: string) => {
   const sessionUserData = await db.user.findFirst({
     where: {
       userId: sessionUserId,

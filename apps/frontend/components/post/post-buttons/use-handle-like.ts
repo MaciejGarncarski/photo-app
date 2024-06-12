@@ -17,21 +17,14 @@ type Props = {
 export const useHandleLike = ({ postId, isLiked }: Props) => {
   const [isLikeAnimationShown, setIsLikeAnimationShown] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const toastRef = useRef<string | number | null>(null);
 
   const { isSignedIn } = useAuth();
   const postLikeMutation = usePostLike();
 
   const handleLike = () => {
     if (!isSignedIn) {
-      if (toastRef.current) {
-        return;
-      }
-
-      toastRef.current = toast.error("Not signed in.", {
-        onAutoClose: () => {
-          toastRef.current = null;
-        },
+      toast.error("You must be logged in to like the post.", {
+        id: "LIKE_NOT_SIGNED_IN",
       });
       return;
     }

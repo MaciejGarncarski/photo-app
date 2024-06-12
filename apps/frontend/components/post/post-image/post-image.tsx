@@ -1,11 +1,9 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
 
 import { useUser } from "@/hooks/use-user";
 import { getDescriptionData } from "@/utils/get-description-data";
 
-import { Loader } from "@/components/loader/loader";
 import { usePost } from "@/components/pages/account/use-post";
 
 import styles from "./post-image.module.scss";
@@ -38,7 +36,6 @@ const getAspectRatio = (width: number, height: number) => {
 export const PostImage = ({ priority, url, height, width, postId }: Props) => {
   const { data: postData } = usePost({ postId: postId });
   const { data } = useUser({ userId: postData?.authorId || "" });
-  const [isLoading, setIsLoading] = useState(true);
 
   if (!postData) {
     return null;
@@ -49,22 +46,14 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
   const { shortDescription } = getDescriptionData(postData.description);
 
   return (
-    <>
-      {isLoading && (
-        <span className={styles.loader}>
-          <Loader color="primary" size="big" />
-        </span>
-      )}
-      <Image
-        className={clsx(styles[imageAspectRatio], styles.sliderImage)}
-        src={url}
-        priority={priority}
-        quality={100}
-        onLoad={() => setIsLoading(false)}
-        width={600}
-        height={600}
-        alt={`${data?.username} - ${shortDescription}`}
-      />
-    </>
+    <Image
+      className={clsx(styles[imageAspectRatio], styles.sliderImage)}
+      src={url}
+      priority={priority}
+      quality={100}
+      width={600}
+      height={600}
+      alt={`${data?.username} - ${shortDescription}`}
+    />
   );
 };
