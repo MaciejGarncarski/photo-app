@@ -9,6 +9,8 @@ import { userQueryOptions } from "@/hooks/use-user";
 import { Home } from "@/components/pages/home/home";
 import { getHomepagePostsOptions } from "@/components/pages/home/use-homepage-posts";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const queryClient = new QueryClient();
 
