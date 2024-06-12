@@ -8,14 +8,13 @@ import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 
 import { ButtonLink } from "@/components/buttons/button-link/button-link";
 import { HomePost } from "@/components/home-post/home-post";
-import { Loader } from "@/components/loader/loader";
 import { useHomepagePosts } from "@/components/pages/home/use-homepage-posts";
 import { PostPlaceholder } from "@/components/post/post-placeholder/post-placeholder";
 
 import styles from "./home-posts-list.module.scss";
 
 export const HomePostsList = () => {
-  const { data, isPending, hasNextPage, fetchNextPage } = useHomepagePosts();
+  const { data, hasNextPage, fetchNextPage } = useHomepagePosts();
   const { isSignedIn } = useAuth();
 
   const { ref } = useInfiniteScroll({
@@ -42,25 +41,24 @@ export const HomePostsList = () => {
 
   return (
     <div className={styles.posts}>
-      <Suspense
-        fallback={
-          <div className={styles.posts}>
-            <PostPlaceholder />
-            <PostPlaceholder />
-          </div>
-        }
-      >
-        {data?.pages.map((page) => {
-          return page.data.map(({ id }, idx) => {
-            return <HomePost priority={idx <= 1} key={id} postId={id} />;
-          });
-        })}
-      </Suspense>
-      {!isPending && hasNextPage && (
-        <div role="status" ref={ref}>
-          <Loader size="small" color="primary" />
-        </div>
-      )}
+      {data?.pages.map((page, pageIdx) => {
+        return page.data.map(({ id }, idx) => {
+          return (
+            <Suspense fallback={<PostPlaceholder />} key={id}>
+              <HomePost
+                priority={idx <= 1}
+                postId={id}
+                ref={
+                  pageIdx === data.pages.length - 1 &&
+                  idx === page.data.length - 1
+                    ? ref
+                    : undefined
+                }
+              />
+            </Suspense>
+          );
+        });
+      })}
     </div>
   );
 };

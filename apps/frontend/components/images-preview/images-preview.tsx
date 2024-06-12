@@ -1,7 +1,8 @@
 import { CameraPlus, Trash } from "@phosphor-icons/react";
 import Image from "next/image";
+import { useMemo } from "react";
 
-import type { PreviewImages } from "@/utils/get-preview-images";
+import { PreviewImages } from "@/components/pages/create-post/use-preview-images";
 
 import styles from "./images-preview.module.scss";
 
@@ -17,7 +18,10 @@ export const ImagesPreview = ({ onRemove, previewImages }: Props) => {
 
   const placeholders = Array.from({ length: emptyImagesLength }, (_, el) => el);
 
-  const images = [...previewImages, ...placeholders];
+  const images = useMemo(
+    () => [...previewImages, ...placeholders],
+    [placeholders, previewImages]
+  );
 
   return (
     <div>

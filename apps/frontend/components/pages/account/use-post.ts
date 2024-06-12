@@ -14,7 +14,6 @@ export const getPostQueryOptions = (postId: number) =>
 
       return post.data;
     },
-    enabled: Boolean(postId),
   });
 
 export const usePost = ({ postId }: { postId: number }) => {

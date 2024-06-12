@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-import { getPreviewImages } from "@/utils/get-preview-images";
-
 import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
+import { usePreviewImages } from "@/components/pages/create-post/use-preview-images";
 
 export const useFinalImages = () => {
   const [finalImages, setFinalImages] = useState<FinalImages>([]);
-  const { previewImages } = getPreviewImages(finalImages);
+  const { previewImages } = usePreviewImages(finalImages);
 
   const onRemove = (id: string) => {
     const filteredState = finalImages.filter((finalImg) => {
@@ -15,5 +14,10 @@ export const useFinalImages = () => {
     setFinalImages(filteredState);
   };
 
-  return { finalImages, setFinalImages, previewImages, onRemove };
+  return {
+    finalImages,
+    setFinalImages,
+    previewImages,
+    onRemove,
+  };
 };

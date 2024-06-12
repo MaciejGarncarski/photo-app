@@ -1,7 +1,7 @@
 import type { DropZoneErrors } from "@/components/pages/create-post/create-post-schema";
 
 export const IMAGE_MIN_SIZE = 150;
-export const IMAGE_MAX_FILE_SIZE = 5_500_000;
+export const IMAGE_MAX_FILE_SIZE = 8_500_000;
 const SUPPORTED_FILE_TYPES = ["jpeg", "jpg", "png", "webp"];
 
 type HandleDropImage = {

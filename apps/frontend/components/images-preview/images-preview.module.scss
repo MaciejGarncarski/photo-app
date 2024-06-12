@@ -12,10 +12,12 @@
 }
 
 .previewButton {
+  background-color: var(--color-secondary);
   border: none;
-  background-color: transparent;
   display: flex;
   border-radius: var(--radius-small);
+  border: 1px solid var(--shadow-0-5);
+  box-shadow: var(--shadow);
   justify-content: center;
   align-items: center;
   position: relative;
@@ -29,6 +31,7 @@
 }
 
 .emptySpace {
+  aspect-ratio: 1/1;
   background-color: var(--color-secondary);
   border-radius: var(--radius-small);
   border: 1px solid var(--shadow-0-5);
@@ -38,12 +41,10 @@
   gap: 0.25rem;
   justify-content: center;
   align-items: center;
-  min-height: 5rem;
   color: var(--color-text-gray);
 
   @include common.mediaquery("desktop") {
     gap: 1rem;
-    min-height: 9rem;
   }
 }
 

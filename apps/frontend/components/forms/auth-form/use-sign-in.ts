@@ -27,10 +27,13 @@ export const useSignIn = () => {
     onError: (error) => {
       toast.error(error.message);
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       router.push("/");
-      await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
-      await queryClient.invalidateQueries({ queryKey: ["session"] });
+
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY });
+        queryClient.invalidateQueries({ queryKey: ["session"] });
+      }, 300);
     },
   });
 };

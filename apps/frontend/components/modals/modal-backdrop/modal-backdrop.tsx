@@ -16,7 +16,17 @@ export const ModalBackdrop = ({ closeModal, children }: Props) => {
   };
 
   return createPortal(
-    <div onClick={handleOverlayClick} className={styles.backdrop}>
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <div
+      onClick={handleOverlayClick}
+      role="dialog"
+      onKeyUp={(event) => {
+        if (event.key === "Escape") {
+          closeModal();
+        }
+      }}
+      className={styles.backdrop}
+    >
       {children}
     </div>,
     document.body
