@@ -3,12 +3,11 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { getPreviewImages } from "@/utils/get-preview-images";
-
 import { Button } from "@/components/buttons/button/button";
 import { CropImage } from "@/components/crop-image/crop-image";
 import { Loader } from "@/components/loader/loader";
 import type { FinalImages } from "@/components/pages/create-post/create-post-schema";
+import { usePreviewImages } from "@/components/pages/create-post/use-preview-images";
 import { useUploadAvatar } from "@/components/update-avatar-view/use-upload-avatar";
 
 import styles from "./update-avatar-view.module.scss";
@@ -24,7 +23,7 @@ export const UpdateAvatarView = ({ closeModal }: Props) => {
     closeModal,
     resetFinalImages,
   });
-  const { previewImages } = getPreviewImages(finalImages);
+  const { previewImages } = usePreviewImages(finalImages);
 
   if (isPending) {
     return <Loader color="accent" size="big" />;
