@@ -6,6 +6,8 @@ import { PostPlaceholder } from '@/components/post/post-placeholder/post-placeho
 
 import styles from './home.module.scss'
 
+export const dynamic = 'force-dynamic'
+
 export const Home = () => {
 	return (
 		<div className={styles.home}>
