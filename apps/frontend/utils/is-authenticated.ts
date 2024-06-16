@@ -10,6 +10,8 @@ export const isAuthenticated = async () => {
 		)
 
 		if (response.status === 200) {
+			// eslint-disable-next-line no-console
+			console.log('AUTHENTICATED')
 			return true
 		}
 
