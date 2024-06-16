@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { type ReactNode, Suspense } from 'react'
 
 import { Navbar } from '@/components/navbar/navbar'
 
@@ -11,7 +11,9 @@ type Props = {
 export const Layout = ({ children }: Props) => {
 	return (
 		<div className={styles.layout}>
-			<Navbar />
+			<Suspense fallback={null}>
+				<Navbar />
+			</Suspense>
 			<div className={styles.container}>{children}</div>
 		</div>
 	)
