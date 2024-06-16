@@ -1,27 +1,27 @@
-@use "styles/common";
+@use 'styles/common';
 
 .backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  background-color: var(--color-overlay);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	background-color: var(--color-overlay);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  animation: show-backdrop 300ms ease-out forwards;
+	animation: show-backdrop 250ms ease-out forwards;
 }
 
 @keyframes show-backdrop {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

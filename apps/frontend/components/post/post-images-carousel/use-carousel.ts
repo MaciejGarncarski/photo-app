@@ -1,30 +1,27 @@
-import { useState } from "react";
-
-const percentWidthToChangePhoto = 20;
+import { useState } from 'react'
 
 export const useCarousel = () => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [side, setSide] = useState<"left" | "right">("right");
+	const [currentImage, setCurrentImage] = useState(0)
 
-  const handlePrevImage = () => {
-    setCurrentImage((prev) => {
-      if (prev >= 0) {
-        return prev - 1;
-      }
+	const handlePrevImage = () => {
+		setCurrentImage((prev) => {
+			if (prev >= 0) {
+				return prev - 1
+			}
 
-      return prev;
-    });
-  };
+			return prev
+		})
+	}
 
-  const handleNextImage = () => {
-    setCurrentImage((prev) => {
-      if (prev <= 2) {
-        return prev + 1;
-      }
+	const handleNextImage = () => {
+		setCurrentImage((prev) => {
+			if (prev <= 2) {
+				return prev + 1
+			}
 
-      return prev;
-    });
-  };
+			return prev
+		})
+	}
 
-  return { currentImage, handlePrevImage, handleNextImage };
-};
+	return { currentImage, handlePrevImage, handleNextImage }
+}

@@ -1,20 +1,21 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { getPageTitle } from "@/utils/get-page-title";
+import { getPageTitle } from '@/utils/get-page-title'
+import { isAuthenticated } from '@/utils/is-authenticated'
 
-import { ProtectedPage } from "@/components/pages/protected-page/protected-page";
-import { RegisterSignIn } from "@/components/pages/register-sign-in/register-sign-in";
+import { RegisterSignIn } from '@/components/pages/register-sign-in/register-sign-in'
 
 export const metadata: Metadata = {
-  title: getPageTitle("Register"),
-};
+	title: getPageTitle('Register'),
+}
 
-const RegisterPage = () => {
-  return (
-    <ProtectedPage sessionNeeded={false}>
-      <RegisterSignIn variant="register" />
-    </ProtectedPage>
-  );
-};
+const RegisterPage = async () => {
+	if (await isAuthenticated()) {
+		redirect('/')
+	}
 
-export default RegisterPage;
+	return <RegisterSignIn variant="register" />
+}
+
+export default RegisterPage

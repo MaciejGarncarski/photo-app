@@ -1,94 +1,111 @@
-import type { MultipartFile } from '@fastify/multipart';
-import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { MultipartFile } from '@fastify/multipart'
+import type { FastifyReply, FastifyRequest } from 'fastify'
 
-import type { EditAccountInput, FollowUserInput, GetUserInput, GetUserInputByUsername } from './user.schema.js';
-import { deleteAvatar, editAccount, followUser, getUser, unfollowUser, updateAvatar } from './user.service.js';
+import type {
+	EditAccountInput,
+	FollowUserInput,
+	GetUserInput,
+	GetUserInputByUsername,
+} from './user.schema.js'
+import {
+	deleteAvatar,
+	editAccount,
+	followUser,
+	getUser,
+	unfollowUser,
+	updateAvatar,
+} from './user.service.js'
 
 export const getUserHandler = async (
-  request: FastifyRequest<{
-    Params: GetUserInput;
-  }>,
-  reply: FastifyReply,
+	request: FastifyRequest<{
+		Params: GetUserInput
+	}>,
+	reply: FastifyReply,
 ) => {
-  const {
-    params: { userId },
-  } = request;
+	const {
+		params: { userId },
+	} = request
 
-  if (userId.trim() === '') {
-    return reply.notFound('User not found.');
-  }
+	if (userId.trim() === '') {
+		return reply.notFound('User not found.')
+	}
 
-  const data = await getUser({ userId: userId }, request.session.userId);
+	const data = await getUser({ userId: userId }, request.session.userId)
 
-  if (data) {
-    return { data };
-  }
+	if (data) {
+		return { data }
+	}
 
-  return reply.notFound('User not found.');
-};
+	return reply.notFound('User not found.')
+}
 
 export const getUserByUsernameHandler = async (
-  request: FastifyRequest<{
-    Params: GetUserInputByUsername;
-  }>,
-  reply: FastifyReply,
+	request: FastifyRequest<{
+		Params: GetUserInputByUsername
+	}>,
+	reply: FastifyReply,
 ) => {
-  const {
-    params: { username },
-  } = request;
+	const {
+		params: { username },
+	} = request
 
-  const data = await getUser({ username: username }, request.session.userId);
+	const data = await getUser({ username: username }, request.session.userId)
 
-  if (data) {
-    return { data };
-  }
+	if (data) {
+		return { data }
+	}
 
-  return reply.badRequest('Invalid user data.');
-};
+	return reply.badRequest('Invalid user data.')
+}
 
-export const followUserHandler = async (request: FastifyRequest<{ Params: FollowUserInput }>, reply: FastifyReply) => {
-  const { userId } = request.session;
+export const followUserHandler = async (
+	request: FastifyRequest<{ Params: FollowUserInput }>,
+	reply: FastifyReply,
+) => {
+	const { userId } = request.session
 
-  await followUser(request.params.userId, userId);
-  return reply.status(204).send();
-};
+	await followUser(request.params.userId, userId)
+	return reply.status(204).send()
+}
 
 export const unfollowUserHandler = async (
-  request: FastifyRequest<{ Params: FollowUserInput }>,
-  reply: FastifyReply,
+	request: FastifyRequest<{ Params: FollowUserInput }>,
+	reply: FastifyReply,
 ) => {
-  const { userId } = request.session;
+	const { userId } = request.session
 
-  await unfollowUser(request.params.userId, userId);
-  return reply.status(204).send();
-};
+	await unfollowUser(request.params.userId, userId)
+	return reply.status(204).send()
+}
 
 export const updateAvatarHandler = async (
-  request: FastifyRequest<{ Body: { image: MultipartFile } }>,
-  reply: FastifyReply,
+	request: FastifyRequest<{ Body: { image: MultipartFile } }>,
+	reply: FastifyReply,
 ) => {
-  const { userId } = request.session;
-  const fileData = request.body.image;
+	const { userId } = request.session
+	const fileData = request.body.image
 
-  if (!fileData) {
-    return reply.badRequest('No image provided.');
-  }
+	if (!fileData) {
+		return reply.badRequest('No image provided.')
+	}
 
-  const updatedAvatar = await updateAvatar(userId, fileData);
-  return { data: updatedAvatar };
-};
+	const updatedAvatar = await updateAvatar(userId, fileData)
+	return { data: updatedAvatar }
+}
 
 export const deleteAvatarHandler = async (request: FastifyRequest) => {
-  const { userId } = request.session;
+	const { userId } = request.session
 
-  const data = await deleteAvatar(userId);
-  return { data };
-};
+	const data = await deleteAvatar(userId)
+	return { data }
+}
 
-export const editAccountHandler = async (request: FastifyRequest<{ Body: EditAccountInput }>) => {
-  const { userId } = request.session;
+export const editAccountHandler = async (
+	request: FastifyRequest<{ Body: EditAccountInput }>,
+) => {
+	const { userId } = request.session
 
-  const data = await editAccount(userId, request.body);
+	const data = await editAccount(userId, request.body)
 
-  return { data };
-};
+	return { data }
+}

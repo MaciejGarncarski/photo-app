@@ -1,17 +1,16 @@
-import { useNotificationSoundAtom } from "@/components/settings-modal/use-notification-sound-atom";
+import { useNotificationSoundAtom } from '@/components/settings-modal/use-notification-sound-atom'
 
 export const useNotificationSoundPreference = () => {
-  const { notificationSound, setNotificationSound } =
-    useNotificationSoundAtom();
+	const { notificationSound, setNotificationSound } = useNotificationSoundAtom()
 
-  const isSoundEnabled = notificationSound === "ON";
+	const isSoundEnabled = notificationSound === 'ON'
 
-  const toggleNotificationSound = () => {
-    setNotificationSound((sound) => (sound === "ON" ? "OFF" : "ON"));
-  };
+	const toggleNotificationSound = () => {
+		setNotificationSound((sound) => (sound === 'ON' ? 'OFF' : 'ON'))
+	}
 
-  return {
-    isSoundEnabled,
-    toggleNotificationSound,
-  };
-};
+	return {
+		isSoundEnabled,
+		toggleNotificationSound,
+	}
+}

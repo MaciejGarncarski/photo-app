@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import { getDescriptionData } from "@/utils/get-description-data";
+import { getDescriptionData } from '@/utils/get-description-data'
 
 type Arguments = {
-  description: string;
-};
+	description: string
+}
 
 export const usePostFooter = ({ description }: Arguments) => {
-  const [showMore, setShowMore] = useState(false);
+	const [showMore, setShowMore] = useState(false)
 
-  const { isDescriptionLong, shortDescription } =
-    getDescriptionData(description);
+	const { isDescriptionLong, shortDescription } =
+		getDescriptionData(description)
 
-  const toggleShowMore = () => setShowMore((prev) => !prev);
+	const toggleShowMore = () => setShowMore((prev) => !prev)
 
-  return { showMore, isDescriptionLong, shortDescription, toggleShowMore };
-};
+	return { showMore, isDescriptionLong, shortDescription, toggleShowMore }
+}

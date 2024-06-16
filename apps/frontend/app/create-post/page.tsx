@@ -1,20 +1,21 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { getPageTitle } from "@/utils/get-page-title";
+import { getPageTitle } from '@/utils/get-page-title'
+import { isAuthenticated } from '@/utils/is-authenticated'
 
-import { CreatePost } from "@/components/pages/create-post/create-post";
-import { ProtectedPage } from "@/components/pages/protected-page/protected-page";
+import { CreatePost } from '@/components/pages/create-post/create-post'
 
 export const metadata: Metadata = {
-  title: getPageTitle("Create Post"),
-};
+	title: getPageTitle('Create Post'),
+}
 
-const CreatePostPage = () => {
-  return (
-    <ProtectedPage sessionNeeded>
-      <CreatePost />
-    </ProtectedPage>
-  );
-};
+const CreatePostPage = async () => {
+	if (!(await isAuthenticated())) {
+		redirect('/access-denied')
+	}
 
-export default CreatePostPage;
+	return <CreatePost />
+}
+
+export default CreatePostPage

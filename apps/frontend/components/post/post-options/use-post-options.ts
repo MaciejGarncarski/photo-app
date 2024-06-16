@@ -1,12 +1,12 @@
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from '@/hooks/use-auth'
 
 type Arguments = {
-  authorId: string;
-};
+	authorId: string
+}
 
 export const usePostOptions = ({ authorId }: Arguments) => {
-  const { sessionUser } = useAuth();
-  const isAbleToModify = authorId === sessionUser?.id;
+	const { sessionUser } = useAuth()
+	const isAbleToModify = authorId === sessionUser?.id
 
-  return { isAbleToModify };
-};
+	return { isAbleToModify }
+}

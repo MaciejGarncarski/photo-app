@@ -1,271 +1,287 @@
-import type { MultipartFile } from '@fastify/multipart';
-import type { FastifyRequest } from 'fastify';
-import { nanoid } from 'nanoid';
+import type { MultipartFile } from '@fastify/multipart'
+import type { FastifyRequest } from 'fastify'
+import { nanoid } from 'nanoid'
 
-import type { CreatePostInput, GetUserPostsInput, PostDetails, PostsResponse } from './post.schema.js';
-import { db } from '../../utils/db.js';
-import { imageKit } from '../../utils/imagekit.js';
+import type {
+	CreatePostInput,
+	GetUserPostsInput,
+	PostDetails,
+	PostsResponse,
+} from './post.schema.js'
+import { db } from '../../utils/db.js'
+import { imageKit } from '../../utils/imagekit.js'
 
-const POSTS_PER_SCROLL = 3;
+const POSTS_PER_SCROLL = 3
 
 export const getHomepagePosts = async (skip: number) => {
-  const postsRequest = db.post.findMany({
-    skip: skip * POSTS_PER_SCROLL,
-    take: POSTS_PER_SCROLL,
-    select: {
-      authorId: true,
-      createdAt: true,
-      id: true,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-  const postsCountRequest = db.post.count();
-  const [postsList, postsCount] = await Promise.all([postsRequest, postsCountRequest]);
-  const maxPages = postsCount / POSTS_PER_SCROLL;
-  const totalPages = Math.ceil(maxPages) - 1;
+	const postsRequest = db.post.findMany({
+		skip: skip * POSTS_PER_SCROLL,
+		take: POSTS_PER_SCROLL,
+		select: {
+			authorId: true,
+			createdAt: true,
+			id: true,
+		},
+		orderBy: {
+			createdAt: 'desc',
+		},
+	})
+	const postsCountRequest = db.post.count()
+	const [postsList, postsCount] = await Promise.all([
+		postsRequest,
+		postsCountRequest,
+	])
+	const maxPages = postsCount / POSTS_PER_SCROLL
+	const totalPages = Math.ceil(maxPages) - 1
 
-  const posts = postsList.map(({ authorId, createdAt, id }) => {
-    return {
-      id,
-      createdAt: createdAt.toString(),
-      authorId: authorId,
-    };
-  });
+	const posts = postsList.map(({ authorId, createdAt, id }) => {
+		return {
+			id,
+			createdAt: createdAt.toString(),
+			authorId: authorId,
+		}
+	})
 
-  const response: PostsResponse = {
-    postsCount,
-    totalPages,
-    currentPage: skip,
-    data: posts,
-  };
+	const response: PostsResponse = {
+		postsCount,
+		totalPages,
+		currentPage: skip,
+		data: posts,
+	}
 
-  return response;
-};
+	return response
+}
 
 export const createPost = async (
-  { description }: CreatePostInput,
-  sessionUserId: string,
-  images: Array<MultipartFile>,
+	{ description }: CreatePostInput,
+	sessionUserId: string,
+	images: Array<MultipartFile>,
 ) => {
-  const post = await db.post.create({
-    data: {
-      authorId: sessionUserId,
-      description,
-    },
-  });
+	const post = await db.post.create({
+		data: {
+			authorId: sessionUserId,
+			description,
+		},
+	})
 
-  for await (const image of images) {
-    const file = await image.toBuffer();
+	for await (const image of images) {
+		const file = await image.toBuffer()
 
-    const { fileId, width, height, thumbnailUrl, url, size, name } = await imageKit.upload({
-      file: file,
-      fileName: `${nanoid()}.webp`,
-      folder: `post-images/${post.id}/`,
-    });
+		const { fileId, width, height, thumbnailUrl, url, size, name } =
+			await imageKit.upload({
+				file: file,
+				fileName: `${nanoid()}.webp`,
+				folder: `post-images/${post.id}/`,
+			})
 
-    await db.postImage.create({
-      data: {
-        fileId,
-        height,
-        name,
-        size,
-        thumbnailUrl,
-        url,
-        width,
-        postId: post.id,
-      },
-    });
-  }
+		await db.postImage.create({
+			data: {
+				fileId,
+				height,
+				name,
+				size,
+				thumbnailUrl,
+				url,
+				width,
+				postId: post.id,
+			},
+		})
+	}
 
-  return post;
-};
+	return post
+}
 
 export const deletePost = async (postId: number, request: FastifyRequest) => {
-  const sessionUserId = request.session.userId;
+	const sessionUserId = request.session.userId
 
-  const postData = await db.post.findFirst({
-    where: {
-      id: postId,
-    },
-    select: { images: true, authorId: true },
-  });
+	const postData = await db.post.findFirst({
+		where: {
+			id: postId,
+		},
+		select: { images: true, authorId: true },
+	})
 
-  if (!postData) {
-    return;
-  }
-  const isAbleToDelete = postData.authorId === sessionUserId;
+	if (!postData) {
+		return
+	}
+	const isAbleToDelete = postData.authorId === sessionUserId
 
-  if (!isAbleToDelete) {
-    return;
-  }
+	if (!isAbleToDelete) {
+		return
+	}
 
-  await imageKit.deleteFolder(`post-images/${postId}/`);
-  await db.post.deleteMany({
-    where: {
-      id: postId,
-    },
-  });
+	await imageKit.deleteFolder(`post-images/${postId}/`)
+	await db.post.deleteMany({
+		where: {
+			id: postId,
+		},
+	})
 
-  await db.postImage.deleteMany({
-    where: {
-      postId: postId,
-    },
-  });
+	await db.postImage.deleteMany({
+		where: {
+			postId: postId,
+		},
+	})
 
-  return 'deleted';
-};
+	return 'deleted'
+}
 
 export const getPostById = async (postId: number, request: FastifyRequest) => {
-  const sessionUserId = request.session.userId;
+	const sessionUserId = request.session.userId
 
-  const postFromDb = await db.post.findFirst({
-    where: {
-      id: postId,
-    },
-    include: {
-      author: true,
-      images: true,
-      postsLikes: {
-        where: sessionUserId
-          ? {
-              userId: sessionUserId,
-            }
-          : {},
-      },
-      _count: {
-        select: {
-          postsLikes: true,
-          postsComments: true,
-        },
-      },
-    },
-  });
+	const postFromDb = await db.post.findFirst({
+		where: {
+			id: postId,
+		},
+		include: {
+			author: true,
+			images: true,
+			postsLikes: {
+				where: sessionUserId
+					? {
+							userId: sessionUserId,
+						}
+					: {},
+			},
+			_count: {
+				select: {
+					postsLikes: true,
+					postsComments: true,
+				},
+			},
+		},
+	})
 
-  if (!postFromDb) {
-    return null;
-  }
+	if (!postFromDb) {
+		return null
+	}
 
-  const {
-    _count: { postsComments: commentsCount, postsLikes: likesCount },
-    authorId,
-    createdAt,
-    description,
-    id,
-    images,
-    postsLikes,
-  } = postFromDb;
+	const {
+		_count: { postsComments: commentsCount, postsLikes: likesCount },
+		authorId,
+		createdAt,
+		description,
+		id,
+		images,
+		postsLikes,
+	} = postFromDb
 
-  const data: PostDetails = {
-    authorId: authorId,
-    commentsCount: commentsCount || 0,
-    likesCount: likesCount || 0,
-    createdAt: createdAt.toString(),
-    description,
-    images,
-    id,
-    isLiked: sessionUserId ? Boolean(postsLikes[0]) : false,
-  };
+	const data: PostDetails = {
+		authorId: authorId,
+		commentsCount: commentsCount || 0,
+		likesCount: likesCount || 0,
+		createdAt: createdAt.toString(),
+		description,
+		images,
+		id,
+		isLiked: sessionUserId ? Boolean(postsLikes[0]) : false,
+	}
 
-  return data;
-};
+	return data
+}
 
 export const addPostLike = async (postId: number, sessionUserId: string) => {
-  const likeAlreadyExists = await db.postLike.findFirst({
-    where: {
-      postId: postId,
-      userId: sessionUserId,
-    },
-  });
+	const likeAlreadyExists = await db.postLike.findFirst({
+		where: {
+			postId: postId,
+			userId: sessionUserId,
+		},
+	})
 
-  if (likeAlreadyExists) {
-    return;
-  }
+	if (likeAlreadyExists) {
+		return
+	}
 
-  return db.postLike.create({
-    data: {
-      postId: postId,
-      userId: sessionUserId,
-    },
-    select: {
-      id: true,
-    },
-  });
-};
+	return db.postLike.create({
+		data: {
+			postId: postId,
+			userId: sessionUserId,
+		},
+		select: {
+			id: true,
+		},
+	})
+}
 
 export const deletePostLike = async (postId: number, sessionUserId: string) => {
-  await db.postLike.deleteMany({
-    where: {
-      postId: postId,
-      userId: sessionUserId,
-    },
-  });
-};
+	await db.postLike.deleteMany({
+		where: {
+			postId: postId,
+			userId: sessionUserId,
+		},
+	})
+}
 
-export const editPost = async (postId: number, sessionUserId: string, newDescription: string) => {
-  const postToBeEdited = await db.post.findFirst({
-    where: {
-      id: postId,
-    },
-  });
+export const editPost = async (
+	postId: number,
+	sessionUserId: string,
+	newDescription: string,
+) => {
+	const postToBeEdited = await db.post.findFirst({
+		where: {
+			id: postId,
+		},
+	})
 
-  if (postToBeEdited?.authorId !== sessionUserId) {
-    return;
-  }
+	if (postToBeEdited?.authorId !== sessionUserId) {
+		return
+	}
 
-  return db.post.update({
-    data: {
-      description: newDescription,
-    },
-    where: {
-      id: postId,
-    },
-  });
-};
+	return db.post.update({
+		data: {
+			description: newDescription,
+		},
+		where: {
+			id: postId,
+		},
+	})
+}
 
-const USER_POSTS_PER_SCROLL = 3;
+const USER_POSTS_PER_SCROLL = 3
 
 export const getUserPosts = async ({ skip, authorId }: GetUserPostsInput) => {
-  const postsRequest = db.post.findMany({
-    skip: skip * USER_POSTS_PER_SCROLL,
-    take: USER_POSTS_PER_SCROLL,
+	const postsRequest = db.post.findMany({
+		skip: skip * USER_POSTS_PER_SCROLL,
+		take: USER_POSTS_PER_SCROLL,
 
-    where: {
-      authorId: authorId,
-    },
-    select: {
-      id: true,
-      createdAt: true,
-      authorId: true,
-    },
-    orderBy: {
-      id: 'desc',
-    },
-  });
+		where: {
+			authorId: authorId,
+		},
+		select: {
+			id: true,
+			createdAt: true,
+			authorId: true,
+		},
+		orderBy: {
+			id: 'desc',
+		},
+	})
 
-  const postsCountRequest = db.post.count({
-    where: {
-      authorId: authorId,
-    },
-  });
+	const postsCountRequest = db.post.count({
+		where: {
+			authorId: authorId,
+		},
+	})
 
-  const [postsCount, posts] = await Promise.all([postsCountRequest, postsRequest]);
-  const totalPages = Math.ceil(postsCount / USER_POSTS_PER_SCROLL) - 1;
+	const [postsCount, posts] = await Promise.all([
+		postsCountRequest,
+		postsRequest,
+	])
+	const totalPages = Math.ceil(postsCount / USER_POSTS_PER_SCROLL) - 1
 
-  const transformedPosts = posts.map((post) => {
-    return {
-      ...post,
-      createdAt: post.createdAt.toString(),
-    };
-  });
+	const transformedPosts = posts.map((post) => {
+		return {
+			...post,
+			createdAt: post.createdAt.toString(),
+		}
+	})
 
-  const response: PostsResponse = {
-    postsCount,
-    totalPages,
-    currentPage: skip,
-    data: transformedPosts,
-  };
+	const response: PostsResponse = {
+		postsCount,
+		totalPages,
+		currentPage: skip,
+		data: transformedPosts,
+	}
 
-  return response;
-};
+	return response
+}

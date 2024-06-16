@@ -1,12 +1,7 @@
-import { EditPost } from "@/components/pages/edit-post/edit-post";
-import { ProtectedPage } from "@/components/pages/protected-page/protected-page";
+import { EditPost } from '@/components/pages/edit-post/edit-post'
 
 const EditPostPage = () => {
-  return (
-    <ProtectedPage sessionNeeded>
-      <EditPost />
-    </ProtectedPage>
-  );
-};
+	return <EditPost />
+}
 
-export default EditPostPage;
+export default EditPostPage

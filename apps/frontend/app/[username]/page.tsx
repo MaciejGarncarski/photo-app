@@ -1,63 +1,63 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
-import { getPageTitle } from "@/utils/get-page-title";
+import { getPageTitle } from '@/utils/get-page-title'
 
-import { Account } from "@/components/pages/account/account";
-import { APP_URL } from "@/constants";
-import { getUserByUsername } from "@/services/user.service";
+import { Account } from '@/components/pages/account/account'
+import { APP_URL } from '@/constants'
+import { getUserByUsername } from '@/services/user.service'
 
 type Props = {
-  params: { username: string };
-};
+	params: { username: string }
+}
 
 export const generateMetadata = async ({
-  params,
+	params,
 }: Props): Promise<Metadata> => {
-  const { username } = params;
+	const { username } = params
 
-  const usernameTitle = getPageTitle(`@${username}`);
+	const usernameTitle = getPageTitle(`@${username}`)
 
-  try {
-    const {
-      data: { data: userData },
-    } = await getUserByUsername({ username: username }, { cache: "no-cache" });
+	try {
+		const {
+			data: { data: userData },
+		} = await getUserByUsername({ username: username }, { cache: 'no-cache' })
 
-    if (!userData.avatar) {
-      return {
-        title: usernameTitle,
-      };
-    }
+		if (!userData.avatar) {
+			return {
+				title: usernameTitle,
+			}
+		}
 
-    return {
-      title: usernameTitle,
-      metadataBase: new URL("https://ik.imagekit.io"),
-      description: userData.bio,
-      openGraph: {
-        title: usernameTitle,
-        description: userData.bio || undefined,
-        url: APP_URL,
-        siteName: "Photo App",
-        locale: "en_GB",
-        type: "profile",
-        username: username,
-        images: [
-          {
-            url: userData?.avatar,
-            width: 720,
-            height: 720,
-          },
-        ],
-      },
-    };
-  } catch (error) {
-    return {
-      title: usernameTitle,
-    };
-  }
-};
+		return {
+			title: usernameTitle,
+			metadataBase: new URL('https://ik.imagekit.io'),
+			description: userData.bio,
+			openGraph: {
+				title: usernameTitle,
+				description: userData.bio || undefined,
+				url: APP_URL,
+				siteName: 'Photo App',
+				locale: 'en_GB',
+				type: 'profile',
+				username: username,
+				images: [
+					{
+						url: userData?.avatar,
+						width: 720,
+						height: 720,
+					},
+				],
+			},
+		}
+	} catch (error) {
+		return {
+			title: usernameTitle,
+		}
+	}
+}
 
 const UserAccount = () => {
-  return <Account />;
-};
+	return <Account />
+}
 
-export default UserAccount;
+export default UserAccount
