@@ -6,7 +6,14 @@ export const getPostQueryOptions = (postId: number) =>
 	queryOptions({
 		queryKey: ['post', postId],
 		queryFn: async () => {
-			const { data: post } = await getPost({ postId: postId.toString() })
+			const { data: post } = await getPost(
+				{ postId: postId.toString() },
+				{
+					next: {
+						tags: [`post-${postId}`],
+					},
+				},
+			)
 
 			if (!post.data) {
 				throw new Error('No post data.')

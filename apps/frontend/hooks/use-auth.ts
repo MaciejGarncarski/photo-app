@@ -1,7 +1,27 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import { getSessionUser } from '@/services/auth.service'
+
+export const authQueryOptions = queryOptions({
+	queryKey: ['session'],
+	queryFn: async () => {
+		try {
+			const { data: sessionUser } = await getSessionUser({})
+
+			if (!sessionUser.data) {
+				throw new Error('No session data')
+			}
+
+			return sessionUser.data
+		} catch (error) {
+			return null
+		}
+	},
+	initialData: undefined,
+	staleTime: 20 * 1000,
+	retry: false,
+})
 
 export const useAuth = () => {
 	const {
@@ -9,25 +29,7 @@ export const useAuth = () => {
 		isPending,
 		isRefetching,
 		isFetching,
-	} = useSuspenseQuery({
-		queryKey: ['session'],
-		queryFn: async () => {
-			try {
-				const { data: sessionUser } = await getSessionUser({})
-
-				if (!sessionUser.data) {
-					throw new Error('No session data')
-				}
-
-				return sessionUser.data
-			} catch (error) {
-				return null
-			}
-		},
-		initialData: undefined,
-		staleTime: 20 * 1000,
-		retry: false,
-	})
+	} = useSuspenseQuery(authQueryOptions)
 
 	const isSignedIn = Boolean(sessionUser?.id)
 
