@@ -9,7 +9,7 @@ export const isAuthenticated = async () => {
 			},
 		)
 
-		if (response.data.data.id) {
+		if (response.status === 200) {
 			return true
 		}
 

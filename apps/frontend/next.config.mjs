@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 export default {
 	experimental: {
-		ppr: 'incremental',
+		ppr: true,
 	},
 	images: {
 		remotePatterns: [
