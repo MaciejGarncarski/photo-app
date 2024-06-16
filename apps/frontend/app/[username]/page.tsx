@@ -10,8 +10,6 @@ type Props = {
 	params: { username: string }
 }
 
-export const revalidate = 1000
-
 export const generateMetadata = async ({
 	params,
 }: Props): Promise<Metadata> => {

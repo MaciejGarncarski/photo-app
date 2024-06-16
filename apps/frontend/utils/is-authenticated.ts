@@ -5,7 +5,7 @@ export const isAuthenticated = async () => {
 		const response = await getSessionUser(
 			{},
 			{
-				cache: 'no-cache',
+				cache: 'no-store',
 			},
 		)
 

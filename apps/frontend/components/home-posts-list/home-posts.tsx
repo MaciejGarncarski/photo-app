@@ -3,6 +3,7 @@ import {
 	HydrationBoundary,
 	QueryClient,
 } from '@tanstack/react-query'
+import { unstable_noStore } from 'next/cache'
 
 import { authQueryOptions } from '@/hooks/use-auth'
 import { userQueryOptions } from '@/hooks/use-user'
@@ -12,6 +13,7 @@ import { getPostQueryOptions } from '@/components/pages/account/use-post'
 import { getHomepagePostsOptions } from '@/components/pages/home/use-homepage-posts'
 
 export async function HomePosts() {
+	unstable_noStore()
 	const queryClient = new QueryClient()
 
 	const prefetchHomepagePosts = await queryClient.fetchInfiniteQuery(
