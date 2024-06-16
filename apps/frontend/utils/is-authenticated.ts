@@ -8,6 +8,8 @@ export const isAuthenticated = async () => {
 				cache: 'no-store',
 			},
 		)
+		// eslint-disable-next-line no-console
+		console.log('NOOOT AUTHENTICATED')
 
 		if (response.status === 200) {
 			// eslint-disable-next-line no-console
@@ -17,6 +19,8 @@ export const isAuthenticated = async () => {
 
 		return false
 	} catch (error) {
+		// eslint-disable-next-line no-console
+		console.log(error)
 		return false
 	}
 }
