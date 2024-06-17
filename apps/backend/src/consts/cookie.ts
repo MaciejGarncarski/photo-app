@@ -8,6 +8,6 @@ export const cookie: CookieOptions = {
 	sameSite: 'lax',
 	httpOnly: true,
 	maxAge: ms('7 days'),
-	domain: envVariables.COOKIE_DOMAIN,
+	domain: isProd ? envVariables.COOKIE_DOMAIN : undefined,
 	secure: isProd,
 }

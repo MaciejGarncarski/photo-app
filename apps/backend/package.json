@@ -11,7 +11,7 @@
 		"check-types": "tsc --noEmit",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",
-		"dev": "pnpm tsx watch --env-file=.env ./src/index.ts"
+		"dev": "pnpm tsx watch --clear-screen=false --env-file=.env ./src/index.ts"
 	},
 	"dependencies": {
 		"@fastify/cookie": "^9.3.1",

@@ -35,40 +35,44 @@ export const googleAuthPlugin = async (server: FastifyInstance) => {
 		url: '/auth/google/callback',
 		method: 'GET',
 		async handler(request, reply) {
-			const { token } =
-				await this.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(request)
+			try {
+				const { token } =
+					await this.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(
+						request,
+						reply,
+					)
 
-			const googleAPiUrl = `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${token.access_token}`
-			const response = await fetch(googleAPiUrl, {
-				method: 'GET',
-			})
+				const googleAPiUrl = `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${token.access_token}`
+				const response = await fetch(googleAPiUrl, {
+					method: 'GET',
+				})
 
-			const responseJSON = await response.json()
+				const responseJSON = (await response.json()) as GoogleUser
+				const user = await signInGoogle(responseJSON.id)
 
-			const data = responseJSON.data as GoogleUser
+				if (user) {
+					await request.session.regenerate()
+					request.session.userId = user.id
+					return reply.redirect(`${envVariables.APP_URL}`)
+				}
 
-			const user = await signInGoogle(data.id)
+				const createdUser = await retry<User>(
+					() => createGoogleUser(responseJSON, token),
+					{
+						retries: 20,
+					},
+				)
 
-			if (user) {
-				await request.session.regenerate()
-				request.session.userId = user.id
-				return reply.redirect(`${envVariables.APP_URL}`)
+				if (createdUser) {
+					await request.session.regenerate()
+					request.session.userId = createdUser.id
+					return reply.redirect(`${envVariables.APP_URL}`)
+				}
+
+				return reply.redirect(`${envVariables.APP_URL}/auth/sign-in`)
+			} catch (error) {
+				return reply.redirect(`${envVariables.APP_URL}/auth/sign-in`)
 			}
-
-			const createdUser = await retry<User>(
-				() => createGoogleUser(data, token),
-				{
-					retries: 20,
-				},
-			)
-
-			if (createdUser) {
-				await request.session.regenerate()
-				request.session.userId = createdUser.id
-				return reply.redirect(`${envVariables.APP_URL}`)
-			}
-
-			return reply.redirect(`${envVariables.APP_URL}/auth/sign-in`)
 		},
 	})
 }

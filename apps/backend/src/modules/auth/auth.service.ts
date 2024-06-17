@@ -45,7 +45,7 @@ export const createGoogleUser = async (
 	const currentDate = new Date(expires_at)
 	const expiresAt = Math.ceil(currentDate.getTime() / 1000)
 
-	const temporaryUsername = `user-${nanoid()}`
+	const temporaryUsername = `user-${nanoid(6)}`
 
 	const user = await db.$transaction(async (tx) => {
 		const account = await tx.account.findFirst({
@@ -95,9 +95,13 @@ export const signInGoogle = async (googleId: string) => {
 			},
 		})
 
+		if (!account) {
+			return null
+		}
+
 		const user = await tx.user.findUnique({
 			where: {
-				userId: account?.userId,
+				userId: account.userId,
 			},
 		})
 
