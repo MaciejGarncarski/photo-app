@@ -10,6 +10,7 @@ export const envVariablesSchema = Type.Object({
 	BACKEND_URL: Type.String({ format: 'uri' }),
 	GOOGLE_CLIENT_ID: Type.String(),
 	GOOGLE_CLIENT_SECRET: Type.String(),
+	COOKIE_DOMAIN: Type.String(),
 	STATUS: Type.Union([Type.Literal('production'), Type.Literal('development')]),
 })
 
@@ -25,5 +26,6 @@ export const envVariables = {
 	BACKEND_URL: process.env.BACKEND_URL,
 	GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
 	GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+	COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
 	STATUS: process.env.STATUS,
 } as EnvVariables
