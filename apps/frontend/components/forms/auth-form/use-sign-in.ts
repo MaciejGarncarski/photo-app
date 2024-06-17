@@ -28,6 +28,7 @@ export const useSignIn = () => {
 		},
 		onSuccess: async () => {
 			router.push('/')
+
 			await queryClient.invalidateQueries({ queryKey: ['session'] })
 			await queryClient.invalidateQueries({ queryKey: HOME_POSTS_QUERY_KEY })
 		},
