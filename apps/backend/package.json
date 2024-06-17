@@ -4,7 +4,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
-		"build": "NODE_ENV=production pnpm prisma generate && pnpm tsc",
+		"build": "pnpm prisma generate && pnpm tsc",
 		"build:dev": "pnpm prisma generate && pnpm tsc",
 		"start": "node ./dist/src",
 		"restart-deploy": "pm2 startOrRestart ~/ecosystem.config.js --name \"Photo app - backend\"",
