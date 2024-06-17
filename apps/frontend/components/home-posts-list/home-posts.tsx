@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query'
 import { unstable_noStore } from 'next/cache'
 
+import { authQueryOptions } from '@/hooks/use-auth'
 import { userQueryOptions } from '@/hooks/use-user'
 
 import { HomePostsList } from '@/components/home-posts-list/home-posts-list'
@@ -15,7 +16,10 @@ export async function HomePosts() {
 	unstable_noStore()
 	const queryClient = new QueryClient()
 
-	const posts = await queryClient.fetchInfiniteQuery(getHomepagePostsOptions)
+	const prefetchSession = queryClient.prefetchQuery(authQueryOptions)
+	const prefetchPosts = queryClient.fetchInfiniteQuery(getHomepagePostsOptions)
+
+	const [posts] = await Promise.all([prefetchPosts, prefetchSession])
 
 	const postIds = posts.pages[0].data.map(({ id }) => id)
 	const authorIds = posts.pages[0].data.map(({ authorId }) => authorId)
