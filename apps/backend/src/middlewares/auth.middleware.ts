@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { preHandlerHookHandler } from 'fastify'
 
 export const authorize: preHandlerHookHandler = function (
@@ -6,6 +7,8 @@ export const authorize: preHandlerHookHandler = function (
 	reply,
 	done,
 ) {
+	console.log(request.session, request.headers.origin)
+
 	if (!request.session.userId) {
 		return reply.unauthorized('Unauthorized.')
 	}
