@@ -10,8 +10,15 @@ export const metadata: Metadata = {
 	title: getPageTitle('Create Post'),
 }
 
+export const dynamic = 'force-dynamic'
+
 const CreatePostPage = async () => {
-	if (!(await isAuthenticated())) {
+	const isSignedIn = await isAuthenticated()
+
+	// eslint-disable-next-line no-console
+	console.log({ isSignedIn })
+
+	if (!isSignedIn) {
 		redirect('/access-denied')
 	}
 
