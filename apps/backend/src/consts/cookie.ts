@@ -1,7 +1,8 @@
 import type { CookieOptions } from '@fastify/session'
 import ms from 'ms'
+import { envVariables } from '../utils/envVariables.js'
 
-const isProd = process.env.PRODUCTION === 'true'
+const isProd = envVariables.STATUS === 'production'
 
 export const cookie: CookieOptions = {
 	httpOnly: true,
