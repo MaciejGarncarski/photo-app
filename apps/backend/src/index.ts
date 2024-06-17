@@ -24,6 +24,7 @@ declare module 'fastify' {
 
 const start = async () => {
 	const app = Fastify({
+		trustProxy: true,
 		ajv: {
 			plugins: [ajvFilePlugin],
 		},
