@@ -7,7 +7,8 @@ export const authorize: preHandlerHookHandler = function (
 	reply,
 	done,
 ) {
-	console.log(`USERID: ${request.session.userId}`, request.headers.origin)
+	console.log(`USERID: ${request.session.userId}`)
+	console.log('COOKIES', request.cookies)
 
 	if (!request.session.userId) {
 		return reply.unauthorized('Unauthorized.')
