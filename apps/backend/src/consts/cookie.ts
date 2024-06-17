@@ -6,10 +6,11 @@ const isProd = envVariables.STATUS === 'production'
 
 // eslint-disable-next-line no-console
 console.log({
+	sameSite: 'lax',
 	httpOnly: true,
-	maxAge: ms('2 days'),
-	sameSite: isProd ? 'lax' : 'lax',
-	secure: isProd ? true : false,
+	maxAge: ms('7 days'),
+	domain: envVariables.COOKIE_DOMAIN,
+	secure: isProd,
 })
 
 export const cookie: CookieOptions = {
