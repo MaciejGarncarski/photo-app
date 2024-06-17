@@ -62,17 +62,9 @@ const start = async () => {
 		},
 	})
 
-	// eslint-disable-next-line no-console
-	console.log({
-		credentials: true,
-		origin: [`${envVariables.APP_URL}`],
-		methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-	})
-
 	await app.register(cors, {
 		credentials: true,
-		origin: [`${envVariables.APP_URL}`],
-		methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+		origin: envVariables.APP_URL,
 	})
 
 	await app.register(fastifyCookie)
