@@ -49,7 +49,6 @@ const start = async () => {
 	})
 
 	await app.register(fastifySensible)
-	await app.register(fastifyCookie)
 
 	const PrismaStore = new PrismaSessionStore(new PrismaClient(), {
 		checkPeriod: 2 * 60 * 1000,
@@ -62,11 +61,21 @@ const start = async () => {
 			fileSize: 6500000,
 		},
 	})
+
+	// eslint-disable-next-line no-console
+	console.log({
+		credentials: true,
+		origin: [`${envVariables.APP_URL}`],
+		methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+	})
+
 	await app.register(cors, {
 		credentials: true,
 		origin: [`${envVariables.APP_URL}`],
 		methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 	})
+
+	await app.register(fastifyCookie)
 
 	app.decorate('authorize', authorize)
 
