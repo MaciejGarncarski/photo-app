@@ -23,8 +23,6 @@ const logger: Middleware = async (url, init, next) => {
 		const sessionCookie = cookies().get('sessionId')?.value
 
 		init.headers.append('Cookie', `sessionId=${sessionCookie}`)
-		// eslint-disable-next-line no-console
-		console.log({ allTheCookies: cookies().getAll() })
 
 		const response = await next(url, init)
 		return response

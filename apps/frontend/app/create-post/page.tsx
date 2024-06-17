@@ -15,9 +15,6 @@ export const dynamic = 'force-dynamic'
 const CreatePostPage = async () => {
 	const isSignedIn = await isAuthenticated()
 
-	// eslint-disable-next-line no-console
-	console.log({ isSignedIn })
-
 	if (!isSignedIn) {
 		redirect('/access-denied')
 	}

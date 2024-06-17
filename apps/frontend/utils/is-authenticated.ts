@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { getSessionUser } from '@/services/auth.service'
 
 export const isAuthenticated = async () => {
@@ -10,16 +9,12 @@ export const isAuthenticated = async () => {
 			},
 		)
 
-		console.log({ response })
-
 		if (response.status === 200) {
 			return true
 		}
 
 		return false
 	} catch (error) {
-		console.log({ isAuthenticatedError: error })
-
 		return false
 	}
 }
