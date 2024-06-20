@@ -237,7 +237,7 @@ export const editPost = async (
 	})
 }
 
-const USER_POSTS_PER_SCROLL = 3
+const USER_POSTS_PER_SCROLL = 9
 
 export const getUserPosts = async ({ skip, authorId }: GetUserPostsInput) => {
 	const postsRequest = db.post.findMany({

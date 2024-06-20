@@ -1,27 +1,27 @@
-@use "styles/common";
+@use 'styles/common';
 
 .homePost {
-  width: var(--post-width);
-  background-color: var(--color-secondary);
-  padding: 1rem 1rem;
-  border-radius: calc(0.5rem + var(--radius-small));
-  box-shadow: var(--shadow);
+	width: var(--post-width);
+	background-color: var(--color-secondary);
+	padding: 1rem 1rem;
+	border-radius: calc(0.5rem + var(--radius-small));
+	box-shadow: var(--shadow);
 
-  @include common.mediaquery("desktop") {
-    border: 1px solid var(--shadow-0-5);
-    padding: 1rem 1.5rem;
-  }
+	@include common.mediaquery('desktop') {
+		border: 1px solid var(--shadow-50);
+		padding: 1rem 1.5rem;
+	}
 }
 
 .header {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 
-  @include common.mediaquery("desktop") {
-    margin-bottom: 1.25rem;
-  }
+	@include common.mediaquery('desktop') {
+		margin-bottom: 1.25rem;
+	}
 }
 
 .carousel {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+	width: 100%;
+	aspect-ratio: 1 / 1;
 }

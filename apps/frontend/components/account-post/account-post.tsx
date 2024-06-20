@@ -1,4 +1,5 @@
 import { ChatCentered, CopySimple, Heart } from '@phosphor-icons/react'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -47,7 +48,12 @@ export const AccountPost = ({ postId }: Props) => {
 			) : null}
 
 			<Image
-				className={styles.image}
+				className={clsx(
+					{
+						[styles.imageLoading]: !isLoaded,
+					},
+					styles.image,
+				)}
 				src={images[0].url}
 				alt="post"
 				sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 15vw"

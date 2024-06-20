@@ -1,38 +1,38 @@
-@use "styles/common";
+@use 'styles/common';
 
 .listItem {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  transition: transform var(--transition);
-  margin: 0.25rem 1rem;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	transition: transform var(--transition);
+	margin: 0.25rem 1rem;
 
-  @include common.mediaquery("desktop") {
-    gap: 2rem;
-  }
+	@include common.mediaquery('desktop') {
+		gap: 2rem;
+	}
 }
 
 .itemLink {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-grow: 1;
-  border-radius: var(--radius-medium);
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-grow: 1;
+	border-radius: var(--radius-medium);
 
-  @include common.mediaquery("desktop") {
-    border: 1px solid transparent;
-    padding: 0.5rem 1rem;
+	@include common.mediaquery('desktop') {
+		border: 1px solid transparent;
+		padding: 0.5rem 1rem;
 
-    &:hover,
-    &:focus {
-      border: 1px solid var(--shadow-0-5);
-      box-shadow: var(--shadow-0-5);
-      background-color: var(--color-secondary);
-    }
-  }
+		&:hover,
+		&:focus {
+			border: 1px solid var(--shadow-50);
+			box-shadow: var(--shadow-50);
+			background-color: var(--color-secondary);
+		}
+	}
 }
 
 .username {
-  font-weight: 700;
-  font-size: 1.25rem;
+	font-weight: 700;
+	font-size: 1.25rem;
 }

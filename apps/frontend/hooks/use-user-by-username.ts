@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 
 import { getUserByUsername } from '@/services/user.service'
 
@@ -6,8 +6,8 @@ type Arguments = {
 	username: string
 }
 
-export const useUserByUsername = ({ username }: Arguments) => {
-	return useSuspenseQuery({
+export const getUserByUsernmeQueryOptions = (username: string) =>
+	queryOptions({
 		queryKey: ['user', username],
 		queryFn: async () => {
 			const { data: user } = await getUserByUsername({ username })
@@ -21,4 +21,7 @@ export const useUserByUsername = ({ username }: Arguments) => {
 		retry: 1,
 		refetchOnWindowFocus: false,
 	})
+
+export const useUserByUsername = ({ username }: Arguments) => {
+	return useSuspenseQuery(getUserByUsernmeQueryOptions(username))
 }

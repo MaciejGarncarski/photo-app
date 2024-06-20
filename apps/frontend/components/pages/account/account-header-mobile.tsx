@@ -1,4 +1,4 @@
-import { GearSix } from '@phosphor-icons/react'
+import { Chat, GearSix } from '@phosphor-icons/react'
 
 import { useAuth } from '@/hooks/use-auth'
 import { useUser } from '@/hooks/use-user'
@@ -42,7 +42,9 @@ export const AccountHeaderMobile = ({
 			{!isOwner && isSignedIn && (
 				<div className={styles.accountButtons}>
 					<FollowButton userId={userId} />
-					<ButtonLink href={`/chat/${data.username}`}>Send message</ButtonLink>
+					<ButtonLink href={`/chat/${data.username}`}>
+						<Chat weight="fill" />
+					</ButtonLink>
 				</div>
 			)}
 			{isOwner && (

@@ -1,38 +1,39 @@
 @mixin mediaquery($query) {
-  $breakpoints: (
-    "tablet": "(min-width: 750px)",
-    "desktop": "(min-width: 1101px)",
-    "desktop-big": "(min-width: 1440px)",
-  );
+	$breakpoints: (
+		'tablet': '(min-width: 750px)',
+		'desktop': '(min-width: 1101px)',
+		'desktop-big': '(min-width: 1441px)',
+	);
 
-  @if map-has-key($breakpoints, $query) {
-    @media screen and #{map-get($breakpoints, $query)} {
-      @content;
-    }
-  } @else {
-    @error "ERROR: No breakpoint specified for query '#{$query}'";
-  }
+	@if map-has-key($breakpoints, $query) {
+		@media screen and #{map-get($breakpoints, $query)} {
+			@content;
+		}
+	} @else {
+		@error "ERROR: No breakpoint specified for query '#{$query}'";
+	}
 }
 
 @mixin mobile-landscape {
-  @media screen and (max-width: 1000px) and (orientation: landscape) {
-    @content;
-  }
+	@media screen and (max-width: 1000px) and (orientation: landscape) {
+		@content;
+	}
 }
 
 @mixin button {
-  border-radius: var(--radius-small);
-  font-weight: 500;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  letter-spacing: 0em;
-  line-height: 1.25rem;
-  height: 2.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 0.75rem;
-  transition: all var(--transition-fast);
-  transition-property: background-color, color, box-shadow;
+	border-radius: var(--radius-small);
+	font-weight: 500;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	letter-spacing: 0em;
+	line-height: 1.25rem;
+	height: 2.25rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	gap: 0.75rem;
+	transition: all var(--transition-fast);
+	transition-property: background-color, color, box-shadow;
+	position: relative;
 }

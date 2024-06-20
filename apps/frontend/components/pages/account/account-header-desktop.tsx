@@ -1,4 +1,4 @@
-import { GearSix } from '@phosphor-icons/react'
+import { Chat, GearSix } from '@phosphor-icons/react'
 
 import { useAuth } from '@/hooks/use-auth'
 import { useUser } from '@/hooks/use-user'
@@ -41,7 +41,7 @@ export const AccountHeaderDesktop = ({
 					<div className={styles.accountButtons}>
 						<FollowButton userId={userId} />
 						<ButtonLink href={`/chat/${data.username}`}>
-							Send message
+							<Chat weight="fill" />
 						</ButtonLink>
 					</div>
 				)}

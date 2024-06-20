@@ -1,32 +1,32 @@
-@use "styles/common";
+@use 'styles/common';
 
 .closeButton {
-  border: none;
-  transition: all var(--transition);
-  transition-property: background-color, box-shadow, color;
-  position: relative;
-  border-radius: 100%;
-  padding: 0.5rem;
-  background-color: var(--color-gray);
-  border: 1px solid transparent;
+	border: none;
+	transition: all var(--transition);
+	transition-property: background-color, box-shadow, color;
+	position: relative;
+	border-radius: 100%;
+	padding: 0.5rem;
+	background-color: var(--color-gray);
+	border: 1px solid transparent;
 
-  @include common.mediaquery("desktop") {
-    &:hover {
-      background-color: var(--color-accent);
-      color: var(--color-primary);
-      border-color: var(--shadow-0-5);
-    }
-  }
+	@include common.mediaquery('desktop') {
+		&:hover {
+			background-color: var(--color-accent);
+			color: var(--color-primary);
+			border-color: var(--shadow-50);
+		}
+	}
 }
 
 .secondary {
-  background-color: var(--color-text);
-  color: var(--color-secondary);
+	background-color: var(--color-text);
+	color: var(--color-secondary);
 
-  @include common.mediaquery("desktop") {
-    &:hover {
-      background-color: var(--color-secondary);
-      color: var(--color-text);
-    }
-  }
+	@include common.mediaquery('desktop') {
+		&:hover {
+			background-color: var(--color-secondary);
+			color: var(--color-text);
+		}
+	}
 }

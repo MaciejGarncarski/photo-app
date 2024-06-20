@@ -1,98 +1,99 @@
-@use "styles/common";
+@use 'styles/common';
 
 .list {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
 
-  @include common.mediaquery("desktop") {
-    border-radius: 0;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    border: initial;
-    width: 100%;
-    height: auto;
-    overflow-y: clip;
-    padding: 2rem 0;
-    gap: 2rem;
-    margin-bottom: auto;
-    box-shadow: none;
-  }
+	@include common.mediaquery('desktop') {
+		border-radius: 0;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		border: initial;
+		width: 100%;
+		height: auto;
+		overflow-y: clip;
+		padding: 2rem 0;
+		gap: 2rem;
+		margin-bottom: auto;
+		box-shadow: none;
+	}
 }
 
 .listItem {
-  width: 100%;
+	width: 100%;
 }
 
 .listItemContent {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
-  border-radius: var(--radius-medium);
-  transition: all var(--transition-fast);
-  font-size: 1.25rem;
-  transition-property: transform, background-color, border-color;
-  border: 1px solid transparent;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	gap: 1rem;
+	padding: 0.5rem;
+	border-radius: var(--radius-medium);
+	transition: all var(--transition-fast);
+	font-size: 1.25rem;
+	transition-property: transform, background-color, border-color;
+	border: 1px solid transparent;
 
-  @include common.mediaquery("desktop") {
-    padding: 1rem;
+	@include common.mediaquery('desktop') {
+		padding: 1rem;
 
-    &:hover {
-      transform: scale(1.05);
-      background-color: var(--color-primary);
-    }
-  }
+		&:hover {
+			transform: scale(1.03);
+			border-color: var(--shadow-100);
+			background-color: var(--color-primary);
+		}
+	}
 }
 
 .icon {
-  transition: transform var(--transition-fast);
+	transition: transform var(--transition-fast);
 }
 
 .active {
-  background-color: var(--color-primary);
-  border-color: var(--shadow-0-5);
-  box-shadow: var(--shadow);
+	background-color: var(--color-primary);
+	border-color: var(--shadow-200);
+	box-shadow: var(--shadow);
 
-  @include common.mediaquery("desktop") {
-    background-color: var(--color-primary);
-    font-weight: 700;
-  }
+	@include common.mediaquery('desktop') {
+		background-color: var(--color-primary);
+		font-weight: 700;
+	}
 }
 
 .title {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 
-  @include common.mediaquery("desktop") {
-    text-transform: capitalize;
-    position: static;
-    width: auto;
-    height: auto;
-    padding: 0;
-    margin: 0;
-    overflow: visible;
-    clip: none;
-    white-space: nowrap;
-    border-width: 0;
-  }
+	@include common.mediaquery('desktop') {
+		text-transform: capitalize;
+		position: static;
+		width: auto;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		overflow: visible;
+		clip: none;
+		white-space: nowrap;
+		border-width: 0;
+	}
 }
 
 .signInButton {
-  @include common.mediaquery("desktop") {
-    margin-top: auto;
-    width: 100%;
-  }
+	@include common.mediaquery('desktop') {
+		margin-top: auto;
+		width: 100%;
+	}
 }
