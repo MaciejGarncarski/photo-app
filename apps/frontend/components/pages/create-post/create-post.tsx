@@ -48,24 +48,29 @@ export const CreatePost = () => {
 	}
 
 	return (
-		<main className={styles.createPost}>
+		<main>
 			<div className={styles.heading}>
 				<PlusCircle size={40} />
 				<Heading tag="h2" size="big">
 					Create post
 				</Heading>
 			</div>
-			{finalImages.length <= 3 && (
-				<CropImage setFinalImages={setFinalImages} finalImages={finalImages} />
-			)}
-			<ImagesPreview previewImages={previewImages} onRemove={onRemove} />
-			<CreatePostForm
-				disabled={isSubmitDisabled}
-				errors={errors}
-				onSubmit={handleSubmit(onSubmit)}
-				openModal={() => router.back()}
-				register={register}
-			/>
+			<div className={styles.createPost}>
+				{finalImages.length <= 3 && (
+					<CropImage
+						setFinalImages={setFinalImages}
+						finalImages={finalImages}
+					/>
+				)}
+				<ImagesPreview previewImages={previewImages} onRemove={onRemove} />
+				<CreatePostForm
+					disabled={isSubmitDisabled}
+					errors={errors}
+					onSubmit={handleSubmit(onSubmit)}
+					openModal={() => router.back()}
+					register={register}
+				/>
+			</div>
 		</main>
 	)
 }

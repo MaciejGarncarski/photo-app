@@ -10,7 +10,7 @@
 	width: clamp(20rem, 80vw, 40rem);
 	padding: 1rem 1.5rem;
 	border-radius: var(--radius-medium);
-	animation: show-modal var(--transition) cubic-bezier(0, 1.4, 1, 1) forwards;
+	animation: show-modal 200ms cubic-bezier(0, 1.4, 1, 1) forwards;
 
 	@include common.mediaquery('desktop') {
 		width: clamp(25rem, 40vw, 35rem);
