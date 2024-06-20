@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 	title: 'Access Denied',
 }
 
-const AccessDeniedPage = () => {
+const AccessDeniedPage = async () => {
 	return <AccessDenied />
 }
 

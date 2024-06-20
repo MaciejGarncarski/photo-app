@@ -2,7 +2,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 
 import { authQueryOptions } from '@/hooks/use-auth'
-import { userQueryOptions } from '@/hooks/use-user'
+import { getUserQueryOptions } from '@/hooks/use-user'
 import { getUserByUsernmeQueryOptions } from '@/hooks/use-user-by-username'
 import { getPageTitle } from '@/utils/get-page-title'
 import { getQueryClient } from '@/utils/get-query-client'
@@ -35,13 +35,15 @@ export const generateMetadata = async ({
 			}
 		}
 
+		const description = `${userData.name ? `${userData.name} - @${userData.username}` : userData.username}. Bio: ${userData.bio || 'No bio yet.'}. Followers: ${userData.followersCount}, friends: ${userData.friendsCount}, posts: ${userData.postsCount}.`
+
 		return {
 			title: usernameTitle,
 			metadataBase: new URL('https://ik.imagekit.io'),
-			description: userData.bio,
+			description: description,
 			openGraph: {
 				title: usernameTitle,
-				description: userData.bio || undefined,
+				description: description,
 				url: APP_URL,
 				siteName: 'Photo App',
 				locale: 'en_GB',
@@ -86,7 +88,7 @@ export default async function AccountPage({ params }: Props) {
 	})
 
 	const prefetchPostAuthors = authorIds.map((authorId) => {
-		return queryClient.prefetchQuery(userQueryOptions(authorId))
+		return queryClient.prefetchQuery(getUserQueryOptions(authorId))
 	})
 
 	await Promise.all([...prefetchPostsById, ...prefetchPostAuthors])

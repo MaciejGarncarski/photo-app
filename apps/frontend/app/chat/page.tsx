@@ -1,69 +1,47 @@
-import {
-	dehydrate,
-	HydrationBoundary,
-	QueryClient,
-} from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import type { Metadata } from 'next'
+import { unstable_noStore } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { authQueryOptions } from '@/hooks/use-auth'
+import { getUserQueryOptions } from '@/hooks/use-user'
 import { getPageTitle } from '@/utils/get-page-title'
+import { getQueryClient } from '@/utils/get-query-client'
 import { isAuthenticated } from '@/utils/is-authenticated'
 
 import { Chat } from '@/components/pages/chat/chat'
+import { chatUsersQueryOptions } from '@/components/pages/chat/use-chat-users'
 
 export const metadata: Metadata = {
 	title: getPageTitle('Chat'),
 }
 
 const ChatPage = async () => {
-	const queryClient = new QueryClient()
+	unstable_noStore()
 
 	if (!(await isAuthenticated())) {
 		redirect('/access-denied')
 	}
 
-	// try {
-	//   const users = await queryClient.fetchInfiniteQuery({
-	//     queryKey: ["chat users"],
-	//     queryFn: async ({ pageParam }) => {
-	//       const data = await getChatUsers({
-	//         skip: pageParam.toString(),
-	//       });
+	const queryClient = getQueryClient()
 
-	//       if (!data.data) {
-	//         throw new Error("No data");
-	//       }
+	const prefetchChatUsers = queryClient.fetchInfiniteQuery(
+		chatUsersQueryOptions,
+	)
+	const prefetchSession = queryClient.prefetchQuery(authQueryOptions)
 
-	//       return data.data;
-	//     },
-	//     initialPageParam: 0,
-	//   });
+	const [chatUsers] = await Promise.all([prefetchChatUsers, prefetchSession])
 
-	//   await Promise.all(
-	//     users.pages.map(async ({ data }) => {
-	//       if (!data) {
-	//         return null;
-	//       }
+	const usersIds = chatUsers.pages
+		.flat()
+		.map(({ users }) => users.map(({ userId }) => userId))
+		.flat()
 
-	//       await Promise.all(
-	//         data.users.map(async (userData) => {
-	//           await queryClient.prefetchQuery({
-	//             queryKey: ["user", userData.userId],
-	//             queryFn: async () => {
-	//               const userRequest = await getUser({ userId: userData.userId });
-	//               if (!userRequest.data) {
-	//                 throw new Error("no user");
-	//               }
-	//               return userRequest.data;
-	//             },
-	//           });
-	//         })
-	//       );
-	//     })
-	//   );
-
-	//   await Promise.all(users.pages);
-	// } catch (error) {}
+	await Promise.all(
+		usersIds.map((userId) => {
+			return queryClient.prefetchQuery(getUserQueryOptions(userId))
+		}),
+	)
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

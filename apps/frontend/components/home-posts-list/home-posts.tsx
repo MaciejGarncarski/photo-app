@@ -6,7 +6,7 @@ import {
 import { unstable_noStore } from 'next/cache'
 
 import { authQueryOptions } from '@/hooks/use-auth'
-import { userQueryOptions } from '@/hooks/use-user'
+import { getUserQueryOptions } from '@/hooks/use-user'
 
 import { HomePostsList } from '@/components/home-posts-list/home-posts-list'
 import { getPostQueryOptions } from '@/components/pages/account/use-post'
@@ -29,7 +29,7 @@ export async function HomePosts() {
 	})
 
 	const prefetchPostAuthors = authorIds.map((authorId) => {
-		return queryClient.prefetchQuery(userQueryOptions(authorId))
+		return queryClient.prefetchQuery(getUserQueryOptions(authorId))
 	})
 
 	await Promise.all([...prefetchPostsById, ...prefetchPostAuthors])

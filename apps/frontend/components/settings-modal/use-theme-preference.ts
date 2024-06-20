@@ -5,10 +5,10 @@ export const useThemePreference = () => {
 	const { setTheme, theme } = useTheme()
 
 	const toggleTheme = () => {
-		setTheme(theme === 'DARK' ? 'LIGHT' : 'DARK')
+		setTheme(theme === 'dark' ? 'light' : 'dark')
 	}
 
-	const isDark = useMemo(() => theme === 'DARK', [theme])
+	const isDark = useMemo(() => theme === 'dark', [theme])
 
 	return { toggleTheme, isDark }
 }

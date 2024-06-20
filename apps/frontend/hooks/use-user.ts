@@ -6,7 +6,7 @@ type Props = {
 	userId: string
 }
 
-export const userQueryOptions = (userId: string) =>
+export const getUserQueryOptions = (userId: string) =>
 	queryOptions({
 		queryKey: ['user', userId],
 		queryFn: async () => {
@@ -23,5 +23,5 @@ export const userQueryOptions = (userId: string) =>
 	})
 
 export const useUser = ({ userId }: Props) => {
-	return useSuspenseQuery(userQueryOptions(userId))
+	return useSuspenseQuery(getUserQueryOptions(userId))
 }

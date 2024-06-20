@@ -59,22 +59,28 @@ export const createPostHandler = async (
 	request: FastifyRequest<{ Body: RequestBody }>,
 	reply: FastifyReply,
 ) => {
-	const { images, description } = request.body
-	const { userId } = request.session
+	try {
+		const { images, description } = request.body
+		const { userId } = request.session
 
-	if (!images) {
-		return reply.badRequest('No image provided')
+		if (!images) {
+			return reply.badRequest('No image provided')
+		}
+
+		const imagesArray = Array.isArray(images) ? images : [images]
+		const data = await createPost(
+			{ description: description.value },
+			userId,
+			imagesArray,
+		)
+		request.server.io.emit('new post')
+
+		return reply.status(201).send({ data })
+	} catch (error) {
+		// eslint-disable-next-line no-console
+		console.log({ error })
+		return reply.badRequest()
 	}
-
-	const imagesArray = Array.isArray(images) ? images : [images]
-	const data = await createPost(
-		{ description: description.value },
-		userId,
-		imagesArray,
-	)
-	request.server.io.emit('new post')
-
-	return reply.status(201).send({ data })
 }
 
 export const deletePostHandler = async (

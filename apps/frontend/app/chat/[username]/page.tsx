@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 import { getPageTitle } from '@/utils/get-page-title'
+import { isAuthenticated } from '@/utils/is-authenticated'
 
 import { ChatRoom } from '@/components/pages/chat-room/chat-room'
 
@@ -22,7 +24,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 	}
 }
 
-const ChatRoomPage = () => {
+const ChatRoomPage = async () => {
+	const isSignedIn = await isAuthenticated()
+
+	if (!isSignedIn) {
+		redirect('/access-denied')
+	}
+
 	return <ChatRoom />
 }
 

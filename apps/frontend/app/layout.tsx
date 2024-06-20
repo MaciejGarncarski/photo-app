@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Rubik } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
 import { Toaster } from 'sonner'
 
@@ -35,18 +36,20 @@ export const viewport: Viewport = {
 
 const DefaultLayout = ({ children }: Props) => {
 	return (
-		<html lang="en" className={font.className}>
+		<html lang="en" className={font.className} suppressHydrationWarning>
 			<head />
 			<body>
-				<Providers>
-					<Toaster
-						richColors
-						position="top-center"
-						closeButton
-						className={font.className}
-					/>
-					<Layout>{children}</Layout>
-				</Providers>
+				<ThemeProvider defaultTheme="light">
+					<Providers>
+						<Toaster
+							richColors
+							position="top-center"
+							closeButton
+							className={font.className}
+						/>
+						<Layout>{children}</Layout>
+					</Providers>
+				</ThemeProvider>
 			</body>
 		</html>
 	)

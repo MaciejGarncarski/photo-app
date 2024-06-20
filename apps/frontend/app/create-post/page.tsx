@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 	title: getPageTitle('Create Post'),
 }
 
-export const dynamic = 'force-dynamic'
-
 const CreatePostPage = async () => {
 	const isSignedIn = await isAuthenticated()
 

@@ -6,7 +6,9 @@
 
 	@include common.mediaquery('desktop') {
 		display: grid;
-		grid-template-columns: 1fr 3fr;
+		grid-template-columns:
+			calc(var(--navbar-desktop-margin) + var(--navbar-desktop-width))
+			3fr;
 		padding-bottom: 0;
 		gap: 3rem;
 	}
