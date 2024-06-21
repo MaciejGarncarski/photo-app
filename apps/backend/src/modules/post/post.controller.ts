@@ -1,4 +1,4 @@
-import type { MultipartFile } from '@fastify/multipart'
+import type { MultipartFile, MultipartValue } from '@fastify/multipart'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
 import type {
@@ -59,7 +59,11 @@ export const createPostHandler = async (
 	request: FastifyRequest<{ Body: RequestBody }>,
 	reply: FastifyReply,
 ) => {
-	const { images, description } = request.body
+	const images = await request.saveRequestFiles()
+	const descriptionField = images[0]?.fields
+		.description as MultipartValue<string>
+	const description = descriptionField.value
+
 	const { userId } = request.session
 
 	if (!images) {
@@ -67,8 +71,9 @@ export const createPostHandler = async (
 	}
 
 	const imagesArray = Array.isArray(images) ? images : [images]
+
 	const data = await createPost(
-		{ description: description.value },
+		{ description: description },
 		userId,
 		imagesArray,
 	)

@@ -57,9 +57,8 @@ const start = async () => {
 	})
 
 	await app.register(fastifyMultipart, {
-		attachFieldsToBody: true,
 		limits: {
-			fileSize: 15_500_000,
+			fileSize: 150_500_000,
 		},
 	})
 

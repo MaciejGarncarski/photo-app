@@ -37,7 +37,6 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
 	}
 	return {
 		onSubmit,
-		error: sendNewPost.error,
 		isError: sendNewPost.isError,
 		isPending: sendNewPost.isPending,
 	}

@@ -1,7 +1,7 @@
-import type { MultipartFile } from '@fastify/multipart'
+import type { SavedMultipartFile } from '@fastify/multipart'
 import type { FastifyRequest } from 'fastify'
 import { nanoid } from 'nanoid'
-
+import fs from 'node:fs'
 import type {
 	CreatePostInput,
 	GetUserPostsInput,
@@ -55,38 +55,47 @@ export const getHomepagePosts = async (skip: number) => {
 export const createPost = async (
 	{ description }: CreatePostInput,
 	sessionUserId: string,
-	images: Array<MultipartFile>,
+	images: Array<SavedMultipartFile>,
 ) => {
-	const post = await db.post.create({
-		data: {
-			authorId: sessionUserId,
-			description,
-		},
-	})
-
-	for await (const image of images) {
-		const file = await image.toBuffer()
-
-		const { fileId, width, height, thumbnailUrl, url, size, name } =
-			await imageKit.upload({
-				file: file,
-				fileName: `${nanoid()}.webp`,
-				folder: `post-images/${post.id}/`,
+	const post = await db.$transaction(
+		async (tx) => {
+			const post = await tx.post.create({
+				data: {
+					authorId: sessionUserId,
+					description,
+				},
 			})
 
-		await db.postImage.create({
-			data: {
-				fileId,
-				height,
-				name,
-				size,
-				thumbnailUrl,
-				url,
-				width,
-				postId: post.id,
-			},
-		})
-	}
+			await Promise.all(
+				images.map(async (image) => {
+					const imageFile = fs.readFileSync(image.filepath)
+
+					const { fileId, width, height, thumbnailUrl, url, size, name } =
+						await imageKit.upload({
+							file: imageFile,
+							fileName: `${nanoid()}.webp`,
+							folder: `post-images/${post.id}/`,
+						})
+
+					await tx.postImage.create({
+						data: {
+							fileId,
+							height,
+							name,
+							size,
+							thumbnailUrl,
+							url,
+							width,
+							postId: post.id,
+						},
+					})
+				}),
+			)
+
+			return post
+		},
+		{ maxWait: 20000, timeout: 30000 },
+	)
 
 	return post
 }
