@@ -7,12 +7,7 @@ export const authQueryOptions = queryOptions({
 	queryKey: ['session'],
 	queryFn: async () => {
 		try {
-			const { data: sessionUser } = await getSessionUser(
-				{},
-				{
-					cache: 'no-store',
-				},
-			)
+			const { data: sessionUser } = await getSessionUser({})
 
 			if (!sessionUser.data) {
 				throw new Error('No session data')

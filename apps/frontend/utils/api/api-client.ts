@@ -1,5 +1,4 @@
-import { Fetcher, Middleware } from '@qdrant/openapi-typescript-fetch'
-import { isServer } from '@tanstack/react-query'
+import { Fetcher } from '@qdrant/openapi-typescript-fetch'
 import type { z } from 'zod'
 
 import { clientEnv } from '@/utils/env'
@@ -17,24 +16,8 @@ type ApiClientArguments<S> = {
 
 export const fetcher = Fetcher.for<paths>()
 
-const logger: Middleware = async (url, init, next) => {
-	if (isServer) {
-		const { cookies } = await import('next/headers')
-		const sessionCookie = cookies().get('sessionId')?.value
-
-		init.headers.append('Cookie', `sessionId=${sessionCookie}`)
-
-		const response = await next(url, init)
-		return response
-	}
-
-	const response = await next(url, init)
-	return response
-}
-
 fetcher.configure({
 	baseUrl: clientEnv.NEXT_PUBLIC_API_ROOT || 'http://localhost:3001',
-	use: [logger],
 	init: {
 		credentials: 'include',
 	},

@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 }
 
 const SignInPage = async () => {
-	if (await isAuthenticated()) {
+	const isSignedIn = await isAuthenticated()
+
+	if (isSignedIn) {
 		redirect('/')
 	}
 

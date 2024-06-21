@@ -10,9 +10,18 @@ import { getChatUsers } from '@/services/chat.service'
 export const chatUsersQueryOptions = infiniteQueryOptions({
 	queryKey: ['chat users'],
 	queryFn: async ({ pageParam = 0 }) => {
-		const { data } = await getChatUsers({
-			skip: pageParam.toString(),
-		})
+		const { cookies } = await import('next/headers')
+
+		const { data } = await getChatUsers(
+			{
+				skip: pageParam.toString(),
+			},
+			{
+				headers: {
+					Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+				},
+			},
+		)
 
 		if (!data.data) {
 			throw new Error('No data')

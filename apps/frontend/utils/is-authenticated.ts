@@ -2,10 +2,13 @@ import { getSessionUser } from '@/services/auth.service'
 
 export const isAuthenticated = async () => {
 	try {
+		const { cookies } = await import('next/headers')
 		const response = await getSessionUser(
 			{},
 			{
-				cache: 'no-store',
+				headers: {
+					Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+				},
 			},
 		)
 

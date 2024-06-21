@@ -15,7 +15,6 @@ import { Loader } from '@/components/loader/loader'
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog'
 import { usePost } from '@/components/pages/account/use-post'
 import { usePostHeader } from '@/components/post/post-header/use-post-header'
-import { PostHeaderPlaceholder } from '@/components/post/post-header-placeholder/post-header-placeholder'
 import { PostOptions } from '@/components/post/post-options/post-options'
 import { TooltipContent } from '@/components/tooltip-content/tooltip-content'
 
@@ -40,17 +39,13 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
 		postData,
 		dateFromNow,
 	} = usePostHeader({
-		authorId: data?.authorId,
-		createdAt: data?.createdAt,
+		authorId: data.authorId,
+		createdAt: data.createdAt,
 		postId,
 	})
 
-	const isAuthor = sessionUser?.id === data?.authorId || ''
-	const authorId = data?.authorId
-
-	if (!authorId) {
-		return <PostHeaderPlaceholder />
-	}
+	const isAuthor = sessionUser?.id === data.authorId
+	const authorId = data.authorId
 
 	return (
 		<Tag className={styles.header}>
@@ -64,14 +59,14 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
 							<Tooltip.Trigger asChild>
 								<button type="button" className={styles.createdAt}>
 									<span className={styles.dot}>&#8226;&nbsp;</span>
-									<time dateTime={postData?.createdAt.toString()}>
+									<time dateTime={postData.createdAt.toString()}>
 										{dateFromNow}
 									</time>
 								</button>
 							</Tooltip.Trigger>
 							{isOpen ? (
 								<TooltipContent>
-									{formatDateFull(postData?.createdAt || '', {
+									{formatDateFull(postData.createdAt, {
 										fullMonth: true,
 									})}
 								</TooltipContent>

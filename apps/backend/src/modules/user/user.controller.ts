@@ -49,6 +49,10 @@ export const getUserByUsernameHandler = async (
 		params: { username },
 	} = request
 
+	if (username === 'favicon.ico') {
+		return reply.badRequest()
+	}
+
 	const data = await getUser({ username: username }, request.session.userId)
 
 	if (data) {

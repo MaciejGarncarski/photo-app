@@ -1,1 +1,1 @@
-export const getPageTitle = (title: string) => `${title} | Photo App`
+export const getPageTitle = (title: string) => `${title} - PhotoApp`

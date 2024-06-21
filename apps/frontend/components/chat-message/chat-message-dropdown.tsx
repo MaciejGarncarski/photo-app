@@ -7,6 +7,8 @@ import { formatDateFull } from '@/utils/format-date-full'
 import { DropdownContent } from '@/components/dropdown/dropdown-content/dropdown-content'
 import { DropdownItem } from '@/components/dropdown/dropdown-item/dropdown-item'
 
+import styles from './chat-message.module.scss'
+
 type Props = {
 	createdAt: string
 	messageText: string
@@ -38,7 +40,11 @@ export const ChatMessageDropdown = ({
 
 	return (
 		<Dropdown.Portal>
-			<DropdownContent side="top" sideOffset={0}>
+			<DropdownContent
+				side="top"
+				sideOffset={0}
+				className={styles.dropdownContent}
+			>
 				<DropdownItem variant="primary">
 					<Clock size={17} />
 					<span>{formatDateFull(createdAt, { fullMonth: true })}</span>

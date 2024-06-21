@@ -44,7 +44,6 @@ const DefaultLayout = ({ children }: Props) => {
 						<Toaster
 							richColors
 							position="top-center"
-							closeButton
 							className={font.className}
 						/>
 						<Layout>{children}</Layout>

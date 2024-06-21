@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/use-auth'
 
 import { usePostLike } from '@/components/post/post-buttons/use-post-like'
 
-const TIMEOUT = 1000
+const TIMEOUT = 5000
 
 type Props = {
 	postId: number

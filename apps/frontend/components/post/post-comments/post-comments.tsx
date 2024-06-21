@@ -37,7 +37,7 @@ export const PostComments = ({ postId, closeModal }: Props) => {
 		enabled: true,
 	})
 
-	if (!data || !sortedData) {
+	if (!sortedData || !data) {
 		return null
 	}
 
@@ -62,7 +62,7 @@ export const PostComments = ({ postId, closeModal }: Props) => {
 							</button>
 						</Dropdown.Trigger>
 						<Dropdown.Portal>
-							<DropdownContent>
+							<DropdownContent className={styles.dropdownContent}>
 								<Dropdown.RadioGroup
 									value={sortOption}
 									onValueChange={changeSelectedSort}

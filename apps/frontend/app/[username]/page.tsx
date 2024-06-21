@@ -1,7 +1,6 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 
-import { authQueryOptions } from '@/hooks/use-auth'
 import { getUserQueryOptions } from '@/hooks/use-user'
 import { getUserByUsernmeQueryOptions } from '@/hooks/use-user-by-username'
 import { getPageTitle } from '@/utils/get-page-title'
@@ -27,7 +26,12 @@ export const generateMetadata = async ({
 	try {
 		const {
 			data: { data: userData },
-		} = await getUserByUsername({ username: username })
+		} = await getUserByUsername(
+			{ username: username },
+			{
+				cache: 'no-store',
+			},
+		)
 
 		if (!userData.avatar) {
 			return {
@@ -73,12 +77,9 @@ export default async function AccountPage({ params }: Props) {
 	const { username } = params
 	const queryClient = getQueryClient()
 
-	const prefetchSession = queryClient.prefetchQuery(authQueryOptions)
-	const prefetchUser = queryClient.fetchQuery(
+	const user = await queryClient.fetchQuery(
 		getUserByUsernmeQueryOptions(username),
 	)
-
-	const [user] = await Promise.all([prefetchUser, prefetchSession])
 
 	const posts = await queryClient.fetchInfiniteQuery(
 		getAccountPostsQueryOptions(user.userId),

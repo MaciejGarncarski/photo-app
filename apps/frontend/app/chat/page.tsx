@@ -1,9 +1,7 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import type { Metadata } from 'next'
-import { unstable_noStore } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { authQueryOptions } from '@/hooks/use-auth'
 import { getUserQueryOptions } from '@/hooks/use-user'
 import { getPageTitle } from '@/utils/get-page-title'
 import { getQueryClient } from '@/utils/get-query-client'
@@ -17,20 +15,15 @@ export const metadata: Metadata = {
 }
 
 const ChatPage = async () => {
-	unstable_noStore()
+	const isSignedIn = await isAuthenticated()
 
-	if (!(await isAuthenticated())) {
+	if (!isSignedIn) {
 		redirect('/access-denied')
 	}
 
 	const queryClient = getQueryClient()
 
-	const prefetchChatUsers = queryClient.fetchInfiniteQuery(
-		chatUsersQueryOptions,
-	)
-	const prefetchSession = queryClient.prefetchQuery(authQueryOptions)
-
-	const [chatUsers] = await Promise.all([prefetchChatUsers, prefetchSession])
+	const chatUsers = await queryClient.fetchInfiniteQuery(chatUsersQueryOptions)
 
 	const usersIds = chatUsers.pages
 		.flat()

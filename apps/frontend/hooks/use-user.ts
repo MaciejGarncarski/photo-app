@@ -10,6 +10,10 @@ export const getUserQueryOptions = (userId: string) =>
 	queryOptions({
 		queryKey: ['user', userId],
 		queryFn: async () => {
+			if (userId.trim() === '') {
+				return null
+			}
+
 			const { data: user } = await getUser({ userId })
 
 			if (!user.data) {

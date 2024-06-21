@@ -1,9 +1,10 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { Ref, Suspense } from 'react'
 
 import { PostFooter } from '@/components/post/post-footer/post-footer'
-import { PostHeader } from '@/components/post/post-header/post-header'
+import { PostHeaderPlaceholder } from '@/components/post/post-header-placeholder/post-header-placeholder'
 import { PostImagesCarousel } from '@/components/post/post-images-carousel/post-images-carousel'
 import { PostPlaceholder } from '@/components/post/post-placeholder/post-placeholder'
 
@@ -14,6 +15,17 @@ type Props = {
 	priority: boolean
 	ref?: Ref<HTMLElement>
 }
+
+const PostHeader = dynamic(
+	() =>
+		import('@/components/post/post-header/post-header').then(
+			(m) => m.PostHeader,
+		),
+	{
+		loading: PostHeaderPlaceholder,
+		ssr: false,
+	},
+)
 
 export const HomePost = ({ postId, priority, ref }: Props) => {
 	return (

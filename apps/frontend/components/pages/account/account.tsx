@@ -1,6 +1,7 @@
 'use client'
 
 import { PencilSimple, SignOut } from '@phosphor-icons/react'
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 
 import { useAuth } from '@/hooks/use-auth'
@@ -15,15 +16,28 @@ import { FetchErrorMessage } from '@/components/fetch-error-message/fetch-error-
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog'
 import { ListModal } from '@/components/modals/list-modal/list-modal'
 import { ListModalItem } from '@/components/modals/list-modal-item/list-modal-item'
+import { AccountHeaderDesktopPlaceholder } from '@/components/pages/account/account-header-desktop-placeholder'
 
 import styles from './account.module.scss'
-
-import { AccountHeaderDesktop } from './account-header-desktop'
-import { AccountHeaderMobile } from './account-header-mobile'
 
 type Props = {
 	username?: string
 }
+
+const AccountHeaderMobile = dynamic(
+	() =>
+		import('@/components/pages/account/account-header-mobile').then(
+			(m) => m.AccountHeaderMobile,
+		),
+	{ ssr: false },
+)
+const AccountHeaderDesktop = dynamic(
+	() =>
+		import('@/components/pages/account/account-header-desktop').then(
+			(m) => m.AccountHeaderDesktop,
+		),
+	{ ssr: false, loading: AccountHeaderDesktopPlaceholder },
+)
 
 export const Account = ({ username }: Props) => {
 	const { isTabletOrMobile } = useIsTabletOrMobile()

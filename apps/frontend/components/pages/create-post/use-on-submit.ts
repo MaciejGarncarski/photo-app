@@ -25,6 +25,7 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
 				{
 					onSuccess: () => {
 						router.push('/')
+						router.refresh()
 					},
 				},
 			),
