@@ -101,13 +101,10 @@
 .signedInInfo {
 	margin: 0;
 	position: relative;
-	padding: 0.6rem 0.75rem;
+	padding: 1rem 1rem;
 	background-color: var(--color-primary);
 	border-radius: var(--radius-medium);
-	display: flex;
-	flex-direction: column;
 	width: 100%;
-	gap: 0.5rem;
 	border: 1px solid var(--shadow-200);
 	box-shadow: var(--shadow);
 }
@@ -118,16 +115,21 @@
 	gap: 1rem;
 }
 
-.userNameInfo {
+.nameContainer {
 	display: flex;
 	justify-content: flex-start;
-	gap: 0.5rem;
+	flex-direction: column;
 	text-align: left;
 }
 
-.username {
-	max-width: 12ch;
+.name {
+	line-height: 1;
 	font-weight: 700;
+	max-width: 30ch;
+}
+
+.username {
+	max-width: 30ch;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

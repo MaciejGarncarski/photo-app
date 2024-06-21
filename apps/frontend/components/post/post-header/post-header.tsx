@@ -56,26 +56,30 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
 		<Tag className={styles.header}>
 			<Link href={`/${username}`} className={styles.userAnchor}>
 				<Avatar userId={authorId} size="small" />
-				<span className={styles.username}>{username}</span>
-			</Link>
+				<span className={styles.usernameContainer}>
+					<span className={styles.username}>{username}</span>
 
-			<Tooltip.Provider>
-				<Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
-					<Tooltip.Trigger asChild>
-						<button type="button" className={styles.createdAt}>
-							&#8226;&nbsp;
-							<time dateTime={postData?.createdAt.toString()}>
-								{dateFromNow}
-							</time>
-						</button>
-					</Tooltip.Trigger>
-					{isOpen ? (
-						<TooltipContent>
-							{formatDateFull(postData?.createdAt || '', { fullMonth: true })}
-						</TooltipContent>
-					) : null}
-				</Tooltip.Root>
-			</Tooltip.Provider>
+					<Tooltip.Provider delayDuration={0}>
+						<Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
+							<Tooltip.Trigger asChild>
+								<button type="button" className={styles.createdAt}>
+									<span className={styles.dot}>&#8226;&nbsp;</span>
+									<time dateTime={postData?.createdAt.toString()}>
+										{dateFromNow}
+									</time>
+								</button>
+							</Tooltip.Trigger>
+							{isOpen ? (
+								<TooltipContent>
+									{formatDateFull(postData?.createdAt || '', {
+										fullMonth: true,
+									})}
+								</TooltipContent>
+							) : null}
+						</Tooltip.Root>
+					</Tooltip.Provider>
+				</span>
+			</Link>
 
 			{sessionUser?.id && (
 				<div className={styles.options}>

@@ -5,8 +5,20 @@
 	border: 1px solid var(--shadow-100);
 	border-radius: var(--radius-small);
 	padding: 0.5rem 1rem;
+	animation: showContent 150ms ease-in-out forwards;
 }
 
 .tooltipArrow {
 	fill: var(--color-primary);
+}
+
+@keyframes showContent {
+	from {
+		opacity: 0;
+		scale: 0;
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+	}
 }

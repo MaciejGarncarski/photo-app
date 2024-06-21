@@ -30,12 +30,15 @@ export const Navbar = () => {
 				<div className={styles.signedInInfo}>
 					<div className={styles.info}>
 						<Avatar userId={sessionUser.id} size="small" />
-						<span className={styles.userNameInfo}>
-							<span className={styles.username}>@{sessionUser.username}</span>
-							{sessionUser.name && (
+						{sessionUser.name && (
+							<p className={styles.nameContainer}>
 								<span className={styles.name}>{sessionUser.name}</span>
-							)}
-						</span>
+								<span className={styles.username}>@{sessionUser.username}</span>
+							</p>
+						)}
+						{!sessionUser.name && (
+							<p className={styles.onlyUsername}>@{sessionUser.username}</p>
+						)}
 					</div>
 				</div>
 			)}

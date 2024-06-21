@@ -38,12 +38,12 @@ export const getUser = async (config: Config, sessionUserId?: string) => {
 	const counts = await getCount(userId)
 
 	const sessionUserData = sessionUserId
-		? null
-		: await db.user.findFirst({
+		? await db.user.findFirst({
 				where: {
 					userId: sessionUserId,
 				},
 			})
+		: null
 
 	const isFollowing =
 		sessionUserData &&

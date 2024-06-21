@@ -63,6 +63,11 @@ export const followUserHandler = async (
 	reply: FastifyReply,
 ) => {
 	const { userId } = request.session
+	const userToFollow = request.params.userId
+
+	if (userId === userToFollow) {
+		return reply.badRequest()
+	}
 
 	await followUser(request.params.userId, userId)
 	return reply.status(204).send()
