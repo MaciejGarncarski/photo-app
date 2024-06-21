@@ -27,7 +27,7 @@ export const CreatePost = () => {
 	const router = useRouter()
 	const { finalImages, previewImages, setFinalImages, onRemove } =
 		useFinalImages()
-	const { onSubmit, isPending, isError } = useOnSubmit({ finalImages })
+	const { onSubmit, isPending, isError, error } = useOnSubmit({ finalImages })
 
 	const {
 		register,
@@ -44,7 +44,12 @@ export const CreatePost = () => {
 		!dirtyFields.description || finalImages.length === 0 || isPending
 
 	if (isError) {
-		return <p>Cannot upload post.</p>
+		return (
+			<p>
+				Cannot upload post. error for debugging, will be deleted later{' '}
+				{error?.message}
+			</p>
+		)
 	}
 
 	return (
