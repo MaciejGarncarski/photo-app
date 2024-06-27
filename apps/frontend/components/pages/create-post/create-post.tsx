@@ -25,9 +25,8 @@ export const PostDetailsSchema = z.object({
 
 export const CreatePost = () => {
 	const router = useRouter()
-	const { finalImages, previewImages, setFinalImages, onRemove } =
-		useFinalImages()
-	const { onSubmit, isPending, isError } = useOnSubmit({ finalImages })
+	const { finalImages, previewImages, onRemove } = useFinalImages()
+	const { onSubmit, isPending, isError } = useOnSubmit()
 
 	const {
 		register,
@@ -56,12 +55,7 @@ export const CreatePost = () => {
 				</Heading>
 			</div>
 			<div className={styles.createPost}>
-				{finalImages.length <= 3 && (
-					<CropImage
-						setFinalImages={setFinalImages}
-						finalImages={finalImages}
-					/>
-				)}
+				{finalImages.length <= 3 && <CropImage />}
 				<ImagesPreview previewImages={previewImages} onRemove={onRemove} />
 				<CreatePostForm
 					disabled={isSubmitDisabled}

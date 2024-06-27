@@ -32,7 +32,8 @@ export const signInCredentialsHandler = async (
 
 	const mappedUser = mapPrismaUser(user)
 
-	request.session.userId = mappedUser.id
+	request.session.set('userId', mappedUser.id)
+
 	return { data: mappedUser }
 }
 

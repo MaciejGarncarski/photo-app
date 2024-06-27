@@ -1,19 +1,67 @@
+import { useAtom } from 'jotai'
 import { type ChangeEvent, type DragEvent, useRef, useState } from 'react'
+import { toast } from 'sonner'
 
-import { handleDropImage } from '@/utils/handle-drop-image'
-
+import { errorMessages } from '@/components/crop-error/crop-error.data'
+import { imageSourcesAtom } from '@/components/crop-image/crop-image'
 import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema'
+
+export const IMAGE_MIN_SIZE = 150
+export const IMAGE_MAX_FILE_SIZE = 15_500_000
+const SUPPORTED_FILE_TYPES = ['jpeg', 'jpg', 'png', 'webp']
 
 type Arguments = {
 	setError: (error: DropZoneErrors) => void
-	setImgSrc: (image: string | null) => void
 }
 
-export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
+export const useDropZone = ({ setError }: Arguments) => {
 	const [isActive, setIsActive] = useState(false)
 	const [isUploadingImage, setIsUploadingImage] = useState(false)
+	const [, setImageSources] = useAtom(imageSourcesAtom)
 
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	const handleFilesDrop = (files: FileList) => {
+		if (files.length > 3) {
+			toast.info(errorMessages.TOO_MANY_IMAGES)
+		}
+
+		const fileArray = Array.from(files).filter((_, idx) => idx <= 2)
+
+		fileArray.forEach((file) => {
+			const reader = new FileReader()
+			const fileType = file.type.split('/')
+
+			if (file.size > IMAGE_MAX_FILE_SIZE) {
+				return setError('FILE_SIZE')
+			}
+
+			if (!SUPPORTED_FILE_TYPES.includes(fileType[1])) {
+				return setError('INVALID_TYPE')
+			}
+
+			reader.addEventListener('load', () => {
+				const image = new Image()
+
+				image.src = URL.createObjectURL(file)
+
+				image.onload = () => {
+					const { height, width } = image
+					if (width < IMAGE_MIN_SIZE || height < IMAGE_MIN_SIZE) {
+						return setError('DIMENSIONS')
+					}
+
+					const readerResult = reader.result?.toString()
+
+					if (readerResult) {
+						setImageSources((prev) => [...prev, readerResult])
+					}
+				}
+			})
+
+			reader.readAsDataURL(file)
+		})
+	}
 
 	const onChange = (changeEv: ChangeEvent<HTMLInputElement>) => {
 		if (!changeEv.target.files) {
@@ -23,7 +71,8 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
 
 		if (changeEv.target.files.length > 0) {
 			setIsUploadingImage(true)
-			handleDropImage({ file: changeEv.target.files[0], setError, setImgSrc })
+
+			handleFilesDrop(changeEv.target.files)
 			setIsUploadingImage(false)
 		}
 	}
@@ -46,18 +95,16 @@ export const useDropZone = ({ setError, setImgSrc }: Arguments) => {
 			dataTransfer: { files },
 		} = dropEv
 
-		const firstFile = files[0]
-
-		if (!files || !firstFile) {
+		if (!files) {
 			return setError('NO_IMAGE_DETECTED')
 		}
 
-		if (files.length > 1) {
-			return setError('TOO_MANY_IMAGES')
+		if (files.length > 3) {
+			toast.info(errorMessages.TOO_MANY_IMAGES)
 		}
 
 		setIsUploadingImage(true)
-		handleDropImage({ file: firstFile, setError, setImgSrc })
+		handleFilesDrop(files)
 	}
 
 	return {

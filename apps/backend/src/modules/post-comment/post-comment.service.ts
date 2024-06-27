@@ -46,7 +46,7 @@ export const deleteComment = async (
 	return 'ok'
 }
 
-const COMMENTS_PER_REQUEST = 4
+const COMMENTS_PER_REQUEST = 2
 
 export const getComments = async (
 	postId: number,

@@ -1,13 +1,14 @@
 'use client'
 
-import ReactFocusLock from 'react-focus-lock'
+import { useRouter } from 'next/navigation'
 
-import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile'
-
+import { ModalCloseButton } from '@/components/buttons/modal-close-button/modal-close-button'
+import { CommentForm } from '@/components/forms/comment-form/comment-form'
 import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop'
-import { PostModalDesktop } from '@/components/post/post-modal/post-modal-desktop'
-import { PostModalMobile } from '@/components/post/post-modal/post-modal-mobile'
-import { usePostModal } from '@/components/post/post-modal/use-post-modal'
+import { PostComments } from '@/components/post/post-comments/post-comments'
+import { PostFooter } from '@/components/post/post-footer/post-footer'
+import { PostHeader } from '@/components/post/post-header/post-header'
+import { PostImagesCarousel } from '@/components/post/post-images-carousel/post-images-carousel'
 
 import styles from './post-modal.module.scss'
 
@@ -24,28 +25,47 @@ export const PostModal = ({
 	postId,
 	isPostPage,
 }: Props) => {
-	const { isTabletOrMobile } = useIsTabletOrMobile()
-	const { handleClose } = usePostModal({
-		closeModal,
-		isPostPage: Boolean(isPostPage),
-		postId,
-	})
+	const router = useRouter()
+
+	const closeModalAndRedirect = () => {
+		closeModal()
+
+		if (isPostPage) {
+			router.back()
+		}
+	}
+
+	if (!isVisible) {
+		return null
+	}
 
 	return (
-		<>
-			{isVisible && (
-				<ModalBackdrop closeModal={handleClose}>
-					<ReactFocusLock autoFocus={false} className={styles.focusLock}>
-						<div role="dialog" className={styles.container}>
-							{isTabletOrMobile ? (
-								<PostModalMobile closeModal={handleClose} postId={postId} />
-							) : (
-								<PostModalDesktop closeModal={handleClose} postId={postId} />
-							)}
-						</div>
-					</ReactFocusLock>
-				</ModalBackdrop>
-			)}
-		</>
+		<ModalBackdrop closeModal={closeModalAndRedirect}>
+			<div role="dialog" className={styles.container}>
+				<div className={styles.closeButton}>
+					<ModalCloseButton
+						onClose={closeModalAndRedirect}
+						variant="secondary"
+					/>
+				</div>
+				<div className={styles.contentContainer}>
+					<div className={styles.header}>
+						<PostHeader tag="div" postId={postId} />
+					</div>
+					<div className={styles.carousel}>
+						<PostImagesCarousel postId={postId} priority />
+					</div>
+					<div className={styles.footer}>
+						<PostFooter postId={postId} parentModalOpen />
+					</div>
+					<div className={styles.commentsForm}>
+						<CommentForm postId={postId} />
+					</div>
+					<div className={styles.postComments}>
+						<PostComments postId={postId} closeModal={closeModalAndRedirect} />
+					</div>
+				</div>
+			</div>
+		</ModalBackdrop>
 	)
 }

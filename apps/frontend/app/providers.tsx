@@ -27,7 +27,7 @@ export const Providers = ({ children }: Props) => {
 					{children}
 				</IconContext.Provider>
 			</JotaiProvider>
-			<ReactQueryDevtools initialIsOpen={false} buttonPosition="top-right" />
+			<ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" />
 		</QueryClientProvider>
 	)
 }

@@ -13,10 +13,10 @@ import type { DropZoneErrors } from '@/components/pages/create-post/create-post-
 import styles from './drop-zone.module.scss'
 
 type Props = {
-	setImgSrc: (src: string | null) => void
+	isAvatarCrop?: boolean
 }
 
-export const DropZone = ({ setImgSrc }: Props) => {
+export const DropZone = ({ isAvatarCrop }: Props) => {
 	const [error, setError] = useState<DropZoneErrors>(null)
 	const { isTabletOrMobile } = useIsTabletOrMobile()
 
@@ -30,7 +30,6 @@ export const DropZone = ({ setImgSrc }: Props) => {
 		isUploadingImage,
 	} = useDropZone({
 		setError,
-		setImgSrc,
 	})
 
 	const openFileInput = () => {
@@ -61,6 +60,7 @@ export const DropZone = ({ setImgSrc }: Props) => {
 					type="file"
 					accept="image/*"
 					className={styles.input}
+					multiple={!isAvatarCrop}
 					ref={inputRef}
 					name="fileInput"
 					onChange={onChange}

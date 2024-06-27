@@ -4,6 +4,11 @@ export default defineConfig({
 	test: {
 		environment: 'node',
 		globals: true,
+		poolOptions: {
+			forks: {
+				execArgv: ['--env-file=.env'],
+			},
+		},
 		coverage: {
 			include: ['src/modules/**/*.ts'],
 			exclude: [

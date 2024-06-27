@@ -46,8 +46,11 @@
 	width: 100%;
 	transition: background-color var(--transition);
 
-	@include common.mediaquery('desktop') {
+	@include common.mediaquery('tablet') {
 		padding: 0.5rem 1.25rem;
+	}
+
+	@include common.mediaquery('desktop') {
 		height: 6rem;
 		box-shadow: var(--shadow);
 	}

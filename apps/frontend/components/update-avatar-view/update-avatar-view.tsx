@@ -1,13 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
 
 import { Button } from '@/components/buttons/button/button'
 import { CropImage } from '@/components/crop-image/crop-image'
 import { Loader } from '@/components/loader/loader'
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema'
-import { usePreviewImages } from '@/components/pages/create-post/use-preview-images'
+import { useFinalImages } from '@/components/pages/create-post/use-final-images'
 import { useUploadAvatar } from '@/components/update-avatar-view/use-upload-avatar'
 
 import styles from './update-avatar-view.module.scss'
@@ -15,32 +13,24 @@ import styles from './update-avatar-view.module.scss'
 type Props = {
 	closeModal: () => void
 }
+
 export const UpdateAvatarView = ({ closeModal }: Props) => {
-	const [finalImages, setFinalImages] = useState<FinalImages>([])
-	const resetFinalImages = () => setFinalImages([])
 	const { onSaveImage, isPending, isFinalImageEmpty } = useUploadAvatar({
-		finalImages,
 		closeModal,
-		resetFinalImages,
 	})
-	const { previewImages } = usePreviewImages(finalImages)
+	const { previewImages } = useFinalImages()
 
 	if (isPending) {
 		return <Loader color="accent" size="big" />
 	}
 
-	const [previewImage] = previewImages
+	const previewImage = previewImages[0]
+
 	const isNewAvatarReady = previewImage?.src
 
 	return (
 		<div className={styles.updateAvatar}>
-			{!isNewAvatarReady && (
-				<CropImage
-					finalImages={finalImages}
-					setFinalImages={setFinalImages}
-					isAvatarCrop
-				/>
-			)}
+			{!isNewAvatarReady && <CropImage isAvatarCrop />}
 			{isNewAvatarReady && (
 				<>
 					<div className={styles.preview}>

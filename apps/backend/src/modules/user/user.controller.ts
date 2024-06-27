@@ -92,13 +92,14 @@ export const updateAvatarHandler = async (
 	reply: FastifyReply,
 ) => {
 	const { userId } = request.session
-	const fileData = request.body.image
+	const images = await request.saveRequestFiles()
+	const avatarImage = images[0]
 
-	if (!fileData) {
+	if (!avatarImage) {
 		return reply.badRequest('No image provided.')
 	}
 
-	const updatedAvatar = await updateAvatar(userId, fileData)
+	const updatedAvatar = await updateAvatar(userId, avatarImage)
 	return { data: updatedAvatar }
 }
 

@@ -1,16 +1,20 @@
+import { useAtom } from 'jotai'
 import { useRouter } from 'next/navigation'
 import type { SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
 
+import { imageSourcesAtom } from '@/components/crop-image/crop-image'
+import { revalidateHomePage } from '@/components/pages/create-post/action'
+import { useFinalImages } from '@/components/pages/create-post/use-final-images'
 import { useSendNewPost } from '@/components/pages/create-post/use-send-new-post'
 
-import type { FinalImages, PostDetails } from './create-post-schema'
+import type { PostDetails } from './create-post-schema'
 
-type Arguments = { finalImages: FinalImages }
-
-export const useOnSubmit = ({ finalImages }: Arguments) => {
+export const useOnSubmit = () => {
 	const router = useRouter()
 	const sendNewPost = useSendNewPost()
+	const { finalImages, setFinalImages } = useFinalImages()
+	const [, setImageSources] = useAtom(imageSourcesAtom)
 
 	const onSubmit: SubmitHandler<PostDetails> = async ({ description }) => {
 		if (!finalImages[0]?.file) {
@@ -23,9 +27,11 @@ export const useOnSubmit = ({ finalImages }: Arguments) => {
 			sendNewPost.mutateAsync(
 				{ description, images: finalImagesToBlob },
 				{
-					onSuccess: () => {
+					onSuccess: async () => {
+						setFinalImages([])
+						setImageSources([])
+						await revalidateHomePage()
 						router.push('/')
-						router.refresh()
 					},
 				},
 			),

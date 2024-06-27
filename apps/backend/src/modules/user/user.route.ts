@@ -33,18 +33,6 @@ export const userRoutesPlugin: FastifyPluginAsync = async (fastify) => {
 		method: 'PUT',
 		url: '/user/avatar',
 		preHandler: [fastify.authorize],
-		schema: {
-			consumes: ['multipart/form-data'],
-			body: {
-				type: 'object',
-				required: ['image'],
-				properties: {
-					image: {
-						isFile: true,
-					},
-				},
-			},
-		},
 		handler: updateAvatarHandler,
 	})
 

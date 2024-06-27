@@ -1,9 +1,10 @@
-import type { MultipartFile } from '@fastify/multipart'
+import type { SavedMultipartFile } from '@fastify/multipart'
 
 import type { EditAccountInput, UserWithStats } from './user.schema.js'
 import { db } from '../../utils/db.js'
-import { getCount } from '../../utils/getCount.js'
+import { getCount } from '../../utils/get-count.js'
 import { imageKit } from '../../utils/imagekit.js'
+import fs from 'node:fs'
 
 type Config =
 	| {
@@ -120,14 +121,14 @@ export const editAccount = (
 
 export const updateAvatar = async (
 	sessionUserId: string,
-	fileData: MultipartFile,
+	fileData: SavedMultipartFile,
 ) => {
+	const imageFile = fs.readFileSync(fileData.filepath)
+
 	const folder = `${sessionUserId}/avatar/custom/`
 
-	const fileBuffer = await fileData.toBuffer()
-
 	const image = await imageKit.upload({
-		file: fileBuffer,
+		file: imageFile,
 		fileName: `${sessionUserId}-custom-avatar`,
 		folder,
 	})

@@ -1,11 +1,28 @@
-import { useState } from 'react'
+import { atom, useAtom } from 'jotai'
 
 import type { FinalImages } from '@/components/pages/create-post/create-post-schema'
-import { usePreviewImages } from '@/components/pages/create-post/use-preview-images'
+export type PreviewImages = Array<
+	| {
+			id: string
+			src: string
+	  }
+	| undefined
+>
+
+const finalImagesAtom = atom<FinalImages>([])
 
 export const useFinalImages = () => {
-	const [finalImages, setFinalImages] = useState<FinalImages>([])
-	const { previewImages } = usePreviewImages(finalImages)
+	const [finalImages, setFinalImages] = useAtom(finalImagesAtom)
+
+	const previewImages: PreviewImages = finalImages.map((finalImg) => {
+		if (finalImg?.file) {
+			const img = URL.createObjectURL(finalImg?.file)
+			return {
+				id: finalImg?.id,
+				src: img,
+			}
+		}
+	})
 
 	const onRemove = (id: string) => {
 		const filteredState = finalImages.filter((finalImg) => {

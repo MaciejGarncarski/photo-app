@@ -50,15 +50,15 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
 			>
 				{post.images.map((image, idx) => {
 					return (
-						<div className={styles.image} key={image.fileId}>
-							<PostImage
-								priority={priority && idx === 0}
-								url={image.url}
-								width={image.width}
-								height={image.height}
-								postId={post.id}
-							/>
-						</div>
+						<PostImage
+							priority={priority && idx === 0}
+							url={image.url}
+							thumbnailUrl={image.thumbnailUrl}
+							width={image.width}
+							key={image.fileId}
+							height={image.height}
+							postId={post.id}
+						/>
 					)
 				})}
 			</div>

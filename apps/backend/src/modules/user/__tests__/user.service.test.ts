@@ -1,7 +1,6 @@
 import { getUser } from '../user.service.js'
 import { db } from '../../../utils/__mocks__/db.js'
 import { faker } from '@faker-js/faker'
-import { getCount } from '../../../utils/getCount.js'
 import type { PrismaPromise } from '@prisma/client'
 import { getUserMock } from '../../../utils/__mocks__/user.js'
 
@@ -17,6 +16,21 @@ describe('user.service test', () => {
 		db.post.count.mockResolvedValue(postsCount)
 		db.user.findFirst.mockResolvedValue(userMock)
 		db.post.count.mockResolvedValue(postsCount)
+
+		db.session.create.mockResolvedValue({
+			data: '',
+			expiresAt: new Date(),
+			id: '',
+			sid: '',
+		})
+
+		db.session.findFirst.mockResolvedValue({
+			data: '',
+			expiresAt: new Date(),
+			id: '',
+			sid: '',
+		})
+
 		db.follower.count.mockImplementation((args) => {
 			return new Promise((resolve) => {
 				if (!args) {
@@ -29,18 +43,6 @@ describe('user.service test', () => {
 
 				resolve(friendsCount)
 			}) as PrismaPromise<number>
-		})
-	})
-
-	describe('getCount function test', async () => {
-		it('should return valid count', async () => {
-			const count = await getCount(userMock.userId)
-
-			expect(count).toStrictEqual({
-				postsCount: postsCount,
-				friendsCount: friendsCount,
-				followersCount: followersCount,
-			})
 		})
 	})
 

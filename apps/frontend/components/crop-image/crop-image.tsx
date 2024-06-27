@@ -1,5 +1,5 @@
 import { FloppyDisk, Hand, Image, Mouse } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { atom, useAtom } from 'jotai'
 import Cropper from 'react-easy-crop'
 
 import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile'
@@ -11,26 +11,22 @@ import { useCropImage } from '@/components/crop-image/use-crop-image'
 import { DropZone } from '@/components/drop-zone/drop-zone'
 import { Loader } from '@/components/loader/loader'
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog'
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema'
 
 import styles from './crop-image.module.scss'
 
 type Props = {
-	setFinalImages: (final: FinalImages) => void
-	finalImages: FinalImages
 	isAvatarCrop?: boolean
 }
 
-export const CropImage = ({
-	setFinalImages,
-	finalImages,
-	isAvatarCrop,
-}: Props) => {
-	const [imgSrc, setImgSrc] = useState<string | null>(null)
+export const imageSourcesAtom = atom<Array<string>>([])
+
+export const CropImage = ({ isAvatarCrop }: Props) => {
+	const [imageSources, setImageSources] = useAtom(imageSourcesAtom)
+
+	const areImageSourcesEmpty = imageSources.length === 0
+
 	const { openModal, isModalOpen, closeModal } = useModal()
 	const { isTabletOrMobile } = useIsTabletOrMobile()
-
-	const resetImgSrc = () => setImgSrc(null)
 
 	const {
 		aspect,
@@ -42,19 +38,21 @@ export const CropImage = ({
 		onCropComplete,
 		isCropping,
 		saveCrop,
-	} = useCropImage({ finalImages, imgSrc, resetImgSrc, setFinalImages })
-
-	const handleSelectOtherImage = () => {
-		resetImgSrc()
-		closeModal()
-	}
+	} = useCropImage()
 
 	if (isCropping) {
 		return <Loader size="big" color="accent" />
 	}
 
-	if (!imgSrc) {
-		return <DropZone setImgSrc={setImgSrc} />
+	if (imageSources.length === 0) {
+		return <DropZone />
+	}
+
+	const currentImage = imageSources[imageSources.length - 1]
+
+	const handleRemoveImage = () => {
+		setImageSources((prev) => prev.filter((val) => val !== currentImage))
+		closeModal()
 	}
 
 	return (
@@ -62,7 +60,7 @@ export const CropImage = ({
 			<section className={styles.addPhoto}>
 				<div className={styles.cropContainer}>
 					<Cropper
-						image={imgSrc}
+						image={currentImage}
 						zoom={zoom}
 						aspect={aspect}
 						crop={crop}
@@ -91,10 +89,10 @@ export const CropImage = ({
 						<Button
 							type="button"
 							variant="destructive"
-							disabled={!imgSrc}
+							disabled={areImageSourcesEmpty}
 							onClick={openModal}
 						>
-							Select another
+							Remove
 							{isTabletOrMobile ? '' : ' image'}
 							{!isTabletOrMobile && <Image />}
 						</Button>
@@ -104,13 +102,13 @@ export const CropImage = ({
 			{isModalOpen && (
 				<ConfirmationDialog
 					isVisible={isModalOpen}
-					text="Do you want to select another image?"
+					text="Do you want to remove this image?"
 					closeModal={closeModal}
 				>
 					<Button
 						variant="destructive"
-						onClick={handleSelectOtherImage}
-						disabled={!imgSrc}
+						onClick={handleRemoveImage}
+						disabled={areImageSourcesEmpty}
 					>
 						Confirm
 					</Button>

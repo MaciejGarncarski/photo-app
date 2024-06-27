@@ -1,22 +1,26 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useAtom } from 'jotai'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/hooks/use-auth'
 import { apiClient } from '@/utils/api/api-client'
 
-import type { FinalImages } from '@/components/pages/create-post/create-post-schema'
+import { imageSourcesAtom } from '@/components/crop-image/crop-image'
+import { useFinalImages } from '@/components/pages/create-post/use-final-images'
 
 type UseUploadAvatarArguments = {
-	finalImages: FinalImages
-	resetFinalImages: () => void
 	closeModal: () => void
 }
 
-export const useUploadAvatar = ({
-	finalImages,
-	resetFinalImages,
-	closeModal,
-}: UseUploadAvatarArguments) => {
+export const useUploadAvatar = ({ closeModal }: UseUploadAvatarArguments) => {
+	const { finalImages, setFinalImages } = useFinalImages()
+	const [, setImageSources] = useAtom(imageSourcesAtom)
+
+	const resetState = () => {
+		setFinalImages([])
+		setImageSources([])
+	}
+
 	const { sessionUser } = useAuth()
 	const queryClient = useQueryClient()
 
@@ -61,7 +65,7 @@ export const useUploadAvatar = ({
 					})
 				},
 				onSettled: () => {
-					resetFinalImages()
+					resetState()
 				},
 			},
 		)

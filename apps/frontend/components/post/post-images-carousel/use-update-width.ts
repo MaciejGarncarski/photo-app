@@ -14,7 +14,7 @@ export const useUpdateWidth = () => {
 			clearTimeout(timeoutRef.current)
 		}
 
-		setWidth(imageRef.current?.getBoundingClientRect().width)
+		setWidth(Math.floor(imageRef.current?.getBoundingClientRect().width))
 	}, [])
 
 	useEffect(() => {

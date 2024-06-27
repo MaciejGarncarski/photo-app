@@ -4,7 +4,6 @@ import type { FastifyInstance } from 'fastify'
 import type { GoogleUser } from './auth.schema.js'
 import { createGoogleUser, signInGoogle } from './auth.service.js'
 import type { User } from '../user/user.schema.js'
-import { envVariables } from '../../utils/envVariables.js'
 import { retry } from '../../utils/retry.js'
 
 declare module 'fastify' {
@@ -21,14 +20,14 @@ export const googleAuthPlugin = async (server: FastifyInstance) => {
 		name: 'googleOAuth2',
 		credentials: {
 			client: {
-				id: envVariables.GOOGLE_CLIENT_ID,
-				secret: envVariables.GOOGLE_CLIENT_SECRET,
+				id: process.env.GOOGLE_CLIENT_ID,
+				secret: process.env.GOOGLE_CLIENT_SECRET,
 			},
 			auth: fastifyOauth2.GOOGLE_CONFIGURATION,
 		},
 		scope: ['https://www.googleapis.com/auth/userinfo.profile'],
 		startRedirectPath: '/auth/google',
-		callbackUri: `${envVariables.BACKEND_URL}/auth/google/callback`,
+		callbackUri: `${process.env.BACKEND_URL}/auth/google/callback`,
 	})
 
 	server.route({
@@ -53,7 +52,7 @@ export const googleAuthPlugin = async (server: FastifyInstance) => {
 				if (user) {
 					await request.session.regenerate()
 					request.session.userId = user.id
-					return reply.redirect(`${envVariables.APP_URL}`)
+					return reply.redirect(`${process.env.APP_URL}`)
 				}
 
 				const createdUser = await retry<User>(
@@ -66,12 +65,12 @@ export const googleAuthPlugin = async (server: FastifyInstance) => {
 				if (createdUser) {
 					await request.session.regenerate()
 					request.session.userId = createdUser.id
-					return reply.redirect(`${envVariables.APP_URL}`)
+					return reply.redirect(`${process.env.APP_URL}`)
 				}
 
-				return reply.redirect(`${envVariables.APP_URL}/auth/sign-in`)
+				return reply.redirect(`${process.env.APP_URL}/auth/sign-in`)
 			} catch (error) {
-				return reply.redirect(`${envVariables.APP_URL}/auth/sign-in`)
+				return reply.redirect(`${process.env.APP_URL}/auth/sign-in`)
 			}
 		},
 	})

@@ -63,7 +63,6 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
 			await queryClient.invalidateQueries({
 				queryKey: ['user', data?.username],
 			})
-			await queryClient.invalidateQueries({ queryKey: ['session'] })
 		},
 	})
 }
