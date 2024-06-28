@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { SavedMultipartFile } from '@fastify/multipart'
 import type { FastifyRequest } from 'fastify'
 import { nanoid } from 'nanoid'
@@ -58,7 +57,6 @@ export const createPost = async (
 	sessionUserId: string,
 	images: Array<SavedMultipartFile>,
 ) => {
-	console.time('postadd')
 	const post = await db.$transaction(
 		async (tx) => {
 			const post = await tx.post.create({
@@ -68,39 +66,39 @@ export const createPost = async (
 				},
 			})
 
-			await Promise.all(
-				images.map(async (image) => {
-					console.time('fileRead')
-					const imageFile = fs.readFileSync(image.filepath)
-					console.timeEnd('fileRead')
+			const readImages = images.map((image) => fs.readFileSync(image.filepath))
 
-					const { fileId, width, height, thumbnailUrl, url, size, name } =
-						await imageKit.upload({
-							file: imageFile,
-							fileName: `${nanoid()}.webp`,
-							folder: `post-images/${post.id}/`,
-						})
-
-					await tx.postImage.create({
-						data: {
-							fileId,
-							height,
-							name,
-							size,
-							thumbnailUrl,
-							url,
-							width,
-							postId: post.id,
-						},
+			const uploadedImagesData = await Promise.all(
+				readImages.map((imageFile) => {
+					return imageKit.upload({
+						file: imageFile,
+						fileName: `${nanoid()}.webp`,
+						folder: `post-images/${post.id}/`,
 					})
 				}),
 			)
+
+			const postImageData = uploadedImagesData.map((imageData) => {
+				return {
+					fileId: imageData.fileId,
+					height: imageData.height,
+					name: imageData.name,
+					size: imageData.size,
+					thumbnailUrl: imageData.thumbnailUrl,
+					url: imageData.url,
+					width: imageData.width,
+					postId: post.id,
+				}
+			})
+
+			await tx.postImage.createMany({
+				data: postImageData,
+			})
 
 			return post
 		},
 		{ maxWait: 20000, timeout: 30000 },
 	)
-	console.timeEnd('postadd')
 
 	return post
 }

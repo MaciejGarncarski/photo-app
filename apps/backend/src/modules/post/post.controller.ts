@@ -70,6 +70,10 @@ export const createPostHandler = async (
 		return reply.badRequest('No image provided')
 	}
 
+	if (images.length > 3) {
+		return reply.badRequest('Too many images')
+	}
+
 	const imagesArray = Array.isArray(images) ? images : [images]
 
 	const data = await createPost(

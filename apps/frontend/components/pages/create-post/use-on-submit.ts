@@ -37,9 +37,10 @@ export const useOnSubmit = () => {
 			),
 			{
 				id: 'add-post',
-				loading: 'Creating post...',
-				success: 'Post created.',
-				error: 'Could not add post. Please, try again later.',
+				loading:
+					'Creating a new post. It may take more time, depending on the image sizes.',
+				success: 'Post created!',
+				error: 'Could not add post. Please, try again later. 😢',
 			},
 		)
 	}
