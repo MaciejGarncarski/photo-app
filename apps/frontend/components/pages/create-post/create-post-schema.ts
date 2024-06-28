@@ -1,6 +1,6 @@
-import type { z } from 'zod'
+import { z } from 'zod'
 
-import type { PostDetailsSchema } from './create-post'
+import { PostDetailsSchema } from '@/components/forms/create-post-form/create-post-form'
 
 export type PostDetails = z.infer<typeof PostDetailsSchema>
 

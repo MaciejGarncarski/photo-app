@@ -5,7 +5,7 @@ import { useDetailsForm } from '@/components/details-form/use-details-form'
 import { Input } from '@/components/input/input'
 import { Loader } from '@/components/loader/loader'
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog'
-import { TextArea } from '@/components/textarea/text-area'
+import { TextArea } from '@/components/textarea/textarea'
 import type { User } from '@/schemas/user.schema'
 
 import styles from './details-form.module.scss'
@@ -24,6 +24,7 @@ export const DetailsForm = ({ user }: DetailsForm) => {
 		onReset,
 		onSubmit,
 		register,
+		bioValue,
 	} = useDetailsForm({ user })
 
 	if (isPending) {
@@ -52,7 +53,7 @@ export const DetailsForm = ({ user }: DetailsForm) => {
 				error={errors.bio?.message}
 				placeholder="Aa"
 				label="Bio"
-				rows={6}
+				value={bioValue || ''}
 				{...register('bio')}
 			/>
 			<div className={styles.buttons}>

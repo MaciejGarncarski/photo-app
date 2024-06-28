@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from 'next'
 import { Rubik } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
-import { Toaster } from 'sonner'
 
 import { Providers } from '@/app/providers'
+import { CustomToaster } from '@/components/custom-toaster/custom-toaster'
 import { Layout } from '@/components/layout/layout'
 
 import '../styles/globals.scss'
@@ -41,11 +41,7 @@ const DefaultLayout = ({ children }: Props) => {
 			<body>
 				<ThemeProvider defaultTheme="light">
 					<Providers>
-						<Toaster
-							richColors
-							position="top-center"
-							className={font.className}
-						/>
+						<CustomToaster />
 						<Layout>{children}</Layout>
 					</Providers>
 				</ThemeProvider>

@@ -11,7 +11,7 @@
 	}
 
 	@include common.mediaquery('desktop') {
-		width: clamp(35rem, 50vw, 45rem);
+		width: clamp(35rem, 50vw, 40rem);
 	}
 }
 

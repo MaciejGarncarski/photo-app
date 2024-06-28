@@ -5,6 +5,7 @@ import { toast } from 'sonner'
 import { errorMessages } from '@/components/crop-error/crop-error.data'
 import { imageSourcesAtom } from '@/components/crop-image/crop-image'
 import type { DropZoneErrors } from '@/components/pages/create-post/create-post-schema'
+import { useFinalImages } from '@/components/pages/create-post/use-final-images'
 
 export const IMAGE_MIN_SIZE = 150
 export const IMAGE_MAX_FILE_SIZE = 15_500_000
@@ -18,15 +19,24 @@ export const useDropZone = ({ setError }: Arguments) => {
 	const [isActive, setIsActive] = useState(false)
 	const [isUploadingImage, setIsUploadingImage] = useState(false)
 	const [, setImageSources] = useAtom(imageSourcesAtom)
+	const { finalImages } = useFinalImages()
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const handleFilesDrop = (files: FileList) => {
+		const emptySpaces = 3 - finalImages.length
+
 		if (files.length > 3) {
 			toast.info(errorMessages.TOO_MANY_IMAGES)
 		}
 
-		const fileArray = Array.from(files).filter((_, idx) => idx <= 2)
+		if (finalImages.length > 1 && emptySpaces > files.length) {
+			toast.info(errorMessages.TOO_MANY_IMAGES)
+		}
+
+		const fileArray = Array.from(files).filter(
+			(_, idx) => idx <= emptySpaces - 1,
+		)
 
 		fileArray.forEach((file) => {
 			const reader = new FileReader()
@@ -97,10 +107,6 @@ export const useDropZone = ({ setError }: Arguments) => {
 
 		if (!files) {
 			return setError('NO_IMAGE_DETECTED')
-		}
-
-		if (files.length > 3) {
-			toast.info(errorMessages.TOO_MANY_IMAGES)
 		}
 
 		setIsUploadingImage(true)

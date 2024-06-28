@@ -7,13 +7,13 @@ type Button = {
 }
 
 export const getButtonList = (
-	openModal: () => void,
+	onCancel: () => void,
 	submitDisabled: boolean,
 ) => {
 	const buttonList: Array<Button> = [
 		{
 			variant: 'secondary',
-			onClick: openModal,
+			onClick: onCancel,
 			text: 'Cancel',
 			type: 'button',
 		},

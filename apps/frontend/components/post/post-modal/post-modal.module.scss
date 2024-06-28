@@ -10,6 +10,10 @@
 	right: 0;
 	top: -3rem;
 	right: 1rem;
+
+	@include common.mediaquery('desktop') {
+		right: -2rem;
+	}
 }
 
 .contentContainer {

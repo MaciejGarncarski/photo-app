@@ -2,7 +2,7 @@ import { CameraPlus, Trash } from '@phosphor-icons/react'
 import Image from 'next/image'
 import { useMemo } from 'react'
 
-import { PreviewImages } from '@/components/pages/create-post/use-preview-images'
+import { PreviewImages } from '@/components/pages/create-post/use-final-images'
 
 import styles from './images-preview.module.scss'
 

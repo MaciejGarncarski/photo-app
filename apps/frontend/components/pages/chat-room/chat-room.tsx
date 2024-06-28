@@ -12,7 +12,7 @@ import { Button } from '@/components/buttons/button/button'
 import { ChatMessages } from '@/components/chat-messages/chat-messages'
 import { Loader } from '@/components/loader/loader'
 import { useChatRoom } from '@/components/pages/chat-room/use-chat-room'
-import { TextArea } from '@/components/textarea/text-area'
+import { TextArea } from '@/components/textarea/textarea'
 
 import styles from './chat-room.module.scss'
 
@@ -64,7 +64,11 @@ export const ChatRoom = () => {
 			/>
 
 			<form className={styles.form} onSubmit={onSubmit}>
-				<TextArea placeholder="Aa" rows={2} {...form.register('text')} />
+				<TextArea
+					placeholder="Aa"
+					value={form.watch('text')}
+					{...form.register('text')}
+				/>
 				<Button
 					type="submit"
 					variant="primary"

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { SavedMultipartFile } from '@fastify/multipart'
 import type { FastifyRequest } from 'fastify'
 import { nanoid } from 'nanoid'
@@ -57,6 +58,7 @@ export const createPost = async (
 	sessionUserId: string,
 	images: Array<SavedMultipartFile>,
 ) => {
+	console.time('postadd')
 	const post = await db.$transaction(
 		async (tx) => {
 			const post = await tx.post.create({
@@ -68,7 +70,9 @@ export const createPost = async (
 
 			await Promise.all(
 				images.map(async (image) => {
+					console.time('fileRead')
 					const imageFile = fs.readFileSync(image.filepath)
+					console.timeEnd('fileRead')
 
 					const { fileId, width, height, thumbnailUrl, url, size, name } =
 						await imageKit.upload({
@@ -96,6 +100,7 @@ export const createPost = async (
 		},
 		{ maxWait: 20000, timeout: 30000 },
 	)
+	console.timeEnd('postadd')
 
 	return post
 }

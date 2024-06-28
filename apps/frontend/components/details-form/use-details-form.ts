@@ -22,6 +22,7 @@ export const useDetailsForm = ({ user }: DetailsForm) => {
 		reset,
 		formState: { isDirty, errors },
 		handleSubmit,
+		watch,
 	} = useForm<AccountDetails>({
 		defaultValues: {
 			username: user.username || '',
@@ -40,6 +41,8 @@ export const useDetailsForm = ({ user }: DetailsForm) => {
 
 	const isError = Boolean(errors.bio || errors.fullName || errors.username)
 
+	const bioValue = watch('bio')
+
 	return {
 		isError,
 		errors,
@@ -47,6 +50,7 @@ export const useDetailsForm = ({ user }: DetailsForm) => {
 		register,
 		onSubmit,
 		isPending,
+		bioValue,
 		onReset,
 		cancelModal,
 	}

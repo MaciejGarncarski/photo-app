@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form'
 import { useModal } from '@/hooks/use-modal'
 
 import { Button } from '@/components/buttons/button/button'
+import { PostDetailsSchema } from '@/components/forms/create-post-form/create-post-form'
 import { Loader } from '@/components/loader/loader'
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog'
 import { usePost } from '@/components/pages/account/use-post'
-import { PostDetailsSchema } from '@/components/pages/create-post/create-post'
 import { useEditPost } from '@/components/pages/edit-post/use-edit-post'
-import { TextArea } from '@/components/textarea/text-area'
+import { TextArea } from '@/components/textarea/textarea'
 import { Heading } from '@/components/typography/heading/heading'
 
 import styles from './edit-post.module.scss'
@@ -31,6 +31,7 @@ export const EditPost = () => {
 		formState: { errors, isDirty },
 		register,
 		getValues,
+		watch,
 	} = useForm({
 		mode: 'all',
 		resolver: zodResolver(PostDetailsSchema),
@@ -62,7 +63,7 @@ export const EditPost = () => {
 					label="Description"
 					placeholder="Type in new description"
 					{...register('description')}
-					rows={6}
+					value={watch('description')}
 					error={errors.description?.message}
 				/>
 				<div className={styles.buttons}>

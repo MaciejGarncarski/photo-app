@@ -20,6 +20,7 @@ export const useCommentForm = ({ postId }: Arguments) => {
 		register,
 		handleSubmit,
 		reset,
+		watch,
 		formState: { isDirty, errors },
 	} = useForm<CommentFormValues>({
 		defaultValues: {
@@ -46,5 +47,15 @@ export const useCommentForm = ({ postId }: Arguments) => {
 		)
 	}
 
-	return { onSubmit, isPending, register, handleSubmit, isDirty, errors }
+	const commentValue = watch('comment')
+
+	return {
+		onSubmit,
+		isPending,
+		register,
+		handleSubmit,
+		isDirty,
+		errors,
+		commentValue,
+	}
 }

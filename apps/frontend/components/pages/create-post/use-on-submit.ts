@@ -36,15 +36,15 @@ export const useOnSubmit = () => {
 				},
 			),
 			{
+				id: 'add-post',
 				loading: 'Creating post...',
 				success: 'Post created.',
-				error: 'Could not add post.',
+				error: 'Could not add post. Please, try again later.',
 			},
 		)
 	}
 	return {
 		onSubmit,
-		isError: sendNewPost.isError,
 		isPending: sendNewPost.isPending,
 	}
 }
