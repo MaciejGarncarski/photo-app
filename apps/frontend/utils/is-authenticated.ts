@@ -3,8 +3,6 @@ import { getSessionUser } from '@/services/auth.service'
 export const isAuthenticated = async () => {
 	try {
 		const { cookies } = await import('next/headers')
-		// eslint-disable-next-line no-console
-		console.log(cookies().getAll())
 
 		const response = await getSessionUser(
 			{},
