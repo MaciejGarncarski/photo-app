@@ -4,7 +4,7 @@ export const isAuthenticated = async () => {
 	try {
 		const { cookies } = await import('next/headers')
 		// eslint-disable-next-line no-console
-		console.log(`sessionId=${cookies().get('sessionId')?.value}`)
+		console.log(cookies().getAll())
 
 		const response = await getSessionUser(
 			{},
