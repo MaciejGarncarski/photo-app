@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import { Loader } from '@/components/loader/loader'
 import { usePost } from '@/components/pages/account/use-post'
 
 import styles from './account-post.module.scss'
@@ -16,10 +15,6 @@ type Props = {
 export const AccountPost = ({ postId }: Props) => {
 	const [isLoaded, setIsLoaded] = useState(false)
 	const { data: postData } = usePost({ postId })
-
-	if (!postData) {
-		return null
-	}
 
 	const { commentsCount, images, likesCount } = postData
 
@@ -36,12 +31,7 @@ export const AccountPost = ({ postId }: Props) => {
 			className={styles.link}
 			data-cy="account post link"
 		>
-			{!isLoaded && (
-				<span className={styles.loader} role="status">
-					<Loader color="accent" size="small" />
-				</span>
-			)}
-			{imagesLength > 1 ? (
+			{imagesLength > 1 && isLoaded ? (
 				<span className={styles.manyPhotosIcon}>
 					<CopySimple weight="fill" size={40} />
 				</span>

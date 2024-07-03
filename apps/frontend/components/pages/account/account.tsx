@@ -3,6 +3,7 @@
 import { PencilSimple, SignOut } from '@phosphor-icons/react'
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
+import { Suspense } from 'react'
 
 import { useAuth } from '@/hooks/use-auth'
 import { useIsTabletOrMobile } from '@/hooks/use-is-tablet-or-mobile'
@@ -17,6 +18,7 @@ import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/conf
 import { ListModal } from '@/components/modals/list-modal/list-modal'
 import { ListModalItem } from '@/components/modals/list-modal-item/list-modal-item'
 import { AccountHeaderDesktopPlaceholder } from '@/components/pages/account/account-header-desktop-placeholder'
+import { AccountHeaderMobilePlaceholder } from '@/components/pages/account/account-header-mobile-placeholder'
 
 import styles from './account.module.scss'
 
@@ -29,7 +31,7 @@ const AccountHeaderMobile = dynamic(
 		import('@/components/pages/account/account-header-mobile').then(
 			(m) => m.AccountHeaderMobile,
 		),
-	{ ssr: false },
+	{ ssr: false, loading: AccountHeaderMobilePlaceholder },
 )
 const AccountHeaderDesktop = dynamic(
 	() =>
@@ -106,7 +108,9 @@ export const Account = ({ username }: Props) => {
 					Cancel
 				</Button>
 			</ConfirmationDialog>
-			{userData?.userId && <AccountPostsList userId={userData.userId} />}
+			<Suspense fallback={<p>loadingg</p>}>
+				{userData?.userId && <AccountPostsList userId={userData.userId} />}
+			</Suspense>
 		</div>
 	)
 }

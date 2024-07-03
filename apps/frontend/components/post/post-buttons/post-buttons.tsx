@@ -1,3 +1,5 @@
+'use client'
+
 import { formatLikes } from '@/utils/format-likes'
 
 import { usePostButtonsData } from '@/components/post/post-buttons/use-post-buttons'

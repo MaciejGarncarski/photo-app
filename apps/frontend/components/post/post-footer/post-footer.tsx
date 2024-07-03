@@ -1,10 +1,23 @@
+import dynamic from 'next/dynamic'
+
 import { useUser } from '@/hooks/use-user'
 
 import { usePost } from '@/components/pages/account/use-post'
-import { PostButtons } from '@/components/post/post-buttons/post-buttons'
+import { PostButtonsPlaceholder } from '@/components/post/post-buttons/post-buttons-placeholder'
 import { usePostFooter } from '@/components/post/post-footer/use-post-footer'
 
 import styles from './post-footer.module.scss'
+
+const PostButtons = dynamic(
+	() =>
+		import('@/components/post/post-buttons/post-buttons').then(
+			(m) => m.PostButtons,
+		),
+	{
+		ssr: false,
+		loading: PostButtonsPlaceholder,
+	},
+)
 
 type Props = {
 	postId: number

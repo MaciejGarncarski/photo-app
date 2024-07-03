@@ -1,24 +1,32 @@
 .list {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-  margin-top: 1rem;
+	display: flex;
+	list-style: none;
+	gap: 2rem;
+	margin-top: 1rem;
 }
 
 .listItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.25rem;
 }
 
 .button {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 1.25rem;
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 1.25rem;
 }
 
 .buttonsCount {
-  display: flex;
+	display: flex;
+}
+
+.placeholder {
+	height: 2rem;
+	margin-top: 0.5rem;
+	border-radius: var(--radius-small);
+	width: 6rem;
+	background-color: var(--color-primary);
 }

@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import Image from 'next/image'
-import { useState } from 'react'
 
 import { useUser } from '@/hooks/use-user'
 import { getDescriptionData } from '@/utils/get-description-data'
@@ -29,23 +28,14 @@ const getAspectRatio = (width: number, height: number) => {
 type Props = {
 	priority: boolean
 	url: string
-	thumbnailUrl: string
 	width: number
 	height: number
 	postId: number
 }
 
-export const PostImage = ({
-	priority,
-	url,
-	thumbnailUrl,
-	height,
-	width,
-	postId,
-}: Props) => {
+export const PostImage = ({ priority, url, height, width, postId }: Props) => {
 	const { data: postData } = usePost({ postId: postId })
 	const { data } = useUser({ userId: postData?.authorId || '' })
-	const [isLoading, setIsLoading] = useState(true)
 
 	if (!postData) {
 		return null
@@ -57,32 +47,41 @@ export const PostImage = ({
 
 	return (
 		<div className={styles.postImage}>
-			{isLoading && priority && (
-				<Image
-					className={clsx(
-						styles[imageAspectRatio],
-						styles.sliderImageThumbnail,
+			{(imageAspectRatio === 'landscape' ||
+				imageAspectRatio === 'portrait') && (
+				<div className={styles.backgroundOuter}>
+					{imageAspectRatio === 'landscape' && (
+						<Image
+							className={styles.landscapeBackground}
+							src={url}
+							priority={priority}
+							quality={100}
+							width={600}
+							height={600}
+							alt={`${data?.username} - ${shortDescription}`}
+						/>
 					)}
-					src={thumbnailUrl}
-					priority={priority}
-					quality={10}
-					width={600}
-					height={600}
-					alt={`${data?.username} - ${shortDescription}`}
-				/>
+					{imageAspectRatio === 'portrait' && (
+						<Image
+							className={styles.portraitBackground}
+							src={url}
+							priority={priority}
+							quality={100}
+							width={600}
+							height={600}
+							alt={`${data?.username} - ${shortDescription}`}
+						/>
+					)}
+				</div>
 			)}
+
 			<Image
-				className={clsx(
-					styles[imageAspectRatio],
-					styles.sliderImage,
-					isLoading && styles.sliderImageLoading,
-				)}
+				className={clsx(styles[imageAspectRatio], styles.sliderImage)}
 				src={url}
 				priority={priority}
 				quality={100}
 				width={600}
 				height={600}
-				onLoad={() => setIsLoading(false)}
 				alt={`${data?.username} - ${shortDescription}`}
 			/>
 		</div>

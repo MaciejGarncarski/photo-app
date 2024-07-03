@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll'
 
 import { AccountPost } from '@/components/account-post/account-post'
@@ -11,7 +13,7 @@ type Props = {
 }
 
 export const AccountPostsList = ({ userId }: Props) => {
-	const { data, isPending, hasNextPage, fetchNextPage } = useAccountPosts({
+	const { data, hasNextPage, fetchNextPage } = useAccountPosts({
 		userId,
 	})
 
@@ -21,10 +23,6 @@ export const AccountPostsList = ({ userId }: Props) => {
 		enabled: true,
 	})
 
-	if (!data || isPending) {
-		return <Loader marginTop color="accent" size="big" />
-	}
-
 	const hasPosts = data.pages[0].postsCount !== 0
 
 	return (
@@ -33,11 +31,15 @@ export const AccountPostsList = ({ userId }: Props) => {
 				{!hasPosts && <p className={styles.noPosts}>No posts yet.</p>}
 				{data.pages.map((page) => {
 					return page.data.map(({ id }) => {
-						return <AccountPost key={id} postId={id} />
+						return (
+							<Suspense key={id} fallback={<p>loo</p>}>
+								<AccountPost postId={id} />
+							</Suspense>
+						)
 					})
 				})}
 			</div>
-			{hasNextPage && hasPosts && !isPending && (
+			{hasNextPage && hasPosts && (
 				<div ref={ref} className={styles.loading}>
 					<Loader color="primary" size="small" />
 				</div>

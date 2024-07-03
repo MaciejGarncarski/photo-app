@@ -1,4 +1,7 @@
-import { infiniteQueryOptions, useInfiniteQuery } from '@tanstack/react-query'
+import {
+	infiniteQueryOptions,
+	useSuspenseInfiniteQuery,
+} from '@tanstack/react-query'
 
 import { nextPageParam } from '@/utils/api/next-page-param'
 
@@ -30,5 +33,5 @@ export const getAccountPostsQueryOptions = (userId: string) =>
 	})
 
 export const useAccountPosts = ({ userId }: UseAccountPost) => {
-	return useInfiniteQuery(getAccountPostsQueryOptions(userId))
+	return useSuspenseInfiniteQuery(getAccountPostsQueryOptions(userId))
 }
