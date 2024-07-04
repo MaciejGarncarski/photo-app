@@ -4,13 +4,13 @@ import clsx from 'clsx'
 import styles from './modal-close-button.module.scss'
 
 type Props = {
-	onClose: () => void
+	onCloseModal: () => void
 	variant: 'primary' | 'secondary'
 }
 
-export const ModalCloseButton = ({ onClose, variant }: Props) => {
+export const ModalCloseButton = ({ onCloseModal, variant }: Props) => {
 	const handleClose = () => {
-		onClose()
+		onCloseModal()
 	}
 
 	return (

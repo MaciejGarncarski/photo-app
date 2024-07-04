@@ -24,5 +24,5 @@ export const useOnEscape = ({
 		return () => {
 			document.removeEventListener('keydown', onKeyDown)
 		}
-	})
+	}, [onKeyDown])
 }

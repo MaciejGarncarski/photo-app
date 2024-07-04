@@ -1,12 +1,13 @@
 .content {
-  z-index: 3;
-  --padding: 0.5rem;
-  padding: 0.5rem;
-  border-radius: calc(var(--radius-small) + var(--padding));
-  background-color: var(--color-secondary);
-  box-shadow: var(--shadow);
+	--padding: 0.25rem;
+	z-index: 5;
+	padding: var(--padding);
+	border-radius: calc(var(--radius-small) + var(--padding));
+	background-color: var(--color-primary);
+	border: 1px solid var(--shadow-200);
+	box-shadow: var(--shadow);
 }
 
 .arrow {
-  fill: var(--color-secondary);
+	fill: var(--color-secondary);
 }

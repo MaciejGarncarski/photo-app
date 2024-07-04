@@ -27,14 +27,14 @@ export const useComment = ({ commentData }: Arguments) => {
 	const handleDelete = () =>
 		commentDelete.mutate({ commentId: commentId.toString() })
 
-	const isAbleToDelete = sessionUserData?.userId === authorId
+	const isCommentAuthor = sessionUserData?.userId === authorId
 	const userAccountHref = `/${data?.username}`
 
 	return {
 		timeSinceCreated,
 		handleDelete,
 		handleLike,
-		isAbleToDelete,
+		isCommentAuthor,
 		userAccountHref,
 		isDeleting: commentDelete.isPending,
 		username: data?.username || '',

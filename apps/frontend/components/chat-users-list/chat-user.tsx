@@ -32,6 +32,7 @@ export const ChatUser = ({ userId, message, messageCreatedAt }: Props) => {
 			) : (
 				<li className={styles.listItem}>
 					<Link
+						prefetch={true}
 						href={`/chat/${data.username}`}
 						className={clsx(isActive && styles.linkActive, styles.link)}
 					>

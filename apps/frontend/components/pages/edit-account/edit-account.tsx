@@ -105,7 +105,7 @@ export const EditAccount = () => {
 								</Heading>
 								<div className={styles.closeButton}>
 									<ModalCloseButton
-										onClose={updateAvatarModal.closeModal}
+										onCloseModal={updateAvatarModal.closeModal}
 										variant="primary"
 									/>
 								</div>

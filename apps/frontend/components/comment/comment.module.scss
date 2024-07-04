@@ -47,6 +47,10 @@
 	text-overflow: ellipsis;
 }
 
+.dropdownContent {
+	z-index: 5;
+}
+
 .content {
 	display: inline;
 }

@@ -40,6 +40,7 @@ export const NavButtons = () => {
 							<li key={title} className={styles.listItem}>
 								<Link
 									href={href}
+									prefetch={true}
 									className={clsx(
 										{
 											[styles.active]: isActive,

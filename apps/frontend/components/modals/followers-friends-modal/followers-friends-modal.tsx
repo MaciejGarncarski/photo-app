@@ -25,7 +25,7 @@ export const FollowersFriendsModal = ({ closeModal, type, userId }: Props) => {
 				<ReactFocusLock autoFocus={false}>
 					<div className={styles.header}>
 						<h3 className={styles.heading}>{type.toUpperCase()}</h3>
-						<ModalCloseButton onClose={closeModal} variant="primary" />
+						<ModalCloseButton onCloseModal={closeModal} variant="primary" />
 					</div>
 					{isEmpty && (
 						<ul className={styles.list}>

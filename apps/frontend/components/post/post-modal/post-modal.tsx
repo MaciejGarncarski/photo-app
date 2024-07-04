@@ -2,9 +2,12 @@
 
 import { useRouter } from 'next/navigation'
 
+import { useUser } from '@/hooks/use-user'
+
 import { ModalCloseButton } from '@/components/buttons/modal-close-button/modal-close-button'
 import { CommentForm } from '@/components/forms/comment-form/comment-form'
 import { ModalBackdrop } from '@/components/modals/modal-backdrop/modal-backdrop'
+import { usePost } from '@/components/pages/account/use-post'
 import { PostComments } from '@/components/post/post-comments/post-comments'
 import { PostFooter } from '@/components/post/post-footer/post-footer'
 import { PostHeader } from '@/components/post/post-header/post-header'
@@ -25,13 +28,15 @@ export const PostModal = ({
 	postId,
 	isPostPage,
 }: Props) => {
+	const post = usePost({ postId })
+	const author = useUser({ userId: post.data.authorId })
 	const router = useRouter()
 
 	const closeModalAndRedirect = () => {
 		closeModal()
 
-		if (isPostPage) {
-			router.back()
+		if (isPostPage && author.data?.username) {
+			router.push(`/${author.data?.username}`)
 		}
 	}
 
@@ -44,7 +49,7 @@ export const PostModal = ({
 			<div role="dialog" className={styles.container}>
 				<div className={styles.closeButton}>
 					<ModalCloseButton
-						onClose={closeModalAndRedirect}
+						onCloseModal={closeModalAndRedirect}
 						variant="secondary"
 					/>
 				</div>

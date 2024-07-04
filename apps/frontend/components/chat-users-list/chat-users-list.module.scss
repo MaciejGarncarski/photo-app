@@ -65,14 +65,12 @@
 .username {
 	max-width: 18rem;
 	overflow: hidden;
-	font-weight: 500;
 	text-overflow: ellipsis;
 	font-size: 1rem;
 	color: var(--text-gray);
 
 	@include common.mediaquery('desktop') {
 		font-size: 1.5rem;
-		font-weight: 400;
 		max-width: unset;
 	}
 }

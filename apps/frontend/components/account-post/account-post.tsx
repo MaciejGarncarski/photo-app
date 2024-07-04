@@ -25,12 +25,7 @@ export const AccountPost = ({ postId }: Props) => {
 	}
 
 	return (
-		<Link
-			shallow
-			href={`/post/${postId}`}
-			className={styles.link}
-			data-cy="account post link"
-		>
+		<Link shallow href={`/post/${postId}`} className={styles.link}>
 			{imagesLength > 1 && isLoaded ? (
 				<span className={styles.manyPhotosIcon}>
 					<CopySimple weight="fill" size={40} />

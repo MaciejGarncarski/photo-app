@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Rubik } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
 
@@ -13,9 +13,9 @@ type Props = {
 	children: ReactNode
 }
 
-const font = Rubik({
+const font = Open_Sans({
 	subsets: ['latin-ext', 'latin'],
-	weight: ['300', '400', '500', '600', '700', '800', '900'],
+	weight: ['300', '400', '500', '600', '700', '800'],
 	display: 'swap',
 })
 

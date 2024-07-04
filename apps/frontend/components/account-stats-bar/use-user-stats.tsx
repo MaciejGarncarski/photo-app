@@ -22,7 +22,7 @@ export const useUserStats = ({ userId }: Props) => {
 			title: 'Posts',
 			titleOne: 'Post',
 			count: data?.postsCount || 0,
-			onClick: () => window.scrollBy({ top: 200, behavior: 'smooth' }),
+			onClick: () => window.scrollBy({ top: 320, behavior: 'smooth' }),
 		},
 		{
 			title: 'Followers',

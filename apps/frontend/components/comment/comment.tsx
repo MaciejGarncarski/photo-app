@@ -3,7 +3,6 @@ import * as Dropdown from '@radix-ui/react-dropdown-menu'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useState } from 'react'
 
 import { useModal } from '@/hooks/use-modal'
 import { formatDateFull } from '@/utils/format-date-full'
@@ -27,14 +26,14 @@ type Props = {
 
 export const Comment = ({ commentData }: Props) => {
 	const { authorId, createdAt, text, isLiked, likesCount } = commentData
-	const { openModal, closeModal, isModalOpen } = useModal()
-	const [isOpen, setIsOpen] = useState(false)
+	const confirmationModal = useModal()
+	const timeModal = useModal()
 
 	const {
 		handleDelete,
 		handleLike,
 		isDeleting,
-		isAbleToDelete,
+		isCommentAuthor,
 		timeSinceCreated,
 		userAccountHref,
 		username,
@@ -57,13 +56,16 @@ export const Comment = ({ commentData }: Props) => {
 				</button>
 
 				<Tooltip.Provider>
-					<Tooltip.Root open={isOpen} onOpenChange={setIsOpen}>
+					<Tooltip.Root
+						open={timeModal.isModalOpen}
+						onOpenChange={timeModal.setIsModalOpen}
+					>
 						<Tooltip.Trigger asChild>
 							<button type="button" className={styles.createdAt}>
 								<time dateTime={createdAt.toString()}>{timeSinceCreated}</time>
 							</button>
 						</Tooltip.Trigger>
-						{isOpen ? (
+						{timeModal.isModalOpen ? (
 							<TooltipContent>
 								{formatDateFull(createdAt, { fullMonth: true })}
 							</TooltipContent>
@@ -71,18 +73,24 @@ export const Comment = ({ commentData }: Props) => {
 					</Tooltip.Root>
 				</Tooltip.Provider>
 
-				{isAbleToDelete && (
+				{isCommentAuthor && (
 					<div className={styles.buttonLast}>
 						<Dropdown.Root>
 							<Dropdown.Trigger asChild>
-								<button type="button" onClick={openModal}>
+								<button type="button">
 									<span className="visually-hidden">options</span>
 									<DotsThree />
 								</button>
 							</Dropdown.Trigger>
 							<Dropdown.Portal>
-								<DropdownContent side="left">
-									<DropdownItem variant="destructive" onSelect={openModal}>
+								<DropdownContent
+									className={styles.dropdownContent}
+									side="bottom"
+								>
+									<DropdownItem
+										variant="destructive"
+										onSelect={confirmationModal.openModal}
+									>
 										<Trash />
 										<span>Delete</span>
 									</DropdownItem>
@@ -94,15 +102,15 @@ export const Comment = ({ commentData }: Props) => {
 			</div>
 
 			<ConfirmationDialog
-				isVisible={isModalOpen}
-				closeModal={closeModal}
+				isVisible={confirmationModal.isModalOpen}
+				closeModal={confirmationModal.closeModal}
 				text="Do you want to delete comment?"
 			>
 				<Button variant="destructive" onClick={handleDelete}>
 					{isDeleting ? <Loader color="primary" size="small" /> : <Trash />}
 					{isDeleting ? 'Deleting...' : 'Delete'}
 				</Button>
-				<Button variant="secondary" onClick={closeModal}>
+				<Button variant="secondary" onClick={confirmationModal.closeModal}>
 					Cancel
 				</Button>
 			</ConfirmationDialog>

@@ -30,6 +30,11 @@ describe('requests the "/auth/sign-in" route', async () => {
 		expect(response.headers['set-cookie']).toContain('sessionId=')
 	})
 
+	it('should delete session', async () => {
+		const response = await app.inject({ url: '/auth/me', method: 'DELETE' })
+		expect(response.statusCode).toBe(204)
+	})
+
 	afterAll(async () => {
 		await app.close()
 	})
