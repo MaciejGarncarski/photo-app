@@ -51,7 +51,8 @@ export const googleAuthPlugin = async (server: FastifyInstance) => {
 
 				if (user) {
 					await request.session.regenerate()
-					request.session.userId = user.id
+					request.session.set('userId', user.id)
+
 					return reply.redirect(`${process.env.APP_URL}`)
 				}
 
@@ -64,7 +65,8 @@ export const googleAuthPlugin = async (server: FastifyInstance) => {
 
 				if (createdUser) {
 					await request.session.regenerate()
-					request.session.userId = createdUser.id
+					request.session.set('userId', createdUser.id)
+
 					return reply.redirect(`${process.env.APP_URL}`)
 				}
 

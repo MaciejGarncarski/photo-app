@@ -11,7 +11,7 @@ import type {
 import { db } from '../../utils/db.js'
 import { imageKit } from '../../utils/imagekit.js'
 
-const POSTS_PER_SCROLL = 5
+const POSTS_PER_SCROLL = 3
 
 export const getHomepagePosts = async (skip: number) => {
 	const postsRequest = db.post.findMany({

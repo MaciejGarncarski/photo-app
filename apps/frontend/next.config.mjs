@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 export default {
-	// experimental: {
-	// 	reactCompiler: true,
-	// },
+	experimental: {
+		ppr: 'incremental',
+	},
 	eslint: {
 		ignoreDuringBuilds: true,
 	},

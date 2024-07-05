@@ -74,7 +74,7 @@ export const registerCredentialsHandler = async (
 	}
 
 	const registeredUser = await registerUser(data)
-	request.session.userId = registeredUser.id
+	request.session.set('userId', registeredUser.id)
 
 	return reply.status(201).send({ data: registerUser })
 }

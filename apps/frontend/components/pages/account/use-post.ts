@@ -6,12 +6,15 @@ export const getPostQueryOptions = (postId: number) =>
 	queryOptions({
 		queryKey: ['post', postId],
 		queryFn: async () => {
+			const { cookies } = await import('next/headers')
+
 			const { data: post } = await getPost(
 				{ postId: postId.toString() },
 				{
-					next: {
-						tags: [`post-${postId}`],
+					headers: {
+						Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
 					},
+					cache: 'no-store',
 				},
 			)
 

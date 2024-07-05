@@ -1,6 +1,6 @@
 import { Home } from '@/components/pages/home/home'
 
-export const revalidate = 600
+export const experimental_ppr = true
 
 export default async function HomePage() {
 	return <Home />

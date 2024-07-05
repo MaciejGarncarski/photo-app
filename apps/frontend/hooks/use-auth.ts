@@ -6,8 +6,18 @@ import { getSessionUser } from '@/services/auth.service'
 export const authQueryOptions = queryOptions({
 	queryKey: ['session'],
 	queryFn: async () => {
+		const { cookies } = await import('next/headers')
+
 		try {
-			const { data: sessionUser } = await getSessionUser({})
+			const { data: sessionUser } = await getSessionUser(
+				{},
+				{
+					headers: {
+						Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+					},
+					cache: 'no-store',
+				},
+			)
 
 			if (!sessionUser.data) {
 				throw new Error('No session data')
