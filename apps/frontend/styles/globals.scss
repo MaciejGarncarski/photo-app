@@ -1,6 +1,5 @@
 @use 'common.scss';
 @use 'variables';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
 	@extend %variables;
@@ -23,7 +22,6 @@
 }
 
 body {
-	font-family: 'Open Sans', sans-serif;
 	color: var(--color-text);
 	background-color: var(--color-primary);
 }
