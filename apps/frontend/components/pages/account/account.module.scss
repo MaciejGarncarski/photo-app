@@ -121,10 +121,14 @@
 
 .bio {
 	color: var(--color-text-gray);
+	font-size: 0.9rem;
+	font-style: italic;
 	text-align: center;
 	max-width: 20rem;
 	word-wrap: break-word;
 	text-wrap: balance;
+	line-height: 1.1;
+	margin-bottom: 1rem;
 
 	@include common.mediaquery('desktop') {
 		text-align: left;

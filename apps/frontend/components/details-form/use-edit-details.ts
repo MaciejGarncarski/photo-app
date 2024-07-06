@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation'
 import type { MouseEvent } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import { useEditAccount } from '@/components/pages/edit-account/use-edit-account'
 import type { AccountDetails } from '@/schemas/user.schema'
@@ -27,6 +28,7 @@ export const useEditDetails = ({ reset }: UseEditDetailsArguments) => {
 			{ bio: bio || null, name: fullName || null, username: username || null },
 			{
 				onSuccess: () => {
+					toast.success('Success!')
 					router.push(`/${username}`)
 				},
 			},

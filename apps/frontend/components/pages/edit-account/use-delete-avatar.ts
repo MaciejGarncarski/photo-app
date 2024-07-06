@@ -11,9 +11,10 @@ export const useDeleteAvatar = () => {
 		onError: () => {
 			toast.error('Cannot delete avatar. Try again later.')
 		},
-		onSuccess: (data) => {
-			queryClient.setQueryData(['session'], data)
-			queryClient.invalidateQueries({ queryKey: ['user'] })
+		onSuccess: () => {
+			toast.success('Success!')
+			void queryClient.invalidateQueries({ queryKey: ['user'] })
+			void queryClient.invalidateQueries({ queryKey: ['session'] })
 		},
 	})
 }
