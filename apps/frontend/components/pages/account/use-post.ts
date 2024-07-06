@@ -6,17 +6,26 @@ export const getPostQueryOptions = (postId: number) =>
 	queryOptions({
 		queryKey: ['post', postId],
 		queryFn: async () => {
-			const { cookies } = await import('next/headers')
+			if (typeof window === 'undefined') {
+				const { cookies } = await import('next/headers')
 
-			const { data: post } = await getPost(
-				{ postId: postId.toString() },
-				{
-					headers: {
-						Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+				const { data: post } = await getPost(
+					{ postId: postId.toString() },
+					{
+						headers: {
+							Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+						},
 					},
-					cache: 'no-store',
-				},
-			)
+				)
+
+				if (!post.data) {
+					throw new Error('No post data.')
+				}
+
+				return post.data
+			}
+
+			const { data: post } = await getPost({ postId: postId.toString() })
 
 			if (!post.data) {
 				throw new Error('No post data.')
