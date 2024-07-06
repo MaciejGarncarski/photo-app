@@ -58,7 +58,7 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
 						)}
 						src={url}
 						priority={priority}
-						quality={10}
+						quality={80}
 						width={600}
 						height={600}
 						alt={`${data?.username} - ${shortDescription}`}
@@ -69,7 +69,7 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
 				className={clsx(styles[imageAspectRatio], styles.sliderImage)}
 				src={url}
 				priority={priority}
-				quality={100}
+				quality={80}
 				width={width}
 				height={height}
 				alt={`${data?.username} - ${shortDescription}`}
