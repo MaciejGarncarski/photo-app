@@ -42,7 +42,7 @@ export const PostImage = ({ url, height, width, postId }: Props) => {
 
 	const { ref } = useInView({
 		threshold: 0,
-		rootMargin: '0px',
+		rootMargin: '100%',
 		onChange: (inView) => {
 			if (inView) {
 				setIsVisible(true)
