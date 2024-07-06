@@ -4,7 +4,6 @@ import type { SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import { imageSourcesAtom } from '@/components/crop-image/crop-image'
-import { revalidateHomePage } from '@/components/pages/create-post/action'
 import { useFinalImages } from '@/components/pages/create-post/use-final-images'
 import { useSendNewPost } from '@/components/pages/create-post/use-send-new-post'
 
@@ -30,7 +29,6 @@ export const useOnSubmit = () => {
 					onSuccess: async () => {
 						setFinalImages([])
 						setImageSources([])
-						await revalidateHomePage()
 						router.push('/')
 					},
 				},

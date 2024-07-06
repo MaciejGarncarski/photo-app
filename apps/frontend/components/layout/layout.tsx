@@ -1,14 +1,8 @@
-import dynamic from 'next/dynamic'
 import { type ReactNode } from 'react'
 
-import styles from './layout.module.scss'
+import { Navbar } from '@/components/navbar/navbar'
 
-const Navbar = dynamic(
-	() => import('@/components/navbar/navbar').then((m) => m.Navbar),
-	{
-		ssr: false,
-	},
-)
+import styles from './layout.module.scss'
 
 type Props = {
 	children: ReactNode

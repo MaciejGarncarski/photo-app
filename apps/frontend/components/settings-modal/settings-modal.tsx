@@ -1,3 +1,5 @@
+'use client'
+
 import {
 	Moon,
 	SignOut,
@@ -16,14 +18,12 @@ import { ListModal } from '@/components/modals/list-modal/list-modal'
 import { ListModalItem } from '@/components/modals/list-modal-item/list-modal-item'
 import { SignOutDialog } from '@/components/settings-modal/sign-out-dialog'
 import { useNotificationSoundPreference } from '@/components/settings-modal/use-notification-sound-preference'
+import { useSettingsAtom } from '@/components/settings-modal/use-settings-atom'
 import { useThemePreference } from '@/components/settings-modal/use-theme-preference'
 
-type Props = {
-	closeSettingsModal: () => void
-	isVisible: boolean
-}
+export const SettingsModal = () => {
+	const { isSettingsOpen, setSettingsOpen } = useSettingsAtom()
 
-export const SettingsModal = ({ closeSettingsModal, isVisible }: Props) => {
 	const { sessionUser, isSignedIn } = useAuth()
 	const signOutModal = useModal()
 
@@ -47,11 +47,13 @@ export const SettingsModal = ({ closeSettingsModal, isVisible }: Props) => {
 		return <SpeakerLow />
 	}, [isSoundEnabled])
 
+	const closeSettingsModal = () => setSettingsOpen(false)
+
 	return (
 		<>
-			<RemoveScroll enabled={isVisible} forwardProps>
+			<RemoveScroll enabled={isSettingsOpen} forwardProps>
 				<ListModal
-					isVisible={isVisible}
+					isVisible={isSettingsOpen}
 					closeModal={closeSettingsModal}
 					headingText="Settings"
 					data-cy="settings modal"

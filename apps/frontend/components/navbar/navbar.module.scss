@@ -99,14 +99,19 @@
 }
 
 .signedInInfo {
-	margin: 0;
-	position: relative;
-	padding: 1rem 1rem;
-	background-color: var(--color-primary);
-	border-radius: var(--radius-medium);
-	width: 100%;
-	border: 1px solid var(--shadow-200);
-	box-shadow: var(--shadow);
+	display: none;
+
+	@include common.mediaquery('desktop') {
+		display: block;
+		margin: 0;
+		position: relative;
+		padding: 1rem 1rem;
+		background-color: var(--color-primary);
+		border-radius: var(--radius-medium);
+		width: 100%;
+		border: 1px solid var(--shadow-200);
+		box-shadow: var(--shadow);
+	}
 }
 
 .info {

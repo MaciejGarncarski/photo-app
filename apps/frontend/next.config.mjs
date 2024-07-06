@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 export default {
-	experimental: {
-		ppr: 'incremental',
-	},
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
