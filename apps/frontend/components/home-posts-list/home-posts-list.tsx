@@ -19,6 +19,7 @@ export const HomePostsList = () => {
 	const { ref } = useInfiniteScroll({
 		hasNextPage: Boolean(hasNextPage),
 		fetchNextPage,
+		rootMargin: '100px',
 		enabled: true,
 	})
 

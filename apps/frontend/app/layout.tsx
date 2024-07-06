@@ -16,7 +16,7 @@ type Props = {
 
 const font = Open_Sans({
 	subsets: ['latin-ext', 'latin'],
-	weight: ['400', '500', '700', '800'],
+	weight: ['400', '500', '700'],
 	display: 'swap',
 })
 
