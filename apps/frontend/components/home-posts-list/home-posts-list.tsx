@@ -48,7 +48,7 @@ export const HomePostsList = () => {
 					return (
 						<HomePost
 							key={id}
-							priority={idx <= 1}
+							priority={pageIdx <= 1 && idx <= 1}
 							postId={id}
 							ref={
 								pageIdx === data.pages.length - 1 &&

@@ -50,38 +50,28 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
 			{(imageAspectRatio === 'landscape' ||
 				imageAspectRatio === 'portrait') && (
 				<div className={styles.backgroundOuter}>
-					{imageAspectRatio === 'landscape' && (
-						<Image
-							className={styles.landscapeBackground}
-							src={url}
-							priority={priority}
-							quality={100}
-							width={600}
-							height={600}
-							alt={`${data?.username} - ${shortDescription}`}
-						/>
-					)}
-					{imageAspectRatio === 'portrait' && (
-						<Image
-							className={styles.portraitBackground}
-							src={url}
-							priority={priority}
-							quality={100}
-							width={600}
-							height={600}
-							alt={`${data?.username} - ${shortDescription}`}
-						/>
-					)}
+					<Image
+						className={clsx(
+							imageAspectRatio === 'landscape'
+								? styles.landscapeBackground
+								: styles.portraitBackground,
+						)}
+						src={url}
+						priority={priority}
+						quality={10}
+						width={600}
+						height={600}
+						alt={`${data?.username} - ${shortDescription}`}
+					/>
 				</div>
 			)}
-
 			<Image
 				className={clsx(styles[imageAspectRatio], styles.sliderImage)}
 				src={url}
 				priority={priority}
 				quality={100}
-				width={600}
-				height={600}
+				width={width}
+				height={height}
 				alt={`${data?.username} - ${shortDescription}`}
 			/>
 		</div>
