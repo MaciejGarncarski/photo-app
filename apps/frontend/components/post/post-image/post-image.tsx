@@ -70,8 +70,8 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
 				src={url}
 				priority={priority}
 				quality={80}
-				width={width}
-				height={height}
+				width={600}
+				height={600}
 				alt={`${data?.username} - ${shortDescription}`}
 			/>
 		</div>
