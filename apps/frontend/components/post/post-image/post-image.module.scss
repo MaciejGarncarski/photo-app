@@ -42,6 +42,7 @@
 	grid-row-start: 1;
 	grid-column-start: 1;
 	border-radius: var(--radius-small);
+	animation: show-image 200ms ease-in-out forwards;
 }
 
 .square {
@@ -58,6 +59,7 @@
 	width: var(--width);
 	height: 100%;
 	overflow: auto;
+	animation: show-image 200ms ease-in-out forwards;
 }
 
 .backgroundOuter {
@@ -85,4 +87,13 @@
 .portrait {
 	height: 100%;
 	aspect-ratio: 4 / 5;
+}
+
+@keyframes show-image {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

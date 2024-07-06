@@ -14,10 +14,9 @@ import styles from './post-images-carousel.module.scss'
 
 type Props = {
 	postId: number
-	priority: boolean
 }
 
-export const PostImagesCarousel = ({ postId, priority }: Props) => {
+export const PostImagesCarousel = ({ postId }: Props) => {
 	const { data: post, isPending } = usePost({ postId })
 	const { width, imageRef } = useUpdateWidth()
 	const { currentImage, handleNextImage, handlePrevImage } = useCarousel()
@@ -48,10 +47,9 @@ export const PostImagesCarousel = ({ postId, priority }: Props) => {
 					} as CSSProperties
 				}
 			>
-				{post.images.map((image, idx) => {
+				{post.images.map((image) => {
 					return (
 						<PostImage
-							priority={priority && idx === 0}
 							url={image.url}
 							width={image.width}
 							key={image.fileId}

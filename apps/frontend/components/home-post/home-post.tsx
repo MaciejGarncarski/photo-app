@@ -12,7 +12,6 @@ import styles from './home-post.module.scss'
 
 type Props = {
 	postId: number
-	priority: boolean
 	ref?: Ref<HTMLElement>
 }
 
@@ -27,7 +26,7 @@ const PostHeader = dynamic(
 	},
 )
 
-export const HomePost = ({ postId, priority, ref }: Props) => {
+export const HomePost = ({ postId, ref }: Props) => {
 	return (
 		<Suspense fallback={<PostPlaceholder />}>
 			<article className={styles.homePost} ref={ref}>
@@ -35,7 +34,7 @@ export const HomePost = ({ postId, priority, ref }: Props) => {
 					<PostHeader postId={postId} />
 				</div>
 				<div className={styles.carousel}>
-					<PostImagesCarousel postId={postId} priority={priority} />
+					<PostImagesCarousel postId={postId} />
 				</div>
 				<PostFooter postId={postId} />
 			</article>

@@ -1,5 +1,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
+import { useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import { useUser } from '@/hooks/use-user'
 import { getDescriptionData } from '@/utils/get-description-data'
@@ -26,55 +28,63 @@ const getAspectRatio = (width: number, height: number) => {
 }
 
 type Props = {
-	priority: boolean
 	url: string
 	width: number
 	height: number
 	postId: number
 }
 
-export const PostImage = ({ priority, url, height, width, postId }: Props) => {
+export const PostImage = ({ url, height, width, postId }: Props) => {
+	const [isVisible, setIsVisible] = useState(false)
+
 	const { data: postData } = usePost({ postId: postId })
 	const { data } = useUser({ userId: postData?.authorId || '' })
 
-	if (!postData) {
-		return null
-	}
+	const { ref } = useInView({
+		threshold: 0,
+		rootMargin: '0px',
+		onChange: (inView) => {
+			if (inView) {
+				setIsVisible(true)
+			}
+		},
+	})
 
 	const imageAspectRatio = getAspectRatio(width, height)
-
 	const { shortDescription } = getDescriptionData(postData.description)
 
 	return (
-		<div className={styles.postImage}>
-			{(imageAspectRatio === 'landscape' ||
-				imageAspectRatio === 'portrait') && (
-				<div className={styles.backgroundOuter}>
+		<div className={styles.postImage} ref={ref}>
+			{isVisible && (
+				<>
+					{(imageAspectRatio === 'landscape' ||
+						imageAspectRatio === 'portrait') && (
+						<div className={styles.backgroundOuter}>
+							<Image
+								className={clsx(
+									imageAspectRatio === 'landscape'
+										? styles.landscapeBackground
+										: styles.portraitBackground,
+								)}
+								src={url}
+								quality={80}
+								width={600}
+								height={600}
+								alt={`${data?.username} - ${shortDescription}`}
+							/>
+						</div>
+					)}
+
 					<Image
-						className={clsx(
-							imageAspectRatio === 'landscape'
-								? styles.landscapeBackground
-								: styles.portraitBackground,
-						)}
+						className={clsx(styles[imageAspectRatio], styles.sliderImage)}
 						src={url}
-						priority={priority}
 						quality={80}
 						width={600}
 						height={600}
 						alt={`${data?.username} - ${shortDescription}`}
 					/>
-				</div>
+				</>
 			)}
-
-			<Image
-				className={clsx(styles[imageAspectRatio], styles.sliderImage)}
-				src={url}
-				priority={priority}
-				quality={80}
-				width={600}
-				height={600}
-				alt={`${data?.username} - ${shortDescription}`}
-			/>
 		</div>
 	)
 }
