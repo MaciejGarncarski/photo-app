@@ -65,6 +65,7 @@ export const PostImage = ({ priority, url, height, width, postId }: Props) => {
 					/>
 				</div>
 			)}
+
 			<Image
 				className={clsx(styles[imageAspectRatio], styles.sliderImage)}
 				src={url}
