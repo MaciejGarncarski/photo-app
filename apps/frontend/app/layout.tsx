@@ -3,6 +3,7 @@ import { Open_Sans } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
 
+import { PreloadResources } from '@/app/preload-resources'
 import { Providers } from '@/app/providers'
 import { CustomToaster } from '@/components/custom-toaster/custom-toaster'
 import { Layout } from '@/components/layout/layout'
@@ -39,6 +40,7 @@ const DefaultLayout = ({ children }: Props) => {
 		<html lang="en" className={font.className} suppressHydrationWarning>
 			<head />
 			<body>
+				<PreloadResources />
 				<ThemeProvider defaultTheme="light">
 					<Providers>
 						<CustomToaster />
