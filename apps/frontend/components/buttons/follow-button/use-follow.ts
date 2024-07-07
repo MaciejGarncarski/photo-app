@@ -59,9 +59,9 @@ export const useFollowMutation = ({ userId }: FollowMutation) => {
 			}
 		},
 		onSuccess: async () => {
-			await queryClient.invalidateQueries({ queryKey: ['user', userId] })
+			await queryClient.invalidateQueries({ queryKey: ['user'] })
 			await queryClient.invalidateQueries({
-				queryKey: ['user', data?.username],
+				queryKey: ['user'],
 			})
 		},
 	})

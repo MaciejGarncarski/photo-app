@@ -6,6 +6,7 @@
 	align-items: center;
 	transition: transform var(--transition);
 	margin: 0.25rem 1rem;
+	gap: 1rem;
 
 	@include common.mediaquery('desktop') {
 		gap: 2rem;
@@ -15,24 +16,25 @@
 .itemLink {
 	display: flex;
 	align-items: center;
-	gap: 1rem;
+	gap: 0.5rem;
 	flex-grow: 1;
 	border-radius: var(--radius-medium);
+	border: 1px solid transparent;
+	border: 1px solid var(--shadow-100);
+	box-shadow: var(--shadow-100);
+	background-color: var(--color-secondary);
+	padding: 0.5rem 0.5rem;
 
 	@include common.mediaquery('desktop') {
-		border: 1px solid transparent;
+		gap: 1rem;
 		padding: 0.5rem 1rem;
-
-		&:hover,
-		&:focus {
-			border: 1px solid var(--shadow-100);
-			box-shadow: var(--shadow-100);
-			background-color: var(--color-secondary);
-		}
 	}
 }
 
 .username {
 	font-weight: 700;
-	font-size: 1.25rem;
+
+	@include common.mediaquery('desktop') {
+		font-size: 1.25rem;
+	}
 }

@@ -34,7 +34,7 @@ export const FollowersFriendsModal = ({ closeModal, type, userId }: Props) => {
 					)}
 					{isPending ? (
 						<ul className={styles.list} ref={ref}>
-							{Array.from({ length: 3 }, (_, item) => item).map((el) => {
+							{Array.from({ length: 2 }, (_, item) => item).map((el) => {
 								return <li className={styles.placeholder} key={el} />
 							})}
 						</ul>
