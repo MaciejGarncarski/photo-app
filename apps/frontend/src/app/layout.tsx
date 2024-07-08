@@ -42,12 +42,12 @@ const DefaultLayout = ({ children }: Props) => {
 			<head />
 			<body>
 				<PreloadResources />
-				<ThemeProvider defaultTheme="light">
-					<Providers>
+				<Providers>
+					<ThemeProvider defaultTheme="light" disableTransitionOnChange>
 						<CustomToaster />
 						<Layout>{children}</Layout>
-					</Providers>
-				</ThemeProvider>
+					</ThemeProvider>
+				</Providers>
 			</body>
 		</html>
 	)

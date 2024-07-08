@@ -8,6 +8,7 @@ import {
 	Sun,
 	User,
 } from '@phosphor-icons/react'
+import { useTheme } from 'next-themes'
 import { useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 
@@ -19,7 +20,6 @@ import { ListModalItem } from '@/components/modals/list-modal-item/list-modal-it
 import { SignOutDialog } from '@/components/settings-modal/sign-out-dialog'
 import { useNotificationSoundPreference } from '@/components/settings-modal/use-notification-sound-preference'
 import { useSettingsAtom } from '@/components/settings-modal/use-settings-atom'
-import { useThemePreference } from '@/components/settings-modal/use-theme-preference'
 
 export const SettingsModal = () => {
 	const { isSettingsOpen, setSettingsOpen } = useSettingsAtom()
@@ -30,7 +30,13 @@ export const SettingsModal = () => {
 	const { isSoundEnabled, toggleNotificationSound } =
 		useNotificationSoundPreference()
 
-	const { isDark, toggleTheme } = useThemePreference()
+	const { setTheme, theme } = useTheme()
+
+	const toggleTheme = () => {
+		setTheme(theme === 'dark' ? 'light' : 'dark')
+	}
+
+	const isDark = theme === 'dark'
 
 	const ThemeButton = useCallback(() => {
 		if (isDark) {
