@@ -1,0 +1,32 @@
+.layout {
+	padding-bottom: 4rem;
+	min-height: 100dvh;
+
+	@media (--large-viewport) {
+		display: grid;
+		grid-template-columns:
+			calc(var(--navbar-desktop-margin) + var(--navbar-desktop-width))
+			3fr;
+		padding-bottom: 0;
+		gap: 3rem;
+	}
+}
+
+.container {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+
+	@media (--large-viewport) {
+		margin-top: 3rem;
+		margin-right: 5vw;
+		margin-bottom: 2rem;
+		grid-column: 2 / 3;
+	}
+
+	@media (--xlarge-viewport) {
+		margin-right: 15vw;
+	}
+}

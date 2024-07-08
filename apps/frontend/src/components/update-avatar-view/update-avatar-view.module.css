@@ -1,0 +1,33 @@
+.updateAvatar {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.removeButton {
+	align-self: flex-start;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+	justify-content: flex-start;
+	gap: 1rem;
+
+	@media (--large-viewport) {
+		gap: 2rem;
+	}
+}
+
+.preview {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+}
+
+.previewImg {
+	border-radius: 100%;
+}

@@ -70,7 +70,7 @@ turbo dev
 ### Frontend
 
 - TypeScript
-- SASS with css-modules
+- PostCSS with css-modules
 - [Next.js](https://nextjs.org/)
 - [Tanstack Query React](https://tanstack.com/query/latest/docs/react/overview)
 

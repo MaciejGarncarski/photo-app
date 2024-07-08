@@ -1,0 +1,55 @@
+.header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.userAnchor {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+
+	@media (--large-viewport) {
+		gap: 0.75rem;
+	}
+}
+
+.usernameContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+
+	@media (--large-viewport) {
+		flex-direction: row;
+		gap: 1ch;
+	}
+}
+
+.username {
+	font-weight: 700;
+}
+
+.dot {
+	display: none;
+
+	@media (--large-viewport) {
+		display: inline;
+	}
+}
+
+.createdAt {
+	font-size: 0.9rem;
+	color: var(--color-text-gray);
+
+	@media (--medium-viewport) {
+		font-size: 1rem;
+	}
+}
+
+.options {
+	margin-left: auto;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}

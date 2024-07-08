@@ -1,0 +1,17 @@
+.form {
+	display: grid;
+	gap: 2rem;
+
+	@media (--large-viewport) {
+		gap: 2rem;
+	}
+}
+
+.error {
+	text-align: center;
+	color: var(--color-error);
+}
+
+.button {
+	margin: 0 auto;
+}

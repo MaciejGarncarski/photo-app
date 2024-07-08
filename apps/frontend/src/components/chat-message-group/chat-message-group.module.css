@@ -1,0 +1,25 @@
+.message {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin-left: auto;
+	position: relative;
+	word-break: normal;
+	max-width: 70%;
+	gap: 0.5rem;
+
+	@media (--large-viewport) {
+		max-width: 50%;
+	}
+}
+
+.textColumn {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 0.25rem;
+}
+
+.messageReceiver {
+	margin-left: 0;
+	color: inherit;
+}

@@ -1,0 +1,89 @@
+.sliderImageContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.postImage {
+	display: grid;
+	grid-template-columns: 1fr;
+	place-content: center;
+	height: 100%;
+	width: var(--width, var(--post-width));
+	flex-shrink: 0;
+	position: relative;
+}
+
+.postImageLoader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translate(-50%, -50%);
+}
+
+.sliderImage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	object-fit: contain;
+	width: var(--width);
+	box-shadow: 0 1px 2px var(--shadow-100);
+	flex-shrink: 0;
+	z-index: 1;
+	height: 100%;
+	overflow: auto;
+	grid-row-start: 1;
+	grid-column-start: 1;
+	border-radius: var(--radius-small);
+	animation: show-image 200ms ease-in-out forwards;
+}
+
+.square {
+	aspect-ratio: 1 / 1;
+	height: 100%;
+}
+
+.background {
+	position: absolute;
+	width: 100%;
+	object-fit: cover;
+	aspect-ratio: 1 / 1;
+	filter: blur(6px) opacity(0.7);
+	width: var(--width);
+	height: 100%;
+	overflow: auto;
+	animation: show-image 200ms ease-in-out forwards;
+}
+
+.backgroundOuter {
+	border-radius: var(--radius-small);
+	overflow: hidden;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.landscape {
+	height: auto;
+	aspect-ratio: 1.91 / 1;
+}
+.portrait {
+	height: 100%;
+	aspect-ratio: 4 / 5;
+}
+
+@keyframes show-image {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

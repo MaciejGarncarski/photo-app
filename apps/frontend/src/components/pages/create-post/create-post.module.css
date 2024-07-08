@@ -1,0 +1,26 @@
+.createPost {
+	display: grid;
+	width: clamp(20rem, 80vw, 35rem);
+	margin: 0 auto;
+	gap: 2rem;
+
+	@media (--medium-viewport) {
+		gap: 3rem;
+	}
+
+	@media (--large-viewport) {
+		width: clamp(35rem, 50vw, 40rem);
+	}
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+
+	@media (--large-viewport) {
+		margin-bottom: 4rem;
+	}
+}

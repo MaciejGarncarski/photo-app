@@ -1,0 +1,30 @@
+.heading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.container {
+	gap: 1.5rem;
+	z-index: 1;
+	height: 100%;
+	margin-inline: auto;
+	padding: 1rem;
+	padding-top: 0;
+	width: 100%;
+	padding-bottom: 6rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	@media (--small-viewport) {
+		max-width: 35rem;
+	}
+
+	@media (--medium-viewport) {
+		gap: 3rem;
+		max-width: 50rem;
+		padding: 0;
+	}
+}

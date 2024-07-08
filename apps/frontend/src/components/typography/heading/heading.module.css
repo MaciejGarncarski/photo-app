@@ -1,0 +1,33 @@
+.heading {
+	position: relative;
+	line-height: 1.5;
+	font-weight: 700;
+	--heading-size: 1.5rem;
+	letter-spacing: -0.025em;
+}
+
+.small {
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+}
+
+.medium {
+	font-size: 1.875rem;
+	line-height: 2.25rem;
+}
+
+.big {
+	font-size: 2.25rem;
+	line-height: 2.5rem;
+
+	@media (--large-viewport) {
+		font-size: 3rem;
+		line-height: 1;
+	}
+}
+
+.center {
+	text-align: center;
+	width: fit-content;
+	margin-inline: auto;
+}

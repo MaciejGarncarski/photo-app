@@ -1,0 +1,38 @@
+.container {
+	background-color: var(--color-primary);
+	border-radius: var(--radius-medium);
+	border: 1px solid var(--shadow-100);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: clamp(20rem, 80vw, 30rem);
+	padding: 1.5rem;
+}
+
+.headingContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	width: 100%;
+}
+
+.heading {
+	text-align: center;
+	font-size: 1.25rem;
+	font-weight: 500;
+}
+
+.text {
+	margin-top: 1rem;
+	margin-bottom: 1.25rem;
+	color: var(--color-text-gray);
+}
+
+.buttonsRow {
+	display: flex;
+	margin-top: 0.5rem;
+	gap: 1.5rem;
+	justify-content: flex-end;
+	align-items: center;
+}

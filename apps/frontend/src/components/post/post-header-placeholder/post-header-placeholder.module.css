@@ -1,0 +1,41 @@
+.placeholder {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 1rem;
+
+	@media (--large-viewport) {
+		gap: 1rem;
+	}
+}
+
+.avatar,
+.name,
+.button {
+	background-color: var(--color-primary);
+	animation: var(--skeleton-animation);
+}
+
+.avatar {
+	border-radius: 100%;
+	--avatar-size-placeholder: 2.2rem;
+	width: var(--avatar-size-placeholder);
+	height: var(--avatar-size-placeholder);
+
+	@media (--large-viewport) {
+		--avatar-size-placeholder: 2.5rem;
+	}
+}
+
+.name {
+	height: 2.5rem;
+	width: 7rem;
+	border-radius: var(--radius-small);
+}
+
+.button {
+	width: 4rem;
+	height: 2.5rem;
+	border-radius: var(--radius-small);
+	margin-left: auto;
+}

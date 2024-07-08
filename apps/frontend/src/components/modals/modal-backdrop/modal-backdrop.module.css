@@ -1,0 +1,25 @@
+.backdrop {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	right: 0;
+	z-index: 5;
+	background-color: var(--color-overlay);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	animation: show-backdrop 200ms ease-out forwards;
+}
+
+@keyframes show-backdrop {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

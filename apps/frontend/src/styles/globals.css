@@ -1,0 +1,88 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	color: var(--color-text);
+	background-color: var(--color-primary);
+}
+
+img,
+picture,
+svg,
+video {
+	display: block;
+}
+
+button {
+	background-color: transparent;
+	border: 0;
+
+	&:not(:disabled) {
+		cursor: pointer;
+	}
+}
+
+textarea,
+button,
+input {
+	font: inherit;
+	color: inherit;
+}
+
+a {
+	font: inherit;
+	color: inherit;
+	text-decoration: none;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+.button {
+	border-radius: var(--radius-small);
+	font-weight: 500;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	letter-spacing: 0em;
+	line-height: 1.25rem;
+	height: 2.25rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	gap: 0.75rem;
+	transition: all var(--transition-fast);
+	transition-property: background-color, color, box-shadow;
+	position: relative;
+}
+
+@keyframes skeleton {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.1;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
