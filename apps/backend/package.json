@@ -7,7 +7,6 @@
 		"build": "pnpm prisma generate && pnpm tsc",
 		"build:dev": "pnpm prisma generate && pnpm tsc",
 		"start": "node --env-file=.env ./dist/src",
-		"restart-deploy": "pm2 startOrRestart ~/ecosystem.config.js --name \"Photo app - backend\"",
 		"check-types": "tsc --noEmit",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",

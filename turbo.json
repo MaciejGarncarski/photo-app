@@ -10,11 +10,14 @@
     "backend#build": {
       "dependsOn": ["^build"]
     },
-    "frontend#build": {
-      "dependsOn": ["^build", "backend#restart-deploy"]
+    "restart-backend": {
+      "dependsOn": ["^backend#build"]
     },
-    "backend#restart-deploy": {
-      "dependsOn": ["backend#build"]
+    "frontend#build": {
+      "dependsOn": ["^restart-backend"]
+    },
+    "restart-frontend": {
+      "dependsOn": ["^frontend#build"]
     },
     "format": {},
     "start": {},
