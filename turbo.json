@@ -13,8 +13,8 @@
       "dependsOn": ["//#restart-backend"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "//#restart-frontend": {
-      "dependsOn": ["^frontend#build"]
+    "restart-frontend": {
+      "dependsOn": ["frontend#build"]
     },
     "format": {},
     "lint": {},
