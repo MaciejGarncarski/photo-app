@@ -12,9 +12,7 @@
     "format": "pnpm prettier --write \"**/*.{ts,tsx}\" --cache",
     "check-types": "pnpm run check-types --parallel",
     "prepare": "pnpm husky",
-    "preinstall": "npx only-allow pnpm",
-    "restart-backend": "pm2 restart ~/ecosystem.config.js --only \"PhotoApp_Backend\"",
-    "restart-frontend": "pm2 restart ~/ecosystem.config.js --only \"PhotoApp_Frontend\""
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

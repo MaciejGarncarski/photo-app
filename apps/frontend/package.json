@@ -12,7 +12,8 @@
 		"vercel-build": "next build",
 		"generate-types": "openapi-typescript http://localhost:3001/documentation/json --output types.ts",
 		"test": "vitest",
-		"coverage": "vitest run --coverage"
+		"coverage": "vitest run --coverage",
+		"postbuild": "pm2 restart ~/ecosystem.config.js --only \"PhotoApp_Frontend\""
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.1",

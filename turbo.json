@@ -4,22 +4,8 @@
   "ui": "stream",
   "tasks": {
     "build": {
-      "dependsOn": ["^restart-frontend"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
-    },
-    "backend#build": {
-      "outputs": ["dist/**"]
-    },
-    "//#restart-backend": {
-      "dependsOn": ["backend#build"],
-      "outputs": ["dist/**"]
-    },
-    "frontend#build": {
-      "dependsOn": ["//#restart-backend"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "restart-frontend": {
-      "dependsOn": ["frontend#build"]
     },
     "format": {},
     "lint": {},
