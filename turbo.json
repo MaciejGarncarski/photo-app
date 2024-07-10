@@ -4,7 +4,8 @@
   "ui": "stream",
   "tasks": {
     "build": {
-      "dependsOn": ["restart-frontend"]
+      "dependsOn": ["^restart-frontend"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "backend#build": {
       "outputs": ["dist/**"]
