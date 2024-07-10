@@ -3,25 +3,23 @@
   "globalDependencies": ["**/.env.*local"],
   "ui": "stream",
   "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
-    },
     "backend#build": {
-      "dependsOn": ["^build"]
+      "outputs": ["dist/**"]
     },
-    "restart-backend": {
-      "dependsOn": ["^backend#build"]
+    "//#restart-backend": {
+      "dependsOn": ["backend#build"]
     },
     "frontend#build": {
-      "dependsOn": ["^restart-backend"]
+      "dependsOn": ["//#restart-backend"],
+      "outputs": [".next/**", "!.next/cache/**"]
     },
-    "restart-frontend": {
-      "dependsOn": ["^frontend#build"]
+    "//#restart-frontend": {
+      "dependsOn": ["frontend#build"]
     },
     "format": {},
-    "start": {},
+    "lint": {},
     "check-types": {},
+    "start": {},
     "dev": {
       "cache": false
     }

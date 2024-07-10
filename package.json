@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "deploy": "turbo build",
     "dev": "turbo dev",
     "start": "turbo start",
     "lint": "pnpm eslint -c eslint.config.mjs --fix",
     "lint-format": "pnpm lint-format",
-    "format": "pnpm prettier --write \"**/*.{ts,tsx}\"",
+    "format": "pnpm prettier --write \"**/*.{ts,tsx}\" --cache",
     "check-types": "pnpm run check-types --parallel",
     "prepare": "pnpm husky",
     "preinstall": "npx only-allow pnpm",

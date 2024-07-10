@@ -52,6 +52,11 @@ export default tseslint.config(
       "simple-import-sort": simpleImportSort,
       "unused-imports": fixupPluginRules(unusedImports),
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
     rules: {
       ...react.configs.recommended.rules,
       ...jsxa11y.configs.recommended.rules,

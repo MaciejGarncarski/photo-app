@@ -58,7 +58,7 @@ export const PostModal = ({
 						<PostHeader tag="div" postId={postId} />
 					</div>
 					<div className={styles.carousel}>
-						<PostImagesCarousel postId={postId} priority />
+						<PostImagesCarousel postId={postId} />
 					</div>
 					<div className={styles.footer}>
 						<PostFooter postId={postId} parentModalOpen />
