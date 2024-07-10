@@ -3,11 +3,15 @@
   "globalDependencies": ["**/.env.*local"],
   "ui": "stream",
   "tasks": {
+    "build": {
+      "dependsOn": ["restart-frontend"]
+    },
     "backend#build": {
       "outputs": ["dist/**"]
     },
     "//#restart-backend": {
-      "dependsOn": ["backend#build"]
+      "dependsOn": ["backend#build"],
+      "outputs": ["dist/**"]
     },
     "frontend#build": {
       "dependsOn": ["//#restart-backend"],
