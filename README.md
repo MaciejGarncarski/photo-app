@@ -15,21 +15,23 @@ PhotoApp is a social app inspired by Instagram. Users can create posts, like the
 ### Install node dependencies
 
 ```bash
+# turbo is needed for monorepo
+pnpm add -g turbo
 pnpm install
 ```
 
-### Add .env for frontend (/apps/frontend/.env)
+### Add .env for frontend
 
 ```
-# .env
+# /apps/frontend/.env
 
 NEXT_PUBLIC_API_ROOT=
 ```
 
-### Add .env for backend (/apps/backend/.env)
+### Add .env for backend
 
 ```
-# .env
+# /apps/backend/.env
 
 DATABASE_URL=
 SECRET=
@@ -62,7 +64,8 @@ turbo dev
 ### Backend
 
 - [Fastify](https://www.fastify.io/)
-- [Planetscale database](https://planetscale.com/)
+- [Prisma](https://prisma.io/)
+- PostgreSQL database
 - Socket.IO
 - ImageKit
 - Vitest
