@@ -22,12 +22,14 @@
 	height: 80dvh;
 	position: relative;
 	border-radius: var(--radius-medium);
+	overflow-y: auto;
 
 	@media (--medium-viewport) {
 		width: 40rem;
 	}
 
 	@media (--large-viewport) {
+		overflow-y: hidden;
 		width: calc(40rem + 25vw);
 		display: grid;
 		column-gap: 2vw;

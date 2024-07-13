@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { RemoveScroll } from 'react-remove-scroll'
 
 import { useUser } from '@/hooks/use-user'
 
@@ -45,32 +46,37 @@ export const PostModal = ({
 	}
 
 	return (
-		<ModalBackdrop closeModal={closeModalAndRedirect}>
-			<div role="dialog" className={styles.container}>
-				<div className={styles.closeButton}>
-					<ModalCloseButton
-						onCloseModal={closeModalAndRedirect}
-						variant="secondary"
-					/>
+		<RemoveScroll>
+			<ModalBackdrop closeModal={closeModalAndRedirect}>
+				<div role="dialog" className={styles.container}>
+					<div className={styles.closeButton}>
+						<ModalCloseButton
+							onCloseModal={closeModalAndRedirect}
+							variant="secondary"
+						/>
+					</div>
+					<div className={styles.contentContainer}>
+						<div className={styles.header}>
+							<PostHeader tag="div" postId={postId} />
+						</div>
+						<div className={styles.carousel}>
+							<PostImagesCarousel postId={postId} />
+						</div>
+						<div className={styles.footer}>
+							<PostFooter postId={postId} parentModalOpen />
+						</div>
+						<div className={styles.commentsForm}>
+							<CommentForm postId={postId} />
+						</div>
+						<div className={styles.postComments}>
+							<PostComments
+								postId={postId}
+								closeModal={closeModalAndRedirect}
+							/>
+						</div>
+					</div>
 				</div>
-				<div className={styles.contentContainer}>
-					<div className={styles.header}>
-						<PostHeader tag="div" postId={postId} />
-					</div>
-					<div className={styles.carousel}>
-						<PostImagesCarousel postId={postId} />
-					</div>
-					<div className={styles.footer}>
-						<PostFooter postId={postId} parentModalOpen />
-					</div>
-					<div className={styles.commentsForm}>
-						<CommentForm postId={postId} />
-					</div>
-					<div className={styles.postComments}>
-						<PostComments postId={postId} closeModal={closeModalAndRedirect} />
-					</div>
-				</div>
-			</div>
-		</ModalBackdrop>
+			</ModalBackdrop>
+		</RemoveScroll>
 	)
 }
