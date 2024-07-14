@@ -59,16 +59,14 @@ export const PostImage = ({ url, height, width, postId }: Props) => {
 				<>
 					{(imageAspectRatio === 'landscape' ||
 						imageAspectRatio === 'portrait') && (
-						<div className={styles.backgroundOuter}>
-							<Image
-								className={styles.background}
-								src={url}
-								quality={80}
-								width={600}
-								height={600}
-								alt={`${data?.username} - ${shortDescription}`}
-							/>
-						</div>
+						<Image
+							className={styles.background}
+							src={url}
+							quality={80}
+							width={600}
+							height={600}
+							alt={`${data?.username} - ${shortDescription}`}
+						/>
 					)}
 
 					<Image

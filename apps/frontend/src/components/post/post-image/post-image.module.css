@@ -11,6 +11,8 @@
 	height: 100%;
 	width: var(--width, var(--post-width));
 	flex-shrink: 0;
+	border-radius: var(--radius-small);
+	overflow: hidden;
 	position: relative;
 }
 
@@ -40,7 +42,7 @@
 	grid-row-start: 1;
 	grid-column-start: 1;
 	border-radius: var(--radius-small);
-	animation: show-image 200ms ease-in-out forwards;
+	animation: show-image 150ms ease-in-out forwards;
 }
 
 .square {
@@ -49,25 +51,16 @@
 }
 
 .background {
-	position: absolute;
-	width: 100%;
-	object-fit: cover;
-	aspect-ratio: 1 / 1;
-	filter: blur(6px) opacity(0.7);
-	width: var(--width);
-	height: 100%;
-	overflow: auto;
-	animation: show-image 200ms ease-in-out forwards;
-}
-
-.backgroundOuter {
-	border-radius: var(--radius-small);
 	overflow: hidden;
-	height: 100%;
+	object-fit: cover;
+	filter: blur(24px) opacity(0.5);
+	animation: show-image 150ms ease-in-out forwards;
 	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	top: 50%;
-	transform: translateY(-50%);
+	height: 100%;
+	transform: scale(1.2);
 }
 
 .landscape {
