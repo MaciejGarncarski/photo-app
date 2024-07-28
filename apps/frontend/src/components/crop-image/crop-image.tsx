@@ -94,6 +94,7 @@ export const CropImage = ({ isAvatarCrop }: Props) => {
 						>
 							Remove
 							{isTabletOrMobile ? '' : ' image'}
+							{/* eslint-disable-next-line jsx-a11y/alt-text */}
 							{!isTabletOrMobile && <Image />}
 						</Button>
 					</div>

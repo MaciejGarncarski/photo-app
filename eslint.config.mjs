@@ -1,15 +1,16 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import { fixupPluginRules } from "@eslint/compat";
-import nextPlugin from "@next/eslint-plugin-next";
-// import nextConfig from "@next/eslint-plugin-next";
-// ADD TO CONFIG WHEN ITS UPDATED
 import jsxa11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
-import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import testingLibrary from "eslint-plugin-testing-library";
 import unusedImports from "eslint-plugin-unused-imports";
+import nextPlugin from "@next/eslint-plugin-next";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+
+const patchedNextPlugin = fixupPluginRules(nextPlugin);
+const patchedReactHooksPlugin = fixupPluginRules(reactHooksPlugin);
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -27,7 +28,6 @@ export default tseslint.config(
     ],
   },
   {
-    ...nextPlugin.configs.recommended,
     name: "PhotoApp - Frontend",
     files: [
       "apps/frontend/**/*.js",
@@ -35,20 +35,13 @@ export default tseslint.config(
       "apps/frontend/**/*.ts",
       "apps/frontend/**/*.tsx",
     ],
-    languageOptions: {
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
     plugins: {
       "@typescript-eslint": tseslint.plugin,
-      next: fixupPluginRules(nextPlugin),
-      "testing-library": testingLibrary,
-      "jsx-a11y": jsxa11y,
       react: react,
-      "react-hooks": fixupPluginRules(eslintPluginReactHooks),
+      "testing-library": testingLibrary,
+      "@next/next": patchedNextPlugin,
+      "react-hooks": patchedReactHooksPlugin,
+      "jsx-a11y": jsxa11y,
       "simple-import-sort": simpleImportSort,
       "unused-imports": fixupPluginRules(unusedImports),
     },
@@ -59,8 +52,10 @@ export default tseslint.config(
     },
     rules: {
       ...react.configs.recommended.rules,
+      ...patchedReactHooksPlugin.configs.recommended.rules,
+      ...patchedNextPlugin.configs["recommended"].rules,
+      ...patchedNextPlugin.configs["core-web-vitals"].rules,
       ...jsxa11y.configs.recommended.rules,
-      ...eslintPluginReactHooks.configs.recommended.rules,
       "no-unused-vars": "off",
       "no-useless-escape": "off",
       "no-undef": "off",
@@ -78,11 +73,21 @@ export default tseslint.config(
         },
       ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
-      "react/react-in-jsx-scope": "off",
       "jsx-a11y/no-autofocus": "off",
+      "react/no-unknown-property": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "jsx-a11y/alt-text": ["error", { elements: ["img"], img: ["Image"] }],
+      "jsx-a11y/aria-props": "error",
+      "jsx-a11y/aria-proptypes": "error",
+      "jsx-a11y/aria-unsupported-elements": "error",
+      "jsx-a11y/role-has-required-aria-props": "error",
+      "jsx-a11y/role-supports-aria-props": "error",
+      "react/jsx-no-target-blank": "off",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": "off",
       "simple-import-sort/exports": "warn",
+      "@next/next/no-html-link-for-pages": "off",
       "simple-import-sort/imports": [
         "warn",
         {
