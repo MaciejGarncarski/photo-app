@@ -1,0 +1,9 @@
+.icon {
+	vertical-align: middle;
+	display: inline-flex;
+	align-items: center;
+}
+
+.iconLiked {
+	color: var(--color-accent);
+}

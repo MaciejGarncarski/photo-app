@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Onest } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
 
@@ -15,9 +15,9 @@ type Props = {
 	children: ReactNode
 }
 
-const font = Onest({
+const font = Lato({
 	subsets: ['latin-ext', 'latin'],
-	weight: ['400', '500', '700', '900'],
+	weight: ['400', '700', '900'],
 	display: 'swap',
 })
 

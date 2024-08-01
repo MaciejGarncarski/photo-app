@@ -43,11 +43,6 @@
 
 .inputError {
 	border-color: var(--color-error-light);
-
-	&::placeholder {
-		color: var(--color-text);
-		font-weight: 500;
-	}
 }
 
 .error {
