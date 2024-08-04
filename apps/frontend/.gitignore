@@ -52,3 +52,7 @@ public/workbox-*.js
 public/workbox-*.js.map
 # Turborepo
 .turbo
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

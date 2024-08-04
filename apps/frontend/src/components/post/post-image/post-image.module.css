@@ -41,8 +41,7 @@
 	overflow: auto;
 	grid-row-start: 1;
 	grid-column-start: 1;
-	border-radius: var(--radius-small);
-	animation: show-image 150ms ease-in-out forwards;
+	animation: show-image 500ms ease-out forwards;
 }
 
 .square {
@@ -54,7 +53,7 @@
 	overflow: hidden;
 	object-fit: cover;
 	filter: blur(10px) opacity(0.5);
-	animation: show-image 150ms ease-in-out forwards;
+	animation: show-image 300ms ease-in-out forwards;
 	position: absolute;
 	top: 0;
 	left: 0;

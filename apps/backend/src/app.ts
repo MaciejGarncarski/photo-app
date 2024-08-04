@@ -77,6 +77,5 @@ export const buildApp = async () => {
 	})
 
 	await app.register(routerPlugin, { prefix: '/' })
-
 	return app
 }

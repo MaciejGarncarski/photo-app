@@ -93,7 +93,12 @@ export const DropZone = ({ isAvatarCrop }: Props) => {
 					</>
 				)}
 			</div>
-			<Button type="button" variant="primary" onClick={openFileInput}>
+			<Button
+				type="button"
+				variant="primary"
+				onClick={openFileInput}
+				data-testid="filechooser"
+			>
 				<File />
 				Select file from device
 			</Button>

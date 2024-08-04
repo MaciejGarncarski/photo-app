@@ -3,6 +3,7 @@
 import { Chat } from '@phosphor-icons/react'
 import { useAnimate } from 'framer-motion'
 
+import { useAuth } from '@/hooks/use-auth'
 import { useModal } from '@/hooks/use-modal'
 import { formatLikes } from '@/utils/format-likes'
 
@@ -20,6 +21,7 @@ type Props = {
 
 export const PostButtons = ({ postId, parentModalOpen }: Props) => {
 	const postModal = useModal()
+	const { sessionUser } = useAuth()
 	const [scope, animate] = useAnimate()
 	const { data: post } = usePost({ postId })
 	const { handleLike } = useHandleLike({
@@ -32,6 +34,11 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
 	}
 
 	const onLike = async () => {
+		if (!sessionUser) {
+			handleLike()
+			return
+		}
+
 		await animate(
 			scope.current,
 			{
@@ -49,7 +56,7 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
 				y: -30,
 			},
 			{
-				duration: 0.1,
+				duration: 0.01,
 			},
 		)
 		await animate(

@@ -62,9 +62,9 @@ export const PostImage = ({ url, height, width, postId }: Props) => {
 						<Image
 							className={styles.background}
 							src={url}
-							quality={80}
-							width={600}
-							height={600}
+							quality={10}
+							width={200}
+							height={200}
 							alt={`${data?.username} - ${shortDescription}`}
 						/>
 					)}
@@ -72,9 +72,9 @@ export const PostImage = ({ url, height, width, postId }: Props) => {
 					<Image
 						className={clsx(styles[imageAspectRatio], styles.sliderImage)}
 						src={url}
-						quality={80}
-						width={600}
-						height={600}
+						quality={90}
+						width={width}
+						height={height}
 						alt={`${data?.username} - ${shortDescription}`}
 					/>
 				</>

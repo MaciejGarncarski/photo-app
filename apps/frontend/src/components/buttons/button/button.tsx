@@ -21,6 +21,7 @@ export const Button = ({
 	children,
 	variant,
 	onClick,
+	...props
 }: Props) => {
 	return (
 		<IconContext.Provider
@@ -34,6 +35,7 @@ export const Button = ({
 				type={type}
 				disabled={disabled}
 				className={clsx(styles[variant], 'button')}
+				{...props}
 			>
 				{children}
 			</button>
