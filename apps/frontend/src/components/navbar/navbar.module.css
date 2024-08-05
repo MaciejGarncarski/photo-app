@@ -26,7 +26,7 @@
 	margin: 0 auto;
 	width: clamp(20rem, 60vw, 25rem);
 	z-index: 3;
-	border-radius: var(--radius-small);
+	border-radius: var(--radius-medium);
 	box-shadow: var(--shadow);
 	border: 1px solid var(--shadow-100);
 	background-color: var(--color-secondary-transparent);
@@ -37,7 +37,7 @@
 
 	@media (--medium-viewport) {
 		--padding: 0.5rem;
-		border-radius: calc(var(--radius-small) + var(--padding) / 2);
+		border-radius: calc(var(--radius-medium) + var(--padding));
 	}
 
 	@media (--large-viewport) {

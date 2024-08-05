@@ -22,6 +22,8 @@ body {
 	color: var(--color-text);
 	background-color: var(--color-primary);
 	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-mox-osx-font-smoothing: grayscale;
 }
 
 hr {
@@ -173,11 +175,11 @@ summary {
 
 .button {
 	border-radius: var(--radius-small);
-	font-weight: 500;
 	padding-right: 1rem;
 	padding-left: 1rem;
 	letter-spacing: 0em;
 	line-height: 1.25rem;
+	font-weight: 400;
 	height: 2.25rem;
 	display: flex;
 	justify-content: center;

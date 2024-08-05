@@ -1,7 +1,7 @@
 .layout {
 	padding-bottom: 4rem;
 	min-height: 100dvh;
-
+	position: relative;
 	@media (--large-viewport) {
 		display: grid;
 		grid-template-columns:
@@ -28,5 +28,47 @@
 
 	@media (--xlarge-viewport) {
 		margin-right: 15vw;
+	}
+}
+
+.ellipse {
+	position: fixed;
+	top: 60vh;
+	left: 0;
+	width: 20rem;
+	height: auto;
+	z-index: -1;
+	animation: fadeIn 2s ease-in-out forwards;
+
+	@media (--xlarge-viewport) {
+		top: unset;
+		bottom: 1vh;
+		width: 30vw;
+		left: 0vw;
+	}
+}
+
+.ellipseRight {
+	position: fixed;
+	top: 4rem;
+	right: 0;
+	width: 20rem;
+	height: auto;
+	z-index: -1;
+	animation: fadeIn 2s ease-in-out forwards;
+
+	@media (--xlarge-viewport) {
+		top: 0;
+		width: 30vw;
+		right: 1vw;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		filter: blur(10vw) opacity(0);
+	}
+	to {
+		filter: blur(10vw) opacity(var(--opacity));
 	}
 }

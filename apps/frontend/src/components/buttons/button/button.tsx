@@ -24,21 +24,21 @@ export const Button = ({
 	...props
 }: Props) => {
 	return (
-		<IconContext.Provider
-			value={{
-				weight: 'fill',
-				size: 19,
-			}}
+		<button
+			onClick={onClick}
+			type={type}
+			disabled={disabled}
+			className={clsx(styles[variant], 'button')}
+			{...props}
 		>
-			<button
-				onClick={onClick}
-				type={type}
-				disabled={disabled}
-				className={clsx(styles[variant], 'button')}
-				{...props}
+			<IconContext.Provider
+				value={{
+					weight: 'fill',
+					size: 19,
+				}}
 			>
 				{children}
-			</button>
-		</IconContext.Provider>
+			</IconContext.Provider>
+		</button>
 	)
 }

@@ -16,9 +16,8 @@ type Props = {
 }
 
 const font = Lato({
-	subsets: ['latin-ext', 'latin'],
+	subsets: ['latin', 'latin-ext'],
 	weight: ['400', '700', '900'],
-	display: 'swap',
 })
 
 const description =
