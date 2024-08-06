@@ -43,7 +43,6 @@ COOKIE_DOMAIN=
 BACKEND_URL=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
-STATUS="production | development"
 ```
 
 ### Start dev server

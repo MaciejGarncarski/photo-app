@@ -1,7 +1,7 @@
 import type { CookieOptions } from '@fastify/session'
 import ms from 'ms'
 
-const isProd = process.env.STATUS === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
 export const cookie: CookieOptions = {
 	sameSite: 'lax',

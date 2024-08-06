@@ -10,6 +10,5 @@ declare namespace NodeJS {
 		GOOGLE_CLIENT_ID: string
 		GOOGLE_CLIENT_SECRET: string
 		COOKIE_DOMAIN: string
-		STATUS: 'production' | 'development'
 	}
 }

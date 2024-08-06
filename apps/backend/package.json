@@ -4,10 +4,8 @@
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
-		"build": "pnpm prisma generate && pnpm tsc",
-		"build:dev": "pnpm prisma generate && pnpm tsc",
-		"postbuild": "pm2 restart ~/ecosystem.config.js --only \"PhotoApp_Backend\"",
-		"start": "node --env-file=.env ./dist/src",
+		"build": "rm -rf dist && pnpm prisma generate && pnpm tsc",
+		"start": "NODE_ENV=production node --env-file=.env ./dist/src",
 		"check-types": "tsc --noEmit",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",

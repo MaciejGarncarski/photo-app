@@ -22,7 +22,6 @@ const PostHeader = dynamic(
 		),
 	{
 		loading: PostHeaderPlaceholder,
-		ssr: false,
 	},
 )
 
