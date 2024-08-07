@@ -43,7 +43,7 @@
 	@media (--xlarge-viewport) {
 		top: unset;
 		bottom: 1vh;
-		width: 20vw;
+		width: 30vw;
 		left: 0vw;
 	}
 }
@@ -59,7 +59,7 @@
 
 	@media (--xlarge-viewport) {
 		top: 0;
-		width: 20vw;
+		width: 30vw;
 		right: 1vw;
 	}
 }
@@ -69,6 +69,6 @@
 		filter: blur(100vw) opacity(0);
 	}
 	to {
-		filter: blur(30vw) opacity(var(--opacity));
+		filter: blur(25vw) opacity(var(--opacity));
 	}
 }

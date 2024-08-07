@@ -38,7 +38,7 @@
 	--navbar-desktop-width: 20rem;
 	--navbar-desktop-margin: 3vw;
 
-	--opacity: 0.4;
+	--opacity: 0.25;
 
 	@media (--medium-viewport) {
 		--post-width: calc(18rem + 15vw);
