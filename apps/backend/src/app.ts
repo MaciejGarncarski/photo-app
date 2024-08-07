@@ -61,7 +61,7 @@ export const buildApp = async () => {
 
 	await app.register(cors, {
 		credentials: true,
-		origin: process.env.APP_URL,
+		origin: [process.env.APP_URL, 'https://photoappmg.vercel.app'],
 	})
 
 	await app.register(fastifyCookie)

@@ -43,7 +43,7 @@
 	@media (--xlarge-viewport) {
 		top: unset;
 		bottom: 1vh;
-		width: 30vw;
+		width: 20vw;
 		left: 0vw;
 	}
 }
@@ -59,16 +59,16 @@
 
 	@media (--xlarge-viewport) {
 		top: 0;
-		width: 30vw;
+		width: 20vw;
 		right: 1vw;
 	}
 }
 
 @keyframes fadeIn {
 	from {
-		filter: blur(10vw) opacity(0);
+		filter: blur(100vw) opacity(0);
 	}
 	to {
-		filter: blur(10vw) opacity(var(--opacity));
+		filter: blur(30vw) opacity(var(--opacity));
 	}
 }
