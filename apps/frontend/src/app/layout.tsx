@@ -35,8 +35,6 @@ export const viewport: Viewport = {
 	themeColor: 'rgb(109, 194, 171)',
 }
 
-export const experimental_ppr = true
-
 const DefaultLayout = ({ children }: Props) => {
 	return (
 		<html lang="en" className={font.className} suppressHydrationWarning>
