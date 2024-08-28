@@ -2,7 +2,7 @@
 
 import { PencilSimple, SignOut } from '@phosphor-icons/react'
 import dynamic from 'next/dynamic'
-import { usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { Suspense } from 'react'
 
 import { useAuth } from '@/hooks/use-auth'
@@ -44,14 +44,14 @@ const AccountHeaderDesktop = dynamic(
 export const Account = ({ username }: Props) => {
 	const { isTabletOrMobile } = useIsTabletOrMobile()
 	const signOut = useSignOut()
-	const pathname = usePathname()
+	const params = useParams<{ username: string }>()
 
 	const { sessionUser } = useAuth()
 	const settingsModal = useModal()
 	const signOutModal = useModal()
 
 	const { data: userData, isError } = useUserByUsername({
-		username: username || (pathname.slice(1) as string),
+		username: username || params.username,
 	})
 
 	const isOwner = sessionUser?.id === userData?.userId

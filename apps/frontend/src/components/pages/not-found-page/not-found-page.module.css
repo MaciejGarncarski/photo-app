@@ -13,3 +13,7 @@
 .error {
 	text-decoration: underline;
 }
+
+.notFound {
+	font-weight: 700;
+}

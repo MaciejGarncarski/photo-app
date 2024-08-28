@@ -30,7 +30,7 @@ export const getNavListData = (username?: string | null) => {
 		{
 			icon: User,
 			title: 'Profile',
-			href: `/${username}`,
+			href: `/user/${username}`,
 			shouldShowWhileGuest: false,
 		},
 	]

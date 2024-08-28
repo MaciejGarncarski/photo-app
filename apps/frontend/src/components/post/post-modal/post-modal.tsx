@@ -37,7 +37,7 @@ export const PostModal = ({
 		closeModal()
 
 		if (isPostPage && author.data?.username) {
-			router.push(`/${author.data?.username}`)
+			router.push(`/user/${author.data?.username}`)
 		}
 	}
 

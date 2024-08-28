@@ -27,7 +27,7 @@
 		"jotai": "^2.8.0",
 		"lodash.debounce": "^4.0.8",
 		"nanoid": "^5.0.7",
-		"next": "15.0.0-canary.100",
+		"next": "15.0.0-canary.132",
 		"next-themes": "^0.3.0",
 		"react": "19.0.0-rc.0",
 		"react-dom": "19.0.0-rc.0",

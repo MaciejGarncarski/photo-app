@@ -49,7 +49,7 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
 
 	return (
 		<Tag className={styles.header}>
-			<Link href={`/${username}`} className={styles.userAnchor}>
+			<Link href={`/user/${username}`} className={styles.userAnchor}>
 				<Avatar userId={authorId} size="small" />
 				<span className={styles.usernameContainer}>
 					<span className={styles.username}>{username}</span>

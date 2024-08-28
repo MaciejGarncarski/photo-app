@@ -29,7 +29,7 @@ export const useEditDetails = ({ reset }: UseEditDetailsArguments) => {
 			{
 				onSuccess: () => {
 					toast.success('Success!')
-					router.push(`/${username}`)
+					router.push(`/user/${username}`)
 				},
 			},
 		)

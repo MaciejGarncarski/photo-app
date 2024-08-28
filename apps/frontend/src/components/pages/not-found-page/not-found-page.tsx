@@ -10,7 +10,7 @@ export const NotFoundPage = () => {
 			<Heading tag="h2" size="big">
 				404
 			</Heading>
-			<p>not found</p>
+			<p className={styles.notFound}>Not found</p>
 			<Link href="/" className={styles.error}>
 				Go back to homepage
 			</Link>
