@@ -3,7 +3,6 @@ export type PostImage = {
 	fileId: string
 	name: string
 	url: string
-	thumbnailUrl: string
 	width: number
 	height: number
 	size: number

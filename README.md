@@ -4,7 +4,7 @@
 
 # PhotoApp Overview
 
-PhotoApp is a social app inspired by Instagram. Users can create posts, like them and add comments to them. There is a chat feature in the app that uses WebSocket for communication. For the frontend I used the Next.js framework, TypeScript, Tanstack Query and TailwindCSS, while for the backend I used Fastify, TypeScript and ImageKit to store images added by users. For database communication, I used PostgreSQL and Prisma. For communication between the frontend and backend, I used openapi-typescript.
+PhotoApp is a social app inspired by Instagram. Users can create posts, like them and add comments to them. There is a chat feature in the app that uses WebSocket for communication. For the frontend I used the Next.js framework, TypeScript, Tanstack Query and TailwindCSS, while for the backend I used Fastify, TypeScript and Cloudinary to store images added by users. For database communication, I used PostgreSQL and Prisma. For communication between the frontend and backend, I used openapi-typescript.
 
 ## Live
 
@@ -66,7 +66,7 @@ turbo dev
 - [Prisma](https://prisma.io/)
 - PostgreSQL database
 - Socket.IO
-- ImageKit
+- Cloudinary
 - Vitest
 
 ### Frontend

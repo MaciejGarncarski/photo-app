@@ -3,8 +3,8 @@ import type { SavedMultipartFile } from '@fastify/multipart'
 import type { EditAccountInput, UserWithStats } from './user.schema.js'
 import { db } from '../../utils/db.js'
 import { getCount } from '../../utils/get-count.js'
-import { imageKit } from '../../utils/imagekit.js'
 import fs from 'node:fs'
+import { v2 as cloudinary, type UploadApiResponse } from 'cloudinary'
 
 type Config =
 	| {
@@ -91,7 +91,7 @@ export const unfollowUser = async (userId: string, sessionUserId: string) => {
 }
 
 export const deleteAvatar = async (sessionUserId: string) => {
-	await imageKit.deleteFolder(`${sessionUserId}/avatar/custom/`)
+	await cloudinary.api.delete_folder(`${sessionUserId}/avatar/custom/`)
 
 	return db.user.update({
 		data: {
@@ -127,15 +127,29 @@ export const updateAvatar = async (
 
 	const folder = `${sessionUserId}/avatar/custom/`
 
-	const image = await imageKit.upload({
-		file: imageFile,
-		fileName: `${sessionUserId}-custom-avatar`,
-		folder,
-	})
+	const imageResponse = await new Promise<UploadApiResponse | undefined>(
+		(resolve, reject) => {
+			cloudinary.uploader
+				.upload_stream(
+					{
+						fileName: `${sessionUserId}-custom-avatar`,
+						folder,
+					},
+					(err, result) => {
+						return resolve(result)
+					},
+				)
+				.end(imageFile)
+		},
+	)
+
+	if (!imageResponse) {
+		throw new Error('Image upload failed')
+	}
 
 	const created = await db.user.update({
 		data: {
-			avatarUrl: image.url,
+			avatarUrl: imageResponse.url,
 		},
 		where: {
 			userId: sessionUserId,

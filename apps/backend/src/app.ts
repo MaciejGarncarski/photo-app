@@ -12,6 +12,7 @@ import fastifySwagger from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import Fastify, { type preHandlerHookHandler } from 'fastify'
 import { db } from './utils/db.js'
+import { v2 as cloudinary } from 'cloudinary'
 
 declare module 'fastify' {
 	interface FastifyInstance {
@@ -44,6 +45,12 @@ export const buildApp = async () => {
 		uiConfig: {
 			docExpansion: 'full',
 		},
+	})
+
+	cloudinary.config({
+		cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+		api_key: process.env.CLOUDINARY_API_KEY,
+		api_secret: process.env.CLOUDINARY_API_SECRET,
 	})
 
 	await app.register(fastifySensible)

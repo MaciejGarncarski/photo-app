@@ -1,6 +1,5 @@
 import type { SavedMultipartFile } from '@fastify/multipart'
 import type { FastifyRequest } from 'fastify'
-import { nanoid } from 'nanoid'
 import fs from 'node:fs'
 import type {
 	CreatePostInput,
@@ -9,7 +8,8 @@ import type {
 	PostsResponse,
 } from './post.schema.js'
 import { db } from '../../utils/db.js'
-import { imageKit } from '../../utils/imagekit.js'
+import { v2 as cloudinary, type UploadApiResponse } from 'cloudinary'
+import { nanoid } from 'nanoid'
 
 const POSTS_PER_SCROLL = 3
 
@@ -98,27 +98,44 @@ export const createPost = async (
 			const readImages = images.map((image) => fs.readFileSync(image.filepath))
 
 			const uploadedImagesData = await Promise.all(
-				readImages.map((imageFile) => {
-					return imageKit.upload({
-						file: imageFile,
-						fileName: `${nanoid()}.webp`,
-						folder: `post-images/${post.id}/`,
+				readImages.map(async (imageFile) => {
+					const imageResponse = await new Promise<
+						UploadApiResponse | undefined
+					>((resolve) => {
+						cloudinary.uploader
+							.upload_stream(
+								{
+									fileName: `${nanoid()}.webp`,
+									folder: `post-images/${post.id}/`,
+								},
+								(error, uploadResult) => {
+									return resolve(uploadResult)
+								},
+							)
+							.end(imageFile)
 					})
+
+					if (!imageResponse) {
+						throw new Error('Image upload failed')
+					}
+
+					return imageResponse
 				}),
 			)
 
-			const postImageData = uploadedImagesData.map((imageData) => {
-				return {
-					fileId: imageData.fileId,
-					height: imageData.height,
-					name: imageData.name,
-					size: imageData.size,
-					thumbnailUrl: imageData.thumbnailUrl,
-					url: imageData.url,
-					width: imageData.width,
-					postId: post.id,
-				}
-			})
+			const postImageData = uploadedImagesData.map(
+				({ height, original_filename, width, url, public_id, bytes }) => {
+					return {
+						fileId: public_id,
+						height: height,
+						name: original_filename,
+						size: bytes,
+						url: url,
+						width: width,
+						postId: post.id,
+					}
+				},
+			)
 
 			await tx.postImage.createMany({
 				data: postImageData,
@@ -151,7 +168,7 @@ export const deletePost = async (postId: number, request: FastifyRequest) => {
 		return
 	}
 
-	await imageKit.deleteFolder(`post-images/${postId}/`)
+	await cloudinary.api.delete_folder(`post-images/${postId}/`)
 	await db.post.deleteMany({
 		where: {
 			id: postId,

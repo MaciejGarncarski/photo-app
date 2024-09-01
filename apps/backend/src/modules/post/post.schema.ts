@@ -14,7 +14,6 @@ const postImageSchema = Type.Object({
 	fileId: Type.String(),
 	name: Type.String(),
 	url: Type.String(),
-	thumbnailUrl: Type.String(),
 	width: Type.Number(),
 	height: Type.Number(),
 	size: Type.Number(),

@@ -34,7 +34,8 @@
 		"utils/env.js",
 		".next/types/**/*.ts",
 		"mocks/mocks.js",
-		"mocks/mocks.js"
+		"mocks/mocks.js",
+		"next.config.cjs"
 	],
 	"exclude": ["node_modules"]
 }

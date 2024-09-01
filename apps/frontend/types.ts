@@ -210,7 +210,6 @@ export interface paths {
 									fileId: string
 									name: string
 									url: string
-									thumbnailUrl: string
 									width: number
 									height: number
 									size: number
@@ -261,7 +260,6 @@ export interface paths {
 									fileId: string
 									name: string
 									url: string
-									thumbnailUrl: string
 									width: number
 									height: number
 									size: number
@@ -320,7 +318,6 @@ export interface paths {
 									fileId: string
 									name: string
 									url: string
-									thumbnailUrl: string
 									width: number
 									height: number
 									size: number

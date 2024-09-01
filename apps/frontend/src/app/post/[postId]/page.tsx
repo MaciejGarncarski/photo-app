@@ -1,5 +1,3 @@
-import type { Metadata } from 'next'
-
 import { getPageTitle } from '@/utils/get-page-title'
 
 import { PostById } from '@/components/pages/post-by-id/post-by-id'
@@ -11,9 +9,7 @@ type Props = {
 	params: { postId: string }
 }
 
-export const generateMetadata = async ({
-	params,
-}: Props): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: Props) => {
 	const { postId } = params
 
 	const { data: post } = await getPost(
@@ -36,7 +32,6 @@ export const generateMetadata = async ({
 
 	return {
 		title: getPageTitle(`@${userData.username} post`),
-		metadataBase: new URL('https://ik.imagekit.io'),
 		description: postData.description,
 		openGraph: {
 			title: getPageTitle(`@${userData.username} post`),
@@ -48,7 +43,7 @@ export const generateMetadata = async ({
 			images: [
 				{
 					alt: `${userData.username} post. Description: ${postData.description}`,
-					url: image.thumbnailUrl,
+					url: image.url,
 					width: image.width,
 					height: image.height,
 				},

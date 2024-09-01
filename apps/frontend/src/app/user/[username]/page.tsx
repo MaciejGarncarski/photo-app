@@ -43,7 +43,6 @@ export const generateMetadata = async ({
 
 		return {
 			title: usernameTitle,
-			metadataBase: new URL('https://ik.imagekit.io'),
 			description: description,
 			keywords: userData.bio
 				? `${userData.username}, ` +

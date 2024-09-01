@@ -2,9 +2,10 @@ declare namespace NodeJS {
 	interface ProcessEnv {
 		DATABASE_URL: string
 		SECRET: string
-		IMG_KIT_PRIVATE: string
-		IMG_KIT_PUBLIC: string
-		IMG_KIT_ENDPOINT: string
+		CLOUDINARY_CLOUD_NAME: string
+		CLOUDINARY_API_KEY: string
+		CLOUDINARY_API_SECRET: string
+		CLOUDINARY_API_ENV: string
 		APP_URL: string
 		BACKEND_URL: string
 		GOOGLE_CLIENT_ID: string

@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["relationJoins"]
 }
 
@@ -9,147 +9,136 @@ datasource db {
 }
 
 model Account {
-  id                String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid @unique
-  userId            String  @db.Uuid 
+  id                String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId            String  @db.Uuid
   type              String
   provider          String
   providerAccountId String
-  refreshToken      String? @db.Text
-  accessToken       String? @db.Text
+  refreshToken      String?
+  accessToken       String?
   expiresAt         Int?
   tokenType         String?
   scope             String?
-  idToken           String? @db.Text
+  idToken           String?
   sessionState      String?
+  user              User    @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
-  user User @relation(fields: [userId], references: [userId], onDelete: Cascade)
   @@index([userId])
 }
 
 model Session {
   id        String   @id @unique
   sid       String   @unique
-  data      String   @db.Text
+  data      String
   expiresAt DateTime
 }
 
 model User {
-  userId          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid @unique
-  email           String?
-  emailverified   DateTime?         @db.Timestamptz(6)
-  name            String?           @db.VarChar(50)
-  password        String?           @db.VarChar(200)
-  username        String?           @unique(map: "username_unique") @db.VarChar(50)
-  bio             String?
-  Account         Account[]
-  avatarUrl    String?
-
-  postsLikes    PostLike[]
-  postsComments PostComment[]
-  fromUser      Follower[]    @relation("Follower")
-  toUser        Follower[]    @relation("Following")
-  createdAt     DateTime      @default(now()) @db.Timestamptz()
-  commentLike   CommentLike[]
-
-  sentMessages     Message[] @relation("Sent")
-  receivedMessages Message[] @relation("Received")
-
-  sender   ChatRoom[] @relation("UserOne")
-  receiver ChatRoom[] @relation("UserTwo")
-
-  Post Post[]
+  userId           String        @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email            String?
+  emailverified    DateTime?     @db.Timestamptz(6)
+  name             String?       @db.VarChar(50)
+  password         String?       @db.VarChar(200)
+  username         String?       @unique(map: "username_unique") @db.VarChar(50)
+  bio              String?
+  createdAt        DateTime      @default(now()) @db.Timestamptz(6)
+  avatarUrl        String?
+  Account          Account[]
+  receiver         ChatRoom[]    @relation("UserTwo")
+  sender           ChatRoom[]    @relation("UserOne")
+  commentLike      CommentLike[]
+  fromUser         Follower[]    @relation("Follower")
+  toUser           Follower[]    @relation("Following")
+  receivedMessages Message[]     @relation("Received")
+  sentMessages     Message[]     @relation("Sent")
+  Post             Post[]
+  postsComments    PostComment[]
+  postsLikes       PostLike[]
 
   @@index([username])
 }
 
-
 model Post {
-  id            Int           @id @default(autoincrement()) @db.Integer @unique
-  author        User          @relation(fields: [authorId], references: [userId], onDelete: Cascade)
-  authorId      String        @db.Uuid 
-  description   String        @db.Text
+  id            Int           @id @unique @default(autoincrement())
+  authorId      String        @db.Uuid
+  description   String
   createdAt     DateTime      @default(now()) @db.Timestamp(0)
+  author        User          @relation(fields: [authorId], references: [userId], onDelete: Cascade)
+  postsComments PostComment[]
   images        PostImage[]
   postsLikes    PostLike[]
-  postsComments PostComment[]
 
   @@index([authorId])
 }
 
 model PostImage {
-  id           Int    @id @default(autoincrement()) @db.Integer @unique
-  fileId       String
-  name         String
-  url          String
-  thumbnailUrl String
-  width        Int
-  height       Int
-  size         Int
-  post         Post?  @relation(fields: [postId], references: [id])
-  postId       Int?   @db.Integer
+  id     Int    @id @unique @default(autoincrement())
+  fileId String
+  name   String
+  url    String
+  width  Int
+  height Int
+  size   Int
+  postId Int?
+  post   Post?  @relation(fields: [postId], references: [id])
 
   @@index([postId])
 }
 
 model PostLike {
-  id     Int    @id @default(autoincrement()) @db.Integer @unique
+  id     Int    @id @unique @default(autoincrement())
+  postId Int
+  userId String @db.Uuid
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId Int    @db.Integer
   user   User   @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  userId String  @db.Uuid
 
   @@index([postId])
   @@index([userId])
 }
 
 model PostComment {
-  id          Int           @id @default(autoincrement()) @db.Integer @unique
-  user        User          @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  userId      String  @db.Uuid
-  post        Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId      Int           @db.Integer
+  id          Int           @id @unique @default(autoincrement())
+  postId      Int
   createdAt   DateTime      @default(now()) @db.Timestamp(0)
-  text        String        @db.Text
+  text        String
+  userId      String        @db.Uuid
   commentLike CommentLike[]
+  post        Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   @@index([userId])
   @@index([postId])
 }
 
 model CommentLike {
-  id        Int         @id @default(autoincrement()) @db.Integer @unique
+  id        Int         @id @unique @default(autoincrement())
+  commentId Int
+  userId    String      @db.Uuid
   comment   PostComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  commentId Int         @db.Integer
   user      User        @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  userId    String  @db.Uuid
 
   @@index([commentId])
   @@index([userId])
 }
 
-enum Role {
-  USER
-  ADMIN
-}
-
 model Follower {
-  id        Int      @id @default(autoincrement()) @db.Integer @unique
-  fromUser  User     @relation(fields: [from], references: [userId], name: "Follower", onDelete: Cascade)
-  from      String   @db.Uuid
-  toUser    User     @relation(fields: [to], references: [userId], name: "Following", onDelete: Cascade)
-  to        String   @db.Uuid
+  id        Int      @id @unique @default(autoincrement())
   createdAt DateTime @default(now()) @db.Timestamp(0)
+  from      String   @db.Uuid
+  to        String   @db.Uuid
+  fromUser  User     @relation("Follower", fields: [from], references: [userId], onDelete: Cascade)
+  toUser    User     @relation("Following", fields: [to], references: [userId], onDelete: Cascade)
 
   @@index([to])
   @@index([from])
 }
 
 model ChatRoom {
-  id         Int       @id @default(autoincrement()) @db.Integer @unique
-  sender     User      @relation(fields: [senderId], references: [userId], name: "UserOne", onDelete: Cascade)
+  id         Int       @id @unique @default(autoincrement())
   senderId   String    @db.Uuid
-  userTwo    User      @relation(fields: [receiverId], references: [userId], name: "UserTwo", onDelete: Cascade)
   receiverId String    @db.Uuid
+  userTwo    User      @relation("UserTwo", fields: [receiverId], references: [userId], onDelete: Cascade)
+  sender     User      @relation("UserOne", fields: [senderId], references: [userId], onDelete: Cascade)
   messages   Message[] @relation("Chatroom")
 
   @@index([senderId])
@@ -157,17 +146,22 @@ model ChatRoom {
 }
 
 model Message {
-  id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid @unique
   text       String
-  senderId   String   @db.Uuid
-  sender     User     @relation(fields: [senderId], references: [userId], name: "Sent", onDelete: Cascade)
-  receiverId String   @db.Uuid
-  receiver   User     @relation(fields: [receiverId], references: [userId], name: "Received", onDelete: Cascade)
   createdAt  DateTime @default(now()) @db.Timestamp(0)
-  chatroom   ChatRoom @relation(fields: [chatroomId], references: [id], name: "Chatroom")
   chatroomId Int
+  senderId   String   @db.Uuid
+  receiverId String   @db.Uuid
+  id         String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  chatroom   ChatRoom @relation("Chatroom", fields: [chatroomId], references: [id])
+  receiver   User     @relation("Received", fields: [receiverId], references: [userId], onDelete: Cascade)
+  sender     User     @relation("Sent", fields: [senderId], references: [userId], onDelete: Cascade)
 
   @@index([senderId])
   @@index([receiverId])
   @@index([chatroomId])
+}
+
+enum Role {
+  USER
+  ADMIN
 }
