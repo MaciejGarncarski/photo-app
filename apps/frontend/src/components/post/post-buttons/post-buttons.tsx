@@ -8,7 +8,6 @@ import { useModal } from '@/hooks/use-modal'
 import { formatLikes } from '@/utils/format-likes'
 
 import { HeartIcon } from '@/components/heart-icon/heart-icon'
-import { usePost } from '@/components/pages/account/use-post'
 import { useHandleLike } from '@/components/post/post-buttons/use-handle-like'
 import { PostModal } from '@/components/post/post-modal/post-modal'
 
@@ -16,17 +15,23 @@ import styles from './post-buttons.module.css'
 
 type Props = {
 	postId: number
+	isLiked: boolean
 	parentModalOpen?: boolean
+	likesCount: number
 }
 
-export const PostButtons = ({ postId, parentModalOpen }: Props) => {
+export const PostButtons = ({
+	postId,
+	isLiked,
+	likesCount,
+	parentModalOpen,
+}: Props) => {
 	const postModal = useModal()
 	const { sessionUser } = useAuth()
 	const [scope, animate] = useAnimate()
-	const { data: post } = usePost({ postId })
 	const { handleLike } = useHandleLike({
 		postId,
-		isLiked: post?.isLiked || false,
+		isLiked: isLiked || false,
 	})
 
 	const postModalOpen = () => {
@@ -80,10 +85,10 @@ export const PostButtons = ({ postId, parentModalOpen }: Props) => {
 					type="button"
 					onClick={onLike}
 				>
-					<HeartIcon isLiked={post.isLiked} />
-					{post.likesCount !== 0 && (
+					<HeartIcon isLiked={isLiked} />
+					{likesCount !== 0 && (
 						<span className={styles.buttonsCount}>
-							{formatLikes(post.likesCount)}
+							{formatLikes(likesCount)}
 						</span>
 					)}
 					<span className="visually-hidden">like</span>

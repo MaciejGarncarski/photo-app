@@ -28,6 +28,33 @@ export const getHomepagePostsOptions = infiniteQueryOptions({
 	getNextPageParam: nextPageParam,
 })
 
+export const getHomepagePostsOptionsServerSide = infiniteQueryOptions({
+	queryKey: HOME_POSTS_QUERY_KEY,
+	queryFn: async ({ pageParam }) => {
+		const { cookies } = await import('next/headers')
+
+		const { data } = await getInfinitePosts(
+			{
+				skip: pageParam.toString(),
+			},
+			{
+				headers: {
+					Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+				},
+			},
+		)
+
+		if (!data) {
+			throw new Error('Fetch failed')
+		}
+
+		return data
+	},
+	initialPageParam: 0,
+	refetchOnWindowFocus: false,
+	getNextPageParam: nextPageParam,
+})
+
 export const useHomepagePosts = () => {
 	const query = useSuspenseInfiniteQuery(getHomepagePostsOptions)
 	return query

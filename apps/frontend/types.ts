@@ -203,8 +203,22 @@ export interface paths {
 							totalPages: number
 							currentPage: number
 							data: {
+								commentsCount: number
+								likesCount: number
+								images: {
+									id: number
+									fileId: string
+									name: string
+									url: string
+									thumbnailUrl: string
+									width: number
+									height: number
+									size: number
+								}[]
 								createdAt: string
+								description: string
 								id: number
+								isLiked: boolean
 								authorId: string
 							}[]
 						}
@@ -240,8 +254,22 @@ export interface paths {
 							totalPages: number
 							currentPage: number
 							data: {
+								commentsCount: number
+								likesCount: number
+								images: {
+									id: number
+									fileId: string
+									name: string
+									url: string
+									thumbnailUrl: string
+									width: number
+									height: number
+									size: number
+								}[]
 								createdAt: string
+								description: string
 								id: number
+								isLiked: boolean
 								authorId: string
 							}[]
 						}
@@ -487,14 +515,6 @@ export interface paths {
 	}
 	'/user/avatar': {
 		put: {
-			requestBody: {
-				content: {
-					'multipart/form-data': {
-						/** Format: binary */
-						image: string
-					}
-				}
-			}
 			responses: {
 				/** @description Default Response */
 				200: {

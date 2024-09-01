@@ -13,7 +13,6 @@ import { Button } from '@/components/buttons/button/button'
 import { FollowButton } from '@/components/buttons/follow-button/follow-button'
 import { Loader } from '@/components/loader/loader'
 import { ConfirmationDialog } from '@/components/modals/confirmation-dialog/confirmation-dialog'
-import { usePost } from '@/components/pages/account/use-post'
 import { usePostHeader } from '@/components/post/post-header/use-post-header'
 import { PostOptions } from '@/components/post/post-options/post-options'
 import { TooltipContent } from '@/components/tooltip-content/tooltip-content'
@@ -23,12 +22,18 @@ import styles from './post-header.module.css'
 type Props = {
 	tag?: 'header' | 'div'
 	postId: number
+	authorId: string
+	createdAt: string
 }
 
-export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
+export const PostHeader = ({
+	tag: Tag = 'header',
+	postId,
+	authorId,
+	createdAt,
+}: Props) => {
 	const { sessionUser } = useAuth()
 	const [isOpen, setIsOpen] = useState(false)
-	const { data } = usePost({ postId })
 
 	const {
 		handleDeletePost,
@@ -36,16 +41,14 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
 		username,
 		confirmationModal,
 		menuModal,
-		postData,
 		dateFromNow,
 	} = usePostHeader({
-		authorId: data.authorId,
-		createdAt: data.createdAt,
+		authorId: authorId,
+		createdAt: createdAt,
 		postId,
 	})
 
-	const isAuthor = sessionUser?.id === data.authorId
-	const authorId = data.authorId
+	const isAuthor = sessionUser?.id === authorId
 
 	return (
 		<Tag className={styles.header}>
@@ -59,14 +62,12 @@ export const PostHeader = ({ tag: Tag = 'header', postId }: Props) => {
 							<Tooltip.Trigger asChild>
 								<button type="button" className={styles.createdAt}>
 									<span className={styles.dot}>&#8226;&nbsp;</span>
-									<time dateTime={postData.createdAt.toString()}>
-										{dateFromNow}
-									</time>
+									<time dateTime={createdAt.toString()}>{dateFromNow}</time>
 								</button>
 							</Tooltip.Trigger>
 							{isOpen ? (
 								<TooltipContent>
-									{formatDateFull(postData.createdAt, {
+									{formatDateFull(createdAt, {
 										fullMonth: true,
 									})}
 								</TooltipContent>

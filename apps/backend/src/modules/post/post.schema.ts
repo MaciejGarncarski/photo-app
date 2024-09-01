@@ -9,12 +9,6 @@ export const postDescriptionSchema = Type.String({
 	maxLength: 100,
 })
 
-export const postSchema = Type.Object({
-	createdAt: Type.String(),
-	id: Type.Number(),
-	authorId: Type.String(),
-})
-
 const postImageSchema = Type.Object({
 	id: Type.Number(),
 	fileId: Type.String(),
@@ -41,7 +35,7 @@ export const postsResponseSchema = Type.Object({
 	postsCount: Type.Number(),
 	totalPages: Type.Number(),
 	currentPage: Type.Number(),
-	data: Type.Array(postSchema),
+	data: Type.Array(postDetailsSchema),
 })
 
 const createPostInputSchema = Type.Object({

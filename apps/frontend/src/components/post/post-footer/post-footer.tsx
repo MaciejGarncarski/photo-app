@@ -1,6 +1,5 @@
 import { useUser } from '@/hooks/use-user'
 
-import { usePost } from '@/components/pages/account/use-post'
 import { PostButtons } from '@/components/post/post-buttons/post-buttons'
 import { usePostFooter } from '@/components/post/post-footer/use-post-footer'
 
@@ -8,26 +7,34 @@ import styles from './post-footer.module.css'
 
 type Props = {
 	postId: number
+	authorId: string
+	description: string
+	isLiked: boolean
+	likesCount: number
 	parentModalOpen?: boolean
 }
 
-export const PostFooter = ({ postId, parentModalOpen }: Props) => {
-	const { data: post, isPending } = usePost({ postId })
-
-	const { data } = useUser({ userId: post?.authorId || '' })
+export const PostFooter = ({
+	postId,
+	parentModalOpen,
+	isLiked,
+	likesCount,
+	authorId,
+	description,
+}: Props) => {
+	const { data } = useUser({ userId: authorId })
 
 	const { isDescriptionLong, shortDescription, showMore, toggleShowMore } =
-		usePostFooter({ description: post?.description || '' })
-
-	if (isPending || !post) {
-		return null
-	}
-
-	const { description } = post
+		usePostFooter({ description: description })
 
 	return (
 		<footer className={styles.footer}>
-			<PostButtons postId={postId} parentModalOpen={parentModalOpen} />
+			<PostButtons
+				postId={postId}
+				parentModalOpen={parentModalOpen}
+				isLiked={isLiked}
+				likesCount={likesCount}
+			/>
 			<div className={styles.descriptionContainer}>
 				<p className={styles.author}>{data?.username}</p>
 				{isDescriptionLong ? (

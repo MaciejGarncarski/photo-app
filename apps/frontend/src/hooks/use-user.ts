@@ -10,7 +10,7 @@ export const getUserQueryOptions = (userId: string) =>
 	queryOptions({
 		queryKey: ['user', userId],
 		queryFn: async () => {
-			if (userId.trim() === '') {
+			if (!userId || userId.trim() === '') {
 				return null
 			}
 

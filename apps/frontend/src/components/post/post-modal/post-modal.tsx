@@ -57,13 +57,31 @@ export const PostModal = ({
 					</div>
 					<div className={styles.contentContainer}>
 						<div className={styles.header}>
-							<PostHeader tag="div" postId={postId} />
+							<PostHeader
+								tag="div"
+								postId={postId}
+								authorId={post.data.authorId}
+								createdAt={post.data.createdAt}
+							/>
 						</div>
 						<div className={styles.carousel}>
-							<PostImagesCarousel postId={postId} />
+							<PostImagesCarousel
+								authorId={post.data.authorId}
+								description={post.data.description}
+								postImages={post.data.images}
+								isLiked={post.data.isLiked}
+								postId={postId}
+							/>
 						</div>
 						<div className={styles.footer}>
-							<PostFooter postId={postId} parentModalOpen />
+							<PostFooter
+								postId={postId}
+								isLiked={post.data.isLiked}
+								authorId={post.data.authorId}
+								likesCount={post.data.likesCount}
+								description={post.data.description}
+								parentModalOpen
+							/>
 						</div>
 						<div className={styles.commentsForm}>
 							<CommentForm postId={postId} />

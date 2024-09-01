@@ -77,5 +77,11 @@ export const buildApp = async () => {
 	})
 
 	await app.register(routerPlugin, { prefix: '/' })
+
+	app.ready((err) => {
+		if (err) throw err
+		app.swagger()
+	})
+
 	return app
 }

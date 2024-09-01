@@ -50,6 +50,7 @@ export const usePostLike = () => {
 		},
 		onSettled: (data, _, { postId }) => {
 			queryClient.invalidateQueries({ queryKey: ['post', postId] })
+			queryClient.invalidateQueries({ queryKey: ['homepage infinite posts'] })
 		},
 	})
 }

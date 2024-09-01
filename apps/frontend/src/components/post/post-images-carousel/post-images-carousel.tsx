@@ -3,32 +3,37 @@
 import { CSSProperties } from 'react'
 
 import { HeartAnimation } from '@/components/heart-animation/heart-animation'
-import { usePost } from '@/components/pages/account/use-post'
 import { PostArrows } from '@/components/post/post-arrows/post-arrows'
 import { useHandleLike } from '@/components/post/post-buttons/use-handle-like'
 import { PostImage } from '@/components/post/post-image/post-image'
 import { useCarousel } from '@/components/post/post-images-carousel/use-carousel'
 import { useUpdateWidth } from '@/components/post/post-images-carousel/use-update-width'
+import { PostImage as PostImageType } from '@/schemas/post.schema'
 
 import styles from './post-images-carousel.module.css'
 
 type Props = {
 	postId: number
+	isLiked: boolean
+	postImages: PostImageType[]
+	description: string
+	authorId: string
 }
 
-export const PostImagesCarousel = ({ postId }: Props) => {
-	const { data: post, isPending } = usePost({ postId })
+export const PostImagesCarousel = ({
+	postId,
+	postImages,
+	isLiked,
+	description,
+	authorId,
+}: Props) => {
 	const { width, imageRef } = useUpdateWidth()
 	const { currentImage, handleNextImage, handlePrevImage } = useCarousel()
 
 	const { handleLikeWithAnimation, isLikeAnimationShown } = useHandleLike({
 		postId,
-		isLiked: Boolean(post?.isLiked),
+		isLiked: isLiked,
 	})
-
-	if (isPending || !post) {
-		return null
-	}
 
 	return (
 		<div
@@ -47,21 +52,22 @@ export const PostImagesCarousel = ({ postId }: Props) => {
 					} as CSSProperties
 				}
 			>
-				{post.images.map((image) => {
+				{postImages.map((image) => {
 					return (
 						<PostImage
 							url={image.url}
 							width={image.width}
 							key={image.fileId}
 							height={image.height}
-							postId={post.id}
+							authorId={authorId}
+							description={description}
 						/>
 					)
 				})}
 			</div>
 			<PostArrows
 				currentIndex={currentImage}
-				postImages={post.images}
+				postImages={postImages}
 				handlePrevImage={handlePrevImage}
 				handleNextImage={handleNextImage}
 			/>

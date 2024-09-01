@@ -13,34 +13,63 @@ import { imageKit } from '../../utils/imagekit.js'
 
 const POSTS_PER_SCROLL = 3
 
-export const getHomepagePosts = async (skip: number) => {
+export const getHomepagePosts = async (skip: number, userId: string | null) => {
 	const postsRequest = db.post.findMany({
 		skip: skip * POSTS_PER_SCROLL,
 		take: POSTS_PER_SCROLL,
-		select: {
-			authorId: true,
-			createdAt: true,
-			id: true,
-		},
 		orderBy: {
 			createdAt: 'desc',
 		},
+		include: {
+			author: true,
+			images: true,
+			postsLikes: {
+				where: userId
+					? {
+							userId: userId,
+						}
+					: {},
+			},
+			_count: {
+				select: {
+					postsLikes: true,
+					postsComments: true,
+				},
+			},
+		},
 	})
+
 	const postsCountRequest = db.post.count()
 	const [postsList, postsCount] = await Promise.all([
 		postsRequest,
 		postsCountRequest,
 	])
+
 	const maxPages = postsCount / POSTS_PER_SCROLL
 	const totalPages = Math.ceil(maxPages) - 1
 
-	const posts = postsList.map(({ authorId, createdAt, id }) => {
-		return {
+	const posts = postsList.map(
+		({
+			authorId,
+			createdAt,
 			id,
-			createdAt: createdAt.toString(),
-			authorId: authorId,
-		}
-	})
+			description,
+			images,
+			postsLikes,
+			_count,
+		}): PostDetails => {
+			return {
+				authorId: authorId,
+				commentsCount: _count.postsComments || 0,
+				likesCount: _count.postsLikes || 0,
+				createdAt: createdAt.toString(),
+				description,
+				images,
+				id,
+				isLiked: userId ? Boolean(postsLikes[0]) : false,
+			}
+		},
+	)
 
 	const response: PostsResponse = {
 		postsCount,
@@ -253,19 +282,27 @@ const USER_POSTS_PER_SCROLL = 9
 
 export const getUserPosts = async ({ skip, authorId }: GetUserPostsInput) => {
 	const postsRequest = db.post.findMany({
-		skip: skip * USER_POSTS_PER_SCROLL,
-		take: USER_POSTS_PER_SCROLL,
-
-		where: {
-			authorId: authorId,
-		},
-		select: {
-			id: true,
-			createdAt: true,
-			authorId: true,
-		},
+		skip: skip * POSTS_PER_SCROLL,
+		take: POSTS_PER_SCROLL,
 		orderBy: {
-			id: 'desc',
+			createdAt: 'desc',
+		},
+		include: {
+			author: true,
+			images: true,
+			postsLikes: {
+				where: authorId
+					? {
+							userId: authorId,
+						}
+					: {},
+			},
+			_count: {
+				select: {
+					postsLikes: true,
+					postsComments: true,
+				},
+			},
 		},
 	})
 
@@ -281,12 +318,28 @@ export const getUserPosts = async ({ skip, authorId }: GetUserPostsInput) => {
 	])
 	const totalPages = Math.ceil(postsCount / USER_POSTS_PER_SCROLL) - 1
 
-	const transformedPosts = posts.map((post) => {
-		return {
-			...post,
-			createdAt: post.createdAt.toString(),
-		}
-	})
+	const transformedPosts = posts.map(
+		({
+			authorId,
+			createdAt,
+			id,
+			description,
+			images,
+			postsLikes,
+			_count,
+		}): PostDetails => {
+			return {
+				authorId: authorId,
+				commentsCount: _count.postsComments || 0,
+				likesCount: _count.postsLikes || 0,
+				createdAt: createdAt.toString(),
+				description,
+				images,
+				id,
+				isLiked: authorId ? Boolean(postsLikes[0]) : false,
+			}
+		},
+	)
 
 	const response: PostsResponse = {
 		postsCount,

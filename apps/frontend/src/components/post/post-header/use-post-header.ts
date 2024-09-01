@@ -2,7 +2,6 @@ import { useModal } from '@/hooks/use-modal'
 import { useUser } from '@/hooks/use-user'
 import { formatDateRelative } from '@/utils/format-date-relative'
 
-import { usePost } from '@/components/pages/account/use-post'
 import { useDeletePost } from '@/components/post/post-options/use-delete-post'
 
 type Arguments = {
@@ -16,7 +15,6 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
 	const menuModal = useModal()
 	const confirmationModal = useModal()
 	const deletePostMutation = useDeletePost()
-	const { data: postData } = usePost({ postId })
 
 	const dateFromNow = createdAt ? formatDateRelative(createdAt) : ''
 
@@ -38,7 +36,6 @@ export const usePostHeader = ({ authorId, createdAt, postId }: Arguments) => {
 		dateFromNow,
 		confirmationModal,
 		menuModal,
-		postData,
 		deletePostMutation,
 	}
 }

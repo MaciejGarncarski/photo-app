@@ -6,8 +6,6 @@ import { useInView } from 'react-intersection-observer'
 import { useUser } from '@/hooks/use-user'
 import { getDescriptionData } from '@/utils/get-description-data'
 
-import { usePost } from '@/components/pages/account/use-post'
-
 import styles from './post-image.module.css'
 
 const ASPECT_RATIO_LANDSCAPE = 191
@@ -31,14 +29,20 @@ type Props = {
 	url: string
 	width: number
 	height: number
-	postId: number
+	authorId: string
+	description: string
 }
 
-export const PostImage = ({ url, height, width, postId }: Props) => {
+export const PostImage = ({
+	url,
+	height,
+	width,
+	authorId,
+	description,
+}: Props) => {
 	const [isVisible, setIsVisible] = useState(false)
 
-	const { data: postData } = usePost({ postId: postId })
-	const { data } = useUser({ userId: postData?.authorId || '' })
+	const { data } = useUser({ userId: authorId })
 
 	const { ref } = useInView({
 		threshold: 0,
@@ -51,7 +55,7 @@ export const PostImage = ({ url, height, width, postId }: Props) => {
 	})
 
 	const imageAspectRatio = getAspectRatio(width, height)
-	const { shortDescription } = getDescriptionData(postData.description)
+	const { shortDescription } = getDescriptionData(description)
 
 	return (
 		<div className={styles.postImage} ref={ref}>

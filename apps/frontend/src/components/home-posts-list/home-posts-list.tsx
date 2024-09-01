@@ -45,20 +45,39 @@ export const HomePostsList = () => {
 	return (
 		<div className={styles.posts}>
 			{data?.pages.map((page, pageIdx) => {
-				return page.data.map(({ id }, idx) => {
-					return (
-						<HomePost
-							key={id}
-							postId={id}
-							ref={
-								pageIdx === data.pages.length - 1 &&
-								idx === page.data.length - 1
-									? ref
-									: undefined
-							}
-						/>
-					)
-				})
+				return page.data.map(
+					(
+						{
+							id,
+							images,
+							isLiked,
+							authorId,
+							likesCount,
+							createdAt,
+							description,
+						},
+						idx,
+					) => {
+						return (
+							<HomePost
+								authorId={authorId}
+								description={description}
+								likesCount={likesCount}
+								createdAt={createdAt}
+								key={id}
+								postImages={images}
+								isLiked={isLiked}
+								postId={id}
+								ref={
+									pageIdx === data.pages.length - 1 &&
+									idx === page.data.length - 1
+										? ref
+										: undefined
+								}
+							/>
+						)
+					},
+				)
 			})}
 		</div>
 	)

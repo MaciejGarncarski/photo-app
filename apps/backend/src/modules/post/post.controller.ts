@@ -25,7 +25,10 @@ import {
 export const getHomepagePostsHandler = async (
 	request: FastifyRequest<{ Querystring: GetHomepagePostsInput }>,
 ) => {
-	const response = await getHomepagePosts(parseInt(request.query.skip))
+	const response = await getHomepagePosts(
+		parseInt(request.query.skip),
+		request.session.userId,
+	)
 	return response
 }
 
