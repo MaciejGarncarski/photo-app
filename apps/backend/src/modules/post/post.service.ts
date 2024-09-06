@@ -10,6 +10,7 @@ import type {
 import { db } from '../../utils/db.js'
 import { v2 as cloudinary, type UploadApiResponse } from 'cloudinary'
 import { nanoid } from 'nanoid'
+import AdmZip from 'adm-zip'
 
 const POSTS_PER_SCROLL = 3
 
@@ -95,7 +96,12 @@ export const createPost = async (
 				},
 			})
 
-			const readImages = images.map((image) => fs.readFileSync(image.filepath))
+			const readImages = images.map((image) => {
+				return {
+					buffer: fs.readFileSync(image.filepath),
+					fileType: image.mimetype.split('/')[1],
+				}
+			})
 
 			const uploadedImagesData = await Promise.all(
 				readImages.map(async (imageFile) => {
@@ -105,14 +111,14 @@ export const createPost = async (
 						cloudinary.uploader
 							.upload_stream(
 								{
-									fileName: `${nanoid()}.webp`,
+									fileName: `${nanoid()}.${imageFile.fileType}`,
 									folder: `post-images/${post.id}/`,
 								},
 								(error, uploadResult) => {
 									return resolve(uploadResult)
 								},
 							)
-							.end(imageFile)
+							.end(imageFile.buffer)
 					})
 
 					if (!imageResponse) {
@@ -124,13 +130,21 @@ export const createPost = async (
 			)
 
 			const postImageData = uploadedImagesData.map(
-				({ height, original_filename, width, url, public_id, bytes }) => {
+				({
+					height,
+					original_filename,
+					width,
+					secure_url,
+					public_id,
+					bytes,
+					...rest
+				}) => {
 					return {
 						fileId: public_id,
 						height: height,
 						name: original_filename,
 						size: bytes,
-						url: url,
+						url: secure_url,
 						width: width,
 						postId: post.id,
 					}
@@ -168,7 +182,12 @@ export const deletePost = async (postId: number, request: FastifyRequest) => {
 		return
 	}
 
-	await cloudinary.api.delete_folder(`post-images/${postId}/`)
+	try {
+		await cloudinary.api.delete_resources_by_prefix(`post-images/${postId}/`)
+	} catch {
+		return null
+	}
+
 	await db.post.deleteMany({
 		where: {
 			id: postId,
@@ -236,6 +255,37 @@ export const getPostById = async (postId: number, request: FastifyRequest) => {
 	}
 
 	return data
+}
+
+export const getPostImage = async (postId: number, request: FastifyRequest) => {
+	const postFromDb = await db.post.findFirst({
+		where: {
+			id: postId,
+		},
+		include: {
+			images: true,
+		},
+	})
+
+	if (!postFromDb) {
+		return null
+	}
+
+	if (!postFromDb.images) {
+		return null
+	}
+
+	const zip = new AdmZip()
+
+	for await (const [index, file] of postFromDb.images.entries()) {
+		const response = await fetch(file.url)
+		const fileBuffer = await response.arrayBuffer()
+		const fileType = file.url.split('.').pop()
+
+		zip.addFile(`post_image-${index}.${fileType}`, Buffer.from(fileBuffer))
+	}
+
+	return zip.toBuffer()
 }
 
 export const addPostLike = async (postId: number, sessionUserId: string) => {

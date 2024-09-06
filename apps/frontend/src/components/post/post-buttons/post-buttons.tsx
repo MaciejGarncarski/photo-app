@@ -1,6 +1,6 @@
 'use client'
 
-import { Chat } from '@phosphor-icons/react'
+import { Chat, Download } from '@phosphor-icons/react'
 import { useAnimate } from 'framer-motion'
 
 import { useAuth } from '@/hooks/use-auth'
@@ -8,6 +8,7 @@ import { useModal } from '@/hooks/use-modal'
 import { formatLikes } from '@/utils/format-likes'
 
 import { HeartIcon } from '@/components/heart-icon/heart-icon'
+import { useDownloadPost } from '@/components/post/post-buttons/use-download-post'
 import { useHandleLike } from '@/components/post/post-buttons/use-handle-like'
 import { PostModal } from '@/components/post/post-modal/post-modal'
 
@@ -28,6 +29,7 @@ export const PostButtons = ({
 }: Props) => {
 	const postModal = useModal()
 	const { sessionUser } = useAuth()
+	const downloadImages = useDownloadPost()
 	const [scope, animate] = useAnimate()
 	const { handleLike } = useHandleLike({
 		postId,
@@ -102,6 +104,16 @@ export const PostButtons = ({
 				>
 					<Chat />
 					<span className="visually-hidden">comment</span>
+				</button>
+			</li>
+
+			<li className={styles.downloadItem}>
+				<button
+					type="button"
+					className={styles.button}
+					onClick={() => downloadImages.mutate({ postId })}
+				>
+					<Download />
 				</button>
 			</li>
 

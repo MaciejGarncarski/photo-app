@@ -9,6 +9,7 @@ import {
 	editPostHandler,
 	getHomepagePostsHandler,
 	getPostByIdHandler,
+	getPostImageHandler,
 	getUserPostsHandler,
 } from './post.controller.js'
 import {
@@ -97,6 +98,15 @@ export const postRoutesPlugin: FastifyPluginAsync = async (fastify) => {
 			},
 		},
 		handler: getPostByIdHandler,
+	})
+
+	fastify.route({
+		method: 'GET',
+		url: '/posts/:postId/image',
+		schema: {
+			params: postByIdInputSchema,
+		},
+		handler: getPostImageHandler,
 	})
 
 	fastify.route({

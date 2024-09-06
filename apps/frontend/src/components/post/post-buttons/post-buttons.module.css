@@ -20,6 +20,10 @@
 	font-size: 1.25rem;
 }
 
+.downloadItem {
+	margin-left: auto;
+}
+
 .buttonsCount {
 	display: flex;
 	align-items: center;

@@ -19,6 +19,7 @@ import {
 	editPost,
 	getHomepagePosts,
 	getPostById,
+	getPostImage,
 	getUserPosts,
 } from './post.service.js'
 
@@ -113,6 +114,19 @@ export const getPostByIdHandler = async (
 	}
 
 	return { data }
+}
+
+export const getPostImageHandler = async (
+	request: FastifyRequest<{ Params: PostByIdInput }>,
+	reply: FastifyReply,
+) => {
+	const data = await getPostImage(parseInt(request.params.postId), request)
+
+	if (!data) {
+		return reply.notFound('Post image not found.')
+	}
+
+	return data
 }
 
 export const addPostLikeHandler = async (

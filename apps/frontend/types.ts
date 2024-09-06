@@ -349,6 +349,21 @@ export interface paths {
 			}
 		}
 	}
+	'/posts/{postId}/image': {
+		get: {
+			parameters: {
+				path: {
+					postId: string
+				}
+			}
+			responses: {
+				/** @description Default Response */
+				200: {
+					content: never
+				}
+			}
+		}
+	}
 	'/posts/{postId}/like': {
 		post: {
 			parameters: {
