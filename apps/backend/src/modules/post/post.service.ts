@@ -357,6 +357,9 @@ const USER_POSTS_PER_SCROLL = 9
 
 export const getUserPosts = async ({ skip, authorId }: GetUserPostsInput) => {
 	const postsRequest = db.post.findMany({
+		where: {
+			authorId: authorId,
+		},
 		skip: skip * POSTS_PER_SCROLL,
 		take: POSTS_PER_SCROLL,
 		orderBy: {

@@ -43,7 +43,10 @@ export const ChatRoom = () => {
 				<Button variant="primary" type="button" onClick={goBack}>
 					<ArrowLeft />
 				</Button>
-				<Link href={`/${friendData?.username}`} className={styles.userHeader}>
+				<Link
+					href={`/user/${friendData?.username}`}
+					className={styles.userHeader}
+				>
 					<Avatar userId={friendData?.userId || ''} size="small" />
 					<span className={styles.userInfo}>
 						<span className={styles.name}>

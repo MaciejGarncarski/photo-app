@@ -67,7 +67,7 @@ export const SettingsModal = () => {
 					{isSignedIn && sessionUser?.username && (
 						<ListModalItem
 							type="link"
-							href={`/${sessionUser.username}`}
+							href={`/user/${sessionUser.username}`}
 							onClick={closeSettingsModal}
 							icon={<User />}
 						>
