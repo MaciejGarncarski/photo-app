@@ -8,6 +8,7 @@ import { useModal } from '@/hooks/use-modal'
 import { formatLikes } from '@/utils/format-likes'
 
 import { HeartIcon } from '@/components/heart-icon/heart-icon'
+import { usePost } from '@/components/pages/account/use-post'
 import { useDownloadPost } from '@/components/post/post-buttons/use-download-post'
 import { useHandleLike } from '@/components/post/post-buttons/use-handle-like'
 import { PostModal } from '@/components/post/post-modal/post-modal'
@@ -29,7 +30,8 @@ export const PostButtons = ({
 }: Props) => {
 	const postModal = useModal()
 	const { sessionUser } = useAuth()
-	const downloadImages = useDownloadPost()
+	const { mutate } = useDownloadPost()
+	const { data: postData } = usePost({ postId })
 	const [scope, animate] = useAnimate()
 	const { handleLike } = useHandleLike({
 		postId,
@@ -78,6 +80,15 @@ export const PostButtons = ({
 		)
 	}
 
+	const downloadImages = async () => {
+		for (const idx of postData.images.keys()) {
+			mutate({
+				imageIndex: idx,
+				postId: postId,
+			})
+		}
+	}
+
 	return (
 		<ul className={styles.list}>
 			<li className={styles.listItem}>
@@ -111,7 +122,7 @@ export const PostButtons = ({
 				<button
 					type="button"
 					className={styles.button}
-					onClick={() => downloadImages.mutate({ postId })}
+					onClick={downloadImages}
 				>
 					<Download />
 				</button>

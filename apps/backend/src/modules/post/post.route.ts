@@ -21,6 +21,7 @@ import {
 	getUserPostsQuerySchema,
 	postByIdInputSchema,
 	postDetailsSchema,
+	postImageQuerySchema,
 	postLikeInputSchema,
 	postsResponseSchema,
 } from './post.schema.js'
@@ -105,6 +106,7 @@ export const postRoutesPlugin: FastifyPluginAsync = async (fastify) => {
 		url: '/posts/:postId/image',
 		schema: {
 			params: postByIdInputSchema,
+			querystring: postImageQuerySchema,
 		},
 		handler: getPostImageHandler,
 	})

@@ -10,7 +10,7 @@ import type {
 import { db } from '../../utils/db.js'
 import { v2 as cloudinary, type UploadApiResponse } from 'cloudinary'
 import { nanoid } from 'nanoid'
-import AdmZip from 'adm-zip'
+import { fileTypeFromBuffer } from 'file-type'
 
 const POSTS_PER_SCROLL = 3
 
@@ -257,7 +257,11 @@ export const getPostById = async (postId: number, request: FastifyRequest) => {
 	return data
 }
 
-export const getPostImage = async (postId: number, request: FastifyRequest) => {
+export const getPostImage = async (
+	postId: number,
+	imageIndex: number,
+	request: FastifyRequest,
+) => {
 	const postFromDb = await db.post.findFirst({
 		where: {
 			id: postId,
@@ -275,17 +279,21 @@ export const getPostImage = async (postId: number, request: FastifyRequest) => {
 		return null
 	}
 
-	const zip = new AdmZip()
+	const file = postFromDb.images[imageIndex]
 
-	for await (const [index, file] of postFromDb.images.entries()) {
-		const response = await fetch(file.url)
-		const fileBuffer = await response.arrayBuffer()
-		const fileType = file.url.split('.').pop()
-
-		zip.addFile(`post_image-${index}.${fileType}`, Buffer.from(fileBuffer))
+	if (!file) {
+		return null
 	}
 
-	return zip.toBuffer()
+	const response = await fetch(file.url)
+	const fileBuffer = await response.arrayBuffer()
+	const buffer = Buffer.from(fileBuffer)
+	const fileType = await fileTypeFromBuffer(fileBuffer)
+
+	return {
+		buffer: buffer,
+		fileType,
+	}
 }
 
 export const addPostLike = async (postId: number, sessionUserId: string) => {

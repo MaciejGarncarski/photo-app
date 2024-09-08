@@ -9,6 +9,7 @@ import type {
 	GetUserPostsParamsInput,
 	GetUserPostsQueryInput,
 	PostByIdInput,
+	PostImageQuery,
 	PostLikeInputSchema,
 } from './post.schema.js'
 import {
@@ -117,16 +118,25 @@ export const getPostByIdHandler = async (
 }
 
 export const getPostImageHandler = async (
-	request: FastifyRequest<{ Params: PostByIdInput }>,
+	request: FastifyRequest<{
+		Params: PostByIdInput
+		Querystring: PostImageQuery
+	}>,
 	reply: FastifyReply,
 ) => {
-	const data = await getPostImage(parseInt(request.params.postId), request)
+	const data = await getPostImage(
+		parseInt(request.params.postId),
+		parseInt(request.query.imageIndex),
+		request,
+	)
 
 	if (!data) {
 		return reply.notFound('Post image not found.')
 	}
 
-	return data
+	return reply
+		.type(data.fileType?.mime || 'application/octet-stream')
+		.send(data.buffer)
 }
 
 export const addPostLikeHandler = async (

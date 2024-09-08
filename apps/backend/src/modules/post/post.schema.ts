@@ -49,6 +49,10 @@ export const postByIdInputSchema = Type.Object({
 	postId: Type.String(),
 })
 
+export const postImageQuerySchema = Type.Object({
+	imageIndex: Type.String(),
+})
+
 export const postLikeInputSchema = Type.Object({
 	postId: Type.String(),
 })
@@ -81,3 +85,4 @@ export type CreatePostInput = Static<typeof createPostInputSchema>
 export type PostDetails = Static<typeof postDetailsSchema>
 export type PostsResponse = Static<typeof postsResponseSchema>
 export type GetUserPostsInput = GetUserPostsParamsInput & GetUserPostsQueryInput
+export type PostImageQuery = Static<typeof postImageQuerySchema>

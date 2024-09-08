@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/hooks/use-auth'
@@ -10,7 +10,6 @@ import { useChatRoomData } from '@/components/pages/chat-room/use-chat-room-data
 import { useNotificationSoundPreference } from '@/components/settings-modal/use-notification-sound-preference'
 
 export const useChatSubscription = () => {
-	const notificationAudio = useMemo(() => new Audio('/notification.mp3'), [])
 	const queryClient = useQueryClient()
 	const router = useRouter()
 	const { data: chatRoomData, isError: chatRoomError } = useChatRoomData()
@@ -28,6 +27,8 @@ export const useChatSubscription = () => {
 		if (typeof chatRoomData !== 'undefined' && chatRoomData?.id !== 0) {
 			socket.emit('join chat room', { chatRoomId: chatRoomData?.id })
 		}
+
+		const notificationAudio = new Audio('/notification.mp3')
 
 		const newMessage = (message: {
 			senderId: string
@@ -60,7 +61,6 @@ export const useChatSubscription = () => {
 		chatRoomData,
 		chatRoomData?.id,
 		isSoundEnabled,
-		notificationAudio,
 		queryClient,
 		sessionUser?.id,
 	])
