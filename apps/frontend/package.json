@@ -26,7 +26,7 @@
 		"jotai": "^2.8.0",
 		"lodash.debounce": "^4.0.8",
 		"nanoid": "^5.0.7",
-		"next": "15.0.0-canary.143",
+		"next": "15.0.0-canary.152",
 		"next-themes": "^0.3.0",
 		"react": "19.0.0-rc.0",
 		"react-dom": "19.0.0-rc.0",
@@ -54,6 +54,6 @@
 		"postcss": "^8.4.39",
 		"postcss-custom-media": "^10.0.8",
 		"postcss-nesting": "^12.1.5",
-		"typescript": "5.6.0-beta"
+		"typescript": "^5.6.2"
 	}
 }
