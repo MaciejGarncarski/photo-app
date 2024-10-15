@@ -11,6 +11,7 @@ export const chatUsersQueryOptions = infiniteQueryOptions({
 	queryKey: ['chat users'],
 	queryFn: async ({ pageParam = 0 }) => {
 		const { cookies } = await import('next/headers')
+		const cookiesData = await cookies()
 
 		const { data } = await getChatUsers(
 			{
@@ -18,7 +19,7 @@ export const chatUsersQueryOptions = infiniteQueryOptions({
 			},
 			{
 				headers: {
-					Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+					Cookie: `sessionId=${cookiesData.get('sessionId')?.value}`,
 				},
 			},
 		)

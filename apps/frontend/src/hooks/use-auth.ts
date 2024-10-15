@@ -9,11 +9,13 @@ export const authQueryOptions = queryOptions({
 		try {
 			if (typeof window === 'undefined') {
 				const { cookies } = await import('next/headers')
+				const cookiesData = await cookies()
+
 				const { data: sessionUser } = await getSessionUser(
 					{},
 					{
 						headers: {
-							Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+							Cookie: `sessionId=${cookiesData.get('sessionId')?.value}`,
 						},
 						cache: 'no-store',
 					},

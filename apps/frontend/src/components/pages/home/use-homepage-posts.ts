@@ -32,6 +32,7 @@ export const getHomepagePostsOptionsServerSide = infiniteQueryOptions({
 	queryKey: HOME_POSTS_QUERY_KEY,
 	queryFn: async ({ pageParam }) => {
 		const { cookies } = await import('next/headers')
+		const cookiesData = await cookies()
 
 		const { data } = await getInfinitePosts(
 			{
@@ -39,7 +40,7 @@ export const getHomepagePostsOptionsServerSide = infiniteQueryOptions({
 			},
 			{
 				headers: {
-					Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+					Cookie: `sessionId=${cookiesData.get('sessionId')?.value}`,
 				},
 			},
 		)

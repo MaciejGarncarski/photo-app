@@ -8,12 +8,13 @@ export const getPostQueryOptions = (postId: number) =>
 		queryFn: async () => {
 			if (typeof window === 'undefined') {
 				const { cookies } = await import('next/headers')
+				const cookiesData = await cookies()
 
 				const { data: post } = await getPost(
 					{ postId: postId.toString() },
 					{
 						headers: {
-							Cookie: `sessionId=${cookies().get('sessionId')?.value}`,
+							Cookie: `sessionId=${cookiesData.get('sessionId')?.value}`,
 						},
 					},
 				)

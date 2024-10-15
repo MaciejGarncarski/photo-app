@@ -9,9 +9,6 @@ import unusedImports from "eslint-plugin-unused-imports";
 import nextPlugin from "@next/eslint-plugin-next";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 
-const patchedNextPlugin = fixupPluginRules(nextPlugin);
-const patchedReactHooksPlugin = fixupPluginRules(reactHooksPlugin);
-
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
@@ -39,8 +36,8 @@ export default tseslint.config(
       "@typescript-eslint": tseslint.plugin,
       react: react,
       "testing-library": testingLibrary,
-      "@next/next": patchedNextPlugin,
-      "react-hooks": patchedReactHooksPlugin,
+      "@next/next": nextPlugin,
+      "react-hooks": reactHooksPlugin,
       "jsx-a11y": jsxa11y,
       "simple-import-sort": simpleImportSort,
       "unused-imports": fixupPluginRules(unusedImports),
@@ -52,10 +49,6 @@ export default tseslint.config(
     },
     rules: {
       ...react.configs.recommended.rules,
-      ...patchedReactHooksPlugin.configs.recommended.rules,
-      ...patchedNextPlugin.configs["recommended"].rules,
-      ...patchedNextPlugin.configs["core-web-vitals"].rules,
-      ...jsxa11y.configs.recommended.rules,
       "no-unused-vars": "off",
       "no-useless-escape": "off",
       "no-undef": "off",
