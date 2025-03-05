@@ -19,7 +19,7 @@ type Props = {
 export const generateMetadata = async ({
 	params,
 }: Props): Promise<Metadata> => {
-	const { username } = params
+	const { username } = await params
 
 	const usernameTitle = getPageTitle(`@${username}`)
 
@@ -73,7 +73,7 @@ export const generateMetadata = async ({
 }
 
 export default async function AccountPage({ params }: Props) {
-	const { username } = params
+	const { username } = await params
 	const queryClient = getQueryClient()
 
 	const user = await queryClient.fetchQuery(

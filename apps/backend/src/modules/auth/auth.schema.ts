@@ -7,16 +7,11 @@ export const signInSchema = Type.Object({
 
 export type SignInValues = Static<typeof signInSchema>
 
-const usernameRegExp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim
-const smallCharactersRegExp = /^[a-z0-9_\-]+$/
-
-export const username = Type.Optional(
-	Type.Union([Type.RegExp(usernameRegExp), Type.RegExp(smallCharactersRegExp)]),
-)
+export const username = Type.String()
 
 export const registerSchema = Type.Object({
 	email: Type.String({ format: 'email' }),
-	username: username,
+	username: Type.String(),
 	password: Type.String({ minLength: 5 }),
 	confirmPassword: Type.String({ minLength: 5 }),
 })

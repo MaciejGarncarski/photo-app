@@ -11,14 +11,16 @@ type Params = {
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-	if (!params.username) {
+	const awaitedParams = await params
+
+	if (!awaitedParams.username) {
 		return {
 			title: getPageTitle('Chat'),
 		}
 	}
 
 	return {
-		title: getPageTitle(`Chat with @${params.username}`),
+		title: getPageTitle(`Chat with @${awaitedParams.username}`),
 	}
 }
 

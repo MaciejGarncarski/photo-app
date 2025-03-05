@@ -68,6 +68,7 @@ export const buildApp = async () => {
 
 	await app.register(cors, {
 		credentials: true,
+		methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'],
 		origin: process.env.APP_URL,
 	})
 
