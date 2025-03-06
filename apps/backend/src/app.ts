@@ -62,7 +62,7 @@ export const buildApp = async () => {
 
 	await app.register(fastifyMultipart, {
 		limits: {
-			fileSize: 150_500_000,
+			fileSize: 5000000,
 		},
 	})
 

@@ -8,7 +8,7 @@ import type { DropZoneErrors } from '@/components/pages/create-post/create-post-
 import { useFinalImages } from '@/components/pages/create-post/use-final-images'
 
 export const IMAGE_MIN_SIZE = 150
-export const IMAGE_MAX_FILE_SIZE = 15_500_000
+export const IMAGE_MAX_FILE_SIZE = 5000000
 const SUPPORTED_FILE_TYPES = ['jpeg', 'jpg', 'png', 'webp']
 
 type Arguments = {
