@@ -81,7 +81,7 @@ importers:
         specifier: ^11.0.2
         version: 11.0.2
       '@fastify/cors':
-        specifier: ^11.0.1
+        specifier: ^11.0.0
         version: 11.0.1
       '@fastify/multipart':
         specifier: ^9.0.3
@@ -105,22 +105,22 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(@sinclair/typebox@0.34.31)
       '@prisma/client':
-        specifier: ^6.5.0
+        specifier: ^6.4.1
         version: 6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)
       '@quixo3/prisma-session-store':
         specifier: ^3.1.13
         version: 3.1.13(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2))(express-session@1.18.0)
       '@sinclair/typebox':
-        specifier: ^0.34.31
+        specifier: ^0.34.28
         version: 0.34.31
       argon2:
         specifier: ^0.41.1
         version: 0.41.1
       cloudinary:
-        specifier: ^2.6.0
+        specifier: ^2.5.1
         version: 2.6.0
       fastify:
-        specifier: ^5.2.2
+        specifier: ^5.2.1
         version: 5.2.2
       fastify-plugin:
         specifier: ^5.0.1
@@ -129,23 +129,23 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(fastify@5.2.2)(socket.io@4.8.1(bufferutil@4.0.8))
       file-type:
-        specifier: ^20.4.1
+        specifier: ^20.4.0
         version: 20.4.1
       ms:
         specifier: ^2.1.3
         version: 2.1.3
       nanoid:
-        specifier: ^5.1.5
+        specifier: ^5.1.2
         version: 5.1.5
       prisma:
-        specifier: ^6.5.0
+        specifier: ^6.4.1
         version: 6.5.0(typescript@5.8.2)
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1(bufferutil@4.0.8)
     devDependencies:
       '@faker-js/faker':
-        specifier: ^9.6.0
+        specifier: ^9.5.1
         version: 9.6.0
       '@swc/core':
         specifier: 1.11.7
@@ -154,7 +154,7 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       '@vitest/coverage-v8':
-        specifier: ^3.0.9
+        specifier: ^3.0.7
         version: 3.0.9(vitest@3.0.7(@types/node@22.13.14)(jiti@2.4.2)(jsdom@24.1.0(bufferutil@4.0.8))(sass@1.77.2)(tsx@4.19.3)(yaml@2.7.1))
       nodemon:
         specifier: ^3.1.9
