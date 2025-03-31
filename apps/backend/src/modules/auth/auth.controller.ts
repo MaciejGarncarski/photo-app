@@ -34,10 +34,6 @@ export const signInCredentialsHandler = async (
 
 	request.session.set('userId', mappedUser.id)
 
-	const headers = reply.getHeaders()
-	// eslint-disable-next-line no-console
-	console.log('Response Headers:', headers)
-
 	return reply.send({ data: mappedUser })
 }
 
