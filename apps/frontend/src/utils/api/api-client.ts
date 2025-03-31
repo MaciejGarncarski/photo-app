@@ -1,4 +1,4 @@
-import { Fetcher } from '@qdrant/openapi-typescript-fetch'
+import { Fetcher } from 'openapi-typescript-fetch'
 import type { z } from 'zod'
 
 import { clientEnv } from '@/utils/env'
