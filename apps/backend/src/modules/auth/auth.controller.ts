@@ -32,6 +32,8 @@ export const signInCredentialsHandler = async (
 
 	const mappedUser = mapPrismaUser(user)
 
+	// eslint-disable-next-line no-console
+	console.log(request.session)
 	request.session.set('userId', mappedUser.id)
 
 	return { data: mappedUser }
