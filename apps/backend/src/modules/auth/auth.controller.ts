@@ -34,7 +34,7 @@ export const signInCredentialsHandler = async (
 
 	request.session.set('userId', mappedUser.id)
 
-	return { data: mappedUser }
+	return reply.send({ data: mappedUser })
 }
 
 export const registerCredentialsHandler = async (
