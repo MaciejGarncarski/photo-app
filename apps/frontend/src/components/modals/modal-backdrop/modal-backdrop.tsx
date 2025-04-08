@@ -11,6 +11,10 @@ type Props = {
 }
 
 export const ModalBackdrop = ({ closeModal, children }: Props) => {
+	if (!document) {
+		return null
+	}
+
 	const handleOverlayClick = (mouseEv: MouseEvent) => {
 		if (mouseEv.target === mouseEv.currentTarget) {
 			closeModal()
@@ -18,7 +22,6 @@ export const ModalBackdrop = ({ closeModal, children }: Props) => {
 	}
 
 	return createPortal(
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 		<div
 			onClick={handleOverlayClick}
 			role="dialog"

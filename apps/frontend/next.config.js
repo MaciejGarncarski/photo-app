@@ -1,6 +1,8 @@
-import type { NextConfig } from 'next'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withRspack = require('next-rspack')
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
@@ -25,4 +27,4 @@ const nextConfig: NextConfig = {
 	},
 }
 
-export default nextConfig
+module.exports = withRspack(nextConfig)
