@@ -25,7 +25,7 @@ export const HomePostsList = () => {
 
 	const noPosts = useMemo(
 		() => data?.pages[0] && data.pages[0].postsCount < 1,
-		[data.pages],
+		[data?.pages],
 	)
 
 	if (noPosts) {

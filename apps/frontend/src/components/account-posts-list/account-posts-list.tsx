@@ -23,13 +23,13 @@ export const AccountPostsList = ({ userId }: Props) => {
 		enabled: true,
 	})
 
-	const hasPosts = data.pages[0].postsCount !== 0
+	const hasPosts = data?.pages[0].postsCount !== 0
 
 	return (
 		<>
 			<div className={styles.posts}>
 				{!hasPosts && <p className={styles.noPosts}>No posts yet.</p>}
-				{data.pages.map((page) => {
+				{data?.pages.map((page) => {
 					return page.data.map(({ id }) => {
 						return (
 							<Suspense key={id} fallback={<p>loo</p>}>

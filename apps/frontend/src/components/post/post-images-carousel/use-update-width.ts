@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 export const useUpdateWidth = () => {
 	const imageRef = useRef<HTMLDivElement>(null)
 	const [width, setWidth] = useState(0)
-	const timeoutRef = useRef<NodeJS.Timeout>()
+	const timeoutRef = useRef<NodeJS.Timeout>(null)
 
 	const handleResize = useCallback(() => {
 		if (!imageRef.current) {

@@ -1,7 +1,4 @@
-import {
-	infiniteQueryOptions,
-	useSuspenseInfiniteQuery,
-} from '@tanstack/react-query'
+import { infiniteQueryOptions, useInfiniteQuery } from '@tanstack/react-query'
 
 import { nextPageParam } from '@/utils/api/next-page-param'
 
@@ -36,5 +33,5 @@ export const chatUsersQueryOptions = infiniteQueryOptions({
 })
 
 export const useChatUsers = () => {
-	return useSuspenseInfiniteQuery(chatUsersQueryOptions)
+	return useInfiniteQuery(chatUsersQueryOptions)
 }

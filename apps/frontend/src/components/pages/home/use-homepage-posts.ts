@@ -1,7 +1,7 @@
 import {
 	infiniteQueryOptions,
 	type QueryKey,
-	useSuspenseInfiniteQuery,
+	useInfiniteQuery,
 } from '@tanstack/react-query'
 
 import { nextPageParam } from '@/utils/api/next-page-param'
@@ -57,6 +57,6 @@ export const getHomepagePostsOptionsServerSide = infiniteQueryOptions({
 })
 
 export const useHomepagePosts = () => {
-	const query = useSuspenseInfiniteQuery(getHomepagePostsOptions)
+	const query = useInfiniteQuery(getHomepagePostsOptions)
 	return query
 }
