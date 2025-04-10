@@ -1,17 +1,14 @@
-import {
-	dehydrate,
-	HydrationBoundary,
-	QueryClient,
-} from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 import { authQueryOptions } from '@/hooks/use-auth'
 import { getUserQueryOptions } from '@/hooks/use-user'
+import { getQueryClient } from '@/utils/get-query-client'
 
 import { HomePostsList } from '@/components/home-posts-list/home-posts-list'
 import { getHomepagePostsOptionsServerSide } from '@/components/pages/home/use-homepage-posts'
 
-export async function HomePosts() {
-	const queryClient = new QueryClient()
+const getData = async () => {
+	const queryClient = getQueryClient()
 
 	const prefetchSession = queryClient.prefetchQuery(authQueryOptions)
 	const prefetchPosts = queryClient.fetchInfiniteQuery(
@@ -27,6 +24,12 @@ export async function HomePosts() {
 	})
 
 	await Promise.all([...prefetchPostAuthors])
+
+	return queryClient
+}
+
+export async function HomePosts() {
+	const queryClient = await getData()
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

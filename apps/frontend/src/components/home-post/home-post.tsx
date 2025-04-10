@@ -1,6 +1,6 @@
 'use client'
 
-import { Ref } from 'react'
+import { Ref, Suspense } from 'react'
 
 import { PostFooter } from '@/components/post/post-footer/post-footer'
 import { PostHeader } from '@/components/post/post-header/post-header'
@@ -33,24 +33,34 @@ export const HomePost = ({
 	return (
 		<article className={styles.homePost} ref={ref}>
 			<div className={styles.header}>
-				<PostHeader postId={postId} authorId={authorId} createdAt={createdAt} />
+				<Suspense fallback={<p>Loading...</p>}>
+					<PostHeader
+						postId={postId}
+						authorId={authorId}
+						createdAt={createdAt}
+					/>
+				</Suspense>
 			</div>
 			<div className={styles.carousel}>
-				<PostImagesCarousel
-					isLiked={isLiked}
-					postImages={postImages}
+				<Suspense fallback={<p>Loading...</p>}>
+					<PostImagesCarousel
+						isLiked={isLiked}
+						postImages={postImages}
+						authorId={authorId}
+						description={description}
+						postId={postId}
+					/>
+				</Suspense>
+			</div>
+			<Suspense fallback={<p>Loading...</p>}>
+				<PostFooter
+					postId={postId}
 					authorId={authorId}
 					description={description}
-					postId={postId}
+					isLiked={isLiked}
+					likesCount={likesCount}
 				/>
-			</div>
-			<PostFooter
-				postId={postId}
-				authorId={authorId}
-				description={description}
-				isLiked={isLiked}
-				likesCount={likesCount}
-			/>
+			</Suspense>
 		</article>
 	)
 }

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 	title: getPageTitle('Chat'),
 }
 
-const ChatPage = async () => {
+const getChatPageData = async () => {
 	const queryClient = getQueryClient()
 
 	const chatUsers = await queryClient.fetchInfiniteQuery(chatUsersQueryOptions)
@@ -27,6 +27,12 @@ const ChatPage = async () => {
 			return queryClient.prefetchQuery(getUserQueryOptions(userId))
 		}),
 	)
+
+	return queryClient
+}
+
+const ChatPage = async () => {
+	const queryClient = await getChatPageData()
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

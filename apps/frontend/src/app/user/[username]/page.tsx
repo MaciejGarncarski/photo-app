@@ -72,8 +72,7 @@ export const generateMetadata = async ({
 	}
 }
 
-export default async function AccountPage({ params }: Props) {
-	const { username } = await params
+const getAccountData = async (username: string) => {
 	const queryClient = getQueryClient()
 
 	const user = await queryClient.fetchQuery(
@@ -96,6 +95,13 @@ export default async function AccountPage({ params }: Props) {
 	})
 
 	await Promise.all([...prefetchPostsById, ...prefetchPostAuthors])
+
+	return queryClient
+}
+
+export default async function AccountPage({ params }: Props) {
+	const { username } = await params
+	const queryClient = await getAccountData(username)
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
